@@ -1,7 +1,7 @@
 export function CreateCart() {
   const cart: CartItem[] = [];
   if (
-    typeof window !== "undefined" &&
+    // typeof window !== "undefined" &&
     !sessionStorage.getItem("tons-of-tacos-cart")
   ) {
     sessionStorage.setItem("tons-of-tacos-cart", JSON.stringify(cart));
@@ -41,11 +41,9 @@ export function RemoveCartItem(id: string) {
 export function GetCart() {
   let oldCart: CartItem[] = [];
   try {
-    if (typeof window !== "undefined") {
-      oldCart = JSON.parse(
-        sessionStorage.getItem("tons-of-tacos-cart") || "{}"
-      );
-    }
+    // if (typeof window !== "undefined") {
+    oldCart = JSON.parse(sessionStorage.getItem("tons-of-tacos-cart") || "{}");
+    // }
   } catch (error) {
     // throw new Error("Cant get cart right now");
     throw error;

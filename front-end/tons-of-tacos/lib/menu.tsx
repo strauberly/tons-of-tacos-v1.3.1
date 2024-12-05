@@ -1,5 +1,3 @@
-// import error from "next/error";
-
 export default async function CategoriesSource() {
   try {
     const response = await fetch(
@@ -13,7 +11,7 @@ export default async function CategoriesSource() {
   }
 }
 
-export async function useMenuItemsForCategory(category: string) {
+export async function MenuItemsSource(category: string) {
   try {
     const response = await fetch(
       `http://localhost:8080/api/menu/category?category=${category}`
@@ -25,7 +23,3 @@ export async function useMenuItemsForCategory(category: string) {
     throw error;
   }
 }
-
-export const MenuItems = (category: string) => {
-  return useMenuItemsForCategory(category);
-};

@@ -2,6 +2,17 @@
 
 ---
 
+-- ? Dec 2024 --
+
+- Quest for global-error.tsx to act appropriately in next 14 was fruitless and so updated the project to next 15. Seems promising but creating some new quirks and errors while also undoing some work. Working through.
+- Checking for window before accessing local storage seems to no longer be needed so have commented out lines of code and will evaluate.
+- Added suppressHydrationWarning in root layout html. Browser extension induced it seems.
+- Did some reading and learned the hydration error was due to my browser extensions. NOt awesome. Hopefully everyone learns to play nice.
+- Eliminated need to use params in menu item list.
+- Addressed issues with customer form and nav buttons updating other components by placing the offender in use effect.
+
+---
+
 -- 2 Dec 2024 --
 
 - Update to cart item so that if cart item quantity exceeds given amount then customer is alerted via our alert modal component instead of browser alert.
