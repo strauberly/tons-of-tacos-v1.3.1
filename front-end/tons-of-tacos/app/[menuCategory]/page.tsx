@@ -7,19 +7,24 @@ import { Suspense, useEffect, useRef, useState, use } from "react";
 import FadeOnLoad from "@/components/ui/animations/fade-on-load";
 import { useMenuContext } from "@/context/menu-context";
 import Loading from "../loading";
-import { MenuItems } from "@/lib/menu";
+import { MenuItemsSource } from "@/lib/menu";
 import { useMenuCategoryContext } from "@/context/menu-category-context";
 
 export default function MenuItemsByCategory(props: {
   params: Promise<{ menuCategory: string }>;
 }) {
   const params = use(props.params);
+
   const { setMenuItems } = useMenuContext();
+
   const { menuCategories } = useMenuCategoryContext();
+
   const menuItems = useRef<MenuItem[]>([]);
+
   const menuOptions: string[] = menuCategories.map(
     (category: { name: string }) => category.name
   );
+
   const category = params.menuCategory;
 
   console.log(category);
@@ -33,7 +38,8 @@ export default function MenuItemsByCategory(props: {
   useEffect(() => {
     async function DisplayMenuItems() {
       try {
-        menuItems.current = await MenuItems(category);
+        menuItems.current = await MenuItemsSource(category);
+        // try just catching the error in the lib
       } catch (error) {
         setError(() => {
           throw error;
@@ -59,7 +65,7 @@ export default function MenuItemsByCategory(props: {
             <h1>{category + ":"}</h1>
             <p className={classes.description}>{description}</p>
           </div>
-          <div>{<MenuItemList menuItems={menuItems.current} />}</div>
+          <div>{<MenuItemList />}</div>
         </FadeOnLoad>
       </Suspense>
     </main>

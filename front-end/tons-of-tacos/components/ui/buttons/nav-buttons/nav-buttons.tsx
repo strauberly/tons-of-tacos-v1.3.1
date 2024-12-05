@@ -42,6 +42,9 @@ export default function NavButtons(menuOptions: { menuOptions: Category[] }) {
   useEffect(() => {
     setMenuCategories(menuOptions.menuOptions);
     setCart(GetCart());
+    if (cartQuantity <= 0) {
+      setShowCart(false);
+    }
   }, [
     cartQuantity,
     menuOptions.menuOptions,
@@ -51,9 +54,6 @@ export default function NavButtons(menuOptions: { menuOptions: Category[] }) {
     showCart,
     showMenu,
   ]);
-  if (cartQuantity <= 0) {
-    setShowCart(false);
-  }
 
   return (
     <>
