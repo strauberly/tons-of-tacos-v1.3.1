@@ -1,0 +1,18 @@
+.item {
+  font-size: clamp(1.25rem, 2vw, 1.5vw);
+  border-bottom: solid var(--border-color) 1px;
+  padding-bottom: 1vw;
+}
+
+.itemName {
+  justify-content: left;
+}
+
+.price {
+  justify-content: right;
+}
+
+.size {
+  color: var(--user-selected-color);
+  justify-self: right;
+}

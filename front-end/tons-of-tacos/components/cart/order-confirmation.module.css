@@ -1,0 +1,79 @@
+.alert {
+  display: flex;
+  position: fixed;
+  margin: auto;
+  top: 10%;
+  left: 0;
+  right: 0;
+  padding: 0.25rem;
+  z-index: 99;
+  width: 40%;
+  height: 80%;
+  border-color: transparent;
+  background: linear-gradient(
+      to bottom,
+      var(--border-color) 0%,
+      var(--background-color) 45%,
+      var(--background-color) 90%,
+      var(--border-color) 100%
+    )
+    100%;
+  border-radius: 10px;
+
+  border-style: solid;
+
+  transition: 2.5s ease;
+}
+
+.alertBackground {
+  height: 100%;
+  width: 100%;
+  margin: auto;
+  overflow-y: scroll;
+  top: 0;
+  bottom: 0;
+  padding: 2rem;
+  background-color: #0c0424;
+  border-radius: 10px;
+}
+
+.alertBackdrop {
+  position: fixed;
+  z-index: 999;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.alert p {
+  display: flex;
+  font-size: clamp(1.25rem, 2vw, 1.5vw);
+}
+
+.alert pre {
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-size: clamp(1.25rem, 2vw, 1.5vw);
+}
+
+.close {
+  position: relative;
+  font-size: clamp(2.5rem, 1vw, 1vw);
+  margin: auto;
+  margin-top: 5%;
+  left: 40%;
+  right: 40%;
+}
+
+@media (max-width: 1005px) {
+  .alert {
+    margin: auto;
+  }
+
+  .close {
+    margin: auto;
+    margin-top: 2%;
+    left: 80%;
+  }
+}

@@ -1,0 +1,134 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  right: 50%;
+  left: 50%;
+  gap: 1vw;
+  font-size: clamp(1.25rem, 2vw, 1.5vw);
+  justify-content: center;
+  margin-top: 1vw;
+  margin-bottom: 1vw;
+}
+
+.grid {
+  justify-content: center;
+  align-items: center;
+}
+
+.form div {
+  display: flex;
+  gap: 2%;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1vw;
+}
+.form label {
+  color: var(--interactive-color);
+  justify-content: left;
+  padding-right: 1vw;
+  padding-left: 0.5vw;
+}
+
+.form input,
+.form textarea {
+  font-size: clamp(1.25rem, 2vw, 1.5vw);
+  text-align: left;
+
+  background-color: var(--background-color);
+
+  color: var(--user-selected-color);
+  padding-left: 1vw;
+  padding-top: 0.5vw;
+  padding-bottom: 0.5vw;
+}
+
+.form input:focus,
+.form textarea:focus {
+  outline: none;
+}
+
+.form p {
+  width: max-content;
+  font-size: clamp(1rem, 1.5vw, 1.25vw);
+}
+
+.invalid {
+  width: 40%;
+  border: 2px solid var(--attention-color);
+  border-radius: 3px;
+}
+
+.valid {
+  width: 40%;
+  border: 2px solid var(--border-color);
+  border-radius: 3px;
+}
+
+.phone {
+  width: 81%;
+}
+
+.email {
+  width: 81%;
+}
+
+.checkoutButton {
+  margin-bottom: 2vw;
+  font-family: "Quatl";
+  color: var(--interactive-color);
+  font-size: 1.75rem;
+  cursor: pointer;
+  justify-content: center;
+}
+
+.checkoutButton:active {
+  color: var(--user-selected-color);
+  text-shadow: 0rem 0rem 1rem aquamarine;
+  transition: 0.025s ease;
+}
+
+.errorMessages {
+  display: block;
+  color: var(--attention-color);
+  font-family: var(--inter-font);
+  justify-content: center;
+  margin-bottom: 1vw;
+  align-items: center;
+}
+
+.firstNameError {
+  display: block;
+  color: var(--attention-color);
+  font-family: var(--inter-font);
+  justify-content: center;
+  margin-bottom: 1vw;
+  align-items: center;
+  margin-left: 5vw;
+}
+
+.lastNameError {
+  display: block;
+  color: var(--attention-color);
+  font-family: var(--inter-font);
+  justify-content: center;
+  margin-bottom: 1vw;
+  align-items: center;
+  margin-left: 2vw;
+}
+
+.phoneError {
+  color: var(--attention-color);
+  margin-left: 5vw;
+}
+
+.emailError {
+  color: var(--attention-color);
+  margin-left: 5vw;
+}
+
+@media (max-width: 450px) {
+  .form input,
+  .form textarea {
+    font-size: clamp(1.15rem, 2vw, 1.5vw);
+  }
+}

@@ -1,0 +1,14 @@
+.checkout_button {
+  font-family: "Quatl";
+  color: var(--interactive-color);
+  font-size: 1.75rem;
+  cursor: pointer;
+
+  margin-bottom: 2.5vw;
+}
+
+.checkout_button:active {
+  color: var(--user-selected-color);
+  text-shadow: 0rem 0rem 1rem aquamarine;
+  transition: 0.025s ease;
+}

@@ -1,0 +1,23 @@
+.category {
+  display: flex;
+  gap: 1vw;
+  align-items: first baseline;
+  justify-content: center;
+  padding-top: clamp(2rem + 1vw, 1vw, 2rem);
+}
+
+.description {
+  font-size: clamp(1rem, 2vw, 3rem);
+}
+
+.loadImage {
+  position: fixed;
+  width: clamp(15rem, 30%, 50%);
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  top: clamp(5rem, 15%, 15rem);
+  left: 0rem;
+  right: 0rem;
+  align-content: center;
+}

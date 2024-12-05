@@ -1,0 +1,56 @@
+.menuCard {
+  border-color: transparent;
+  background: linear-gradient(
+      to bottom,
+      var(--border-color) 0%,
+      var(--background-color) 30%,
+      var(--background-color) 90%,
+      var(--border-color) 100%
+    )
+    100%;
+  border-radius: 10px;
+
+  border-style: solid;
+
+  padding: 0.1rem;
+  transition: 2.5s ease;
+}
+
+.menuCard:hover {
+  box-shadow: 0px 0px 50px 10px rgba(99, 179, 105, 1);
+  transition: 0.3s ease;
+}
+
+.expand {
+  position: fixed;
+  margin-top: -12%;
+  align-self: baseline;
+  z-index: 100;
+  width: clamp(22rem, 100%, 30%);
+  height: min-content;
+  margin-right: auto;
+  margin-left: auto;
+  left: 0px;
+  right: 0px;
+  box-shadow: 0px 0px 100px 40px var(--attention-color);
+}
+
+.expand:hover {
+  box-shadow: 0px 0px 100px 40px var(--attention-color);
+}
+
+.expand::backdrop {
+  box-shadow: 0px 0px 100px 40px var(--attention-color);
+}
+
+@media (max-height: 900px) {
+  .expand {
+    margin-top: -6rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .expand {
+    margin-top: -6rem;
+  }
+}

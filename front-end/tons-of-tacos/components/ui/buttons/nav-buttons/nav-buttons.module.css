@@ -1,0 +1,51 @@
+.navButtons {
+  position: static;
+  position: fixed;
+  display: flex;
+  gap: 2.5vw;
+  left: 82vw;
+  margin-top: 0.24rem;
+}
+
+.icon {
+  height: 2vw;
+  color: var(--interactive-color);
+  transition: 1s ease;
+  cursor: pointer;
+  margin-bottom: 1.25vw;
+  padding-right: 1.8vw;
+  padding-left: 1.8vw;
+}
+
+.icon:hover {
+  color: var(--attention-color);
+  transition: 0.3s ease;
+}
+
+/* medium devices */
+@media (max-width: 1400px) {
+  .icon {
+    height: 4vw;
+    margin-bottom: 1.5vw;
+  }
+
+  .navButtons {
+    left: 75vw;
+    gap: 4vw;
+  }
+}
+
+/* small devices */
+@media (max-width: 800px) {
+  .icon {
+    height: 5vw;
+    margin-bottom: 2vw;
+  }
+
+  .navButtons {
+    left: 70vw;
+    margin-right: 60rem;
+    margin-top: 1vw;
+    gap: 4vw;
+  }
+}

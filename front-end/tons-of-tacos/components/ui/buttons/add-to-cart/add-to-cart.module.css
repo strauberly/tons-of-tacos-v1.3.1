@@ -1,0 +1,12 @@
+.add {
+  font-family: "Quatl";
+  color: var(--interactive-color);
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.add:active {
+  color: var(--user-selected-color);
+  text-shadow: 0rem 0rem 1rem aquamarine;
+  transition: 0.025s ease;
+}

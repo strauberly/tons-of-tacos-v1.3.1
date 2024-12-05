@@ -1,0 +1,9 @@
+.selectorGroup {
+  display: inline-flex;
+  justify-content: center;
+  gap: 3rem;
+}
+
+.notShowing {
+  opacity: 0;
+}

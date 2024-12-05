@@ -1,0 +1,47 @@
+.header {
+  border-bottom: solid var(--border-color) 2px;
+  position: fixed;
+  display: flex;
+  z-index: 90;
+  width: 96%;
+  background-color: var(--background-color);
+  padding: 1%;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0rem;
+  right: 0rem;
+}
+
+.home {
+  color: var(--interactive-color);
+  padding-left: 2%;
+  text-decoration: none;
+  font-size: 2vw;
+  transition: 1s ease;
+}
+
+.home:hover {
+  color: var(--attention-color);
+  transition: 0.3s ease;
+}
+
+/* medium devices */
+@media (max-width: 1400px) {
+  .home {
+    font-size: 4vw;
+  }
+}
+
+/* small devices */
+@media (max-width: 800px) {
+  .home {
+    font-size: 6vw;
+  }
+}
+
+/* xsmall devices */
+@media (max-width: 500px) {
+  .home {
+    font-size: 6vw;
+  }
+}

@@ -1,0 +1,110 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  row-gap: 1.5rem;
+  background-color: #0c0424;
+  border-radius: 10px;
+}
+
+.card img {
+  border-radius: 10px;
+}
+
+.card p {
+  color: var(--attention-color);
+  font-size: 1.25rem;
+  width: 80%;
+}
+
+.add {
+  font-family: "Quatl";
+  color: var(--interactive-color);
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.more {
+  height: 0.75rem;
+  fill: var(--interactive-color);
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+
+.ghostDiv {
+  display: flex;
+  min-height: 3rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  row-gap: 2rem;
+  margin-right: auto;
+  margin-left: auto;
+  left: 0px;
+  right: 0px;
+}
+
+.ghostDiv .p {
+  width: 80%;
+  margin-bottom: -30%;
+}
+
+.expand {
+  z-index: 100;
+  position: relative;
+  background-color: var(--background-color);
+  justify-content: center;
+  width: 100%;
+  height: clamp(600px, 80%, 100%);
+  margin-right: auto;
+  margin-left: auto;
+  left: 0px;
+  right: 0px;
+  padding: 1rem;
+  padding-bottom: 2rem;
+  row-gap: 2rem;
+}
+
+.expand::backdrop {
+  fill: var(--background-color);
+  width: 160%;
+}
+
+.expand h2 {
+  margin-top: 3rem;
+  font-size: clamp(0.9rem, 1vw, 1vw);
+}
+
+.expand img {
+  width: 50%;
+  height: auto;
+  position: relative;
+  top: -5rem;
+  margin-bottom: -5rem;
+}
+
+.expand p {
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
+  width: 100%;
+}
+
+.closeExpanded {
+  position: sticky;
+  font-size: clamp(2rem, 1vw, 1vw);
+  bottom: 100%;
+  margin-left: 90%;
+  cursor: pointer;
+}
+
+.expandedTitle {
+  margin-left: 8rem;
+  align-items: center;
+  gap: 5rem;
+}
