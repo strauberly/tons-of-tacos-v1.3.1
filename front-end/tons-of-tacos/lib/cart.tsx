@@ -1,9 +1,6 @@
 export function CreateCart() {
   const cart: CartItem[] = [];
-  if (
-    // typeof window !== "undefined" &&
-    !sessionStorage.getItem("tons-of-tacos-cart")
-  ) {
+  if (!sessionStorage.getItem("tons-of-tacos-cart")) {
     sessionStorage.setItem("tons-of-tacos-cart", JSON.stringify(cart));
   }
 }
@@ -26,7 +23,7 @@ export async function AddItemToCart(
   };
 
   let newCart: CartItem[] = [];
-  newCart = await GetCart();
+  newCart = GetCart();
   newCart.push(cartItem);
   sessionStorage.removeItem("tons-of-tacos-cart");
   sessionStorage.setItem("tons-of-tacos-cart", JSON.stringify(newCart));
@@ -40,13 +37,12 @@ export function RemoveCartItem(id: string) {
 
 export function GetCart() {
   let oldCart: CartItem[] = [];
+
   try {
-    // if (typeof window !== "undefined") {
     oldCart = JSON.parse(sessionStorage.getItem("tons-of-tacos-cart") || "{}");
-    // }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    // throw new Error("Cant get cart right now");
-    throw error;
+    throw new Error("hrm...");
   }
   return oldCart;
 }
@@ -58,9 +54,9 @@ export async function GetCartQuantity() {
   try {
     cartQuantity = cart.map((cartItem) => cartItem.quantity);
     cartQuantity.forEach((num) => (quantity += num));
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    // throw new Error("Can't update cart right now");
-    throw error;
+    throw new Error("Can't update cart quantity right now");
   }
   return quantity;
 }
@@ -69,18 +65,18 @@ export function UpdateCart(cart: CartItem[]) {
   try {
     sessionStorage.removeItem("tons-of-tacos-cart");
     sessionStorage.setItem("tons-of-tacos-cart", JSON.stringify(cart));
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    // throw new Error("Cant update cart");
-    throw error;
+    throw new Error("Cant update cart");
   }
 }
 
 export function ResetCart() {
   try {
     sessionStorage.removeItem("tons-of-tacos-cart");
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    // throw new Error("Problem with resetting the cart");
-    throw error;
+    throw new Error("Problem with resetting the cart");
   }
 }
 
@@ -122,33 +118,39 @@ export async function SendOrder(
     order: orderItems,
   };
 
-  // try catch block here
-  const response = await fetch("http://localhost:8080/api/order/checkout", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(order),
-  });
+  let data;
+  let response;
+  let status;
 
-  // try catch block
   try {
-    const data = await response.json();
-    const status = response.status;
+    response = await fetch("http://localhost:8080/api/order/checkout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(order),
+    });
+    data = await response.json();
+    status = response.status;
 
-    const orderNumber = data.orderUid;
-    const customerName = data.customerName;
-    const customerEmail = data.customerEmail;
-    const customerPhone = data.customerPhone;
-    const orderTotal = data.orderTotal;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (error) {
+    throw new Error("Sorry, we can't process your order right now.");
+  }
 
-    const receivedOrderItems: string[] = data.orderItems.map(
-      (orderItem: OrderItem) =>
-        `\n${orderItem.quantity}  x  ${orderItem.itemName}:
+  const orderNumber = data.orderUid;
+  const customerName = data.customerName;
+  const customerEmail = data.customerEmail;
+  const customerPhone = data.customerPhone;
+  const orderTotal = data.orderTotal;
+
+  const receivedOrderItems: string[] = data.orderItems.map(
+    (orderItem: OrderItem) =>
+      `\n${orderItem.quantity}  x  ${orderItem.itemName}:
     size  (${orderItem.size})  =  $${orderItem.total.toFixed(2)}`
-    );
+  );
 
-    const orderConfirmation = `Hola, ${customerName}!
+  const orderConfirmation = `Hola, ${customerName}!
   
   Thank you for your order of: 
   ${receivedOrderItems}
@@ -163,13 +165,9 @@ export async function SendOrder(
   
   See you at the truck!`;
 
-    if (status === 201) {
-      return { message: orderConfirmation };
-    } else {
-      return { message: data.message };
-    }
-  } catch (error) {
-    // throw new Error("Sorry we can't process your order right now.");
-    throw error;
+  if (status === 201) {
+    return { message: orderConfirmation };
+  } else {
+    return { message: data.message };
   }
 }

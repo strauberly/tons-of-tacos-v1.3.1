@@ -1,24 +1,18 @@
-"use client";
-import { useEffect } from "react";
+// import { useId } from "react";
 import MenuItem from "./menu-item";
 import classes from "./menu-item-list.module.css";
-import { useMenuContext } from "@/context/menu-context";
 
+export default async function MenuItemList(menuItems: {
+  menuItems: MenuItem[];
+}) {
+  // try with context, ie context stored in a const and then shipped instead of through prop pass
 
-export default function MenuItemList() {
-
-  const { menuItems } = useMenuContext();
-
-  useEffect(() => {
-    async function timeOut() {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-    }
-    timeOut();
-  });
+  const items = menuItems.menuItems;
+  await new Promise((resolve) => setTimeout(resolve, 1000));
 
   return (
     <ul className={classes.grid}>
-      {menuItems.map(
+      {items.map(
         (menuItem: {
           id: string;
           itemName: string;

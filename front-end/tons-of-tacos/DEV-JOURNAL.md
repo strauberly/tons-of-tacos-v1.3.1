@@ -2,7 +2,15 @@
 
 ---
 
--- ? Dec 2024 --
+-- 6 Dec 2024 --
+
+- Reverted to using our custom error handler in lieu of just throwing errors. Also, errors for data fetching now handled library level.
+- Cleaned up unnecessary variable transfer in main header.
+- Added error handling to add-to-cart.tsx;
+
+---
+
+-- 5 Dec 2024 --
 
 - Quest for global-error.tsx to act appropriately in next 14 was fruitless and so updated the project to next 15. Seems promising but creating some new quirks and errors while also undoing some work. Working through.
 - Checking for window before accessing local storage seems to no longer be needed so have commented out lines of code and will evaluate.
