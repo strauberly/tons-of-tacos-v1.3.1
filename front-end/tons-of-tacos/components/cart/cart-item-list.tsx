@@ -7,7 +7,7 @@ export default function CartItems() {
   const { cart, setCart } = useCartContext();
 
   useEffect(() => {
-    setCart(GetCart());
+    return setCart(GetCart());
   }, [setCart]);
 
   return (
