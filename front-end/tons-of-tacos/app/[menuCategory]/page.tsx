@@ -14,20 +14,13 @@ export default function MenuItemsByCategory(props: {
   params: Promise<{ menuCategory: string }>;
 }) {
   const params = use(props.params);
-
   const { setMenuItems } = useMenuContext();
-
   const { menuCategories } = useMenuCategoryContext();
-
   const menuItems = useRef<MenuItem[]>([]);
-
   const menuOptions: string[] = menuCategories.map(
     (category: { name: string }) => category.name
   );
-
   const category = params.menuCategory;
-
-  console.log(category);
 
   if (!menuOptions.includes(category)) {
     notFound();
@@ -39,7 +32,6 @@ export default function MenuItemsByCategory(props: {
     async function DisplayMenuItems() {
       try {
         menuItems.current = await MenuItemsSource(category);
-        // try just catching the error in the lib
       } catch (error) {
         setError(() => {
           throw error;
@@ -65,7 +57,7 @@ export default function MenuItemsByCategory(props: {
             <h1>{category + ":"}</h1>
             <p className={classes.description}>{description}</p>
           </div>
-          <div>{<MenuItemList />}</div>
+          <div>{<MenuItemList menuItems={menuItems.current} />}</div>
         </FadeOnLoad>
       </Suspense>
     </main>

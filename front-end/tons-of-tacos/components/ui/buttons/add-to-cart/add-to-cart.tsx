@@ -47,11 +47,18 @@ export default function AddToCart(props: {
   };
 
   const checkItem = useCallback(() => {
-    cart.forEach((cartItem) => {
-      if (props.id == cartItem.id) {
-        setItemInCart(true);
-      }
-    });
+    try {
+      cart.forEach((cartItem) => {
+        if (props.id == cartItem.id) {
+          setItemInCart(true);
+        }
+      });
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      throw new Error(
+        "Sorry there is an issue with your cart please try refreshing and adding items to your cart again."
+      );
+    }
   }, [cart, props.id]);
 
   const addCartItem = () => {

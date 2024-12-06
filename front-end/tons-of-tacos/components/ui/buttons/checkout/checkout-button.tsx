@@ -34,7 +34,12 @@ export default function SubmitButton(validation: {
         status.pending
       }
       onClick={async () => {
-        setOrderConfirmation(validation.state);
+        try {
+          setOrderConfirmation(validation.state);
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        } catch (error) {
+          throw new Error("Sorry, we can't process your order at the moment");
+        }
         await new Promise((resolve) => setTimeout(resolve, 250));
         setShowOrderConfirmation(true);
       }}
