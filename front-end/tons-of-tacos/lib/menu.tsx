@@ -17,7 +17,6 @@ export default async function CategoriesSource() {
 
 export async function MenuItemsSource(category: string) {
   let data;
-  // await new Promise((resolve) => setTimeout(resolve, 10000));
   try {
     const response = await fetch(
       `http://localhost:8080/api/menu/category?category=${category}`
@@ -28,6 +27,5 @@ export async function MenuItemsSource(category: string) {
     throw new Error("Sorry, we're having issues bringing you our menu");
   }
   const menuItems: MenuItem[] = data;
-  // await new Promise((resolve) => setTimeout(resolve, 3000));
   return menuItems;
 }

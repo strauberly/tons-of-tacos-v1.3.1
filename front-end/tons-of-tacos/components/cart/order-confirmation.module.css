@@ -60,14 +60,10 @@
 }
 
 .close {
-  /* position: relative; */
   display: flex;
   font-size: clamp(2.5rem, 1vw, 1vw);
-  /* margin: auto; */
   margin-top: 4rem;
   padding-bottom: 4rem;
-  /* left: 40%;
-  right: 40%; */
   cursor: pointer;
 }
 
