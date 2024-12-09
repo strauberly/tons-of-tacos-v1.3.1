@@ -1,6 +1,7 @@
 .alert {
   display: flex;
   position: fixed;
+  /* justify-content: center; */
   margin: auto;
   top: 10%;
   left: 0;
@@ -8,7 +9,7 @@
   padding: 0.25rem;
   z-index: 99;
   width: 40%;
-  height: 80%;
+  height: 50%;
   border-color: transparent;
   background: linear-gradient(
       to bottom,
@@ -30,11 +31,13 @@
   width: 100%;
   margin: auto;
   overflow-y: scroll;
+  justify-items: center;
   top: 0;
   bottom: 0;
   padding: 2rem;
   background-color: #0c0424;
   border-radius: 10px;
+  overflow-x: hidden;
 }
 
 .alertBackdrop {
@@ -51,30 +54,35 @@
 }
 
 .alert pre {
-  overflow-x: auto;
+  /* overflow-x: auto; */
   white-space: pre-wrap;
   word-wrap: break-word;
   font-size: clamp(1.25rem, 2vw, 1.5vw);
 }
 
 .close {
-  position: relative;
+  display: flex;
   font-size: clamp(2.5rem, 1vw, 1vw);
-  margin: auto;
-  margin-top: 5%;
-  left: 40%;
-  right: 40%;
+  /* margin: auto; */
+  margin-top: 4rem;
+  padding-bottom: 4rem;
+  /* padding: 50%; */
+  /* margin-right: 50rem; */
+  /* margin: 0 auto; */
   cursor: pointer;
+  /* overflow-x: hidden; */
 }
 
 @media (max-width: 1005px) {
   .alert {
     margin: auto;
+    height: 50%;
+    width: 75%;
   }
 
   .close {
-    margin: auto;
-    margin-top: 2%;
+    margin: 0 auto;
+    margin-top: 25%;
     left: 80%;
   }
 }
