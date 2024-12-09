@@ -6,6 +6,8 @@
 
 - Addressed issues caused during refresh with a menu category pulled up.
   Swapped handling of logic between dynamic page and menu item list swapping their roles as client and server components.
+- Updated Alert component styling for responsiveness.
+- Adjusted styling in order confirmation component to bring it more in line with alert styling and aid ux.
 
 ---
 
