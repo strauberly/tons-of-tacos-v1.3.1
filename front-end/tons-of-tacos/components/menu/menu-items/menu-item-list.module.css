@@ -6,3 +6,15 @@
   margin-top: 3%;
   align-items: center;
 }
+
+.category {
+  display: flex;
+  gap: 1vw;
+  align-items: first baseline;
+  justify-content: center;
+  padding-top: clamp(2rem + 1vw, 1vw, 2rem);
+}
+
+.description {
+  font-size: clamp(1rem, 2vw, 3rem);
+}
