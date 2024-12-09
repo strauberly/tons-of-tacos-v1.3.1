@@ -2,6 +2,13 @@
 
 ---
 
+-- 9 Dec 2024 --
+
+- Addressed issues caused during refresh with a menu category pulled up.
+  Swapped handling of logic between dynamic page and menu item list swapping their roles as client and server components.
+
+---
+
 -- 6 Dec 2024 --
 
 - Reverted to using our custom error handler in lieu of just throwing errors. Also, errors for data fetching now handled library level.
