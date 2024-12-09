@@ -1,7 +1,6 @@
 .alert {
   display: flex;
   position: fixed;
-  /* justify-content: center; */
   margin: auto;
   top: 10%;
   left: 0;
@@ -54,7 +53,6 @@
 }
 
 .alert pre {
-  /* overflow-x: auto; */
   white-space: pre-wrap;
   word-wrap: break-word;
   font-size: clamp(1.25rem, 2vw, 1.5vw);
@@ -63,14 +61,9 @@
 .close {
   display: flex;
   font-size: clamp(2.5rem, 1vw, 1vw);
-  /* margin: auto; */
   margin-top: 4rem;
   padding-bottom: 4rem;
-  /* padding: 50%; */
-  /* margin-right: 50rem; */
-  /* margin: 0 auto; */
   cursor: pointer;
-  /* overflow-x: hidden; */
 }
 
 @media (max-width: 1005px) {
