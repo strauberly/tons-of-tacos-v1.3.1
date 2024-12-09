@@ -1,54 +1,75 @@
-// import { useId } from "react";
-import { useMenuContext } from "@/context/menu-context";
-import MenuItem from "./menu-item";
+"use client";
 import classes from "./menu-item-list.module.css";
-// import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import MenuItem from "./menu-item";
+import { MenuItemsSource } from "@/lib/menu";
+import { useMenuContext } from "@/context/menu-context";
+import { notFound } from "next/navigation";
+import { useMenuCategoryContext } from "@/context/menu-category-context";
 
-//  try local storage like with cart so that it isn't affected by refresh
-export default function MenuItemList() {
-  const { menuItems } = useMenuContext();
-  // export default async function MenuItemList(menuItems: {
-  //   menuItems: MenuItem[];
-  // }) {
-  // try with context, ie context stored in a const and then shipped instead of through prop pass
+export default function MenuItemListCopy(category: { category: string }) {
+  const { setMenuItems } = useMenuContext();
+  const { menuCategories } = useMenuCategoryContext();
+  const menuItems = useRef<MenuItem[]>([]);
 
-  // const items = menuItems.menuItems;
-  // await new Promise((resolve) => setTimeout(resolve, 1000));
+  const menuOptions: string[] = menuCategories.map(
+    (category: { name: string }) => category.name
+  );
 
-  const items = menuItems;
+  if (!menuOptions.includes(category.category)) {
+    notFound();
+  }
+  const [, setError] = useState();
+  useEffect(() => {
+    async function DisplayMenuItems() {
+      try {
+        menuItems.current = await MenuItemsSource(category.category);
+      } catch (error) {
+        setError(() => {
+          throw error;
+        });
+      }
+      setMenuItems(menuItems.current);
+    }
+    DisplayMenuItems();
+  }, [category, menuCategories, setMenuItems]);
 
-  // useEffect(() => {
-  //   async function MenuItems() {
-  await new Promise((resolve) => setTimeout(resolve, 3000));
-  //     // items.current = menuItems;
-  //   }
-  //   MenuItems();
-  // });
+  const description: string | undefined = menuCategories
+    .find(function (mc) {
+      return mc.name === `${category.category}`;
+    })
+    ?.description.toString();
 
   return (
-    <ul className={classes.grid}>
-      {items.map(
-        (menuItem: {
-          id: string;
-          itemName: string;
-          category: string;
-          imageUrl: string;
-          itemSize: string;
-          unitPrice: number;
-          description: string;
-        }) => (
-          <MenuItem
-            key={`${menuItem.itemName}_${menuItem.itemSize}`}
-            id={`${menuItem.id}`}
-            itemName={menuItem.itemName}
-            category={menuItem.category}
-            imageUrl={menuItem.imageUrl}
-            itemSize={menuItem.itemSize}
-            unitPrice={menuItem.unitPrice}
-            description={menuItem.description}
-          />
-        )
-      )}
-    </ul>
+    <>
+      <div className={classes.category}>
+        <h1>{category.category + ":"}</h1>
+        <p className={classes.description}>{description}</p>
+      </div>
+      <ul className={classes.grid}>
+        {menuItems.current.map(
+          (menuItem: {
+            id: string;
+            itemName: string;
+            category: string;
+            imageUrl: string;
+            itemSize: string;
+            unitPrice: number;
+            description: string;
+          }) => (
+            <MenuItem
+              key={`${menuItem.itemName}_${menuItem.itemSize}`}
+              id={`${menuItem.id}`}
+              itemName={menuItem.itemName}
+              category={menuItem.category}
+              imageUrl={menuItem.imageUrl}
+              itemSize={menuItem.itemSize}
+              unitPrice={menuItem.unitPrice}
+              description={menuItem.description}
+            />
+          )
+        )}
+      </ul>
+    </>
   );
 }
