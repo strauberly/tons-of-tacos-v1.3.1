@@ -1,7 +1,13 @@
 "use client";
 
-import classes from "@/app/page.module.css";
+// import classes from "@/app/page.module.css";
 import { useEffect } from "react";
+
+// try create styling in global error css and if not importing from folder outside of root layout
+
+import classes from "./global-error.module.css";
+
+// import classes from "./global-error.module.css";
 
 export default function GlobalError({
   error,
@@ -23,13 +29,17 @@ export default function GlobalError({
   };
   return (
     <html>
-      <body>
+      <body className={classes.body}>
         <div className={classes.error}>
-          <h1>Whoops! {error.message}.</h1>
-          <p>Give us a shout and we&apos;ll get it worked out. Thanks!</p>
-          <button onClick={resetHandler}>hi</button>
-          <p></p>
-          <p className={classes.errorContact}>Tons Of Tacos: contact info</p>
+          <h1 className={classes.h1}>Whoops! {error.message}.</h1>
+          <p className={classes.instructions}>
+            Give us a shout and we&apos;ll get it worked out. Thanks!
+          </p>
+          {/* <p>{Error.toString()}</p> */}
+          <p className={classes.contact}>Tons Of Tacos: contact info</p>
+          <button className={classes.button} onClick={resetHandler}>
+            Retry
+          </button>
         </div>
       </body>
     </html>

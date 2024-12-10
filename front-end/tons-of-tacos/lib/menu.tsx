@@ -8,7 +8,7 @@ export default async function CategoriesSource() {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     throw new Error(
-      "Bummer, look like our systems are down. Give us a shout for more info or try again later."
+      "Bummer, looks like our systems are down. Give us a shout for more info or try again later."
     );
   }
   const categories: Category[] = data;
