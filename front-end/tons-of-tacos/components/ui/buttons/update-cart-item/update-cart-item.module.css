@@ -1,4 +1,5 @@
 .update {
   color: var(--interactive-color);
   font-size: clamp(1.25rem, 2vw, 1.5vw);
+  cursor: pointer;
 }

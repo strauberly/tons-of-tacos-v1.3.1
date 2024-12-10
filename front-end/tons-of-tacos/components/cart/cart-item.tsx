@@ -29,10 +29,25 @@ export default function CartItem(props: {
         "The limit for this item is 10. If you need more please give us a call so we can try to accommodate your order. Thanks!"
       );
       setShowAlert(true);
+    } else if (quantity + cartQuantity > 30) {
+      setAlert(
+        "Your order has grown to a fair size. The current maximum is 30 items. Please contact us before adding anything else. \n\nThis will ensure we can make your order happen today. You can also remove items from your cart. Thank you!"
+      );
+      setShowAlert(true);
     } else {
       setQuantity(quantity + 1);
     }
   };
+  // const increment = () => {
+  //   if (quantity >= 10) {
+  //     setAlert(
+  //       "The limit for this item is 10. If you need more please give us a call so we can try to accommodate your order. Thanks!"
+  //     );
+  //     setShowAlert(true);
+  //   } else {
+  //     setQuantity(quantity + 1);
+  //   }
+  // };
 
   const decrement = () => {
     setQuantity(quantity - 1);
