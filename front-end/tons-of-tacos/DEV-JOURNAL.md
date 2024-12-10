@@ -4,8 +4,9 @@
 
 -- 10 Dec 2024 --
 
-- Adjusted logic in cart item component incrimination that would allow a by pass of our order size limitation.
-- Updated styling for update cart tiem button and remove from carton button to have a pointer cursor.
+- Adjusted logic in cart item component incrementilization that would allow a by pass of our order size limitation.
+- Updated styling for update cart item button and remove from carton button to have a pointer cursor.
+- Adjusted styling in our customer info form for better responsive design taking possible input errors into account.
 
 ---
 
