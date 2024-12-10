@@ -3,36 +3,32 @@
   flex-direction: column;
   right: 50%;
   left: 50%;
-  gap: 1vw;
+  gap: 2vw;
   font-size: clamp(1.25rem, 2vw, 1.5vw);
   justify-content: center;
   margin-top: 1vw;
   margin-bottom: 1vw;
 }
 
-.grid {
-  justify-content: center;
-  align-items: center;
-}
-
 .form div {
   display: flex;
-  gap: 2%;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 1vw;
+  /* gap: 1%; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* margin-bottom: 1vw; */
 }
 .form label {
   color: var(--interactive-color);
   justify-content: left;
-  padding-right: 1vw;
-  padding-left: 0.5vw;
+  /* padding-right: 1vw; */
+  /* padding-left: 0.5vw; */
 }
 
 .form input,
 .form textarea {
   font-size: clamp(1.25rem, 2vw, 1.5vw);
   text-align: left;
+  /* min-width: fit-content; */
 
   background-color: var(--background-color);
 
@@ -40,6 +36,7 @@
   padding-left: 1vw;
   padding-top: 0.5vw;
   padding-bottom: 0.5vw;
+  margin-bottom: 1rem;
 }
 
 .form input:focus,
@@ -53,23 +50,15 @@
 }
 
 .invalid {
-  width: 40%;
+  /* width: 40%; */
   border: 2px solid var(--attention-color);
   border-radius: 3px;
 }
 
 .valid {
-  width: 40%;
+  /* width: 40%; */
   border: 2px solid var(--border-color);
   border-radius: 3px;
-}
-
-.phone {
-  width: 81%;
-}
-
-.email {
-  width: 81%;
 }
 
 .checkoutButton {
@@ -87,43 +76,107 @@
   transition: 0.025s ease;
 }
 
-.errorMessages {
+/* .errorMessages {
   display: block;
   color: var(--attention-color);
   font-family: var(--inter-font);
   justify-content: center;
   margin-bottom: 1vw;
   align-items: center;
+} */
+
+.names {
+  /* display: flexbox; */
+  align-items: first baseline;
+  flex-direction: row;
+  gap: 2%;
+  /* max-width: ; */
+}
+
+.first {
+  flex-direction: column;
+  min-width: 44%;
+  padding-left: 0.5%;
+  /* margin-left: -0.5rem; */
+  /* align-items: left; */
 }
 
 .firstNameError {
   display: block;
   color: var(--attention-color);
   font-family: var(--inter-font);
-  justify-content: center;
-  margin-bottom: 1vw;
-  align-items: center;
-  margin-left: 5vw;
+  max-width: 100%;
+  /* justify-content: center; */
+  /* margin-bottom: 1vw; */
+  /* align-items: center; */
+  /* margin-left: 5vw; */
+}
+
+.last {
+  flex-direction: column;
+  min-width: 44%;
+  /* align-items: left; */
 }
 
 .lastNameError {
   display: block;
   color: var(--attention-color);
   font-family: var(--inter-font);
-  justify-content: center;
+  max-width: 100%;
+  /* justify-content: center;
   margin-bottom: 1vw;
   align-items: center;
-  margin-left: 2vw;
+  margin- 2vw; */
+}
+
+.phone {
+  align-items: first baseline;
+  /* flex-direction: row; */
+  /* gap: 2%; */
+  /* min-width: min-content; */
+  /* width: 100%; */
+}
+
+/* .phoneValid {
+  min-width: 99%;
+  border: 2px solid var(--border-color);
+  border-radius: 3px;
+}
+
+.phoneInvalid {
+  min-width: 99%;
+  border: 2px solid var(--attention-color);
+  border-radius: 3px;
+} */
+
+.phoneColumn {
+  flex-direction: column;
+  margin-left: 2%;
+  min-width: 89%;
 }
 
 .phoneError {
+  display: block;
   color: var(--attention-color);
-  margin-left: 5vw;
+  font-family: var(--inter-font);
+  max-width: 100%;
+  /* margin-left: 5vw; */
+}
+
+.email {
+  align-items: first baseline;
+  /* gap: 2%; */
+}
+
+.emailColumn {
+  flex-direction: column;
+  margin-left: 1.5%;
+  min-width: 88.5%;
 }
 
 .emailError {
   color: var(--attention-color);
-  margin-left: 5vw;
+  /* margin-left: 5vw; */
 }
 
 @media (max-width: 450px) {
