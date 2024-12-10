@@ -41,6 +41,8 @@ export default function Update(props: {
 
   let newQuantity = 0;
 
+  console.log("old" + props.oldQuantity);
+
   const updateQuantity = () => {
     newQuantity = cartQuantity - props.oldQuantity;
     newQuantity += props.updatedItemQuantity;
