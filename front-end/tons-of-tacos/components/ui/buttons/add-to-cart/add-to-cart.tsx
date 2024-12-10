@@ -37,7 +37,7 @@ export default function AddToCart(props: {
     newQuantity = cartQuantity + props.quantity;
     if (newQuantity > 30) {
       setAlert(
-        "Your order has grown to a fair size. The current maximum is 30 items. Please contact us before adding anything else. This will ensure we can make your order happen today. You can also remove other items from your cart. Thank you!"
+        "Your order has grown to a fair size. The current maximum is 30 items. Please contact us before adding anything else.\n\nThis will ensure we can make your order happen today. You can also remove other items from your cart. Thank you!"
       );
       setShowAlert(true);
       setLargeOrder(true);
