@@ -1,0 +1,65 @@
+@font-face {
+  font-family: "Quatl";
+  src: url("../components/ui/fonts/Quatl-3zp26.ttf");
+}
+
+.body {
+  background-color: var(--background-color);
+  font-family: "Quatl";
+  letter-spacing: 0.5px;
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  --background-color: #0c0424;
+  --interactive-color: #cf3052;
+  --attention-color: #ebc83b;
+  --paragraph-color: #c7ebec;
+  --border-color: #63b369;
+  --user-selected-color: aqua;
+}
+
+.error {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10%;
+  padding: 2rem;
+}
+
+.error p {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  font-family: var(--inter-font);
+  font-size: clamp(1rem, 2vw, 2vw);
+}
+
+.h1 {
+  display: flex;
+  justify-content: center;
+  color: var(--attention-color);
+  font-size: clamp(1rem, 2vw, 2vw);
+}
+
+.instructions {
+  color: var(--paragraph-color);
+}
+
+.contact {
+  color: var(--interactive-color);
+}
+
+.button {
+  margin-top: 2rem;
+  color: var(--interactive-color);
+  background-color: transparent;
+  border: none;
+  transition: 1s ease;
+  font-size: clamp(2rem, 3vw, 3vw);
+  cursor: pointer;
+}
+
+.button:hover {
+  color: var(--attention-color);
+  transition: 0.3s ease;
+}
