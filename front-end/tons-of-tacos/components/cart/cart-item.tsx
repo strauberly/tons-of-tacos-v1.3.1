@@ -38,16 +38,6 @@ export default function CartItem(props: {
       setQuantity(quantity + 1);
     }
   };
-  // const increment = () => {
-  //   if (quantity >= 10) {
-  //     setAlert(
-  //       "The limit for this item is 10. If you need more please give us a call so we can try to accommodate your order. Thanks!"
-  //     );
-  //     setShowAlert(true);
-  //   } else {
-  //     setQuantity(quantity + 1);
-  //   }
-  // };
 
   const decrement = () => {
     setQuantity(quantity - 1);
