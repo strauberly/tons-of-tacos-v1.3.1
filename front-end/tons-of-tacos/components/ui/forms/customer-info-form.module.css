@@ -12,23 +12,17 @@
 
 .form div {
   display: flex;
-  /* gap: 1%; */
-  /* justify-content: center; */
-  /* align-items: center; */
-  /* margin-bottom: 1vw; */
 }
 .form label {
   color: var(--interactive-color);
   justify-content: left;
-  /* padding-right: 1vw; */
-  /* padding-left: 0.5vw; */
+  min-width: max-content;
 }
 
 .form input,
 .form textarea {
   font-size: clamp(1.25rem, 2vw, 1.5vw);
   text-align: left;
-  /* min-width: fit-content; */
 
   background-color: var(--background-color);
 
@@ -50,13 +44,11 @@
 }
 
 .invalid {
-  /* width: 40%; */
   border: 2px solid var(--attention-color);
   border-radius: 3px;
 }
 
 .valid {
-  /* width: 40%; */
   border: 2px solid var(--border-color);
   border-radius: 3px;
 }
@@ -76,29 +68,17 @@
   transition: 0.025s ease;
 }
 
-/* .errorMessages {
-  display: block;
-  color: var(--attention-color);
-  font-family: var(--inter-font);
-  justify-content: center;
-  margin-bottom: 1vw;
-  align-items: center;
-} */
-
 .names {
-  /* display: flexbox; */
   align-items: first baseline;
   flex-direction: row;
   gap: 2%;
-  /* max-width: ; */
+  margin-bottom: 1rem;
 }
 
 .first {
   flex-direction: column;
   min-width: 44%;
   padding-left: 0.5%;
-  /* margin-left: -0.5rem; */
-  /* align-items: left; */
 }
 
 .firstNameError {
@@ -106,16 +86,11 @@
   color: var(--attention-color);
   font-family: var(--inter-font);
   max-width: 100%;
-  /* justify-content: center; */
-  /* margin-bottom: 1vw; */
-  /* align-items: center; */
-  /* margin-left: 5vw; */
 }
 
 .last {
   flex-direction: column;
   min-width: 44%;
-  /* align-items: left; */
 }
 
 .lastNameError {
@@ -123,31 +98,12 @@
   color: var(--attention-color);
   font-family: var(--inter-font);
   max-width: 100%;
-  /* justify-content: center;
-  margin-bottom: 1vw;
-  align-items: center;
-  margin- 2vw; */
 }
 
 .phone {
   align-items: first baseline;
-  /* flex-direction: row; */
-  /* gap: 2%; */
-  /* min-width: min-content; */
-  /* width: 100%; */
+  margin-bottom: 1rem;
 }
-
-/* .phoneValid {
-  min-width: 99%;
-  border: 2px solid var(--border-color);
-  border-radius: 3px;
-}
-
-.phoneInvalid {
-  min-width: 99%;
-  border: 2px solid var(--attention-color);
-  border-radius: 3px;
-} */
 
 .phoneColumn {
   flex-direction: column;
@@ -160,23 +116,34 @@
   color: var(--attention-color);
   font-family: var(--inter-font);
   max-width: 100%;
-  /* margin-left: 5vw; */
 }
 
 .email {
   align-items: first baseline;
-  /* gap: 2%; */
 }
 
 .emailColumn {
   flex-direction: column;
-  margin-left: 1.5%;
-  min-width: 88.5%;
+  min-width: 89%;
+  margin-left: 2%;
 }
 
 .emailError {
   color: var(--attention-color);
-  /* margin-left: 5vw; */
+}
+@media (max-width: 695px) {
+  .phoneColumn {
+    min-width: clamp(84%, 30vw, 88%);
+  }
+  .emailColumn {
+    min-width: clamp(84%, 30vw, 88%);
+  }
+  .first {
+    min-width: clamp(30%, 30vw, 88%);
+  }
+  .last {
+    min-width: clamp(30%, 30vw, 88%);
+  }
 }
 
 @media (max-width: 450px) {
