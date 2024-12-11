@@ -132,9 +132,9 @@ export default function CustomerInfoForm() {
         <label>E-mail</label>
         <div className={classes.emailColumn}>
           <input
-            className={`${classes.email}
-          ${emailValid ? classes.valid : classes.invalid}
-          `}
+            className={`
+            ${emailValid ? classes.valid : classes.invalid}
+            `}
             type="text"
             id="email"
             name="email"
