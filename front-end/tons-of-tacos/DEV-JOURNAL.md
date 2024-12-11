@@ -2,6 +2,12 @@
 
 ---
 
+-- 11 Dec 2024 --
+
+- Adjusted form and checkout button styling for responsive design.
+
+---
+
 -- 10 Dec 2024 --
 
 - Adjusted logic in cart item component incrementilization that would allow a by pass of our order size limitation.

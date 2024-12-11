@@ -12,3 +12,9 @@
   text-shadow: 0rem 0rem 1rem aquamarine;
   transition: 0.025s ease;
 }
+
+@media (max-width: 900px) {
+  .checkout_button {
+    margin-top: 2rem;
+  }
+}
