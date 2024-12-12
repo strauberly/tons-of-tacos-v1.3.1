@@ -2,6 +2,12 @@
 
 ---
 
+-- 12 Dec 2024 --
+
+- Adjusted logic in menu item component add item to correctly check if cart quantity is below acceptable thresh hold before adding a new menu item to the cart.
+
+---
+
 -- 11 Dec 2024 --
 
 - Adjusted form and checkout button styling for responsive design.
