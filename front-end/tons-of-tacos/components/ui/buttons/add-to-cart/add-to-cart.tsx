@@ -16,7 +16,7 @@ export default function AddToCart(props: {
   quantitySelector: () => void;
   expander: () => void;
 }) {
-  const [largeOrder, setLargeOrder] = useState(false);
+  const [largeOrder, setLargeOrder] = useState<boolean>();
   const [itemInCart, setItemInCart] = useState(false);
   const { setAlert } = useAlertContext();
   const { setShowAlert } = useDisplayContext();
@@ -31,20 +31,22 @@ export default function AddToCart(props: {
     setItemRemoved,
   } = useCartContext();
 
-  let newQuantity = 0;
+  // let newQuantity = 0;
 
-  const quantity = () => {
-    newQuantity = cartQuantity + props.quantity;
-    if (newQuantity > 30) {
-      setAlert(
-        "Your order has grown to a fair size. The current maximum is 30 items. Please contact us before adding anything else.\n\nThis will ensure we can make your order happen today. You can also remove other items from your cart. Thank you!"
-      );
-      setShowAlert(true);
-      setLargeOrder(true);
-    } else {
-      setCartQuantity(cartQuantity + props.quantity);
-    }
-  };
+  // setCart(GetCart());
+
+  // const quantity = () => {
+  //   newQuantity = cartQuantity + props.quantity;
+  //   if (newQuantity > 30) {
+  //     setAlert(
+  //       "Your order has grown to a fair size. The current maximum is 30 items. Please contact us before adding anything else.\n\nThis will ensure we can make your order happen today. You can also remove other items from your cart. Thank you!"
+  //     );
+  //     setShowAlert(true);
+  //     setLargeOrder(true);
+  //   } else {
+  //     setCartQuantity(cartQuantity + props.quantity);
+  //   }
+  // };
 
   const checkItem = useCallback(() => {
     try {
@@ -61,10 +63,51 @@ export default function AddToCart(props: {
     }
   }, [cart, props.id]);
 
+  // const addCartItem = () => {
+  //   console.log(cartQuantity + props.quantity > 30);
+  //   checkItem();
+  //   if (cartQuantity + props.quantity > 30) {
+  //     setAlert(
+  //       "Your order has grown to a fair size. The current maximum is 30 items. Please contact us before adding anything else.\n\nThis will ensure we can make your order happen today. You can also remove other items from your cart. Thank you!"
+  //     );
+  //     setShowAlert(true);
+  //   } else if (itemInCart === true) {
+  //     setAlert(
+  //       `${props.itemName} is already in your cart. Select the cart icon to view your order and change quantities.`
+  //     );
+  //     setShowAlert(true);
+  //   } else {
+  //     // quantity();
+  //     setItemsInCart(true);
+  //     setLargeOrder(false);
+  //     props.quantitySelector();
+  //     props.expander();
+  //     AddItemToCart(
+  //       props.id,
+  //       props.menuId,
+  //       props.itemName,
+  //       props.quantity,
+  //       props.size,
+  //       props.price
+  //     );
+  //     setCart(GetCart());
+  //     // } else {
+  //     //   // use your alert
+  //     //   setAlert(
+  //     //     `${props.itemName} is already in your cart. Select the cart icon to view your order and change quantities.`
+  //     //   );
+  //     //   setShowAlert(true);
+  //   }
+  // };
   const addCartItem = () => {
+    console.log(cartQuantity + props.quantity > 30);
     checkItem();
-    if (itemInCart === false) {
-      quantity();
+    if (cartQuantity + props.quantity > 30) {
+      setAlert(
+        "Your order has grown to a fair size. The current maximum is 30 items. Please contact us before adding anything else.\n\nThis will ensure we can make your order happen today. You can also remove other items from your cart. Thank you!"
+      );
+      setShowAlert(true);
+    } else if (itemInCart === false) {
       setItemsInCart(true);
       setLargeOrder(false);
       props.quantitySelector();
@@ -78,12 +121,21 @@ export default function AddToCart(props: {
         props.price
       );
       setCart(GetCart());
-    } else {
-      // use your alert
+      setCartQuantity(cartQuantity + props.quantity);
+    }
+    if (itemInCart === true) {
       setAlert(
         `${props.itemName} is already in your cart. Select the cart icon to view your order and change quantities.`
       );
       setShowAlert(true);
+      // } else {
+      // quantity();
+      // } else {
+      //   // use your alert
+      //   setAlert(
+      //     `${props.itemName} is already in your cart. Select the cart icon to view your order and change quantities.`
+      //   );
+      //   setShowAlert(true);
     }
   };
 
