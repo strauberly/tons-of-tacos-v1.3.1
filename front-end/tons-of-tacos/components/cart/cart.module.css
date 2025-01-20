@@ -8,8 +8,8 @@
   padding: 1vw;
   padding-bottom: 0.5rem;
   right: 0rem;
-  right: clamp(33vw, 75%, 65rem);
-  top: 3.525vw;
+  right: clamp(40vw, 86%, 65rem);
+  top: 3.55vw;
   height: 85vh;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -39,27 +39,27 @@
 /* medium devices*/
 @media (max-width: 1400px) {
   .cart {
-    right: clamp(30vw, 66%, 60rem);
+    right: clamp(30vw, 75%, 60rem);
     top: 6.15vw;
   }
 }
 
 @media (max-width: 1240px) {
   .cart {
-    right: clamp(30rem, 70%, 10rem);
+    right: clamp(32.6rem, 90%, 10rem);
   }
 }
 
 @media (max-width: 1080px) {
   .cart {
-    right: clamp(31rem, 78%, 32vw);
+    right: clamp(33.6rem, 80%, 32vw);
   }
 }
 
 @media (max-width: 975px) {
   .cart {
     width: 94vw;
-    left: 10%;
+    left: 4.6%;
     transform: translateX(-92%);
     top: 6vw;
   }
@@ -70,6 +70,6 @@
     top: 8vw;
     width: 94vw;
     left: 8.5%;
-    transform: translateX(-86%);
+    /* transform: translateX(-86%); */
   }
 }

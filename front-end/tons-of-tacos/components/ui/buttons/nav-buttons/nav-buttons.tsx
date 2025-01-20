@@ -16,27 +16,17 @@ export default function NavButtons(menuOptions: { menuOptions: Category[] }) {
   const { showMenu, setShowMenu, showCart, setShowCart } = useDisplayContext();
   const { setCart, cartQuantity } = useCartContext();
 
-  const menuRef = useRef<boolean>(showMenu);
-  const cartRef = useRef<boolean>(showCart);
+  // const menuRef = useRef<boolean>(showMenu);
+  // const cartRef = useRef<boolean>(showCart);
 
   function toggleMenu() {
     setShowCart(false);
-    if (menuRef.current == false) {
-      menuRef.current = true;
-    } else {
-      menuRef.current = false;
-    }
-    setShowMenu(menuRef.current);
+    setShowMenu(true);
   }
 
   function toggleCart() {
     setShowMenu(false);
-    if (cartRef.current == false) {
-      cartRef.current = true;
-    } else {
-      cartRef.current = false;
-    }
-    setShowCart(cartRef.current);
+    setShowCart(true);
   }
 
   useEffect(() => {
@@ -60,16 +50,86 @@ export default function NavButtons(menuOptions: { menuOptions: Category[] }) {
       <div className={classes.navButtons}>
         <CartQuantity />
         <nav className={classes.navButtons}>
-          <button className={classes.menuButton} onClick={() => toggleMenu()}>
+          <button
+            className={classes.menuButton}
+            onMouseEnter={() => toggleMenu()}
+          >
             <MenuIcon />
           </button>
-          <button className={classes.cartButton} onClick={() => toggleCart()}>
+          <button
+            className={classes.cartButton}
+            onMouseEnter={() => toggleCart()}
+          >
             <CartIcon />
           </button>
         </nav>
-        <div className={classes.menu}>{showMenu && <MenuNav />}</div>
-        <div>{showCart && <Cart />}</div>
+        <div className={classes.menu} onMouseLeave={() => setShowMenu(false)}>
+          {showMenu && <MenuNav />}
+        </div>
+        <div onMouseLeave={() => setShowCart(false)}>
+          {showCart && <Cart />}
+        </div>
       </div>
     </>
   );
+  // const { setMenuCategories } = useMenuCategoryContext();
+  // const { showMenu, setShowMenu, showCart, setShowCart } = useDisplayContext();
+  // const { setCart, cartQuantity } = useCartContext();
+
+  // const menuRef = useRef<boolean>(showMenu);
+  // const cartRef = useRef<boolean>(showCart);
+
+  // function toggleMenu() {
+  //   setShowCart(false);
+  //   if (menuRef.current == false) {
+  //     menuRef.current = true;
+  //   } else {
+  //     menuRef.current = false;
+  //   }
+  //   setShowMenu(menuRef.current);
+  // }
+
+  // function toggleCart() {
+  //   setShowMenu(false);
+  //   if (cartRef.current == false) {
+  //     cartRef.current = true;
+  //   } else {
+  //     cartRef.current = false;
+  //   }
+  //   setShowCart(cartRef.current);
+  // }
+
+  // useEffect(() => {
+  //   setMenuCategories(menuOptions.menuOptions);
+  //   setCart(GetCart());
+  //   if (cartQuantity <= 0) {
+  //     setShowCart(false);
+  //   }
+  // }, [
+  //   cartQuantity,
+  //   menuOptions.menuOptions,
+  //   setCart,
+  //   setMenuCategories,
+  //   setShowCart,
+  //   showCart,
+  //   showMenu,
+  // ]);
+
+  // return (
+  //   <>
+  //     <div className={classes.navButtons}>
+  //       <CartQuantity />
+  //       <nav className={classes.navButtons}>
+  //         <button className={classes.menuButton} onClick={() => toggleMenu()}>
+  //           <MenuIcon />
+  //         </button>
+  //         <button className={classes.cartButton} onClick={() => toggleCart()}>
+  //           <CartIcon />
+  //         </button>
+  //       </nav>
+  //       <div className={classes.menu}>{showMenu && <MenuNav />}</div>
+  //       <div>{showCart && <Cart />}</div>
+  //     </div>
+  //   </>
+  // );
 }

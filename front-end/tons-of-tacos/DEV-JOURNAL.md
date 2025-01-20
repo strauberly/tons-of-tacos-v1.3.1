@@ -2,6 +2,16 @@
 
 ---
 
+-- 20 Dec 2025 --
+
+- Adjusted nav button functionality so that nav menu and cart appear when corresponding button is entered and vanish upon leaving the components as well as vanishing when clicking outside of the component. Seems to create a smoother flow for the ux than clicking each time to display and hide the component.
+
+- Altered gap between nav buttons in order to aid in functionality. Responsiveness included.
+
+- Altered styling placement of cart component and addressed responsiveness.
+
+---
+
 -- 12 Dec 2024 --
 
 - Adjusted logic in menu item component add item to correctly check if cart quantity is below acceptable thresh hold before adding a new menu item to the cart.
