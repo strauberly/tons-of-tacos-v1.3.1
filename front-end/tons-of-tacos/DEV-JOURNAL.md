@@ -10,6 +10,8 @@
 
 - Altered styling placement of cart component and addressed responsiveness.
 
+- Touched files cleaned up.
+
 ---
 
 -- 12 Dec 2024 --
