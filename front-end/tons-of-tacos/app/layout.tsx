@@ -5,6 +5,7 @@ import { inter } from "../components/ui/fonts/fonts";
 import { Providers } from "@/context/providers";
 import Alert from "@/components/alert/alert";
 import OrderConfirmation from "@/components/cart/order-confirmation";
+import Footer from "@/components/footer/footer";
 
 export const metadata: Metadata = {
   title: "Tons Of Tacos",
@@ -23,7 +24,12 @@ export default function RootLayout({
           <Alert />
           <MainHeader />
           <OrderConfirmation />
-          <div className="children">{children}</div>
+          <div id="page-container">
+            <div id="content-wrap">
+              <div className="children">{children}</div>
+            </div>
+            <Footer />
+          </div>
         </Providers>
       </body>
     </html>

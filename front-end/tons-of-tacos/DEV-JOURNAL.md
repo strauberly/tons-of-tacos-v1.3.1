@@ -2,6 +2,19 @@
 
 ---
 
+-- 22 Dec 2025 --
+
+- Footer component styling happens in globals.css file. By doing the styling here we(me) are able to keep the footer in the root layout and wrap divs around that allow for the desired effect of having the layout stick to the bottom of any pages. Elements inside the footer will be styled in the accompanying css module found in the footer component folder.
+- Will update project on git for tasks to be completed on footer.
+
+---
+
+-- 21 Dec 2025 --
+
+Initialized footer.
+
+---
+
 -- 20 Dec 2025 --
 
 - Adjusted nav button functionality so that nav menu and cart appear when corresponding button is entered and vanish upon leaving the components as well as vanishing when clicking outside of the component. Seems to create a smoother flow for the ux than clicking each time to display and hide the component.

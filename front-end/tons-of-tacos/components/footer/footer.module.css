@@ -1,0 +1,16 @@
+#footer {
+  margin-top: 80rem;
+  background-color: aqua;
+}
+/* .footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  width: 96%;
+  background-color: aqua;
+} */
+
+.footerText {
+  color: orange;
+}
