@@ -1,0 +1,22 @@
+.footerGrid {
+  display: grid;
+  gap: 1vw;
+  /* look at auto fit */
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.footerGrid p {
+  color: var(--interactive-color);
+  font-family: var(--inter-font);
+}
+
+.footerGrid a {
+  font-family: var(--inter-font);
+  color: var(--interactive-color);
+  transition: 1s ease;
+}
+
+.footerGrid a:hover {
+  color: var(--attention-color);
+  transition: 0.3s ease;
+}

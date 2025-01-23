@@ -12,12 +12,14 @@ export default async function MenuItemsByCategory(props: {
   await new Promise((resolve) => setTimeout(resolve, 2000));
 
   return (
-    <main className={classes.main}>
-      <Suspense fallback={<Loading />}>
-        <FadeOnLoad>
-          <MenuItemList category={category} />
-        </FadeOnLoad>
-      </Suspense>
-    </main>
+    <>
+      <main className={classes.main}>
+        <Suspense fallback={<Loading />}>
+          <FadeOnLoad>
+            <MenuItemList category={category} />
+          </FadeOnLoad>
+        </Suspense>
+      </main>
+    </>
   );
 }
