@@ -6,6 +6,7 @@
 
 - Footer component styling happens in globals.css file. By doing the styling here we(me) are able to keep the footer in the root layout and wrap divs around that allow for the desired effect of having the layout stick to the bottom of any pages. Elements inside the footer will be styled in the accompanying css module found in the footer component folder.
 - Will update project on git for tasks to be completed on footer.
+- Grid in place for footer. About and FAQ routes and pages initialized.
 
 ---
 
