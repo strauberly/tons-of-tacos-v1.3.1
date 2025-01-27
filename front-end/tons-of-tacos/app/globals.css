@@ -60,6 +60,7 @@ p {
   justify-content: center;
   font-family: var(--inter-font);
   color: var(--paragraph-color);
+  white-space: pre-line;
 }
 
 h1 {
