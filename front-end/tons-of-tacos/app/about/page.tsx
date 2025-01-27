@@ -1,0 +1,12 @@
+import { about, aboutStory, title } from "@/lib/content/about";
+import classes from "./about.module.css";
+
+export default function About() {
+  return (
+    <div className={classes.aboutContent}>
+      <h1>{title}</h1>
+      <p>{about}</p>
+      <p className={classes.aboutStory}>{aboutStory}</p>
+    </div>
+  );
+}

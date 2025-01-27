@@ -1,16 +1,24 @@
-#footer {
-  margin-top: 80rem;
-  background-color: aqua;
+.footerGrid {
+  display: grid;
+  gap: 1vw;
+  /* look at auto fit */
+  grid-template-columns: repeat(4, 1fr);
+  font-size: larger;
 }
-/* .footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  height: 100px;
-  width: 96%;
-  background-color: aqua;
-} */
 
-.footerText {
-  color: orange;
+.footerGrid p {
+  color: var(--interactive-color);
+  font-family: var(--inter-font);
+}
+
+.footerGrid a {
+  /* font-size: larger; */
+  font-family: var(--inter-font);
+  color: var(--interactive-color);
+  transition: 1s ease;
+}
+
+.footerGrid a:hover {
+  color: var(--attention-color);
+  transition: 0.3s ease;
 }
