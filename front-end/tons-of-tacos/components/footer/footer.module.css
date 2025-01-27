@@ -3,6 +3,7 @@
   gap: 1vw;
   /* look at auto fit */
   grid-template-columns: repeat(4, 1fr);
+  font-size: larger;
 }
 
 .footerGrid p {
@@ -11,6 +12,7 @@
 }
 
 .footerGrid a {
+  /* font-size: larger; */
   font-family: var(--inter-font);
   color: var(--interactive-color);
   transition: 1s ease;
