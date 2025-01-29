@@ -2,11 +2,21 @@
 
 ---
 
+-- 27 Jan 2025 --
+
+FAQ in place with initial styling. Ready for responsive design.
+
+---
+
 -- 26 Jan 2025 --
 
 - Increased front size of elements in footer.
 
 - Changes made to About copy content.
+
+- Started work on FAQ page.
+  - faq.json file created in content folder in library.
+  - faq.json mapped into ul in faq page component.
 
 ---
 

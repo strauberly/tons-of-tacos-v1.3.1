@@ -14,7 +14,7 @@ The about section I imagine for this fictional company is as follows:
 export const aboutStory: string = `
 We got our start in the world flipping homes for profit. Over time, we realized a negative impact this was having on affordable housing in our community and decided to switch gears. 
 
-We sold off our portfolio to first time buyers for cost except for one. We converted that property into a small scale farm we use to create the ingredients for our food we love to bring others trying to make their way in the world.
+We sold off our portfolio to first time buyers for cost except for one. We converted that property into a small scale farm we use to create the ingredients for our food we love to share with others.
 
 Our passion for delicious, wholesome, satisfying meals is matched by watching folks come together at a table to enjoy those meals and we love catering for group functions and being a part of folks special events.
 
