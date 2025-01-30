@@ -2,9 +2,15 @@
 
 ---
 
+-- 29 Jan 2025 --
+
+- Styling adjusted on footer. Content centered in containers.
+
+---
+
 -- 27 Jan 2025 --
 
-FAQ in place with initial styling. Ready for responsive design.
+- FAQ in place with initial styling. Ready for responsive design.
 
 ---
 
