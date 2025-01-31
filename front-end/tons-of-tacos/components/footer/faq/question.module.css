@@ -1,0 +1,11 @@
+.question {
+    font-family: var(--inter-font);
+    font-size: x-large;
+    margin-bottom: 0.75vw;
+    color: var(--user-selected-color);
+  }
+  
+  .answer {
+    font-size: large;
+    margin-bottom: 2vw;
+  }
