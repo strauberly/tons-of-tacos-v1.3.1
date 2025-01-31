@@ -8,6 +8,10 @@
   border-radius: 10px;
 }
 
+.itemName {
+  font-size: clamp(0.8rem, 1vw, 1vw);
+}
+
 .card img {
   border-radius: 10px;
 }
@@ -28,6 +32,7 @@
 .price {
   font-size: 1.5rem;
   font-weight: 700;
+  justify-content: center;
 }
 
 .more {

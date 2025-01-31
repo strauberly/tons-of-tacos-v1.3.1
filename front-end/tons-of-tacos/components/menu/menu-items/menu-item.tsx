@@ -88,7 +88,7 @@ export default function MenuItem(props: {
       <li
         className={`${classes.card} ${expand === true ? classes.expand : " "}`}
       >
-        <h2>{props.itemName}</h2>
+        <h2 className={classes.itemName}>{props.itemName}</h2>
         {expand && (
           <button
             onClick={() => setExpand(false)}

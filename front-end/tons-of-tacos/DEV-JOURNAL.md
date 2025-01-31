@@ -5,6 +5,7 @@
 -- 1 Jan 2025 --
 
 - Altered FAQ page to utilize a question component and moved styling for questions into css module. All are contained in the footer/faq folder.
+- Adjusted styling in globals and menu items allowing for global values to be more generic with fine tuning for responsive design happening in component styling module.
 
 ---
 
