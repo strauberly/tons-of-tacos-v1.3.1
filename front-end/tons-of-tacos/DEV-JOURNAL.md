@@ -2,6 +2,12 @@
 
 ---
 
+-- 1 Jan 2025 --
+
+- Altered FAQ page to utilize a question component and moved styling for questions into css module. All are contained in the footer/faq folder.
+
+---
+
 -- 30 Jan 2025 --
 
 - Styling adjustments for about page to bring the styling more in line with work that was done on FAQ page. Reorganized content to place the mock about for the company before the about blurb of the project. Intent so that visiting that page after the FAQ is less jarring for the user.

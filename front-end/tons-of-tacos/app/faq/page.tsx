@@ -1,3 +1,4 @@
+import Question from "@/components/footer/faq/question";
 import faq from "../../lib/content/faq.json";
 import classes from "./faq.module.css";
 
@@ -7,10 +8,7 @@ export default function FAQ() {
       <h1 className={classes.title}>Frequently Asked Questions:</h1>
       <ul>
         {faq.map((question: { id: number; q: string; a: string }) => (
-          <>
-            <h2 className={classes.question}>{question.q}</h2>
-            <p className={classes.answer}>{question.a}</p>
-          </>
+          <Question key={question.id} q={question.q} a={question.a} />
         ))}
       </ul>
     </div>
