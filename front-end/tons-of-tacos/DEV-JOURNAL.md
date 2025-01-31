@@ -2,6 +2,12 @@
 
 ---
 
+-- 30 Jan 2025 --
+
+- Styling adjustments for about page to bring the styling more in line with work that was done on FAQ page. Reorganized content to place the mock about for the company before the about blurb of the project. Intent so that visiting that page after the FAQ is less jarring for the user.
+
+---
+
 -- 29 Jan 2025 --
 
 - Styling adjusted on footer. Content centered in containers.
