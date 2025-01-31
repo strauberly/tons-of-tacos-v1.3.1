@@ -1,9 +1,14 @@
 .aboutContent {
-  margin-left: auto;
-  margin-right: auto;
-  width: 70%;
+  margin-left: 3vw;
+  margin-right: 3vw;
 }
 
 .aboutStory {
   font-size: x-large;
+  margin-bottom: 2vw;
+}
+
+.projectAbout {
+  color: var(--attention-color);
+  font-size: large;
 }

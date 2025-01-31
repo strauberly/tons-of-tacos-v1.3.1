@@ -2,7 +2,7 @@ export const title: string = "About: ";
 
 export const about: string = `This site is a portfolio project for Adam Straub. It is a demonstration for recruiters and future employers of being able to use an unfamiliar tool to produce desired results without a formal education. In this case, Next.js was new to me.
 
-Please feel free to check out the project on Git Hub <--- link. This project utilizes the repositories tons of tacos v1.3.1 <--- link for the front end and tons of tacos 1.2.1 <--- for the backend
+Please feel free to check out the project on Git Hub <--- link. This project utilizes the repositories tons of tacos v1.3.1 <--- link for the front end and tons of tacos 1.2.1 <--- for the backend. I would also love anyone's feedback on ways to improve so that I can achieve my goal of being employed as a developer.
 
 Tons of Tacos is a fictional food truck company that requested a web application to increase the amount of sales they could process in a set time frame. 
 
