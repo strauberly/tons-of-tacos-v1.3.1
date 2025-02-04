@@ -14,7 +14,8 @@
 }
 
 .title {
-  font-size: 2vw;
+  font-size: 1.5vw;
+  margin-bottom: 1vw;
 }
 
 /* medium devices */
@@ -22,9 +23,7 @@
   .aboutContent {
     margin-top: 4vw;
   }
-}
 
-@media (max-width: 1160px) {
   .title {
     font-size: 2.5vw;
   }
@@ -37,18 +36,21 @@
   }
 
   .aboutStory {
-    margin-bottom: 8vw;
+    /* margin-bottom: 8vw; */
     font-size: 4vw;
   }
 
   .title {
-    font-size: 3.5vw;
+    font-size: 4vw;
   }
 }
 
 /* xsmall devices */
-@media (max-width: 680px) {
+@media (max-width: 500px) {
+  .aboutStory {
+    margin-top: -4vw;
+  }
   .title {
-    font-size: 4vw;
+    font-size: 3.5vw;
   }
 }
