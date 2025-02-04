@@ -6,6 +6,10 @@
 
 - Responsive styling for footer in place. Will need to be re-evaluated when social media links are in place.
 
+- Responsive styling for FAQ title and margin top in place.
+
+- Responsive styling for About title and margin top in place.
+
 ---
 
 -- 31 Jan 2025 --

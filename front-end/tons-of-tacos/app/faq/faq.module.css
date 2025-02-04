@@ -10,3 +10,33 @@
 .title {
   margin-bottom: 2vw;
 }
+
+/* xsmall devices */
+
+@media (max-width: 1400px) {
+  .faq {
+    margin-top: 4vw;
+  }
+}
+
+/* small devices */
+@media (max-width: 800px) {
+  .faq {
+    margin-top: 6vw;
+  }
+
+  .title {
+    font-size: 4vw;
+  }
+}
+
+/* xsmall devices */
+@media (max-width: 500px) {
+  .faq {
+    margin-top: 8vw;
+  }
+
+  .title {
+    font-size: 3.5vw;
+  }
+}
