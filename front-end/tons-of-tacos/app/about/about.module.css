@@ -12,3 +12,43 @@
   color: var(--attention-color);
   font-size: large;
 }
+
+.title {
+  font-size: 2vw;
+}
+
+/* medium devices */
+@media (max-width: 1400px) {
+  .aboutContent {
+    margin-top: 4vw;
+  }
+}
+
+@media (max-width: 1160px) {
+  .title {
+    font-size: 2.5vw;
+  }
+}
+
+/* small devices */
+@media (max-width: 800px) {
+  .aboutContent {
+    margin-top: 8vw;
+  }
+
+  .aboutStory {
+    margin-bottom: 8vw;
+    font-size: 4vw;
+  }
+
+  .title {
+    font-size: 3.5vw;
+  }
+}
+
+/* xsmall devices */
+@media (max-width: 680px) {
+  .title {
+    font-size: 4vw;
+  }
+}
