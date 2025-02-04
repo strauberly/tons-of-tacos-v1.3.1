@@ -2,6 +2,12 @@
 
 ---
 
+-- 4 Feb 2025 --
+
+- Responsive design for About and Faq brought more inline with each other to match.
+
+---
+
 -- 3 Feb 2025 --
 
 - Responsive styling for footer in place. Will need to be re-evaluated when social media links are in place.

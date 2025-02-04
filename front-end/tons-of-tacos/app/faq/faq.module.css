@@ -9,13 +9,17 @@
 
 .title {
   margin-bottom: 2vw;
+  font-size: 1.5vw;
 }
 
-/* xsmall devices */
+/* medium devices */
 
 @media (max-width: 1400px) {
   .faq {
     margin-top: 4vw;
+  }
+  .title {
+    font-size: 2.5vw;
   }
 }
 
