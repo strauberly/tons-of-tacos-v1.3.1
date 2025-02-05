@@ -9,11 +9,20 @@
 }
 
 .projectAbout {
+  margin-left: 3vw;
+  margin-right: 3vw;
+  margin-top: 2vw;
   color: var(--attention-color);
+  font-family: var(--inter-font);
   font-size: large;
 }
 
-.title {
+/* .projectAbout {
+  color: var(--attention-color);
+  font-size: large;
+} */
+
+.project .title {
   font-size: 1.5vw;
   margin-bottom: 1vw;
 }

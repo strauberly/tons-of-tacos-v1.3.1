@@ -2,9 +2,19 @@
 
 ---
 
+-- 5 Feb 2025 --
+
+- Project about section converted to React node in order to aid with code readability and formatting. Links for repositories in this section have also been set to their correct destination and open in a separate tab.
+
+- Dev Journal and ReadMe moved into correct locations.
+
+---
+
 -- 4 Feb 2025 --
 
 - Responsive design for About and Faq brought more inline with each other to match.
+
+- Global styling for anchor elements and paragraphs was interfering with desired formatting on about page and so were made more generic.
 
 ---
 
