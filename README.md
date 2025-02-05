@@ -25,9 +25,7 @@
 
 ## Tons of Tacos is a fictional food truck. This is an application designed for its owners and their customers in order to expedite the ordering process and increase sales.
 
-## Progress can be monitored from the 
-[Dev-Journal](/DEV-
-JOURNAL.md).
+## Progress can be monitored from the [Dev-Journal](/DEV-JOURNAL.md).
 
 ## Thank you for checking out what I am working on!
 
