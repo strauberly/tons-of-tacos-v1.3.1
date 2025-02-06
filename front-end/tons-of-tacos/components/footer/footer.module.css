@@ -7,13 +7,17 @@
   justify-items: center;
 }
 
+.contact {
+  display: flex;
+  flex-direction: column;
+}
+
 .footerGrid p {
   color: var(--interactive-color);
   font-family: var(--inter-font);
 }
 
 .footerGrid a {
-  /* font-size: larger; */
   font-family: var(--inter-font);
   color: var(--interactive-color);
   transition: 1s ease;
@@ -30,9 +34,18 @@
     gap: 2rem;
     margin-top: 2vw;
     padding-bottom: 6vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .footerGrid p {
-    justify-content: center;
+    /* justify-items: center; */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact {
+    align-items: center;
   }
 }
