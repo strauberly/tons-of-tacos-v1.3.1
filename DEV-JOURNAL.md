@@ -8,6 +8,10 @@
 
 - Dev Journal and ReadMe moved into correct locations.
 
+- Contact info aligned in grid cell at 840 media request.
+
+- Price on menu item cards justified to center after refactoring globals.css
+
 ---
 
 -- 4 Feb 2025 --
