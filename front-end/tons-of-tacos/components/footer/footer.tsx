@@ -12,7 +12,7 @@ export default function Footer() {
   return (
     <div id="footer" className={classes.footer}>
       <div className={classes.footerGrid}>
-        <div>
+        <div className={classes.contact}>
           <p>{phone}</p>
           <p>{email}</p>
         </div>
