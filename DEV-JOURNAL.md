@@ -2,6 +2,24 @@
 
 ---
 
+-- 10 Feb 2025 --
+
+- Background color added to footer grid.
+- Logo and loading animation responsiveness improved. Logo appears to be prevented from creeping behind header.
+- Styling for loading animation moved into its own style sheet in app folder.
+
+- Padding added to bottom of menu category description added to create more space between that element and and the menu item list.
+
+- Styling for menu category page unnecessary and has been removed along with style sheet.
+
+---
+
+-- 6 Feb 2025 --
+
+- Altered css on logo and loading image to occupy more space on smaller devices.
+
+---
+
 -- 5 Feb 2025 --
 
 - Project about section converted to React node in order to aid with code readability and formatting. Links for repositories in this section have also been set to their correct destination and open in a separate tab.

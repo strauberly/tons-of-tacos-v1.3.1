@@ -1,10 +1,10 @@
 .footerGrid {
   display: grid;
   gap: 1vw;
-  /* look at auto fit */
   grid-template-columns: repeat(4, 1fr);
   font-size: larger;
   justify-items: center;
+  background-color: var(--background-color);
 }
 
 .contact {

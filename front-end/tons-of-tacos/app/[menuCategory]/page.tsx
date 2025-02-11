@@ -1,4 +1,3 @@
-import classes from "./page.module.css";
 import { Suspense } from "react";
 import FadeOnLoad from "@/components/ui/animations/fade-on-load";
 import Loading from "../loading";
@@ -9,11 +8,11 @@ export default async function MenuItemsByCategory(props: {
 }) {
   const params = props.params;
   const category = (await params).menuCategory;
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+  await new Promise((resolve) => setTimeout(resolve, 2500));
 
   return (
     <>
-      <main className={classes.main}>
+      <main>
         <Suspense fallback={<Loading />}>
           <FadeOnLoad>
             <MenuItemList category={category} />
