@@ -17,4 +17,5 @@
 
 .description {
   font-size: clamp(1rem, 2vw, 3rem);
+  padding-bottom: 2vw;
 }
