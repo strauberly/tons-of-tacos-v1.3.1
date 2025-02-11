@@ -1,4 +1,4 @@
-import classes from "@/app/[menuCategory]/page.module.css";
+import classes from "./loading.module.css";
 
 import Image from "next/image";
 import logoImg from "@/public/images/logos/bird-logo-rendersa.svg";
