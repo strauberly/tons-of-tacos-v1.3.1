@@ -1,13 +1,14 @@
 import Link from "next/link";
 import classes from "./footer.module.css";
+import InstaIcon from "../ui/buttons/social-links/insta";
+import XIcon from "../ui/buttons/social-links/x";
+import FacebookIcon from "../ui/buttons/social-links/facebook";
 
 export default function Footer() {
   const phone: string = "1.555.555.5555";
   const email: string = "tonsoftacos@tonsoftacos.com";
   const faq: string = "FAQ";
   const about: string = "About";
-  // adjust as need to display images for links
-  const social: string[] = ["", "", ""];
 
   return (
     <div id="footer" className={classes.footer}>
@@ -22,8 +23,21 @@ export default function Footer() {
         <div>
           <Link href={`/faq`}>{faq}</Link>
         </div>
-        <p>Social Media Links</p>
+        <div className={classes.socialLinks}>
+          <Link href={`https://www.instagram.com`} target="_blank">
+            <InstaIcon />
+          </Link>
+          <Link href={`https://www.x.com`} target="_blank">
+            <XIcon />
+          </Link>
+          <Link href={`https://www.facebook.com`} target="_blank">
+            <FacebookIcon />
+          </Link>
+        </div>
       </div>
+      <p className={classes.copyright}>
+        &copy; Adam Straub {new Date().getFullYear()}
+      </p>
     </div>
   );
 }

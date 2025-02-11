@@ -2,6 +2,15 @@
 
 ---
 
+-- 11 Feb 2025 --
+
+- Wrapping up work on footer.
+  - Social media icons in place and linked to corresponding web addresses.
+  - Copyright placed at bottom
+  - Styled for responsiveness.
+
+---
+
 -- 10 Feb 2025 --
 
 - Background color added to footer grid.
