@@ -85,7 +85,7 @@ export default function MenuItem(props: {
   }, [props.itemSize, selectedSize]);
 
   return (
-    <Card expand={expand} any={undefined}>
+    <Card expand={expand}>
       <li
         className={`${classes.card} ${expand === true ? classes.expand : " "}`}
       >
