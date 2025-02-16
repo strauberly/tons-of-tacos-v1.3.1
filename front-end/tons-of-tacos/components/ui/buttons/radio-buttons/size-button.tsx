@@ -24,7 +24,6 @@ export default function SizeButton(props: { size: string }) {
         name="size"
         value={size}
         id={itemId}
-        defaultChecked={size === "small"}
       />
       <label
         onClick={() => sizeSelected()}
