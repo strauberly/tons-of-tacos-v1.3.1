@@ -1,13 +1,15 @@
 import Card from "@/components/ui/cards/card";
 import Image from "next/image";
 import classes from "./menu-item.module.css";
-import SizeSelector from "./size-selector/size-selector";
-import QuantitySelector from "./quantity-selector/quantity-selector";
 import { useEffect, useState } from "react";
+import QuantitySelector from "./quantity-selector/quantity-selector";
 import MoreIcon from "@/components/ui/icons/more-icon";
-import AddToCart from "../../ui/buttons/add-to-cart/add-to-cart";
+
+import { useSelectedSizeContext } from "@/context/size-context";
 import { useDisplayContext } from "@/context/display-context";
 import { useAlertContext } from "@/context/alert-context";
+import AddToCart from "@/components/ui/buttons/add-to-cart/add-to-cart";
+import SizeSelector from "./size-selector/size-selector";
 
 export default function MenuItem(props: {
   id: string;
@@ -18,14 +20,20 @@ export default function MenuItem(props: {
   itemSize: string;
   unitPrice: number;
 }) {
-  const defaultQuantity: number = 1;
-  const itemSizes = ["small", "medium", "large"];
-  const [sizeAvailable, setSizeAvailable] = useState(false);
-  const [quantity, setQuantity] = useState(defaultQuantity);
-  const [size, setSize] = useState(" ");
-  const [expand, setExpand] = useState(false);
   const { setAlert } = useAlertContext();
   const { setShowAlert } = useDisplayContext();
+  const [expand, setExpand] = useState(false);
+
+  const expander = () => {
+    setExpand(false);
+  };
+
+  const defaultQuantity: number = 1;
+  const [quantity, setQuantity] = useState(defaultQuantity);
+
+  const quantitySelector = () => {
+    setQuantity(defaultQuantity);
+  };
 
   const increment = () => {
     setQuantity(quantity + 1);
@@ -45,23 +53,16 @@ export default function MenuItem(props: {
     }
   };
 
-  const sizeSetter = (sizePicked: string) => {
-    setSize(sizePicked);
-  };
+  const itemSizes = ["small", "medium", "large"];
+  const [sizeAvailable, setSizeAvailable] = useState(false);
 
-  const quantitySelector = () => {
-    setQuantity(defaultQuantity);
-  };
-
-  const expander = () => {
-    setExpand(false);
-  };
+  const { selectedSize } = useSelectedSizeContext();
 
   function calcPrice() {
     let adjPrice: number;
     let sizeSurcharge = 0;
 
-    switch (size) {
+    switch (selectedSize) {
       case "medium":
         sizeSurcharge = 0.5;
         break;
@@ -75,13 +76,13 @@ export default function MenuItem(props: {
     return adjPrice;
   }
 
+  const price = calcPrice().toFixed(2);
+
   useEffect(() => {
     if (props.itemSize === "a") {
       setSizeAvailable(true);
     }
-  }, [props.itemSize]);
-
-  const price = calcPrice().toFixed(2);
+  }, [props.itemSize, selectedSize]);
 
   return (
     <Card expand={expand} any={undefined}>
@@ -89,6 +90,7 @@ export default function MenuItem(props: {
         className={`${classes.card} ${expand === true ? classes.expand : " "}`}
       >
         <h2 className={classes.itemName}>{props.itemName}</h2>
+
         {expand && (
           <button
             onClick={() => setExpand(false)}
@@ -97,6 +99,7 @@ export default function MenuItem(props: {
             X
           </button>
         )}
+
         <Image
           id={classes.itemImage}
           src={`/images/menu-items/${props.category}/${props.itemName}.jpg`}
@@ -104,17 +107,13 @@ export default function MenuItem(props: {
           width={250}
           height={250}
         />
+
         <div className={classes.ghostDiv}>
           {expand && <p>{props.description}</p>}
           {sizeAvailable && (
-            <SizeSelector
-              sizes={itemSizes}
-              sizeSetter={sizeSetter}
-              sizeAvailable={sizeAvailable}
-            />
+            <SizeSelector sizes={itemSizes} sizeAvailable={sizeAvailable} />
           )}
         </div>
-
         <QuantitySelector
           value={quantity}
           increment={increment}
@@ -123,16 +122,15 @@ export default function MenuItem(props: {
         <p className={classes.price}>${price}</p>
 
         <AddToCart
-          id={`${props.itemName}_${size}`}
+          id={`${props.itemName}_${selectedSize}`}
           menuId={props.id}
           itemName={props.itemName}
           quantity={quantity}
-          size={size}
+          size={selectedSize}
           price={price}
           quantitySelector={quantitySelector}
           expander={expander}
         />
-
         {!expand && (
           <button onClick={() => setExpand(true)}>
             <MoreIcon />
