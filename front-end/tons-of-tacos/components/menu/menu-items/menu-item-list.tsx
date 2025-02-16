@@ -1,11 +1,11 @@
 "use client";
 import classes from "./menu-item-list.module.css";
 import { useEffect, useRef, useState } from "react";
-import MenuItem from "./menu-item";
 import { MenuItemsSource } from "@/lib/menu";
 import { useMenuContext } from "@/context/menu-context";
 import { notFound } from "next/navigation";
 import { useMenuCategoryContext } from "@/context/menu-category-context";
+import MenuItem from "./menu-item";
 
 export default function MenuItemListCopy(category: { category: string }) {
   const { setMenuItems } = useMenuContext();

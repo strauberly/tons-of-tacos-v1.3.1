@@ -2,6 +2,18 @@
 
 ---
 
+-- 16 Feb 2025 --
+
+- Modified logic checkItem() in add to cart component. Before we couldn't add an item to the cart if the item already existed in the cart. However it did not take different sizes into account. So a medium horchata couldn't be added if a large horchata was already in the cart for example because check item was only looking for horchata.
+
+- Corrected by taking the following steps:
+
+  - The cart is now sampled at the beginning of the function and compares the menu item id and all cart item ids as well as comparing the size of the two items.
+
+- Additionally context for selected size was implemented eliminating a need for prop drilling between components.
+
+---
+
 -- 11 Feb 2025 --
 
 - Wrapping up work on footer.
