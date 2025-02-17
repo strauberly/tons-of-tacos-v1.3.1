@@ -2,6 +2,16 @@
 
 ---
 
+-- 17 Feb 2025 --
+
+- Updated naming convention for alert component and associated files to modal for more modularity.
+
+  - Updated all files to take this into account. Let me know if I missed any, please.
+
+- added timeout and loading animation to faq and about pages in order to maintain cohesiveness with other pages.
+
+---
+
 -- 16 Feb 2025 --
 
 - Modified logic checkItem() in add to cart component. Before we couldn't add an item to the cart if the item already existed in the cart. However it did not take different sizes into account. So a medium horchata couldn't be added if a large horchata was already in the cart for example because check item was only looking for horchata.

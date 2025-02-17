@@ -1,25 +1,25 @@
 "use client";
-import classes from "./alert.module.css";
+import classes from "./modal.module.css";
 import { useDisplayContext } from "@/context/display-context";
-import { useAlertContext } from "@/context/alert-context";
+import { useModalContext } from "@/context/modal-context";
 
-export default function Alert() {
-  const { showAlert, setShowAlert } = useDisplayContext();
-  const { alert } = useAlertContext();
+export default function Modal() {
+  const { showModal, setShowModal } = useDisplayContext();
+  const { modal } = useModalContext();
 
   return (
     <>
-      {showAlert && (
+      {showModal && (
         <div className={classes.alertBackdrop}>
           <div className={classes.alert}>
             <div className={classes.alertBackground}>
               <pre>
-                <p>{alert}</p>
+                <p>{modal}</p>
               </pre>
               <button
                 className={classes.close}
                 onClick={() => {
-                  setShowAlert(false);
+                  setShowModal(false);
                 }}
               >
                 Close

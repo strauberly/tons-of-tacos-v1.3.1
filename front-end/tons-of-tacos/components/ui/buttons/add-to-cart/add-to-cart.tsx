@@ -1,5 +1,5 @@
 "use client";
-import { useAlertContext } from "@/context/alert-context";
+import { useModalContext } from "@/context/modal-context";
 import classes from "./add-to-cart.module.css";
 import { useCartContext } from "@/context/cart-context";
 import { AddItemToCart, GetCart } from "@/lib/cart";
@@ -17,8 +17,8 @@ export default function AddToCart(props: {
   quantitySelector: () => void;
   expander: () => void;
 }) {
-  const { setAlert } = useAlertContext();
-  const { setShowAlert } = useDisplayContext();
+  const { setModal } = useModalContext();
+  const { setShowModal } = useDisplayContext();
   const { selectedSize } = useSelectedSizeContext();
   const { cartQuantity, setCartQuantity, setItemsInCart, cart, setCart } =
     useCartContext();
@@ -33,10 +33,10 @@ export default function AddToCart(props: {
         if (props.id == cartItem.id && props.size == selectedSize) {
           itemInCart.current = true;
           if (itemInCart.current === true) {
-            setAlert(
+            setModal(
               `${props.itemName} is already in your cart. Select the cart icon to view your order and change quantities.`
             );
-            setShowAlert(true);
+            setShowModal(true);
           }
         }
       });
@@ -46,16 +46,15 @@ export default function AddToCart(props: {
         "Sorry there is an issue with your cart please try refreshing and adding items to your cart again."
       );
     }
-    console.log(itemInCart);
   }
 
   const addCartItem = () => {
     checkItem();
     if (cartQuantity + props.quantity > 30) {
-      setAlert(
+      setModal(
         "Your order has grown to a fair size. The current maximum is 30 items. Please contact us before adding anything else.\n\nThis will ensure we can make your order happen today. You can also remove other items from your cart. Thank you!"
       );
-      setShowAlert(true);
+      setShowModal(true);
     } else if (itemInCart.current === false) {
       setItemsInCart(true);
       setLargeOrder(false);
