@@ -3,7 +3,7 @@ import "./globals.css";
 import MainHeader from "../components/main-header/main-header";
 import { inter } from "../components/ui/fonts/fonts";
 import { Providers } from "@/context/providers";
-import Alert from "@/components/alert/alert";
+import Alert from "@/components/alert/modal";
 import OrderConfirmation from "@/components/cart/order-confirmation";
 import Footer from "@/components/footer/footer";
 

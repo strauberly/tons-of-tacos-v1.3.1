@@ -13,13 +13,13 @@
 /* medium devices */
 @media (max-width: 1400px) {
   .footerIcon {
-    height: 4vw;
+    height: 3vw;
   }
 }
 
 /* small devices */
 @media (max-width: 800px) {
   .footerIcon {
-    height: 8vw;
+    height: 6vw;
   }
 }
