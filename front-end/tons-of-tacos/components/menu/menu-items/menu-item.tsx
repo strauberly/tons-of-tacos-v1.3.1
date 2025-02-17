@@ -7,7 +7,7 @@ import MoreIcon from "@/components/ui/icons/more-icon";
 
 import { useSelectedSizeContext } from "@/context/size-context";
 import { useDisplayContext } from "@/context/display-context";
-import { useAlertContext } from "@/context/alert-context";
+import { useModalContext } from "@/context/modal-context";
 import AddToCart from "@/components/ui/buttons/add-to-cart/add-to-cart";
 import SizeSelector from "./size-selector/size-selector";
 
@@ -20,8 +20,8 @@ export default function MenuItem(props: {
   itemSize: string;
   unitPrice: number;
 }) {
-  const { setAlert } = useAlertContext();
-  const { setShowAlert } = useDisplayContext();
+  const { setModal } = useModalContext();
+  const { setShowModal } = useDisplayContext();
   const [expand, setExpand] = useState(false);
 
   const expander = () => {
@@ -39,10 +39,10 @@ export default function MenuItem(props: {
     setQuantity(quantity + 1);
     if (quantity >= 10) {
       setQuantity(10);
-      setAlert(
+      setModal(
         "The limit for this item is 10. If you need more please give us a call so we can try to accommodate your order. Thanks!"
       );
-      setShowAlert(true);
+      setShowModal(true);
     }
   };
 
