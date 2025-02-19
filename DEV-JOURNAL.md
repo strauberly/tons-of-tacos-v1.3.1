@@ -2,13 +2,29 @@
 
 ---
 
+-- 19 Feb 2025 --
+
+- Default size implemented for menu items with sizes by changing the name attribute value on the input to a dynamic value which differentiates the radio button groups.
+- Created a menuitem id context.
+  - Menu item id is passed through size selector into size button
+  - In the size button; when the button is clicked the sizeSelected context and menuItemId context are set.
+  - MenuItem component evaluates the values of sizeSelectedContext and menuItemId context against the current menu item id. If the correct conditions are met the price updates for the size chosen.
+  - The result is that the price is updated only for that menu item as desired.
+  - An issue has arisen where if a size is selected on a different card the price on the previous card resets as desired but the size on the previous card is not returned to default state. Will be addressed next.
+
+---
+
 -- 17 Feb 2025 --
 
 - Updated naming convention for alert component and associated files to modal for more modularity.
 
   - Updated all files to take this into account. Let me know if I missed any, please.
 
-- added timeout and loading animation to faq and about pages in order to maintain cohesiveness with other pages.
+- Added timeout and loading animation to faq and about pages in order to maintain cohesiveness with other pages.
+
+- Radio buttons and associated files renamed to size buttons.
+
+- priority attribute added to logo image.
 
 ---
 

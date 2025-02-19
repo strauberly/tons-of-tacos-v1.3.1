@@ -10,6 +10,7 @@ import { useDisplayContext } from "@/context/display-context";
 import { useModalContext } from "@/context/modal-context";
 import AddToCart from "@/components/ui/buttons/add-to-cart/add-to-cart";
 import SizeSelector from "./size-selector/size-selector";
+import { useMenuItemIdContext } from "@/context/menu-item-context";
 
 export default function MenuItem(props: {
   id: string;
@@ -22,7 +23,9 @@ export default function MenuItem(props: {
 }) {
   const { setModal } = useModalContext();
   const { setShowModal } = useDisplayContext();
+  const { menuItemId } = useMenuItemIdContext();
   const [expand, setExpand] = useState(false);
+  const [price, setPrice] = useState("");
 
   const expander = () => {
     setExpand(false);
@@ -58,31 +61,34 @@ export default function MenuItem(props: {
 
   const { selectedSize } = useSelectedSizeContext();
 
-  function calcPrice() {
-    let adjPrice: number;
-    let sizeSurcharge = 0;
+  useEffect(() => {
+    function calcPrice() {
+      let adjPrice: number;
+      let sizeSurcharge = 0;
 
-    switch (selectedSize) {
-      case "medium":
+      if (selectedSize === "medium" && props.id === menuItemId) {
         sizeSurcharge = 0.5;
-        break;
-      case "large":
+      } else if (selectedSize === "large" && props.id === menuItemId) {
         sizeSurcharge = 1.0;
-        break;
+      }
+
+      // eslint-disable-next-line prefer-const
+      adjPrice = (sizeSurcharge + props.unitPrice) * quantity;
+      return adjPrice;
     }
 
-    // eslint-disable-next-line prefer-const
-    adjPrice = (sizeSurcharge + props.unitPrice) * quantity;
-    return adjPrice;
-  }
-
-  const price = calcPrice().toFixed(2);
-
-  useEffect(() => {
     if (props.itemSize === "a") {
       setSizeAvailable(true);
     }
-  }, [props.itemSize, selectedSize]);
+    setPrice(calcPrice().toFixed(2));
+  }, [
+    menuItemId,
+    props.id,
+    props.itemSize,
+    props.unitPrice,
+    quantity,
+    selectedSize,
+  ]);
 
   return (
     <Card expand={expand}>
@@ -111,7 +117,11 @@ export default function MenuItem(props: {
         <div className={classes.ghostDiv}>
           {expand && <p>{props.description}</p>}
           {sizeAvailable && (
-            <SizeSelector sizes={itemSizes} sizeAvailable={sizeAvailable} />
+            <SizeSelector
+              sizes={itemSizes}
+              sizeAvailable={sizeAvailable}
+              id={props.id}
+            />
           )}
         </div>
         <QuantitySelector
