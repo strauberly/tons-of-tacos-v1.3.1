@@ -8,21 +8,24 @@ import { MenuContextProvider } from "./menu-context";
 import { ModalContextProvider } from "./modal-context";
 import { OrderConfirmationContextProvider } from "./order-confirmation-context";
 import { SizeSelectedContextProvider } from "./size-context";
+import { MenuItemIdContextProvider } from "./menu-item-context";
 
 export function Providers({ children }: { children: ReactNode }) {
   return (
     <ModalContextProvider>
-      <DisplayContextProvider>
-        <SizeSelectedContextProvider>
-          <OrderConfirmationContextProvider>
-            <CartContextProvider>
-              <MenuCategoryContextProvider>
-                <MenuContextProvider>{children}</MenuContextProvider>
-              </MenuCategoryContextProvider>
-            </CartContextProvider>
-          </OrderConfirmationContextProvider>
-        </SizeSelectedContextProvider>
-      </DisplayContextProvider>
+      <MenuItemIdContextProvider>
+        <DisplayContextProvider>
+          <SizeSelectedContextProvider>
+            <OrderConfirmationContextProvider>
+              <CartContextProvider>
+                <MenuCategoryContextProvider>
+                  <MenuContextProvider>{children}</MenuContextProvider>
+                </MenuCategoryContextProvider>
+              </CartContextProvider>
+            </OrderConfirmationContextProvider>
+          </SizeSelectedContextProvider>
+        </DisplayContextProvider>
+      </MenuItemIdContextProvider>
     </ModalContextProvider>
   );
 }
