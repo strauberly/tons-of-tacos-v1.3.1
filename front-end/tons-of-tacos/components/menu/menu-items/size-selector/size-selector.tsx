@@ -7,15 +7,6 @@ export default function SizeSelector(props: {
   id: string;
 }) {
   return (
-    // <section
-    //   className={`${classes.selectorGroup} ${
-    //     props.sizeAvailable === false ? classes.notShowing : " "
-    //   }`}
-    // >
-    //   {props.sizes.map((size: string) => (
-    //     <SizeButton key={size} size={size} />
-    //   ))}
-    // </section>
     <ul
       className={`${classes.selectorGroup} ${
         props.sizeAvailable === false ? classes.notShowing : " "
