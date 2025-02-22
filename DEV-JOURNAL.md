@@ -2,6 +2,12 @@
 
 ---
 
+-- 22 Feb 2025 --
+
+- Achieved desired results for size selector buttons where a default size is and price is reflected for items with a size and reverts if a different card is selected.
+
+---
+
 -- 19 Feb 2025 --
 
 - Default size implemented for menu items with sizes by changing the name attribute value on the input to a dynamic value which differentiates the radio button groups.
