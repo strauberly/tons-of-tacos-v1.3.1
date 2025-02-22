@@ -1,29 +1,18 @@
 import { useSelectedSizeContext } from "@/context/size-context";
 import classes from "./size-buttons.module.css";
-import { useEffect, useId } from "react";
+import { useId } from "react";
 import { useMenuItemIdContext } from "@/context/menu-item-context";
 
 export default function SizeButton(props: { size: string; id: string }) {
-  const size = props.size;
   const itemId = useId();
 
   const { selectedSize, setSelectedSize } = useSelectedSizeContext();
-  const { setMenuItemId } = useMenuItemIdContext();
+  const { menuItemId, setMenuItemId } = useMenuItemIdContext();
 
-  const sizeSelected = () => {
-    setSelectedSize(props.size);
+  const sizeChangeHandler = () => {
     setMenuItemId(props.id);
+    setSelectedSize(props.size);
   };
-
-  useEffect(() => {
-    setSelectedSize(selectedSize);
-  });
-
-  let checked: boolean = false;
-
-  if (size === "small") {
-    checked = true;
-  }
 
   return (
     <>
@@ -31,16 +20,17 @@ export default function SizeButton(props: { size: string; id: string }) {
         type="radio"
         className={classes.radioButton}
         name={props.id}
-        value={size}
+        value={props.size}
         id={itemId}
-        defaultChecked={checked}
+        onChange={sizeChangeHandler}
+        checked={
+          (menuItemId != props.id && props.size === "small") ||
+          props.size === "small" ||
+          (selectedSize === props.size && menuItemId == props.id)
+        }
       />
-      <label
-        onClick={() => sizeSelected()}
-        htmlFor={`${itemId}`}
-        className={classes.radioButtonLabel}
-      >
-        {size.charAt(0)}
+      <label htmlFor={`${itemId}`} className={classes.radioButtonLabel}>
+        {props.size.charAt(0)}
       </label>
     </>
   );
