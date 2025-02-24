@@ -10,7 +10,6 @@ export default async function Home() {
           src={logoImg}
           className={classes.image}
           alt="tons of tacos logo"
-          // priority={true}
           placeholder="blur"
           blurDataURL="@/public/images/logos/bird-logo-rendersa.svg"
         />

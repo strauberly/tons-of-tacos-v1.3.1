@@ -7,6 +7,8 @@
   left: 0rem;
   right: 0rem;
   overflow: auto;
+  height: auto;
+  width: auto;
 }
 
 @media (max-width: 1400px) {
