@@ -2,6 +2,13 @@
 
 ---
 
+-- 24 Feb 2025 --
+
+- Implemented path for owners tools.
+- Updated project on github for tasks to complete.
+
+---
+
 -- 22 Feb 2025 --
 
 - Achieved desired results for size selector buttons where a default size is and price is reflected for items with a size and reverts if a different card is selected.
