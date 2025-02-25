@@ -2,9 +2,10 @@ import classes from "./main-header.module.css";
 import Link from "next/link";
 import CategoriesSource from "@/lib/menu";
 import NavButtons from "@/components/ui/buttons/nav-buttons/nav-buttons";
+import OwnerLoginForm from "../ui/forms/owner-login-form";
 
 export default async function MainHeader() {
-  const categories = await CategoriesSource();
+  // const categories = await CategoriesSource();
 
   return (
     <>
@@ -13,7 +14,8 @@ export default async function MainHeader() {
           <Link className={classes.home} href="/">
             Tons Of Tacos
           </Link>
-          <NavButtons menuOptions={categories} />
+          <OwnerLoginForm />
+          {/* <NavButtons menuOptions={categories} /> */}
         </header>
       </div>
     </>
