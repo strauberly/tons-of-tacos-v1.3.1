@@ -2,6 +2,13 @@
 
 ---
 
+-- 25 Feb 2025 --
+
+- Implemented owner token context.
+- Initialized owner login form and styling sheet.
+
+---
+
 -- 24 Feb 2025 --
 
 - Implemented path for owners tools.
