@@ -1,7 +1,13 @@
+import { useActionState } from "react";
+import classes from "./owner-login-form.module.css";
+import { OwnerLogin } from "@/lib/owner-login";
+
 export default function OwnerLoginForm() {
+  const initialState = { token: "" };
+  const [state, formAction] = useActionState(OwnerLogin, initialState);
+
   return (
-    <form>
-      <label>Owner ID:</label>
+    <form className={classes.ownerLogin} action={formAction}>
       <input
         type="text"
         id="owner_id"
@@ -11,13 +17,12 @@ export default function OwnerLoginForm() {
         required
       />
 
-      <label>Password:</label>
       <input
         type="text"
         id="password"
         name="password"
         placeholder="Enter Password"
-        minLength={8}
+        maxLength={8}
         required
       />
     </form>

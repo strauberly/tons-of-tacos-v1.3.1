@@ -2,6 +2,13 @@
 
 ---
 
+-- 26 Feb 2025 --
+
+- Initial styling in place for owner login form.
+- Began implementation of owner login library.
+
+---
+
 -- 25 Feb 2025 --
 
 - Implemented owner token context.
