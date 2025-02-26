@@ -1,0 +1,31 @@
+.ownerLogin {
+  position: static;
+  position: fixed;
+  display: flex;
+  gap: 2vw;
+  left: 52vw;
+  align-items: baseline;
+}
+
+.ownerLogin input,
+.ownerLogin textarea {
+  border: solid;
+  border-color: var(--attention-color);
+  border-radius: 3px;
+  font-size: clamp(1.25rem, 2vw, 1.5vw);
+  text-align: left;
+
+  background-color: var(--background-color);
+
+  color: var(--user-selected-color);
+
+  padding-left: 1vw;
+  padding-top: 0.5vw;
+  padding-bottom: 0.5vw;
+  margin-bottom: 1rem;
+}
+
+.ownerLogin input:focus,
+.ownerLogin textarea:focus {
+  outline: none;
+}

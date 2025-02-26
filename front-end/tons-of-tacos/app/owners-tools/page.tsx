@@ -1,7 +1,10 @@
+import { div } from "framer-motion/client";
+
 export default function OwnersTools() {
   return (
-    <div>
-      <p>Owners Tools</p>
-    </div>
+    <div></div>
+    // <div>
+    //   <p>Owners Tools</p>
+    // </div>
   );
 }
