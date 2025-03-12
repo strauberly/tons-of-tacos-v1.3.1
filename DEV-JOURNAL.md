@@ -2,6 +2,14 @@
 
 ---
 
+-- 5 Mar 2025 --
+
+- Owner login form now correctly takes the user id and password from the input fields and encrypts those values before being transmitted to the backend. The backend then decrypts and validates the credentials before returning a JWT that we will hold in context for accessing additional endpoints and functions for the owners.
+
+- Will begin work on storing response, and fine tuning error messaging next.
+
+---
+
 -- 26 Feb 2025 --
 
 - Initial styling in place for owner login form.
