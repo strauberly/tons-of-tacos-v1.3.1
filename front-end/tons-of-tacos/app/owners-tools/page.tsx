@@ -11,7 +11,6 @@ export default function OwnersTools() {
   });
 
   return (
-    // <div></div>
     <div>
       <p>Owners Tools</p>
     </div>
