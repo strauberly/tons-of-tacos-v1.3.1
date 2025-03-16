@@ -2,6 +2,12 @@
 
 ---
 
+-- 16 Mar 2025 --
+
+- Owner login form now rendered conditionally in the header. Call for menu categories has been moved from the header to NavButtons component. showLogin, setShowLogin added to context.
+
+---
+
 -- 5 Mar 2025 --
 
 - Owner login form now correctly takes the user id and password from the input fields and encrypts those values before being transmitted to the backend. The backend then decrypts and validates the credentials before returning a JWT that we will hold in context for accessing additional endpoints and functions for the owners.
