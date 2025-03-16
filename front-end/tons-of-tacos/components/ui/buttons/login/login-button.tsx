@@ -1,19 +1,20 @@
-// import { useOwnerTokenContext } from "@/context/owner-context";
+"use client";
 import { useOwnerTokenContext } from "@/context/owner-context";
+import classes from "./login-button.module.css";
 
 import { useFormStatus } from "react-dom";
 
-// form executes the function of setting the context if login successful the button is only setting a secondary function on click, ie setting the welcome message an alert something like that
-export default function LoginButton(token: { state: { token: string } }) {
+export default function LoginButton(token: { state: string }) {
   const status = useFormStatus();
   const { setOwnerToken } = useOwnerTokenContext();
 
   return (
     <button
+      className={classes.login}
       type="submit"
       onClick={async () => {
         try {
-          setOwnerToken(token.state.token);
+          setOwnerToken(token.state);
         } catch (error) {
           throw new Error("whups..." + { error });
         }
