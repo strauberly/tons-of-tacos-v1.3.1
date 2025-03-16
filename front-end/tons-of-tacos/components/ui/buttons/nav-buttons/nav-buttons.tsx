@@ -13,7 +13,6 @@ import { GetCart } from "@/lib/cart";
 import CategoriesSource from "@/lib/menu";
 
 export default function NavButtons() {
-  // export default function NavButtons(menuOptions: { menuOptions: Category[] }) {
   const { setMenuCategories } = useMenuCategoryContext();
   const { showMenu, setShowMenu, showCart, setShowCart } = useDisplayContext();
   const { setCart, cartQuantity } = useCartContext();
@@ -40,15 +39,8 @@ export default function NavButtons() {
     if (cartQuantity <= 0) {
       setShowCart(false);
     }
-    // useEffect(() => {
-    //   setMenuCategories(menuOptions.menuOptions);
-    //   setCart(GetCart());
-    //   if (cartQuantity <= 0) {
-    //     setShowCart(false);
-    //   }
   }, [
     cartQuantity,
-    // menuOptions.menuOptions,
     setCart,
     setMenuCategories,
     setShowCart,

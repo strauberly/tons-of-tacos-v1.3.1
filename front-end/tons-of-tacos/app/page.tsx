@@ -6,8 +6,6 @@ import { useDisplayContext } from "@/context/display-context";
 import { useEffect } from "react";
 
 export default function Home() {
-  // export default async function Home() {
-
   const { setShowLogin } = useDisplayContext();
 
   useEffect(() => {

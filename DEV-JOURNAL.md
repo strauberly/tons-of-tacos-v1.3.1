@@ -5,6 +5,7 @@
 -- 16 Mar 2025 --
 
 - Owner login form now rendered conditionally in the header. Call for menu categories has been moved from the header to NavButtons component. showLogin, setShowLogin added to context.
+- Code scrub.
 
 ---
 
