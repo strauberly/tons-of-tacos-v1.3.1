@@ -3,7 +3,7 @@
 import { useDisplayContext } from "@/context/display-context";
 import classes from "./checkout-button.module.css";
 import { useFormStatus } from "react-dom";
-// import { useModalContext } from "@/context/alert-context";
+
 import { useEffect } from "react";
 import { useOrderConfirmationContext } from "@/context/order-confirmation-context";
 

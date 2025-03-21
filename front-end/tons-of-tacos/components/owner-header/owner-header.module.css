@@ -1,0 +1,18 @@
+.ownerHeader {
+  position: static;
+  position: fixed;
+  display: flex;
+  gap: 2vw;
+  padding: 0.5%;
+  left: 50vw;
+  /* align-items: baseline; */
+}
+
+.ownerHeader p {
+  font-size: 2vw;
+}
+
+.logout {
+  font-size: 2vw;
+  margin-left: 4vw;
+}

@@ -10,26 +10,28 @@ import {
 } from "react";
 
 interface ContextProps {
-  ownerToken: string;
-  setOwnerToken: Dispatch<SetStateAction<string>>;
+  login: OwnerLogin;
+  setLogin: Dispatch<SetStateAction<OwnerLogin>>;
+  loggedIn: boolean;
+  setLoggedIn: Dispatch<SetStateAction<boolean>>;
 }
 
-const OwnerTokenContext = createContext<ContextProps>({
-  ownerToken: "",
-  setOwnerToken: () => {},
+const OwnerContext = createContext<ContextProps>({
+  login: { token: "null", ownerName: "null" },
+  setLogin: () => {},
+  loggedIn: false,
+  setLoggedIn: () => {},
 });
 
-export const OwnerTokenContextProvider = ({
-  children,
-}: {
-  children: ReactNode;
-}) => {
-  const [ownerToken, setOwnerToken] = useState<string>("");
+export const OwnerContextProvider = ({ children }: { children: ReactNode }) => {
+  const [login, setLogin] = useState<OwnerLogin>({ token: "", ownerName: "" });
+  const [loggedIn, setLoggedIn] = useState(false);
+
   return (
-    <OwnerTokenContext.Provider value={{ ownerToken, setOwnerToken }}>
+    <OwnerContext.Provider value={{ login, setLogin, loggedIn, setLoggedIn }}>
       {children}
-    </OwnerTokenContext.Provider>
+    </OwnerContext.Provider>
   );
 };
 
-export const useOwnerTokenContext = () => useContext(OwnerTokenContext);
+export const useOwnerContext = () => useContext(OwnerContext);

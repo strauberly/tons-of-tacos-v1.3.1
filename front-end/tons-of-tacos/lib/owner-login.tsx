@@ -1,5 +1,3 @@
-"use server";
-
 function randomChar() {
   const min: number = 33;
   const max: number = 126;
@@ -29,13 +27,13 @@ function encrypt(string: string) {
     rolledCodeBytes.push(codeByte);
   });
 
-  console.log(rolledCodeBytes);
+  // console.log(rolledCodeBytes);
 
   rolledCodeBytes.forEach((codeByte) => {
     rolledChars.push(String.fromCharCode(codeByte));
   });
 
-  console.log(rolledChars);
+  // console.log(rolledChars);
 
   for (let i = 0; i < rolledChars.length; i++) {
     rolledChars.splice(i, 0, randomChar());
@@ -49,16 +47,21 @@ function encrypt(string: string) {
   rolledChars.push(randomChar());
   rolledChars.push(randomChar());
 
-  console.log(rolledChars);
-  console.log(rolledChars.join(""));
+  // console.log(rolledChars);
+  // console.log(rolledChars.join(""));
 
   return rolledChars.join("");
 }
 
 export type responseToken = { token: "" };
 
+export type responseObj = {
+  status: number;
+  response: { token: string; ownerName: string };
+};
+
 export async function OwnerLogin(
-  previousState: responseToken,
+  previousState: responseObj,
   formData: FormData
 ) {
   const userName = formData.get("owner_id") as string;
@@ -71,30 +74,71 @@ export async function OwnerLogin(
     psswrd: rolledPassword,
   };
 
-  try {
-    const response = await fetch(
-      "http://localhost:8080/api/owners-tools/login",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(login),
-      }
-    );
-    const data = await response.json();
-    const status = response.status;
+  // try {
+  //   const response = await fetch(
+  //     "http://localhost:8080/api/owners-tools/login",
+  //     {
+  //       method: "POST",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify(login),
+  //     }
+  //   );
+  //   const data = await response.json();
+  //   const status = response.status;
 
-    if (status === 200) {
-      return { token: data.token };
-    } else {
-      console.log(data.message);
-      return data.message;
-    }
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  } catch (error) {
-    throw new Error(
-      "Sorry, login failed. Please try again or contact us." + `${error}`
-    );
+  //   console.log(JSON.parse(data));
+
+  //   if (status === 200) {
+  //     console.log(data);
+  //     // console.log(JSON.stringify(data.token));
+  //     // storeToken(JSON.stringify(data.token));
+  //     return { token: data.token };
+  //   } else {
+  //     console.log(data.message);
+  //     return data.message;
+  //   }
+  //   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // } catch (error) {
+  //   throw new Error(
+  //     "Sorry, login failed. Please try again or contact us." + `${error}`
+  //   );
+  // }
+
+  const response = await fetch("http://localhost:8080/api/owners-tools/login", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(login),
+  });
+  const data = await response.json();
+  const status = response.status;
+
+  console.log(data);
+  console.log(data.token);
+  console.log(data.ownerName);
+  console.log(status);
+  // console.log({ status: status, response: data });
+
+  if (status === 200) {
+    return {
+      status: status,
+      response: { token: data.token, ownerName: data.ownerName },
+    };
+  } else {
+    return { status: status, response: data.message };
   }
+
+  // if (status === 200) {
+  //   console.log(data);
+  //   // console.log(JSON.stringify(data.token));
+  //   // storeToken(JSON.stringify(data.token));
+  //   return { token: data.token };
+  // } else {
+  //   console.log(data.message);
+  //   return data.message;
+  // }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
 }
