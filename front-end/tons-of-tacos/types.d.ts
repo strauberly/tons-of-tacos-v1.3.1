@@ -44,3 +44,8 @@ type OrderItem = {
   size: string;
   total: number;
 };
+
+type OwnerLogin = {
+  token: string;
+  ownerName: string;
+};

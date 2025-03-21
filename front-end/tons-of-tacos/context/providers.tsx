@@ -9,12 +9,12 @@ import { ModalContextProvider } from "./modal-context";
 import { OrderConfirmationContextProvider } from "./order-confirmation-context";
 import { SizeSelectedContextProvider } from "./size-context";
 import { MenuItemIdContextProvider } from "./menu-item-context";
-import { OwnerTokenContextProvider } from "./owner-context";
+import { OwnerContextProvider } from "./owner-context";
 
 export function Providers({ children }: { children: ReactNode }) {
   return (
     <ModalContextProvider>
-      <OwnerTokenContextProvider>
+      <OwnerContextProvider>
         <MenuItemIdContextProvider>
           <DisplayContextProvider>
             <SizeSelectedContextProvider>
@@ -28,7 +28,7 @@ export function Providers({ children }: { children: ReactNode }) {
             </SizeSelectedContextProvider>
           </DisplayContextProvider>
         </MenuItemIdContextProvider>
-      </OwnerTokenContextProvider>
+      </OwnerContextProvider>
     </ModalContextProvider>
   );
 }

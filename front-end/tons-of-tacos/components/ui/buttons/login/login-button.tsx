@@ -1,12 +1,23 @@
 "use client";
-import { useOwnerTokenContext } from "@/context/owner-context";
+import { useOwnerContext } from "@/context/owner-context";
 import classes from "./login-button.module.css";
 
 import { useFormStatus } from "react-dom";
+import { useEffect, useRef } from "react";
+import {
+  ChangeLoggedInStatus,
+  getLogin,
+  logout,
+  storeLogin,
+} from "@/lib/owners-tools";
 
-export default function LoginButton(token: { state: string }) {
+export default function LoginButton() {
   const status = useFormStatus();
-  const { setOwnerToken } = useOwnerTokenContext();
+  const { login, setLogin, setLoggedIn } = useOwnerContext();
+
+  useEffect(() => {
+    setLogin(login);
+  }, []);
 
   return (
     <button
@@ -14,9 +25,11 @@ export default function LoginButton(token: { state: string }) {
       type="submit"
       onClick={async () => {
         try {
-          setOwnerToken(token.state);
+          storeLogin(JSON.stringify(login));
+          setLoggedIn(true);
+          sessionStorage.setItem("isAuthenticated", "true");
         } catch (error) {
-          throw new Error("whups..." + { error });
+          throw new Error("whups..." + error);
         }
       }}
     >

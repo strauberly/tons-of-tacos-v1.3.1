@@ -2,6 +2,31 @@
 
 ---
 
+-- 20 Mar 2025 --
+
+- Much reformatting in order to accomplish goal of header determining what to display based on a successful login and determining logged in.
+  - owner context now stores an owner login object which is fed by the login form and consumed by the login button and stored in session storage so the data will persist on refreshes and be able to be used for subsequent requests.
+    -login button also makes use of logged in state in owner-context in setting the context. Whether these actions are executed or not will be determined by the status returned by the backend.
+  - The main header evaluates fetches is authenticated item from session storage and sets the context of if a user is logged in or not. If this is so we have our desired owner header. Otherwise arriving on the owner-tools endpoint will be displaying our logo and the form for logging in.
+
+---
+
+-- 19 Mar 2025 --
+
+- Owner login form captures input from input fields and passes information to server action located in owner-login lib.
+
+  - The data is encoded and sent to backend where credentials are decoded and authorized.
+  - A successful login returns a jwt and the owners first name.
+  - The owners first name is stored into owner context for use in messages and the token is stored in session storage to be utilized for further requests to secured routes on the API.
+
+- Next course of action will be creating an owner header that will display a greeting message confirming a successful login with date, time, and logout button.
+
+- The header will evaluate condition on whether to display the standard header for customers, login form for owners or header for owners.
+
+- Created component for owner header and initialized basic styling for component.
+
+---
+
 -- 16 Mar 2025 --
 
 - Owner login form now rendered conditionally in the header. Call for menu categories has been moved from the header to NavButtons component. showLogin, setShowLogin added to context.
