@@ -19,15 +19,19 @@ export default function LoginButton(response: {
 
   useEffect(() => {
     let statusCode = response.status;
-    if (statusCode === 200) {
-      storeLogin(JSON.stringify(response.response));
-      setLoggedIn(IsAuthenticated());
-      setLogin(getLogin());
-    } else if (statusCode === 403) {
-      setModal(JSON.stringify(response.response));
-      setShowModal(true);
+    try {
+      if (statusCode === 200) {
+        storeLogin(JSON.stringify(response.response));
+        setLoggedIn(IsAuthenticated());
+        setLogin(getLogin());
+      } else if (statusCode === 403) {
+        setModal(JSON.stringify(response.response));
+        setShowModal(true);
+      }
+      statusCode = response.status;
+    } catch (error) {
+      throw new Error(JSON.stringify(error));
     }
-    statusCode = response.status;
   }, [
     response.response,
     response.status,
