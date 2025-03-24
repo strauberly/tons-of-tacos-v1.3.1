@@ -46,6 +46,6 @@ type OrderItem = {
 };
 
 type OwnerLogin = {
-  token: string;
-  ownerName: string;
+  token: string | undefined;
+  ownerName: string | undefined;
 };

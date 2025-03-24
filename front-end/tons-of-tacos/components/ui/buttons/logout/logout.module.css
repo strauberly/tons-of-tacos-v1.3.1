@@ -1,0 +1,4 @@
+.logout {
+  font-size: clamp(1.25rem, 2vw, 1.5vw);
+  margin-left: 2vw;
+}

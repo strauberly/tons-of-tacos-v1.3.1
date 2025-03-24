@@ -2,6 +2,14 @@
 
 ---
 
+-- 24 Mar 2025 --
+
+- Logout button successfully implemented.
+  - Removes items pertaining to authentication is session storage which resets the state of what is displayed in the header.
+  - Discovered however that objects were not being stored correctly though and so after refactoring the login button now correctly handles the login logic.
+
+---
+
 -- 20 Mar 2025 --
 
 - Much reformatting in order to accomplish goal of header determining what to display based on a successful login and determining logged in.
