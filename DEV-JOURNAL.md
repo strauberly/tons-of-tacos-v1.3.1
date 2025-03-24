@@ -13,6 +13,10 @@
 
 - Unused code removed.
 
+- login logic wrapped in try catch
+
+- implemented means for decrypting subject from received token from backend. Owners name remains encrypted in the token. This means we can eliminate the need to store the owner name in the session storage, simplify the object returned from backend and still use the owners name in the owner header, without transmitting owners name in plain text from the backend.
+
 ---
 
 -- 20 Mar 2025 --
