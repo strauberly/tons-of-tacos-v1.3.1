@@ -1,11 +1,10 @@
 import { useOwnerContext } from "@/context/owner-context";
 import { useEffect, useState } from "react";
 import classes from "./owner-header.module.css";
+import LogoutButton from "../ui/buttons/logout/logout";
 
 export default function OwnerHeader() {
-  const { ownerName } = useOwnerContext();
-  //   const time = new Date().toLocaleTimeString();
-  //   const date = new Date().toDateString();
+  const { login } = useOwnerContext();
 
   const [date, setDate] = useState(new Date());
 
@@ -18,10 +17,10 @@ export default function OwnerHeader() {
 
   return (
     <div className={classes.ownerHeader}>
-      <p> Hola, Jim!</p>
+      <p> Hola, {login.ownerName}!</p>
       <p>{date.toLocaleTimeString([], { timeStyle: "short" })}</p>
       <p>{date.toLocaleDateString()}</p>
-      <button className={classes.logout}>Logout</button>
+      <LogoutButton />
     </div>
   );
 }
