@@ -5,8 +5,13 @@
 -- 24 Mar 2025 --
 
 - Logout button successfully implemented.
+
   - Removes items pertaining to authentication is session storage which resets the state of what is displayed in the header.
   - Discovered however that objects were not being stored correctly though and so after refactoring the login button now correctly handles the login logic.
+
+- Altered login form initial state and owner login function to accept a generic object which allows for passing error from server to login button. Logic for displaying error to user implemented through modal.
+
+- Unused code removed.
 
 ---
 
