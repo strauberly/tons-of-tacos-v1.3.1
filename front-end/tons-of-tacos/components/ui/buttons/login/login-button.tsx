@@ -21,6 +21,7 @@ export default function LoginButton(response: {
     let statusCode = response.status;
     try {
       if (statusCode === 200) {
+        console.log(JSON.stringify(response.response));
         storeLogin(JSON.stringify(response.response));
         setLoggedIn(IsAuthenticated());
         setLogin(getLogin());

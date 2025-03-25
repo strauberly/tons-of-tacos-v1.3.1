@@ -2,6 +2,13 @@
 
 ---
 
+-- 25 Mar 2025 --
+
+- Reorganized code in decrypt for readability.
+- Owner name is now displayed by decrypting token instead of being received in plaint text from back end.
+
+---
+
 -- 24 Mar 2025 --
 
 - Logout button successfully implemented.
