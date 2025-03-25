@@ -3,7 +3,7 @@ import classes from "./main-header.module.css";
 import Link from "next/link";
 
 import NavButtons from "@/components/ui/buttons/nav-buttons/nav-buttons";
-import OwnerLoginForm from "../ui/forms/owner-login-form";
+import OwnerLoginForm from "../../ui/forms/owner-login-form";
 import { useDisplayContext } from "@/context/display-context";
 import OwnerHeader from "../owner-header/owner-header";
 import { useEffect, useRef, useState } from "react";
@@ -11,7 +11,7 @@ import {
   GetLoggedInStatus,
   getLogin,
   IsAuthenticated,
-} from "@/lib/owners-tools";
+} from "@/lib/owners-login-client";
 import { useOwnerContext } from "@/context/owner-context";
 
 export default function MainHeader() {

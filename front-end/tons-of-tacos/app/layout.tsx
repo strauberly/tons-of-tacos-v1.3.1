@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import MainHeader from "../components/main-header/main-header";
+import MainHeader from "../components/header/main-header/main-header";
 import { inter } from "../components/ui/fonts/fonts";
 import { Providers } from "@/context/providers";
 import Alert from "@/components/alert/modal";

@@ -4,7 +4,11 @@ import classes from "./login-button.module.css";
 
 import { useFormStatus } from "react-dom";
 import { useEffect } from "react";
-import { getLogin, IsAuthenticated, storeLogin } from "@/lib/owners-tools";
+import {
+  getLogin,
+  IsAuthenticated,
+  storeLogin,
+} from "@/lib/owners-login-client";
 import { useDisplayContext } from "@/context/display-context";
 import { useModalContext } from "@/context/modal-context";
 

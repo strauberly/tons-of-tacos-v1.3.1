@@ -6,6 +6,9 @@
 
 - Reorganized code in decrypt for readability.
 - Owner name is now displayed by decrypting token instead of being received in plaint text from back end.
+- Headers and variations moved to Header folder.
+- Api call for login changed to server component.
+- library files for owner differentiated by name, (ie server vs client )
 
 ---
 

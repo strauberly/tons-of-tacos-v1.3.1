@@ -1,7 +1,7 @@
 import { useOwnerContext } from "@/context/owner-context";
 import { useEffect, useState } from "react";
 import classes from "./owner-header.module.css";
-import LogoutButton from "../ui/buttons/logout/logout";
+import LogoutButton from "../../ui/buttons/logout/logout";
 
 export default function OwnerHeader() {
   const { login } = useOwnerContext();

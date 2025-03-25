@@ -1,3 +1,5 @@
+"use server";
+
 function randomChar() {
   const min: number = 33;
   const max: number = 126;
