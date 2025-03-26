@@ -2,3 +2,15 @@
   font-size: clamp(1.25rem, 2vw, 1.5vw);
   margin-left: 2vw;
 }
+
+@media (max-width: 1400px) {
+  .login {
+    font-size: 3vw;
+  }
+}
+
+@media (max-width: 800px) {
+  .login {
+    font-size: 5vw;
+  }
+}

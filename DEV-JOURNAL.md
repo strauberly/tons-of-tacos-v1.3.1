@@ -2,6 +2,13 @@
 
 ---
 
+-- 26 Mar 2025 --
+
+- Responsive styling in place for owner login form and button.
+- Responsive styling in place for owner header and log out button.
+
+---
+
 -- 25 Mar 2025 --
 
 - Reorganized code in decrypt for readability.

@@ -5,14 +5,29 @@
   gap: 2vw;
   padding: 0.5%;
   left: 50vw;
-  /* align-items: baseline; */
 }
 
 .ownerHeader p {
   font-size: 2vw;
 }
 
-.logout {
-  font-size: 2vw;
-  margin-left: 4vw;
+@media (max-width: 1400px) {
+  .ownerHeader {
+    position: absolute;
+    top: 140%;
+    left: 20%;
+  }
+
+  .ownerHeader p {
+    font-size: 3vw;
+  }
+}
+
+@media (max-width: 800px) {
+  .ownerHeader {
+    left: 6%;
+  }
+  .ownerHeader p {
+    font-size: 4vw;
+  }
 }
