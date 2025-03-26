@@ -3,9 +3,9 @@ import "./globals.css";
 import MainHeader from "../components/header/main-header/main-header";
 import { inter } from "../components/ui/fonts/fonts";
 import { Providers } from "@/context/providers";
-import Alert from "@/components/alert/modal";
 import OrderConfirmation from "@/components/cart/order-confirmation";
 import Footer from "@/components/footer/footer";
+import Modal from "@/components/modal/modal";
 
 export const metadata: Metadata = {
   title: "Tons Of Tacos",
@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en" className="html">
       <body className={`${inter.variable}`}>
         <Providers>
-          <Alert />
+          <Modal />
           <MainHeader />
           <OrderConfirmation />
           <div id="page-container">

@@ -1,14 +1,13 @@
 "use client";
 import { useOwnerContext } from "@/context/owner-context";
 import classes from "./login-button.module.css";
-
 import { useFormStatus } from "react-dom";
 import { useEffect } from "react";
 import {
   getLogin,
   IsAuthenticated,
   storeLogin,
-} from "@/lib/owners-login-client";
+} from "@/lib/ownerLogin/owners-login-client";
 import { useDisplayContext } from "@/context/display-context";
 import { useModalContext } from "@/context/modal-context";
 
@@ -30,7 +29,10 @@ export default function LoginButton(response: {
         setLoggedIn(IsAuthenticated());
         setLogin(getLogin());
       } else if (statusCode === 403) {
-        setModal(JSON.stringify(response.response));
+        setModal(
+          JSON.stringify(response.response) +
+            " Please try again or give us a call."
+        );
         setShowModal(true);
       }
       statusCode = response.status;

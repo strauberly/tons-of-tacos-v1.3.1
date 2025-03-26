@@ -8,7 +8,10 @@
 - Owner name is now displayed by decrypting token instead of being received in plaint text from back end.
 - Headers and variations moved to Header folder.
 - Api call for login changed to server component.
-- library files for owner differentiated by name, (ie server vs client )
+- Library files for owner differentiated by name, (ie server vs client )
+- Renamed Alert package to Modal allowing for modal to be more generic and fit more use cases.
+- Removed Session storage file from library.
+- Organized owner login files in library into their own package.
 
 ---
 

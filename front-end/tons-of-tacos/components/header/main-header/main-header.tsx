@@ -11,7 +11,7 @@ import {
   GetLoggedInStatus,
   getLogin,
   IsAuthenticated,
-} from "@/lib/owners-login-client";
+} from "@/lib/ownerLogin/owners-login-client";
 import { useOwnerContext } from "@/context/owner-context";
 
 export default function MainHeader() {
