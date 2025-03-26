@@ -2,7 +2,7 @@
 
 import { useActionState } from "react";
 import classes from "./owner-login-form.module.css";
-import { OwnerLogin } from "@/lib/owner-login";
+import { OwnerLogin } from "@/lib/ownerLogin/owner-login-server";
 import LoginButton from "../buttons/login/login-button";
 
 export default function OwnerLoginForm() {
