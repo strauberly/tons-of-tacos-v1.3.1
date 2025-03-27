@@ -1,7 +1,7 @@
 "use client";
 
 import { useDisplayContext } from "@/context/display-context";
-import classes from "./checkout-button.module.css";
+import classes from "./submitOrder-button.module.css";
 import { useFormStatus } from "react-dom";
 import { useEffect } from "react";
 import { useOrderConfirmationContext } from "@/context/order-confirmation-context";

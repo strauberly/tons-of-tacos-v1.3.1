@@ -7,6 +7,7 @@
 -Fade put in place for owners tools login form and owner header.
 
 - Cursor changed to pointer to enhance ux on login and logout button.
+- Changed naming to be consistent for submit order button.
 
 ---
 
