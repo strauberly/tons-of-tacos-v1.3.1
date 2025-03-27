@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useState, useActionState, useEffect } from "react";
-import SubmitButton from "../buttons/checkout/checkout-button";
+import SubmitButton from "../buttons/submit-order/submitOrder-button";
 import classes from "./customer-info-form.module.css";
 import { checkEmail, checkName, checkPhone } from "@/lib/customer-form";
 import { SendOrder } from "@/lib/cart";
