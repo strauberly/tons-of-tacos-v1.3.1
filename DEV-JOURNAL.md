@@ -2,6 +2,12 @@
 
 ---
 
+-- 27 Mar 2025 --
+
+-Fade put in place for owners tools login form and owner header.
+
+---
+
 -- 26 Mar 2025 --
 
 - Responsive styling in place for owner login form and button.
