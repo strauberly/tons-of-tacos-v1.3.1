@@ -6,6 +6,8 @@
 
 -Fade put in place for owners tools login form and owner header.
 
+- Cursor changed to pointer to enhance ux on login and logout button.
+
 ---
 
 -- 26 Mar 2025 --
