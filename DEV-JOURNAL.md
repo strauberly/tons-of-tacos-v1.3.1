@@ -2,6 +2,12 @@
 
 ---
 
+-- 29 Mar 2025 --
+
+- Initialized files for owner dashboard and it styling in components package.
+
+---
+
 -- 27 Mar 2025 --
 
 -Fade put in place for owners tools login form and owner header.
