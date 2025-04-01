@@ -9,6 +9,8 @@
 - Currently working on styling for component.
 - Order type in types.d.ts is currently evolving as needed for development.
 - Initial styling is in place.
+- Added state to owner dashboard to maintain data between refreshes.
+- Formatted date and time and added extra column to in order to display.
 
 ---
 

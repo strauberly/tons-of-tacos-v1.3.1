@@ -1,17 +1,19 @@
 .dashboard {
   display: flex;
   height: 100%;
+  justify-content: center;
 }
 
 .dashboard ul {
   display: flex;
   flex-direction: column;
+  width: 99%;
 }
 
 .dashboard li {
   padding: 1rem;
   display: grid;
-  grid-template-columns: repeat(9, 1fr);
+  grid-template-columns: repeat(10, 1fr);
   justify-items: center;
   align-content: center;
   border-bottom: solid;
@@ -21,5 +23,5 @@
 
 .dashboard li p {
   min-width: max-content;
-  /* justify-content: center; */
+  justify-content: center;
 }
