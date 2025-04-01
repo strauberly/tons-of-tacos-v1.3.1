@@ -58,8 +58,8 @@ export default function MenuItemListCopy(category: { category: string }) {
             description: string;
           }) => (
             <MenuItem
-              key={`${menuItem.itemName}_${menuItem.itemSize}`}
               id={`${menuItem.id}`}
+              key={`${menuItem.itemName}_${menuItem.itemSize}`}
               itemName={menuItem.itemName}
               category={menuItem.category}
               imageUrl={menuItem.imageUrl}

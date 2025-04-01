@@ -115,11 +115,11 @@ export async function OwnerLogin(
     const decodedPayload = Buffer.from(payloadBase64, "base64").toString(
       "utf-8"
     );
-    const subject = JSON.parse(decodedPayload);
+    const subject = await JSON.parse(decodedPayload);
 
     return {
       status: status,
-      response: { token: data.token, ownerName: decrypt(subject.sub) },
+      response: { token: data.token, ownerName: decrypt(subject.ownername) },
     };
   } else {
     return { status: status, response: data.message };
