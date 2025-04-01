@@ -1,18 +1,21 @@
 import classes from "./owner-dashboard.module.css";
 import { getLogin } from "@/lib/ownerLogin/owners-login-client";
 import { getAllOrders } from "@/lib/owners-tools/owners-tools";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Order from "./order";
 
 export default function OwnerDashboard() {
   const ownerLogin: OwnerLogin = getLogin();
   const token: string | undefined = ownerLogin.token;
 
-  const orders = useRef<Order[] | undefined>();
+  const ordersRef = useRef<Order[] | undefined>();
+
+  const [orders, setOrders] = useState<Order[]>();
 
   useEffect(() => {
     async function GetOrders() {
-      orders.current = await getAllOrders(token);
+      ordersRef.current = await getAllOrders(token);
+      setOrders(ordersRef.current);
     }
     GetOrders();
   }, [token]);
@@ -22,7 +25,7 @@ export default function OwnerDashboard() {
   return (
     <div className={classes.dashboard}>
       <ul>
-        {orders.current?.map(
+        {orders?.map(
           (order: {
             orderUid: string;
             name: string;
