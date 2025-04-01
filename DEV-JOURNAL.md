@@ -2,6 +2,16 @@
 
 ---
 
+-- 1 Apr 2025 --
+
+- Created Order component in owner-dashboard package.
+- Owner Dashboard is mapping orders returned from backend to owner dashboard component and displaying them as styled.
+- Currently working on styling for component.
+- Order type in types.d.ts is currently evolving as needed for development.
+- Initial styling is in place.
+
+---
+
 -- 29 Mar 2025 --
 
 - Initialized files for owner dashboard and it styling in components package.

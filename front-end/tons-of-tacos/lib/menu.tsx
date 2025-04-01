@@ -22,10 +22,12 @@ export async function MenuItemsSource(category: string) {
       `http://localhost:8080/api/menu/category?category=${category}`
     );
     data = await response.json();
+    const menuItems: MenuItem[] = data;
+
+    console.log(menuItems);
+    return menuItems;
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     throw new Error("Sorry, we're having issues bringing you our menu");
   }
-  const menuItems: MenuItem[] = data;
-  return menuItems;
 }

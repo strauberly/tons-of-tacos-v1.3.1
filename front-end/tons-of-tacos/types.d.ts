@@ -49,3 +49,15 @@ type OwnerLogin = {
   token: string | undefined;
   ownerName: string | undefined;
 };
+
+type Order = {
+  orderUid: string;
+  name: string;
+  email: string;
+  phone: string;
+  orderTotal: number;
+  // orderItems: OrderItem[];
+  created: string;
+  ready: string;
+  closed: string;
+};
