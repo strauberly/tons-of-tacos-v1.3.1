@@ -5,6 +5,8 @@ import { useDisplayContext } from "@/context/display-context";
 import { useOwnerContext } from "@/context/owner-context";
 import { useEffect } from "react";
 
+import Splash from "../splash";
+
 export default function OwnersTools() {
   const { setShowLogin } = useDisplayContext();
   const { loggedIn } = useOwnerContext();
@@ -13,9 +15,5 @@ export default function OwnersTools() {
     setShowLogin(true);
   });
 
-  return (
-    <div>
-      {loggedIn ? <OwnerDashboard></OwnerDashboard> : <p>Owners Tools</p>}
-    </div>
-  );
+  return <div>{loggedIn ? <OwnerDashboard /> : <Splash />}</div>;
 }
