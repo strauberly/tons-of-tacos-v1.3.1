@@ -1,0 +1,28 @@
+.orderView {
+  position: fixed;
+  margin-top: 10%;
+  z-index: 100;
+}
+
+.orderDetails {
+  display: grid;
+  padding: 1rem;
+  grid-template-columns: repeat(2, 1fr);
+  justify-items: left;
+  align-items: center;
+  justify-content: center;
+  row-gap: 1rem;
+  background-color: var(--background-color);
+  border-radius: 0.5rem;
+}
+
+.orderDetails p {
+  margin-left: 15%;
+}
+
+.orderDetails p:nth-child(even) {
+  grid-column-start: 2;
+}
+.orderDetails p:nth-child(odd) {
+  color: var(--user-selected-color);
+}
