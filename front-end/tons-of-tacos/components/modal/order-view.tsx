@@ -1,6 +1,7 @@
 import { useModalContext } from "@/context/modal-context";
 import Card from "../ui/cards/card";
 import classes from "./order-view.module.css";
+import OrderItem from "../owner-dashboard/order-item";
 export default function OrderView() {
   const { orderToView } = useModalContext();
 
@@ -8,6 +9,8 @@ export default function OrderView() {
     timeStyle: "short",
   });
   const date: string = new Date(orderToView.created).toLocaleDateString();
+
+  const orderItemArr: OrderItem[] = orderToView.orderItems;
 
   return (
     <div className={classes.orderView}>
@@ -30,6 +33,11 @@ export default function OrderView() {
           <p>Closed: </p>
           <p>{`${orderToView.closed}`}</p>
         </div>
+        <ul>
+          {orderItemArr.map((orderItem) => (
+            <OrderItem key={orderItem.orderItemId} orderItem={orderItem} />
+          ))}
+        </ul>
       </Card>
     </div>
   );

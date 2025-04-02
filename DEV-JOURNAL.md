@@ -12,7 +12,14 @@
 - Modified displayContext to add viewOrder and setViewOrder.
 
 - Order view functioning as intended so far and styling initialized.
+
   - Next step will include the getting the order items with the order incorporating them as well.
+
+- Edited file types.d.ts to be inclusive of order items in in type Order.
+- Updated context to include order items in modal context orderToView.
+- Updated owner dash-board.tsx for mapping the new property.
+- Updated order-view in modal package to create UL for displaying the order items.
+  - Will work on styling for it next.
 
 ---
 
