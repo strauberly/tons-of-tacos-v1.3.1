@@ -11,6 +11,7 @@
 - Initial styling is in place.
 - Added state to owner dashboard to maintain data between refreshes.
 - Formatted date and time and added extra column to in order to display.
+- Created splash component in app to be used around app to help reduce some clutter.
 
 ---
 

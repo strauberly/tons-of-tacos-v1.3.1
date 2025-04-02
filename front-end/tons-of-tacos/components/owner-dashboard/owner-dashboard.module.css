@@ -5,6 +5,7 @@
 }
 
 .dashboard ul {
+  margin-top: 2%;
   display: flex;
   flex-direction: column;
   width: 99%;
@@ -22,6 +23,26 @@
 }
 
 .dashboard li p {
+  min-width: max-content;
+  justify-content: center;
+}
+
+.displayCategories {
+  position: fixed;
+  justify-items: center;
+  align-content: center;
+  margin-top: -1.5%;
+  padding: 1.5rem;
+  width: 96.5%;
+  background-color: var(--background-color);
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 1rem;
+}
+
+.displayCategories p {
+  color: var(--attention-color);
+  font-weight: bolder;
   min-width: max-content;
   justify-content: center;
 }

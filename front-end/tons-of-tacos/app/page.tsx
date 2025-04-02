@@ -1,9 +1,10 @@
 "use client";
-import Image from "next/image";
-import logoImg from "@/public/images/logos/bird-logo-rendersa.svg";
 import classes from "./page.module.css";
 import { useDisplayContext } from "@/context/display-context";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
+import Splash from "./splash";
+import FadeOnLoad from "@/components/ui/animations/fade-on-load";
+import Loading from "./loading";
 
 export default function Home() {
   const { setShowLogin } = useDisplayContext();
@@ -13,16 +14,12 @@ export default function Home() {
   });
 
   return (
-    <>
-      <main className={classes.page}>
-        <Image
-          src={logoImg}
-          className={classes.image}
-          alt="tons of tacos logo"
-          placeholder="blur"
-          blurDataURL="@/public/images/logos/bird-logo-rendersa.svg"
-        />
-      </main>
-    </>
+    <Suspense fallback={<Loading />}>
+      <FadeOnLoad>
+        <main className={classes.page}>
+          <Splash />
+        </main>
+      </FadeOnLoad>
+    </Suspense>
   );
 }

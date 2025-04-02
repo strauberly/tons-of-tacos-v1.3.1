@@ -21,7 +21,7 @@ export default function Order(props: {
       <p>{`${props.name}`}</p>
       <p>{`${props.phone}`}</p>
       <p>{`${props.email}`}</p>
-      <p>{`${total.toFixed(2)}`}</p>
+      <p>{`$${total.toFixed(2)}`}</p>
       <p>{`${time}`}</p>
       <p>{`${date}`}</p>
       <p>{`${props.ready}`}</p>
