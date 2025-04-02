@@ -1,32 +1,28 @@
-export default function Order(props: {
-  orderUid: string;
-  name: string;
-  email: string;
-  phone: string;
-  orderTotal: string;
-  created: string;
-  ready: string;
-  closed: string;
-}) {
-  const time: string = new Date(props.created).toLocaleTimeString([], {
+import { useModalContext } from "@/context/modal-context";
+import ViewOrderButton from "../ui/buttons/view-order/view-order-button";
+
+export default function Order(order: { order: Order }) {
+  const { setOrderToView } = useModalContext();
+
+  const time: string = new Date(order.order.created).toLocaleTimeString([], {
     timeStyle: "short",
   });
-  const date: string = new Date(props.created).toLocaleDateString();
+  const date: string = new Date(order.order.created).toLocaleDateString();
 
-  const total: number = +props.orderTotal;
+  const total: number = +order.order.orderTotal;
 
   return (
     <li>
-      <p>{`${props.orderUid}`}</p>
-      <p>{`${props.name}`}</p>
-      <p>{`${props.phone}`}</p>
-      <p>{`${props.email}`}</p>
+      <p>{`${order.order.orderUid}`}</p>
+      <p>{`${order.order.name}`}</p>
+      <p>{`${order.order.phone}`}</p>
+      <p>{`${order.order.email}`}</p>
       <p>{`$${total.toFixed(2)}`}</p>
       <p>{`${time}`}</p>
       <p>{`${date}`}</p>
-      <p>{`${props.ready}`}</p>
-      <p>{`${props.closed}`}</p>
-      <button>view</button>
+      <p>{`${order.order.ready}`}</p>
+      <p>{`${order.order.closed}`}</p>
+      <ViewOrderButton order={order.order} />
     </li>
   );
 }

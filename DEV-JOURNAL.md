@@ -2,6 +2,20 @@
 
 ---
 
+-- 2 Apr 2025 --
+
+- Initialized order view component and styling files in modal package
+- Initialized view order button component in ui package.
+- Established orderToView and setOrderToView in Modal context.
+  - This will be set in the view order button component and fed to our order view component which will be rendered upon clicking on view button.
+- Optimized owner dashboard and order components to pass along order objects inline helping to eliminate excessive lines from code base.
+- Modified displayContext to add viewOrder and setViewOrder.
+
+- Order view functioning as intended so far and styling initialized.
+  - Next step will include the getting the order items with the order incorporating them as well.
+
+---
+
 -- 1 Apr 2025 --
 
 - Created Order component in owner-dashboard package.
