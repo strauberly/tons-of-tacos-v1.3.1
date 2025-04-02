@@ -56,6 +56,7 @@ export default function OwnerDashboard() {
                   email: string;
                   phone: string;
                   orderTotal: number;
+                  orderItems: OrderItem[];
                   created: string;
                   ready: string;
                   closed: string;
@@ -84,6 +85,7 @@ export default function OwnerDashboard() {
                   email: string;
                   phone: string;
                   orderTotal: number;
+                  orderItems: OrderItem[];
                   created: string;
                   ready: string;
                   closed: string;

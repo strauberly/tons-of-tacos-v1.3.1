@@ -38,8 +38,8 @@ type Valid = {
 };
 
 type OrderItem = {
+  orderItemId: number;
   itemName: string;
-  unitPrice: number;
   quantity: number;
   size: string;
   total: number;
@@ -56,7 +56,7 @@ type Order = {
   email: string;
   phone: string;
   orderTotal: number;
-  // orderItems: OrderItem[];
+  orderItems: OrderItem[];
   created: string;
   ready: string;
   closed: string;
