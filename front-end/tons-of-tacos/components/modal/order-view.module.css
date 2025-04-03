@@ -1,5 +1,6 @@
 .orderView {
   position: fixed;
+  display: flex;
   margin-top: 10%;
   z-index: 100;
 }
@@ -25,4 +26,65 @@
 }
 .orderDetails p:nth-child(odd) {
   color: var(--user-selected-color);
+}
+
+.orderView ul {
+  display: flex;
+  flex-direction: column;
+  width: 99%;
+  background-color: var(--background-color);
+  /* border-radius: 0.5rem; */
+  justify-self: center;
+  padding: 1rem;
+}
+.orderView ul li {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  display: grid;
+  grid-template-columns: repeat(6, 16.66%);
+  justify-items: center;
+  align-items: center;
+  border-bottom: solid;
+  border-width: 0.15rem;
+  border-color: var(--border-color);
+}
+
+.orderView ul li p:first-child {
+  justify-self: left;
+}
+
+.orderView ul li p:nth-child(2) {
+  margin-left: 16.66%;
+}
+
+.orderItemTitles {
+  display: flex;
+}
+
+.orderItemTitles ul {
+  display: grid;
+  grid-template-columns: repeat(6, 16.66%);
+  justify-items: center;
+  color: var(--attention-color);
+  margin-bottom: -2rem;
+}
+
+.orderItemTitles ul p {
+  color: var(--attention-color);
+}
+
+.orderItemTitles ul p:first-child {
+  justify-self: left;
+}
+
+.button {
+  font-size: 2rem;
+
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: var(--background-color);
+  border-radius: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 2rem;
 }
