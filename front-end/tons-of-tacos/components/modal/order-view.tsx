@@ -2,8 +2,14 @@ import { useModalContext } from "@/context/modal-context";
 import Card from "../ui/cards/card";
 import classes from "./order-view.module.css";
 import OrderItem from "../owner-dashboard/order-item";
+import {
+  DisplayContextProvider,
+  useDisplayContext,
+} from "@/context/display-context";
+import { p } from "framer-motion/client";
 export default function OrderView() {
   const { orderToView } = useModalContext();
+  const { setViewOrder } = useDisplayContext();
 
   const time: string = new Date(orderToView.created).toLocaleTimeString([], {
     timeStyle: "short",
@@ -11,6 +17,8 @@ export default function OrderView() {
   const date: string = new Date(orderToView.created).toLocaleDateString();
 
   const orderItemArr: OrderItem[] = orderToView.orderItems;
+
+  const itemTitles: string[] = ["Item", "Quantity", "Size", "Item Total"];
 
   return (
     <div className={classes.orderView}>
@@ -33,11 +41,27 @@ export default function OrderView() {
           <p>Closed: </p>
           <p>{`${orderToView.closed}`}</p>
         </div>
-        <ul>
-          {orderItemArr.map((orderItem) => (
-            <OrderItem key={orderItem.orderItemId} orderItem={orderItem} />
-          ))}
-        </ul>
+        <div>
+          <ul className={classes.itemTitles}>
+            {itemTitles.map((title) => (
+              <p key={title}>{`${title.toString()}`}</p>
+            ))}
+          </ul>
+        </div>
+
+        <div className={classes.orderItems}>
+          <ul>
+            {orderItemArr.map((orderItem) => (
+              <OrderItem key={orderItem.orderItemId} orderItem={orderItem} />
+            ))}
+            <button
+              className={classes.button}
+              onClick={() => setViewOrder(false)}
+            >
+              Close
+            </button>
+          </ul>
+        </div>
       </Card>
     </div>
   );

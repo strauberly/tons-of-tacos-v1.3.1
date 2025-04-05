@@ -4,21 +4,26 @@
       to bottom,
       var(--border-color) 0%,
       var(--background-color) 30%,
-      var(--background-color) 90%,
+      var(--background-color) 80%,
       var(--border-color) 100%
     )
     100%;
   border-radius: 10px;
-
   border-style: solid;
-
   padding: 0.1rem;
-  transition: 2.5s ease;
 }
 
 .menuCard:hover {
   box-shadow: 0px 0px 50px 10px rgba(99, 179, 105, 1);
   transition: 0.3s ease;
+}
+
+.background {
+  background-color: var(--background-color);
+  border-radius: 10px;
+  width: 99%;
+  height: 99.5%;
+  justify-self: center;
 }
 
 .expand {
