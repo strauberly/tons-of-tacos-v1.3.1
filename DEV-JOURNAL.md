@@ -2,6 +2,14 @@
 
 ---
 
+-- 5 Apr 2025 --
+
+- Buttons initialized with basic styling for editing the base details of an order.
+  - Style sheet is starting to get get crowded and will be addressed in a refactor.
+  - Functionality of buttons to be worked on.
+
+---
+
 -- 4 Apr 2025 --
 
 - Styling in place for order items.

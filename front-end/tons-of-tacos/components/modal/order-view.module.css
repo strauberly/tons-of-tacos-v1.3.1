@@ -12,7 +12,6 @@
   align-items: center;
   justify-content: center;
   row-gap: 1rem;
-  background-color: var(--background-color);
   border-radius: 0.5rem;
 }
 
@@ -33,7 +32,6 @@
 }
 
 .orderItems ul {
-  /* display: flex; */
   width: 99%;
   justify-content: center;
   height: 300px;
