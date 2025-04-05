@@ -2,6 +2,16 @@
 
 ---
 
+-- 4 Apr 2025 --
+
+- Styling in place for order items.
+- Card style refactored to add background eliminating need to include in every child element nestled in card.
+- Close button added to order view and functionality in place.
+- Added styling for orderitems to provide scrolling for large orders.
+- Moved Order view close button inside of order items list.
+
+---
+
 -- 2 Apr 2025 --
 
 - Initialized order view component and styling files in modal package

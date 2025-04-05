@@ -9,7 +9,7 @@ export default function Card(props: { children: ReactNode; expand: boolean }) {
         props.expand === true ? classes.expand : " "
       }`}
     >
-      {props.children}
+      <div className={classes.background}>{props.children}</div>
     </div>
   );
 }

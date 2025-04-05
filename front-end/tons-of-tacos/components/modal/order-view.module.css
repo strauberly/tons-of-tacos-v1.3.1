@@ -26,3 +26,55 @@
 .orderDetails p:nth-child(odd) {
   color: var(--user-selected-color);
 }
+
+.orderItems {
+  display: flex;
+  flex-direction: column;
+}
+
+.orderItems ul {
+  /* display: flex; */
+  width: 99%;
+  justify-content: center;
+  height: 300px;
+  overflow-y: scroll;
+  padding-bottom: 1rem;
+}
+
+.orderItems ul li {
+  display: grid;
+  grid-template-columns: repeat(6, 16.66%);
+  padding: 1rem;
+  justify-items: center;
+  align-items: center;
+}
+.orderItems ul li p:first-child {
+  justify-self: left;
+}
+
+.itemTitles {
+  display: grid;
+  grid-template-columns: repeat(6, 16.66%);
+  padding: 1rem;
+  width: 100%;
+  justify-items: center;
+}
+
+.itemTitles p {
+  color: var(--attention-color);
+  font-weight: bolder;
+  min-width: max-content;
+}
+
+.itemTitles p:nth-child(1) {
+  justify-self: left;
+}
+
+.button {
+  display: flex;
+  font-size: 2rem;
+  justify-self: center;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+  cursor: pointer;
+}
