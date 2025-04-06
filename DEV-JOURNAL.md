@@ -2,6 +2,12 @@
 
 ---
 
+-- 6 Apr 2025 --
+
+- Input fields for editing an orders customer name, phone and email in place. Mimics validation and styling found in our customer form.
+
+---
+
 -- 5 Apr 2025 --
 
 - Buttons initialized with basic styling for editing the base details of an order.
