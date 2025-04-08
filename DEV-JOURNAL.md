@@ -2,6 +2,14 @@
 
 ---
 
+-- 7 Apr 2025 --
+
+- Delete button sets context for a confirmation modal to be displayed on click.
+- Files for confirmation modal and its styling created in modal package.
+- Updated context in display-context and modal context.
+
+---
+
 -- 6 Apr 2025 --
 
 - Input fields for editing an orders customer name, phone and email in place. Mimics validation and styling found in our customer form.

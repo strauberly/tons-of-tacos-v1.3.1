@@ -5,9 +5,12 @@ import { useEffect, useRef, useState } from "react";
 import Order from "./order";
 import OrderView from "../modal/order-view";
 import { useDisplayContext } from "@/context/display-context";
+import OrderActionConfirmation from "../modal/order-action-confirmation";
+import { useModalContext } from "@/context/modal-context";
 
 export default function OwnerDashboard() {
-  const { viewOrder } = useDisplayContext();
+  const { viewOrder, showConfirmation } = useDisplayContext();
+  const { confirmationTitle, orderToView } = useModalContext();
   const ownerLogin: OwnerLogin = getLogin();
   const token: string | undefined = ownerLogin.token;
   const ordersRef = useRef<Order[] | undefined>();
@@ -36,6 +39,12 @@ export default function OwnerDashboard() {
 
   return (
     <>
+      {showConfirmation && (
+        <OrderActionConfirmation
+          title={confirmationTitle}
+          order={orderToView}
+        />
+      )}
       {viewOrder ? (
         <>
           <OrderView />

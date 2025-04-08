@@ -23,3 +23,24 @@ export async function getAllOrders(token: string | undefined) {
     console.log(error);
   }
 }
+
+export async function DeleteOrder(orderUid: string, token: string | undefined) {
+  console.log(orderUid);
+  let response;
+  let data;
+  const address: string = `http://localhost:8080/api/owners-tools/orders/delete-order/${orderUid}`;
+  console.log(address);
+  console.log(token);
+  try {
+    response = await fetch(address.toString(), {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    data = await response.json();
+    console.log(data.message);
+  } catch (error) {
+    console.log(error);
+  }
+}

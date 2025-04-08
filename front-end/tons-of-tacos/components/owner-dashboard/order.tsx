@@ -1,11 +1,13 @@
-import { useModalContext } from "@/context/modal-context";
+// import { useModalContext } from "@/context/modal-context";
 import ViewOrderButton from "../ui/buttons/view-order/view-order-button";
-import { ChangeEvent, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import classes from "../owner-dashboard/owner-dashboard.module.css";
 import { checkEmail, checkName, checkPhone } from "@/lib/customer-form";
+import DeleteOrderButton from "../ui/buttons/order-edit/delete-order-button";
+// import { DeleteOrder } from "@/lib/owners-tools/owners-tools";
 
 export default function Order(order: { order: Order }) {
-  const { setOrderToView } = useModalContext();
+  // const { setOrderToView } = useModalContext();
 
   const time: string = new Date(order.order.created).toLocaleTimeString([], {
     timeStyle: "short",
@@ -13,6 +15,8 @@ export default function Order(order: { order: Order }) {
   const date: string = new Date(order.order.created).toLocaleDateString();
 
   const total: number = +order.order.orderTotal;
+
+  // const ownerLogin: OwnerLogin = getLogin();
 
   const [editName, setEditName] = useState<boolean>(false);
   const [editPhone, setEditPhone] = useState<boolean>(false);
@@ -184,7 +188,7 @@ export default function Order(order: { order: Order }) {
       <div className={classes.viewUpdateDelete}>
         <ViewOrderButton order={order.order} />
         <button>Update</button>
-        <button>Delete</button>
+        <DeleteOrderButton order={order.order} />
       </div>
     </li>
   );
