@@ -3,10 +3,11 @@
 import { useDisplayContext } from "@/context/display-context";
 import Card from "../ui/cards/card";
 import classes from "./order-action-confirmation.module.css";
-import { DeleteOrder } from "@/lib/owners-tools/owners-tools";
+import { DeleteOrder, GetAllOrders } from "@/lib/owners-tools/owners-tools";
 import { useOwnerContext } from "@/context/owner-context";
 import { useModalContext } from "@/context/modal-context";
 import { useRef, useState } from "react";
+import { useOrdersContext } from "@/context/orders-context";
 
 export default function OrderActionConfirmation(props: {
   title: string;
@@ -15,7 +16,8 @@ export default function OrderActionConfirmation(props: {
   const { setShowConfirmation, setShowModal } = useDisplayContext();
   const { setModal } = useModalContext();
   const { login } = useOwnerContext();
-  const [confirmationMessage, setConfirmationMessage] = useState<string>("");
+  const { setOrders } = useOrdersContext();
+  // const [confirmationMessage, setConfirmationMessage] = useState<string>("");
   const deleteMessage: string =
     "Are you sure you want to delete order " +
     `${props.order.orderUid}` +
@@ -24,7 +26,7 @@ export default function OrderActionConfirmation(props: {
     "?";
 
   const confirmation = useRef<string>();
-
+  const orders = useRef<Order[] | undefined>();
   return (
     <div className={classes.actionConfirmation}>
       <Card expand={true}>
@@ -38,8 +40,10 @@ export default function OrderActionConfirmation(props: {
                   props.order.orderUid,
                   login.token
                 )),
+                (orders.current = await GetAllOrders(login.token)),
                 setModal(`${confirmation.current}`),
                 setShowConfirmation(false),
+                setOrders(orders.current),
                 setShowModal(true),
               ]}
             >
