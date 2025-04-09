@@ -72,6 +72,11 @@ h2 {
   font-size: clamp(1rem, 1.5vw, 1.5vw);
 }
 
+h3 {
+  color: var(--attention-color);
+  font-size: 1rem;
+}
+
 button {
   color: var(--interactive-color);
   background-color: transparent;

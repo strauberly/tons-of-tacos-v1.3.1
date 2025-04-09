@@ -1,26 +1,30 @@
 import classes from "./owner-dashboard.module.css";
 import { getLogin } from "@/lib/ownerLogin/owners-login-client";
-import { getAllOrders } from "@/lib/owners-tools/owners-tools";
-import { useEffect, useRef, useState } from "react";
+import { GetAllOrders } from "@/lib/owners-tools/owners-tools";
+import { useEffect, useRef } from "react";
 import Order from "./order";
 import OrderView from "../modal/order-view";
 import { useDisplayContext } from "@/context/display-context";
+import OrderActionConfirmation from "../modal/order-action-confirmation";
+import { useModalContext } from "@/context/modal-context";
+import { useOrdersContext } from "@/context/orders-context";
 
 export default function OwnerDashboard() {
-  const { viewOrder } = useDisplayContext();
+  const { viewOrder, showConfirmation } = useDisplayContext();
+  const { confirmationTitle, orderToView } = useModalContext();
+  const { orders, setOrders } = useOrdersContext();
   const ownerLogin: OwnerLogin = getLogin();
   const token: string | undefined = ownerLogin.token;
   const ordersRef = useRef<Order[] | undefined>();
-  const [orders, setOrders] = useState<Order[]>();
 
   useEffect(() => {
     async function GetOrders() {
-      ordersRef.current = await getAllOrders(token);
+      ordersRef.current = await GetAllOrders(token);
       setOrders(ordersRef.current);
     }
 
     GetOrders();
-  }, [token]);
+  }, [setOrders, token]);
 
   const displayCategories: string[] = [
     "Order Id",
@@ -36,6 +40,12 @@ export default function OwnerDashboard() {
 
   return (
     <>
+      {showConfirmation && (
+        <OrderActionConfirmation
+          title={confirmationTitle}
+          order={orderToView}
+        />
+      )}
       {viewOrder ? (
         <>
           <OrderView />

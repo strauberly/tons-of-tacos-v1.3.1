@@ -13,6 +13,8 @@ interface ContextProps {
   setModal: Dispatch<SetStateAction<string>>;
   orderToView: Order;
   setOrderToView: Dispatch<SetStateAction<Order>>;
+  confirmationTitle: string;
+  setConfirmationTitle: Dispatch<SetStateAction<string>>;
 }
 
 const ModalContext = createContext<ContextProps>({
@@ -30,10 +32,12 @@ const ModalContext = createContext<ContextProps>({
     closed: "",
   },
   setOrderToView: () => {},
+  confirmationTitle: "",
+  setConfirmationTitle: () => {},
 });
 
 export const ModalContextProvider = ({ children }: { children: ReactNode }) => {
-  const [modal, setModal] = useState<string>("");
+  const [modal, setModal] = useState<string | undefined>("");
   const [orderToView, setOrderToView] = useState<Order>({
     orderUid: "",
     name: "",
@@ -45,6 +49,7 @@ export const ModalContextProvider = ({ children }: { children: ReactNode }) => {
     ready: "",
     closed: "",
   });
+  const [confirmationTitle, setConfirmationTitle] = useState<string>("");
   return (
     <ModalContext.Provider
       value={{
@@ -52,6 +57,8 @@ export const ModalContextProvider = ({ children }: { children: ReactNode }) => {
         setModal,
         orderToView,
         setOrderToView,
+        confirmationTitle,
+        setConfirmationTitle,
       }}
     >
       {children}

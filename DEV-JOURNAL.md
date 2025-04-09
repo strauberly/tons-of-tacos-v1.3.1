@@ -2,6 +2,32 @@
 
 ---
 
+-- 9 Apr 2025 --
+
+- Added orders context file in context package and orders context provider to providers file. This is now used in the owner dashboard component for displaying orders and order action confirmation component. This allows the orders to be updated when an order is updated or deleted.
+
+---
+
+-- 8 Apr 2025 --
+
+- Delete button correctly displays an action confirmation on click, clicking yes deletes the order from the backend and displays a confirmation modal.
+
+---
+
+-- 7 Apr 2025 --
+
+- Delete button sets context for a confirmation modal to be displayed on click.
+- Files for confirmation modal and its styling created in modal package.
+- Updated context in display-context and modal context.
+
+---
+
+-- 6 Apr 2025 --
+
+- Input fields for editing an orders customer name, phone and email in place. Mimics validation and styling found in our customer form.
+
+---
+
 -- 5 Apr 2025 --
 
 - Buttons initialized with basic styling for editing the base details of an order.
