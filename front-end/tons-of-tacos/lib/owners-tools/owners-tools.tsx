@@ -28,6 +28,7 @@ export async function DeleteOrder(orderUid: string, token: string | undefined) {
   console.log(orderUid);
   let response;
   let data;
+  // let message: string;
   const address: string = `http://localhost:8080/api/owners-tools/orders/delete-order/${orderUid}`;
   console.log(address);
   console.log(token);
@@ -39,8 +40,17 @@ export async function DeleteOrder(orderUid: string, token: string | undefined) {
       },
     });
     data = await response.json();
+    let message: string = "";
+
     console.log(data.message);
+    message = data.message;
+    return message;
   } catch (error) {
     console.log(error);
   }
+}
+
+export async function DeleteConfirmation(orderUid: string, token: string) {
+  const message = await DeleteOrder(orderUid, token);
+  return message;
 }

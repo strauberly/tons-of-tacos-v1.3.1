@@ -2,6 +2,10 @@
 
 ---
 
+-- 8 Apr 2025 --
+
+- Delete button correctly displays an action confirmation on click, clicking yes deletes the order from the backend and displays a confirmation modal.
+
 -- 7 Apr 2025 --
 
 - Delete button sets context for a confirmation modal to be displayed on click.
