@@ -2,6 +2,13 @@
 
 ---
 
+-- 11 Apr 2025 --
+
+- Order view has been updated with options to edit certain components of the order (customer name, email, phone).
+- Edit buttons removed from order component as this functionality now takes place in the order view.
+
+---
+
 -- 9 Apr 2025 --
 
 - Added orders context file in context package and orders context provider to providers file. This is now used in the owner dashboard component for displaying orders and order action confirmation component. This allows the orders to be updated when an order is updated or deleted.
