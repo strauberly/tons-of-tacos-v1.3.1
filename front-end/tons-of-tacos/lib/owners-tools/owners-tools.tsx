@@ -30,7 +30,7 @@ export async function DeleteOrder(orderUid: string, token: string | undefined) {
   console.log(orderUid);
   let response;
   let data;
-  // let message: string;
+
   const address: string = `http://localhost:8080/api/owners-tools/orders/delete-order/${orderUid}`;
   console.log(address);
   console.log(token);
@@ -52,6 +52,28 @@ export async function DeleteOrder(orderUid: string, token: string | undefined) {
   }
 }
 
+export async function MarkOrderReady(
+  orderUid: string,
+  token: string | undefined
+) {
+  let response;
+  let data;
+
+  const address: string = `http://localhost:8080/api/owners-tools/orders/order-ready/${orderUid}`;
+
+  try {
+    response = await fetch(address.toString(), {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    data = response.json();
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+}
 export async function DeleteConfirmation(orderUid: string, token: string) {
   const message = await DeleteOrder(orderUid, token);
   return message;

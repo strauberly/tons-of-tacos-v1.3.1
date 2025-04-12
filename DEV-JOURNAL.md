@@ -2,6 +2,13 @@
 
 ---
 
+-- 12 Apr 2025 --
+
+- Mark Order Ready button component created in ui/buttons/order-edit package.
+  - Button is implemented in order component consumed by the order dashboard and is currently functioning as intended to update the order on the backend and update the displayed orders for the owner.
+
+---
+
 -- 11 Apr 2025 --
 
 - Order view has been updated with options to edit certain components of the order (customer name, email, phone).

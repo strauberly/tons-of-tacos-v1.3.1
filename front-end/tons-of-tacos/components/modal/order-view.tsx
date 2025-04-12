@@ -101,14 +101,6 @@ export default function OrderView() {
     orderToView.name.length
   );
 
-  const displayCategories: string[] = [
-    "Order Id: ",
-    "Created: ",
-    "Customer Name: ",
-    "Phone: ",
-    "E-mail: ",
-  ];
-
   return (
     // main to demo card
     <div className={classes.orderView}>

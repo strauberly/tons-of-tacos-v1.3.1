@@ -1,8 +1,12 @@
 import ViewOrderButton from "../ui/buttons/view-order/view-order-button";
 import classes from "../owner-dashboard/owner-dashboard.module.css";
 import DeleteOrderButton from "../ui/buttons/order-edit/delete-order-button";
+import MarkReadyButton from "../ui/buttons/order-edit/mark-ready-button";
+import { useOwnerContext } from "@/context/owner-context";
 
 export default function Order(order: { order: Order }) {
+  const { login } = useOwnerContext();
+
   const time: string = new Date(order.order.created).toLocaleTimeString([], {
     timeStyle: "short",
   });
@@ -20,7 +24,7 @@ export default function Order(order: { order: Order }) {
       <p>{`${date}`}</p>
       <div>
         <p>{`${order.order.ready}`}</p>
-        <button>Mark Ready</button>
+        <MarkReadyButton orderUid={order.order.orderUid} token={login.token} />
       </div>
       <div>
         <p>{`${order.order.closed}`}</p>
