@@ -6,7 +6,7 @@ import classes from "./order-action-confirmation.module.css";
 import { DeleteOrder, GetAllOrders } from "@/lib/owners-tools/owners-tools";
 import { useOwnerContext } from "@/context/owner-context";
 import { useModalContext } from "@/context/modal-context";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useOrdersContext } from "@/context/orders-context";
 
 export default function OrderActionConfirmation(props: {
@@ -17,7 +17,7 @@ export default function OrderActionConfirmation(props: {
   const { setModal } = useModalContext();
   const { login } = useOwnerContext();
   const { setOrders } = useOrdersContext();
-  // const [confirmationMessage, setConfirmationMessage] = useState<string>("");
+
   const deleteMessage: string =
     "Are you sure you want to delete order " +
     `${props.order.orderUid}` +
