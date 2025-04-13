@@ -2,6 +2,13 @@
 
 ---
 
+-- 13 Apr 2025 --
+
+- Customer information is updated in orderView based on user input.
+  - Will add button for updating backend in future.
+
+---
+
 -- 12 Apr 2025 --
 
 - Mark Ready button component created in ui/buttons/order-edit package.
