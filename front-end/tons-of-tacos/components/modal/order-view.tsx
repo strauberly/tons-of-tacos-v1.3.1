@@ -2,17 +2,38 @@ import { useModalContext } from "@/context/modal-context";
 import Card from "../ui/cards/card";
 import classes from "./order-view.module.css";
 import OrderItem from "../owner-dashboard/order-item";
-import {
-  // DisplayContextProvider,
-  useDisplayContext,
-} from "@/context/display-context";
-import { p } from "framer-motion/client";
-import { useRef, useState } from "react";
+import { useDisplayContext } from "@/context/display-context";
+
+import React, { useRef, useState } from "react";
 import { checkEmail, checkName, checkPhone } from "@/lib/customer-form";
-// import { useRef, useState } from "react";
+
 export default function OrderView() {
   const { orderToView } = useModalContext();
   const { setViewOrder } = useDisplayContext();
+
+  const time: string = new Date(orderToView.created).toLocaleTimeString([], {
+    timeStyle: "short",
+  });
+  const date: string = new Date(orderToView.created).toLocaleDateString();
+
+  const orderItemArr: OrderItem[] = orderToView.orderItems;
+
+  const itemTitles: string[] = ["Item", "Quantity", "Size", "Item Total"];
+
+  const firstName: string = orderToView.name.substring(
+    0,
+    orderToView.name.indexOf(" ")
+  );
+
+  const lastName: string = orderToView.name.substring(
+    orderToView.name.indexOf(" ") + 1,
+    orderToView.name.length
+  );
+
+  const [currentFirstName, setCurrentFirstName] = useState<string>(firstName);
+  const [currentLastName, setCurrentLastName] = useState<string>(lastName);
+  const [currentPhone, setCurrentPhone] = useState<string>(orderToView.phone);
+  const [currentEmail, setCurrentEmail] = useState<string>(orderToView.email);
 
   const [editName, setEditName] = useState<boolean>(false);
   const [editPhone, setEditPhone] = useState<boolean>(false);
@@ -22,8 +43,8 @@ export default function OrderView() {
   const [lastNameValid, setLastNameValid] = useState<boolean>(false);
   const [phoneValid, setPhoneValid] = useState<boolean>(false);
   const [emailValid, setEmailValid] = useState<boolean>(false);
-  const firstNameRef = useRef("false");
-  const lastNameRef = useRef("false");
+  const firstNameValidRef = useRef("true");
+  const lastNameValidRef = useRef("false");
   const phoneNumber = useRef("false");
   const email = useRef("false");
 
@@ -36,20 +57,22 @@ export default function OrderView() {
 
   // // validation functions
   function validateFirstName(event: React.ChangeEvent<HTMLInputElement>) {
-    firstNameRef.current = event.target.value;
-    setFirstNameValid(checkName(firstNameRef.current).valid);
+    firstNameValidRef.current = event.target.value;
+    setFirstNameValid(checkName(firstNameValidRef.current).valid);
     setErrors({
       ...errors,
-      firstNameError: `${"First " + checkName(firstNameRef.current).message}`,
+      firstNameError: `${
+        "First " + checkName(firstNameValidRef.current).message
+      }`,
     });
   }
 
   function validateLastName(event: React.ChangeEvent<HTMLInputElement>) {
-    lastNameRef.current = event.target.value;
-    setLastNameValid(checkName(lastNameRef.current).valid);
+    lastNameValidRef.current = event.target.value;
+    setLastNameValid(checkName(lastNameValidRef.current).valid);
     setErrors({
       ...errors,
-      lastNameError: `${"Last " + checkName(lastNameRef.current).message}`,
+      lastNameError: `${"Last " + checkName(lastNameValidRef.current).message}`,
     });
   }
 
@@ -72,34 +95,22 @@ export default function OrderView() {
     });
   }
 
-  // const firstName: string = order.order.name.substring(
-  //   0,
-  //   order.order.name.indexOf(" ")
-  // );
-
-  // const lastName: string = order.order.name.substring(
-  //   order.order.name.indexOf(" ") + 1,
-  //   order.order.name.length
-  // );
-
-  const time: string = new Date(orderToView.created).toLocaleTimeString([], {
-    timeStyle: "short",
-  });
-  const date: string = new Date(orderToView.created).toLocaleDateString();
-
-  const orderItemArr: OrderItem[] = orderToView.orderItems;
-
-  const itemTitles: string[] = ["Item", "Quantity", "Size", "Item Total"];
-
-  const firstName: string = orderToView.name.substring(
-    0,
-    orderToView.name.indexOf(" ")
-  );
-
-  const lastName: string = orderToView.name.substring(
-    orderToView.name.indexOf(" ") + 1,
-    orderToView.name.length
-  );
+  function updateFirstName(e: React.ChangeEvent<HTMLInputElement>) {
+    setCurrentFirstName(e.target.value);
+    validateFirstName(e);
+  }
+  function updateLastName(e: React.ChangeEvent<HTMLInputElement>) {
+    setCurrentLastName(e.target.value);
+    validateLastName(e);
+  }
+  function updatePhone(e: React.ChangeEvent<HTMLInputElement>) {
+    setCurrentPhone(e.target.value);
+    validatePhoneNumber(e);
+  }
+  function updateEmail(e: React.ChangeEvent<HTMLInputElement>) {
+    setCurrentEmail(e.target.value);
+    validateEmail(e);
+  }
 
   return (
     // main to demo card
@@ -118,7 +129,7 @@ export default function OrderView() {
             <div>
               <div className={classes.editableDetails}>
                 <p>Name:</p>
-                <p>{orderToView.name}</p>
+                <p>{`${currentFirstName}` + " " + `${currentLastName}`}</p>
                 {editName && (
                   <div>
                     <input
@@ -130,7 +141,7 @@ export default function OrderView() {
                       name="first_name"
                       maxLength={17}
                       required
-                      onChange={validateFirstName}
+                      onChange={updateFirstName}
                     ></input>
                     <div className={classes.errorContainer}></div>
                     {!firstNameValid && (
@@ -145,7 +156,7 @@ export default function OrderView() {
                       name="last_name"
                       maxLength={17}
                       required
-                      onChange={validateLastName}
+                      onChange={updateLastName}
                     ></input>
                     {!lastNameValid && (
                       <p className={classes.error}>{errors.lastNameError}</p>
@@ -158,20 +169,20 @@ export default function OrderView() {
               </div>
               <div className={classes.editableDetails}>
                 <p>Phone:</p>
-                <p>{orderToView.phone}</p>
+                <p>{currentPhone}</p>
                 {editPhone && (
                   <div>
                     <input
                       className={` ${
                         phoneValid ? classes.valid : classes.invalid
                       }`}
-                      placeholder={`${orderToView.phone}`}
+                      placeholder={`${currentPhone}`}
                       type="text"
                       id="phone"
                       name="phone"
                       required
                       maxLength={12}
-                      onChange={validatePhoneNumber}
+                      onChange={updatePhone}
                     ></input>
                     {!phoneValid && (
                       <p className={classes.error}>{errors.phoneError}</p>
@@ -184,20 +195,20 @@ export default function OrderView() {
               </div>
               <div className={classes.editableDetails}>
                 <p>Email:</p>
-                <p>{orderToView.email}</p>
+                <p>{currentEmail}</p>
                 {editEmail && (
                   <div>
                     <input
                       className={` ${
                         emailValid ? classes.valid : classes.invalid
                       }`}
-                      placeholder={`${orderToView.email}`}
+                      placeholder={`${currentEmail}`}
                       type="text"
                       id="email"
                       name="email"
                       required
                       maxLength={12}
-                      onChange={validateEmail}
+                      onChange={updateEmail}
                     ></input>
                     {!phoneValid && (
                       <p className={classes.error}>{errors.emailError}</p>
@@ -211,6 +222,7 @@ export default function OrderView() {
             </div>
           </div>
           <div>
+            {/* orderitems and titles */}
             <div>
               <ul className={classes.itemTitles}>
                 {itemTitles.map((title) => (

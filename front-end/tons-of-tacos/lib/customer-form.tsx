@@ -6,9 +6,9 @@ export function checkName(name: string) {
     message: "",
   };
 
-  if (name.length === 0) {
+  if (name?.length === 0) {
     nameValid.message = "Name must not be blank";
-  } else if (!/^S*[a-z]+$/.test(name.toLowerCase())) {
+  } else if (!/^S*[a-z]+$/.test(name?.toLowerCase())) {
     nameValid.message = "Check for only valid characters and no spaces";
   } else if (
     (/^[a-z]+$/.test(name.toLowerCase().trim()) && name.length == 1) ||
