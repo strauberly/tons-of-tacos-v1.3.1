@@ -4,8 +4,15 @@
 
 -- 12 Apr 2025 --
 
-- Mark Order Ready button component created in ui/buttons/order-edit package.
+- Mark Ready button component created in ui/buttons/order-edit package.
+
   - Button is implemented in order component consumed by the order dashboard and is currently functioning as intended to update the order on the backend and update the displayed orders for the owner.
+
+- Mark Ready and Close Order now displayed on whether an order has already been marked ready or not.
+
+- Close Order button will only displayed if order.order.ready !== "no" && order.order.closed === "no".
+
+- Delete order button is not displayed if order has been marked closed.
 
 ---
 

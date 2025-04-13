@@ -74,6 +74,28 @@ export async function MarkOrderReady(
     console.log(error);
   }
 }
+export async function MarkOrderClosed(
+  orderUid: string,
+  token: string | undefined
+) {
+  let response;
+  let data;
+
+  const address: string = `http://localhost:8080/api/owners-tools/orders/close-order/${orderUid}`;
+
+  try {
+    response = await fetch(address.toString(), {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    data = response.json();
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+}
 export async function DeleteConfirmation(orderUid: string, token: string) {
   const message = await DeleteOrder(orderUid, token);
   return message;
