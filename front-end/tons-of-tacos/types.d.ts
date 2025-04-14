@@ -61,3 +61,10 @@ type Order = {
   ready: string;
   closed: string;
 };
+
+type AllMenuItems = {
+  tacos: MenuItem[];
+  sides: MenuItem[];
+  toppings: MenuItem[];
+  drinks: MenuItem[];
+};

@@ -2,6 +2,13 @@
 
 ---
 
+-- 14 Apr 2025 --
+
+- Add Order Item initialized.Menu Item selector initialized.
+  - Both components currently reside in owner-dashboard package and are currently still in development.
+
+---
+
 -- 13 Apr 2025 --
 
 - Customer information is updated in orderView based on user input.
