@@ -1,3 +1,5 @@
+import { menu } from "framer-motion/client";
+
 export default async function CategoriesSource() {
   let data;
   try {
@@ -30,4 +32,26 @@ export async function MenuItemsSource(category: string) {
   } catch (error) {
     throw new Error("Sorry, we're having issues bringing you our menu");
   }
+}
+
+// get menu item
+
+// get menu item names
+
+export async function GetAllMenuItems() {
+  const menuItems: AllMenuItems = {
+    tacos: [],
+    sides: [],
+    toppings: [],
+    drinks: [],
+  };
+
+  menuItems.tacos = await MenuItemsSource("tacos");
+  menuItems.sides = await MenuItemsSource("sides");
+  menuItems.toppings = await MenuItemsSource("toppings");
+  menuItems.drinks = await MenuItemsSource("drinks");
+
+  const returnedMenuItems: AllMenuItems = menuItems;
+
+  return returnedMenuItems;
 }

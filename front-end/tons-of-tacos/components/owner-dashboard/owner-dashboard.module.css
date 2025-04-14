@@ -99,3 +99,13 @@
   min-width: max-content;
   justify-content: center;
 }
+
+.addItemToOrder {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(5, 20%);
+  padding: 1rem;
+  justify-self: center;
+  justify-items: center;
+  align-items: center;
+}

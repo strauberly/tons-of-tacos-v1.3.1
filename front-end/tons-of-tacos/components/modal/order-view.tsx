@@ -6,6 +6,7 @@ import { useDisplayContext } from "@/context/display-context";
 
 import React, { useRef, useState } from "react";
 import { checkEmail, checkName, checkPhone } from "@/lib/customer-form";
+import AddOrderItem from "../owner-dashboard/add-order-item";
 
 export default function OrderView() {
   const { orderToView } = useModalContext();
@@ -142,7 +143,7 @@ export default function OrderView() {
                       maxLength={17}
                       required
                       onChange={updateFirstName}
-                    ></input>
+                    />
                     <div className={classes.errorContainer}></div>
                     {!firstNameValid && (
                       <p className={classes.error}>{errors.firstNameError}</p>
@@ -157,7 +158,7 @@ export default function OrderView() {
                       maxLength={17}
                       required
                       onChange={updateLastName}
-                    ></input>
+                    />
                     {!lastNameValid && (
                       <p className={classes.error}>{errors.lastNameError}</p>
                     )}
@@ -183,7 +184,7 @@ export default function OrderView() {
                       required
                       maxLength={12}
                       onChange={updatePhone}
-                    ></input>
+                    />
                     {!phoneValid && (
                       <p className={classes.error}>{errors.phoneError}</p>
                     )}
@@ -240,6 +241,7 @@ export default function OrderView() {
                   />
                 ))}
               </ul>
+              <AddOrderItem />
               <button
                 className={classes.button}
                 onClick={() => setViewOrder(false)}
