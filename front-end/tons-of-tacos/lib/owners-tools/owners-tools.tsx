@@ -1,6 +1,6 @@
 "use server";
 
-export async function GetAllOrders(token: string | undefined) {
+export async function GetAllOrders(token: string) {
   console.log(token);
   let response;
   let data;
@@ -15,11 +15,11 @@ export async function GetAllOrders(token: string | undefined) {
       }
     );
     data = await response.json();
-    let orders: Order[] = [];
-    orders = data;
+    // let orders: Order[] = [];
+    const orders = data;
 
     console.log(data);
-    console.log("orders: " + orders);
+    console.log("orders: " + orders.toString());
     return orders;
   } catch (error) {
     console.log(error);

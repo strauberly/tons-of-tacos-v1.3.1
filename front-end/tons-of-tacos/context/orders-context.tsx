@@ -9,8 +9,8 @@ import {
 } from "react";
 
 interface ContextProps {
-  orders: Order[] | undefined;
-  setOrders: Dispatch<SetStateAction<Order[] | undefined>>;
+  orders: Order[];
+  setOrders: Dispatch<SetStateAction<Order[]>>;
 }
 
 const OrdersContext = createContext<ContextProps>({
@@ -23,7 +23,7 @@ export const OrdersContextProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const [orders, setOrders] = useState<Order[] | undefined>([]);
+  const [orders, setOrders] = useState<Order[]>([]);
   return (
     <OrdersContext.Provider
       value={{

@@ -11,6 +11,7 @@ export default function OwnerHeader() {
 
   useEffect(() => {
     const timer = setInterval(() => setDate(new Date()), 1000);
+
     return function cleanup() {
       clearInterval(timer);
     };

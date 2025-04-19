@@ -2,6 +2,12 @@
 
 ---
 
+-- 19 Apr 2025 --
+
+- Some work lost for setting orders in owner dashboard, but chance to refactor. owner context is now used to fetch all orders.
+
+---
+
 -- 14 Apr 2025 --
 
 - Add Order Item initialized.Menu Item selector initialized.
