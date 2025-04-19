@@ -4,8 +4,14 @@ import { useEffect, useRef } from "react";
 import { useOwnerContext } from "@/context/owner-context";
 import Order from "./order";
 import { useOrdersContext } from "@/context/orders-context";
+import OrderView from "../modal/order-view";
+import { useDisplayContext } from "@/context/display-context";
+import { useModalContext } from "@/context/modal-context";
+import OrderActionConfirmation from "../modal/order-action-confirmation";
 
 export default function OwnerDashboard() {
+  const { viewOrder, showConfirmation } = useDisplayContext();
+  const { confirmationTitle, orderToView } = useModalContext();
   const { login } = useOwnerContext();
   const { orders, setOrders } = useOrdersContext();
   const displayCategories: string[] = [
@@ -31,6 +37,13 @@ export default function OwnerDashboard() {
 
   return (
     <>
+      {showConfirmation && (
+        <OrderActionConfirmation
+          title={confirmationTitle}
+          order={orderToView}
+        />
+      )}
+      {viewOrder && <OrderView />}
       <div>
         <ul className={classes.displayCategories}>
           {displayCategories.map((category) => (

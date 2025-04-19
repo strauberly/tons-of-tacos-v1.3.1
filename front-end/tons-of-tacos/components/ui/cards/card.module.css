@@ -32,7 +32,7 @@
   align-self: baseline;
   z-index: 100;
   width: clamp(22rem, 100%, 30%);
-  height: min-content;
+  height: 50rem;
   margin-right: auto;
   margin-left: auto;
   left: 0px;

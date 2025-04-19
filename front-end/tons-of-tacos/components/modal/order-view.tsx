@@ -241,15 +241,15 @@ export default function OrderView() {
                   />
                 ))}
               </ul>
-              <AddOrderItem />
-              <button
-                className={classes.button}
-                onClick={() => setViewOrder(false)}
-              >
-                Close
-              </button>
             </div>
+            <AddOrderItem />
           </div>
+          <button
+            className={classes.button}
+            onClick={() => setViewOrder(false)}
+          >
+            Close
+          </button>
         </div>
       </Card>
     </div>
