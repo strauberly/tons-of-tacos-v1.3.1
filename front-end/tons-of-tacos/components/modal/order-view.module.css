@@ -85,12 +85,15 @@
 .orderItems {
   display: flex;
   flex-direction: column;
+  /* justify-self: center; */
+  /* width: auto; */
+  border-bottom: solid var(--border-color);
 }
 
 .orderItems ul {
-  width: 99%;
+  /* width: 99%; */
   justify-content: center;
-  height: 300px;
+  max-height: 300px;
   overflow-y: scroll;
   padding-bottom: 1rem;
 }
@@ -133,8 +136,9 @@
   position: relative;
   font-size: 2rem;
   justify-content: center;
-  margin-bottom: 10%;
+  margin-top: 3rem;
   cursor: pointer;
+  width: 100%;
 }
 
 .invalid {

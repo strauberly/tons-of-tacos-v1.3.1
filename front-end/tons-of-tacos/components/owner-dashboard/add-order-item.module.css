@@ -1,0 +1,79 @@
+.addItemToOrder {
+  display: flex;
+  flex-direction: column;
+
+  padding-bottom: 0.5rem;
+  border-bottom: solid var(--border-color);
+}
+
+.addItemToOrder h3 {
+  font-family: var(--inter-font);
+}
+
+.addItemToOrder ul {
+  margin: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  align-items: center;
+}
+.addItemToOrder ul h3:nth-child(3) {
+  margin-left: 2.5rem;
+}
+.addItemToOrder ul h3:nth-child(2) {
+  margin-left: 1.5rem;
+}
+
+/* set up nth child for pushing columns over slightly */
+
+.addItemToOrder input {
+  width: 8ch;
+}
+.addItemToOrder input:focus {
+  border-color: none;
+}
+
+.decrement {
+  rotate: 90deg;
+  /* width: 0.15rem; */
+}
+
+.increment {
+  rotate: -90deg;
+}
+
+.quantity {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: 0.5rem;
+}
+
+.size {
+  margin-left: 1rem;
+}
+
+.total {
+  grid-column-start: 4;
+}
+
+.addItemToOrder input,
+.quantity textarea {
+  padding: 0.25vw;
+  background-color: transparent;
+  color: var(--user-selected-color);
+  text-align: center;
+  border: solid;
+  border-color: var(--border-color);
+  border-radius: 15%;
+}
+
+.addItemToOrder button {
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.addItemButton {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}

@@ -1,9 +1,15 @@
-// "use server";
-
 import { GetAllMenuItems } from "@/lib/menu";
-
 import { useEffect, useRef, useState } from "react";
-export default function MenuItemSelector() {
+import classes from "./menu-item-selector.module.css";
+
+export default function MenuItemSelector(props: {
+  setItemName: (item: string) => void;
+  setItem: (item: MenuItem) => void;
+  setItemSelector: (itemSelector: boolean) => void;
+  readyToAdd: (readyToAdd: boolean) => void;
+
+  itemName: string;
+}) {
   const [tacos, setTacos] = useState<string[]>([]);
   const [sides, setSides] = useState<string[]>([]);
   const [toppings, setToppings] = useState<string[]>([]);
@@ -15,6 +21,40 @@ export default function MenuItemSelector() {
     toppings: [],
     drinks: [],
   });
+  const menuItem = useRef<MenuItem>({
+    id: "",
+    itemName: "",
+    category: "",
+    imageUrl: "",
+    description: "",
+    itemSize: "",
+    unitPrice: 0,
+  });
+
+  function findItem(name: string) {
+    const taco = menuItems.current.tacos.find(
+      (item: MenuItem) => item.itemName.toString() === `${name}`
+    );
+    const side = menuItems.current.sides.find(
+      (item: MenuItem) => item.itemName === `${name}`
+    );
+    const topping = menuItems.current.toppings.find(
+      (item: MenuItem) => item.itemName === `${name}`
+    );
+    const drink = menuItems.current.drinks.find(
+      (item: MenuItem) => item.itemName === `${name}`
+    );
+    if (taco != undefined) {
+      menuItem.current = taco;
+    } else if (side != undefined) {
+      menuItem.current = side;
+    } else if (topping != undefined) {
+      menuItem.current = topping;
+    } else if (drink != undefined) {
+      menuItem.current = drink;
+    }
+    return menuItem.current;
+  }
 
   useEffect(() => {
     async function GetItems() {
@@ -45,31 +85,67 @@ export default function MenuItemSelector() {
   }, []);
 
   return (
-    <ul>
-      <p>Tacos</p>
-      <ul>
-        {tacos.map((tacoName: string) => (
-          <p key={tacoName}>{`${tacoName}`}</p>
-        ))}
-      </ul>
-      <p>Sides</p>
-      <ul>
-        {sides.map((sideName: string) => (
-          <p key={sideName}>{`${sideName}`}</p>
-        ))}
-      </ul>
-      <p>Toppings</p>
-      <ul>
-        {toppings.map((toppingName: string) => (
-          <p key={toppingName}>{`${toppingName}`}</p>
-        ))}
-      </ul>
-      <p>Drinks</p>
-      <ul>
-        {drinks.map((drinkName: string) => (
-          <p key={drinkName}>{`${drinkName}`}</p>
-        ))}
-      </ul>
-    </ul>
+    <div className={classes.menuItemSelector}>
+      <div className={classes.categories}>
+        <h3>Tacos</h3>
+        <h3>Sides</h3>
+        <h3>Toppings</h3>
+        <h3>Drinks</h3>
+      </div>
+      <div className={classes.items}>
+        <ul>
+          {tacos.map((tacoName: string) => (
+            <button
+              key={tacoName}
+              onClick={() => [
+                props.setItemName(tacoName),
+                props.setItem(findItem(tacoName)),
+                props.readyToAdd(true),
+                props.setItemSelector(false),
+              ]}
+            >{`${tacoName}`}</button>
+          ))}
+        </ul>
+        <ul>
+          {sides.map((sideName: string) => (
+            <button
+              key={sideName}
+              onClick={() => [
+                props.setItemName(sideName),
+                props.setItem(findItem(sideName)),
+                props.readyToAdd(true),
+                props.setItemSelector(false),
+              ]}
+            >{`${sideName}`}</button>
+          ))}
+        </ul>
+        <ul>
+          {toppings.map((toppingName: string) => (
+            <button
+              key={toppingName}
+              onClick={() => [
+                props.setItemName(toppingName),
+                props.setItem(findItem(toppingName)),
+                props.readyToAdd(true),
+                props.setItemSelector(false),
+              ]}
+            >{`${toppingName}`}</button>
+          ))}
+        </ul>
+        <ul>
+          {drinks.map((drinkName: string) => (
+            <button
+              key={drinkName}
+              onClick={() => [
+                props.setItemName(drinkName),
+                props.setItem(findItem(drinkName)),
+                props.readyToAdd(true),
+                props.setItemSelector(false),
+              ]}
+            >{`${drinkName}`}</button>
+          ))}
+        </ul>
+      </div>
+    </div>
   );
 }

@@ -2,6 +2,18 @@
 
 ---
 
+-- 19 Apr 2025 --
+
+- Some work lost for setting orders in owner dashboard, but chance to refactor. owner context is now used to fetch all orders.
+
+- Order view and confirmation modals back in place.
+- Confirmation modal functioning as desired when deleting an order.
+- Buttons for marking an order ready and then closed functioning as expected.
+
+- Styling for card made into a fixed size.
+
+---
+
 -- 14 Apr 2025 --
 
 - Add Order Item initialized.Menu Item selector initialized.
