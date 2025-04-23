@@ -15,5 +15,12 @@ export default function OwnersTools() {
     setShowLogin(true);
   });
 
-  return <div>{loggedIn ? <OwnerDashboard /> : <Splash />}</div>;
+  return (
+    <>
+      {loggedIn && <OwnerDashboard />}
+      {!loggedIn && <Splash />}
+    </>
+  );
 }
+
+// try without ternary

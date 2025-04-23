@@ -6,9 +6,8 @@ import NavButtons from "@/components/ui/buttons/nav-buttons/nav-buttons";
 import OwnerLoginForm from "../../ui/forms/owner-login-form";
 import { useDisplayContext } from "@/context/display-context";
 import OwnerHeader from "../owner-header/owner-header";
-import { Suspense, useEffect, useRef, useState } from "react";
+import { Suspense, useEffect } from "react";
 import {
-  GetLoggedInStatus,
   getLogin,
   IsAuthenticated,
 } from "@/lib/ownerLogin/owners-login-client";
@@ -22,7 +21,7 @@ export default function MainHeader() {
   useEffect(() => {
     setLoggedIn(IsAuthenticated());
     setLogin(getLogin());
-  }, [setLoggedIn, setLogin]);
+  }, [loggedIn, setLoggedIn, setLogin]);
 
   return (
     <>
@@ -33,13 +32,9 @@ export default function MainHeader() {
           </Link>
           <Suspense>
             <FadeOnLoad>
-              {loggedIn ? (
-                <OwnerHeader />
-              ) : showLogin ? (
-                <OwnerLoginForm />
-              ) : (
-                <NavButtons />
-              )}
+              {loggedIn && <OwnerHeader />}
+              {showLogin && !loggedIn && <OwnerLoginForm />}
+              {!showLogin && !loggedIn && <NavButtons />}
             </FadeOnLoad>
           </Suspense>
         </header>

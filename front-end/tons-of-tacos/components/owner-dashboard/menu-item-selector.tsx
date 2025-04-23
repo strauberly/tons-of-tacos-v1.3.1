@@ -6,7 +6,7 @@ export default function MenuItemSelector(props: {
   setItemName: (item: string) => void;
   setItem: (item: MenuItem) => void;
   setItemSelector: (itemSelector: boolean) => void;
-  readyToAdd: (readyToAdd: boolean) => void;
+  setReadyToAdd: (readyToAdd: boolean) => void;
 
   itemName: string;
 }) {
@@ -100,7 +100,7 @@ export default function MenuItemSelector(props: {
               onClick={() => [
                 props.setItemName(tacoName),
                 props.setItem(findItem(tacoName)),
-                props.readyToAdd(true),
+                props.setReadyToAdd(true),
                 props.setItemSelector(false),
               ]}
             >{`${tacoName}`}</button>
@@ -113,7 +113,7 @@ export default function MenuItemSelector(props: {
               onClick={() => [
                 props.setItemName(sideName),
                 props.setItem(findItem(sideName)),
-                props.readyToAdd(true),
+                props.setReadyToAdd(true),
                 props.setItemSelector(false),
               ]}
             >{`${sideName}`}</button>
@@ -126,7 +126,7 @@ export default function MenuItemSelector(props: {
               onClick={() => [
                 props.setItemName(toppingName),
                 props.setItem(findItem(toppingName)),
-                props.readyToAdd(true),
+                props.setReadyToAdd(true),
                 props.setItemSelector(false),
               ]}
             >{`${toppingName}`}</button>
@@ -139,7 +139,7 @@ export default function MenuItemSelector(props: {
               onClick={() => [
                 props.setItemName(drinkName),
                 props.setItem(findItem(drinkName)),
-                props.readyToAdd(true),
+                props.setReadyToAdd(true),
                 props.setItemSelector(false),
               ]}
             >{`${drinkName}`}</button>
