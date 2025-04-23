@@ -2,6 +2,31 @@
 
 ---
 
+-- 23 Apr 2025 --
+
+- New components implemented
+  - Created order-edit-context.
+  - Order action modal updated to be more modular allowing for the change of confirmation message and the action to take place.
+  - Implemented functionality of an add to order button and action confirmation button.
+  - Moved orders into a component in owner dashboard.
+- General flow for adding a new item to order is as follows
+  - Owner clicks add item button and selects a menu item from the drop down.
+  - They can select a quantity and input a size( size selection still to be implemented and refined) and then will click add item.
+  - This information is then transferred to a to order-action-confirmation modal.
+  - The modal gives the option to confirm the action or cancel.
+  - If the confirmation button is clicked then the menu item is added to the order on the backend and the order is updated.
+- Functionality is rough and still needs refactoring and styling improvements to enhance the development and user experience.
+
+---
+
+-- 20 Apr 2025 --
+
+- Moved order into its own component in order to help with readability.
+- Backend altered to accept a size so that a value of null is entered into the database for the order item which would cause an error when calling the orders and their items.
+- Created server action for adding item to order.
+
+---
+
 -- 19 Apr 2025 --
 
 - Some work lost for setting orders in owner dashboard, but chance to refactor. owner context is now used to fetch all orders.

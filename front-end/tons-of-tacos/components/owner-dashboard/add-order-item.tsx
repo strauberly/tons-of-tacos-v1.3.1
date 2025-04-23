@@ -2,16 +2,22 @@
 
 import MenuItemSelector from "./menu-item-selector";
 import classes from "./add-order-item.module.css";
-import { useEffect, useRef, useState } from "react";
-import MenuItem from "../menu/menu-items/menu-item";
-import menuItem from "../menu/menu-items/menu-item";
+import { useState } from "react";
 import ArrowIcon from "../menu/menu-items/quantity-selector/arrow-icon";
+import { AddToOrder } from "@/lib/owners-tools/owners-tools";
+import { useModalContext } from "@/context/modal-context";
+import { useOwnerContext } from "@/context/owner-context";
+import AddToOrderButton from "../ui/buttons/order-edit/add-to-order-button";
 
 export default function AddOrderItem() {
+  const { orderToView } = useModalContext();
+  const { login } = useOwnerContext();
   const [itemSelector, setItemSelector] = useState(false);
   const [itemName, setItemName] = useState<string>("Item");
   const [quantity, setQuantity] = useState<number>(1);
   const [readyToAdd, setReadyToAdd] = useState<boolean>(false);
+
+  console.log(orderToView.name);
 
   const [item, setItem] = useState<MenuItem>({
     id: "",
@@ -103,13 +109,31 @@ export default function AddOrderItem() {
           <p className={classes.total}>{`${total.toFixed(2)}`}</p>
         </ul>
         {readyToAdd && (
-          <button
+          // replace with button component
+          <AddToOrderButton
+            menuItem={item}
+            quantity={quantity}
+            customerName={orderToView.name}
+            setItemName={setItemName}
+            setReadyToAdd={setReadyToAdd}
+          />
+        )}
+        {/* <button
             className={classes.addItemButton}
-            onClick={() => [setReadyToAdd(!readyToAdd), setItemName("Item")]}
+            onClick={() => [
+              setReadyToAdd(!readyToAdd),
+              setItemName("Item"),
+              AddToOrder(
+                orderToView.orderUid,
+                Number(item.id),
+                quantity,
+                item.itemSize,
+                login.token
+              ),
+            ]}
           >
             Add Item
-          </button>
-        )}
+          </button> */}
       </div>
       {itemSelector && (
         <MenuItemSelector
@@ -117,7 +141,7 @@ export default function AddOrderItem() {
           setItem={itemSetter}
           itemName={itemName}
           setItemSelector={setItemSelector}
-          readyToAdd={setReadyToAdd}
+          setReadyToAdd={setReadyToAdd}
         />
       )}
     </>

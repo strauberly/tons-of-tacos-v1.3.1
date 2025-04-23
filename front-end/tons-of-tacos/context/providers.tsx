@@ -11,26 +11,29 @@ import { SizeSelectedContextProvider } from "./size-context";
 import { MenuItemIdContextProvider } from "./menu-item-context";
 import { OwnerContextProvider } from "./owner-context";
 import { OrdersContextProvider } from "./orders-context";
+import { EditOrderContextProvider } from "./edit-order-context";
 
 export function Providers({ children }: { children: ReactNode }) {
   return (
     <ModalContextProvider>
       <OwnerContextProvider>
-        <OrdersContextProvider>
-          <MenuItemIdContextProvider>
-            <DisplayContextProvider>
-              <SizeSelectedContextProvider>
-                <OrderConfirmationContextProvider>
-                  <CartContextProvider>
-                    <MenuCategoryContextProvider>
-                      <MenuContextProvider>{children}</MenuContextProvider>
-                    </MenuCategoryContextProvider>
-                  </CartContextProvider>
-                </OrderConfirmationContextProvider>
-              </SizeSelectedContextProvider>
-            </DisplayContextProvider>
-          </MenuItemIdContextProvider>
-        </OrdersContextProvider>
+        <EditOrderContextProvider>
+          <OrdersContextProvider>
+            <MenuItemIdContextProvider>
+              <DisplayContextProvider>
+                <SizeSelectedContextProvider>
+                  <OrderConfirmationContextProvider>
+                    <CartContextProvider>
+                      <MenuCategoryContextProvider>
+                        <MenuContextProvider>{children}</MenuContextProvider>
+                      </MenuCategoryContextProvider>
+                    </CartContextProvider>
+                  </OrderConfirmationContextProvider>
+                </SizeSelectedContextProvider>
+              </DisplayContextProvider>
+            </MenuItemIdContextProvider>
+          </OrdersContextProvider>
+        </EditOrderContextProvider>
       </OwnerContextProvider>
     </ModalContextProvider>
   );

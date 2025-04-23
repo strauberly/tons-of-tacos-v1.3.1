@@ -19,7 +19,7 @@ export async function GetAllOrders(token: string) {
     const orders = data;
 
     console.log(data);
-    console.log("orders: " + orders.toString());
+    console.log("orders: " + JSON.stringify(orders));
     return orders;
   } catch (error) {
     console.log(error);
@@ -46,7 +46,40 @@ export async function DeleteOrder(orderUid: string, token: string | undefined) {
 
     console.log(data.message);
     message = data.message;
+    // confirmation = data.message;
     return message;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function AddToOrder(
+  orderUid: string,
+  menuItemId: number,
+  quantity: number,
+  itemSize: string,
+  token: string
+) {
+  console.log(orderUid);
+  let response;
+  let data;
+
+  const address: string = `http://localhost:8080/api/owners-tools/orders/add-to-order/${orderUid}/${menuItemId}/${quantity}/${itemSize}`;
+  console.log(address);
+  console.log(token);
+  try {
+    response = await fetch(address.toString(), {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    data = await response.json();
+    // let message: string = "";
+
+    console.log(data);
+    // message = data.message;
+    return data.message;
   } catch (error) {
     console.log(error);
   }
