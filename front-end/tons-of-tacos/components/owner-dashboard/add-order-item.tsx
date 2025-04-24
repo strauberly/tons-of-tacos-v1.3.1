@@ -1,17 +1,14 @@
 "use client";
 
 import MenuItemSelector from "./menu-item-selector";
-import classes from "./add-order-item.module.css";
 import { useState } from "react";
 import ArrowIcon from "../menu/menu-items/quantity-selector/arrow-icon";
-import { AddToOrder } from "@/lib/owners-tools/owners-tools";
 import { useModalContext } from "@/context/modal-context";
-import { useOwnerContext } from "@/context/owner-context";
 import AddToOrderButton from "../ui/buttons/order-edit/add-to-order-button";
+import classes from "./add-order-item.module.css";
 
 export default function AddOrderItem() {
   const { orderToView } = useModalContext();
-  const { login } = useOwnerContext();
   const [itemSelector, setItemSelector] = useState(false);
   const [itemName, setItemName] = useState<string>("Item");
   const [quantity, setQuantity] = useState<number>(1);
@@ -109,7 +106,6 @@ export default function AddOrderItem() {
           <p className={classes.total}>{`${total.toFixed(2)}`}</p>
         </ul>
         {readyToAdd && (
-          // replace with button component
           <AddToOrderButton
             menuItem={item}
             quantity={quantity}
@@ -118,22 +114,6 @@ export default function AddOrderItem() {
             setReadyToAdd={setReadyToAdd}
           />
         )}
-        {/* <button
-            className={classes.addItemButton}
-            onClick={() => [
-              setReadyToAdd(!readyToAdd),
-              setItemName("Item"),
-              AddToOrder(
-                orderToView.orderUid,
-                Number(item.id),
-                quantity,
-                item.itemSize,
-                login.token
-              ),
-            ]}
-          >
-            Add Item
-          </button> */}
       </div>
       {itemSelector && (
         <MenuItemSelector

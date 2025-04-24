@@ -24,8 +24,6 @@
   margin-left: 1.5rem;
 }
 
-/* set up nth child for pushing columns over slightly */
-
 .addItemToOrder input {
   width: 8ch;
 }
@@ -35,7 +33,6 @@
 
 .decrement {
   rotate: 90deg;
-  /* width: 0.15rem; */
 }
 
 .increment {
@@ -71,9 +68,10 @@
 .addItemToOrder button {
   font-size: 1rem;
   cursor: pointer;
+  font-weight: bold;
 }
 
 .addItemButton {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }

@@ -2,6 +2,16 @@
 
 ---
 
+-- 24 Apr 2025 --
+
+- Removed unused code from order-item.tsx
+- Removed customer name from edit order context;
+- Removed unused code and comments from add-order-item.tsx
+- Removed unused code from orders.tsx
+- Updated order view styling.
+
+---
+
 -- 23 Apr 2025 --
 
 - New components implemented

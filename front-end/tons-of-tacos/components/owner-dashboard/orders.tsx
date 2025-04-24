@@ -1,15 +1,13 @@
 import { useOrdersContext } from "@/context/orders-context";
 import { useOwnerContext } from "@/context/owner-context";
 import { GetAllOrders } from "@/lib/owners-tools/owners-tools";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import Order from "./order";
 import classes from "./owner-dashboard.module.css";
 
 export default function Orders() {
   const { orders, setOrders } = useOrdersContext();
   const { login } = useOwnerContext();
-
-  //   const ordersRef = useRef<Order[]>();
 
   useEffect(() => {
     async function GetOrders() {

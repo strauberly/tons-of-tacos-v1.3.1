@@ -16,8 +16,7 @@ export default function OrderActionConfirmation(props: {
   const { setShowConfirmation } = useDisplayContext();
   const { orderToView } = useModalContext();
 
-  const { menuItem, quantity, customerName, menuItemSize } =
-    useEditOrderContext();
+  const { menuItem, quantity } = useEditOrderContext();
 
   const message = useRef<string>("");
 
@@ -25,7 +24,7 @@ export default function OrderActionConfirmation(props: {
     message.current = AddToOrderMessage({
       itemName: menuItem.itemName,
       quantity: quantity,
-      orderUid: props.order.orderUid,
+      orderUid: orderToView.orderUid,
       name: props.order.name,
     });
   }
