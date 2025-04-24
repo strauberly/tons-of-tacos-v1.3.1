@@ -7,13 +7,15 @@
 .orderDetails {
   display: flex;
   flex-direction: column;
-  justify-items: right;
   padding: 1rem;
+  padding-left: 1rem;
+  max-height: 20rem;
+  overflow-y: scroll;
+  border-bottom: solid var(--border-color);
 }
 
 .uneditableDetails {
   display: grid;
-  padding: 1rem;
   grid-template-columns: repeat(3, 1fr);
   align-items: first baseline;
   row-gap: 1rem;
@@ -32,11 +34,14 @@
 
 .editableDetails {
   display: grid;
-  padding: 0rem 1rem 1rem;
+  padding-top: 1rem;
   grid-template-columns: repeat(3, 1fr);
   align-items: first baseline;
   row-gap: 1rem;
   border-radius: 0.5rem;
+}
+.editableDetails button {
+  font-weight: bold;
 }
 
 .editableDetails p:nth-child(3n + 1) {
@@ -50,7 +55,8 @@
   grid-column-start: 3;
   font-size: 1rem;
   cursor: pointer;
-  justify-self: right;
+  /* justify-self: right; */
+  margin-left: 5rem;
 }
 
 .editableDetails input {
@@ -83,36 +89,38 @@
 }
 
 .orderItems {
-  display: flex;
-  flex-direction: column;
-  /* justify-self: center; */
-  /* width: auto; */
   border-bottom: solid var(--border-color);
 }
 
+.orderItems button {
+  cursor: pointer;
+}
+
 .orderItems ul {
-  /* width: 99%; */
   justify-content: center;
-  max-height: 300px;
+  max-height: 8rem;
   overflow-y: scroll;
   padding-bottom: 1rem;
+  row-gap: 1rem;
 }
 
 .orderItems ul li {
   display: grid;
   grid-template-columns: repeat(6, 16.66%);
-  padding: 1rem;
+  padding-top: 1rem;
   justify-items: center;
   align-items: center;
 }
+
 .orderItems ul li p:first-child {
   justify-self: left;
+  margin-left: 1rem;
 }
 
 .itemTitles {
   display: grid;
   grid-template-columns: repeat(6, 16.66%);
-  padding: 1rem;
+  padding-top: 1rem;
   width: 100%;
   justify-items: center;
 }
@@ -125,8 +133,12 @@
 
 .itemTitles p:nth-child(1) {
   justify-self: left;
+  margin-left: 1rem;
 }
 
+.itemTitles p:nth-child(n + 2) {
+  margin-right: 25%;
+}
 .itemTitles p:nth-child(n + 2) {
   margin-right: 25%;
 }

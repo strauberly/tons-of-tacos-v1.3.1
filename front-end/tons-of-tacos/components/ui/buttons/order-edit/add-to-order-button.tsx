@@ -1,7 +1,7 @@
 import { useDisplayContext } from "@/context/display-context";
-import classes from "../add-to-cart/add-to-cart.module.css";
 import { useModalContext } from "@/context/modal-context";
 import { useEditOrderContext } from "@/context/edit-order-context";
+import classes from "../../../owner-dashboard/add-order-item.module.css";
 
 export default function AddToOrderButton(props: {
   menuItem: MenuItem;

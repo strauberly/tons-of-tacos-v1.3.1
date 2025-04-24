@@ -99,7 +99,7 @@ button:hover {
 }
 
 ::-webkit-scrollbar {
-  width: 1.5rem;
+  width: 1rem;
 }
 
 ::-webkit-scrollbar-thumb {
