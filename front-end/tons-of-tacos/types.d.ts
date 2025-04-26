@@ -68,3 +68,12 @@ type AllMenuItems = {
   toppings: MenuItem[];
   drinks: MenuItem[];
 };
+
+type OrderEdit = {
+  orderUid: string;
+  customerName: string;
+  menuItemId: string;
+  quantity: number;
+  itemSize: string;
+  login: string;
+};

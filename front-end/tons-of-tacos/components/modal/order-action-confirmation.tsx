@@ -5,7 +5,10 @@ import classes from "./order-action-confirmation.module.css";
 import { useModalContext } from "@/context/modal-context";
 import { useRef } from "react";
 
-import { AddToOrderMessage } from "@/lib/owners-tools/confirmation-messages";
+import {
+  AddToOrderMessage,
+  DeleteMessage,
+} from "@/lib/owners-tools/confirmation-messages";
 import { useEditOrderContext } from "@/context/edit-order-context";
 import ActionConfirmationButton from "../ui/buttons/order-edit/action-confirmation-button";
 
@@ -27,6 +30,8 @@ export default function OrderActionConfirmation(props: {
       orderUid: orderToView.orderUid,
       name: props.order.name,
     });
+  } else if (props.title === "Delete") {
+    message.current = DeleteMessage(orderToView.orderUid, orderToView.name);
   }
 
   return (

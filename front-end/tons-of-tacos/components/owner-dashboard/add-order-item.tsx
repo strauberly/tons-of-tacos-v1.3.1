@@ -8,7 +8,7 @@ import AddToOrderButton from "../ui/buttons/order-edit/add-to-order-button";
 import classes from "./add-order-item.module.css";
 
 export default function AddOrderItem() {
-  const { orderToView } = useModalContext();
+  const { orderToView, setOrderToView } = useModalContext();
   const [itemSelector, setItemSelector] = useState(false);
   const [itemName, setItemName] = useState<string>("Item");
   const [quantity, setQuantity] = useState<number>(1);
