@@ -1,3 +1,4 @@
+import RemoveFromOrderButton from "../ui/buttons/order-edit/remove-from-order-button";
 import classes from "./order-item.module.css";
 
 export default function OrderItem(orderItem: { orderItem: OrderItem }) {
@@ -8,7 +9,7 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
       <p>{`${orderItem.orderItem.size.toUpperCase()}`}</p>
       <p>{`$${orderItem.orderItem.total.toFixed(2)}`}</p>
       <button className={classes.button}>Edit</button>
-      <button className={classes.button}>Remove</button>
+      <RemoveFromOrderButton orderItem={orderItem.orderItem} />
     </li>
   );
 }

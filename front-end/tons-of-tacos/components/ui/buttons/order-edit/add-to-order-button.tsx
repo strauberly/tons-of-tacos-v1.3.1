@@ -10,7 +10,7 @@ export default function AddToOrderButton(props: {
   setItemName: (item: string) => void;
   setReadyToAdd: (readyToAdd: boolean) => void;
 }) {
-  const { setShowConfirmation, setViewOrder } = useDisplayContext();
+  const { setShowConfirmation } = useDisplayContext();
   const { setConfirmationTitle } = useModalContext();
   const { setMenuItem, setQuantity, setCustomerName, setMenuItemSize } =
     useEditOrderContext();
@@ -25,7 +25,6 @@ export default function AddToOrderButton(props: {
         setMenuItemSize(props.menuItem.itemSize),
         props.setReadyToAdd(false),
         props.setItemName("Item"),
-        // setViewOrder(false),
         setShowConfirmation(true),
         setConfirmationTitle("Add To Order"),
       ]}
