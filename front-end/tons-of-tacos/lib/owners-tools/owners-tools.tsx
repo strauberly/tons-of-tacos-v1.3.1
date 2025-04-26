@@ -1,7 +1,5 @@
 "use server";
 
-import Order from "@/components/owner-dashboard/order";
-
 export async function GetAllOrders(token: string) {
   // console.log(token);
   let response;
@@ -17,11 +15,7 @@ export async function GetAllOrders(token: string) {
       }
     );
     data = await response.json();
-    // let orders: Order[] = [];
     const orders = data;
-
-    // console.log(data);
-    // console.log("orders: " + JSON.stringify(orders));
     return orders;
   } catch (error) {
     console.log(error);
@@ -34,6 +28,33 @@ export async function DeleteOrder(orderUid: string, token: string) {
   let data;
 
   const address: string = `http://localhost:8080/api/owners-tools/orders/delete-order/${orderUid}`;
+  console.log(address);
+  console.log(token);
+  try {
+    response = await fetch(address.toString(), {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    data = await response.json();
+    // let message: string = "";
+
+    console.log(data.message);
+    // message = data.message;
+    // confirmation = data.message;
+    // return message;
+    return data.message;
+  } catch (error) {
+    console.log(error);
+  }
+}
+export async function RemoveFromOrder(orderItemId: number, token: string) {
+  console.log(orderItemId);
+  let response;
+  let data;
+
+  const address: string = `http://localhost:8080/api/owners-tools/orders/remove-from-order/${orderItemId}`;
   console.log(address);
   console.log(token);
   try {
@@ -152,9 +173,6 @@ export async function GetOrder(orderUid: string, token: string) {
       }
     );
     const data = response.json();
-    // const order = await data;
-
-    // console.log("order: " + JSON.stringify(order));
     // rewrite for if not 200
     return data;
   } catch (error) {
@@ -173,5 +191,7 @@ export async function ExecuteConfirm(title: string, orderEdit: OrderEdit) {
     );
   } else if (title === "Delete") {
     return DeleteOrder(orderEdit.orderUid, orderEdit.login);
+  } else if (title === "Remove From Order") {
+    return RemoveFromOrder(orderEdit.orderItem.orderItemId, orderEdit.login);
   }
 }

@@ -76,4 +76,5 @@ type OrderEdit = {
   quantity: number;
   itemSize: string;
   login: string;
+  orderItem: OrderItem;
 };

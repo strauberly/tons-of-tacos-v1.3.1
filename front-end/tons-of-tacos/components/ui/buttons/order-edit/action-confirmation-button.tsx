@@ -5,8 +5,6 @@ import { useModalContext } from "@/context/modal-context";
 import { useOrdersContext } from "@/context/orders-context";
 import { useOwnerContext } from "@/context/owner-context";
 import {
-  AddToOrder,
-  DeleteOrder,
   ExecuteConfirm,
   GetAllOrders,
   GetOrder,
@@ -17,7 +15,7 @@ export default function ActionConfirmationButton(props: { title: string }) {
   const { setShowConfirmation, setShowModal } = useDisplayContext();
   const { setOrders } = useOrdersContext();
   const { login } = useOwnerContext();
-  const { menuItem, quantity, menuItemSize } = useEditOrderContext();
+  const { menuItem, quantity, menuItemSize, orderItem } = useEditOrderContext();
   const { orderToView, setModal, setOrderToView } = useModalContext();
 
   const orders = useRef<Order[]>([]);
@@ -42,25 +40,13 @@ export default function ActionConfirmationButton(props: { title: string }) {
     quantity: quantity,
     itemSize: menuItemSize,
     login: login.token,
+    orderItem: orderItem,
   };
 
   return (
     <button
       onClick={async () => [
-        ((action.current = await ExecuteConfirm(props.title, orderEdit)), // props.title === "Add To Order"
-        //   ? (action.current = await AddToOrder(
-        //       orderToView.orderUid,
-        //       Number(menuItem.id),
-        //       quantity,
-        //       menuItemSize,
-        //       login.token
-        //     ))
-        //   : props.title === "Delete"
-        //   ? (action.current = await DeleteOrder(
-        //       orderToView.orderUid,
-        //       login.token
-        //     ))
-        //   : "",
+        ((action.current = await ExecuteConfirm(props.title, orderEdit)),
         setShowConfirmation(false)),
         setModal(action.current),
         setShowModal(true),

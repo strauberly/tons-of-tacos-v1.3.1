@@ -8,6 +8,7 @@ import { useRef } from "react";
 import {
   AddToOrderMessage,
   DeleteMessage,
+  RemoveFromOrderMessage,
 } from "@/lib/owners-tools/confirmation-messages";
 import { useEditOrderContext } from "@/context/edit-order-context";
 import ActionConfirmationButton from "../ui/buttons/order-edit/action-confirmation-button";
@@ -19,7 +20,7 @@ export default function OrderActionConfirmation(props: {
   const { setShowConfirmation } = useDisplayContext();
   const { orderToView } = useModalContext();
 
-  const { menuItem, quantity } = useEditOrderContext();
+  const { menuItem, quantity, orderItem } = useEditOrderContext();
 
   const message = useRef<string>("");
 
@@ -32,6 +33,12 @@ export default function OrderActionConfirmation(props: {
     });
   } else if (props.title === "Delete") {
     message.current = DeleteMessage(orderToView.orderUid, orderToView.name);
+  } else if (props.title === "Remove From Order") {
+    message.current = RemoveFromOrderMessage({
+      orderItem: orderItem,
+      orderUid: orderToView.orderUid,
+      name: orderToView.name,
+    });
   }
 
   return (

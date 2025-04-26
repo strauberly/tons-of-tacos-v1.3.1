@@ -27,17 +27,21 @@ export function AddToOrderMessage(props: {
   return message;
 }
 
-export function MessageSelector(props: {
-  title: string;
+export function RemoveFromOrderMessage(props: {
+  orderItem: OrderItem;
   orderUid: string;
   name: string;
 }) {
-  let message: string;
-  switch (props.title) {
-    case "Delete":
-      message = DeleteMessage(props.orderUid, props.name);
-      return message;
-    case "Add To Order":
-      message = AddToOrderMessage();
-  }
+  const message: string =
+    " Remove " +
+    `${props.orderItem.itemName}` +
+    ` ${props.orderItem.size}` +
+    " x " +
+    `${props.orderItem.quantity}` +
+    " from order " +
+    `${props.orderUid}` +
+    " for customer " +
+    `${props.name}` +
+    "?";
+  return message;
 }

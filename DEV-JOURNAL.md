@@ -5,9 +5,20 @@
 -- 26 Apr 2025 --
 
 - Reimplemented delete order functionality through action confirmation button.
+
   - Quickly realized means of determining which action execute would become unmanageable to read. Created OrderEdit type in types.d.ts and function in owners-tools.tsx.
   - Execute confirm utilizes the action title and OrderEdit object with all properties needed to execute any of the edit functions appropriate for the title submitted.
   - This should allow these components to scale and maintain readability.
+
+- The back-end team(me) implemented an endpoint allowing the owners to remove an item from an order which is now used on the front-end when an owner clicks the remove button next to an order item.
+  - Added orderItem as property of OrderEdit object
+    in types.d.ts
+  - Added orderItem and setOrderItem to edit-order-context.ts
+  - Created remove-from-order-button.tsx in ui/buttons package
+    - order-item.tsx passes an order item to this button component and utilizes it.
+    - Clicking the button sets show confirmation to true and passes a confirmation title of "Remove From Order"
+- Added RemoveFromOrderMessage to confirmation-messages library.
+- ExecuteConfirm function in owners-tools library now utilizes RemoveFromOrder() which call our new endpoint and removes an item from an order.
 
 ---
 
