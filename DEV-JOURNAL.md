@@ -2,6 +2,21 @@
 
 ---
 
+-- 26 Apr 2025 --
+
+- Reimplemented delete order functionality through action confirmation button.
+  - Quickly realized means of determining which action execute would become unmanageable to read. Created OrderEdit type in types.d.ts and function in owners-tools.tsx.
+  - Execute confirm utilizes the action title and OrderEdit object with all properties needed to execute any of the edit functions appropriate for the title submitted.
+  - This should allow these components to scale and maintain readability.
+
+---
+
+-- 25 Apr 2025 --
+
+- Implemented GetOrder in owners-tools.tsx for getting order by uid. This is used by the action confirmation button to refresh the order once action has been executed.
+
+---
+
 -- 24 Apr 2025 --
 
 - Removed unused code from order-item.tsx

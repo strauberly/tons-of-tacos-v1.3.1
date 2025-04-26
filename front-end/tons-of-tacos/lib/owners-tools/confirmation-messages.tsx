@@ -1,4 +1,4 @@
-function DeleteMessage(orderUid: string, name: string) {
+export function DeleteMessage(orderUid: string, name: string) {
   const message: string =
     "Are you sure you want to delete order " +
     `${orderUid}` +
@@ -9,13 +9,11 @@ function DeleteMessage(orderUid: string, name: string) {
 }
 
 export function AddToOrderMessage(props: {
-
-  itemName: string,
-  quantity: number,
-  orderUid: string,
-  name: string
-}
-) {
+  itemName: string;
+  quantity: number;
+  orderUid: string;
+  name: string;
+}) {
   const message: string =
     " Add " +
     `${props.itemName}` +
