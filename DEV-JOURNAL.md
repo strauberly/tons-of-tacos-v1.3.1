@@ -2,6 +2,18 @@
 
 ---
 
+-- 27 Apr 2025 --
+
+- Implemented functionality for updating a an order item quantity.
+  - Clicking edit button on an order item displays a quantity selector created in order item component. Also display an update and cancel button. Cancel button returns the order item view to default.
+  - Replaced place holder update button with update-order-item.tsx component in ui/buttons package.
+  - Clicking on update button, sets the new quantity, order item, confirmation title, show confirmation to true, and resets the order view to default.
+  - Confirmation utilizes the confirmation title to display confirmation message.
+  - Confirmation button utilizes the confirmation title to select the confirmation action of updating the order item quantity which calls the api endpoint, submits the order uid, item id, and new quantity.
+  - The backend then saves the order item and order before transmitting the response message.
+
+---
+
 -- 26 Apr 2025 --
 
 - Reimplemented delete order functionality through action confirmation button.

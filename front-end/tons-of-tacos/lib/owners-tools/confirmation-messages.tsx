@@ -45,3 +45,21 @@ export function RemoveFromOrderMessage(props: {
     "?";
   return message;
 }
+
+export function UpdateOrderItemMessage(props: {
+  orderItem: OrderItem;
+  newQuantity: number;
+}) {
+  const message: string =
+    "Update " +
+    props.orderItem.itemName +
+    " x " +
+    `${props.orderItem.quantity},` +
+    " to " +
+    props.orderItem.itemName +
+    " x " +
+    props.newQuantity +
+    "?";
+
+  return message;
+}

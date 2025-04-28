@@ -9,6 +9,7 @@ import {
   AddToOrderMessage,
   DeleteMessage,
   RemoveFromOrderMessage,
+  UpdateOrderItemMessage,
 } from "@/lib/owners-tools/confirmation-messages";
 import { useEditOrderContext } from "@/context/edit-order-context";
 import ActionConfirmationButton from "../ui/buttons/order-edit/action-confirmation-button";
@@ -38,6 +39,11 @@ export default function OrderActionConfirmation(props: {
       orderItem: orderItem,
       orderUid: orderToView.orderUid,
       name: orderToView.name,
+    });
+  } else if (props.title === "Update Order Item") {
+    message.current = UpdateOrderItemMessage({
+      orderItem: orderItem,
+      newQuantity: quantity,
     });
   }
 
