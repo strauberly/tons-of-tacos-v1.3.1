@@ -2,3 +2,41 @@
   font-size: 1rem;
   font-weight: bold;
 }
+
+.quantity {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: 0.5rem;
+}
+
+.decrement {
+  rotate: 90deg;
+}
+
+.increment {
+  rotate: -90deg;
+}
+
+.quantity input,
+.quantity textarea {
+  padding: 0.25vw;
+  background-color: transparent;
+  color: var(--user-selected-color);
+  text-align: center;
+  border: solid;
+  border-color: var(--border-color);
+  border-radius: 15%;
+}
+
+.update {
+  display: flex;
+  justify-self: center;
+  margin-top: 0.75rem;
+  gap: 4rem;
+}
+
+.update button {
+  font-size: 0.9rem;
+  font-weight: bold;
+}
