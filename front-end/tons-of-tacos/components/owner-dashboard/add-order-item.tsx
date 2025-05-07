@@ -1,20 +1,30 @@
 "use client";
 
 import MenuItemSelector from "./menu-item-selector";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ArrowIcon from "../menu/menu-items/quantity-selector/arrow-icon";
 import { useModalContext } from "@/context/modal-context";
 import AddToOrderButton from "../ui/buttons/order-edit/add-to-order-button";
 import classes from "./add-order-item.module.css";
+import { useEditOrderContext } from "@/context/edit-order-context";
 
 export default function AddOrderItem() {
   const { orderToView } = useModalContext();
   const [itemSelector, setItemSelector] = useState(false);
   const [itemName, setItemName] = useState<string>("Item");
   const [quantity, setQuantity] = useState<number>(1);
+  const [size, setSize] = useState<string>("");
+  const [price, setPrice] = useState<number>(0);
   const [readyToAdd, setReadyToAdd] = useState<boolean>(false);
+  const sizeError: string =
+    "Enter 'S' for small, 'M' for medium or 'L' for large.";
+  const [showSizeError, setShowSizeError] = useState<boolean>(false);
+
+  const [sizeValid, setSizeValid] = useState<boolean>(false);
 
   console.log(orderToView.name);
+
+  const sizeRef = useRef<string>(size);
 
   const [item, setItem] = useState<MenuItem>({
     id: "",
@@ -26,19 +36,6 @@ export default function AddOrderItem() {
     unitPrice: 0,
   });
 
-  function checkQuantity(number: number) {
-    console.log(number);
-    if (number.toString() === "NaN") {
-      setQuantity(number);
-    } else if (number < 1) {
-      setQuantity(1);
-    } else if (number > 10) {
-      setQuantity(10);
-    } else {
-      setQuantity(number);
-    }
-  }
-
   const itemNameSetter = (name: string) => {
     setItemName(name);
   };
@@ -46,14 +43,28 @@ export default function AddOrderItem() {
   const itemSetter = (item: MenuItem) => {
     setItem(item);
   };
-  const unitPrice = item.unitPrice;
-  const total: number = quantity * unitPrice;
+
+  function calcPrice() {
+    let adjPrice: number;
+    let sizeSurcharge = 0;
+
+    if (sizeRef.current === "M") {
+      sizeSurcharge = 0.5;
+    } else if (sizeRef.current === "L") {
+      sizeSurcharge = 1.0;
+    }
+
+    // eslint-disable-next-line prefer-const
+    adjPrice = (sizeSurcharge + item?.unitPrice) * quantity;
+    return adjPrice;
+  }
 
   const decrement = () => {
     setQuantity(quantity - 1);
     if (quantity <= 1) {
       setQuantity(1);
     }
+    setPrice(calcPrice());
   };
 
   const increment = () => {
@@ -61,7 +72,43 @@ export default function AddOrderItem() {
     if (quantity >= 10) {
       setQuantity(10);
     }
+    setPrice(calcPrice());
   };
+
+  function checkSize(event: React.ChangeEvent<HTMLInputElement>) {
+    sizeRef.current = event.currentTarget.value.toUpperCase();
+    setSize(event.target.value.toUpperCase());
+    console.log("item size: " + item.itemSize);
+    if (
+      sizeRef.current !== "S" &&
+      sizeRef.current !== "M" &&
+      sizeRef.current !== "L"
+    ) {
+      setShowSizeError(true);
+      setSizeValid(false);
+    } else {
+      setSizeValid(true);
+      setShowSizeError(false);
+      setSize(sizeRef.current);
+    }
+  }
+
+  useEffect(() => {
+    function calcPrice() {
+      let adjPrice: number;
+      let sizeSurcharge = 0;
+
+      if (size === "M") {
+        sizeSurcharge = 0.5;
+      } else if (size === "L") {
+        sizeSurcharge = 1.0;
+      }
+      // eslint-disable-next-line prefer-const
+      adjPrice = (sizeSurcharge + item?.unitPrice) * quantity;
+      return adjPrice;
+    }
+    setPrice(calcPrice());
+  }, [item?.unitPrice, price, quantity, size]);
 
   return (
     <>
@@ -91,7 +138,6 @@ export default function AddOrderItem() {
               max={1}
               disabled={true}
               value={quantity}
-              onChange={(e) => checkQuantity(parseInt(e.target.value))}
             />
             <button
               className={`${classes.increment}`}
@@ -100,10 +146,27 @@ export default function AddOrderItem() {
               <ArrowIcon />
             </button>
           </div>
-          {`${item.itemSize}` === "a" && (
-            <input className={classes.size}></input>
+
+          <div className={classes.size}>
+            {`${item.itemSize}` === "a" && (
+              <input
+                className={`${
+                  sizeValid == false ? classes.invalid : classes.valid
+                }`}
+                name="size"
+                id="size"
+                type="text"
+                maxLength={1}
+                style={{ textTransform: "uppercase" }}
+                onChange={checkSize}
+              />
+            )}
+          </div>
+          {showSizeError === true && (
+            <p className={classes.sizeWarning}>{sizeError}</p>
           )}
-          <p className={classes.total}>{`${total.toFixed(2)}`}</p>
+
+          <p className={classes.total}>${price.toFixed(2)}</p>
         </ul>
         {readyToAdd && (
           <AddToOrderButton
@@ -112,6 +175,7 @@ export default function AddOrderItem() {
             customerName={orderToView.name}
             setItemName={setItemName}
             setReadyToAdd={setReadyToAdd}
+            size={sizeRef.current}
           />
         )}
       </div>
@@ -122,6 +186,8 @@ export default function AddOrderItem() {
           itemName={itemName}
           setItemSelector={setItemSelector}
           setReadyToAdd={setReadyToAdd}
+          setPrice={setPrice}
+          setSize={setSize}
         />
       )}
     </>

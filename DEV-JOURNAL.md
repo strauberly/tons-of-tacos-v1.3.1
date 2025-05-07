@@ -2,6 +2,20 @@
 
 ---
 
+-- 5 May 2025 --
+
+- Changes to item size and quantity now accurately reflected in item price.
+
+---
+
+-- 2 May 2025 --
+
+- Add order item now determines between an item with selectable sizes and those without and if applicable displays a simple size selector with a warning message if the input is invalid.
+- Additions made to edit order context. Some may be redundant and need to be examined for removal.
+- Changes to size should impact the order item total and still need to be implemented.
+
+---
+
 -- 27 Apr 2025 --
 
 - Implemented functionality for updating a an order item quantity.
