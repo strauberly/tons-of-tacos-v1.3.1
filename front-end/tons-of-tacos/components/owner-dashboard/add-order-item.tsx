@@ -6,7 +6,6 @@ import ArrowIcon from "../menu/menu-items/quantity-selector/arrow-icon";
 import { useModalContext } from "@/context/modal-context";
 import AddToOrderButton from "../ui/buttons/order-edit/add-to-order-button";
 import classes from "./add-order-item.module.css";
-import { useEditOrderContext } from "@/context/edit-order-context";
 
 export default function AddOrderItem() {
   const { orderToView } = useModalContext();
@@ -93,6 +92,20 @@ export default function AddOrderItem() {
     }
   }
 
+  function reset() {
+    setQuantity(1);
+    setItem({
+      id: "",
+      itemName: "",
+      category: "",
+      imageUrl: "",
+      description: "",
+      itemSize: "",
+      unitPrice: 0,
+    });
+    setItemSelector(false);
+  }
+
   useEffect(() => {
     function calcPrice() {
       let adjPrice: number;
@@ -175,7 +188,8 @@ export default function AddOrderItem() {
             customerName={orderToView.name}
             setItemName={setItemName}
             setReadyToAdd={setReadyToAdd}
-            size={sizeRef.current}
+            size={size}
+            reset={reset}
           />
         )}
       </div>

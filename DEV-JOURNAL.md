@@ -2,6 +2,13 @@
 
 ---
 
+-- 7 May 2025 --
+
+- Order item adjusted to correctly display the size of an order item when returned from the back end.
+- Add to order component resets to default state after an item is added to an order.
+
+---
+
 -- 5 May 2025 --
 
 - Changes to item size and quantity now accurately reflected in item price.

@@ -23,6 +23,20 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
     }
   }
 
+  function sizeDisplay() {
+    if (
+      orderItem.orderItem.size.toUpperCase() !== "S" &&
+      orderItem.orderItem.size.toUpperCase() !== "M" &&
+      orderItem.orderItem.size.toUpperCase() !== "L"
+    ) {
+      return "";
+    } else {
+      return orderItem.orderItem.size.toUpperCase();
+    }
+  }
+
+  // const size: string = sizeDisplay();
+
   const decrement = () => {
     setNewQuantity(newQuantity - 1);
     if (newQuantity <= 1) {
@@ -68,7 +82,7 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
           </div>
         )}
         {!canEdit && <p>{`${orderItem.orderItem.quantity}`}</p>}
-        <p>{`${orderItem.orderItem.size.toUpperCase()}`}</p>
+        <p>{`${sizeDisplay()}`}</p>
         {canEdit == false ? (
           <p>{`$${orderItem.orderItem.total.toFixed(2)}`}</p>
         ) : (

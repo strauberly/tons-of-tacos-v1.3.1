@@ -35,19 +35,19 @@ export default function ActionConfirmationButton(props: { title: string }) {
   const action = useRef<string>("");
 
   let size: string;
-
-  if (menuItem.itemName !== "a") {
-    size = "na";
-  } else {
-    size = itemSize;
-  }
+  //
+  // if (menuItem.itemName !== "a") {
+  //   size = "na";
+  // } else {
+  //   size = itemSize;
+  // }
 
   const orderEdit: OrderEdit = {
     orderUid: orderToView.orderUid,
     customerName: orderToView.name,
     menuItemId: menuItem.id,
     quantity: quantity,
-    itemSize: size,
+    itemSize: itemSize,
     login: login.token,
     orderItem: orderItem,
   };

@@ -2,15 +2,15 @@ import { useDisplayContext } from "@/context/display-context";
 import { useModalContext } from "@/context/modal-context";
 import { useEditOrderContext } from "@/context/edit-order-context";
 import classes from "../../../owner-dashboard/add-order-item.module.css";
-import { useEffect } from "react";
 
 export default function AddToOrderButton(props: {
   menuItem: MenuItem;
   quantity: number;
   customerName: string;
+  size: string;
   setItemName: (item: string) => void;
   setReadyToAdd: (readyToAdd: boolean) => void;
-  size: string;
+  reset: () => void;
 }) {
   const { setShowConfirmation } = useDisplayContext();
   const { setConfirmationTitle } = useModalContext();
@@ -37,6 +37,7 @@ export default function AddToOrderButton(props: {
         props.setItemName("Item"),
         setShowConfirmation(true),
         setConfirmationTitle("Add To Order"),
+        props.reset(),
       ]}
     >
       Add Item
