@@ -86,6 +86,7 @@ export async function AddToOrder(
   itemSize: string,
   token: string
 ) {
+  console.log(itemSize);
   console.log(orderUid);
   let response;
   let data;

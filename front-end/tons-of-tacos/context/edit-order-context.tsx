@@ -21,8 +21,11 @@ interface ContextProps {
   setCustomerName: Dispatch<SetStateAction<string>>;
   menuItemSize: string;
   setMenuItemSize: Dispatch<SetStateAction<string>>;
+
   orderItem: OrderItem;
   setOrderItem: Dispatch<SetStateAction<OrderItem>>;
+  itemSize: string;
+  setItemSize: Dispatch<SetStateAction<string>>;
 }
 
 const EditOrderContext = createContext<ContextProps>({
@@ -30,6 +33,8 @@ const EditOrderContext = createContext<ContextProps>({
   setMessage: () => {},
   title: "",
   setTitle: () => {},
+  itemSize: "",
+  setItemSize: () => {},
   menuItem: {
     id: "",
     itemName: "",
@@ -74,6 +79,7 @@ export const EditOrderContextProvider = ({
     unitPrice: 0,
   });
   const [customerName, setCustomerName] = useState<string>("");
+  const [itemSize, setItemSize] = useState<string>("");
   const [quantity, setQuantity] = useState<number>(0);
   const [orderItem, setOrderItem] = useState<OrderItem>({
     orderItemId: 0,
@@ -99,6 +105,8 @@ export const EditOrderContextProvider = ({
         setMenuItemSize,
         orderItem,
         setOrderItem,
+        itemSize,
+        setItemSize,
       }}
     >
       {children}

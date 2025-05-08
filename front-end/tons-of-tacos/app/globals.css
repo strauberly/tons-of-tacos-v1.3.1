@@ -118,6 +118,12 @@ input {
 input textarea {
   background-color: none;
   border-color: none;
+  border: none;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
 }
 
 input::-webkit-outer-spin-button,

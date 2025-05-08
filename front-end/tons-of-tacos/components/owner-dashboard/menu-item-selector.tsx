@@ -7,6 +7,8 @@ export default function MenuItemSelector(props: {
   setItem: (item: MenuItem) => void;
   setItemSelector: (itemSelector: boolean) => void;
   setReadyToAdd: (readyToAdd: boolean) => void;
+  setPrice: (price: number) => void;
+  setSize: (size: string) => void;
 
   itemName: string;
 }) {
@@ -102,6 +104,8 @@ export default function MenuItemSelector(props: {
                 props.setItem(findItem(tacoName)),
                 props.setReadyToAdd(true),
                 props.setItemSelector(false),
+                props.setPrice(menuItem.current.unitPrice),
+                props.setSize(menuItem.current.itemSize),
               ]}
             >{`${tacoName}`}</button>
           ))}
@@ -115,6 +119,8 @@ export default function MenuItemSelector(props: {
                 props.setItem(findItem(sideName)),
                 props.setReadyToAdd(true),
                 props.setItemSelector(false),
+                props.setPrice(menuItem.current.unitPrice),
+                props.setSize(menuItem.current.itemSize),
               ]}
             >{`${sideName}`}</button>
           ))}
@@ -128,6 +134,8 @@ export default function MenuItemSelector(props: {
                 props.setItem(findItem(toppingName)),
                 props.setReadyToAdd(true),
                 props.setItemSelector(false),
+                props.setPrice(menuItem.current.unitPrice),
+                props.setSize(menuItem.current.itemSize),
               ]}
             >{`${toppingName}`}</button>
           ))}
@@ -141,6 +149,8 @@ export default function MenuItemSelector(props: {
                 props.setItem(findItem(drinkName)),
                 props.setReadyToAdd(true),
                 props.setItemSelector(false),
+                props.setPrice(menuItem.current.unitPrice),
+                props.setSize(menuItem.current.itemSize),
               ]}
             >{`${drinkName}`}</button>
           ))}
