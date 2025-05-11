@@ -125,6 +125,8 @@ export default function OrderView() {
               <p>{orderToView.orderUid}</p>
               <p>Created:</p>
               <p>{`${time + " " + date}`}</p>
+              <p>Total:</p>
+              <p>${orderToView.orderTotal}</p>
             </div>
             {/* editable grid */}
             <div>

@@ -2,6 +2,13 @@
 
 ---
 
+-- 11 May 2025 --
+
+- Improvements to action confirmations.
+- Order total now displayed in order view and updates when an item added or removed.
+
+---
+
 -- 7 May 2025 --
 
 - Order item adjusted to correctly display the size of an order item when returned from the back end.

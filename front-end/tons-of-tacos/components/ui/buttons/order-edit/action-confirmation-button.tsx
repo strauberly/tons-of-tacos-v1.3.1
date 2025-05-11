@@ -15,7 +15,7 @@ export default function ActionConfirmationButton(props: { title: string }) {
   const { setShowConfirmation, setShowModal } = useDisplayContext();
   const { setOrders } = useOrdersContext();
   const { login } = useOwnerContext();
-  const { menuItem, quantity, menuItemSize, orderItem, itemSize, setItemSize } =
+  const { menuItem, quantity, orderItem, itemSize, setItemSize } =
     useEditOrderContext();
   const { orderToView, setModal, setOrderToView } = useModalContext();
 
@@ -33,14 +33,6 @@ export default function ActionConfirmationButton(props: { title: string }) {
   });
 
   const action = useRef<string>("");
-
-  let size: string;
-  //
-  // if (menuItem.itemName !== "a") {
-  //   size = "na";
-  // } else {
-  //   size = itemSize;
-  // }
 
   const orderEdit: OrderEdit = {
     orderUid: orderToView.orderUid,
