@@ -13,17 +13,30 @@ export function AddToOrderMessage(props: {
   quantity: number;
   orderUid: string;
   name: string;
+  size: string;
 }) {
   const message: string =
-    " Add " +
-    `${props.itemName}` +
-    " x " +
-    `${props.quantity}` +
-    " to order " +
-    `${props.orderUid}` +
-    " for customer " +
-    `${props.name}` +
-    "?";
+    includeSize(props.size) == true
+      ? " Add " +
+        `${props.itemName}` +
+        ` ${props.size}` +
+        " x " +
+        `${props.quantity}` +
+        " to order " +
+        `${props.orderUid}` +
+        " for customer " +
+        `${props.name}` +
+        "?"
+      : " Add " +
+        `${props.itemName}` +
+        " x " +
+        `${props.quantity}` +
+        " to order " +
+        `${props.orderUid}` +
+        " for customer " +
+        `${props.name}` +
+        "?";
+
   return message;
 }
 
@@ -33,16 +46,26 @@ export function RemoveFromOrderMessage(props: {
   name: string;
 }) {
   const message: string =
-    " Remove " +
-    `${props.orderItem.itemName}` +
-    ` ${props.orderItem.size}` +
-    " x " +
-    `${props.orderItem.quantity}` +
-    " from order " +
-    `${props.orderUid}` +
-    " for customer " +
-    `${props.name}` +
-    "?";
+    includeSize(props.orderItem.size) == true
+      ? " Remove " +
+        `${props.orderItem.itemName}` +
+        ` ${props.orderItem.size}` +
+        " x " +
+        `${props.orderItem.quantity}` +
+        " from order " +
+        `${props.orderUid}` +
+        " for customer " +
+        `${props.name}` +
+        "?"
+      : " Remove " +
+        `${props.orderItem.itemName}` +
+        " x " +
+        `${props.orderItem.quantity}` +
+        " from order " +
+        `${props.orderUid}` +
+        " for customer " +
+        `${props.name}` +
+        "?";
   return message;
 }
 
@@ -62,4 +85,13 @@ export function UpdateOrderItemMessage(props: {
     "?";
 
   return message;
+}
+
+function includeSize(size: string) {
+  let displaySize: boolean = true;
+
+  if (size !== "S" && size !== "M" && size !== "L") {
+    displaySize = false;
+  }
+  return displaySize;
 }

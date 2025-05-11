@@ -21,7 +21,7 @@ export default function OrderActionConfirmation(props: {
   const { setShowConfirmation } = useDisplayContext();
   const { orderToView } = useModalContext();
 
-  const { menuItem, quantity, orderItem } = useEditOrderContext();
+  const { menuItem, quantity, orderItem, itemSize } = useEditOrderContext();
 
   const message = useRef<string>("");
 
@@ -31,6 +31,7 @@ export default function OrderActionConfirmation(props: {
       quantity: quantity,
       orderUid: orderToView.orderUid,
       name: props.order.name,
+      size: itemSize,
     });
   } else if (props.title === "Delete") {
     message.current = DeleteMessage(orderToView.orderUid, orderToView.name);
