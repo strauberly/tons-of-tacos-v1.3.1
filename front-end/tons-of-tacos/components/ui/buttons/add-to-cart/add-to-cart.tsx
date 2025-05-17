@@ -3,7 +3,7 @@ import { useModalContext } from "@/context/modal-context";
 import classes from "./add-to-cart.module.css";
 import { useCartContext } from "@/context/cart-context";
 import { AddItemToCart, GetCart } from "@/lib/cart";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDisplayContext } from "@/context/display-context";
 import { useSelectedSizeContext } from "@/context/size-context";
 
@@ -19,12 +19,16 @@ export default function AddToCart(props: {
 }) {
   const { setModal } = useModalContext();
   const { setShowModal } = useDisplayContext();
-  const { selectedSize } = useSelectedSizeContext();
+  const { selectedSize, setSelectedSize } = useSelectedSizeContext();
   const { cartQuantity, setCartQuantity, setItemsInCart, cart, setCart } =
     useCartContext();
 
   const [largeOrder, setLargeOrder] = useState<boolean>();
   const itemInCart = useRef(false);
+
+  function print() {
+    console.log("size: " + props.size.toString());
+  }
 
   function checkItem() {
     try {
@@ -65,7 +69,7 @@ export default function AddToCart(props: {
         props.menuId,
         props.itemName,
         props.quantity,
-        props.size,
+        selectedSize,
         props.price
       );
       setCart(GetCart());
@@ -73,6 +77,13 @@ export default function AddToCart(props: {
     }
     itemInCart.current = false;
   };
+
+  // useEffect(() => {
+  //   if (props.size === "") {
+  //     setSelectedSize("na");
+  //   }
+  //   // print();
+  // }, [print, props.size, setSelectedSize]);
 
   return (
     <>

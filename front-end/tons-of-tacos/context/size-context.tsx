@@ -23,7 +23,7 @@ export const SizeSelectedContextProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const [selectedSize, setSelectedSize] = useState<string>("small");
+  const [selectedSize, setSelectedSize] = useState<string>("");
   return (
     <SizeSelectedContext.Provider value={{ selectedSize, setSelectedSize }}>
       {children}

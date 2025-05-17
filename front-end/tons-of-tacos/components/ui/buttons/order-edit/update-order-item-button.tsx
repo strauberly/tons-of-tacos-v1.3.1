@@ -5,15 +5,17 @@ import { useModalContext } from "@/context/modal-context";
 export default function UpdateOrderItemButton(props: {
   orderItem: OrderItem;
   newQuantity: number;
+  newSize: string;
   setCanEdit: (canEdit: boolean) => void;
 }) {
-  const { setQuantity, setOrderItem } = useEditOrderContext();
+  const { setQuantity, setOrderItem, setItemSize } = useEditOrderContext();
   const { setShowConfirmation } = useDisplayContext();
   const { setConfirmationTitle } = useModalContext();
   return (
     <button
       onClick={() => [
         setQuantity(props.newQuantity),
+        setItemSize(props.newSize),
         setOrderItem(props.orderItem),
         setShowConfirmation(true),
         setConfirmationTitle("Update Order Item"),

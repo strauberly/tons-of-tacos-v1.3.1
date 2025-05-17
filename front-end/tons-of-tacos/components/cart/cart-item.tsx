@@ -18,6 +18,7 @@ export default function CartItem(props: {
   itemPrice: string;
 }) {
   const [quantity, setQuantity] = useState(props.itemQuantity);
+  const [hasSize, setHasSize] = useState<boolean>(true);
   const { setCart, cartQuantity, setCartQuantity, setItemRemoved } =
     useCartContext();
   const { setModal } = useModalContext();
