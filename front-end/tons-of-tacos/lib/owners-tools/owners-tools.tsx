@@ -1,7 +1,5 @@
 "use server";
 
-import OrderItem from "@/components/owner-dashboard/order-item";
-
 export async function GetAllOrders(token: string) {
   // console.log(token);
   let response;
@@ -112,16 +110,18 @@ export async function AddToOrder(
   }
 }
 
-export async function UpdateOrderItemQuantity(
+export async function UpdateOrderItem(
+  // add size and change from update order item quantity update order item size
   orderUid: string,
   orderItemId: number,
   newQuantity: number,
+  newSize: string,
   token: string
 ) {
   let response;
   let data;
 
-  const address: string = `http://localhost:8080/api/owners-tools/orders/update-order-item/${orderUid}/${orderItemId}/${newQuantity}`;
+  const address: string = `http://localhost:8080/api/owners-tools/orders/update-order-item/${orderUid}/${orderItemId}/${newQuantity}/${newSize}`;
 
   try {
     response = await fetch(address.toString(), {
@@ -223,10 +223,11 @@ export async function ExecuteConfirm(title: string, orderEdit: OrderEdit) {
   } else if (title === "Remove From Order") {
     return RemoveFromOrder(orderEdit.orderItem.orderItemId, orderEdit.login);
   } else if (title === "Update Order Item") {
-    return UpdateOrderItemQuantity(
+    return UpdateOrderItem(
       orderEdit.orderUid,
       orderEdit.orderItem.orderItemId,
       orderEdit.quantity,
+      orderEdit.itemSize,
       orderEdit.login
     );
   }

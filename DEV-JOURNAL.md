@@ -2,6 +2,36 @@
 
 ---
 
+-- 17 May 2025 --
+
+- Bug hunting revealed issues with edit order item displaying a size selector at incorrect times.
+
+  - Resolved by changing the conditions of when to display
+
+- Order item total was not accurately calculating when updating order item.
+
+  - Issue stemmed from size surcharge not being calculated in backend before updating order item. This has been rectified.
+
+- Edit order item correctly allows for changing item quantity and or size. Totals for order item and order are correctly updated.
+
+---
+
+-- 13 May 2025 --
+
+- Updated menu item, add to cart, and submitOrder
+  - We were getting a default size of small for order items that did not have a size which was throwing off order creation. Now the default size is set to a blank string. Before the order is submitted, the size of each item is evaluated and the size is set to "na" if no size available thus facilitating the requirements of the backend for creating and storing an order.
+
+---
+
+-- 12 May 2025 --
+
+- Reusable size selector created for owners tools
+  - still needs styling adjustments
+- calcPrice function created in owners tools in owners-tools-client to be used in multiple components
+  - still being developed and evaluating for usage
+
+---
+
 -- 11 May 2025 --
 
 - Improvements to action confirmations.

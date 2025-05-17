@@ -27,10 +27,14 @@ export default function MenuItem(props: {
   const [expand, setExpand] = useState(false);
   const [price, setPrice] = useState("");
 
+  const [sizeAvailable, setSizeAvailable] = useState(false);
+  const { selectedSize, setSelectedSize } = useSelectedSizeContext();
+
   const expander = () => {
     setExpand(false);
   };
 
+  const itemSizes = ["small", "medium", "large"];
   const defaultQuantity: number = 1;
   const [quantity, setQuantity] = useState(defaultQuantity);
 
@@ -56,10 +60,8 @@ export default function MenuItem(props: {
     }
   };
 
-  const itemSizes = ["small", "medium", "large"];
-  const [sizeAvailable, setSizeAvailable] = useState(false);
-
-  const { selectedSize } = useSelectedSizeContext();
+  console.log("item size:" + props.itemSize);
+  console.log("selected size:" + selectedSize);
 
   useEffect(() => {
     function calcPrice() {
@@ -88,6 +90,7 @@ export default function MenuItem(props: {
     props.unitPrice,
     quantity,
     selectedSize,
+    setSelectedSize,
   ]);
 
   return (

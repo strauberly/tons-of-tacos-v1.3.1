@@ -101,6 +101,14 @@ export async function SendOrder(
 
   const cartItems = GetCart();
 
+  cartItems.forEach((cartItem) => {
+    if (cartItem.size === "") {
+      cartItem.size = "na";
+    }
+  });
+
+  console.log(cartItems);
+
   const orderItems: item[] = cartItems.map((i) => {
     return {
       menuId: i.menuId,
