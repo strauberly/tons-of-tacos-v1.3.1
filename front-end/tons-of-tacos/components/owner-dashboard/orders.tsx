@@ -23,6 +23,7 @@ export default function Orders() {
         {orders.map(
           (order: {
             orderUid: string;
+            customerUid: string;
             name: string;
             email: string;
             phone: string;

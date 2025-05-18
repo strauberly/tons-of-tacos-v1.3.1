@@ -14,6 +14,8 @@
 
 - Cancel button implemented for customer info edit fields.
 
+- Order view broken into smaller more manageable components. Styling is staying in same file currently instead of creating separate files and repeating the same code in all of them.
+
 ---
 
 -- 17 May 2025 --

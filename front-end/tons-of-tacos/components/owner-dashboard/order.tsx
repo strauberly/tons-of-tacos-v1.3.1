@@ -1,5 +1,5 @@
-import ViewOrderButton from "../ui/buttons/view-order/view-order-button";
 import classes from "../owner-dashboard/owner-dashboard.module.css";
+import ViewOrderButton from "../ui/buttons/view-order/view-order-button";
 import DeleteOrderButton from "../ui/buttons/order-edit/delete-order-button";
 import MarkReadyButton from "../ui/buttons/order-edit/mark-ready-button";
 import { useOwnerContext } from "@/context/owner-context";
@@ -17,8 +17,9 @@ export default function Order(order: { order: Order }) {
   return (
     <li>
       <p>{`${order.order.orderUid}`}</p>
-      <p>{`${order.order.name}`}</p>
-      <p>{`${order.order.phone}`}</p>
+  
+       <p>{`${order.order.name}`}</p> 
+       <p>{`${order.order.phone}`}</p> 
       <p>{`${order.order.email}`}</p>
       <p>{`$${total.toFixed(2)}`}</p>
       <p>{`${time}`}</p>

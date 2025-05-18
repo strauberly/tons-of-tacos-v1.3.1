@@ -1,8 +1,8 @@
+import classes from "./owner-dashboard.module.css";
 import { useDisplayContext } from "@/context/display-context";
 import Orders from "./orders";
-import classes from "./owner-dashboard.module.css";
 import { useModalContext } from "@/context/modal-context";
-import OrderView from "../modal/order-view";
+import OrderView from "../modal/order-view/order-view";
 import OrderActionConfirmation from "../modal/order-action-confirmation";
 
 export default function OwnerDashboard() {
