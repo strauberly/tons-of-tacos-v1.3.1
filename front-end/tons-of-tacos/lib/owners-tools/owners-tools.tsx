@@ -110,7 +110,7 @@ export async function AddToOrder(
   }
 }
 
-export async function UpdateOrderItem(
+export async function UpdateOrderItemQuantity(
   // add size and change from update order item quantity update order item size
   orderUid: string,
   orderItemId: number,
@@ -195,15 +195,41 @@ export async function GetOrder(orderUid: string, token: string) {
     response = await fetch(
       `http://localhost:8080/api/owners-tools/orders/get-order-uid/orderUid?orderUid=${orderUid}`,
       {
-        method: "GET",
+        method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
         },
       }
     );
-    const data = response.json();
+    const data = await response.json();
     // rewrite for if not 200
     return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function UpdateCustomer(customer: Customer, token: string) {
+  let response;
+
+  const uid: string = customer.customerUid;
+  const name: string = customer.name;
+  const phone: string = customer.phone;
+  const email: string = customer.email;
+
+  try {
+    response = await fetch(
+      `http://localhost:8080/api/owners-tools/customers/update-customer/${uid}/${name}/${phone}/${email}`,
+      {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    const data = await response.json();
+    console.log("data: " + data.message);
+    return data.message;
   } catch (error) {
     console.log(error);
   }
@@ -223,12 +249,14 @@ export async function ExecuteConfirm(title: string, orderEdit: OrderEdit) {
   } else if (title === "Remove From Order") {
     return RemoveFromOrder(orderEdit.orderItem.orderItemId, orderEdit.login);
   } else if (title === "Update Order Item") {
-    return UpdateOrderItem(
+    return UpdateOrderItemQuantity(
       orderEdit.orderUid,
       orderEdit.orderItem.orderItemId,
       orderEdit.quantity,
       orderEdit.itemSize,
       orderEdit.login
     );
+  } else if (title === "Update Customer") {
+    return UpdateCustomer(orderEdit.customer, orderEdit.login);
   }
 }

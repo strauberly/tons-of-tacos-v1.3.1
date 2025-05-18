@@ -7,6 +7,7 @@ import { useRef } from "react";
 
 import {
   AddToOrderMessage,
+  CustomerUpdateMessage,
   DeleteMessage,
   RemoveFromOrderMessage,
   UpdateOrderItemMessage,
@@ -21,7 +22,8 @@ export default function OrderActionConfirmation(props: {
   const { setShowConfirmation } = useDisplayContext();
   const { orderToView } = useModalContext();
 
-  const { menuItem, quantity, orderItem, itemSize } = useEditOrderContext();
+  const { menuItem, quantity, orderItem, itemSize, customer } =
+    useEditOrderContext();
 
   const message = useRef<string>("");
 
@@ -46,6 +48,8 @@ export default function OrderActionConfirmation(props: {
       orderItem: orderItem,
       newQuantity: quantity,
     });
+  } else if (props.title === "Update Customer") {
+    message.current = CustomerUpdateMessage(customer);
   }
 
   return (

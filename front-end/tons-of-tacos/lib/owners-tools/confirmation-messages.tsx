@@ -69,6 +69,17 @@ export function RemoveFromOrderMessage(props: {
   return message;
 }
 
+export function CustomerUpdateMessage( customer: Customer ) {
+  const message: string =
+    "Update customer info to: " +
+    customer.name +
+    " " +
+    customer.phone +
+    " " +
+    customer.email;
+  return message;
+}
+
 export function UpdateOrderItemMessage(props: {
   orderItem: OrderItem;
   newQuantity: number;

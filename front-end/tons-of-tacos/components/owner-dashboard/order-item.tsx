@@ -11,9 +11,10 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
   const [newQuantity, setNewQuantity] = useState<number>(
     orderItem.orderItem.quantity
   );
-  // const [newSize, setNewSize] = useState<string>("");
+
+  console.log(orderItem.orderItem.size);
   const [newSize, setNewSize] = useState<string>(orderItem.orderItem.size);
-  // console.log(newSize);
+
   const [showSizeError, setShowSizeError] = useState<boolean>(false);
   const sizeError: string =
     "Enter 'S' for small, 'M' for medium or 'L' for large.";
@@ -54,21 +55,11 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
     return surcharge;
   }
 
-  // const size: string = sizeDisplay();
-
   const decrement = () => {
     setNewQuantity(newQuantity - 1);
     if (newQuantity <= 1) {
       setNewQuantity(1);
     }
-    // setNewPrice(
-    //   calcPrice(
-    //     orderItem.orderItem.total / orderItem.orderItem.quantity -
-    //       calcSurcharge(orderItem.orderItem.size),
-    //     newSize,
-    //     newQuantity
-    //   )
-    // );
   };
 
   const increment = () => {
@@ -127,7 +118,7 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
             </div>
 
             <div>
-              {orderItem.orderItem.size !== " " && (
+              {newSize.toUpperCase() !== "NA" && (
                 <SizeSelector
                   itemSize={orderItem.orderItem.size}
                   setShowSizeError={setShowSizeError}
@@ -139,25 +130,7 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
         )}
         {!canEdit && <p>{`${orderItem.orderItem.quantity}`}</p>}
         {!canEdit && <p>{`${sizeDisplay()}`}</p>}
-        {/* <p> {`$${orderItem.orderItem.total.toFixed(2)}`}</p> */}
         <p> {`$${newPrice.toFixed(2)}`}</p>
-        {/* <p>{`$${newPrice.toFixed(2)}`}</p> */}
-        {/* <p>{`$${calcPrice(
-          orderItem.orderItem.total / orderItem.orderItem.quantity -
-            calcSurcharge(orderItem.orderItem.size),
-          newSize,
-          newQuantity
-        )}`}</p> */}
-        {/* {canEdit == false ? (
-          <p>{`$${orderItem.orderItem.total.toFixed(2)}`}</p>
-        ) : (
-          <p>{`$${adjTotal.toFixed(2)}`}</p>
-          // <p>{`$${(
-          //   (Number(orderItem.orderItem.total.toFixed(2)) /
-          //     orderItem.orderItem.quantity) *
-          //   Number(newQuantity)
-          // ).toFixed(2)}`}</p>
-        )} */}
         {!canEdit && (
           <button
             className={classes.button}

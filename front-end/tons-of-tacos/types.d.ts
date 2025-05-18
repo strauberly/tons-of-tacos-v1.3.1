@@ -52,6 +52,7 @@ type OwnerLogin = {
 
 type Order = {
   orderUid: string;
+  customerUid: string;
   name: string;
   email: string;
   phone: string;
@@ -69,12 +70,28 @@ type AllMenuItems = {
   drinks: MenuItem[];
 };
 
+// type OrderEdit = {
+//   orderUid: string;
+//   customerName: string;
+//   menuItemId: string;
+//   quantity: number;
+//   itemSize: string;
+//   login: string;
+//   orderItem: OrderItem;
+// };
 type OrderEdit = {
   orderUid: string;
-  customerName: string;
+  customer: Customer;
   menuItemId: string;
   quantity: number;
   itemSize: string;
   login: string;
   orderItem: OrderItem;
+};
+
+type Customer = {
+  customerUid: string;
+  name: string;
+  phone: string;
+  email: string;
 };

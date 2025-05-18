@@ -2,6 +2,20 @@
 
 ---
 
+-- 18 May 2025 --
+
+- Implemented buttons for updating customer information in the order view. Flow is as follows:
+  - Owner clicks button for editing an input field.
+  - Once the input is deemed valid a button for done appears.
+  - Clicking the done button triggers buttons to either update the customer or return the previous data.
+- Updated edit order context to include a customer.
+
+- Update customer contact info functionality in place.
+
+- Cancel button implemented for customer info edit fields.
+
+---
+
 -- 17 May 2025 --
 
 - Bug hunting revealed issues with edit order item displaying a size selector at incorrect times.
@@ -13,6 +27,8 @@
   - Issue stemmed from size surcharge not being calculated in backend before updating order item. This has been rectified.
 
 - Edit order item correctly allows for changing item quantity and or size. Totals for order item and order are correctly updated.
+
+- File clean up.
 
 ---
 

@@ -15,28 +15,17 @@ export default function ActionConfirmationButton(props: { title: string }) {
   const { setShowConfirmation, setShowModal } = useDisplayContext();
   const { setOrders } = useOrdersContext();
   const { login } = useOwnerContext();
-  const { menuItem, quantity, orderItem, itemSize, setItemSize } =
+  const { menuItem, quantity, orderItem, itemSize, setItemSize, customer } =
     useEditOrderContext();
   const { orderToView, setModal, setOrderToView } = useModalContext();
 
   const orders = useRef<Order[]>([]);
-  const order = useRef<Order>({
-    orderUid: "",
-    name: "",
-    email: "",
-    phone: "",
-    orderTotal: 0,
-    orderItems: [],
-    created: "",
-    ready: "",
-    closed: "",
-  });
 
   const action = useRef<string>("");
 
   const orderEdit: OrderEdit = {
     orderUid: orderToView.orderUid,
-    customerName: orderToView.name,
+    customer: customer,
     menuItemId: menuItem.id,
     quantity: quantity,
     itemSize: itemSize,
@@ -54,8 +43,8 @@ export default function ActionConfirmationButton(props: { title: string }) {
         setItemSize("na"),
         (orders.current = await GetAllOrders(login.token)),
         setOrders(orders.current),
-        (order.current = await GetOrder(orderToView.orderUid, login.token)),
-        setOrderToView(order.current),
+        // (order.current = await GetOrder(orderToView.orderUid, login.token)),
+        // setOrderToView(order.current),
       ]}
     >
       yes

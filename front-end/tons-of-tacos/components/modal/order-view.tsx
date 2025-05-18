@@ -7,10 +7,14 @@ import { useDisplayContext } from "@/context/display-context";
 import React, { useRef, useState } from "react";
 import { checkEmail, checkName, checkPhone } from "@/lib/customer-form";
 import AddOrderItem from "../owner-dashboard/add-order-item";
+import { useEditOrderContext } from "@/context/edit-order-context";
 
 export default function OrderView() {
   const { orderToView } = useModalContext();
   const { setViewOrder } = useDisplayContext();
+  const { setShowConfirmation } = useDisplayContext();
+  const { setConfirmationTitle } = useModalContext();
+  const { setCustomer } = useEditOrderContext();
 
   const time: string = new Date(orderToView.created).toLocaleTimeString([], {
     timeStyle: "short",
@@ -37,6 +41,7 @@ export default function OrderView() {
   const [currentEmail, setCurrentEmail] = useState<string>(orderToView.email);
 
   const [editName, setEditName] = useState<boolean>(false);
+  const [update, setUpdate] = useState<boolean>(false);
   const [editPhone, setEditPhone] = useState<boolean>(false);
   const [editEmail, setEditEmail] = useState<boolean>(false);
 
@@ -113,6 +118,10 @@ export default function OrderView() {
     validateEmail(e);
   }
 
+  const customerNameRef = useRef<string>(orderToView.name);
+  const customerPhoneRef = useRef<string>(orderToView.phone);
+  const customerEmailRef = useRef<string>(orderToView.email);
+
   return (
     // main to demo card
     <div className={classes.orderView}>
@@ -123,6 +132,8 @@ export default function OrderView() {
             <div className={classes.uneditableDetails}>
               <p>Order Id:</p>
               <p>{orderToView.orderUid}</p>
+              <p>Customer Id:</p>
+              <p>{orderToView.customerUid}</p>
               <p>Created:</p>
               <p>{`${time + " " + date}`}</p>
               <p>Total:</p>
@@ -131,8 +142,22 @@ export default function OrderView() {
             {/* editable grid */}
             <div>
               <div className={classes.editableDetails}>
-                <p>Name:</p>
-                <p>{`${currentFirstName}` + " " + `${currentLastName}`}</p>
+                <p className={classes.editableDetailsTitle}>Name:</p>
+                <p>
+                  {`${
+                    currentFirstName.charAt(0).toUpperCase() +
+                    currentFirstName
+                      .substring(1, currentEmail.length)
+                      .toLowerCase()
+                  }` +
+                    " " +
+                    `${
+                      currentLastName.charAt(0).toUpperCase() +
+                      currentLastName
+                        .substring(1, currentEmail.length)
+                        .toLowerCase()
+                    }`}
+                </p>
                 {editName && (
                   <div>
                     <input
@@ -146,7 +171,7 @@ export default function OrderView() {
                       required
                       onChange={updateFirstName}
                     />
-                    <div className={classes.errorContainer}></div>
+
                     {!firstNameValid && (
                       <p className={classes.error}>{errors.firstNameError}</p>
                     )}
@@ -166,12 +191,47 @@ export default function OrderView() {
                     )}
                   </div>
                 )}
-                <button onClick={() => setEditName(!editName)}>
-                  Edit Name
-                </button>
+                {editName == false && (
+                  <button onClick={() => setEditName(!editName)}>
+                    Edit Name
+                  </button>
+                )}
+                {editName == true &&
+                  firstNameValid == false &&
+                  lastNameValid == false && (
+                    <button onClick={() => setEditName(!editName)}>
+                      Cancel
+                    </button>
+                  )}
+                {firstNameValid === true && lastNameValid === true && (
+                  <button
+                    onClick={() => [
+                      setEditName(!editName),
+                      setFirstNameValid(false),
+                      setLastNameValid(false),
+                      setUpdate(!update),
+                      (customerNameRef.current =
+                        `${
+                          currentFirstName.charAt(0).toUpperCase() +
+                          currentFirstName
+                            .substring(1, currentEmail.length)
+                            .toLowerCase()
+                        }` +
+                        " " +
+                        `${
+                          currentLastName.charAt(0).toUpperCase() +
+                          currentLastName
+                            .substring(1, currentEmail.length)
+                            .toLowerCase()
+                        }`),
+                    ]}
+                  >
+                    Done
+                  </button>
+                )}
               </div>
               <div className={classes.editableDetails}>
-                <p>Phone:</p>
+                <p className={classes.editableDetailsTitle}>Phone:</p>
                 <p>{currentPhone}</p>
                 {editPhone && (
                   <div>
@@ -192,13 +252,33 @@ export default function OrderView() {
                     )}
                   </div>
                 )}
-                <button onClick={() => setEditPhone(!editPhone)}>
-                  Edit Phone
-                </button>
+                {editPhone == false && (
+                  <button onClick={() => setEditPhone(!editPhone)}>
+                    Edit Phone
+                  </button>
+                )}
+                {editPhone == true && phoneValid == false && (
+                  <button onClick={() => setEditPhone(!editPhone)}>
+                    Cancel
+                  </button>
+                )}
+                {phoneValid && (
+                  <button
+                    onClick={() => [
+                      setEditPhone(!editPhone),
+                      setPhoneValid(!phoneValid),
+                      setUpdate(!update),
+                      (customerPhoneRef.current = currentPhone),
+                    ]}
+                  >
+                    Done
+                  </button>
+                )}
               </div>
               <div className={classes.editableDetails}>
-                <p>Email:</p>
+                <p className={classes.editableDetailsTitle}>Email:</p>
                 <p>{currentEmail}</p>
+
                 {editEmail && (
                   <div>
                     <input
@@ -210,18 +290,78 @@ export default function OrderView() {
                       id="email"
                       name="email"
                       required
-                      maxLength={12}
+                      maxLength={32}
                       onChange={updateEmail}
                     ></input>
-                    {!phoneValid && (
+                    {!emailValid && (
                       <p className={classes.error}>{errors.emailError}</p>
                     )}
                   </div>
                 )}
-                <button onClick={() => setEditEmail(!editEmail)}>
-                  Edit Email
-                </button>
+                {editEmail == false && (
+                  <button onClick={() => setEditEmail(!editEmail)}>
+                    Edit Email
+                  </button>
+                )}
+                {editEmail == true && emailValid == false && (
+                  <button onClick={() => setEditEmail(!editEmail)}>
+                    Cancel
+                  </button>
+                )}
+                {emailValid && (
+                  <button
+                    onClick={() => [
+                      setEditEmail(!editEmail),
+                      setEmailValid(!emailValid),
+                      setUpdate(!update),
+                      (customerEmailRef.current = currentEmail),
+                    ]}
+                  >
+                    Done
+                  </button>
+                )}
               </div>
+            </div>
+
+            <div className={classes.contactUpdate}>
+              <button
+                onClick={() => [
+                  setConfirmationTitle("Update Customer"),
+                  setShowConfirmation(true),
+                  setCustomer({
+                    customerUid: orderToView.customerUid,
+                    name:
+                      `${
+                        currentFirstName.charAt(0).toUpperCase() +
+                        currentFirstName
+                          .substring(1, currentEmail.length)
+                          .toLowerCase()
+                      }` +
+                      " " +
+                      `${
+                        currentLastName.charAt(0).toUpperCase() +
+                        currentLastName
+                          .substring(1, currentEmail.length)
+                          .toLowerCase()
+                      }`,
+                    phone: currentPhone,
+                    email: currentEmail,
+                  }),
+                ]}
+              >
+                Update
+              </button>
+              <button
+                onClick={() => [
+                  setCurrentFirstName(firstName),
+                  setCurrentLastName(lastName),
+                  setCurrentEmail(orderToView.email),
+                  setCurrentPhone(orderToView.phone),
+                  setUpdate(!update),
+                ]}
+              >
+                Cancel
+              </button>
             </div>
           </div>
           <div>
