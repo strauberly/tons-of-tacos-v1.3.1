@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useState, useActionState, useEffect } from "react";
-import SubmitButton from "../buttons/checkout/checkout-button";
+import SubmitButton from "../buttons/submit-order/submitOrder-button";
 import classes from "./customer-info-form.module.css";
 import { checkEmail, checkName, checkPhone } from "@/lib/customer-form";
 import { SendOrder } from "@/lib/cart";
@@ -121,6 +121,7 @@ export default function CustomerInfoForm() {
             name="phone"
             placeholder="Enter Phone Number (ie 555.555.5555)"
             required
+            maxLength={12}
             onChange={validatePhoneNumber}
           />
           {!phoneValid && (
@@ -140,6 +141,7 @@ export default function CustomerInfoForm() {
             name="email"
             placeholder="Enter E-Mail Address"
             required
+            maxLength={30}
             onChange={validateEmail}
           />
           {!emailValid && (

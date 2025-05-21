@@ -72,6 +72,11 @@ h2 {
   font-size: clamp(1rem, 1.5vw, 1.5vw);
 }
 
+h3 {
+  color: var(--attention-color);
+  font-size: 1rem;
+}
+
 button {
   color: var(--interactive-color);
   background-color: transparent;
@@ -94,7 +99,7 @@ button:hover {
 }
 
 ::-webkit-scrollbar {
-  width: 1.5rem;
+  width: 1rem;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -113,6 +118,12 @@ input {
 input textarea {
   background-color: none;
   border-color: none;
+  border: none;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
 }
 
 input::-webkit-outer-spin-button,

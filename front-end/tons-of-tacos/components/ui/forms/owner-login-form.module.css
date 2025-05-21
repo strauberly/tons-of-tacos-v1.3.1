@@ -3,7 +3,7 @@
   position: fixed;
   display: flex;
   gap: 2vw;
-  left: 52vw;
+  left: 40vw;
   align-items: baseline;
 }
 
@@ -28,4 +28,30 @@
 .ownerLogin input:focus,
 .ownerLogin textarea:focus {
   outline: none;
+}
+
+@media (max-width: 1400px) {
+  .ownerLogin {
+    position: absolute;
+    flex-direction: column;
+    left: 30%;
+    top: 160%;
+    align-items: center;
+  }
+
+  .ownerLogin input,
+  .ownerLogin textarea {
+    font-size: 3vw;
+  }
+}
+
+@media (max-width: 800px) {
+  .ownerLogin {
+    left: 15%;
+  }
+
+  .ownerLogin input,
+  .ownerLogin textarea {
+    font-size: 5vw;
+  }
 }

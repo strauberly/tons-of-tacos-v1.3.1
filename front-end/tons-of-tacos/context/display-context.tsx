@@ -20,6 +20,12 @@ interface ContextProps {
   setShowModal: Dispatch<SetStateAction<boolean>>;
   showOrderConfirmation: boolean;
   setShowOrderConfirmation: Dispatch<SetStateAction<boolean>>;
+  showLogin: boolean;
+  setShowLogin: Dispatch<SetStateAction<boolean>>;
+  viewOrder: boolean;
+  setViewOrder: Dispatch<SetStateAction<boolean>>;
+  showConfirmation: boolean;
+  setShowConfirmation: Dispatch<SetStateAction<boolean>>;
 }
 
 const DisplayContext = createContext<ContextProps>({
@@ -33,6 +39,12 @@ const DisplayContext = createContext<ContextProps>({
   setShowModal: () => {},
   showOrderConfirmation: false,
   setShowOrderConfirmation: () => {},
+  showLogin: false,
+  setShowLogin: () => {},
+  viewOrder: false,
+  setViewOrder: () => {},
+  showConfirmation: false,
+  setShowConfirmation: () => {},
 });
 
 export const DisplayContextProvider = ({
@@ -45,6 +57,9 @@ export const DisplayContextProvider = ({
   const [showCustomerInfoForm, setShowCustomerInfoForm] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [showOrderConfirmation, setShowOrderConfirmation] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+  const [viewOrder, setViewOrder] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   return (
     <DisplayContext.Provider
@@ -59,6 +74,12 @@ export const DisplayContextProvider = ({
         setShowModal,
         showOrderConfirmation,
         setShowOrderConfirmation,
+        showLogin,
+        setShowLogin,
+        viewOrder,
+        setViewOrder,
+        showConfirmation,
+        setShowConfirmation,
       }}
     >
       {children}

@@ -1,10 +1,24 @@
-import { useActionState } from "react";
+"use client";
+
+import { useActionState, useEffect } from "react";
 import classes from "./owner-login-form.module.css";
-import { OwnerLogin } from "@/lib/owner-login";
+import { OwnerLogin } from "@/lib/ownerLogin/owner-login-server";
+import LoginButton from "../buttons/login/login-button";
+import { IsAuthenticated } from "@/lib/ownerLogin/owners-login-client";
+import { useDisplayContext } from "@/context/display-context";
 
 export default function OwnerLoginForm() {
-  const initialState = { token: "" };
+  const { setShowLogin } = useDisplayContext();
+
+  const initialState = {
+    status: 0,
+    response: {},
+  };
+
   const [state, formAction] = useActionState(OwnerLogin, initialState);
+
+  // useEffect(() => {
+  // }, [setShowLogin]);
 
   return (
     <form className={classes.ownerLogin} action={formAction}>
@@ -13,7 +27,7 @@ export default function OwnerLoginForm() {
         id="owner_id"
         name="owner_id"
         placeholder="Enter ID"
-        maxLength={6}
+        maxLength={7}
         required
       />
 
@@ -25,6 +39,7 @@ export default function OwnerLoginForm() {
         maxLength={8}
         required
       />
+      <LoginButton status={state.status} response={state.response} />
     </form>
   );
 }

@@ -11,20 +11,54 @@ import {
 interface ContextProps {
   modal: string;
   setModal: Dispatch<SetStateAction<string>>;
+  orderToView: Order;
+  setOrderToView: Dispatch<SetStateAction<Order>>;
+  confirmationTitle: string;
+  setConfirmationTitle: Dispatch<SetStateAction<string>>;
 }
 
 const ModalContext = createContext<ContextProps>({
   modal: "",
   setModal: () => {},
+  orderToView: {
+    orderUid: "",
+    name: "",
+    email: "",
+    phone: "",
+    orderTotal: 0,
+    orderItems: [],
+    created: "",
+    ready: "",
+    closed: "",
+  },
+  setOrderToView: () => {},
+  confirmationTitle: "",
+  setConfirmationTitle: () => {},
 });
 
 export const ModalContextProvider = ({ children }: { children: ReactNode }) => {
-  const [modal, setModal] = useState<string>("");
+  const [modal, setModal] = useState<string | undefined>("");
+  const [orderToView, setOrderToView] = useState<Order>({
+    orderUid: "",
+    name: "",
+    email: "",
+    phone: "",
+    orderTotal: 0,
+    orderItems: [],
+    created: "",
+    ready: "",
+    closed: "",
+  });
+  const [confirmationTitle, setConfirmationTitle] = useState<string>("");
   return (
     <ModalContext.Provider
       value={{
         modal,
         setModal,
+        orderToView,
+        setOrderToView,
+        confirmationTitle,
+        setConfirmationTitle,
       }}
     >
       {children}

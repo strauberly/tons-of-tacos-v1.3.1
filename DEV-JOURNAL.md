@@ -2,6 +2,372 @@
 
 ---
 
+-- 18 May 2025 --
+
+- Implemented buttons for updating customer information in the order view. Flow is as follows:
+  - Owner clicks button for editing an input field.
+  - Once the input is deemed valid a button for done appears.
+  - Clicking the done button triggers buttons to either update the customer or return the previous data.
+- Updated edit order context to include a customer.
+
+- Update customer contact info functionality in place.
+
+- Cancel button implemented for customer info edit fields.
+
+- Order view broken into smaller more manageable components. Styling is staying in same file currently instead of creating separate files and repeating the same code in all of them.
+
+---
+
+-- 17 May 2025 --
+
+- Bug hunting revealed issues with edit order item displaying a size selector at incorrect times.
+
+  - Resolved by changing the conditions of when to display
+
+- Order item total was not accurately calculating when updating order item.
+
+  - Issue stemmed from size surcharge not being calculated in backend before updating order item. This has been rectified.
+
+- Edit order item correctly allows for changing item quantity and or size. Totals for order item and order are correctly updated.
+
+- File clean up.
+
+---
+
+-- 13 May 2025 --
+
+- Updated menu item, add to cart, and submitOrder
+  - We were getting a default size of small for order items that did not have a size which was throwing off order creation. Now the default size is set to a blank string. Before the order is submitted, the size of each item is evaluated and the size is set to "na" if no size available thus facilitating the requirements of the backend for creating and storing an order.
+
+---
+
+-- 12 May 2025 --
+
+- Reusable size selector created for owners tools
+  - still needs styling adjustments
+- calcPrice function created in owners tools in owners-tools-client to be used in multiple components
+  - still being developed and evaluating for usage
+
+---
+
+-- 11 May 2025 --
+
+- Improvements to action confirmations.
+- Order total now displayed in order view and updates when an item added or removed.
+
+---
+
+-- 7 May 2025 --
+
+- Order item adjusted to correctly display the size of an order item when returned from the back end.
+- Add to order component resets to default state after an item is added to an order.
+
+---
+
+-- 5 May 2025 --
+
+- Changes to item size and quantity now accurately reflected in item price.
+
+---
+
+-- 2 May 2025 --
+
+- Add order item now determines between an item with selectable sizes and those without and if applicable displays a simple size selector with a warning message if the input is invalid.
+- Additions made to edit order context. Some may be redundant and need to be examined for removal.
+- Changes to size should impact the order item total and still need to be implemented.
+
+---
+
+-- 27 Apr 2025 --
+
+- Implemented functionality for updating a an order item quantity.
+  - Clicking edit button on an order item displays a quantity selector created in order item component. Also display an update and cancel button. Cancel button returns the order item view to default.
+  - Replaced place holder update button with update-order-item.tsx component in ui/buttons package.
+  - Clicking on update button, sets the new quantity, order item, confirmation title, show confirmation to true, and resets the order view to default.
+  - Confirmation utilizes the confirmation title to display confirmation message.
+  - Confirmation button utilizes the confirmation title to select the confirmation action of updating the order item quantity which calls the api endpoint, submits the order uid, item id, and new quantity.
+  - The backend then saves the order item and order before transmitting the response message.
+
+---
+
+-- 26 Apr 2025 --
+
+- Reimplemented delete order functionality through action confirmation button.
+
+  - Quickly realized means of determining which action execute would become unmanageable to read. Created OrderEdit type in types.d.ts and function in owners-tools.tsx.
+  - Execute confirm utilizes the action title and OrderEdit object with all properties needed to execute any of the edit functions appropriate for the title submitted.
+  - This should allow these components to scale and maintain readability.
+
+- The back-end team(me) implemented an endpoint allowing the owners to remove an item from an order which is now used on the front-end when an owner clicks the remove button next to an order item.
+  - Added orderItem as property of OrderEdit object
+    in types.d.ts
+  - Added orderItem and setOrderItem to edit-order-context.ts
+  - Created remove-from-order-button.tsx in ui/buttons package
+    - order-item.tsx passes an order item to this button component and utilizes it.
+    - Clicking the button sets show confirmation to true and passes a confirmation title of "Remove From Order"
+- Added RemoveFromOrderMessage to confirmation-messages library.
+- ExecuteConfirm function in owners-tools library now utilizes RemoveFromOrder() which call our new endpoint and removes an item from an order.
+
+---
+
+-- 25 Apr 2025 --
+
+- Implemented GetOrder in owners-tools.tsx for getting order by uid. This is used by the action confirmation button to refresh the order once action has been executed.
+
+---
+
+-- 24 Apr 2025 --
+
+- Removed unused code from order-item.tsx
+- Removed customer name from edit order context;
+- Removed unused code and comments from add-order-item.tsx
+- Removed unused code from orders.tsx
+- Updated order view styling.
+
+---
+
+-- 23 Apr 2025 --
+
+- New components implemented
+  - Created order-edit-context.
+  - Order action modal updated to be more modular allowing for the change of confirmation message and the action to take place.
+  - Implemented functionality of an add to order button and action confirmation button.
+  - Moved orders into a component in owner dashboard.
+- General flow for adding a new item to order is as follows
+  - Owner clicks add item button and selects a menu item from the drop down.
+  - They can select a quantity and input a size( size selection still to be implemented and refined) and then will click add item.
+  - This information is then transferred to a to order-action-confirmation modal.
+  - The modal gives the option to confirm the action or cancel.
+  - If the confirmation button is clicked then the menu item is added to the order on the backend and the order is updated.
+- Functionality is rough and still needs refactoring and styling improvements to enhance the development and user experience.
+
+---
+
+-- 20 Apr 2025 --
+
+- Moved order into its own component in order to help with readability.
+- Backend altered to accept a size so that a value of null is entered into the database for the order item which would cause an error when calling the orders and their items.
+- Created server action for adding item to order.
+
+---
+
+-- 19 Apr 2025 --
+
+- Some work lost for setting orders in owner dashboard, but chance to refactor. owner context is now used to fetch all orders.
+
+- Order view and confirmation modals back in place.
+- Confirmation modal functioning as desired when deleting an order.
+- Buttons for marking an order ready and then closed functioning as expected.
+
+- Styling for card made into a fixed size.
+
+---
+
+-- 14 Apr 2025 --
+
+- Add Order Item initialized.Menu Item selector initialized.
+  - Both components currently reside in owner-dashboard package and are currently still in development.
+
+---
+
+-- 13 Apr 2025 --
+
+- Customer information is updated in orderView based on user input.
+  - Will add button for updating backend in future.
+
+---
+
+-- 12 Apr 2025 --
+
+- Mark Ready button component created in ui/buttons/order-edit package.
+
+  - Button is implemented in order component consumed by the order dashboard and is currently functioning as intended to update the order on the backend and update the displayed orders for the owner.
+
+- Mark Ready and Close Order now displayed on whether an order has already been marked ready or not.
+
+- Close Order button will only displayed if order.order.ready !== "no" && order.order.closed === "no".
+
+- Delete order button is not displayed if order has been marked closed.
+
+---
+
+-- 11 Apr 2025 --
+
+- Order view has been updated with options to edit certain components of the order (customer name, email, phone).
+- Edit buttons removed from order component as this functionality now takes place in the order view.
+
+---
+
+-- 9 Apr 2025 --
+
+- Added orders context file in context package and orders context provider to providers file. This is now used in the owner dashboard component for displaying orders and order action confirmation component. This allows the orders to be updated when an order is updated or deleted.
+
+---
+
+-- 8 Apr 2025 --
+
+- Delete button correctly displays an action confirmation on click, clicking yes deletes the order from the backend and displays a confirmation modal.
+
+---
+
+-- 7 Apr 2025 --
+
+- Delete button sets context for a confirmation modal to be displayed on click.
+- Files for confirmation modal and its styling created in modal package.
+- Updated context in display-context and modal context.
+
+---
+
+-- 6 Apr 2025 --
+
+- Input fields for editing an orders customer name, phone and email in place. Mimics validation and styling found in our customer form.
+
+---
+
+-- 5 Apr 2025 --
+
+- Buttons initialized with basic styling for editing the base details of an order.
+  - Style sheet is starting to get get crowded and will be addressed in a refactor.
+  - Functionality of buttons to be worked on.
+
+---
+
+-- 4 Apr 2025 --
+
+- Styling in place for order items.
+- Card style refactored to add background eliminating need to include in every child element nestled in card.
+- Close button added to order view and functionality in place.
+- Added styling for orderitems to provide scrolling for large orders.
+- Moved Order view close button inside of order items list.
+
+---
+
+-- 2 Apr 2025 --
+
+- Initialized order view component and styling files in modal package
+- Initialized view order button component in ui package.
+- Established orderToView and setOrderToView in Modal context.
+  - This will be set in the view order button component and fed to our order view component which will be rendered upon clicking on view button.
+- Optimized owner dashboard and order components to pass along order objects inline helping to eliminate excessive lines from code base.
+- Modified displayContext to add viewOrder and setViewOrder.
+
+- Order view functioning as intended so far and styling initialized.
+
+  - Next step will include the getting the order items with the order incorporating them as well.
+
+- Edited file types.d.ts to be inclusive of order items in in type Order.
+- Updated context to include order items in modal context orderToView.
+- Updated owner dash-board.tsx for mapping the new property.
+- Updated order-view in modal package to create UL for displaying the order items.
+  - Will work on styling for it next.
+
+---
+
+-- 1 Apr 2025 --
+
+- Created Order component in owner-dashboard package.
+- Owner Dashboard is mapping orders returned from backend to owner dashboard component and displaying them as styled.
+- Currently working on styling for component.
+- Order type in types.d.ts is currently evolving as needed for development.
+- Initial styling is in place.
+- Added state to owner dashboard to maintain data between refreshes.
+- Formatted date and time and added extra column to in order to display.
+- Created splash component in app to be used around app to help reduce some clutter.
+
+---
+
+-- 29 Mar 2025 --
+
+- Initialized files for owner dashboard and it styling in components package.
+
+---
+
+-- 27 Mar 2025 --
+
+-Fade put in place for owners tools login form and owner header.
+
+- Cursor changed to pointer to enhance ux on login and logout button.
+- Changed naming to be consistent for submit order button.
+
+---
+
+-- 26 Mar 2025 --
+
+- Responsive styling in place for owner login form and button.
+- Responsive styling in place for owner header and log out button.
+
+---
+
+-- 25 Mar 2025 --
+
+- Reorganized code in decrypt for readability.
+- Owner name is now displayed by decrypting token instead of being received in plaint text from back end.
+- Headers and variations moved to Header folder.
+- Api call for login changed to server component.
+- Library files for owner differentiated by name, (ie server vs client )
+- Renamed Alert package to Modal allowing for modal to be more generic and fit more use cases.
+- Removed Session storage file from library.
+- Organized owner login files in library into their own package.
+
+---
+
+-- 24 Mar 2025 --
+
+- Logout button successfully implemented.
+
+  - Removes items pertaining to authentication is session storage which resets the state of what is displayed in the header.
+  - Discovered however that objects were not being stored correctly though and so after refactoring the login button now correctly handles the login logic.
+
+- Altered login form initial state and owner login function to accept a generic object which allows for passing error from server to login button. Logic for displaying error to user implemented through modal.
+
+- Unused code removed.
+
+- login logic wrapped in try catch
+
+- implemented means for decrypting subject from received token from backend. Owners name remains encrypted in the token. This means we can eliminate the need to store the owner name in the session storage, simplify the object returned from backend and still use the owners name in the owner header, without transmitting owners name in plain text from the backend.
+
+---
+
+-- 20 Mar 2025 --
+
+- Much reformatting in order to accomplish goal of header determining what to display based on a successful login and determining logged in.
+  - owner context now stores an owner login object which is fed by the login form and consumed by the login button and stored in session storage so the data will persist on refreshes and be able to be used for subsequent requests.
+    -login button also makes use of logged in state in owner-context in setting the context. Whether these actions are executed or not will be determined by the status returned by the backend.
+  - The main header evaluates fetches is authenticated item from session storage and sets the context of if a user is logged in or not. If this is so we have our desired owner header. Otherwise arriving on the owner-tools endpoint will be displaying our logo and the form for logging in.
+
+---
+
+-- 19 Mar 2025 --
+
+- Owner login form captures input from input fields and passes information to server action located in owner-login lib.
+
+  - The data is encoded and sent to backend where credentials are decoded and authorized.
+  - A successful login returns a jwt and the owners first name.
+  - The owners first name is stored into owner context for use in messages and the token is stored in session storage to be utilized for further requests to secured routes on the API.
+
+- Next course of action will be creating an owner header that will display a greeting message confirming a successful login with date, time, and logout button.
+
+- The header will evaluate condition on whether to display the standard header for customers, login form for owners or header for owners.
+
+- Created component for owner header and initialized basic styling for component.
+
+---
+
+-- 16 Mar 2025 --
+
+- Owner login form now rendered conditionally in the header. Call for menu categories has been moved from the header to NavButtons component. showLogin, setShowLogin added to context.
+- Code scrub.
+
+---
+
+-- 5 Mar 2025 --
+
+- Owner login form now correctly takes the user id and password from the input fields and encrypts those values before being transmitted to the backend. The backend then decrypts and validates the credentials before returning a JWT that we will hold in context for accessing additional endpoints and functions for the owners.
+
+- Will begin work on storing response, and fine tuning error messaging next.
+
+---
+
 -- 26 Feb 2025 --
 
 - Initial styling in place for owner login form.
