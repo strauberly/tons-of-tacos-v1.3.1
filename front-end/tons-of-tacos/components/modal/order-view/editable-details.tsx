@@ -12,6 +12,9 @@ export default function EditableDetails() {
   const { setConfirmationTitle } = useModalContext();
   const { setCustomer } = useEditOrderContext();
 
+  console.log(" customer name" + orderToView.name);
+  console.log("customer uid" + orderToView.customerUid);
+
   return (
     <>
       <CustomerNameDetails />

@@ -2,6 +2,13 @@
 
 ---
 
+-- 21 May 2025 --
+
+- Had an unforunate issue with bitbucket. Couldnt get into my account and password reset emails were'nt going through. Got in and during the process of updating the repositorie murdered my . Files have been mostly repaired.
+  still some work to do on styling changes.
+
+---
+
 -- 18 May 2025 --
 
 - Implemented buttons for updating customer information in the order view. Flow is as follows:

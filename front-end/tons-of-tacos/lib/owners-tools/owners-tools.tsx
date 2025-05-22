@@ -215,6 +215,7 @@ export async function UpdateCustomer(customer: Customer, token: string) {
   let response;
 
   const uid: string = customer.customerUid;
+  console.log(uid);
   const name: string = customer.name;
   const phone: string = customer.phone;
   const email: string = customer.email;
