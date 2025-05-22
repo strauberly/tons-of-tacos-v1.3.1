@@ -52,6 +52,7 @@ type OwnerLogin = {
 
 type Order = {
   orderUid: string;
+  customerUid: string;
   name: string;
   email: string;
   phone: string;
