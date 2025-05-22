@@ -1,20 +1,20 @@
-import RadioButton from "@/components/ui/buttons/radio-buttons/radio-button";
 import classes from "@/components/menu/menu-items/size-selector/size-selector.module.css";
+import SizeButton from "@/components/ui/buttons/size-buttons/size-button";
 
 export default function SizeSelector(props: {
   sizes: string[];
-  sizeSetter: (selectedSize: string) => void;
   sizeAvailable: boolean;
+  id: string;
 }) {
   return (
-    <section
+    <ul
       className={`${classes.selectorGroup} ${
         props.sizeAvailable === false ? classes.notShowing : " "
       }`}
     >
       {props.sizes.map((size: string) => (
-        <RadioButton key={size} size={size} sizeSetter={props.sizeSetter} />
+        <SizeButton key={size} size={size} id={props.id} />
       ))}
-    </section>
+    </ul>
   );
 }

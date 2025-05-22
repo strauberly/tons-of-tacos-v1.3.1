@@ -1,13 +1,14 @@
 .image {
   position: fixed;
-  width: clamp(15rem, 30%, 50%);
-  height: auto;
+  max-width: 70%;
+  max-height: 70%;
   margin-left: auto;
   margin-right: auto;
-  top: clamp(5rem, 15%, 15rem);
   left: 0rem;
   right: 0rem;
-  align-content: center;
+  overflow: auto;
+  height: auto;
+  width: auto;
 }
 
 .page {
@@ -30,4 +31,12 @@
 .errorContact {
   color: var(--interactive-color);
   font-size: clamp(1rem, 2vw, 2vw);
+}
+
+@media (max-width: 1400px) {
+  .image {
+    top: 15vh;
+    max-width: 60%;
+    max-height: 60%;
+  }
 }

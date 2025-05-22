@@ -7,6 +7,8 @@ import { UpdateCart } from "@/lib/cart";
 import { useEffect, useState } from "react";
 
 import classes from "./update-cart-item.module.css";
+import { useModalContext } from "@/context/modal-context";
+import { useDisplayContext } from "@/context/display-context";
 
 export default function Update(props: {
   cartItem: string;
@@ -16,7 +18,12 @@ export default function Update(props: {
 }) {
   const { cart, setCart, setCartQuantity, cartQuantity } = useCartContext();
 
+  const { setModal } = useModalContext();
+  const { setShowModal } = useDisplayContext();
+
   const newCart = cart;
+
+  const [largeOrder, setLargeOrder] = useState(false);
 
   const [itemQuantityChanged, setItemQuantityChanged] = useState(false);
 
@@ -38,10 +45,12 @@ export default function Update(props: {
     newQuantity = cartQuantity - props.oldQuantity;
     newQuantity += props.updatedItemQuantity;
     if (newQuantity > 30) {
-      alert(
-        "Your order has grown to a fair size. The current maximum is 30 items. Please contact us before adding anything else. This will ensure we can make your order happen today. You can also remove items from your cart. Thank you!"
+      setModal(
+        "Your order has grown to a fair size. The current maximum is 30 items. Please contact us before adding anything else. \n\nThis will ensure we can make your order happen today. You can also remove items from your cart. Thank you!"
       );
-    } else {
+      setShowModal(true);
+      setLargeOrder(true);
+    } else if (!largeOrder) {
       setCartQuantity(newQuantity);
     }
   };
@@ -56,6 +65,7 @@ export default function Update(props: {
     <div>
       {itemQuantityChanged && (
         <button
+          disabled={largeOrder === true ? true : false}
           className={classes.update}
           onClick={() => [
             updateCartItem(),

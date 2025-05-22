@@ -1,0 +1,12 @@
+.image {
+  position: fixed;
+  max-width: 70%;
+  max-height: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0rem;
+  right: 0rem;
+  overflow: auto;
+  height: auto;
+  width: auto;
+}

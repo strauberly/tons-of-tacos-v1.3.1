@@ -10,65 +10,68 @@ import { useEffect, useRef } from "react";
 import Cart from "@/components/cart/cart";
 import { useCartContext } from "@/context/cart-context";
 import { GetCart } from "@/lib/cart";
+import CategoriesSource from "@/lib/menu";
 
-export default function NavButtons(menuOptions: { menuOptions: Category[] }) {
+export default function NavButtons() {
   const { setMenuCategories } = useMenuCategoryContext();
   const { showMenu, setShowMenu, showCart, setShowCart } = useDisplayContext();
   const { setCart, cartQuantity } = useCartContext();
 
-  const menuRef = useRef<boolean>(showMenu);
-  const cartRef = useRef<boolean>(showCart);
-
   function toggleMenu() {
     setShowCart(false);
-    if (menuRef.current == false) {
-      menuRef.current = true;
-    } else {
-      menuRef.current = false;
-    }
-    setShowMenu(menuRef.current);
+    setShowMenu(true);
   }
 
   function toggleCart() {
     setShowMenu(false);
-    if (cartRef.current == false) {
-      cartRef.current = true;
-    } else {
-      cartRef.current = false;
-    }
-    setShowCart(cartRef.current);
+    setShowCart(true);
   }
 
+  const categories = useRef<Category[]>([]);
+
   useEffect(() => {
-    setMenuCategories(menuOptions.menuOptions);
+    async function getCategories() {
+      categories.current = await CategoriesSource();
+    }
+    getCategories();
+    setMenuCategories(categories.current);
     setCart(GetCart());
+    if (cartQuantity <= 0) {
+      setShowCart(false);
+    }
   }, [
     cartQuantity,
-    menuOptions.menuOptions,
     setCart,
     setMenuCategories,
     setShowCart,
     showCart,
     showMenu,
   ]);
-  if (cartQuantity <= 0) {
-    setShowCart(false);
-  }
 
   return (
     <>
       <div className={classes.navButtons}>
         <CartQuantity />
         <nav className={classes.navButtons}>
-          <button className={classes.menuButton} onClick={() => toggleMenu()}>
+          <button
+            className={classes.menuButton}
+            onMouseEnter={() => toggleMenu()}
+          >
             <MenuIcon />
           </button>
-          <button className={classes.cartButton} onClick={() => toggleCart()}>
+          <button
+            className={classes.cartButton}
+            onMouseEnter={() => toggleCart()}
+          >
             <CartIcon />
           </button>
         </nav>
-        <div className={classes.menu}>{showMenu && <MenuNav />}</div>
-        <div>{showCart && <Cart />}</div>
+        <div className={classes.menu} onMouseLeave={() => setShowMenu(false)}>
+          {showMenu && <MenuNav />}
+        </div>
+        <div onMouseLeave={() => setShowCart(false)}>
+          {showCart && <Cart />}
+        </div>
       </div>
     </>
   );

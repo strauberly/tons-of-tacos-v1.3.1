@@ -1,10 +1,11 @@
 "use client";
-import { useAlertContext } from "@/context/alert-context";
+import { useModalContext } from "@/context/modal-context";
 import classes from "./add-to-cart.module.css";
 import { useCartContext } from "@/context/cart-context";
 import { AddItemToCart, GetCart } from "@/lib/cart";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useDisplayContext } from "@/context/display-context";
+import { useSelectedSizeContext } from "@/context/size-context";
 
 export default function AddToCart(props: {
   id: string;
@@ -16,48 +17,49 @@ export default function AddToCart(props: {
   quantitySelector: () => void;
   expander: () => void;
 }) {
-  const [largeOrder, setLargeOrder] = useState(false);
-  const [itemInCart, setItemInCart] = useState(false);
-  const { setAlert } = useAlertContext();
-  const { setShowAlert } = useDisplayContext();
+  const { setModal } = useModalContext();
+  const { setShowModal } = useDisplayContext();
+  const { selectedSize, setSelectedSize } = useSelectedSizeContext();
+  const { cartQuantity, setCartQuantity, setItemsInCart, cart, setCart } =
+    useCartContext();
 
-  const {
-    cartQuantity,
-    setCartQuantity,
-    setItemsInCart,
-    cart,
-    setCart,
-    itemRemoved,
-    setItemRemoved,
-  } = useCartContext();
+  const [largeOrder, setLargeOrder] = useState<boolean>();
+  const itemInCart = useRef(false);
 
-  let newQuantity = 0;
+  function print() {
+    console.log("size: " + props.size.toString());
+  }
 
-  const quantity = () => {
-    newQuantity = cartQuantity + props.quantity;
-    if (newQuantity > 30) {
-      setAlert(
-        "Your order has grown to a fair size. The current maximum is 30 items. Please contact us before adding anything else. This will ensure we can make your order happen today. You can also remove other items from your cart. Thank you!"
+  function checkItem() {
+    try {
+      setCart(GetCart());
+      cart.forEach((cartItem) => {
+        if (props.id == cartItem.id && props.size == selectedSize) {
+          itemInCart.current = true;
+          if (itemInCart.current === true) {
+            setModal(
+              `${props.itemName} is already in your cart. Select the cart icon to view your order and change quantities.`
+            );
+            setShowModal(true);
+          }
+        }
+      });
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      throw new Error(
+        "Sorry there is an issue with your cart please try refreshing and adding items to your cart again."
       );
-      setShowAlert(true);
-      setLargeOrder(true);
-    } else {
-      setCartQuantity(cartQuantity + props.quantity);
     }
-  };
-
-  const checkItem = useCallback(() => {
-    cart.forEach((cartItem) => {
-      if (props.id == cartItem.id) {
-        setItemInCart(true);
-      }
-    });
-  }, [cart, props.id]);
+  }
 
   const addCartItem = () => {
     checkItem();
-    if (itemInCart === false) {
-      quantity();
+    if (cartQuantity + props.quantity > 30) {
+      setModal(
+        "Your order has grown to a fair size. The current maximum is 30 items. Please contact us before adding anything else.\n\nThis will ensure we can make your order happen today. You can also remove other items from your cart. Thank you!"
+      );
+      setShowModal(true);
+    } else if (itemInCart.current === false) {
       setItemsInCart(true);
       setLargeOrder(false);
       props.quantitySelector();
@@ -67,35 +69,28 @@ export default function AddToCart(props: {
         props.menuId,
         props.itemName,
         props.quantity,
-        props.size,
+        selectedSize,
         props.price
       );
       setCart(GetCart());
-    } else {
-      // use your alert
-      setAlert(
-        `${props.itemName} is already in your cart. Select the cart icon to view your order and change quantities.`
-      );
-      setShowAlert(true);
+      setCartQuantity(cartQuantity + props.quantity);
     }
+    itemInCart.current = false;
   };
 
-  useEffect(() => {
-    checkItem();
-    if (itemRemoved && itemInCart === true) {
-      setItemInCart(false);
-      setItemRemoved(false);
-    }
-  }, [checkItem, itemInCart, itemRemoved, setItemRemoved]);
+  // useEffect(() => {
+  //   if (props.size === "") {
+  //     setSelectedSize("na");
+  //   }
+  //   // print();
+  // }, [print, props.size, setSelectedSize]);
 
   return (
     <>
       <button
         disabled={largeOrder === true ? true : false}
         className={classes.add}
-        onClick={() => {
-          addCartItem();
-        }}
+        onClick={() => [checkItem(), addCartItem()]}
       >
         Add To Cart
       </button>

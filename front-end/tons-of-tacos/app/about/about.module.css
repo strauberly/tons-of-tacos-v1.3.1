@@ -1,0 +1,60 @@
+.aboutContent {
+  margin-left: 3vw;
+  margin-right: 3vw;
+}
+
+.aboutStory {
+  font-size: x-large;
+  margin-bottom: 2vw;
+}
+
+.projectAbout {
+  margin-left: 3vw;
+  margin-right: 3vw;
+  margin-top: 2vw;
+  color: var(--attention-color);
+  font-family: var(--inter-font);
+  font-size: large;
+}
+
+.project .title {
+  font-size: 1.5vw;
+  margin-bottom: 1vw;
+}
+
+/* medium devices */
+@media (max-width: 1400px) {
+  .aboutContent {
+    margin-top: 4vw;
+  }
+
+  .title {
+    font-size: 2.5vw;
+  }
+}
+
+/* small devices */
+@media (max-width: 800px) {
+  .aboutContent {
+    margin-top: 8vw;
+  }
+
+  .aboutStory {
+    /* margin-bottom: 8vw; */
+    font-size: 4vw;
+  }
+
+  .title {
+    font-size: 4vw;
+  }
+}
+
+/* xsmall devices */
+@media (max-width: 500px) {
+  .aboutStory {
+    margin-top: -4vw;
+  }
+  .title {
+    font-size: 3.5vw;
+  }
+}

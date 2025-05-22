@@ -25,29 +25,56 @@ body {
   --user-selected-color: aqua;
 }
 
-header {
-  display: none;
-  padding: none;
-  margin: none;
+#page-container {
+  position: relative;
+  min-height: 100vh;
+}
+
+#content-wrap {
+  padding-bottom: 10rem;
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  height: 8rem;
+  background-color: var(--background-color);
+  border-top: solid var(--border-color) 2px;
+  width: 96%;
+  padding: 1vw;
+  padding-bottom: 3vw;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0rem;
+  right: 0rem;
+}
+
+a {
+  text-decoration: none;
+  justify-self: center;
+  color: var(--interactive-color);
 }
 
 p {
-  display: flex;
-  justify-content: center;
   font-family: var(--inter-font);
   color: var(--paragraph-color);
+  white-space: pre-line;
 }
 
 h1 {
   display: flex;
-  justify-content: center;
   color: var(--attention-color);
   font-size: clamp(1rem, 2vw, 2vw);
 }
 
 h2 {
   color: var(--attention-color);
-  font-size: clamp(0.8rem, 1vw, 1vw);
+  font-size: clamp(1rem, 1.5vw, 1.5vw);
+}
+
+h3 {
+  color: var(--attention-color);
+  font-size: 1rem;
 }
 
 button {
@@ -72,7 +99,7 @@ button:hover {
 }
 
 ::-webkit-scrollbar {
-  width: 1.5rem;
+  width: 1rem;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -91,6 +118,12 @@ input {
 input textarea {
   background-color: none;
   border-color: none;
+  border: none;
+}
+
+textarea:focus,
+input:focus {
+  outline: none;
 }
 
 input::-webkit-outer-spin-button,

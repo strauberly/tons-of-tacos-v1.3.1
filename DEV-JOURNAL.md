@@ -2,6 +2,1653 @@
 
 ---
 
+-- 18 May 2025 --
+
+- Implemented buttons for updating customer information in the order view. Flow is as follows:
+  - Owner clicks button for editing an input field.
+  - Once the input is deemed valid a button for done appears.
+  - Clicking the done button triggers buttons to either update the customer or return the previous data.
+- Updated edit order context to include a customer.
+
+- Update customer contact info functionality in place.
+
+- Cancel button implemented for customer info edit fields.
+
+- Order view broken into smaller more manageable components. Styling is staying in same file currently instead of creating separate files and repeating the same code in all of them.
+
+---
+
+-- 17 May 2025 --
+
+- Bug hunting revealed issues with edit order item displaying a size selector at incorrect times.
+
+  - Resolved by changing the conditions of when to display
+
+- Order item total was not accurately calculating when updating order item.
+
+  - Issue stemmed from size surcharge not being calculated in backend before updating order item. This has been rectified.
+
+- Edit order item correctly allows for changing item quantity and or size. Totals for order item and order are correctly updated.
+
+- File clean up.
+
+---
+
+-- 13 May 2025 --
+
+- Updated menu item, add to cart, and submitOrder
+  - We were getting a default size of small for order items that did not have a size which was throwing off order creation. Now the default size is set to a blank string. Before the order is submitted, the size of each item is evaluated and the size is set to "na" if no size available thus facilitating the requirements of the backend for creating and storing an order.
+
+---
+
+-- 12 May 2025 --
+
+- Reusable size selector created for owners tools
+  - still needs styling adjustments
+- calcPrice function created in owners tools in owners-tools-client to be used in multiple components
+  - still being developed and evaluating for usage
+
+---
+
+-- 11 May 2025 --
+
+- Improvements to action confirmations.
+- Order total now displayed in order view and updates when an item added or removed.
+
+---
+
+-- 7 May 2025 --
+
+- Order item adjusted to correctly display the size of an order item when returned from the back end.
+- Add to order component resets to default state after an item is added to an order.
+
+---
+
+-- 5 May 2025 --
+
+- Changes to item size and quantity now accurately reflected in item price.
+
+---
+
+-- 2 May 2025 --
+
+- Add order item now determines between an item with selectable sizes and those without and if applicable displays a simple size selector with a warning message if the input is invalid.
+- Additions made to edit order context. Some may be redundant and need to be examined for removal.
+- Changes to size should impact the order item total and still need to be implemented.
+
+---
+
+-- 27 Apr 2025 --
+
+- Implemented functionality for updating a an order item quantity.
+  - Clicking edit button on an order item displays a quantity selector created in order item component. Also display an update and cancel button. Cancel button returns the order item view to default.
+  - Replaced place holder update button with update-order-item.tsx component in ui/buttons package.
+  - Clicking on update button, sets the new quantity, order item, confirmation title, show confirmation to true, and resets the order view to default.
+  - Confirmation utilizes the confirmation title to display confirmation message.
+  - Confirmation button utilizes the confirmation title to select the confirmation action of updating the order item quantity which calls the api endpoint, submits the order uid, item id, and new quantity.
+  - The backend then saves the order item and order before transmitting the response message.
+
+---
+
+-- 26 Apr 2025 --
+
+- Reimplemented delete order functionality through action confirmation button.
+
+  - Quickly realized means of determining which action execute would become unmanageable to read. Created OrderEdit type in types.d.ts and function in owners-tools.tsx.
+  - Execute confirm utilizes the action title and OrderEdit object with all properties needed to execute any of the edit functions appropriate for the title submitted.
+  - This should allow these components to scale and maintain readability.
+
+- The back-end team(me) implemented an endpoint allowing the owners to remove an item from an order which is now used on the front-end when an owner clicks the remove button next to an order item.
+  - Added orderItem as property of OrderEdit object
+    in types.d.ts
+  - Added orderItem and setOrderItem to edit-order-context.ts
+  - Created remove-from-order-button.tsx in ui/buttons package
+    - order-item.tsx passes an order item to this button component and utilizes it.
+    - Clicking the button sets show confirmation to true and passes a confirmation title of "Remove From Order"
+- Added RemoveFromOrderMessage to confirmation-messages library.
+- ExecuteConfirm function in owners-tools library now utilizes RemoveFromOrder() which call our new endpoint and removes an item from an order.
+
+---
+
+-- 25 Apr 2025 --
+
+- Implemented GetOrder in owners-tools.tsx for getting order by uid. This is used by the action confirmation button to refresh the order once action has been executed.
+
+---
+
+-- 24 Apr 2025 --
+
+- Removed unused code from order-item.tsx
+- Removed customer name from edit order context;
+- Removed unused code and comments from add-order-item.tsx
+- Removed unused code from orders.tsx
+- Updated order view styling.
+
+---
+
+-- 23 Apr 2025 --
+
+- New components implemented
+  - Created order-edit-context.
+  - Order action modal updated to be more modular allowing for the change of confirmation message and the action to take place.
+  - Implemented functionality of an add to order button and action confirmation button.
+  - Moved orders into a component in owner dashboard.
+- General flow for adding a new item to order is as follows
+  - Owner clicks add item button and selects a menu item from the drop down.
+  - They can select a quantity and input a size( size selection still to be implemented and refined) and then will click add item.
+  - This information is then transferred to a to order-action-confirmation modal.
+  - The modal gives the option to confirm the action or cancel.
+  - If the confirmation button is clicked then the menu item is added to the order on the backend and the order is updated.
+- Functionality is rough and still needs refactoring and styling improvements to enhance the development and user experience.
+
+---
+
+-- 20 Apr 2025 --
+
+- Moved order into its own component in order to help with readability.
+- Backend altered to accept a size so that a value of null is entered into the database for the order item which would cause an error when calling the orders and their items.
+- Created server action for adding item to order.
+
+---
+
+-- 19 Apr 2025 --
+
+- Some work lost for setting orders in owner dashboard, but chance to refactor. owner context is now used to fetch all orders.
+
+- Order view and confirmation modals back in place.
+- Confirmation modal functioning as desired when deleting an order.
+- Buttons for marking an order ready and then closed functioning as expected.
+
+- Styling for card made into a fixed size.
+
+---
+
+-- 14 Apr 2025 --
+
+- Add Order Item initialized.Menu Item selector initialized.
+  - Both components currently reside in owner-dashboard package and are currently still in development.
+
+---
+
+-- 13 Apr 2025 --
+
+- Customer information is updated in orderView based on user input.
+  - Will add button for updating backend in future.
+
+---
+
+-- 12 Apr 2025 --
+
+- Mark Ready button component created in ui/buttons/order-edit package.
+
+  - Button is implemented in order component consumed by the order dashboard and is currently functioning as intended to update the order on the backend and update the displayed orders for the owner.
+
+- Mark Ready and Close Order now displayed on whether an order has already been marked ready or not.
+
+- Close Order button will only displayed if order.order.ready !== "no" && order.order.closed === "no".
+
+- Delete order button is not displayed if order has been marked closed.
+
+---
+
+-- 11 Apr 2025 --
+
+- Order view has been updated with options to edit certain components of the order (customer name, email, phone).
+- Edit buttons removed from order component as this functionality now takes place in the order view.
+
+---
+
+-- 9 Apr 2025 --
+
+- Added orders context file in context package and orders context provider to providers file. This is now used in the owner dashboard component for displaying orders and order action confirmation component. This allows the orders to be updated when an order is updated or deleted.
+
+---
+
+-- 8 Apr 2025 --
+
+- Delete button correctly displays an action confirmation on click, clicking yes deletes the order from the backend and displays a confirmation modal.
+
+---
+
+-- 7 Apr 2025 --
+
+- Delete button sets context for a confirmation modal to be displayed on click.
+- Files for confirmation modal and its styling created in modal package.
+- Updated context in display-context and modal context.
+
+---
+
+-- 6 Apr 2025 --
+
+- Input fields for editing an orders customer name, phone and email in place. Mimics validation and styling found in our customer form.
+
+---
+
+-- 5 Apr 2025 --
+
+- Buttons initialized with basic styling for editing the base details of an order.
+  - Style sheet is starting to get get crowded and will be addressed in a refactor.
+  - Functionality of buttons to be worked on.
+
+---
+
+-- 4 Apr 2025 --
+
+- Styling in place for order items.
+- Card style refactored to add background eliminating need to include in every child element nestled in card.
+- Close button added to order view and functionality in place.
+- Added styling for orderitems to provide scrolling for large orders.
+- Moved Order view close button inside of order items list.
+
+---
+
+-- 2 Apr 2025 --
+
+- Initialized order view component and styling files in modal package
+- Initialized view order button component in ui package.
+- Established orderToView and setOrderToView in Modal context.
+  - This will be set in the view order button component and fed to our order view component which will be rendered upon clicking on view button.
+- Optimized owner dashboard and order components to pass along order objects inline helping to eliminate excessive lines from code base.
+- Modified displayContext to add viewOrder and setViewOrder.
+
+- Order view functioning as intended so far and styling initialized.
+
+  - Next step will include the getting the order items with the order incorporating them as well.
+
+- Edited file types.d.ts to be inclusive of order items in in type Order.
+- Updated context to include order items in modal context orderToView.
+- Updated owner dash-board.tsx for mapping the new property.
+- Updated order-view in modal package to create UL for displaying the order items.
+  - Will work on styling for it next.
+
+---
+
+-- 1 Apr 2025 --
+
+- Created Order component in owner-dashboard package.
+- Owner Dashboard is mapping orders returned from backend to owner dashboard component and displaying them as styled.
+- Currently working on styling for component.
+- Order type in types.d.ts is currently evolving as needed for development.
+- Initial styling is in place.
+- Added state to owner dashboard to maintain data between refreshes.
+- Formatted date and time and added extra column to in order to display.
+- Created splash component in app to be used around app to help reduce some clutter.
+
+---
+
+-- 29 Mar 2025 --
+
+- Initialized files for owner dashboard and it styling in components package.
+
+---
+
+-- 27 Mar 2025 --
+
+-Fade put in place for owners tools login form and owner header.
+
+- Cursor changed to pointer to enhance ux on login and logout button.
+- Changed naming to be consistent for submit order button.
+
+---
+
+-- 26 Mar 2025 --
+
+- Responsive styling in place for owner login form and button.
+- Responsive styling in place for owner header and log out button.
+
+---
+
+-- 25 Mar 2025 --
+
+- Reorganized code in decrypt for readability.
+- Owner name is now displayed by decrypting token instead of being received in plaint text from back end.
+- Headers and variations moved to Header folder.
+- Api call for login changed to server component.
+- Library files for owner differentiated by name, (ie server vs client )
+- Renamed Alert package to Modal allowing for modal to be more generic and fit more use cases.
+- Removed Session storage file from library.
+- Organized owner login files in library into their own package.
+
+---
+
+-- 24 Mar 2025 --
+
+- Logout button successfully implemented.
+
+  - Removes items pertaining to authentication is session storage which resets the state of what is displayed in the header.
+  - Discovered however that objects were not being stored correctly though and so after refactoring the login button now correctly handles the login logic.
+
+- Altered login form initial state and owner login function to accept a generic object which allows for passing error from server to login button. Logic for displaying error to user implemented through modal.
+
+- Unused code removed.
+
+- login logic wrapped in try catch
+
+- implemented means for decrypting subject from received token from backend. Owners name remains encrypted in the token. This means we can eliminate the need to store the owner name in the session storage, simplify the object returned from backend and still use the owners name in the owner header, without transmitting owners name in plain text from the backend.
+
+---
+
+-- 20 Mar 2025 --
+
+- Much reformatting in order to accomplish goal of header determining what to display based on a successful login and determining logged in.
+  - owner context now stores an owner login object which is fed by the login form and consumed by the login button and stored in session storage so the data will persist on refreshes and be able to be used for subsequent requests.
+    -login button also makes use of logged in state in owner-context in setting the context. Whether these actions are executed or not will be determined by the status returned by the backend.
+  - The main header evaluates fetches is authenticated item from session storage and sets the context of if a user is logged in or not. If this is so we have our desired owner header. Otherwise arriving on the owner-tools endpoint will be displaying our logo and the form for logging in.
+
+---
+
+-- 19 Mar 2025 --
+
+- Owner login form captures input from input fields and passes information to server action located in owner-login lib.
+
+  - The data is encoded and sent to backend where credentials are decoded and authorized.
+  - A successful login returns a jwt and the owners first name.
+  - The owners first name is stored into owner context for use in messages and the token is stored in session storage to be utilized for further requests to secured routes on the API.
+
+- Next course of action will be creating an owner header that will display a greeting message confirming a successful login with date, time, and logout button.
+
+- The header will evaluate condition on whether to display the standard header for customers, login form for owners or header for owners.
+
+- Created component for owner header and initialized basic styling for component.
+
+---
+
+-- 16 Mar 2025 --
+
+- Owner login form now rendered conditionally in the header. Call for menu categories has been moved from the header to NavButtons component. showLogin, setShowLogin added to context.
+- Code scrub.
+
+---
+
+-- 5 Mar 2025 --
+
+- Owner login form now correctly takes the user id and password from the input fields and encrypts those values before being transmitted to the backend. The backend then decrypts and validates the credentials before returning a JWT that we will hold in context for accessing additional endpoints and functions for the owners.
+
+- Will begin work on storing response, and fine tuning error messaging next.
+
+---
+
+-- 26 Feb 2025 --
+
+- Initial styling in place for owner login form.
+- Began implementation of owner login library.
+
+---
+
+-- 25 Feb 2025 --
+
+- Implemented owner token context.
+- Initialized owner login form and styling sheet.
+
+---
+
+-- 24 Feb 2025 --
+
+- Implemented path for owners tools.
+- Updated project on github for tasks to complete.
+
+---
+
+-- 22 Feb 2025 --
+
+- Achieved desired results for size selector buttons where a default size is and price is reflected for items with a size and reverts if a different card is selected.
+
+---
+
+-- 19 Feb 2025 --
+
+- Default size implemented for menu items with sizes by changing the name attribute value on the input to a dynamic value which differentiates the radio button groups.
+- Created a menuitem id context.
+  - Menu item id is passed through size selector into size button
+  - In the size button; when the button is clicked the sizeSelected context and menuItemId context are set.
+  - MenuItem component evaluates the values of sizeSelectedContext and menuItemId context against the current menu item id. If the correct conditions are met the price updates for the size chosen.
+  - The result is that the price is updated only for that menu item as desired.
+  - An issue has arisen where if a size is selected on a different card the price on the previous card resets as desired but the size on the previous card is not returned to default state. Will be addressed next.
+
+---
+
+-- 17 Feb 2025 --
+
+- Updated naming convention for alert component and associated files to modal for more modularity.
+
+  - Updated all files to take this into account. Let me know if I missed any, please.
+
+- Added timeout and loading animation to faq and about pages in order to maintain cohesiveness with other pages.
+
+- Radio buttons and associated files renamed to size buttons.
+
+- priority attribute added to logo image.
+
+---
+
+-- 16 Feb 2025 --
+
+- Modified logic checkItem() in add to cart component. Before we couldn't add an item to the cart if the item already existed in the cart. However it did not take different sizes into account. So a medium horchata couldn't be added if a large horchata was already in the cart for example because check item was only looking for horchata.
+
+- Corrected by taking the following steps:
+
+  - The cart is now sampled at the beginning of the function and compares the menu item id and all cart item ids as well as comparing the size of the two items.
+
+- Additionally context for selected size was implemented eliminating a need for prop drilling between components.
+
+---
+
+-- 11 Feb 2025 --
+
+- Wrapping up work on footer.
+  - Social media icons in place and linked to corresponding web addresses.
+  - Copyright placed at bottom
+  - Styled for responsiveness.
+
+---
+
+-- 10 Feb 2025 --
+
+- Background color added to footer grid.
+- Logo and loading animation responsiveness improved. Logo appears to be prevented from creeping behind header.
+- Styling for loading animation moved into its own style sheet in app folder.
+
+- Padding added to bottom of menu category description added to create more space between that element and and the menu item list.
+
+- Styling for menu category page unnecessary and has been removed along with style sheet.
+
+---
+
+-- 6 Feb 2025 --
+
+- Altered css on logo and loading image to occupy more space on smaller devices.
+
+---
+
+-- 5 Feb 2025 --
+
+- Project about section converted to React node in order to aid with code readability and formatting. Links for repositories in this section have also been set to their correct destination and open in a separate tab.
+
+- Dev Journal and ReadMe moved into correct locations.
+
+- Contact info aligned in grid cell at 840 media request.
+
+- Price on menu item cards justified to center after refactoring globals.css
+
+---
+
+-- 4 Feb 2025 --
+
+- Responsive design for About and Faq brought more inline with each other to match.
+
+- Global styling for anchor elements and paragraphs was interfering with desired formatting on about page and so were made more generic.
+
+---
+
+-- 3 Feb 2025 --
+
+- Responsive styling for footer in place. Will need to be re-evaluated when social media links are in place.
+
+- Responsive styling for FAQ title and margin top in place.
+
+- Responsive styling for About title and margin top in place.
+
+---
+
+-- 31 Jan 2025 --
+
+- Altered FAQ page to utilize a question component and moved styling for questions into css module. All are contained in the footer/faq folder.
+- Adjusted styling in globals and menu items allowing for global values to be more generic with fine tuning for responsive design happening in component styling module.
+
+---
+
+-- 30 Jan 2025 --
+
+- Styling adjustments for about page to bring the styling more in line with work that was done on FAQ page. Reorganized content to place the mock about for the company before the about blurb of the project. Intent so that visiting that page after the FAQ is less jarring for the user.
+
+---
+
+-- 29 Jan 2025 --
+
+- Styling adjusted on footer. Content centered in containers.
+
+---
+
+-- 27 Jan 2025 --
+
+- FAQ in place with initial styling. Ready for responsive design.
+
+---
+
+-- 26 Jan 2025 --
+
+- Increased front size of elements in footer.
+
+- Changes made to About copy content.
+
+- Started work on FAQ page.
+  - faq.json file created in content folder in library.
+  - faq.json mapped into ul in faq page component.
+
+---
+
+-- 23 Jan 2025 --
+
+- Content placed for About page.
+- About link in footer linked to about page.
+
+---
+
+-- 22 Jan 2025 --
+
+- Footer component styling happens in globals.css file. By doing the styling here we(me) are able to keep the footer in the root layout and wrap divs around that allow for the desired effect of having the layout stick to the bottom of any pages. Elements inside the footer will be styled in the accompanying css module found in the footer component folder.
+- Will update project on git for tasks to be completed on footer.
+- Grid in place for footer. About and FAQ routes and pages initialized.
+
+---
+
+-- 21 Jan 2025 --
+
+Initialized footer.
+
+---
+
+-- 20 Jan 2025 --
+
+- Adjusted nav button functionality so that nav menu and cart appear when corresponding button is entered and vanish upon leaving the components as well as vanishing when clicking outside of the component. Seems to create a smoother flow for the ux than clicking each time to display and hide the component.
+
+- Altered gap between nav buttons in order to aid in functionality. Responsiveness included.
+
+- Altered styling placement of cart component and addressed responsiveness.
+
+- Touched files cleaned up.
+
+---
+
+-- 12 Dec 2024 --
+
+- Adjusted logic in menu item component add item to correctly check if cart quantity is below acceptable thresh hold before adding a new menu item to the cart.
+
+---
+
+-- 11 Dec 2024 --
+
+- Adjusted form and checkout button styling for responsive design.
+
+---
+
+-- 10 Dec 2024 --
+
+- Adjusted logic in cart item component incrementilization that would allow a by pass of our order size limitation.
+- Updated styling for update cart item button and remove from carton button to have a pointer cursor.
+- Adjusted styling in our customer info form for better responsive design taking possible input errors into account.
+
+---
+
+-- 9 Dec 2024 --
+
+- Addressed issues caused during refresh with a menu category pulled up.
+  Swapped handling of logic between dynamic page and menu item list swapping their roles as client and server components.
+- Updated Alert component styling for responsiveness.
+- Adjusted styling in order confirmation component to bring it more in line with alert styling and aid ux.
+- Removed unused and unneeded lines of code.
+- Worked on basic styling for global error.
+- Removed extraneous error components.
+- Changed notification of too large an order to use custom alert modal.
+
+---
+
+-- 6 Dec 2024 --
+
+- Reverted to using our custom error handler in lieu of just throwing errors. Also, errors for data fetching now handled library level.
+- Cleaned up unnecessary variable transfer in main header.
+- Added error handling to add-to-cart.tsx;
+
+---
+
+-- 5 Dec 2024 --
+
+- Quest for global-error.tsx to act appropriately in next 14 was fruitless and so updated the project to next 15. Seems promising but creating some new quirks and errors while also undoing some work. Working through.
+- Checking for window before accessing local storage seems to no longer be needed so have commented out lines of code and will evaluate.
+- Added suppressHydrationWarning in root layout html. Browser extension induced it seems.
+- Did some reading and learned the hydration error was due to my browser extensions. NOt awesome. Hopefully everyone learns to play nice.
+- Eliminated need to use params in menu item list.
+- Addressed issues with customer form and nav buttons updating other components by placing the offender in use effect.
+
+---
+
+-- 2 Dec 2024 --
+
+- Update to cart item so that if cart item quantity exceeds given amount then customer is alerted via our alert modal component instead of browser alert.
+- Updated phone number validation in form library, checkPhone(), to match validation created on back end.
+- Styling for global error updated to be more responsive.
+- Styling updated in customer form so that any validation errors for input fields are more responsive.
+
+---
+
+-- 25 Nov 2024 --
+
+- Improvements to handling conditional display of menu. Created a click handler that listens for clicks outside of the menu component and closes the menu if click comes from outside the target.
+
+- Scrubbed files for unused code.
+
+- Updated quantity selector and add to cart to utilize our alert modal instead of alert();
+
+---
+
+-- 20 Nov 2024 --
+
+- Implemented solution into cartToggle as well. Result is somewhat mixed.
+  - Appears we are getting the nav options without an animation rerender bringing us to original state, but there is lag requiring a double click in most instances to activate the desired behavior. Will be seeing if I can address this next.
+  - File scrubbed of unnecessary code.
+
+---
+
+-- 19 Nov 2024 --
+
+- Appear to have found a means for changing the sate of menu and cart without rerender which would essentially provide the same state as before. Solution implemented into menu, will try in cart next.
+
+---
+
+-- 18 Nov 2024 --
+
+While testing user experience witnessed frustration with cart disappearing if user was moving quickly as they were sliding off the cart triggering the close. Created event listener that would instead leave the cart open until the user clicked another element. Implemented similar in menu. Also opted for on click instead of entered. On entered would also create odd jitters. Perhaps more from rerender.
+
+---
+
+-- 14 Nov 2024 --
+
+- While continuing with error handling have come to realize, this work often leads to refactoring also. Therefore, will push the current changes and continue work from the refactoring branch.
+- Try catch blocks added to cart library.
+- Try catch blocks added to menu library.
+- Refactored so that we have an order confirmation and an alert modal separated from each other.
+
+---
+
+-- 13 Nov 2024 --
+
+- Began work on improving error handling for system tasks like checking if connection can be made to database.
+  - Main header was in layout but outside of error boundary I believe and would be why our error page wasn't loading when server was down. Will research further down the road.
+  - After much fiddling about found the tiny line in next.js docs next page of error handling that reads "global-error.js is only enabled in production. In development, our error overlay will show instead." Please put the unique circumstance highlighted up front as soon as you start talking about the topic so people aren't pulling their hair out trying to figure what is going on.
+    - If we move the main header out of the root layout the error handling functions as intended. I may try creating a layout in that route, throwing the header in there and seeing how that plays out. Will actually want a different header between customer interface and owner interface so that might work. Anyway continuing on with error handling to see where else we can make improvements.
+
+---
+
+-- 12 Nov 2024 --
+
+- Backend team rectified previously mentioned issue and we are back to work.
+- Improved the ux by changing the nav buttons to work of on click instead of on enter. The issue seemed to stem from the component not quite yet loaded before a user moved the mouse cursor away creating an unwelcome jitter. Will observe over time.
+- Improved on submit button styling for cart form.
+
+---
+
+-- 5 Nov 2024 --
+
+- Closing order confirmation now resets the cart. Ran into error where backend is preserving last customer instead of resetting the data to start new order. Will address this next.
+
+- Menu nav adjusted for lower width resolution.
+- Media request styling for 1000px width in form styling eliminated.
+- Adjusted 1400 media request for cart.
+- Adjustments to nav buttons at less than 800
+- Adjusted 800 media request for cart.
+- Adjusted cart badge for 800 media query.
+- Removed cart badge styling at 500.
+- Drop down animation moved from nav buttons into individual menu nav and cart components.
+- Animation placement updated to be dynamic based on display size.
+- Styling refactored for menu nav and cart in order to facilitate updated file schema.
+- Program scrubbed for outdated code and comments.
+
+---
+
+-- 17 Oct 2024 --
+
+- Styling updated to accommodate file organization for cart component.
+
+---
+
+-- 10 Oct 2024 --
+
+- Increased padding around nav buttons and restyled to accomodate.
+
+---
+
+-- 9 Oct 2024 --
+
+- Moved menu nav styling to menu nav style sheet from main header style sheet.
+- Restyled menu nav elements to correspond with new placement of components.
+
+---
+
+-- 8 Oct 2024 --
+
+- Moved nav buttons styling into its own style sheet next to nav buttons component.
+
+- Transferred Cart styling from main header style sheet to cart stylesheet.
+
+- Adjusted styling for cart badge.
+
+- Created menu nav style sheet module.
+
+---
+
+- -- 6 Oct 2024 --
+
+- Shifted alert/modal out of cart and into the layout. This should allow for a proper modal after styling and prevent it from vanishing when mouse leaves cart.
+
+- Witnessed bug caused by alert being made visible before being able to capture and set response as alert. Resolved with timeout.
+
+- Components relating to modal work scrubbed for unused code and comments. Alert styling scrubbed.
+
+---
+
+-- 3 Oct 2024 --
+
+- Styling adjustments for responsiveness.
+
+---
+
+-- 29 Sep 2024 --
+
+- Order confirmation text formatted. Ready to begin styling.
+- Styling is in place and functionality for closing the alert and redirecting to home page.
+
+---
+
+-- 28 Sep 2024 --
+
+- Order confirmation is now correctly being captured and forwarded to our alert component. Time for some styling and formatting.
+- Files scrubbed for unused comments and code. Functionality remains.
+
+---
+
+-- 25 Sep 2024 --
+
+- Placed Alert component in layout. Created an alert context in order to pass the response messages from any request necessary. Hopefully may need to alter a bit to get desired result.
+
+---
+
+-- 24 Sep 2024 --
+
+- Initialization of alert components. Alert component and styling in components folder, show context, providers and layout files updated.
+
+---
+
+-- 21 Sep 2024 --
+
+- Succeeded in capturing response into a string that will be able to be returned to the user. Little muddy and needs revision. Essentially using formState to store the value of the response as an object that is updated as the form action is executed. Feels a bit like lifting state earlier in the application build. If backend runs into exception return that response.
+
+---
+
+-- 19 Sep 2024 --
+
+- Had a nice chat with the backend team (myself), and after reviewing the backend realized the requirements for an order object were over complicated. Made adjustments that allow much easier development for front end team (also me.).
+- Front is now able to successfully transmit a customers order to the backend and receive a response.
+- From this exercise a few observations were made and the project issues will be updated.
+  - A need for an alert component that can be utilized application wide.
+  - Separate the submit button from the form to its own component in the UI.
+  - Create a new submit function that can capture the response from the back end when the order is created.
+
+---
+
+-- 7 Sep 2024 --
+
+- Order object created but does not transmit correctly to back end yet. Possibly malformed object. Notes submitted to backend development team (me) >\_<; .
+
+---
+
+-- 5 Sep 2024 --
+
+- Cart now also utilizes a menu id from the menu items added to the cart. This will match the specs of the backend when creating an order.
+
+- Have begun work on building object to submit order in cart libray. Pausing work here so it can be continued on appropriate branch.
+
+---
+
+-- 4 Sep 2024 --
+
+- Discovered flaw in data set up. Backend requires the id of the menu item that is generated at database creation. Cart makes use of a separate id in order to have unique identifier. Easiest path forward might be to pass menu item id as part of object and store that as part of a cart item as well and then pass it forward while creating the id.
+
+---
+
+-- 31 Aug 2024 --
+
+- Have begun refactor of files and validation of customer form fields. Current code in validateName should serve as a template for further work.
+
+- checkName in customer form library regex modified to look for spaces. Error message modified.
+
+- Exported logic for name validation to customer form library.
+
+- Last name validation now makes use of checkName from the customer for library.
+
+- Exported phone validation logic to customer form library. Enhanced copy for warning message.
+
+- Exported email validation logic to customer form library.
+
+---
+
+-- 20 Aug 2024 --
+
+- Responsive design in place. Ready for refactor.
+
+---
+
+-- 14 Aug 2024 --
+
+- Cart font sizes and margins adjusted for responsive design.
+
+---
+
+-- 13 Aug 2024 --
+
+- Began work on responsive design for cart.
+
+---
+
+-- 10 Aug 2024 --
+
+- Refactored styling and validation for a more granular approach and elimination of zod dependency. Not dead set on this solution as it does increase the individual file sizes a bit but may break them down into smaller components and then reincorporate into the form at a later time.
+
+- Customer form validation is in place and will continue to be developed.
+
+---
+
+-- 3 Aug 2024 --
+
+- Zod is in place with the functionality desired and providing correct validation and error messages.
+- It works but only shows the error messages AFTER the form is submitted.
+- My ux goal is to have more immediate feedback for the customer if the data entered into the field isn't acceptable.
+- Going to begin working on my own solution next.
+
+---
+
+-- 2 Aug 2024 --
+
+- Initial styling in place for customer info form.
+- Moved form into cart in order to enhance customer experience. Customer no longer has to click a button in order to bring up the form and enter their data separately.
+
+- Beginning work on writing my own validation for customer info form based on work done on backend for validation. While I appreciate what Zod provides, I feel like I'll have more control if I try to implement my own solution. Wish me luck!
+
+---
+
+-- 27 Jul 2024 --
+
+- Getting much closer.
+
+  - Difficulties were arising from determining a type from the filter for items in the error messages. Appears to be resolved. Callback statement is creating issues currently. The dependency array is based on errors being returned, if there are no errors this result in a state undefined that can not be read. Will be diving into this at a later time.
+
+  - Solved with check. Will refine down the road.
+  - Refactored to eliminate notes and irrelevant code.
+  - Beginning work on styling form.
+
+---
+
+-- 24 Jul 2024 --
+
+- Research continues into building forms in Next.js and form validation.
+  Believe I have found a pattern I appreciate with Zod and have begun implementation.
+
+---
+
+-- 21 Jul 2024 --
+
+- Finally getting back to work on project by capturing form data.
+- Day job has been insane past month. So many boats and so many crew to train! Anyways, feels good to get back into it.
+
+---
+
+-- 26 Jun 2024 --
+
+- Began work on actions file. Plan is as follows:
+  - Create build order function in cart library. This will combine customer info obtained from check out form with the items stored in our cart in order to build the required order object to be submitted to api in order to place an order.
+  - Work on form validation, possibly with Zod.
+
+---
+
+-- 24 Jun 2024 --
+
+- Customer info form moved from cart component to nav button component to aid in styling.
+
+- Began fleshing out form and removing placeholders.
+
+---
+
+-- 19 Jun 2024 --
+
+- Customer info form linked to checkout button in cart component to render conditionally. Next steps will include fleshing out and styling form.
+
+---
+
+-- 17 Jun 2024 --
+
+- Created files for checkout component and implemented styling. Still needs to programmed for functionality.
+- Project updated on github.
+
+---
+
+-- 15 Jun 2024 --
+
+- Cart now correctly checks if menu item has already been added to the cart and if so instructs user to use the cart in order to adjust quantities and remove items first. Functionality achieved through creation of additional parameter to be checked in cart context.
+  - item in cart ? if not add to cart, if so alert user.
+  - item removed from cart ? then item not in cart.
+- Set Item Removed also implemented in cart quantity selector allowing for correct flow of functionality if cart item is removed due to setting the cart item quantity to zero.
+
+- Refactored for elimination of unnecessary code.
+
+---
+
+-- 10 Jun 2024 --
+
+- Removal of unused css.
+
+---
+
+-- 5 Jun 2024 --
+
+- Implemented y overflow for cart.
+
+---
+
+-- 4 Jun 2024 --
+
+- Cart padding and positioning improvements.
+- General layout of cart as imagined.
+
+---
+
+-- 3 Jun 2024 --
+
+- Improvements in cart styling. Components of cart item arranged in grid.
+- Improved spacing of elements in quantity selector.
+
+---
+
+-- 27 May 2024 --
+
+- File cleanup.
+- Update quantity selector styling to be more responsive.
+- Beginning to update the styling for the cart.
+
+---
+
+-- 24 May 2024 --
+
+- Logic for determining if a menu item is already in the cart moved from use effect loop to a separate function executed on click of add to cart button.
+- Already in cart alert bug resolved.
+
+---
+
+-- 23 May 2024 --
+
+- Application now correctly using a unique key for menu and cart items and only the cart item selected is removed when clicking the remove button.
+- Working out a bug where item already in cart alert is being triggered when adding an item to cart after all cart items have been removed.
+
+---
+
+-- 21 May 2024 --
+
+- Application now checks if a menu item is already a cart item and if so, alerts the user to the status and recommends action through an alert.
+- ***
+
+  -- 20 May 2024 --
+
+- Cart items now display an alert when their quantity would exceed the current limit of 10 or if their new quantity would exceed the cart limit of 20 total items.
+- Cart item now removed from cart if quantity selected is 0.
+- Cart quantity badge updates accordingly.
+- Improved on cart display logic.
+- Cart component ready for refactor.
+- Cart components and functions scrubbed for outdated code and comments.
+
+---
+
+-- 17 May 2024 --
+
+- Quantity of any cart item is now correctly limited to 10.
+
+-- 16 May 2024 --
+
+- Cart now correctly only displays update button only when the quantity for a cart item has been changed and only for that cart item.
+
+---
+
+-- 15 May 2024 --
+
+- Logic in place for displaying update button only if a cart items quantity has been changed. Working towards ensuring update button is only displayed for item that has changed and not every item.
+
+---
+
+-- 13 May 2024 --
+
+- Located bug that was consistently overwriting the first item in the cart with the updated cart item and preserving the old details of the altered cart item. This has been rectified and cart is now correctly allowing for cart items to have their quantity altered and the prices and cart quantity badge are reflective of those changes.
+
+---
+
+-- 7 May 2024 --
+
+- Cart badge now reflects updated cart quantity when updating a cart item quantity.
+  - Still need:
+    - install quantity checks and alerts.
+    - check if item already in cart when clicking add to cart and if so display alert to click cart icon and alter quantities there.
+    - remove item from cart if quantity zero.
+
+---
+
+-- 5 May 2024 --
+
+- Cart total placeholder replaced and cart appears to be correctly tallying the total for items in cart.
+- Adjusting a cart items quantity displays a button for updating the cart, which updates the total.
+  - Continuing on with bug hunting in cart component logic that may prevent cart from accurately being portrayed.
+
+---
+
+-- 1 May 2024 --
+
+- Cart now displays conditionally according to if there is anything in the cart or not.
+
+---
+
+-- 30 Apr 2024 --
+
+- Cart correctly displays an updated cart for the user when an item is added and when an item is removed.
+- Cart quantity badge is correctly tracking and updating as the contents of the cart change.
+
+---
+
+-- 29 Apr 2024 --
+
+- Continuing to build out cart component.
+  - Progress made on removing an item from the cart. Needs to rerender in order to update cart state. Looking into utilizing context.
+    -Forwarded ideas to ux and and design team (both are me ^\_^) in regards to improving on cart styling.
+
+---
+
+-- 27 Apr 2024 --
+
+- Slight adjustment to cart styling in order to aid in development of cart functionality. Will finalize styling once functionality is in place.
+
+- Cart component now has similar display functionality as menu category nav menu. Hove displays the cart, entering component continues to display and mouse leaving component causes component to vanish.
+
+- Cart items now correctly adjust quantity and price when altered in the cart.
+
+---
+
+-- 25 Apr 2024 --
+
+- Remove from cart button component added to ui library and integrated into cart component.
+- Still need to update styling and program for functionality.
+
+---
+
+-- 24 Apr 2024 --
+
+- Improved on styling with focus on responsiveness.
+
+---
+
+-- 22 Apr 2024 --
+
+- Initialized styling of cart component.
+
+---
+
+-- 18 Apr 2024 --
+
+- Continuation of fleshing out cart item and cart component.
+- Altered get cart function from async to synchronous function.
+- Cart components should be ready styling initialization.
+
+---
+
+-- 17 Apr 2024 --
+
+- While working on cart item component I discovered code was not happy as custom hook was being called conditionally in a try catch black. Wrote a new function returns the custom hook and makes everything happy while still handling the error.
+
+---
+
+-- 16 Apr 2024 --
+
+- Began fleshing out cart item.
+
+---
+
+-- 15 Apr 2024 --
+
+- Project updated in github with actions to be taken to facilitate cart functionality.
+- Additions to display context for displaying cart.
+- Generic placeholder for cart implemented.
+- Additions to nav buttons concerning logic for displaying cart.
+- Generic cart item component created and ready to be fleshed out.
+
+---
+
+-- 13 Apr 2024 --
+
+- Wireframe for cart display and checkout functions.
+
+<p align="center">
+  <img src="./media/wireframes/view-cart-and-checkout.png"/>
+</p>
+
+---
+
+-- 11 Apr 2024 ---
+
+- Enjoyed a little break after completing sprint and have started looking at implementation of cart for customer view to then be followed up by order submission.
+- Also starting back at seasonal day job today. Thankful to have it while making career transition but it should be expected for development to slow a bit.
+
+---
+
+-- 4 Apr 2024 ---
+
+- Basic implementation for error handling in place with styling.
+
+- Improved on styling for expanded view close button and type copy when user tries to add more than 15 items to their cart.
+
+- Added a touch more drop shadow to menu items hover state.
+
+---
+
+-- 3 Apr 2024 ---
+
+- Styling enhancements for expanded view of menu item.
+
+  - Greater separation between item name and close expanded view button.
+  - Enhancement for expanded view font size and spacing for description and title.
+
+- Reimplemented functionality for add to cart button to both close the expanded view and return quantity to default by passing functions as props.
+
+- Styling was not quite what was needed and so updated.
+
+- Menu context provider removed from layout. Is already in providers component.
+
+---
+
+-- 2 Apr 2024 ---
+
+- While working to have not found function correctly with elements of the header I realized my context was not as I wished.
+  Getting convoluted and repeating some functionality unnecessarily. Made notes and decided to go back and readdress. Wish me luck.
+
+- Context refactored to encapsulate children in a a providers component. This allows for for more organized components I believe and reduces repeated functionality. Also allows for the elimination of writing the menu categories into session storage.
+
+---
+
+-- 1 Apr 2024 ---
+
+- Refactored context to utilize a consistent naming schema.
+- Add to cart resets menu item quantity to default quantity.
+- Responsive design improved for menu item expanded view. Now takes into account when ghost div is rendered with size selector.
+- Improvements to responsive font size for menu category description.
+- CSS class name alter for improved description semantics.
+
+---
+
+-- 28 Mar 2024 ---
+
+- Scrubbed styling of superfluous code and comments.
+- Established site color in the body as a variable allowing for easier reusability and maintenance.
+- Removed unused modal folder and component.
+- Detailed view of menu item card now closes when the add to cart button is clicked.
+
+---
+
+-- 27 Mar 2024 ---
+
+- Improvements to responsiveness of cart quantity badge.
+- Improvements to detailed view.
+  - Close button fixed in relation to card size.
+  - Card min and max sizes established.
+- Improvements to 'p' font size for expanded view and category title spacing.
+
+---
+
+-- 26 Mar 2024 ---
+
+- Responsive implementation for logo and loading animation.
+- Improvements to responsiveness of menu category descriptions.
+- Updated responsive grid styling. Previous implementation was causing menu item names to wrap in an undesirable fashion.
+
+---
+
+-- 25 Mar 2024 ---
+
+- Responsive design work for main header.
+- Initialization of work on a 1300px breakpoint. Seeing what breaks and altering.
+- Menu sizing for medium devices (< 1300) and general responsiveness.
+- Responsive sizing for small devices ( < 800)
+- Responsive sizing for xs devices (< 500)
+
+---
+
+-- 22 Mar 2024 ---
+
+- Continuing responsive design for detailed view.
+- Have determined responsive design has hit its limit as is and it is time to start utilizing media requests.
+
+---
+
+-- 21 Mar 2024 ---
+
+- Improved on responsive menu design and restored functionality.
+- Improved on menu animation.
+- Landing page logo position enhanced.
+- Loading animation position moved to match.
+- Responsive design implemented for menu items category and category description.
+- Responsive design implemented for cart quantity badge.
+- Responsive design in place for horizontal challenges. Work will continue with vertical.
+
+---
+
+-- 20 Mar 2024 ---
+
+- Responsive design implemented for header and logo.
+- Responsive design implemented for menu.
+
+---
+
+-- 19 Mar 2024 ---
+
+- Initiated work on responsive design.
+- Gap between header elements now responsive down to a width of 640. Removed fixed position and overwrote div in global.
+
+- Project rebase before continuing styling
+
+-- 15 Mar 2024 ---
+
+- Reimplemented cart quantity badge not being displayed until items are actually in cart.
+- Implemented cart quantity limiter with alert message. The idea being to limit opportunities for runaway or mischief order as our owners are currently a cash business. A user is currently limited to 15 items in their order and if more items desired, encouraged to contact the business.
+
+---
+
+-- 14 Mar 2024 ---
+
+- Restyled expanded view of menu item in order to prevent shift when dev tools are up in browser.
+- Restyled cart quantity badge for similar reasons and it will remain locked in place until I begin addressing responsive design for the application.
+
+---
+
+-- 13 Mar 2024 ---
+
+- Discovered duplicate menu items folder, it has been removed and references updated.
+- Moved button type components to buttons folder in ui component folder.
+- Menu icon now has desired behavior of show menu on entry and hiding when use moves cursor somewhere besides menu. Also hides menu when user enters the menu and move off of it with out making a selection.
+- Changed expanded view close icon to use standard app font. User feedback indicated the before used custom font was harder to determine what the intended purpose was.
+- Reinstated loading animation for menu items.
+- Removed unnecessary context items.
+
+---
+
+-- 12 Mar 2024 ---
+
+- Revised styling on menu item expanded view. Still have a few elements running rogue when dev tools brought up but overall experience and aesthetics improved.
+- Corrected issues derived from menu item list being brought in as an async function.
+- Successfully migrated cart quantity logic into library improving readability of cart quantity component.
+
+---
+
+-- 11 Mar 2024 ---
+
+- Was able to move logic for cart quantity out of nav button inside of its own component.
+
+- Discovered rendering issues were arising as result of where and when call to create cart was currently located and so transported it in to use effect for cart quantity badge. May also move it into main header so that all items dealing with session storage are dealt with at once.
+
+---
+
+-- 7 Mar 2024 ---
+
+- Cart quantity badge styling is updated. Background color matches quantity selected and item size font color when selected. The idea being this color indicating the user did something.
+
+- Updated styling for add to cart button. Active is now set to change color in order to provide feedback to the user that they did add something to the cart.
+
+- Similar styling implemented for quantity selector increment and decrement buttons.
+
+- Animation in place for the cart quantity badge to activate when an item is added to the cart. Still needs to be wired up.
+
+---
+
+-- 6 Mar 2024 ---
+
+- Cart quantity badge is now only visible if items determined to be in a cart. Click add to cart button on a menu item sets items in cart to true.
+- Code refactored to reimplement cart as session storage.
+- Cart quantity is now reflective of cart stored in session storage, meaning persistence of value for cart quantity is maintained.
+
+---
+
+-- 5 Mar 2024 ---
+
+- Cart quantity badge is in place and accurately reflecting quantity of all items in the cart. Ready for styling.
+- Cart quantity badge is styled and ready for further programming.
+- Cart quantity badge is now dynamically updating the number of items that should be in the cart based on the users input.
+
+---
+
+-- 4 Mar 2024 ---
+
+- Session Storage holds a TonsOfTacosCart object created at runtime. The idea is to use session storage in order to preserve high frequency state changes for our customers cart in case of browser refresh. This may change over time and make use of Redux or Zustand.
+
+- Cart and its contents will be destroyed upon checkout. Following a principle of unobtrusive data storage for the customer.
+
+- As time and use case progresses we may see a need for creating a session id and storing it on the backend, in order to facilitate if a customer wishes to create an account to facilitate advanced features dow the road such as repeating an order or creating a reoccurring order, or even sharing a favorite order with others.
+
+- Discovered a couple of errors in code and rectified. GetCart and AddToCart are currently functioning as desired.
+
+---
+
+-- 29 Feb 2024 ---
+
+- Created types for cart item and cart in types.d.ts. Created skelton for cart functions in library. The idea is to separate out from actual component to reduce a sense of clutter. Creating a new branch for overlap work between menu items and cart.
+
+- Filled out function for adding a menu item to the cart and session storage. Ready to implement context for passing between components and along with sessionStorage.
+
+---
+
+-- 28 Feb 2024 ---
+
+- Expanded card in place and functioning as desired. Enlarges in order to display a description for the menu item. Expanded version of card dismissed with click of button in upper right hand corner.
+
+- Cart context created. Need order item type creation to begin working with.
+
+---
+
+-- 27 Feb 2024 ---
+
+- Replaced place holders for more/description button and add to cart with buttons in menu item. They are ready for further styling.
+
+- Created icon folder in ui components. Will migrate others there as well. Also will be moving buttons and update styling at some point for modularity.
+
+- Updated styling for pointer cursor opn interactive elements.
+
+- Created conditions for triggering larger card presence. The idea is that instead of being presented as a modal we simply make the card bigger to hold description. Ready for styling.
+
+- Basic styling in place for expanded card.
+
+---
+
+-- 26 Feb 2024 ---
+
+- Context not an appropriate means for managing the state of a menu item as it would be wrapped around all menu items and therefore all menu items would be using the same size state.
+
+- Opted to pass setter down from menu item to size selector and send results back for calculating price.
+
+- Another option would be to bring the button component for the size selector into the size selector component if the prop drilling is deemed excessive.
+
+- Another design option might be to bring menu item into the card component one step earlier and surround that with context before bringing up into menu item list.
+
+- Further options to be evaluated at a later date. Component is functioning as desired at the moment and is ready for a refactor scrub.
+
+- Refactor scrub complete.
+
+- Size selector is now only visible if sizes are available. Utilized state passed to size selector and then conditional opacity as a class in css to achieve the desired result.
+
+- Ready start work on detail view of menu item.
+
+---
+
+-- 23 Feb 2024 ---
+
+- Began work on size selector by tinkering with html and css options. Desired result wasn't quite there. Did some reading and research and came to solution that marries some of what I did with html and css along with other reusable components I had created.
+
+As time goes on I think it will be a strong base for developing a modular solution for larger applications where more radio style features might be needed.
+
+Work ready for a refactor and scrub an implementation of factoring in size options to pricing.
+
+Start with creating a context.
+
+---
+
+-- 22 Feb 2024 ---
+
+- Quantity selector functioning as desired and updates the displayed price in accordance. Ready for refactor scrub.
+
+---
+
+-- 21 Feb 2024 ---
+
+- Size selector styled and ready to programmed.
+- Selector placeholder removed.
+- Reduced menu item image size.
+- Quantity Selector set into its own component.
+- Styling for quantity selector moved to its own style sheet.
+
+---
+
+-- 20 Feb 2024 ---
+
+- Altered color scheme slightly for menu items.
+- Created styling for quantity selector.
+- Increased styling to menu item elements.
+
+---
+
+-- 18 Feb 2024 ---
+
+- Began additional styling of menu items.
+  - Increased gap between items.
+  - Item name is now an h2 element.
+  - h2 styling introduced in global.css.
+    - changed color and front size.
+  - Added icon image for description/expanded view.
+  - Slightly altered timing of loading animation.
+
+---
+
+-- 17 Feb 2024 ---
+
+- Main header is now a server component and calls our menu categories.
+- Data passed to nav button and set as a context and kept in session storage.
+- Dynamic page now passes slug for desired menu category to the menu item list component and makes item list component where data is mapped for each menu item in the component. This is also a server component.
+- Learned a lot in the refactor that should aid in the next steps.
+
+---
+
+-- 16 Feb 2024 ---
+
+- Began refactor process trying to solve for an inconsistency with our food menu items reloading when reselecting the menu button without having selected a new menu category.
+- Traced to components encapsulated in the same context component. Will be breaking this larger context provider into smaller ones more task dedicated.
+  there will be some overlap concerning menu categories but should be minimal.
+- Tracing the issue lead to a much more detailed understanding of Next.js structure.
+- Continued refactor still in progress.
+
+---
+
+-- 13 Feb 2024 ---
+
+- Created assets for loading animation and implemented the animation. Requires a little additional tweaking.
+- Menu item list currently has a timeout implemented to test loading animation.
+
+---
+
+--- 10 Feb 2024 ---
+
+- Rectified a few styling oddities and created drop down animation for menu nav.
+- Upgraded NVM to 18.
+
+---
+
+--- 9 Feb 2024 ---
+
+- Changed menu button from on click to on enter.
+
+---
+
+--- 8 Feb 2024 ---
+
+- Refactored styling modules to eliminate unused code and notes. Moved fonts folder into nested ui folder. Ready for more styling.
+- Set main background color to #0c0424. Will need to update the template.
+- Set overflow y to scroll. Prevents content shift for now.
+- Added transition ease onto various interactive elements.
+- Utilized framer motion for loading menu item pages with a smoothed transition.
+- Styled scrollbar to match theme.
+
+---
+
+--- 7 Feb 2024 ---
+
+- Worked on styles for our menu item grid,and main nav header. Noticed where styling could be tightened up and made a bit leaner. Also set items to more dynamically align and center with other elements. Ready for refactor to scrub old solutions.
+- Next will come fleshing out the menu item cards a little bit more.
+
+---
+
+--- 6 Feb 2024 ---
+
+- Backend team(me ^\_^) finished implementation of adjusting pricing according to size and we should be good to go after looking over documentation. Also altered our code to format pricing correctly.
+
+---
+
+--- 5 Feb 2024 ---
+
+- Reverted to local storage after remembering that desired experience is for a user to be able to head straight to a menu category without having been to the application before.
+
+- Outsourced call to api for menu items to library.
+
+- Removed extraneous notes.
+
+- Sent request to backend team(me ^\_^) to return menu item price in currency format as well as implement functionality for a adding a size to a menu item if applicable and calculate appropriate price.
+
+---
+
+--- 3 Feb 2024 ---
+
+- Supplanted local storage for session storage. Ready for refactor and clean up.
+
+---
+
+--- 1 Feb 2024 ---
+
+- Implemented some persistance through local storage in order to keep moving forward with development. I am earmarking this with a note for a revaluation of obtaining the same desired results through alternative means ie Zustand, perhaps usage of memo or callback other state management libraries.
+
+- In order to achieve persistance for menu categories and category descriptions after a browser refresh, the following was implemented:
+
+  - In the header component we utilize use effect on initialization to call our api and simultaneously set the global context of menu categories and set it in the local storage. By doing this if the browser is refreshed, the header component recalls the api and resets. The context can still be used.
+
+  - If the user is on the menu items pages though and browser is refreshed the required values are not reset before being called and we get a not found page. This is fixed by feeding the required values needed for validation from the values saved to local storage.
+
+---
+
+--- 31 Jan 2024 ---
+
+- Successful implementation of global context for menu categories.
+
+  - Updated context.
+  - Updated api fetch.
+  - Main header is rendered on loading and interactive and already client component for conditionally displaying nav menu. Therefore set global context for menu categories here.
+    - Utilized useEffect() as component can not be async as it is client in order to use global context.
+  - Updated menu category list to use categories from global context instead of passed props. Unnecessary props will be removed shortly.
+
+- Successful implementation of dynamically returning category descriptions. Issues here are that on refresh we lose it.
+  - Thinking the solution would be to add a menu options to global context and also set in the main header.
+  - Possibly also evaluate condition as an async function.
+
+---
+
+--- 30 Jan 2024 ---
+
+- Created new branch to continue on creating contexts. Application currently delivers content dynamically from our backend and through the use of context, but is also passing information through prop drilling. My next goal will be to fetch data on the server side and essentially set it as a semi global context that I can call into different components. Hopefully this eliminate a number of needless calls or prop spelunking. Wish me luck.
+
+---
+
+--- 23 Jan 2024 ---
+
+- Implemented calling api route for menu categories from layout and menu categories are dynamically populated.
+
+  - When link is clicked the menu disappears. This is achieved by implementing a global context to be called in other components.
+  - Clicking on a link correctly calls all menu items associated with menu category.
+
+- Push is intentionally a mess so that I can start demonstrating proof of work and conceptualization. Will then clean and pull from main.
+
+---
+
+--- 19 Jan 2024 ---
+
+- Styled out menu category grid of menu items. Basically a ul of cards nested in a section.
+- Styling places our grid dead center and gives the appearance of growing outward.
+- Implemented means to render menu item name with first letter of each word capitalized.
+- Ready to continue styling with a call to get description of category and complete styling of card for changing quantity of a menu item before adding it to cart.
+
+---
+
+--- 18 Jan 2024 ---
+
+- Back-end team(me) implemented our suggestions and so we have made adjustments by renaming our images to correctly reflect menu item names stored in the backend.
+- Currently receiving menu items via a call to backend each time the category changes and the component loads. Will be implementing a loading state. As well will be looking into pre-fetching and rendering the data so that it can displayed quicker. Backend calls also to be transferred elsewhere than in component.
+- Component ready for styling. Reference wire frame.
+
+---
+
+--- 16 Jan 2024 ---
+
+- Roughed in making call to receive menu items by category from backend and it is successfully doing so.
+- Files will need to be cleaned up and notes have been made for future improvements.
+- Noticed places for improvement in back-end in order to aide in ease of development by front-end team (me). Have passed along notes to back-end team(also me ^\_^).
+- Will be starting a new branch for further development of this feature.
+
+---
+
+--- 15 Jan 2024 ---
+
+- Menu items correctly changing dynamically according to slug input provided either through the address bar or our nav menu.
+  - Sample data sets created for each menu item category.
+  - Props passed through from hardcoded sample data to our components making up the display of menu items by category.
+  - Should be ready to swap out sample data for api provided data and styling.
+
+---
+
+--- 12 Jan 2024 ---
+
+- Placeholders for elements on cards and what data to work with for menu items. Think we're about ready to try and start working with data and implementing props. Will start fleshing out sample data sets a little more after the weekend. Planning to do a bit trial and error before firing up the backend and trying to make a connection.
+
+### Cheers and have a great weekend!
+
+---
+
+--- 11 Jan 2024 ---
+
+- Dynamic route and page basic implementation in place.
+  - Slug is captured and validated. Not found page in place to catch invalid requests. After validation switch is set up to change what dataset is used pertaining to what menu items are displayed.
+  - Component is currently returning placeholder elements that verify dynamic functionality.
+- Noticed places for improvement in backend and will be opening issues in project for addressing.
+
+- Created basic files for creation of a menu item, the card it will go into, and the menu item list all menu items will be fed into.
+
+---
+
+--- 10 Jan 2024 ---
+
+- Updated styling for food menu nav. Is now aligned with our header border and the colors for link text and hover match the rest of our theme.
+- Worked on creating dynamic route for menu items by category. Involves capturing the slug through params and setting that as the menu item category requested. Next steps will include using the aforementioned steps to return desired sample data.
+
+---
+
+--- 9 Jan 2024 ---
+
+- Began cleaning up styling and working on styling for menu nav component.
+- Menu nav component initialized and state of its button utilized.
+
+---
+
+--- 8 Jan 2024 ---
+
+- Added to global styling for h1 elements.
+- Created basic files for menu navigation based on menu item category (tacos,drinks,sides,toppings).
+- Created basic pages for menu.
+- Created basic image gallery file for menu items.
+
+---
+
+--- 7 Jan 2024 ---
+
+- Brought in icon images in svg format for manipulation of various properties.
+- Created icon components to bring into main header and styled.
+- Refactored and cleaned up main-header page and css file.
+- Replaced default icon with our fictional companies logo.
+- Will begin work on buttons and nav next.
+- Fixed image links in dev journal.
+
+---
+
+--- 6 Jan 2024 ---
+
+- Began work on header and styling.
+  - Header is a central component for navigating menu items and cart.
+- Brought in fonts through use of importation and global css. So far a bigger fan of creating font faces in css. reads cleaner in the main page.
+- Updated icons for cart and menu in order to fit main font theme a little better.
+- Continued build out for main page and menu to be continued next.
+
+---
+
 --- 4 Jan 2024 ---
 
 Started off new year with completion of a quick next.js refresher and beginning work on the front end.
@@ -27,15 +1674,15 @@ Off to the races!
 ### Sample Mock Ups For Consideration
 
 <p align="center">
-  <img src="./front-end/concept-art/bird-logo/media/main-page-mockup.png"/>
+  <img src="./media/bird-design/main-page-mockup.png"/>
 </p>
 
 <p align="center">
-  <img src="./front-end/concept-art/temple-logo/media/mainpage-mockup1.png"/>
+  <img src="./media/temple-design/mainpage-mockup.png"/>
 </p>
 
 <p align="center">
-  <img src="./front-end/concept-art/ton-logo/media/mainpage-mockup.png"/>
+  <img src="./media/ton-design/mainpage-mockup.png"/>
 </p>
 
 ---
@@ -50,15 +1697,15 @@ Next steps to include:
 - gathering and formatting remaining menu item images
 
 <p align="center">
-  <img src="./front-end/concept-art/bird-logo/media/bird-logo-revised-comparison.png"/>
+  <img src="./media/bird-design/bird-logo-revised-comparison.png"/>
 </p>
 
 <p align="center">
-  <img src="./front-end/concept-art/temple-logo/media/temple-logo-comparison.png"/>
+  <img src="./media/temple-design/temple-logo-comparison.png"/>
 </p>
 
 <p align="center">
-  <img src="./front-end/concept-art/ton-logo/media/ton-logo-comparison.png"/>
+  <img src="./media/ton-design/ton-logo-comparison.png"/>
 </p>
 
 ---
@@ -68,7 +1715,7 @@ Next steps to include:
 - Created wire frame demonstrating action to add a menu item to cart. More or less created to demonstrate knowledge of design life cycle and demonstrate how I might convey that information to others. I may create more for additional actions as time allows in the future but am chomping at the bit to get moving on development.
 
 <p align="center">
-  <img src="./front-end/concept-art/wire-frames/desktop/actions/add-item-to-cart.png"/>
+  <img src="./media/wireframes/add-item-to-carta.png"/>
 </p>
 
 ---
@@ -78,15 +1725,15 @@ Next steps to include:
 - Began creating color templates, logo concept art, and wire frames. Below are a few samples. Will begin work on wire frames for task flows (ie. Selecting menu items and submitting an order, owner login and various tasks.) next.
 
 <p align="center">
-  <img src="./front-end/concept-art/logo-collection.png"/>
+  <img src="./media/logo-collection.png"/>
 </p>
 
 <p align="center">
-  <img src="./front-end/concept-art/theme-layout.png"/>
+  <img src="./media/theme-layout.png"/>
 </p>
 
 <p align="center">
-  <img src="./front-end/concept-art/wire-frames/general-layout.png"/>
+  <img src="./media/wireframes/general-layout.png"/>
 </p>
 
 ---

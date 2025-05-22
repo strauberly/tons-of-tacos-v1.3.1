@@ -13,7 +13,7 @@
 </pre>
 </p>
 
-# tons-of-tacos-v1.3
+# tons-of-tacos-v1.3.1
 
 </div>
 
@@ -25,7 +25,7 @@
 
 ## Tons of Tacos is a fictional food truck. This is an application designed for its owners and their customers in order to expedite the ordering process and increase sales.
 
-## Progress can be monitored from the [Dev-Journal](https://github.com/strauberly/tons-of-tacos-v1.3/blob/main/DEV-JOURNAL.md).
+## Progress can be monitored from the [Dev-Journal](/DEV-JOURNAL.md).
 
 ## Thank you for checking out what I am working on!
 

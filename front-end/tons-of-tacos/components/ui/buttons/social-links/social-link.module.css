@@ -1,0 +1,25 @@
+.footerIcon {
+  height: 2vw;
+  color: var(--interactive-color);
+  transition: 1s ease;
+  cursor: pointer;
+}
+
+.footerIcon:hover {
+  color: var(--attention-color);
+  transition: 0.3s ease;
+}
+
+/* medium devices */
+@media (max-width: 1400px) {
+  .footerIcon {
+    height: 3vw;
+  }
+}
+
+/* small devices */
+@media (max-width: 800px) {
+  .footerIcon {
+    height: 6vw;
+  }
+}

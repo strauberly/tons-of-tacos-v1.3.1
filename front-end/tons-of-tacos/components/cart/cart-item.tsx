@@ -6,7 +6,7 @@ import RemoveFromCart from "../ui/buttons/remove-from-cart/remove-from-cart";
 import Update from "../ui/buttons/update-cart-item/update-cart-item";
 import { useCartContext } from "@/context/cart-context";
 import { GetCart, RemoveCartItem } from "@/lib/cart";
-import { useAlertContext } from "@/context/alert-context";
+import { useModalContext } from "@/context/modal-context";
 import { useDisplayContext } from "@/context/display-context";
 
 export default function CartItem(props: {
@@ -18,17 +18,23 @@ export default function CartItem(props: {
   itemPrice: string;
 }) {
   const [quantity, setQuantity] = useState(props.itemQuantity);
+  const [hasSize, setHasSize] = useState<boolean>(true);
   const { setCart, cartQuantity, setCartQuantity, setItemRemoved } =
     useCartContext();
-  const { setAlert } = useAlertContext();
-  const { setShowAlert } = useDisplayContext();
+  const { setModal } = useModalContext();
+  const { setShowModal } = useDisplayContext();
 
   const increment = () => {
     if (quantity >= 10) {
-      setAlert(
+      setModal(
         "The limit for this item is 10. If you need more please give us a call so we can try to accommodate your order. Thanks!"
       );
-      setShowAlert(true);
+      setShowModal(true);
+    } else if (quantity + cartQuantity > 30) {
+      setModal(
+        "Your order has grown to a fair size. The current maximum is 30 items. Please contact us before adding anything else. \n\nThis will ensure we can make your order happen today. You can also remove items from your cart. Thank you!"
+      );
+      setShowModal(true);
     } else {
       setQuantity(quantity + 1);
     }

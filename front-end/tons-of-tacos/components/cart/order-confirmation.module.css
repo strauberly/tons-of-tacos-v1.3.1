@@ -30,11 +30,13 @@
   width: 100%;
   margin: auto;
   overflow-y: scroll;
+  justify-items: center;
   top: 0;
   bottom: 0;
   padding: 2rem;
   background-color: #0c0424;
   border-radius: 10px;
+  overflow-x: hidden;
 }
 
 .alertBackdrop {
@@ -58,22 +60,22 @@
 }
 
 .close {
-  position: relative;
+  display: flex;
   font-size: clamp(2.5rem, 1vw, 1vw);
-  margin: auto;
-  margin-top: 5%;
-  left: 40%;
-  right: 40%;
+  margin-top: 4rem;
+  padding-bottom: 4rem;
+  cursor: pointer;
 }
 
 @media (max-width: 1005px) {
   .alert {
     margin: auto;
+    width: 75%;
   }
 
   .close {
     margin: auto;
-    margin-top: 2%;
+    margin-top: 25%;
     left: 80%;
   }
 }

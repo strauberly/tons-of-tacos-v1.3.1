@@ -3,30 +3,20 @@
   flex-direction: column;
   right: 50%;
   left: 50%;
-  gap: 1vw;
+  gap: 2vw;
   font-size: clamp(1.25rem, 2vw, 1.5vw);
   justify-content: center;
   margin-top: 1vw;
   margin-bottom: 1vw;
 }
 
-.grid {
-  justify-content: center;
-  align-items: center;
-}
-
 .form div {
   display: flex;
-  gap: 2%;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 1vw;
 }
 .form label {
   color: var(--interactive-color);
   justify-content: left;
-  padding-right: 1vw;
-  padding-left: 0.5vw;
+  min-width: max-content;
 }
 
 .form input,
@@ -40,6 +30,7 @@
   padding-left: 1vw;
   padding-top: 0.5vw;
   padding-bottom: 0.5vw;
+  margin-bottom: 1rem;
 }
 
 .form input:focus,
@@ -53,23 +44,13 @@
 }
 
 .invalid {
-  width: 40%;
   border: 2px solid var(--attention-color);
   border-radius: 3px;
 }
 
 .valid {
-  width: 40%;
   border: 2px solid var(--border-color);
   border-radius: 3px;
-}
-
-.phone {
-  width: 81%;
-}
-
-.email {
-  width: 81%;
 }
 
 .checkoutButton {
@@ -87,43 +68,82 @@
   transition: 0.025s ease;
 }
 
-.errorMessages {
-  display: block;
-  color: var(--attention-color);
-  font-family: var(--inter-font);
-  justify-content: center;
-  margin-bottom: 1vw;
-  align-items: center;
+.names {
+  align-items: first baseline;
+  flex-direction: row;
+  gap: 2%;
+  margin-bottom: 1rem;
+}
+
+.first {
+  flex-direction: column;
+  min-width: 44%;
+  padding-left: 0.5%;
 }
 
 .firstNameError {
   display: block;
   color: var(--attention-color);
   font-family: var(--inter-font);
-  justify-content: center;
-  margin-bottom: 1vw;
-  align-items: center;
-  margin-left: 5vw;
+  max-width: 100%;
+}
+
+.last {
+  flex-direction: column;
+  min-width: 44%;
 }
 
 .lastNameError {
   display: block;
   color: var(--attention-color);
   font-family: var(--inter-font);
-  justify-content: center;
-  margin-bottom: 1vw;
-  align-items: center;
-  margin-left: 2vw;
+  max-width: 100%;
+}
+
+.phone {
+  align-items: first baseline;
+  margin-bottom: 1rem;
+}
+
+.phoneColumn {
+  flex-direction: column;
+  margin-left: 2%;
+  min-width: 89%;
 }
 
 .phoneError {
+  display: block;
   color: var(--attention-color);
-  margin-left: 5vw;
+  font-family: var(--inter-font);
+  max-width: 100%;
+}
+
+.email {
+  align-items: first baseline;
+}
+
+.emailColumn {
+  flex-direction: column;
+  min-width: 89%;
+  margin-left: 2%;
 }
 
 .emailError {
   color: var(--attention-color);
-  margin-left: 5vw;
+}
+@media (max-width: 695px) {
+  .phoneColumn {
+    min-width: clamp(84%, 30vw, 88%);
+  }
+  .emailColumn {
+    min-width: clamp(84%, 30vw, 88%);
+  }
+  .first {
+    min-width: clamp(30%, 30vw, 88%);
+  }
+  .last {
+    min-width: clamp(30%, 30vw, 88%);
+  }
 }
 
 @media (max-width: 450px) {

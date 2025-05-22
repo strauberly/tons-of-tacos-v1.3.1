@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useRef, useState, useActionState } from "react";
-import SubmitButton from "../buttons/checkout/checkout-button";
+import React, { useRef, useState, useActionState, useEffect } from "react";
+import SubmitButton from "../buttons/submit-order/submitOrder-button";
 import classes from "./customer-info-form.module.css";
 import { checkEmail, checkName, checkPhone } from "@/lib/customer-form";
 import { SendOrder } from "@/lib/cart";
@@ -66,85 +66,90 @@ export default function CustomerInfoForm() {
     });
   }
 
-  setOrderConfirmation(state.message);
+  useEffect(() => {
+    setOrderConfirmation(state.message);
+  });
 
   return (
     <form className={classes.form} action={formAction}>
-      <div>
+      <div className={classes.names}>
         <label className={classes.name}>Name</label>
-        <input
-          className={` 
-            ${firstNameValid ? classes.valid : classes.invalid}
-
+        <div className={classes.first}>
+          <input
+            className={` 
+              ${firstNameValid ? classes.valid : classes.invalid}
+              
               `}
-          type="text"
-          id="first_name"
-          name="first_name"
-          placeholder="Enter First Name"
-          maxLength={17}
-          required
-          onChange={validateFirstName}
-        />
-        <input
-          className={` 
+            type="text"
+            id="first_name"
+            name="first_name"
+            placeholder="Enter First Name"
+            maxLength={17}
+            required
+            onChange={validateFirstName}
+          />
+          {!firstNameValid && (
+            <p className={classes.firstNameError}>{errors.firstNameError}</p>
+          )}
+          <div />
+        </div>
+        <div className={classes.last}>
+          <input
+            className={` 
                 ${lastNameValid ? classes.valid : classes.invalid}
-                  `}
-          type="text"
-          id="last_name"
-          name="last_name"
-          placeholder="Enter Last Name"
-          maxLength={17}
-          required
-          onChange={validateLastName}
-        />
+                `}
+            type="text"
+            id="last_name"
+            name="last_name"
+            placeholder="Enter Last Name"
+            maxLength={17}
+            required
+            onChange={validateLastName}
+          />
+          {!lastNameValid && (
+            <p className={classes.lastNameError}>{errors.lastNameError}</p>
+          )}
+        </div>
       </div>
-      <div>
-        {!firstNameValid && (
-          <p className={classes.firstNameError}>{errors.firstNameError}</p>
-        )}
-        {!lastNameValid && (
-          <p className={classes.lastNameError}>{errors.lastNameError}</p>
-        )}
-      </div>
-      <div>
+      <div className={classes.phone}>
         <label>Phone</label>
-        <input
-          className={`${classes.phone} ${
-            phoneValid ? classes.valid : classes.invalid
-          }`}
-          type="text"
-          id="phone"
-          name="phone"
-          placeholder="Enter Phone Number (ie 555.555.5555)"
-          required
-          onChange={validatePhoneNumber}
-        />
+        <div className={classes.phoneColumn}>
+          <input
+            className={` ${phoneValid ? classes.valid : classes.invalid}`}
+            type="text"
+            id="phone"
+            name="phone"
+            placeholder="Enter Phone Number (ie 555.555.5555)"
+            required
+            maxLength={12}
+            onChange={validatePhoneNumber}
+          />
+          {!phoneValid && (
+            <p className={classes.phoneError}>{errors.phoneError}</p>
+          )}
+        </div>
       </div>
-      <div className={classes.errors}>
-        {!phoneValid && (
-          <p className={classes.phoneError}>{errors.phoneError}</p>
-        )}
-      </div>
-      <div>
+      <div className={classes.email}>
         <label>E-mail</label>
-        <input
-          className={`${classes.email}
+        <div className={classes.emailColumn}>
+          <input
+            className={`
             ${emailValid ? classes.valid : classes.invalid}
-              `}
-          type="text"
-          id="email"
-          name="email"
-          placeholder="Enter E-Mail Address"
-          required
-          onChange={validateEmail}
-        />
+            `}
+            type="text"
+            id="email"
+            name="email"
+            placeholder="Enter E-Mail Address"
+            required
+            maxLength={30}
+            onChange={validateEmail}
+          />
+          {!emailValid && (
+            <p className={classes.emailError}>{errors.emailError}</p>
+          )}
+        </div>
       </div>
 
-      <div>
-        {!emailValid && (
-          <p className={classes.emailError}>{errors.emailError}</p>
-        )}
-      </div>
       <SubmitButton
         firstName={firstNameValid}
         lastName={lastNameValid}

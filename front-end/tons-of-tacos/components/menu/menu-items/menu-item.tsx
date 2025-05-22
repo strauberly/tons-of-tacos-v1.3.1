@@ -1,13 +1,16 @@
 import Card from "@/components/ui/cards/card";
 import Image from "next/image";
 import classes from "./menu-item.module.css";
-import SizeSelector from "./size-selector/size-selector";
-import QuantitySelector from "./quantity-selector/quantity-selector";
 import { useEffect, useState } from "react";
+import QuantitySelector from "./quantity-selector/quantity-selector";
 import MoreIcon from "@/components/ui/icons/more-icon";
-import AddToCart from "../../ui/buttons/add-to-cart/add-to-cart";
+
+import { useSelectedSizeContext } from "@/context/size-context";
 import { useDisplayContext } from "@/context/display-context";
-import { useAlertContext } from "@/context/alert-context";
+import { useModalContext } from "@/context/modal-context";
+import AddToCart from "@/components/ui/buttons/add-to-cart/add-to-cart";
+import SizeSelector from "./size-selector/size-selector";
+import { useMenuItemIdContext } from "@/context/menu-item-context";
 
 export default function MenuItem(props: {
   id: string;
@@ -18,23 +21,35 @@ export default function MenuItem(props: {
   itemSize: string;
   unitPrice: number;
 }) {
-  const defaultQuantity: number = 1;
-  const itemSizes = ["small", "medium", "large"];
-  const [sizeAvailable, setSizeAvailable] = useState(false);
-  const [quantity, setQuantity] = useState(defaultQuantity);
-  const [size, setSize] = useState(" ");
+  const { setModal } = useModalContext();
+  const { setShowModal } = useDisplayContext();
+  const { menuItemId } = useMenuItemIdContext();
   const [expand, setExpand] = useState(false);
-  const { setAlert } = useAlertContext();
-  const { setShowAlert } = useDisplayContext();
+  const [price, setPrice] = useState("");
+
+  const [sizeAvailable, setSizeAvailable] = useState(false);
+  const { selectedSize, setSelectedSize } = useSelectedSizeContext();
+
+  const expander = () => {
+    setExpand(false);
+  };
+
+  const itemSizes = ["small", "medium", "large"];
+  const defaultQuantity: number = 1;
+  const [quantity, setQuantity] = useState(defaultQuantity);
+
+  const quantitySelector = () => {
+    setQuantity(defaultQuantity);
+  };
 
   const increment = () => {
     setQuantity(quantity + 1);
     if (quantity >= 10) {
       setQuantity(10);
-      setAlert(
+      setModal(
         "The limit for this item is 10. If you need more please give us a call so we can try to accommodate your order. Thanks!"
       );
-      setShowAlert(true);
+      setShowModal(true);
     }
   };
 
@@ -45,50 +60,46 @@ export default function MenuItem(props: {
     }
   };
 
-  const sizeSetter = (sizePicked: string) => {
-    setSize(sizePicked);
-  };
-
-  const quantitySelector = () => {
-    setQuantity(defaultQuantity);
-  };
-
-  const expander = () => {
-    setExpand(false);
-  };
-
-  function calcPrice() {
-    let adjPrice: number;
-    let sizeSurcharge = 0;
-
-    switch (size) {
-      case "medium":
-        sizeSurcharge = 0.5;
-        break;
-      case "large":
-        sizeSurcharge = 1.0;
-        break;
-    }
-
-    // eslint-disable-next-line prefer-const
-    adjPrice = (sizeSurcharge + props.unitPrice) * quantity;
-    return adjPrice;
-  }
+  console.log("item size:" + props.itemSize);
+  console.log("selected size:" + selectedSize);
 
   useEffect(() => {
+    function calcPrice() {
+      let adjPrice: number;
+      let sizeSurcharge = 0;
+
+      if (selectedSize === "medium" && props.id === menuItemId) {
+        sizeSurcharge = 0.5;
+      } else if (selectedSize === "large" && props.id === menuItemId) {
+        sizeSurcharge = 1.0;
+      }
+
+      // eslint-disable-next-line prefer-const
+      adjPrice = (sizeSurcharge + props.unitPrice) * quantity;
+      return adjPrice;
+    }
+
     if (props.itemSize === "a") {
       setSizeAvailable(true);
     }
-  }, [props.itemSize]);
-
-  const price = calcPrice().toFixed(2);
+    setPrice(calcPrice().toFixed(2));
+  }, [
+    menuItemId,
+    props.id,
+    props.itemSize,
+    props.unitPrice,
+    quantity,
+    selectedSize,
+    setSelectedSize,
+  ]);
 
   return (
-    <Card expand={expand} any={undefined}>
+    <Card expand={expand}>
       <li
         className={`${classes.card} ${expand === true ? classes.expand : " "}`}
       >
-        <h2>{props.itemName}</h2>
+        <h2 className={classes.itemName}>{props.itemName}</h2>
+
         {expand && (
           <button
             onClick={() => setExpand(false)}
@@ -97,6 +108,7 @@ export default function MenuItem(props: {
             X
           </button>
         )}
+
         <Image
           id={classes.itemImage}
           src={`/images/menu-items/${props.category}/${props.itemName}.jpg`}
@@ -104,17 +116,17 @@ export default function MenuItem(props: {
           width={250}
           height={250}
         />
+
         <div className={classes.ghostDiv}>
           {expand && <p>{props.description}</p>}
           {sizeAvailable && (
             <SizeSelector
               sizes={itemSizes}
-              sizeSetter={sizeSetter}
               sizeAvailable={sizeAvailable}
+              id={props.id}
             />
           )}
         </div>
-
         <QuantitySelector
           value={quantity}
           increment={increment}
@@ -123,16 +135,15 @@ export default function MenuItem(props: {
         <p className={classes.price}>${price}</p>
 
         <AddToCart
-          id={`${props.itemName}_${size}`}
+          id={`${props.itemName}_${selectedSize}`}
           menuId={props.id}
           itemName={props.itemName}
           quantity={quantity}
-          size={size}
+          size={selectedSize}
           price={price}
           quantitySelector={quantitySelector}
           expander={expander}
         />
-
         {!expand && (
           <button onClick={() => setExpand(true)}>
             <MoreIcon />

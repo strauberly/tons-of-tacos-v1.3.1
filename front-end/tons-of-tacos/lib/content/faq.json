@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "q": "How do I use this site?",
+    "a": "Add menu items to the cart. Fill in info needed for the order and click submit order. Come down to the truck, provide us with your order number, pay and pick up your food. Simple enough but feel free to give us a shout with any questions."
+  },
+  {
+    "id": 2,
+    "q": "Where is the truck?",
+    "a": "In the main parking lot directly across from the main entrance doors. In the future we'll have a map and calendar so you can find us no matter what. We are on site from 11am - 2pm."
+  },
+  {
+    "id": 3,
+    "q": "I need to place an order larger than the cart allows. How can I do this?",
+    "a": "Give us a call or an email and we'll get you set up."
+  },
+  {
+    "id": 4,
+    "q": "Can you cater for large events?",
+    "a": "Absolutely. We need about two weeks notice and can accommodate up to 80 persons."
+  },
+  {
+    "id": 5,
+    "q": "What forms of payment do you accept?",
+    "a": "Cash is preferred, but we do also accept debit and credit cards."
+  }
+]

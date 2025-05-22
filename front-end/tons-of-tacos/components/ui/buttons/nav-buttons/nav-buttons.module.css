@@ -2,7 +2,7 @@
   position: static;
   position: fixed;
   display: flex;
-  gap: 2.5vw;
+  gap: 8vw;
   left: 82vw;
   margin-top: 0.24rem;
 }
@@ -12,9 +12,6 @@
   color: var(--interactive-color);
   transition: 1s ease;
   cursor: pointer;
-  margin-bottom: 1.25vw;
-  padding-right: 1.8vw;
-  padding-left: 1.8vw;
 }
 
 .icon:hover {
@@ -31,7 +28,7 @@
 
   .navButtons {
     left: 75vw;
-    gap: 4vw;
+    gap: 9vw;
   }
 }
 
@@ -46,6 +43,6 @@
     left: 70vw;
     margin-right: 60rem;
     margin-top: 1vw;
-    gap: 4vw;
+    gap: 9.5vw;
   }
 }
