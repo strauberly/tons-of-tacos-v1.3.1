@@ -69,7 +69,7 @@ export function RemoveFromOrderMessage(props: {
   return message;
 }
 
-export function CustomerUpdateMessage( customer: Customer ) {
+export function CustomerUpdateMessage(customer: Customer) {
   const message: string =
     "Update customer info to: " +
     customer.name +
@@ -83,17 +83,30 @@ export function CustomerUpdateMessage( customer: Customer ) {
 export function UpdateOrderItemMessage(props: {
   orderItem: OrderItem;
   newQuantity: number;
+  newSize: string;
 }) {
   const message: string =
-    "Update " +
-    props.orderItem.itemName +
-    " x " +
-    `${props.orderItem.quantity},` +
-    " to " +
-    props.orderItem.itemName +
-    " x " +
-    props.newQuantity +
-    "?";
+    includeSize(props.orderItem.size) == true
+      ? "Update " +
+        props.orderItem.itemName +
+        " " +
+        props.orderItem.size +
+        " x " +
+        `${props.orderItem.quantity},` +
+        " to " +
+        props.orderItem.itemName +
+        " x " +
+        props.newQuantity +
+        "?"
+      : "Update " +
+        props.orderItem.itemName +
+        " x " +
+        `${props.orderItem.quantity},` +
+        " to " +
+        props.orderItem.itemName +
+        " x " +
+        props.newQuantity +
+        "?";
 
   return message;
 }
