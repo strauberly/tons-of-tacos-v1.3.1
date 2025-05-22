@@ -37,7 +37,7 @@ const ModalContext = createContext<ContextProps>({
 });
 
 export const ModalContextProvider = ({ children }: { children: ReactNode }) => {
-  const [modal, setModal] = useState<string | undefined>("");
+  const [modal, setModal] = useState<string>("");
   const [orderToView, setOrderToView] = useState<Order>({
     orderUid: "",
     name: "",

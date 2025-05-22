@@ -195,13 +195,15 @@ export async function GetOrder(orderUid: string, token: string) {
     response = await fetch(
       `http://localhost:8080/api/owners-tools/orders/get-order-uid/orderUid?orderUid=${orderUid}`,
       {
-        method: "PUT",
+        method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
       }
     );
+    //
     const data = await response.json();
+
     // rewrite for if not 200
     return data;
   } catch (error) {
