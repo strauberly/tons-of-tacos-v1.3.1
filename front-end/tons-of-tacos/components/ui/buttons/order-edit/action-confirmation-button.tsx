@@ -9,7 +9,7 @@ import {
   GetAllOrders,
   GetOrder,
 } from "@/lib/owners-tools/owners-tools";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 export default function ActionConfirmationButton(props: { title: string }) {
   const { setShowConfirmation, setShowModal } = useDisplayContext();
@@ -20,6 +20,18 @@ export default function ActionConfirmationButton(props: { title: string }) {
   const { orderToView, setModal, setOrderToView } = useModalContext();
 
   const orders = useRef<Order[]>([]);
+
+  const order = useRef<Order>({
+    orderUid: "",
+    name: "",
+    email: "",
+    phone: "",
+    orderItems: [],
+    orderTotal: 0,
+    created: "",
+    ready: "",
+    closed: "",
+  });
 
   const action = useRef<string>("");
 
@@ -43,8 +55,7 @@ export default function ActionConfirmationButton(props: { title: string }) {
         setItemSize("na"),
         (orders.current = await GetAllOrders(login.token)),
         setOrders(orders.current),
-        // (order.current = await GetOrder(orderToView.orderUid, login.token)),
-        // setOrderToView(order.current),
+        setOrderToView(await GetOrder(orderToView.orderUid, login.token)),
       ]}
     >
       yes

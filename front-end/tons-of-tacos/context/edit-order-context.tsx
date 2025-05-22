@@ -27,6 +27,8 @@ interface ContextProps {
   setItemSize: Dispatch<SetStateAction<string>>;
   customer: Customer;
   setCustomer: Dispatch<SetStateAction<Customer>>;
+  orderUid: string;
+  setOrderUid: Dispatch<SetStateAction<string>>;
 }
 
 const EditOrderContext = createContext<ContextProps>({
@@ -67,6 +69,8 @@ const EditOrderContext = createContext<ContextProps>({
     email: "",
   },
   setCustomer: () => {},
+  orderUid: "",
+  setOrderUid: () => {},
 });
 
 export const EditOrderContextProvider = ({
@@ -102,6 +106,7 @@ export const EditOrderContextProvider = ({
     phone: "",
     email: "",
   });
+  const [orderUid, setOrderUid] = useState<string>("");
   return (
     <EditOrderContext.Provider
       value={{
@@ -123,6 +128,8 @@ export const EditOrderContextProvider = ({
         setItemSize,
         customer,
         setCustomer,
+        orderUid,
+        setOrderUid,
       }}
     >
       {children}
