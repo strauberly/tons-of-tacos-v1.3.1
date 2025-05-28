@@ -86,7 +86,7 @@ export function UpdateOrderItemMessage(props: {
   newSize: string;
 }) {
   const message: string =
-    includeSize(props.orderItem.size) == true
+    includeSize(props.orderItem.size && props.newSize) == true
       ? "Update " +
         props.orderItem.itemName +
         " " +
@@ -95,6 +95,8 @@ export function UpdateOrderItemMessage(props: {
         `${props.orderItem.quantity},` +
         " to " +
         props.orderItem.itemName +
+        " " +
+        props.newSize +
         " x " +
         props.newQuantity +
         "?"

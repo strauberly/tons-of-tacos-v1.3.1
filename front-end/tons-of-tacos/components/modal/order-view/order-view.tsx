@@ -1,19 +1,14 @@
+import classes from "./order-view.module.css";
 import { useModalContext } from "@/context/modal-context";
 import Card from "../../ui/cards/card";
-import classes from "./order-view.module.css";
 import OrderItem from "../../owner-dashboard/order-item";
 import { useDisplayContext } from "@/context/display-context";
 import AddOrderItem from "../../owner-dashboard/add-order-item";
 import EditableDetails from "./editable-details";
-import { useEffect, useRef } from "react";
-import { GetOrder } from "@/lib/owners-tools/owners-tools";
-import { useOwnerContext } from "@/context/owner-context";
-import { SourceTextModule } from "vm";
 
 export default function OrderView() {
   const { orderToView } = useModalContext();
   const { setViewOrder } = useDisplayContext();
-  const { login } = useOwnerContext();
 
   console.log(orderToView);
   const time: string = new Date(orderToView.created).toLocaleTimeString([], {
@@ -21,9 +16,6 @@ export default function OrderView() {
   });
 
   const date: string = new Date(orderToView.created).toLocaleDateString();
-
-  // const time = useRef<string>("");
-  // const date = useRef<string>("");
 
   const orderItemArr: OrderItem[] = orderToView.orderItems;
 
@@ -65,12 +57,14 @@ export default function OrderView() {
             </div>
             <AddOrderItem />
           </div>
-          <button
-            className={classes.button}
-            onClick={() => setViewOrder(false)}
-          >
+          <button className={classes.close} onClick={() => setViewOrder(false)}>
             Close
           </button>
+          {orderToView.ready !== "no" && (
+            <h3 className={classes.editWarning}>
+              Order has been prepared and can not be edited!
+            </h3>
+          )}
         </div>
       </Card>
     </div>

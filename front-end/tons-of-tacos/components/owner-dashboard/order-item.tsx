@@ -1,18 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import RemoveFromOrderButton from "../ui/buttons/order-edit/remove-from-order-button";
 import ArrowIcon from "../menu/menu-items/quantity-selector/arrow-icon";
 import UpdateOrderItemButton from "../ui/buttons/order-edit/update-order-item-button";
 import SizeSelector from "./size-selector";
 import classes from "./order-item.module.css";
 import { calcPrice } from "@/lib/owners-tools/owners-tools-client";
+import { useEditOrderContext } from "@/context/edit-order-context";
+import { useModalContext } from "@/context/modal-context";
 
 export default function OrderItem(orderItem: { orderItem: OrderItem }) {
+  const { setOrderItem, setQuantity, quantity } = useEditOrderContext();
+  const { orderToView } = useModalContext();
   const [canEdit, setCanEdit] = useState(false);
   const [newQuantity, setNewQuantity] = useState<number>(
     orderItem.orderItem.quantity
   );
 
-  console.log(orderItem.orderItem.size);
   const [newSize, setNewSize] = useState<string>(orderItem.orderItem.size);
 
   const [showSizeError, setShowSizeError] = useState<boolean>(false);
@@ -57,6 +60,8 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
 
   const decrement = () => {
     setNewQuantity(newQuantity - 1);
+    setQuantity(newQuantity);
+    console.log(quantity);
     if (newQuantity <= 1) {
       setNewQuantity(1);
     }
@@ -64,6 +69,8 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
 
   const increment = () => {
     setNewQuantity(newQuantity + 1);
+    setQuantity(newQuantity);
+    console.log(quantity);
     if (newQuantity >= 10) {
       setNewQuantity(10);
     }
@@ -78,12 +85,17 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
         newQuantity
       )
     );
+    if (orderToView.ready !== "no") {
+      setCanEdit(false);
+    }
   }, [
+    canEdit,
     newQuantity,
     newSize,
     orderItem.orderItem.quantity,
     orderItem.orderItem.size,
     orderItem.orderItem.total,
+    orderToView.ready,
   ]);
 
   return (
@@ -134,12 +146,22 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
         {!canEdit && (
           <button
             className={classes.button}
-            onClick={() => setCanEdit(!canEdit)}
+            disabled={orderToView.ready !== "no" || orderToView.closed !== "no"}
+            onClick={() => [
+              setCanEdit(!canEdit),
+              setOrderItem(orderItem.orderItem),
+              // setQuantity(newQuantity),
+            ]}
           >
             Edit
           </button>
         )}
-        {!canEdit && <RemoveFromOrderButton orderItem={orderItem.orderItem} />}
+        {!canEdit && (
+          <RemoveFromOrderButton
+            orderItem={orderItem.orderItem}
+            orderToView={orderToView}
+          />
+        )}
       </li>
       {showSizeError === true && (
         <p className={classes.sizeWarning}>{sizeError}</p>

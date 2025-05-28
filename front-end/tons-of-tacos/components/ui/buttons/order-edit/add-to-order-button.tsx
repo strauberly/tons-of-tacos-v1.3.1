@@ -20,7 +20,6 @@ export default function AddToOrderButton(props: {
     setCustomerName,
     setMenuItemSize,
     setItemSize,
-    setOrderUid,
   } = useEditOrderContext();
   console.log(props.quantity);
   console.log("item size: " + `${props.size}`);
