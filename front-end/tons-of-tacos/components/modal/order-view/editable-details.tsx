@@ -22,6 +22,7 @@ export default function EditableDetails() {
       <CustomerEmailDetails />
       <div className={classes.contactUpdate}>
         <button
+          disabled={orderToView.ready !== "no" || orderToView.closed !== "no"}
           onClick={() => [
             setConfirmationTitle("Update Customer"),
             setShowConfirmation(true),

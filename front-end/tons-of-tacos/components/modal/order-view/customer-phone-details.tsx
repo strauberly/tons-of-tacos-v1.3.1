@@ -52,7 +52,12 @@ export default function CustomerPhoneDetails() {
         </div>
       )}
       {editPhone == false && (
-        <button onClick={() => setEditPhone(!editPhone)}>Edit Phone</button>
+        <button
+          disabled={orderToView.ready !== "no" || orderToView.closed !== "no"}
+          onClick={() => setEditPhone(!editPhone)}
+        >
+          Edit Phone
+        </button>
       )}
       {editPhone == true && (
         <button
