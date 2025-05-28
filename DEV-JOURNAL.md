@@ -2,6 +2,34 @@
 
 ---
 
+--27 May 2025--
+
+- Elements in place for displaying volume of daily sales and cash value of sales. Stlying iniated.
+
+---
+
+--27 May 2025--
+
+- All buttons in order view disabled when an order is marked ready pertaining to editing a button
+
+- orders color coded to assist with determining quickly whether an order is ready or already completed.
+
+---
+
+--27 May 2025--
+
+- All buttons in order view disabled when an order is marked ready pertaining to editing a button
+
+- orders color coded to assist with determining quickly whether an order is ready or already completed.
+
+---
+
+-- 25 May 2025 --
+
+- Adjusted close button styling for order view.
+
+---
+
 -- 21 May 2025 --
 
 - Had an unforunate issue with bitbucket. Couldnt get into my account and password reset emails were'nt going through. Got in and during the process of updating the repositorie murdered my . Files have been mostly repaired.

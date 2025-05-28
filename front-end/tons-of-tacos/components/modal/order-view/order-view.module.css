@@ -179,3 +179,18 @@
 .warning {
   color: var(--attention-color);
 }
+
+.close {
+  display: flex;
+  font-size: 2rem;
+  cursor: pointer;
+  font-weight: bold;
+  justify-self: center;
+  margin-top: 2rem;
+}
+
+.editWarning {
+  display: flex;
+  justify-self: center;
+  margin-top: 2rem;
+}

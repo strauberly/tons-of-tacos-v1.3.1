@@ -238,6 +238,26 @@ export async function UpdateCustomer(customer: Customer, token: string) {
   }
 }
 
+export async function DailySales(token: string) {
+  let response;
+  try {
+    response = await fetch(
+      `http://localhost:8080/api/owners-tools/orders/sales`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function ExecuteConfirm(title: string, orderEdit: OrderEdit) {
   if (title === "Add To Order") {
     return AddToOrder(

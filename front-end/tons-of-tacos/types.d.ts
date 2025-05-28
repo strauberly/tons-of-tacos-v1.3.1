@@ -86,3 +86,9 @@ type Customer = {
   phone: string;
   email: string;
 };
+
+type Sales = {
+  date: string;
+  numberOfSales: internal;
+  total: number;
+};

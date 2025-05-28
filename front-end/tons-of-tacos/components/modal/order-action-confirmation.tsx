@@ -25,6 +25,8 @@ export default function OrderActionConfirmation(props: {
   const { menuItem, quantity, orderItem, itemSize, customer } =
     useEditOrderContext();
 
+  console.log(itemSize);
+
   const message = useRef<string>("");
 
   if (props.title === "Add To Order") {
@@ -47,6 +49,7 @@ export default function OrderActionConfirmation(props: {
     message.current = UpdateOrderItemMessage({
       orderItem: orderItem,
       newQuantity: quantity,
+      newSize: itemSize,
     });
   } else if (props.title === "Update Customer") {
     message.current = CustomerUpdateMessage(customer);
