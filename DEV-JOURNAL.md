@@ -2,6 +2,19 @@
 
 ---
 
+--7 June 2025--
+
+- Daily sales is now called every 5 seconds
+- Order total was not being calculated correctly in backend due to a persistence issue. This has been rectified.
+
+---
+
+--6 June 2025--
+
+- improvements to date formatting.
+
+---
+
 --27 May 2025--
 
 - Elements in place for displaying volume of daily sales and cash value of sales. Stlying iniated.
