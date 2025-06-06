@@ -4,7 +4,7 @@ import Orders from "./orders";
 import { useModalContext } from "@/context/modal-context";
 import OrderView from "../modal/order-view/order-view";
 import OrderActionConfirmation from "../modal/order-action-confirmation";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useOwnerContext } from "@/context/owner-context";
 import { DailySales } from "@/lib/owners-tools/owners-tools";
 
@@ -20,24 +20,16 @@ export default function OwnerDashboard() {
     "Total",
     "Time",
     "Date",
-    "Ready",
-    "Closed",
   ];
 
+  const [sortState, setSortState] = useState<string>("open");
   const [sales, setSales] = useState<Sales>();
-
-  const salesVolume = useRef<number>(sales?.numberOfSales);
-  const salesTotal = useRef<number>(Number(sales?.total.toFixed(2)));
-
-  // timeout to updates sales every 5 min
 
   useEffect(() => {
     async function Sales() {
       setSales(await DailySales(login.token));
-      salesVolume.current = sales?.numberOfSales;
-      salesTotal.current = Number(sales?.total.toFixed(2));
     }
-    Sales();
+    setInterval(Sales, 5000);
   }, [login.token, sales?.numberOfSales, sales?.total]);
 
   return (
@@ -54,11 +46,32 @@ export default function OwnerDashboard() {
           {displayCategories.map((category) => (
             <p key={category}>{`${category.toString()}`}</p>
           ))}
+
+          <button
+            className={classes.sortButtons}
+            onClick={() => setSortState("ready")}
+          >
+            {" "}
+            Ready
+          </button>
+          <button
+            onClick={() => setSortState("closed")}
+            className={classes.sortButtons}
+          >
+            {" "}
+            Closed
+          </button>
+          <button
+            onClick={() => setSortState("open")}
+            className={classes.sortButtons}
+          >
+            Open
+          </button>
         </ul>
-        <Orders />
+        <Orders sortState={sortState} />
         <div className={classes.sales}>
-          <h1>Sales For Today: {salesVolume.current}</h1>
-          <h1>Total: ${salesTotal.current.toFixed(2)}</h1>
+          <h1>Sales For Today: {sales?.numberOfSales}</h1>
+          <h1>Total: ${sales?.total.toFixed(2)}</h1>
         </div>
       </div>
     </div>
