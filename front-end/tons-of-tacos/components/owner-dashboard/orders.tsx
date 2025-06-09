@@ -12,9 +12,15 @@ export default function Orders(props: { sortState: string }) {
   const readyOrders: Order[] = orders.filter(checkReady);
   const openOrders: Order[] = orders.filter(checkOpen);
   const closedOrders: Order[] = orders.filter(checkClosed);
-  const sortedOpen: Order[] = [];
-  const sortedReady: Order[] = [];
-  const sortedClosed: Order[] = [];
+  const sortedOpen: Order[] = openOrders
+    .concat(readyOrders)
+    .concat(closedOrders);
+  const sortedReady: Order[] = readyOrders
+    .concat(openOrders)
+    .concat(closedOrders);
+  const sortedClosed: Order[] = closedOrders
+    .concat(readyOrders)
+    .concat(openOrders);
 
   function checkReady(order: Order) {
     return order.ready !== "no" && order.closed === "no";
@@ -40,34 +46,75 @@ export default function Orders(props: { sortState: string }) {
     setOrders(sortedClosed);
   }
 
+  // function sortOrders() {
+  //   const returnedOrders: Order[] = sortedOpen;
+  //   if (props.sortState === "open") {
+  //     setOrders(sortedOpen)
+  // }
+
   useEffect(() => {
     async function GetOrders() {
       const orders: Order[] = await GetAllOrders(login.token);
       setOrders(orders);
     }
-    setInterval(GetOrders, 5000);
+    function sortOrders() {
+      // const returnedOrders: Order[] = sortedOpen;
+      if (props.sortState === "open") {
+        setOrders(sortedOpen);
+      }
+    }
     GetOrders();
+    setInterval(GetOrders, 5000);
   }, [login.token, setOrders]);
 
   return (
     <div className={classes.dashboard}>
       <ul>
-        {orders.map(
-          (order: {
-            orderUid: string;
-            customerUid: string;
-            name: string;
-            email: string;
-            phone: string;
-            orderTotal: number;
-            orderItems: OrderItem[];
-            created: string;
-            ready: string;
-            closed: string;
-          }) => (
-            <Order key={`${order.orderUid}`} order={order} />
-          )
-        )}
+        {props.sortState === "open" &&
+          sortedOpen.map(
+            (order: {
+              orderUid: string;
+              customerUid: string;
+              name: string;
+              email: string;
+              phone: string;
+              orderTotal: number;
+              orderItems: OrderItem[];
+              created: string;
+              ready: string;
+              closed: string;
+            }) => <Order key={`${order.orderUid}`} order={order} />
+          )}
+        {props.sortState === "ready" &&
+          sortedReady.map(
+            (order: {
+              orderUid: string;
+              customerUid: string;
+              name: string;
+              email: string;
+              phone: string;
+              orderTotal: number;
+              orderItems: OrderItem[];
+              created: string;
+              ready: string;
+              closed: string;
+            }) => <Order key={`${order.orderUid}`} order={order} />
+          )}
+        {props.sortState === "closed" &&
+          sortedClosed.map(
+            (order: {
+              orderUid: string;
+              customerUid: string;
+              name: string;
+              email: string;
+              phone: string;
+              orderTotal: number;
+              orderItems: OrderItem[];
+              created: string;
+              ready: string;
+              closed: string;
+            }) => <Order key={`${order.orderUid}`} order={order} />
+          )}
       </ul>
     </div>
   );
