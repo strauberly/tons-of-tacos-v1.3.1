@@ -23,12 +23,14 @@ export default function OwnerDashboard() {
   ];
 
   const [sortState, setSortState] = useState<string>("open");
+
   const [sales, setSales] = useState<Sales>();
 
   useEffect(() => {
     async function Sales() {
       setSales(await DailySales(login.token));
     }
+    Sales();
     setInterval(Sales, 5000);
   }, [login.token, sales?.numberOfSales, sales?.total]);
 

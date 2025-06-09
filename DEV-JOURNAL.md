@@ -2,6 +2,14 @@
 
 ---
 
+--8 June 2025--
+
+- Daily sales updated in backend updated for comparing dates with new formatting.
+
+- Orders can be sorted by selecting ready closed or open.
+
+---
+
 --7 June 2025--
 
 - Daily sales is now called every 5 seconds
