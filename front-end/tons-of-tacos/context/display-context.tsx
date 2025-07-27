@@ -8,7 +8,7 @@ import {
   useState,
   ReactNode,
 } from "react";
-
+// add for display orders by customer
 interface ContextProps {
   showMenu: boolean;
   setShowMenu: Dispatch<SetStateAction<boolean>>;
@@ -26,6 +26,8 @@ interface ContextProps {
   setViewOrder: Dispatch<SetStateAction<boolean>>;
   showConfirmation: boolean;
   setShowConfirmation: Dispatch<SetStateAction<boolean>>;
+  showCustomerOrders: boolean;
+  setShowCustomerOrders: Dispatch<SetStateAction<boolean>>;
 }
 
 const DisplayContext = createContext<ContextProps>({
@@ -45,6 +47,8 @@ const DisplayContext = createContext<ContextProps>({
   setViewOrder: () => {},
   showConfirmation: false,
   setShowConfirmation: () => {},
+  showCustomerOrders: false,
+  setShowCustomerOrders: () => {},
 });
 
 export const DisplayContextProvider = ({
@@ -60,6 +64,7 @@ export const DisplayContextProvider = ({
   const [showLogin, setShowLogin] = useState(false);
   const [viewOrder, setViewOrder] = useState(false);
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [showCustomerOrders, setShowCustomerOrders] = useState(false);
 
   return (
     <DisplayContext.Provider
@@ -80,6 +85,8 @@ export const DisplayContextProvider = ({
         setViewOrder,
         showConfirmation,
         setShowConfirmation,
+        showCustomerOrders,
+        setShowCustomerOrders,
       }}
     >
       {children}

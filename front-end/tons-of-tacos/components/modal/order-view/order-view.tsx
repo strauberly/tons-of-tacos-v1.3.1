@@ -5,22 +5,29 @@ import OrderItem from "../../owner-dashboard/order-item";
 import { useDisplayContext } from "@/context/display-context";
 import AddOrderItem from "../../owner-dashboard/add-order-item";
 import EditableDetails from "./editable-details";
+import { useEffect } from "react";
 
 export default function OrderView() {
   const { orderToView } = useModalContext();
   const { setViewOrder } = useDisplayContext();
 
-  console.log(orderToView);
+  console.log("order to view: " + orderToView);
   const time: string = new Date(orderToView.created).toLocaleTimeString([], {
     timeStyle: "short",
   });
 
+  // order total should be a const 0 and then if order to View doesnt == undefined or a string the set the order total.
   const date: string = new Date(orderToView.created).toLocaleDateString();
 
   const orderItemArr: OrderItem[] = orderToView.orderItems;
 
   const itemTitles: string[] = ["Item", "Quantity", "Size", "Item Total"];
-
+  // useEffect(() => {
+  // if (orderToView.orderTotal == undefined) {
+  //   orderToView.orderTotal = 0;
+  // }
+  console.log("order to view: " + orderToView);
+  // });
   return (
     <div className={classes.orderView}>
       <Card expand={true}>

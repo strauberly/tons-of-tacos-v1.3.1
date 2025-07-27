@@ -3,10 +3,16 @@ import { useModalContext } from "@/context/modal-context";
 
 export default function ViewOrderButton(order: { order: Order }) {
   const { setOrderToView } = useModalContext();
-  const { setViewOrder } = useDisplayContext();
+  const { setViewOrder, setShowCustomerOrders } = useDisplayContext();
 
   return (
-    <button onClick={() => [setOrderToView(order.order), setViewOrder(true)]}>
+    <button
+      onClick={() => [
+        setOrderToView(order.order),
+        setViewOrder(true),
+        setShowCustomerOrders(false),
+      ]}
+    >
       View
     </button>
   );
