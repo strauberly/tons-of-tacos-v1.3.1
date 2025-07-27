@@ -11,11 +11,15 @@ import {
 interface ContextProps {
   orders: Order[];
   setOrders: Dispatch<SetStateAction<Order[]>>;
+  customerOrders: Order[];
+  setCustomerOrders: Dispatch<SetStateAction<Order[]>>;
 }
 
 const OrdersContext = createContext<ContextProps>({
   orders: [],
   setOrders: () => {},
+  customerOrders: [],
+  setCustomerOrders: () => {},
 });
 
 export const OrdersContextProvider = ({
@@ -24,11 +28,14 @@ export const OrdersContextProvider = ({
   children: ReactNode;
 }) => {
   const [orders, setOrders] = useState<Order[]>([]);
+  const [customerOrders, setCustomerOrders] = useState<Order[]>([]);
   return (
     <OrdersContext.Provider
       value={{
         orders,
         setOrders,
+        customerOrders,
+        setCustomerOrders,
       }}
     >
       {children}

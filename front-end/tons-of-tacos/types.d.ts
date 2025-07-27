@@ -92,3 +92,15 @@ type Sales = {
   numberOfSales: internal;
   total: number;
 };
+
+type OrderRequestResponse = {
+  status: number;
+  // headers: { [key: string]: string };
+  // body: unknown;
+  body: Order | string;
+};
+
+type CustomerOrdersResponse = {
+  status: number;
+  body: Order[] | string;
+};

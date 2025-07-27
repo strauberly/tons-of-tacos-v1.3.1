@@ -2,6 +2,48 @@
 
 ---
 
+-27 July 2025--
+
+- Find orders for customer based on their phone number as an identifier is currently functioning as desired.
+
+  - Entering the correct phone number and clicking search button sends request to back end which uses the phone number to find the customer.
+  - The customers uid is then used to find all of their orders and return them to the front end where a quick summary of the order is displayed along with a view order button.
+  - Clicking the view button closes the summary modal and opens the order view modal loaded with the information for the corresponding order.
+
+  - Components are ready for styling.
+
+-26 July 2025--
+
+- Finding customer by name is not a valid option as it is possible to have two entities by the same name meaning it is not a unique identifier. We have updated to search for orders for a customer by their phone number which is a unique identifier. The back end uses the phone number to pull up the customer, get their uid and then return all orders with that customers uid. We could also just search for all orders with that phone number as an option.
+
+- In orders context we have created a state to be used for customerOrders to be passed into the modal that will display a summary of all orders for that customer allowing us to view each order in order to address inquiries or make changes to an order where appropriate.
+
+- Created orderSummary in types file that allow us to quickly view pertinent information (ie uid, date, status).
+
+- created order summary component.
+
+---
+
+-2 July 2025--
+
+- intialization of orders by customer modal,
+  Will display customer name and then the id, status and date of each order with a view button for each order. view button will close and display the order associated. Styling module also created.
+- added showCustomerOrders and setShowCustomerOrders to display context this will be utilized by the search button for find orders by customer name to display the modal holding pertinent details of all orders for that customer name.
+- ***
+
+  --1 July 2025--
+
+- Functionality for finding an order by id in place. If an id that exists is entered our view order modal is opened. If the query is invalid (order doesn't exist) our general purpose modal opens and displays the message provided by our error handler on the backend.
+- Was planning to make the component reusable between finding an order by id or customer but does not seem practical at this time as a search by customer name is possible to return multiple orders. Will need to come up with a plan for this scenario. Possibly customer query modal or something along those lines.
+
+---
+
+--10 June 2025--
+
+- search by id and search by customer name components in order awaiting functionality to be programmed.
+
+---
+
 --8 June 2025--
 
 - Daily sales updated in backend updated for comparing dates with new formatting.

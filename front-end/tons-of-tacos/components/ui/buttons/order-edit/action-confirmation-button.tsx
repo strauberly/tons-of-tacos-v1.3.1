@@ -7,7 +7,7 @@ import { useOwnerContext } from "@/context/owner-context";
 import {
   ExecuteConfirm,
   GetAllOrders,
-  GetOrder,
+  GetOrderByID,
 } from "@/lib/owners-tools/owners-tools";
 import { useEffect, useRef } from "react";
 
@@ -55,7 +55,7 @@ export default function ActionConfirmationButton(props: { title: string }) {
         setItemSize("na"),
         (orders.current = await GetAllOrders(login.token)),
         setOrders(orders.current),
-        setOrderToView(await GetOrder(orderToView.orderUid, login.token)),
+        setOrderToView(await GetOrderByID(orderToView.orderUid, login.token)),
       ]}
     >
       yes
