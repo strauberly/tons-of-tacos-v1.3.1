@@ -33,38 +33,14 @@ export default function Orders(props: { sortState: string }) {
     return order.ready !== "no" && order.closed !== "no";
   }
 
-  function sortOpen() {
-    sortedOpen.concat(openOrders).concat(readyOrders).concat(closedOrders);
-    setOrders(sortedOpen);
-  }
-  function sortReady() {
-    sortedReady.concat(openOrders).concat(readyOrders).concat(closedOrders);
-    setOrders(sortedReady);
-  }
-  function sortClosed() {
-    sortedClosed.concat(openOrders).concat(readyOrders).concat(closedOrders);
-    setOrders(sortedClosed);
-  }
-
-  // function sortOrders() {
-  //   const returnedOrders: Order[] = sortedOpen;
-  //   if (props.sortState === "open") {
-  //     setOrders(sortedOpen)
-  // }
-
   useEffect(() => {
     async function GetOrders() {
       const orders: Order[] = await GetAllOrders(login.token);
       setOrders(orders);
     }
-    function sortOrders() {
-      // const returnedOrders: Order[] = sortedOpen;
-      if (props.sortState === "open") {
-        setOrders(sortedOpen);
-      }
-    }
+
     GetOrders();
-    setInterval(GetOrders, 5000);
+    // setInterval(GetOrders, 5000);
   }, [login.token, setOrders]);
 
   return (

@@ -187,27 +187,106 @@ export async function DeleteConfirmation(orderUid: string, token: string) {
   return message;
 }
 
-export async function GetOrder(orderUid: string, token: string) {
-  console.log(orderUid);
-  let response;
-  // let data;
-  try {
-    response = await fetch(
-      `http://localhost:8080/api/owners-tools/orders/get-order-uid/orderUid?orderUid=${orderUid}`,
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    //
-    const data = await response.json();
+export async function GetOrdersByCustomerPhone(phone: string, token: string) {
+  console.log(phone);
 
-    // rewrite for if not 200
-    return data;
-  } catch (error) {
-    console.log(error);
+  const customerOrdersResponse: CustomerOrdersResponse = {
+    status: 0,
+    body: "",
+  };
+
+  // try {
+  const response = await fetch(
+    `http://localhost:8080/api/owners-tools/orders/get-order-customer-phone/phone?phone=${phone}`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  //
+  const data = await response.json();
+  const status = response.status;
+  customerOrdersResponse.body = data;
+  customerOrdersResponse.status = status;
+  console.log(response.status);
+  console.log(response.body);
+  if (response.status === 200) {
+    return customerOrdersResponse;
+  } else {
+    customerOrdersResponse.body = data.message;
+    customerOrdersResponse.status = status;
+    return customerOrdersResponse;
+  }
+}
+
+// work on this
+// export async function GetOrdersByCustomer(customer: string, token: string) {
+//   console.log(customer);
+
+//   const customerOrdersResponse: CustomerOrdersResponse = {
+//     status: 0,
+//     body: "",
+//   };
+
+//   // try {
+//   const response = await fetch(
+//     `http://localhost:8080/api/owners-tools/orders/get-order-customer/customer?customer=${customer}`,
+//     {
+//       method: "GET",
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//       },
+//     }
+//   );
+//   //
+//   const data = await response.json();
+//   const status = response.status;
+//   customerOrdersResponse.body = data;
+//   customerOrdersResponse.status = status;
+//   console.log(response.status);
+//   console.log(response.body);
+//   if (response.status === 200) {
+//     return customerOrdersResponse;
+//   } else {
+//     customerOrdersResponse.body = data.message;
+//     customerOrdersResponse.status = status;
+//     return customerOrdersResponse;
+//   }
+// }
+
+export async function GetOrderByID(orderUid: string, token: string) {
+  console.log(orderUid);
+
+  const orderResponse: OrderRequestResponse = {
+    status: 0,
+    body: "",
+  };
+
+  // try {
+  const response = await fetch(
+    `http://localhost:8080/api/owners-tools/orders/get-order-uid/orderUid?orderUid=${orderUid}`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  //
+  const data = await response.json();
+  const status = response.status;
+  orderResponse.body = data;
+  orderResponse.status = status;
+  console.log(response.status);
+  console.log(response.body);
+  if (response.status === 200) {
+    return orderResponse;
+  } else {
+    orderResponse.body = data.message;
+    orderResponse.status = status;
+    return orderResponse;
   }
 }
 
