@@ -1,0 +1,19 @@
+.orderSummary {
+  display: flex;
+}
+
+.orderSummary button {
+  font-size: 1rem;
+}
+
+.closed p {
+  color: #499801;
+}
+
+.ready p {
+  color: #c25714;
+}
+
+.orderSummary li {
+  margin-bottom: 1rem;
+}

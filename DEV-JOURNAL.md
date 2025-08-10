@@ -2,6 +2,28 @@
 
 ---
 
+--10 Aug 2025--
+
+- Owner dashboard search for orders by a customer phone number or order id updated to included a form of validation and visual clues for a user.
+
+- Next will be taking what was implemented and refactoring to be its own component.
+
+---
+
+--1 Aug 2025--
+
+- Styling added for close button in customer orders view.
+- Altered styling for search by customer phone number input.
+- Search by phone number now correctly handles error from backend if customer with entered phone number can not be found.
+
+---
+
+-30 July 2025--
+
+- References or files named find by customer name have been renamed to find by customer phone or find by phone.
+
+---
+
 -27 July 2025--
 
 - Find orders for customer based on their phone number as an identifier is currently functioning as desired.
@@ -11,6 +33,11 @@
   - Clicking the view button closes the summary modal and opens the order view modal loaded with the information for the corresponding order.
 
   - Components are ready for styling.
+
+  - initiated styling for customer orders modal inline with styling already created including color for an order by its status.
+  - added close button to the modal that will require further styling.
+
+  ***
 
 -26 July 2025--
 

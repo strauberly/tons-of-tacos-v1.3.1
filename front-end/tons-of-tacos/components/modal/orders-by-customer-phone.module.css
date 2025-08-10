@@ -20,9 +20,23 @@
   /* margin-top: center; */
 }
 
+.customerOrders h3 {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
 .customerOrders li {
   display: flex;
   /* flex-direction: row; */
   width: 100%;
   justify-content: space-between;
+}
+
+.close {
+  display: flex;
+  position: sticky;
+  margin-top: 95%;
+  justify-self: center;
+  font-size: 2rem;
 }
