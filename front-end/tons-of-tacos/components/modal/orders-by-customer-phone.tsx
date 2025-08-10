@@ -1,17 +1,20 @@
 import { useOrdersContext } from "@/context/orders-context";
 import Card from "../ui/cards/card";
-import classes from "./orders-by-customer.module.css";
-import OrderSummary from "./order-view/order-summary";
-import Order from "../owner-dashboard/order";
+import classes from "./orders-by-customer-phone.module.css";
+import OrderSummary from "./order-summary";
+import { useDisplayContext } from "@/context/display-context";
 
-export default function OrdersByCustomer() {
+export default function OrdersByCustomerPhone() {
   const { customerOrders } = useOrdersContext();
+  const { setShowCustomerOrders } = useDisplayContext();
 
   return (
     <div className={classes.customerOrders}>
       <Card expand={true}>
         <div className={classes.orderSummary}>
-          <h3>{customerOrders[0].name}</h3>
+          <h3>
+            {"Orders for customer: "} {customerOrders[0].name}
+          </h3>
           <ul>
             {customerOrders.map(
               (order: {
@@ -30,6 +33,13 @@ export default function OrdersByCustomer() {
               )
             )}
           </ul>
+          <button className={classes.close}
+            onClick={() => {
+              setShowCustomerOrders(false);
+            }}
+          >
+            Close
+          </button>
         </div>
       </Card>
     </div>
