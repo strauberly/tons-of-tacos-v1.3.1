@@ -12,6 +12,9 @@ export default function EditableDetails() {
   const { setConfirmationTitle } = useModalContext();
   const { setCustomer } = useEditOrderContext();
 
+  console.log(" customer name" + orderToView.name);
+  console.log("customer uid" + orderToView.customerUid);
+
   return (
     <>
       <CustomerNameDetails />
@@ -19,6 +22,7 @@ export default function EditableDetails() {
       <CustomerEmailDetails />
       <div className={classes.contactUpdate}>
         <button
+          disabled={orderToView.ready !== "no" || orderToView.closed !== "no"}
           onClick={() => [
             setConfirmationTitle("Update Customer"),
             setShowConfirmation(true),

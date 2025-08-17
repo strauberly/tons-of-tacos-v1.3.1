@@ -127,7 +127,10 @@ export default function AddOrderItem() {
     <>
       <div className={classes.addItemToOrder}>
         <ul>
-          <button onClick={() => setItemSelector(!itemSelector)}>
+          <button
+            disabled={orderToView.ready !== "no" || orderToView.closed !== "no"}
+            onClick={() => setItemSelector(!itemSelector)}
+          >
             Select Item
           </button>
           <h3>Quantity</h3>

@@ -1,24 +1,33 @@
+import classes from "./order-view.module.css";
 import { useModalContext } from "@/context/modal-context";
 import Card from "../../ui/cards/card";
-import classes from "./order-view.module.css";
 import OrderItem from "../../owner-dashboard/order-item";
 import { useDisplayContext } from "@/context/display-context";
 import AddOrderItem from "../../owner-dashboard/add-order-item";
 import EditableDetails from "./editable-details";
+import { useEffect } from "react";
 
 export default function OrderView() {
   const { orderToView } = useModalContext();
   const { setViewOrder } = useDisplayContext();
 
+  console.log("order to view: " + orderToView);
   const time: string = new Date(orderToView.created).toLocaleTimeString([], {
     timeStyle: "short",
   });
+
+  // order total should be a const 0 and then if order to View doesnt == undefined or a string the set the order total.
   const date: string = new Date(orderToView.created).toLocaleDateString();
 
   const orderItemArr: OrderItem[] = orderToView.orderItems;
 
   const itemTitles: string[] = ["Item", "Quantity", "Size", "Item Total"];
-
+  // useEffect(() => {
+  // if (orderToView.orderTotal == undefined) {
+  //   orderToView.orderTotal = 0;
+  // }
+  console.log("order to view: " + orderToView);
+  // });
   return (
     <div className={classes.orderView}>
       <Card expand={true}>
@@ -27,8 +36,6 @@ export default function OrderView() {
             <div className={classes.uneditableDetails}>
               <p>Order Id:</p>
               <p>{orderToView.orderUid}</p>
-              <p>Customer Id:</p>
-              <p>{orderToView.customerUid}</p>
               <p>Created:</p>
               <p>{`${time + " " + date}`}</p>
               <p>Total:</p>
@@ -57,12 +64,14 @@ export default function OrderView() {
             </div>
             <AddOrderItem />
           </div>
-          <button
-            className={classes.button}
-            onClick={() => setViewOrder(false)}
-          >
+          <button className={classes.close} onClick={() => setViewOrder(false)}>
             Close
           </button>
+          {orderToView.ready !== "no" && (
+            <h3 className={classes.editWarning}>
+              Order has been prepared and can not be edited!
+            </h3>
+          )}
         </div>
       </Card>
     </div>

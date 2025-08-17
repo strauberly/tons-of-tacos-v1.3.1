@@ -4,22 +4,42 @@ import DeleteOrderButton from "../ui/buttons/order-edit/delete-order-button";
 import MarkReadyButton from "../ui/buttons/order-edit/mark-ready-button";
 import { useOwnerContext } from "@/context/owner-context";
 import MarkClosedButton from "../ui/buttons/order-edit/mark-closed-button";
+import { useEffect, useState } from "react";
 
 export default function Order(order: { order: Order }) {
   const { login } = useOwnerContext();
 
+  const [closed, setClosed] = useState<boolean>(false);
+  const [ready, setReady] = useState<boolean>(false);
+
   const time: string = new Date(order.order.created).toLocaleTimeString([], {
     timeStyle: "short",
   });
+
   const date: string = new Date(order.order.created).toLocaleDateString();
+  // const time: string = new Date(order.order.created).toLocaleTimeString([], {
+  //   timeStyle: "short",
+  // });
+  // const date: string = new Date(order.order.created).toLocaleDateString();
   const total: number = +order.order.orderTotal;
 
+  useEffect(() => {
+    if (order.order.closed !== "no") {
+      setClosed(true);
+    } else if (order.order.ready !== "no") {
+      setReady(true);
+    }
+  }, [order.order.closed, order.order.ready]);
+
   return (
-    <li>
+    <li
+      className={`${
+        (closed === true && classes.closed) || (ready === true && classes.ready)
+      } `}
+    >
       <p>{`${order.order.orderUid}`}</p>
-  
-       <p>{`${order.order.name}`}</p> 
-       <p>{`${order.order.phone}`}</p> 
+      <p>{`${order.order.name}`}</p>
+      <p>{`${order.order.phone}`}</p>
       <p>{`${order.order.email}`}</p>
       <p>{`$${total.toFixed(2)}`}</p>
       <p>{`${time}`}</p>

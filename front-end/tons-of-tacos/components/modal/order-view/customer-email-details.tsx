@@ -53,7 +53,12 @@ export default function CustomerEmailDetails() {
         </div>
       )}
       {editEmail == false && (
-        <button onClick={() => setEditEmail(!editEmail)}>Edit Email</button>
+        <button
+          disabled={orderToView.ready !== "no" || orderToView.closed !== "no"}
+          onClick={() => setEditEmail(!editEmail)}
+        >
+          Edit Email
+        </button>
       )}
       {editEmail == true && (
         <button

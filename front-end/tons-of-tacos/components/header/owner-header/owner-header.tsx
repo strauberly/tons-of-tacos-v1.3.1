@@ -8,6 +8,11 @@ export default function OwnerHeader() {
   const { login } = useOwnerContext();
 
   const [date, setDate] = useState(new Date());
+  const options: Intl.DateTimeFormatOptions = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
 
   useEffect(() => {
     const timer = setInterval(() => setDate(new Date()), 1000);
@@ -23,7 +28,7 @@ export default function OwnerHeader() {
         <div className={classes.ownerHeader}>
           <p> Hola, {login.ownerName}!</p>
           <p>{date.toLocaleTimeString([], { timeStyle: "short" })}</p>
-          <p>{date.toLocaleDateString()}</p>
+          <p>{date.toLocaleDateString(undefined, options)}</p>
           <LogoutButton />
         </div>
       </FadeOnLoad>

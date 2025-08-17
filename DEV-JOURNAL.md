@@ -2,6 +2,131 @@
 
 ---
 
+--10 Aug 2025--
+
+- Owner dashboard search for orders by a customer phone number or order id updated to included a form of validation and visual clues for a user.
+
+- Next will be taking what was implemented and refactoring to be its own component.
+
+---
+
+--1 Aug 2025--
+
+- Styling added for close button in customer orders view.
+- Altered styling for search by customer phone number input.
+- Search by phone number now correctly handles error from backend if customer with entered phone number can not be found.
+
+---
+
+-30 July 2025--
+
+- References or files named find by customer name have been renamed to find by customer phone or find by phone.
+
+---
+
+-27 July 2025--
+
+- Find orders for customer based on their phone number as an identifier is currently functioning as desired.
+
+  - Entering the correct phone number and clicking search button sends request to back end which uses the phone number to find the customer.
+  - The customers uid is then used to find all of their orders and return them to the front end where a quick summary of the order is displayed along with a view order button.
+  - Clicking the view button closes the summary modal and opens the order view modal loaded with the information for the corresponding order.
+
+  - Components are ready for styling.
+
+  - initiated styling for customer orders modal inline with styling already created including color for an order by its status.
+  - added close button to the modal that will require further styling.
+
+  ***
+
+-26 July 2025--
+
+- Finding customer by name is not a valid option as it is possible to have two entities by the same name meaning it is not a unique identifier. We have updated to search for orders for a customer by their phone number which is a unique identifier. The back end uses the phone number to pull up the customer, get their uid and then return all orders with that customers uid. We could also just search for all orders with that phone number as an option.
+
+- In orders context we have created a state to be used for customerOrders to be passed into the modal that will display a summary of all orders for that customer allowing us to view each order in order to address inquiries or make changes to an order where appropriate.
+
+- Created orderSummary in types file that allow us to quickly view pertinent information (ie uid, date, status).
+
+- created order summary component.
+
+---
+
+-2 July 2025--
+
+- intialization of orders by customer modal,
+  Will display customer name and then the id, status and date of each order with a view button for each order. view button will close and display the order associated. Styling module also created.
+- added showCustomerOrders and setShowCustomerOrders to display context this will be utilized by the search button for find orders by customer name to display the modal holding pertinent details of all orders for that customer name.
+- ***
+
+  --1 July 2025--
+
+- Functionality for finding an order by id in place. If an id that exists is entered our view order modal is opened. If the query is invalid (order doesn't exist) our general purpose modal opens and displays the message provided by our error handler on the backend.
+- Was planning to make the component reusable between finding an order by id or customer but does not seem practical at this time as a search by customer name is possible to return multiple orders. Will need to come up with a plan for this scenario. Possibly customer query modal or something along those lines.
+
+---
+
+--10 June 2025--
+
+- search by id and search by customer name components in order awaiting functionality to be programmed.
+
+---
+
+--8 June 2025--
+
+- Daily sales updated in backend updated for comparing dates with new formatting.
+
+- Orders can be sorted by selecting ready closed or open.
+
+---
+
+--7 June 2025--
+
+- Daily sales is now called every 5 seconds
+- Order total was not being calculated correctly in backend due to a persistence issue. This has been rectified.
+
+---
+
+--6 June 2025--
+
+- improvements to date formatting.
+
+---
+
+--27 May 2025--
+
+- Elements in place for displaying volume of daily sales and cash value of sales. Stlying iniated.
+
+---
+
+--27 May 2025--
+
+- All buttons in order view disabled when an order is marked ready pertaining to editing a button
+
+- orders color coded to assist with determining quickly whether an order is ready or already completed.
+
+---
+
+--27 May 2025--
+
+- All buttons in order view disabled when an order is marked ready pertaining to editing a button
+
+- orders color coded to assist with determining quickly whether an order is ready or already completed.
+
+---
+
+-- 25 May 2025 --
+
+- Adjusted close button styling for order view.
+
+---
+
+-- 21 May 2025 --
+
+- Had an unforunate issue with bitbucket. Couldnt get into my account and password reset emails were'nt going through. Got in and during the process of updating the repositorie murdered my . Files have been mostly repaired.
+  still some work to do on styling changes.
+
+---
+
 -- 18 May 2025 --
 
 - Implemented buttons for updating customer information in the order view. Flow is as follows:

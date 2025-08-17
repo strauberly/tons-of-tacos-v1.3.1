@@ -111,7 +111,12 @@ export default function CustomerNameDetails() {
         </div>
       )}
       {editName == false && (
-        <button onClick={() => setEditName(!editName)}>Edit Name</button>
+        <button
+          disabled={orderToView.ready !== "no" || orderToView.closed !== "no"}
+          onClick={() => setEditName(!editName)}
+        >
+          Edit Name
+        </button>
       )}
       {editName == true && (
         <button

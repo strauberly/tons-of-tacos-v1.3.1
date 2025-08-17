@@ -1,7 +1,9 @@
 .dashboard {
+  margin-top: 2%;
   display: flex;
   height: 100%;
   justify-content: center;
+  overflow-y: scroll;
 }
 
 .viewUpdateDelete {
@@ -13,6 +15,8 @@
   display: flex;
   flex-direction: column;
   width: 99%;
+  max-height: 25rem;
+  overflow-y: scroll;
 }
 
 .dashboard li {
@@ -26,7 +30,6 @@
   border-color: var(--border-color);
 }
 .dashboard button {
-  cursor: pointer;
   font-size: 1rem;
 }
 
@@ -108,4 +111,65 @@
   justify-self: center;
   justify-items: center;
   align-items: center;
+}
+
+.closed p {
+  color: #499801;
+}
+
+.ready p {
+  color: #c25714;
+}
+
+.sales {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 98.7%;
+  padding-top: 2rem;
+  margin-top: 2rem;
+}
+
+.sortButtons {
+  font-size: 1rem;
+  cursor: pointer;
+  margin-right: 4rem;
+}
+
+.search {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.search label {
+  color: var(--interactive-color);
+  font-family: var(--inter-font);
+  font-weight: bold;
+  margin-left: 2rem;
+}
+
+.search input {
+  width: 28ch;
+}
+
+.search input,
+.search textarea {
+  font-size: 1rem;
+  padding-top: 0.1vw;
+  padding-bottom: 0.1vw;
+  text-align: center;
+  background-color: var(--background-color);
+  color: var(--user-selected-color);
+}
+
+.search input:focus,
+.search textarea:focus {
+  outline: none;
+}
+
+.searchError {
+  color: var(--attention-color);
+  margin-top: 0.5rem;
+  margin-left: 20rem;
 }
