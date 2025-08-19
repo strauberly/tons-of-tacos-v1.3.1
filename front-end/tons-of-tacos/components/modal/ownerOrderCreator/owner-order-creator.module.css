@@ -1,0 +1,21 @@
+.ownerOrderCreator {
+  position: fixed;
+  margin-top: 10%;
+  z-index: 100;
+  justify-content: center;
+}
+
+.elements {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  padding-left: 1rem;
+  max-height: 48rem;
+  overflow-y: scroll;
+  /* border-bottom: solid var(--border-color); */
+}
+
+.close {
+  font-size: 2rem;
+  justify-self: center;
+}

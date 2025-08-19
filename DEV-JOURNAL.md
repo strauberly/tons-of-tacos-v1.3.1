@@ -2,6 +2,13 @@
 
 ---
 
+--16 Aug 2025--
+
+- Search component is now combined with an ownerOrderCreator component, inside of an action bar component allowing for more modularity.
+- owner-order-creator allows an owner to create a new order from scratch for a customer and reuses functionality from other components. Thats the plan anyway ^\_^. Working on refactors to make this achievable.
+
+---
+
 --10 Aug 2025--
 
 - Owner dashboard search for orders by a customer phone number or order id updated to included a form of validation and visual clues for a user.

@@ -8,19 +8,25 @@
 }
 
 .categories {
-  position: absolute;
+  position: relative;
+  /* position: absolute; */
   background-color: var(--background-color);
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 0.5fr);
   width: 90%;
 }
+
+.categories h3:not(:first-child) {
+  margin-left: 0.5rem;
+}
+
 .itemsContainer {
   display: flex;
   height: 5rem;
 }
 .items {
   padding-top: 0.5rem;
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
   overflow-y: scroll;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
