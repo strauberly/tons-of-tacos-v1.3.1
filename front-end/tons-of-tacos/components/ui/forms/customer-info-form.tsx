@@ -4,13 +4,22 @@ import React, { useRef, useState, useActionState, useEffect } from "react";
 import SubmitButton from "../buttons/submit-order/submitOrder-button";
 import classes from "./customer-info-form.module.css";
 import { checkEmail, checkName, checkPhone } from "@/lib/customer-form";
-import { SendOrder } from "@/lib/cart";
+import { SendOrder, setIsLoggedIn } from "@/lib/cart";
 import { useOrderConfirmationContext } from "@/context/order-confirmation-context";
+import { useOwnerContext } from "@/context/owner-context";
+import { isLoggedIn } from "@/lib/owners-tools/owners-tools-client";
 
 export default function CustomerInfoForm() {
   const { setOrderConfirmation } = useOrderConfirmationContext();
+  const { loggedIn } = useOwnerContext();
   const initialState = { message: "" };
   const [state, formAction] = useActionState(SendOrder, initialState);
+  console.log(loggedIn);
+  /*
+  check if logged in, if so set user library function and call in send order
+  in add item check if login create new order
+  set the logic for if should use cart or new order from owner
+  */
 
   const [firstNameValid, setFirstNameValid] = useState<boolean>(false);
   const [lastNameValid, setLastNameValid] = useState<boolean>(false);
@@ -67,6 +76,10 @@ export default function CustomerInfoForm() {
   }
 
   useEffect(() => {
+    async function CheckLogin() {
+      setIsLoggedIn(loggedIn);
+    }
+    CheckLogin();
     setOrderConfirmation(state.message);
   });
 

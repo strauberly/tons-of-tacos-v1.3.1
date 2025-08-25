@@ -12,3 +12,65 @@ export function calcPrice(unitPrice: number, size: string, quantity: number) {
   const adjPrice = (unitPrice + sizeSurcharge) * quantity;
   return adjPrice;
 }
+
+export function CreateOwnerOrder() {
+  const ownerCart: CartItem[] = [];
+  if (!sessionStorage.getItem("owner-order")) {
+    sessionStorage.setItem("owner-order", JSON.stringify(ownerCart));
+  }
+}
+
+export function GetOwnerOrder() {
+  let ownerCart: CartItem[] = [];
+
+  try {
+    ownerCart = JSON.parse(sessionStorage.getItem("owner-order") || "{}");
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (error) {
+    throw new Error("whups...");
+  }
+  return ownerCart;
+}
+
+export function AddToOwnerOrder(
+  id: string,
+  menuId: string,
+  itemName: string,
+  quantity: number,
+  size: string,
+  price: string
+) {
+  const cartItem: CartItem = {
+    id: id,
+    menuId: menuId,
+    itemName: itemName,
+    quantity: quantity,
+    size: size,
+    price: Number(price).toFixed(2).toString(),
+  };
+
+  let newOwnerCart: CartItem[] = [];
+  newOwnerCart = GetOwnerOrder();
+  newOwnerCart.push(cartItem);
+  sessionStorage.removeItem("owner-order");
+  sessionStorage.setItem("owner-order", JSON.stringify(newOwnerCart));
+}
+
+export function RemoveFromOwnerOrder(id: string) {
+  console.log(id);
+  const updatedOrder = GetOwnerOrder().filter(
+    (orderItem) => orderItem.menuId != id
+  );
+  // console.log(updatedOrder);
+  sessionStorage.removeItem("owner-order");
+  sessionStorage.setItem("owner-order", JSON.stringify(updatedOrder));
+}
+
+export function updateOwnerOrder(order: CartItem[]) {
+  sessionStorage.removeItem("owner-order");
+  sessionStorage.setItem("owner-order", JSON.stringify(order));
+}
+
+export function RemoveOwnerOrder() {
+  sessionStorage.removeItem("owner-order");
+}

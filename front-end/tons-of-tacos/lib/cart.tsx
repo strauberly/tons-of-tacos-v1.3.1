@@ -1,3 +1,17 @@
+// import { isLoggedIn } from "./owners-tools/owners-tools-client";
+
+import { GetOwnerOrder } from "./owners-tools/owners-tools-client";
+
+export let isLoggedInRef: boolean;
+
+export function setIsLoggedIn(loggedIn: boolean) {
+  if (loggedIn) {
+    isLoggedInRef = true;
+  } else {
+    isLoggedInRef = false;
+  }
+}
+
 export function CreateCart() {
   const cart: CartItem[] = [];
   if (!sessionStorage.getItem("tons-of-tacos-cart")) {
@@ -84,6 +98,14 @@ export type responseMessage = { message: "" };
 
 export const resp: string = "";
 
+// let loggedIn: boolean;
+
+/*
+Add logic for determining customer or owner
+
+if owner different message
+
+*/
 export async function SendOrder(
   previousState: responseMessage,
   formData: FormData
@@ -99,7 +121,15 @@ export async function SendOrder(
     size: string;
   };
 
-  const cartItems = GetCart();
+  let cartItems: CartItem[];
+
+  console.log(isLoggedInRef);
+
+  if ((isLoggedInRef = true)) {
+    cartItems = GetOwnerOrder();
+  } else {
+    cartItems = GetCart();
+  }
 
   cartItems.forEach((cartItem) => {
     if (cartItem.size === "") {
