@@ -6,13 +6,16 @@ import { useFormStatus } from "react-dom";
 import { useEffect } from "react";
 import { useOrderConfirmationContext } from "@/context/order-confirmation-context";
 
-export default function SubmitButton(validation: {
-  firstName: boolean | undefined;
-  lastName: boolean | undefined;
-  phone: boolean | undefined;
-  email: boolean | undefined;
-  state: string;
-}) {
+export default function SubmitButton(
+  validation: {
+    firstName: boolean | undefined;
+    lastName: boolean | undefined;
+    phone: boolean | undefined;
+    email: boolean | undefined;
+    state: string;
+  },
+  user: string
+) {
   const status = useFormStatus();
   const { setShowOrderConfirmation } = useDisplayContext();
   const { setOrderConfirmation } = useOrderConfirmationContext();

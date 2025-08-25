@@ -9,6 +9,8 @@ import { useEffect, useState } from "react";
 import classes from "./update-cart-item.module.css";
 import { useModalContext } from "@/context/modal-context";
 import { useDisplayContext } from "@/context/display-context";
+import { useOwnerContext } from "@/context/owner-context";
+import { updateOwnerOrder } from "@/lib/owners-tools/owners-tools-client";
 
 export default function Update(props: {
   cartItem: string;
@@ -20,6 +22,7 @@ export default function Update(props: {
 
   const { setModal } = useModalContext();
   const { setShowModal } = useDisplayContext();
+  const { ownerOrder, order, setOrder } = useOwnerContext();
 
   const newCart = cart;
 
@@ -39,6 +42,16 @@ export default function Update(props: {
     UpdateCart(newCart);
   };
 
+  function updateOrderItem() {
+    const orderItemIndex = order.findIndex(
+      (orderItem) => orderItem.itemName === props.cartItem
+    );
+    order[orderItemIndex].quantity = props.updatedItemQuantity;
+    order[orderItemIndex].price = props.updatedItemPrice;
+    setOrder(order);
+    updateOwnerOrder(order);
+  }
+
   let newQuantity = 0;
 
   const updateQuantity = () => {
@@ -55,6 +68,18 @@ export default function Update(props: {
     }
   };
 
+  function checkOrderContext() {
+    if (ownerOrder) {
+      return [updateOrderItem(), setItemQuantityChanged(false)];
+    } else {
+      return [
+        updateCartItem(),
+        updateQuantity(),
+        setItemQuantityChanged(false),
+      ];
+    }
+  }
+
   useEffect(() => {
     if (props.oldQuantity != props.updatedItemQuantity) {
       setItemQuantityChanged(true);
@@ -67,11 +92,7 @@ export default function Update(props: {
         <button
           disabled={largeOrder === true ? true : false}
           className={classes.update}
-          onClick={() => [
-            updateCartItem(),
-            updateQuantity(),
-            setItemQuantityChanged(false),
-          ]}
+          onClick={() => [checkOrderContext()]}
         >
           Update
         </button>

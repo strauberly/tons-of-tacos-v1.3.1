@@ -8,6 +8,7 @@ import { useCartContext } from "@/context/cart-context";
 import { GetCart, RemoveCartItem } from "@/lib/cart";
 import { useModalContext } from "@/context/modal-context";
 import { useDisplayContext } from "@/context/display-context";
+import MenuItem from "../menu/menu-items/menu-item";
 
 export default function CartItem(props: {
   id: string;
@@ -79,7 +80,7 @@ export default function CartItem(props: {
         oldQuantity={props.itemQuantity}
       />
 
-      <RemoveFromCart id={props.id} cartItemQuantity={props.itemQuantity} />
+      <RemoveFromCart id={props.menuId} cartItemQuantity={props.itemQuantity} />
     </li>
   );
 }

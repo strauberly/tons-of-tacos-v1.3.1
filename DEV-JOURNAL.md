@@ -2,6 +2,23 @@
 
 ---
 
+--24 Aug 2025--
+
+- Remove from cart button reformatted to apply to an owner order.
+- Added check for if menu item already added to owner order in add item button.
+- Update button from cart item refactored to work in the owner order creator also.
+- Close button in owner order creator removes owner-order object from session storage.
+
+---
+
+--23 Aug 2025--
+
+- created ownerorder context in owner-context.
+- add to order button in add order item component now checks context to see if order is an owner order and if so adds to owner-order held in session storage.
+  -owner order creator Now implements the cart item list component to show the items the owner has selected for the current order.
+
+---
+
 --16 Aug 2025--
 
 - Search component is now combined with an ownerOrderCreator component, inside of an action bar component allowing for more modularity.
