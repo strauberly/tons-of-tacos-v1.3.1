@@ -41,6 +41,7 @@ export default function CartItem(props: {
     }
   };
 
+  // need a context check and appropriate action
   const decrement = () => {
     setQuantity(quantity - 1);
     if (quantity <= 1) {
@@ -49,6 +50,7 @@ export default function CartItem(props: {
       setCart(GetCart());
       setCartQuantity(cartQuantity - props.itemQuantity);
     } else {
+      // set quantity -1?
     }
   };
 

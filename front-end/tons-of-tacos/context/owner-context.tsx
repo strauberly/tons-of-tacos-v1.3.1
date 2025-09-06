@@ -18,6 +18,8 @@ interface ContextProps {
   setOwnerOrder: Dispatch<SetStateAction<boolean>>;
   order: CartItem[];
   setOrder: Dispatch<SetStateAction<CartItem[]>>;
+  orderTotal: string;
+  setOrderTotal: Dispatch<SetStateAction<string>>;
 }
 
 const OwnerContext = createContext<ContextProps>({
@@ -29,6 +31,8 @@ const OwnerContext = createContext<ContextProps>({
   setOwnerOrder: () => {},
   order: [],
   setOrder: () => {},
+  orderTotal: "",
+  setOrderTotal: () => {},
 });
 
 export const OwnerContextProvider = ({ children }: { children: ReactNode }) => {
@@ -36,6 +40,7 @@ export const OwnerContextProvider = ({ children }: { children: ReactNode }) => {
   const [loggedIn, setLoggedIn] = useState(false);
   const [ownerOrder, setOwnerOrder] = useState(false);
   const [order, setOrder] = useState<CartItem[]>([]);
+  const [orderTotal, setOrderTotal] = useState<string>("");
 
   return (
     <OwnerContext.Provider
@@ -48,6 +53,8 @@ export const OwnerContextProvider = ({ children }: { children: ReactNode }) => {
         setOwnerOrder,
         order,
         setOrder,
+        orderTotal,
+        setOrderTotal,
       }}
     >
       {children}

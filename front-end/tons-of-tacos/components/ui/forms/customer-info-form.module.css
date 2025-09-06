@@ -5,7 +5,7 @@
   left: 50%;
   gap: 2vw;
   font-size: clamp(1rem, 1.5vw, 1vw);
-  /* font-size: clamp(1.25rem, 2vw, 1.5vw); */
+
   justify-content: center;
   margin-top: 1vw;
   margin-bottom: 1vw;
@@ -23,7 +23,6 @@
 .form input,
 .form textarea {
   font-size: clamp(1rem, 1.5vw, 1vw);
-  /* font-size: clamp(1.25rem, 2vw, 1.5vw); */
   text-align: left;
 
   background-color: var(--background-color);
@@ -121,12 +120,12 @@
   display: block;
   color: var(--attention-color);
   font-family: var(--inter-font);
-  /* checkwidth of this error on cart */
   max-width: 100%;
 }
 
 .email {
   align-items: first baseline;
+  max-width: 98%;
 }
 
 .emailColumn {
@@ -137,6 +136,7 @@
 
 .emailError {
   color: var(--attention-color);
+  max-width: 90%;
 }
 @media (max-width: 695px) {
   .phoneColumn {

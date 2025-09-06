@@ -4,21 +4,30 @@ import { useDisplayContext } from "@/context/display-context";
 import CustomerInfoForm from "@/components/ui/forms/customer-info-form";
 import AddOrderItem from "@/components/owner-dashboard/add-order-item";
 import CartItems from "@/components/cart/cart-item-list";
-import { useCartContext } from "@/context/cart-context";
+// import { useCartContext } from "@/context/cart-context";
 import {
+  CalcOrderTotal,
   GetOwnerOrder,
   RemoveOwnerOrder,
 } from "@/lib/owners-tools/owners-tools-client";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+import { useOwnerContext } from "@/context/owner-context";
 
 export default function OwnerOrderCreator() {
   const { setShowOwnerOrderCreator } = useDisplayContext();
 
-  const { setCart } = useCartContext();
+  const { setOrder, orderTotal } = useOwnerContext();
 
+  const total = useRef<string>("");
+
+  total.current = CalcOrderTotal();
   useEffect(() => {
-    setCart(GetOwnerOrder());
-  }, [setCart]);
+    setOrder(GetOwnerOrder());
+    async function GetTotal() {
+      total.current = orderTotal;
+    }
+    GetTotal();
+  }, [orderTotal, setOrder]);
 
   return (
     <div className={classes.ownerOrderCreator}>
@@ -29,7 +38,7 @@ export default function OwnerOrderCreator() {
             <h3>Order Items:</h3>
             <CartItems />
           </div>
-          <h3>Total:</h3>
+          <h3 className={classes.total}>Total: ${total.current}</h3>
           <CustomerInfoForm />
 
           <button

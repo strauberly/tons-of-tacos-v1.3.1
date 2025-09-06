@@ -5,10 +5,11 @@ import classes from "../../../owner-dashboard/add-order-item.module.css";
 import { useOwnerContext } from "@/context/owner-context";
 import {
   AddToOwnerOrder,
+  CalcOrderTotal,
   GetOwnerOrder,
 } from "@/lib/owners-tools/owners-tools-client";
 import { useCartContext } from "@/context/cart-context";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 export default function AddToOrderButton(props: {
   menuItem: MenuItem;
@@ -39,6 +40,7 @@ export default function AddToOrderButton(props: {
 
   function orderCheck() {
     setOrder(GetOwnerOrder());
+    // setOrderTotal(CalcOrderTotal());
     order.forEach((orderItem) => {
       if (orderItem.menuId === props.menuItem.id) {
         setModal(
@@ -87,6 +89,7 @@ export default function AddToOrderButton(props: {
       disabled={props.menuItem.itemName === ""}
       onClick={() => {
         checkOrderContext();
+        setOrder(GetOwnerOrder());
       }}
     >
       Add Item
