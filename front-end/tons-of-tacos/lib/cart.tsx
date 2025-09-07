@@ -98,17 +98,10 @@ export type responseMessage = { message: "" };
 
 export const resp: string = "";
 
-// let loggedIn: boolean;
-
-/*
-Add logic for determining customer or owner
-
-if owner different message
-
-*/
 export async function SendOrder(
   previousState: responseMessage,
   formData: FormData
+  // loggedIn: boolean,
 ) {
   const firstName = formData.get("first_name");
   const lastName = formData.get("last_name");
@@ -181,6 +174,12 @@ export async function SendOrder(
   const customerEmail = data.customerEmail;
   const customerPhone = data.customerPhone;
   const orderTotal = data.orderTotal;
+
+  let name;
+
+  // if(loggedIn){
+  //   name =
+  // }
 
   const receivedOrderItems: string[] = data.orderItems.map(
     (orderItem: OrderItem) =>

@@ -13,8 +13,8 @@ export default function SubmitButton(
     phone: boolean | undefined;
     email: boolean | undefined;
     state: string;
-  },
-  user: string
+  }
+  // user: string
 ) {
   const status = useFormStatus();
   const { setShowOrderConfirmation } = useDisplayContext();

@@ -221,41 +221,6 @@ export async function GetOrdersByCustomerPhone(phone: string, token: string) {
   }
 }
 
-// work on this
-// export async function GetOrdersByCustomer(customer: string, token: string) {
-//   console.log(customer);
-
-//   const customerOrdersResponse: CustomerOrdersResponse = {
-//     status: 0,
-//     body: "",
-//   };
-
-//   // try {
-//   const response = await fetch(
-//     `http://localhost:8080/api/owners-tools/orders/get-order-customer/customer?customer=${customer}`,
-//     {
-//       method: "GET",
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//       },
-//     }
-//   );
-//   //
-//   const data = await response.json();
-//   const status = response.status;
-//   customerOrdersResponse.body = data;
-//   customerOrdersResponse.status = status;
-//   console.log(response.status);
-//   console.log(response.body);
-//   if (response.status === 200) {
-//     return customerOrdersResponse;
-//   } else {
-//     customerOrdersResponse.body = data.message;
-//     customerOrdersResponse.status = status;
-//     return customerOrdersResponse;
-//   }
-// }
-
 export async function GetOrderByID(orderUid: string, token: string) {
   console.log(orderUid);
 

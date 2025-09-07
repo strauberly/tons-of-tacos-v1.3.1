@@ -2,6 +2,22 @@
 
 ---
 
+-- 6 Sep 2025 --
+
+- Owner order component now sends order to backend, updates orders on owners dashboard and redirects to the owner dashboard end point by refactoring order confirmation component.
+
+- Styling enhanced for owner order creator.
+- Styling altered in customer info form (email error) in norder to make component reusable.
+
+- ***
+
+  -- 1 Sep 2025 --
+
+- Owner order total displayed accurately reflecting selected items.
+- Update button correctly functioning and price correctly reflected.
+
+---
+
 --24 Aug 2025--
 
 - Remove from cart button reformatted to apply to an owner order.

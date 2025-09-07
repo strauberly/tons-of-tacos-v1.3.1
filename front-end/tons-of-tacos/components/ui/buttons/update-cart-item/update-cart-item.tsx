@@ -10,7 +10,10 @@ import classes from "./update-cart-item.module.css";
 import { useModalContext } from "@/context/modal-context";
 import { useDisplayContext } from "@/context/display-context";
 import { useOwnerContext } from "@/context/owner-context";
-import { updateOwnerOrder } from "@/lib/owners-tools/owners-tools-client";
+import {
+  GetOwnerOrder,
+  updateOwnerOrder,
+} from "@/lib/owners-tools/owners-tools-client";
 
 export default function Update(props: {
   cartItem: string;
@@ -43,9 +46,16 @@ export default function Update(props: {
   };
 
   function updateOrderItem() {
+    console.log(GetOwnerOrder());
+    console.log(order);
+    console.log(
+      order.findIndex((orderItem) => orderItem.itemName === props.cartItem)
+    );
     const orderItemIndex = order.findIndex(
       (orderItem) => orderItem.itemName === props.cartItem
     );
+    console.log("order item index: " + order[orderItemIndex]);
+    console.log("order item index quantity: " + order[orderItemIndex].quantity);
     order[orderItemIndex].quantity = props.updatedItemQuantity;
     order[orderItemIndex].price = props.updatedItemPrice;
     setOrder(order);
@@ -70,7 +80,11 @@ export default function Update(props: {
 
   function checkOrderContext() {
     if (ownerOrder) {
-      return [updateOrderItem(), setItemQuantityChanged(false)];
+      return [
+        updateOrderItem(),
+        setOrder(GetOwnerOrder()),
+        setItemQuantityChanged(false),
+      ];
     } else {
       return [
         updateCartItem(),
