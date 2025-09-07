@@ -2,6 +2,13 @@
 
 ---
 
+-- 7 Sep 2025 --
+
+- Responsive styling repaired for cart.
+- Responsive styling repaired for menu navigation.
+
+---
+
 -- 6 Sep 2025 --
 
 - Owner order component now sends order to backend, updates orders on owners dashboard and redirects to the owner dashboard end point by refactoring order confirmation component.
@@ -9,9 +16,9 @@
 - Styling enhanced for owner order creator.
 - Styling altered in customer info form (email error) in norder to make component reusable.
 
-- ***
+---
 
-  -- 1 Sep 2025 --
+-- 1 Sep 2025 --
 
 - Owner order total displayed accurately reflecting selected items.
 - Update button correctly functioning and price correctly reflected.
