@@ -76,15 +76,3 @@ export function updateOwnerOrder(order: CartItem[]) {
 export function RemoveOwnerOrder() {
   sessionStorage.removeItem("owner-order");
 }
-
-export function CalcOrderTotal() {
-  let ownerOrderTotal = 0;
-  const order: CartItem[] = GetOwnerOrder();
-
-  let i;
-  for (i = 0; i < order.length; i++) {
-    ownerOrderTotal += parseFloat(order[i].price);
-  }
-  console.log("owner order total: " + ownerOrderTotal.toFixed(2));
-  return ownerOrderTotal.toFixed(2);
-}

@@ -7,21 +7,23 @@ import CustomerInfoForm from "../ui/forms/customer-info-form";
 import CartItems from "./cart-item-list";
 import { AnimatePresence } from "framer-motion";
 import DropDown from "../ui/animations/drop-down";
+import { CalcOrderTotal } from "@/lib/general/multi-use";
+import { useOwnerContext } from "@/context/owner-context";
 
 export default function Cart() {
   const { setShowCart } = useDisplayContext();
   const { cart, setCart } = useCartContext();
   const cartRef = useRef<HTMLDivElement>(null);
+  const { loggedIn } = useOwnerContext();
+  // let total = 0;
 
-  let total = 0;
-
-  function calcTotal() {
-    let i;
-    for (i = 0; i < cart.length; i++) {
-      total += parseFloat(cart[i].price);
-    }
-    return total;
-  }
+  // function calcTotal() {
+  //   let i;
+  //   for (i = 0; i < cart.length; i++) {
+  //     total += parseFloat(cart[i].price);
+  //   }
+  //   return total;
+  // }
 
   useEffect(() => {
     function clickHandler(event: MouseEvent) {
@@ -40,7 +42,8 @@ export default function Cart() {
         <DropDown>
           <div ref={cartRef} className={classes.cart}>
             <CartItems />
-            <p className={classes.total}>Total: $ {calcTotal().toFixed(2)}</p>
+            <p className={classes.total}>Total: $ {CalcOrderTotal(loggedIn)}</p>
+
             <CustomerInfoForm />
           </div>
         </DropDown>

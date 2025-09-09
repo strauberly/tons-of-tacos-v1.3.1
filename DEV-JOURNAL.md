@@ -2,10 +2,17 @@
 
 ---
 
+-- 9 Sep 2025 --
+
+- General use library created for functions used through out application. Created CalcOrderTotal function there reducing redundant code.
+
+---
+
 -- 7 Sep 2025 --
 
 - Responsive styling repaired for cart.
 - Responsive styling repaired for menu navigation.
+- Quantity check removed for owner allowing them to create an order with a large size.
 
 ---
 
