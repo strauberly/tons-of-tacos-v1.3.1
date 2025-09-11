@@ -4,23 +4,22 @@ import { useDisplayContext } from "@/context/display-context";
 import CustomerInfoForm from "@/components/ui/forms/customer-info-form";
 import AddOrderItem from "@/components/owner-dashboard/add-order-item";
 import CartItems from "@/components/cart/cart-item-list";
-// import { useCartContext } from "@/context/cart-context";
 import {
-  CalcOrderTotal,
   GetOwnerOrder,
   RemoveOwnerOrder,
 } from "@/lib/owners-tools/owners-tools-client";
 import { useEffect, useRef } from "react";
 import { useOwnerContext } from "@/context/owner-context";
+import { CalcOrderTotal } from "@/lib/general/multi-use";
 
 export default function OwnerOrderCreator() {
   const { setShowOwnerOrderCreator } = useDisplayContext();
 
-  const { setOrder, orderTotal } = useOwnerContext();
+  const { setOrder, orderTotal, loggedIn } = useOwnerContext();
 
   const total = useRef<string>("");
 
-  total.current = CalcOrderTotal();
+  total.current = CalcOrderTotal(loggedIn);
   useEffect(() => {
     setOrder(GetOwnerOrder());
     async function GetTotal() {

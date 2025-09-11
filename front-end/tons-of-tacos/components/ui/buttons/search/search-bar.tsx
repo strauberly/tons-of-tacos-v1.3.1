@@ -21,7 +21,7 @@ export default function SearchBar() {
     setOrderID(e.target.value.toUpperCase());
     orderIdRef.current = orderId;
     if (
-      e.target.value.length !== 6 ||
+      e.target.value.length !== 5 ||
       !e.target.value.toUpperCase().match(/([A-Z+0-9])/g)
     ) {
       SetIdValid(false);
@@ -44,7 +44,7 @@ export default function SearchBar() {
       setSearchError("Valid phone number is ten digits.");
     } else if (!idValid) {
       setSearchError(
-        "Order ID must be 6 characters long and not contain any special characters ."
+        "Order ID must be 5 characters long and not contain any special characters ."
       );
     } else {
       setSearchError("");
@@ -93,7 +93,7 @@ export default function SearchBar() {
           className={idValid ? classes.valid : classes.invalid}
           placeholder="Enter Order ID"
           type="text"
-          maxLength={6}
+          maxLength={5}
           style={{ textTransform: "uppercase" }}
           onFocus={handleFocus}
           onChange={captureOrderID}
