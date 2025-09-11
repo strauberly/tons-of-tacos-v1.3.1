@@ -1,5 +1,4 @@
 .form {
-  display: flex;
   flex-direction: column;
   right: 50%;
   left: 50%;
@@ -11,9 +10,6 @@
   margin-bottom: 1vw;
 }
 
-.form div {
-  display: flex;
-}
 .form label {
   color: var(--interactive-color);
   justify-content: left;
@@ -40,7 +36,7 @@
 }
 
 .form p {
-  width: max-content;
+  /* width: max-content; */
   font-size: clamp(1rem, 1.25vw, 1vw);
   /* font-size: clamp(1rem, 1.5vw, 1.25vw); */
 }
@@ -71,6 +67,7 @@
 }
 
 .names {
+  display: flex;
   align-items: first baseline;
   flex-direction: row;
   gap: 2%;
@@ -79,6 +76,7 @@
 }
 
 .first {
+  display: flex;
   flex-direction: column;
   /* min-width: 38%; */
   min-width: 44%;
@@ -106,14 +104,17 @@
 }
 
 .phone {
+  display: flex;
   align-items: first baseline;
   margin-bottom: 1rem;
+  /* max-width: 97%; */
 }
 
 .phoneColumn {
+  display: flex;
   flex-direction: column;
   margin-left: 2%;
-  min-width: 84%;
+  width: 100%;
 }
 
 .phoneError {
@@ -124,19 +125,21 @@
 }
 
 .email {
+  display: flex;
   align-items: first baseline;
-  max-width: 98%;
+  max-width: 100%;
 }
 
 .emailColumn {
+  display: flex;
   flex-direction: column;
-  min-width: 84%;
+  width: 100%;
   margin-left: 2%;
 }
 
 .emailError {
   color: var(--attention-color);
-  max-width: 90%;
+  max-width: 100%;
 }
 @media (max-width: 695px) {
   .phoneColumn {

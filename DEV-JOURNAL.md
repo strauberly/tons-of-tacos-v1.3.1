@@ -2,6 +2,18 @@
 
 ---
 
+-- 11 Sep 2025 --
+
+- Styling in customer info form altered to prevent overall dimensions from auto growth.
+
+---
+
+-- 10 Sep 2025 --
+
+- General use library created for functions used through out application. Created CalcOrderTotal function there reducing redundant code.
+
+---
+
 -- 9 Sep 2025 --
 
 - General use library created for functions used through out application. Created CalcOrderTotal function there reducing redundant code.

@@ -15,15 +15,6 @@ export default function Cart() {
   const { cart, setCart } = useCartContext();
   const cartRef = useRef<HTMLDivElement>(null);
   const { loggedIn } = useOwnerContext();
-  // let total = 0;
-
-  // function calcTotal() {
-  //   let i;
-  //   for (i = 0; i < cart.length; i++) {
-  //     total += parseFloat(cart[i].price);
-  //   }
-  //   return total;
-  // }
 
   useEffect(() => {
     function clickHandler(event: MouseEvent) {
