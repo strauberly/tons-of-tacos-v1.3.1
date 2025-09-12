@@ -53,7 +53,7 @@ export default function Order(order: { order: Order }) {
           />
         )}
       </div>
-      <div>
+      <div className={classes.closed}>
         <p>{`${order.order.closed}`}</p>
         {order.order.ready !== "no" && order.order.closed === "no" && (
           <MarkClosedButton
