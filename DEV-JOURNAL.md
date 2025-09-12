@@ -3,8 +3,11 @@
 ---
 
 -- 11 Sep 2025 --
+never forget
 
 - Styling in customer info form altered to prevent overall dimensions from auto growth.
+
+- Styling improvement for readability of order on owners dashboard.
 
 ---
 
