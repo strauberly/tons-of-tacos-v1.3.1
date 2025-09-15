@@ -118,7 +118,7 @@ export async function SendOrder(
 
   console.log(isLoggedInRef);
 
-  if ((isLoggedInRef = true)) {
+  if (isLoggedInRef === true) {
     cartItems = GetOwnerOrder();
   } else {
     cartItems = GetCart();

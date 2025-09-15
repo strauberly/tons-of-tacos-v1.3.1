@@ -33,7 +33,8 @@ export default function OrdersByCustomerPhone() {
               )
             )}
           </ul>
-          <button className={classes.close}
+          <button
+            className={classes.close}
             onClick={() => {
               setShowCustomerOrders(false);
             }}

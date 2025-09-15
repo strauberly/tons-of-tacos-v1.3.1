@@ -57,7 +57,9 @@ export default function OrderConfirmation() {
                 className={classes.close}
                 onClick={async () => {
                   orderCompletion();
-                  setOrders(await GetAllOrders(login.token));
+                  if (loggedIn) {
+                    setOrders(await GetAllOrders(login.token));
+                  }
                 }}
               >
                 Close
