@@ -2,6 +2,15 @@
 
 ---
 
+-- 15 Sep 2025 --
+
+- styling improvements made to orders by customer phone, resolving location of close button.
+- added customer name in case of multiple orders using same phone number.
+- changed structure in owner dashboard so that order view is above orders by phone number. This way we can close the order view and still have access to the other orders in case we wish to view a different order next with that phone number.
+- updated close button styling on view orders by phone to bring in line with close button on order view.
+
+---
+
 -- 14 Sep 2025 --
 
 - Addressed issues with getting orders back when looking up orders by phone number on the back end giving us our functionality again.
