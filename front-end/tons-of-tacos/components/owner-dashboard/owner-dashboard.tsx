@@ -47,9 +47,9 @@ export default function OwnerDashboard() {
 
   return (
     <div>
+      {showCustomerOrders && <OrdersByCustomerPhone />}
       {showOwnerOrderCreator && <OwnerOrderCreator />}
       {viewOrder && <OrderView />}
-      {showCustomerOrders && <OrdersByCustomerPhone />}
       {showConfirmation && (
         <OrderActionConfirmation
           title={confirmationTitle}

@@ -13,7 +13,7 @@ export default function OrdersByCustomerPhone() {
       <Card expand={true}>
         <div className={classes.orderSummary}>
           <h3>
-            {"Orders for customer: "} {customerOrders[0].name}
+            {"Orders for phone number: "} {customerOrders[0].phone}
           </h3>
           <ul>
             {customerOrders.map(

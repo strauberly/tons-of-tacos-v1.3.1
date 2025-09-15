@@ -5,17 +5,11 @@ import classes from "../../../modal/order-summary.module.css";
 
 export default function ViewOrderButton(order: { order: Order }) {
   const { setOrderToView } = useModalContext();
-  const { setViewOrder, setShowCustomerOrders } = useDisplayContext();
+  const { setViewOrder } = useDisplayContext();
 
   return (
     <div className={classes.orderSummary}>
-      <button
-        onClick={() => [
-          setOrderToView(order.order),
-          setViewOrder(true),
-          setShowCustomerOrders(false),
-        ]}
-      >
+      <button onClick={() => [setOrderToView(order.order), setViewOrder(true)]}>
         View
       </button>
     </div>

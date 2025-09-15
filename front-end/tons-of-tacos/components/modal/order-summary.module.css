@@ -17,3 +17,8 @@
 .orderSummary li {
   margin-bottom: 1rem;
 }
+
+.orderSummary p {
+  display: flex;
+  justify-content: left;
+}
