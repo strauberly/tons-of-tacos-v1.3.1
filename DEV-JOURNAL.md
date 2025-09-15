@@ -2,6 +2,14 @@
 
 ---
 
+-- 14 Sep 2025 --
+
+- Addressed issues with getting orders back when looking up orders by phone number on the back end giving us our functionality again.
+
+- Addressed a few other issues as well pertaining to context of who is using the application. Components not responding as they should be.
+
+---
+
 -- 11 Sep 2025 --
 never forget
 
