@@ -34,7 +34,7 @@ export default function CustomerInfoForm() {
 
   const firstName = useRef("false");
   const lastName = useRef("false");
-  const phoneNumber = useRef("false");
+  const phoneNumber = useRef("");
   const email = useRef("false");
 
   function validateFirstName(event: React.ChangeEvent<HTMLInputElement>) {
@@ -56,8 +56,32 @@ export default function CustomerInfoForm() {
     });
   }
 
+ 
+  function formatNumber(input: string) {
+    if (!input) return input;
+    const numberInput: string = input.replace(/[^\d]/g, "");
+    const inputLength: number = numberInput.length;
+
+    if (inputLength < 4) {
+      return numberInput;
+    } else if (inputLength < 7) {
+      return `${numberInput.slice(0, 3)}.${numberInput.slice(3)}`;
+    } else {
+      return `${numberInput.slice(0, 3)}.${numberInput.slice(
+        3,
+        6
+      )}.${numberInput.slice(6)}`;
+    }
+  }
+
   function validatePhoneNumber(event: React.ChangeEvent<HTMLInputElement>) {
-    phoneNumber.current = event.target.value;
+    const formattedNumber = formatNumber(event.target.value);
+
+    phoneNumber.current = formattedNumber;
+
+    console.log(phoneNumber.current);
+    console.log(formattedNumber);
+
     setPhoneValid(checkPhone(phoneNumber.current).valid);
     setErrors({
       ...errors,
@@ -132,10 +156,11 @@ export default function CustomerInfoForm() {
             type="text"
             id="phone"
             name="phone"
-            placeholder="Enter Phone Number (ie 555.555.5555)"
+            placeholder="Enter Numbers Only (Auto Formatted)"
             required
             maxLength={12}
             onChange={validatePhoneNumber}
+            value={phoneNumber.current}
           />
           {!phoneValid && (
             <p className={classes.phoneError}>{errors.phoneError}</p>
