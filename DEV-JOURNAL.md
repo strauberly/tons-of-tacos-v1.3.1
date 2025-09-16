@@ -2,6 +2,12 @@
 
 ---
 
+-- 16 Sep 2025 --
+
+- Customer phone number validation on checkout form brought inline with methodology found in owner search bar which provides auto formatting.
+
+---
+
 -- 15 Sep 2025 --
 
 - styling improvements made to orders by customer phone, resolving location of close button.

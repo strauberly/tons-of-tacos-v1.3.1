@@ -42,7 +42,7 @@ export default function OwnerDashboard() {
     }
     Sales();
 
-    // setInterval(Sales, 5000);
+    setInterval(Sales, 3000);
   }, [login.token, sales?.numberOfSales, sales?.total]);
 
   return (

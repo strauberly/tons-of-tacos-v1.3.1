@@ -34,7 +34,9 @@ export default function Order(order: { order: Order }) {
   return (
     <li
       className={`${
-        (closed === true && classes.closed) || (ready === true && classes.ready)
+        (closed === true && classes.closed) ||
+        (ready === true && classes.ready) ||
+        (closed === false && ready === false && classes.open)
       } `}
     >
       <p>{`${order.order.orderUid}`}</p>
@@ -53,7 +55,7 @@ export default function Order(order: { order: Order }) {
           />
         )}
       </div>
-      <div className={classes.closed}>
+      <div>
         <p>{`${order.order.closed}`}</p>
         {order.order.ready !== "no" && order.order.closed === "no" && (
           <MarkClosedButton
