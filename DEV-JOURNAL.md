@@ -2,7 +2,16 @@
 
 ---
 
--- 16 Sep 2025 --
+-- 18 Sep 2025 --
+
+- Daily Sales brought into its own component to eliminate issues when rerendering to update.
+- input element for owner login form changed from text to password for obfuscation.
+- add to order button is now correctly checking if an item is in an order before adding and updating the order if an item is added.
+- order edits made by owner functioning correctly and recalculating order total correctly.
+
+- ***
+
+  -- 16 Sep 2025 --
 
 - Customer phone number validation on checkout form brought inline with methodology found in owner search bar which provides auto formatting.
 

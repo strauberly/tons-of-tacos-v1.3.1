@@ -6,10 +6,13 @@ import { useDisplayContext } from "@/context/display-context";
 import AddOrderItem from "../../owner-dashboard/add-order-item";
 import EditableDetails from "./editable-details";
 import { useEffect } from "react";
+import { GetOrderByID } from "@/lib/owners-tools/owners-tools";
+import { useOwnerContext } from "@/context/owner-context";
 
 export default function OrderView() {
-  const { orderToView } = useModalContext();
+  const { orderToView, setOrderToView } = useModalContext();
   const { setViewOrder } = useDisplayContext();
+  const { login } = useOwnerContext();
 
   console.log("order to view: " + orderToView);
   const time: string = new Date(orderToView.created).toLocaleTimeString([], {
@@ -28,6 +31,14 @@ export default function OrderView() {
   // }
   console.log("order to view: " + orderToView);
   // });
+
+  useEffect(() => {
+    async function OrderView() {
+      setOrderToView(await GetOrderByID(orderToView.orderUid, login.token));
+    }
+    OrderView();
+  }, [login.token, orderToView.orderUid, setOrderToView]);
+
   return (
     <div className={classes.orderView}>
       <Card expand={true}>

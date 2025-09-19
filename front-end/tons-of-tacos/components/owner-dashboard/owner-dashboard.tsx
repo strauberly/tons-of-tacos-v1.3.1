@@ -11,6 +11,7 @@ import { DailySales } from "@/lib/owners-tools/owners-tools";
 import OrdersByCustomerPhone from "../modal/orders-by-customer-phone";
 import ActionBar from "./action-bar/action-bar";
 import OwnerOrderCreator from "../modal/ownerOrderCreator/owner-order-creator";
+import DailySalesDisplay from "./daily-sales/daily-sales";
 
 export default function OwnerDashboard() {
   const {
@@ -42,7 +43,7 @@ export default function OwnerDashboard() {
     }
     Sales();
 
-    setInterval(Sales, 3000);
+    // setInterval(Sales, 3000);
   }, [login.token, sales?.numberOfSales, sales?.total]);
 
   return (
@@ -86,8 +87,9 @@ export default function OwnerDashboard() {
         </ul>
         <Orders sortState={sortState} />
         <div className={classes.sales}>
-          <h1>Sales For Today: {sales?.numberOfSales}</h1>
-          <h1>Total: ${sales?.total.toFixed(2)}</h1>
+          {/* <DailySalesDisplay /> */}
+          {/* <h1>Sales For Today: {sales?.numberOfSales}</h1>
+          <h1>Total: ${sales?.total.toFixed(2)}</h1> */}
         </div>
       </div>
     </div>
