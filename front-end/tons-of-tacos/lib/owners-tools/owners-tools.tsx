@@ -226,7 +226,18 @@ export async function GetOrderByID(orderUid: string, token: string) {
 
   const orderResponse: OrderRequestResponse = {
     status: 0,
-    body: "",
+    body: {
+      orderUid: "",
+      customerUid: "",
+      name: "",
+      email: "",
+      phone: "",
+      orderItems: [],
+      orderTotal: 0,
+      created: "",
+      ready: "",
+      closed: "",
+    },
   };
 
   // try {
@@ -246,12 +257,14 @@ export async function GetOrderByID(orderUid: string, token: string) {
   orderResponse.status = status;
   console.log(response.status);
   console.log(response.body);
-  if (response.status === 200) {
-    return orderResponse;
+  if (status === 200) {
+    // return orderResponse;
+    return data;
   } else {
-    orderResponse.body = data.message;
-    orderResponse.status = status;
-    return orderResponse;
+    throw new Error(`${data.message}`);
+    // orderResponse.body = data.message;
+    // orderResponse.status = status;
+    // return orderResponse;
   }
 }
 

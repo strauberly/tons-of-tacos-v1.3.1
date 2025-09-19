@@ -21,17 +21,33 @@ export default function ActionConfirmationButton(props: { title: string }) {
 
   const orders = useRef<Order[]>([]);
 
-  const order = useRef<Order>({
-    orderUid: "",
-    name: "",
-    email: "",
-    phone: "",
-    orderItems: [],
-    orderTotal: 0,
-    created: "",
-    ready: "",
-    closed: "",
+  const orderResponse = useRef<OrderRequestResponse>({
+    status: 0,
+    body: {
+      orderUid: "",
+      customerUid: "",
+      name: "",
+      email: "",
+      phone: "",
+      orderItems: [],
+      orderTotal: 0,
+      created: "",
+      ready: "",
+      closed: "",
+    },
   });
+
+  // const order = useRef<Order>({
+  //   orderUid: "",
+  //   name: "",
+  //   email: "",
+  //   phone: "",
+  //   orderItems: [],
+  //   orderTotal: 0,
+  //   created: "",
+  //   ready: "",
+  //   closed: "",
+  // });
 
   const action = useRef<string>("");
 
@@ -44,6 +60,19 @@ export default function ActionConfirmationButton(props: { title: string }) {
     login: login.token,
     orderItem: orderItem,
   };
+
+  // useEffect(() => {
+  //   async function CheckResponse() {
+  //     orderResponse.current = await GetOrderByID(
+  //       orderToView.orderUid,
+  //       login.token
+  //     );
+  //     if ((orderResponse.current.status = 200)) {
+  //       setOrderToView(orderResponse.current.body);
+  //     }
+  //   }
+  //   CheckResponse();
+  // }, [login.token, orderToView.orderUid, setOrderToView]);
 
   return (
     <button

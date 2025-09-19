@@ -10,8 +10,10 @@ import {
 } from "@/lib/owners-tools/owners-tools-client";
 import { useCartContext } from "@/context/cart-context";
 import { useEffect, useRef } from "react";
+import { GetOrderByID } from "@/lib/owners-tools/owners-tools";
 
 export default function AddToOrderButton(props: {
+  orderUid: string;
   menuItem: MenuItem;
   quantity: number;
   customerName: string;
@@ -22,9 +24,10 @@ export default function AddToOrderButton(props: {
 }) {
   const { setShowConfirmation } = useDisplayContext();
   const { setConfirmationTitle } = useModalContext();
-  const { ownerOrder, setOrder, order } = useOwnerContext();
+  const { orderToView } = useModalContext();
+  const { ownerOrder, setOrder, order, login } = useOwnerContext();
   const { setCart } = useCartContext();
-  const { setModal } = useModalContext();
+  const { setModal, setOrderToView } = useModalContext();
   const { setShowModal } = useDisplayContext();
   const {
     setMenuItem,
@@ -39,10 +42,11 @@ export default function AddToOrderButton(props: {
   const itemInOrder = useRef<boolean>(false);
 
   function orderCheck() {
-    setOrder(GetOwnerOrder());
+    // setOrder(GetOwnerOrder());
     // setOrderTotal(CalcOrderTotal());
-    order.forEach((orderItem) => {
-      if (orderItem.menuId === props.menuItem.id) {
+    console.log(order);
+    Array.from(orderToView.orderItems).forEach((orderItem) => {
+      if (orderItem.itemName === props.menuItem.itemName) {
         setModal(
           "Item already in order. Update quantity, remove, or choose a different item."
         );
@@ -51,6 +55,14 @@ export default function AddToOrderButton(props: {
         props.reset();
       }
     });
+  }
+
+  function proceed() {
+    if (!itemInOrder.current) {
+      setShowConfirmation(true);
+      setConfirmationTitle("Add To Order");
+      props.reset();
+    }
   }
 
   function checkOrderContext() {
@@ -76,9 +88,10 @@ export default function AddToOrderButton(props: {
         setItemSize(props.size),
         props.setReadyToAdd(false),
         props.setItemName("Item"),
-        setShowConfirmation(true),
-        setConfirmationTitle("Add To Order"),
-        props.reset(),
+        proceed(),
+        // setShowConfirmation(true),
+        // setConfirmationTitle("Add To Order"),
+        // props.reset(),
       ];
     }
   }
@@ -87,9 +100,12 @@ export default function AddToOrderButton(props: {
     <button
       className={classes.addItemButton}
       disabled={props.menuItem.itemName === ""}
-      onClick={() => {
-        checkOrderContext();
+      onClick={async () => {
+        setOrderToView(await GetOrderByID(orderToView.orderUid, login.token));
+        orderCheck();
         setOrder(GetOwnerOrder());
+        checkOrderContext();
+        setOrderToView(await GetOrderByID(props.orderUid, login.token));
       }}
     >
       Add Item

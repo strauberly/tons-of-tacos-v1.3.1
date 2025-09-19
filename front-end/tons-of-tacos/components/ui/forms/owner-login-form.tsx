@@ -32,7 +32,7 @@ export default function OwnerLoginForm() {
       />
 
       <input
-        type="text"
+        type="password"
         id="password"
         name="password"
         placeholder="Enter Password"

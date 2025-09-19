@@ -18,6 +18,8 @@ interface ContextProps {
   setOwnerOrder: Dispatch<SetStateAction<boolean>>;
   order: CartItem[];
   setOrder: Dispatch<SetStateAction<CartItem[]>>;
+  // order: OrderItem[];
+  // setOrder: Dispatch<SetStateAction<OrderItem[]>>;
   orderTotal: string;
   setOrderTotal: Dispatch<SetStateAction<string>>;
 }
@@ -39,6 +41,7 @@ export const OwnerContextProvider = ({ children }: { children: ReactNode }) => {
   const [login, setLogin] = useState<OwnerLogin>({ token: "", ownerName: "" });
   const [loggedIn, setLoggedIn] = useState(false);
   const [ownerOrder, setOwnerOrder] = useState(false);
+  // const [order, setOrder] = useState<OrderItem[]>([]);
   const [order, setOrder] = useState<CartItem[]>([]);
   const [orderTotal, setOrderTotal] = useState<string>("");
 

@@ -186,6 +186,7 @@ export default function AddOrderItem() {
         </ul>
         {readyToAdd && (
           <AddToOrderButton
+            orderUid={orderToView.orderUid}
             menuItem={item}
             quantity={quantity}
             customerName={orderToView.name}
