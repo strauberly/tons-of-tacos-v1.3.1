@@ -10,7 +10,7 @@ import {
 // import { useEffect } from "react";
 
 export default function Remove(props: {
-  id: string;
+  menuId: string;
   cartItemQuantity: number;
 }) {
   const { cartQuantity, setCartQuantity, setItemRemoved } = useCartContext();
@@ -23,16 +23,17 @@ export default function Remove(props: {
   function checkOrderContext() {
     if (ownerOrder) {
       return [
-        console.log(props.id),
-        RemoveFromOwnerOrder(props.id),
+        console.log("id" + props.menuId),
+        RemoveFromOwnerOrder(props.menuId),
         setOrder(GetOwnerOrder()),
       ];
     } else {
       return [
         ,
-        setItemRemoved(true),
-        RemoveCartItem(props.id),
+        console.log("id" + props.menuId),
+        RemoveCartItem(props.menuId),
         setCartQuantity(cartQuantity - props.cartItemQuantity),
+        setItemRemoved(true),
       ];
     }
   }
@@ -41,7 +42,7 @@ export default function Remove(props: {
     <button
       className={classes.remove}
       onClick={() => [
-        // console.log(props.id),
+        console.log("id: " + props.id),
         checkOrderContext(),
         // setItemRemoved(true),
         // RemoveCartItem(props.id),

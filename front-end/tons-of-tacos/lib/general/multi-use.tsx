@@ -18,3 +18,20 @@ export function CalcOrderTotal(loggedIn: boolean) {
   console.log("owner order total: " + orderTotal.toFixed(2));
   return orderTotal.toFixed(2);
 }
+
+export function formatPhone(input: string) {
+  if (!input) return input;
+  const numberInput: string = input.replace(/[^\d]/g, "");
+  const inputLength: number = numberInput.length;
+
+  if (inputLength < 4) {
+    return numberInput;
+  } else if (inputLength < 7) {
+    return `${numberInput.slice(0, 3)}.${numberInput.slice(3)}`;
+  } else {
+    return `${numberInput.slice(0, 3)}.${numberInput.slice(
+      3,
+      6
+    )}.${numberInput.slice(6)}`;
+  }
+}

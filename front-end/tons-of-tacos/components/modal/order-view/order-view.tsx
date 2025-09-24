@@ -5,7 +5,7 @@ import OrderItem from "../../owner-dashboard/order-item";
 import { useDisplayContext } from "@/context/display-context";
 import AddOrderItem from "../../owner-dashboard/add-order-item";
 import EditableDetails from "./editable-details";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { GetOrderByID } from "@/lib/owners-tools/owners-tools";
 import { useOwnerContext } from "@/context/owner-context";
 
@@ -21,8 +21,10 @@ export default function OrderView() {
 
   // order total should be a const 0 and then if order to View doesnt == undefined or a string the set the order total.
   const date: string = new Date(orderToView.created).toLocaleDateString();
-
+  // turn this into a ref and try assigning in use effect
   const orderItemArr: OrderItem[] = orderToView.orderItems;
+
+  // let orderItemArr =(orderToView.orderItems);
 
   const itemTitles: string[] = ["Item", "Quantity", "Size", "Item Total"];
   // useEffect(() => {
@@ -36,8 +38,13 @@ export default function OrderView() {
     async function OrderView() {
       setOrderToView(await GetOrderByID(orderToView.orderUid, login.token));
     }
-    OrderView();
-  }, [login.token, orderToView.orderUid, setOrderToView]);
+    // OrderView();
+  }, [
+    login.token,
+    orderToView.orderItems,
+    orderToView.orderUid,
+    setOrderToView,
+  ]);
 
   return (
     <div className={classes.orderView}>

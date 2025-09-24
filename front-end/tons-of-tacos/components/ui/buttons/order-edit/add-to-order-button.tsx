@@ -42,7 +42,7 @@ export default function AddToOrderButton(props: {
   const itemInOrder = useRef<boolean>(false);
 
   function orderCheck() {
-    // setOrder(GetOwnerOrder());
+    setOrder(GetOwnerOrder());
     // setOrderTotal(CalcOrderTotal());
     console.log(order);
     Array.from(orderToView.orderItems).forEach((orderItem) => {
@@ -52,7 +52,7 @@ export default function AddToOrderButton(props: {
         );
         setShowModal(true);
         itemInOrder.current = true;
-        props.reset();
+        // props.reset();
       }
     });
   }
@@ -77,7 +77,7 @@ export default function AddToOrderButton(props: {
           props.menuItem.itemSize,
           props.menuItem.unitPrice.toString()
         ),
-        props.reset(),
+        // props.reset(),
       ];
     } else if (!ownerOrder) {
       return [
@@ -101,11 +101,15 @@ export default function AddToOrderButton(props: {
       className={classes.addItemButton}
       disabled={props.menuItem.itemName === ""}
       onClick={async () => {
-        setOrderToView(await GetOrderByID(orderToView.orderUid, login.token));
+        // setOrder(GetOwnerOrder());
+        // setOrderToView(await GetOrderByID(orderToView.orderUid, login.token));
         orderCheck();
-        setOrder(GetOwnerOrder());
         checkOrderContext();
-        setOrderToView(await GetOrderByID(props.orderUid, login.token));
+        // setOrder(GetOwnerOrder());
+        if (!ownerOrder) {
+          setOrderToView(await GetOrderByID(props.orderUid, login.token));
+        }
+        // props.reset();
       }}
     >
       Add Item

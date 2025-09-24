@@ -15,7 +15,7 @@ import { CalcOrderTotal } from "@/lib/general/multi-use";
 export default function OwnerOrderCreator() {
   const { setShowOwnerOrderCreator } = useDisplayContext();
 
-  const { setOrder, orderTotal, loggedIn } = useOwnerContext();
+  const { setOrder, orderTotal, loggedIn, setOwnerOrder } = useOwnerContext();
 
   const total = useRef<string>("");
 
@@ -45,6 +45,8 @@ export default function OwnerOrderCreator() {
             onClick={() => [
               setShowOwnerOrderCreator(false),
               RemoveOwnerOrder(),
+              setOwnerOrder(false),
+              // reset flag for owner order
             ]}
           >
             Close
