@@ -43,8 +43,11 @@ export async function AddItemToCart(
   sessionStorage.setItem("tons-of-tacos-cart", JSON.stringify(newCart));
 }
 
-export function RemoveCartItem(id: string) {
-  const updatedCart = GetCart().filter((cartItem) => cartItem.id != id);
+export function RemoveCartItem(menuId: string) {
+  const updatedCart: CartItem[] = GetCart().filter(
+    (cartItem) => cartItem.menuId != menuId
+  );
+  console.log("cart: " + updatedCart);
   sessionStorage.removeItem("tons-of-tacos-cart");
   sessionStorage.setItem("tons-of-tacos-cart", JSON.stringify(updatedCart));
 }

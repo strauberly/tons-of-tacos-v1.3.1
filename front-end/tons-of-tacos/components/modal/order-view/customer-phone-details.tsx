@@ -1,23 +1,32 @@
 import classes from "./order-view.module.css";
 import { useModalContext } from "@/context/modal-context";
 import { checkPhone } from "@/lib/customer-form";
+import { formatPhone } from "@/lib/general/multi-use";
 import { useRef, useState } from "react";
 
 export default function CustomerPhoneDetails() {
   const { orderToView, setOrderToView } = useModalContext();
+
   const [currentPhone, setCurrentPhone] = useState<string>(orderToView.phone);
 
   const [editPhone, setEditPhone] = useState<boolean>(false);
   const [phoneValid, setPhoneValid] = useState<boolean>(false);
   const [update, setUpdate] = useState<boolean>(false);
-  const phoneNumber = useRef("false");
 
   const [errors, setErrors] = useState({
     phoneError: "Phone Number must not be blank",
   });
 
+  const phoneNumber = useRef(currentPhone);
+
   function validatePhoneNumber(event: React.ChangeEvent<HTMLInputElement>) {
-    phoneNumber.current = event.target.value;
+    const formattedNumber = formatPhone(event.target.value);
+
+    phoneNumber.current = formattedNumber;
+
+    console.log(phoneNumber.current);
+    console.log(formattedNumber);
+
     setPhoneValid(checkPhone(phoneNumber.current).valid);
     setErrors({
       ...errors,
@@ -25,17 +34,10 @@ export default function CustomerPhoneDetails() {
     });
   }
 
-  function updatePhone(e: React.ChangeEvent<HTMLInputElement>) {
-    setCurrentPhone(e.target.value);
-    validatePhoneNumber(e);
-  }
-
-  const customerPhoneRef = useRef<string>(orderToView.phone);
-
   return (
     <div className={classes.editableDetails}>
       <p className={classes.editableDetailsTitle}>Phone:</p>
-      <p>{currentPhone}</p>
+      <p>{phoneNumber.current}</p>
       {editPhone && (
         <div>
           <input
@@ -46,7 +48,8 @@ export default function CustomerPhoneDetails() {
             name="phone"
             required
             maxLength={12}
-            onChange={updatePhone}
+            onChange={validatePhoneNumber}
+            value={phoneNumber.current}
           />
           {!phoneValid && <p className={classes.error}>{errors.phoneError}</p>}
         </div>
@@ -77,7 +80,7 @@ export default function CustomerPhoneDetails() {
               customerUid: orderToView.customerUid,
               name: orderToView.name,
               email: orderToView.email,
-              phone: currentPhone,
+              phone: phoneNumber.current,
               orderTotal: orderToView.orderTotal,
               orderItems: orderToView.orderItems,
               created: orderToView.created,
@@ -87,7 +90,7 @@ export default function CustomerPhoneDetails() {
             setEditPhone(!editPhone),
             setPhoneValid(!phoneValid),
             setUpdate(!update),
-            (customerPhoneRef.current = currentPhone),
+            phoneNumber.current,
           ]}
         >
           Done

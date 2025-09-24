@@ -5,6 +5,7 @@ import classes from "./submitOrder-button.module.css";
 import { useFormStatus } from "react-dom";
 import { useEffect } from "react";
 import { useOrderConfirmationContext } from "@/context/order-confirmation-context";
+import { useOwnerContext } from "@/context/owner-context";
 
 export default function SubmitButton(
   validation: {
@@ -19,6 +20,7 @@ export default function SubmitButton(
   const status = useFormStatus();
   const { setShowOrderConfirmation } = useDisplayContext();
   const { setOrderConfirmation } = useOrderConfirmationContext();
+  const { setOwnerOrder } = useOwnerContext();
 
   useEffect(() => {
     setOrderConfirmation(validation.state);
@@ -37,7 +39,9 @@ export default function SubmitButton(
       }
       onClick={async () => {
         try {
+          // reset ownerOrder
           setOrderConfirmation(validation.state);
+          setOwnerOrder(false);
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (error) {
           throw new Error("Sorry, we can't process your order at the moment");

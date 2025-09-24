@@ -14,16 +14,20 @@ import {
 } from "@/lib/owners-tools/confirmation-messages";
 import { useEditOrderContext } from "@/context/edit-order-context";
 import ActionConfirmationButton from "../ui/buttons/order-edit/action-confirmation-button";
+import { GetOrderByID } from "@/lib/owners-tools/owners-tools";
+import { useOwnerContext } from "@/context/owner-context";
 
 export default function OrderActionConfirmation(props: {
   title: string;
   order: Order;
 }) {
   const { setShowConfirmation } = useDisplayContext();
-  const { orderToView } = useModalContext();
+  const { orderToView, setOrderToView } = useModalContext();
 
-  const { menuItem, quantity, orderItem, itemSize, customer } =
+  const { menuItem, quantity, orderItem, itemSize, customer, setOrderChanged } =
     useEditOrderContext();
+
+  const { login } = useOwnerContext();
 
   console.log(itemSize);
 
@@ -51,6 +55,7 @@ export default function OrderActionConfirmation(props: {
       newQuantity: quantity,
       newSize: itemSize,
     });
+    // setOrderChanged(true);
   } else if (props.title === "Update Customer") {
     message.current = CustomerUpdateMessage(customer);
   }
@@ -63,7 +68,17 @@ export default function OrderActionConfirmation(props: {
           <p>{message.current}</p>
           <div className={classes.buttons}>
             <ActionConfirmationButton title={props.title} />
-            <button onClick={() => setShowConfirmation(false)}>no</button>
+            <button
+              onClick={async () => [
+                setShowConfirmation(false),
+                setOrderChanged(false),
+                setOrderToView(
+                  await GetOrderByID(orderToView.orderUid, login.token)
+                ),
+              ]}
+            >
+              no
+            </button>
           </div>
         </div>
       </Card>

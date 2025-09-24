@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import SearchByIdButton from "../search/search-by-id-button";
 import SearchByPhoneButton from "../search/search-by-phone-button";
 import { useOwnerContext } from "@/context/owner-context";
+import { formatPhone } from "@/lib/general/multi-use";
 
 export default function SearchBar() {
   const [orderId, setOrderID] = useState<string>("");
@@ -54,7 +55,7 @@ export default function SearchBar() {
   //  search by customer phone number
 
   function captureCustomerPhone(e: React.ChangeEvent<HTMLInputElement>) {
-    const formattedNumber = formatNumber(e.target.value);
+    const formattedNumber = formatPhone(e.target.value);
 
     setCustomerPhone(formattedNumber as string);
 
@@ -67,22 +68,22 @@ export default function SearchBar() {
     phoneNumberRef.current = formattedNumber;
   }
 
-  function formatNumber(input: string) {
-    if (!input) return input;
-    const numberInput: string = input.replace(/[^\d]/g, "");
-    const inputLength: number = numberInput.length;
+  // function formatNumber(input: string) {
+  //   if (!input) return input;
+  //   const numberInput: string = input.replace(/[^\d]/g, "");
+  //   const inputLength: number = numberInput.length;
 
-    if (inputLength < 4) {
-      return numberInput;
-    } else if (inputLength < 7) {
-      return `${numberInput.slice(0, 3)}.${numberInput.slice(3)}`;
-    } else {
-      return `${numberInput.slice(0, 3)}.${numberInput.slice(
-        3,
-        6
-      )}.${numberInput.slice(6)}`;
-    }
-  }
+  //   if (inputLength < 4) {
+  //     return numberInput;
+  //   } else if (inputLength < 7) {
+  //     return `${numberInput.slice(0, 3)}.${numberInput.slice(3)}`;
+  //   } else {
+  //     return `${numberInput.slice(0, 3)}.${numberInput.slice(
+  //       3,
+  //       6
+  //     )}.${numberInput.slice(6)}`;
+  //   }
+  // }
 
   return (
     <div>

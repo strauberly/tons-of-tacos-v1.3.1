@@ -15,8 +15,15 @@ export default function ActionConfirmationButton(props: { title: string }) {
   const { setShowConfirmation, setShowModal } = useDisplayContext();
   const { setOrders } = useOrdersContext();
   const { login } = useOwnerContext();
-  const { menuItem, quantity, orderItem, itemSize, setItemSize, customer } =
-    useEditOrderContext();
+  const {
+    menuItem,
+    quantity,
+    orderItem,
+    itemSize,
+    setItemSize,
+    customer,
+    setOrderChanged,
+  } = useEditOrderContext();
   const { orderToView, setModal, setOrderToView } = useModalContext();
 
   const orders = useRef<Order[]>([]);
@@ -85,6 +92,7 @@ export default function ActionConfirmationButton(props: { title: string }) {
         (orders.current = await GetAllOrders(login.token)),
         setOrders(orders.current),
         setOrderToView(await GetOrderByID(orderToView.orderUid, login.token)),
+        setOrderChanged(true),
       ]}
     >
       yes

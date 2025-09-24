@@ -47,7 +47,9 @@ export default function Update(props: {
 
   function updateOrderItem() {
     console.log(GetOwnerOrder());
+    setOrder(GetOwnerOrder());
     console.log(order);
+    console.log(props.cartItem);
     console.log(
       order.findIndex((orderItem) => orderItem.itemName === props.cartItem)
     );
@@ -81,8 +83,8 @@ export default function Update(props: {
   function checkOrderContext() {
     if (ownerOrder) {
       return [
-        updateOrderItem(),
         setOrder(GetOwnerOrder()),
+        updateOrderItem(),
         setItemQuantityChanged(false),
       ];
     } else {

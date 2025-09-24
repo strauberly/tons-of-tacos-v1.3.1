@@ -6,6 +6,8 @@ import { AddItemToCart, GetCart } from "@/lib/cart";
 import { useEffect, useRef, useState } from "react";
 import { useDisplayContext } from "@/context/display-context";
 import { useSelectedSizeContext } from "@/context/size-context";
+import { useOwnerContext } from "@/context/owner-context";
+import { AddToOwnerOrder } from "@/lib/owners-tools/owners-tools-client";
 
 export default function AddToCart(props: {
   id: string;
@@ -22,6 +24,7 @@ export default function AddToCart(props: {
   const { selectedSize, setSelectedSize } = useSelectedSizeContext();
   const { cartQuantity, setCartQuantity, setItemsInCart, cart, setCart } =
     useCartContext();
+  const { loggedIn } = useOwnerContext();
 
   const [largeOrder, setLargeOrder] = useState<boolean>();
   const itemInCart = useRef(false);
@@ -64,14 +67,25 @@ export default function AddToCart(props: {
       setLargeOrder(false);
       props.quantitySelector();
       props.expander();
-      AddItemToCart(
-        props.id,
-        props.menuId,
-        props.itemName,
-        props.quantity,
-        selectedSize,
-        props.price
-      );
+      if (loggedIn) {
+        AddToOwnerOrder(
+          `${props.itemName}` + `_${props.size}`,
+          props.id,
+          props.itemName,
+          props.quantity,
+          props.size,
+          props.size
+        );
+      } else {
+        AddItemToCart(
+          props.id,
+          props.menuId,
+          props.itemName,
+          props.quantity,
+          selectedSize,
+          props.price
+        );
+      }
       setCart(GetCart());
       setCartQuantity(cartQuantity + props.quantity);
     }

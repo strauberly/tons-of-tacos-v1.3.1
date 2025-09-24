@@ -53,6 +53,8 @@ export function AddToOwnerOrder(
 
   let newOwnerCart: CartItem[] = [];
   newOwnerCart = GetOwnerOrder();
+  console.log(cartItem);
+  console.log(newOwnerCart);
   newOwnerCart.push(cartItem);
   sessionStorage.removeItem("owner-order");
   sessionStorage.setItem("owner-order", JSON.stringify(newOwnerCart));

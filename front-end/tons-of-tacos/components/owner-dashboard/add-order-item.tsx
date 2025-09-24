@@ -6,9 +6,12 @@ import ArrowIcon from "../menu/menu-items/quantity-selector/arrow-icon";
 import { useModalContext } from "@/context/modal-context";
 import AddToOrderButton from "../ui/buttons/order-edit/add-to-order-button";
 import classes from "./add-order-item.module.css";
+import { useOrdersContext } from "@/context/orders-context";
+import { useOwnerContext } from "@/context/owner-context";
 
 export default function AddOrderItem() {
-  const { orderToView } = useModalContext();
+  const { orderToView, setOrderToView } = useModalContext();
+  const { ownerOrder } = useOwnerContext();
   const [itemSelector, setItemSelector] = useState<boolean>(false);
   const [itemName, setItemName] = useState<string>("Item");
   const [quantity, setQuantity] = useState<number>(1);
@@ -42,7 +45,7 @@ export default function AddOrderItem() {
   const itemSetter = (item: MenuItem) => {
     setItem(item);
   };
-
+  // call from lib
   function calcPrice() {
     let adjPrice: number;
     let sizeSurcharge = 0;
@@ -106,7 +109,10 @@ export default function AddOrderItem() {
     setItemSelector(false);
   }
 
+  // need an owner order context check
+
   useEffect(() => {
+    console.log(ownerOrder);
     function calcPrice() {
       let adjPrice: number;
       let sizeSurcharge = 0;

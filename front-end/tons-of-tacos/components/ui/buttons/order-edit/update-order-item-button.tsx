@@ -14,6 +14,7 @@ export default function UpdateOrderItemButton(props: {
   console.log("new size" + props.newSize);
   return (
     <button
+      // setordertoview
       onClick={() => [
         setQuantity(props.newQuantity),
         setItemSize(props.newSize),

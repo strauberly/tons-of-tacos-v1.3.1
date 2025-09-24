@@ -2,12 +2,23 @@
 
 ---
 
--- 18 Sep 2025 --
+-- 22 Sep 2025 --
+
+- cart updated to ensure proper functionality.
+- owner order editor for phone brought in line with other components for number formatting and validation.
+- format phone number function added to general library reducing redundant code.
+- working out why owner order creator is misbehaving.
+
+- ***
+
+  -- 18 Sep 2025 --
 
 - Daily Sales brought into its own component to eliminate issues when rerendering to update.
 - input element for owner login form changed from text to password for obfuscation.
 - add to order button is now correctly checking if an item is in an order before adding and updating the order if an item is added.
 - order edits made by owner functioning correctly and recalculating order total correctly.
+
+---
 
 - ***
 

@@ -45,7 +45,7 @@ export default function CartItem(props: {
   const decrement = () => {
     setQuantity(quantity - 1);
     if (quantity <= 1) {
-      RemoveCartItem(props.id);
+      RemoveCartItem(props.menuId);
       setItemRemoved(true);
       setCart(GetCart());
       setCartQuantity(cartQuantity - props.itemQuantity);
@@ -82,7 +82,10 @@ export default function CartItem(props: {
         oldQuantity={props.itemQuantity}
       />
 
-      <RemoveFromCart id={props.menuId} cartItemQuantity={props.itemQuantity} />
+      <RemoveFromCart
+        menuId={props.menuId}
+        cartItemQuantity={props.itemQuantity}
+      />
     </li>
   );
 }

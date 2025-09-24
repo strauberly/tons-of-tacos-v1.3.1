@@ -8,6 +8,7 @@ import { SendOrder, setIsLoggedIn } from "@/lib/cart";
 import { useOrderConfirmationContext } from "@/context/order-confirmation-context";
 import { useOwnerContext } from "@/context/owner-context";
 import { isLoggedIn } from "@/lib/owners-tools/owners-tools-client";
+import { formatPhone } from "@/lib/general/multi-use";
 
 export default function CustomerInfoForm() {
   const { setOrderConfirmation } = useOrderConfirmationContext();
@@ -56,26 +57,25 @@ export default function CustomerInfoForm() {
     });
   }
 
- 
-  function formatNumber(input: string) {
-    if (!input) return input;
-    const numberInput: string = input.replace(/[^\d]/g, "");
-    const inputLength: number = numberInput.length;
+  // function formatNumber(input: string) {
+  //   if (!input) return input;
+  //   const numberInput: string = input.replace(/[^\d]/g, "");
+  //   const inputLength: number = numberInput.length;
 
-    if (inputLength < 4) {
-      return numberInput;
-    } else if (inputLength < 7) {
-      return `${numberInput.slice(0, 3)}.${numberInput.slice(3)}`;
-    } else {
-      return `${numberInput.slice(0, 3)}.${numberInput.slice(
-        3,
-        6
-      )}.${numberInput.slice(6)}`;
-    }
-  }
+  //   if (inputLength < 4) {
+  //     return numberInput;
+  //   } else if (inputLength < 7) {
+  //     return `${numberInput.slice(0, 3)}.${numberInput.slice(3)}`;
+  //   } else {
+  //     return `${numberInput.slice(0, 3)}.${numberInput.slice(
+  //       3,
+  //       6
+  //     )}.${numberInput.slice(6)}`;
+  //   }
+  // }
 
   function validatePhoneNumber(event: React.ChangeEvent<HTMLInputElement>) {
-    const formattedNumber = formatNumber(event.target.value);
+    const formattedNumber = formatPhone(event.target.value);
 
     phoneNumber.current = formattedNumber;
 
