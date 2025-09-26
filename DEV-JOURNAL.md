@@ -2,6 +2,15 @@
 
 ---
 
+-- 26 Sep 2025 --
+
+- Continuing investigation into functionality for altering cart. Appears we are getting jumbled with possibly too much context interaction jumbling components. Working on restoring functionality and then onto seeing if work can be streamlined.
+- If I recall correctly I believe the different context was created in order to prevent context for cart from wrapping entire application and unintentionally affect components shared between a customer and owner.
+  More research needed.
+- Funtionality for adding items to carts, and updating quantities and totals restored.
+
+---
+
 -- 22 Sep 2025 --
 
 - cart updated to ensure proper functionality.
@@ -9,9 +18,9 @@
 - format phone number function added to general library reducing redundant code.
 - working out why owner order creator is misbehaving.
 
-- ***
+---
 
-  -- 18 Sep 2025 --
+-- 18 Sep 2025 --
 
 - Daily Sales brought into its own component to eliminate issues when rerendering to update.
 - input element for owner login form changed from text to password for obfuscation.

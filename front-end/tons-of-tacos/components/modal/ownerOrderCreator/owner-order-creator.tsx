@@ -11,22 +11,26 @@ import {
 import { useEffect, useRef } from "react";
 import { useOwnerContext } from "@/context/owner-context";
 import { CalcOrderTotal } from "@/lib/general/multi-use";
+import { useCartContext } from "@/context/cart-context";
 
 export default function OwnerOrderCreator() {
   const { setShowOwnerOrderCreator } = useDisplayContext();
 
   const { setOrder, orderTotal, loggedIn, setOwnerOrder } = useOwnerContext();
 
+  const { setCart } = useCartContext();
+
   const total = useRef<string>("");
 
   total.current = CalcOrderTotal(loggedIn);
   useEffect(() => {
-    setOrder(GetOwnerOrder());
+    // change to set a cart
+    setCart(GetOwnerOrder());
     async function GetTotal() {
       total.current = orderTotal;
     }
     GetTotal();
-  }, [orderTotal, setOrder]);
+  }, [orderTotal, setCart, setOrder]);
 
   return (
     <div className={classes.ownerOrderCreator}>
@@ -46,6 +50,7 @@ export default function OwnerOrderCreator() {
               setShowOwnerOrderCreator(false),
               RemoveOwnerOrder(),
               setOwnerOrder(false),
+              setCart([]),
               // reset flag for owner order
             ]}
           >

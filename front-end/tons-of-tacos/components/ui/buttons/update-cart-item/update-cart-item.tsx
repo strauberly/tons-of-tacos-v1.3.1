@@ -23,7 +23,7 @@ export default function Update(props: {
 }) {
   const { cart, setCart, setCartQuantity, cartQuantity } = useCartContext();
 
-  const { setModal } = useModalContext();
+  const { setModal, orderToView, setOrderToView } = useModalContext();
   const { setShowModal } = useDisplayContext();
   const { ownerOrder, order, setOrder } = useOwnerContext();
 
@@ -41,25 +41,39 @@ export default function Update(props: {
     newCart[cartItemIndex].quantity = props.updatedItemQuantity;
 
     newCart[cartItemIndex].price = props.updatedItemPrice;
-    setCart(newCart);
     UpdateCart(newCart);
+    setCart(newCart);
   };
 
   function updateOrderItem() {
     console.log(GetOwnerOrder());
-    setOrder(GetOwnerOrder());
+    // setOrder(GetOwnerOrder());
     console.log(order);
     console.log(props.cartItem);
     console.log(
       order.findIndex((orderItem) => orderItem.itemName === props.cartItem)
     );
-    const orderItemIndex = order.findIndex(
+    const orderItemIndex = orderToView.orderItems.findIndex(
       (orderItem) => orderItem.itemName === props.cartItem
     );
-    console.log("order item index: " + order[orderItemIndex]);
-    console.log("order item index quantity: " + order[orderItemIndex].quantity);
-    order[orderItemIndex].quantity = props.updatedItemQuantity;
-    order[orderItemIndex].price = props.updatedItemPrice;
+    // const orderItemIndex = order.findIndex(
+    //   (orderItem) => orderItem.itemName === props.cartItem
+    // );
+    console.log("order item index: " + orderToView.orderItems[orderItemIndex]);
+    // console.log("order item index: " + order[orderItemIndex]);
+    console.log(
+      "order item index quantity: " +
+        orderToView.orderItems[orderItemIndex].quantity
+    );
+    // console.log("order item index quantity: " + order[orderItemIndex].quantity);
+    orderToView.orderItems[orderItemIndex].quantity = props.updatedItemQuantity;
+    // order[orderItemIndex].quantity = props.updatedItemQuantity;
+    orderToView.orderItems[orderItemIndex].total = Number(
+      props.updatedItemPrice
+    );
+    // order[orderItemIndex].price = props.updatedItemPrice;
+
+    setOrder(order);
     setOrder(order);
     updateOwnerOrder(order);
   }
@@ -83,7 +97,8 @@ export default function Update(props: {
   function checkOrderContext() {
     if (ownerOrder) {
       return [
-        setOrder(GetOwnerOrder()),
+        setCart(GetOwnerOrder()),
+
         updateOrderItem(),
         setItemQuantityChanged(false),
       ];

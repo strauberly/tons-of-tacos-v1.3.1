@@ -26,7 +26,7 @@ export default function AddToOrderButton(props: {
   const { setConfirmationTitle } = useModalContext();
   const { orderToView } = useModalContext();
   const { ownerOrder, setOrder, order, login } = useOwnerContext();
-  const { setCart } = useCartContext();
+  const { setCart, cart } = useCartContext();
   const { setModal, setOrderToView } = useModalContext();
   const { setShowModal } = useDisplayContext();
   const {
@@ -42,19 +42,34 @@ export default function AddToOrderButton(props: {
   const itemInOrder = useRef<boolean>(false);
 
   function orderCheck() {
-    setOrder(GetOwnerOrder());
-    // setOrderTotal(CalcOrderTotal());
+    // setOrder(GetOwnerOrder());
     console.log(order);
-    Array.from(orderToView.orderItems).forEach((orderItem) => {
-      if (orderItem.itemName === props.menuItem.itemName) {
-        setModal(
-          "Item already in order. Update quantity, remove, or choose a different item."
-        );
-        setShowModal(true);
-        itemInOrder.current = true;
-        // props.reset();
-      }
-    });
+    // setOrderTotal(CalcOrderTotal());
+
+    if (ownerOrder) {
+      cart.forEach((cartItem) => {
+        if (cartItem.itemName === props.menuItem.itemName) {
+          setModal(
+            "Item already in order. Update quantity, remove, or choose a different item."
+          );
+          setShowModal(true);
+          itemInOrder.current = true;
+          props.reset();
+        }
+      });
+    } else {
+      console.log(order);
+      Array.from(orderToView.orderItems).forEach((orderItem) => {
+        if (orderItem.itemName === props.menuItem.itemName) {
+          setModal(
+            "Item already in order. Update quantity, remove, or choose a different item."
+          );
+          setShowModal(true);
+          itemInOrder.current = true;
+          props.reset();
+        }
+      });
+    }
   }
 
   function proceed() {
@@ -77,7 +92,8 @@ export default function AddToOrderButton(props: {
           props.menuItem.itemSize,
           props.menuItem.unitPrice.toString()
         ),
-        // props.reset(),
+        props.reset(),
+        setCart(GetOwnerOrder()),
       ];
     } else if (!ownerOrder) {
       return [
@@ -101,15 +117,13 @@ export default function AddToOrderButton(props: {
       className={classes.addItemButton}
       disabled={props.menuItem.itemName === ""}
       onClick={async () => {
-        // setOrder(GetOwnerOrder());
+        setOrder(GetOwnerOrder());
         // setOrderToView(await GetOrderByID(orderToView.orderUid, login.token));
         orderCheck();
         checkOrderContext();
-        // setOrder(GetOwnerOrder());
         if (!ownerOrder) {
           setOrderToView(await GetOrderByID(props.orderUid, login.token));
         }
-        // props.reset();
       }}
     >
       Add Item
