@@ -42,6 +42,7 @@ export default function SubmitButton(
           // reset ownerOrder
           setOrderConfirmation(validation.state);
           setOwnerOrder(false);
+
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (error) {
           throw new Error("Sorry, we can't process your order at the moment");

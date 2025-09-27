@@ -3,7 +3,7 @@ import QuantitySelector from "../menu/menu-items/quantity-selector/quantity-sele
 
 import classes from "./cart-item.module.css";
 import RemoveFromCart from "../ui/buttons/remove-from-cart/remove-from-cart";
-import Update from "../ui/buttons/update-cart-item/update-cart-item";
+import Update from "../ui/buttons/update-cart-item/update-cart-item-copy";
 import { useCartContext } from "@/context/cart-context";
 import { GetCart, RemoveCartItem } from "@/lib/cart";
 import { useModalContext } from "@/context/modal-context";
@@ -45,12 +45,14 @@ export default function CartItem(props: {
   const decrement = () => {
     setQuantity(quantity - 1);
     if (quantity <= 1) {
-      RemoveCartItem(props.menuId);
-      setItemRemoved(true);
-      setCart(GetCart());
-      setCartQuantity(cartQuantity - props.itemQuantity);
+      // RemoveCartItem(props.menuId);
+      // setItemRemoved(true);
+      // setCart(GetCart());
+      // setCartQuantity(cartQuantity - props.itemQuantity);
+      setQuantity(1);
     } else {
       // set quantity -1?
+      setCartQuantity(cartQuantity - props.itemQuantity);
     }
   };
 
