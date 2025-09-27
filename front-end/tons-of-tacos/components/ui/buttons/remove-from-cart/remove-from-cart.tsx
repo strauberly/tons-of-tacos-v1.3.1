@@ -21,6 +21,7 @@ export default function Remove(props: {
   // });
 
   function checkOrderContext() {
+    console.log("id: " + props.id);
     if (ownerOrder) {
       return [
         console.log(props.id),

@@ -2,12 +2,18 @@
 
 ---
 
+-- 27 Sep 2025 --
+
+- Restored remove item from appropriate cart functionality. Will continue to research and see if we can slimline carts with context.
+
+---
+
 -- 26 Sep 2025 --
 
-- Continuing investigation into functionality for altering cart. Appears we are getting jumbled with possibly too much context interaction jumbling components. Working on restoring functionality and then onto seeing if work can be streamlined.
+- Continuing investigation into functionality for altering cart. Appears we are getting jumbled with possibly too much context interaction. Working on restoring functionality and then onto seeing if work can be streamlined.
 - If I recall correctly I believe the different context was created in order to prevent context for cart from wrapping entire application and unintentionally affect components shared between a customer and owner.
   More research needed.
-- Funtionality for adding items to carts, and updating quantities and totals restored.
+- Functionality for adding items to carts, and updating quantities and totals restored.
 
 ---
 

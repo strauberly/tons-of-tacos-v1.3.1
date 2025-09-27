@@ -84,10 +84,7 @@ export default function CartItem(props: {
         oldQuantity={props.itemQuantity}
       />
 
-      <RemoveFromCart
-        menuId={props.menuId}
-        cartItemQuantity={props.itemQuantity}
-      />
+      <RemoveFromCart id={props.menuId} cartItemQuantity={props.itemQuantity} />
     </li>
   );
 }
