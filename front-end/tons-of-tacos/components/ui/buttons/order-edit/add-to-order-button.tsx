@@ -18,6 +18,7 @@ export default function AddToOrderButton(props: {
   quantity: number;
   customerName: string;
   size: string;
+  price: string;
   setItemName: (item: string) => void;
   setReadyToAdd: (readyToAdd: boolean) => void;
   reset: () => void;
@@ -90,7 +91,7 @@ export default function AddToOrderButton(props: {
           props.menuItem.itemName,
           props.quantity,
           props.menuItem.itemSize,
-          props.menuItem.unitPrice.toString()
+          props.price
         ),
         props.reset(),
         setCart(GetOwnerOrder()),

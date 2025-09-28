@@ -2,6 +2,12 @@
 
 ---
 
+-- 28 Sep 2025 --
+
+- Add to order button was not correctly adding an items total to the cart due to result of calculation not being passed to button component. This has been rectified.
+
+---
+
 -- 27 Sep 2025 --
 
 - Restored remove item from appropriate cart functionality. Will continue to research and see if we can slimline carts with context.

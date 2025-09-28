@@ -127,7 +127,7 @@ export default function AddOrderItem() {
       return adjPrice;
     }
     setPrice(calcPrice());
-  }, [item?.unitPrice, price, quantity, size]);
+  }, [item?.unitPrice, ownerOrder, price, quantity, size]);
 
   return (
     <>
@@ -196,9 +196,10 @@ export default function AddOrderItem() {
             menuItem={item}
             quantity={quantity}
             customerName={orderToView.name}
+            size={size}
+            price={price.toFixed(2)}
             setItemName={setItemName}
             setReadyToAdd={setReadyToAdd}
-            size={size}
             reset={reset}
           />
         )}
