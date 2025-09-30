@@ -2,6 +2,12 @@
 
 ---
 
+-- 29 Sep 2025 --
+
+- Began working on responsive styling for owners-tools Starting with owner login form.
+
+---
+
 -- 28 Sep 2025 --
 
 - Add to order button was not correctly adding an items total to the cart due to result of calculation not being passed to button component. This has been rectified.
