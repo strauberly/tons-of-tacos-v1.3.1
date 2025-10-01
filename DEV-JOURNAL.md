@@ -2,6 +2,16 @@
 
 ---
 
+-- 1 Oct 2025 --
+
+- Responsive styling in place for owner header once logged in.
+
+- Beginnings of responsive design for the owner dashboard. Moving into new position at 1400px coinciding with our responsive size scheme for the application as a whole.
+
+- Responsive styling for action and search bar in place.
+
+---
+
 -- 29 Sep 2025 --
 
 - Began working on responsive styling for owners-tools Starting with owner login form.

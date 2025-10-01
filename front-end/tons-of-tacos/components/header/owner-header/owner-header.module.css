@@ -14,20 +14,29 @@
 @media (max-width: 1400px) {
   .ownerHeader {
     position: absolute;
-    top: 140%;
-    left: 20%;
+    top: 102%;
+    left: 0.1%;
+    background-color: var(--background-color);
+    width: 100%;
+    border-bottom: solid;
+    border-color: var(--border-color);
+    justify-content: space-between;
+    padding: 1rem;
   }
 
   .ownerHeader p {
     font-size: 3vw;
+    justify-self: center;
   }
 }
 
 @media (max-width: 800px) {
   .ownerHeader {
-    left: 6%;
+    top: 103%;
+    align-items: center;
+    width: 100%;
   }
   .ownerHeader p {
-    font-size: 4vw;
+    font-size: 3vw;
   }
 }

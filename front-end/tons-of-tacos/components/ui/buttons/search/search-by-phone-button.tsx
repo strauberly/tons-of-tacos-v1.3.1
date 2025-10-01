@@ -34,7 +34,7 @@ export default function SearchByPhoneButton(props: {
 
   return (
     <button
-      className={classes.search}
+      className={classes.searchButton}
       onClick={async () => [
         (response.current = await GetOrdersByCustomerPhone(
           props.customerName,

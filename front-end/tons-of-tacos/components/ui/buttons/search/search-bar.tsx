@@ -1,4 +1,6 @@
-import classes from "../../../owner-dashboard/owner-dashboard.module.css";
+// import classes from "../../../owner-dashboard/owner-dashboard.module.css";
+
+import classes from "../search/search.module.css";
 
 import { useRef, useState } from "react";
 import SearchByIdButton from "../search/search-by-id-button";
@@ -86,7 +88,7 @@ export default function SearchBar() {
   // }
 
   return (
-    <div>
+    <div className={classes.searchBar}>
       <div className={classes.search}>
         <label>Find by Order ID:</label>
         <input

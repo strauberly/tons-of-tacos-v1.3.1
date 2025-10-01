@@ -1,10 +1,10 @@
 import { GetOrderByID } from "@/lib/owners-tools/owners-tools";
 import SearchIcon from "./search-icon";
-import classes from "./search.module.css";
 import { useRef } from "react";
 import { useModalContext } from "@/context/modal-context";
 import { useDisplayContext } from "@/context/display-context";
 
+import classes from "./search.module.css";
 export default function SearchByIdButton(props: {
   orderUid: string;
   token: string;
@@ -32,7 +32,7 @@ export default function SearchByIdButton(props: {
   // try catch on click?
   return (
     <button
-      className={classes.search}
+      className={classes.searchButton}
       onClick={async () => [
         (response.current = await GetOrderByID(props.orderUid, props.token)),
         orderFound(),
