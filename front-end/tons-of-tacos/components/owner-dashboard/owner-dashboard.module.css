@@ -1,3 +1,7 @@
+.completeDash {
+  /* display: contents; */
+}
+
 .dashboard {
   margin-top: 2%;
   display: flex;
@@ -33,8 +37,6 @@
 .dashboard button {
   font-size: 1rem;
 }
-
-
 
 .dashboard li div {
   display: flex;
@@ -145,40 +147,8 @@
   margin-right: 4rem;
 }
 
-.search {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-
-.search label {
-  color: var(--interactive-color);
-  font-family: var(--inter-font);
-  font-weight: bold;
-  margin-left: 2rem;
-}
-
-.search input {
-  width: 28ch;
-}
-
-.search input,
-.search textarea {
-  font-size: 1rem;
-  padding-top: 0.1vw;
-  padding-bottom: 0.1vw;
-  text-align: center;
-  background-color: var(--background-color);
-  color: var(--user-selected-color);
-}
-
-.search input:focus,
-.search textarea:focus {
-  outline: none;
-}
-
-.searchError {
-  color: var(--attention-color);
-  margin-top: 0.5rem;
-  margin-left: 20rem;
+@media (max-width: 1400px) {
+  .dashboard {
+    margin-top: 15%;
+  }
 }

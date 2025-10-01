@@ -57,8 +57,8 @@ export default function OwnerDashboard() {
           order={orderToView}
         />
       )}
-      <ActionBar />
-      <div>
+      <div className={classes.completeDash}>
+        <ActionBar />
         <ul className={classes.displayCategories}>
           {displayCategories.map((category) => (
             <p key={category}>{`${category.toString()}`}</p>
