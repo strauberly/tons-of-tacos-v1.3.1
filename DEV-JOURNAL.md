@@ -10,6 +10,8 @@
 
 - Responsive styling for action and search bar in place.
 
+- Responsive scheme started for order summaries. Needs further refinement.
+
 ---
 
 -- 29 Sep 2025 --
