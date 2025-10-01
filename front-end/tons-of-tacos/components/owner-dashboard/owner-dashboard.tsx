@@ -57,35 +57,38 @@ export default function OwnerDashboard() {
           order={orderToView}
         />
       )}
-      <div className={classes.completeDash}>
+      <div>
         <ActionBar />
-        <ul className={classes.displayCategories}>
-          {displayCategories.map((category) => (
-            <p key={category}>{`${category.toString()}`}</p>
-          ))}
-
-          <button
-            className={classes.sortButtons}
-            onClick={() => setSortState("ready")}
-          >
-            {" "}
-            Ready
-          </button>
-          <button
-            onClick={() => setSortState("closed")}
-            className={classes.sortButtons}
-          >
-            {" "}
-            Closed
-          </button>
-          <button
-            onClick={() => setSortState("open")}
-            className={classes.sortButtons}
-          >
-            Open
-          </button>
-        </ul>
-        <Orders sortState={sortState} />
+        <div className={classes.ordersDash}>
+          <ul className={classes.displayCategories}>
+            {displayCategories.map((category) => (
+              <p key={category}>{`${category.toString()}`}</p>
+            ))}
+            <div className={classes.buttonGroup}>
+              <button
+                className={classes.sortButtons}
+                onClick={() => setSortState("ready")}
+              >
+                {" "}
+                Ready
+              </button>
+              <button
+                onClick={() => setSortState("closed")}
+                className={classes.sortButtons}
+              >
+                {" "}
+                Closed
+              </button>
+              <button
+                onClick={() => setSortState("open")}
+                className={classes.sortButtons}
+              >
+                Open
+              </button>
+            </div>
+          </ul>
+          <Orders sortState={sortState} />
+        </div>
         <div className={classes.sales}>
           {/* <DailySalesDisplay /> */}
           {/* <h1>Sales For Today: {sales?.numberOfSales}</h1>
