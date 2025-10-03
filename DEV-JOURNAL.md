@@ -2,6 +2,12 @@
 
 ---
 
+-- 2 Oct 2025 --
+
+- column categories matched up with order summary columns in responsive view less than 1920. Still working on making it happen in the other direction.
+
+---
+
 -- 1 Oct 2025 --
 
 - Responsive styling in place for owner header once logged in.
