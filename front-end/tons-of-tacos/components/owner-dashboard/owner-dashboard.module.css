@@ -1,21 +1,16 @@
 .completeDash {
   display: flex;
-  /* flex-direction: ; */
-  /* align-items: last baseline; */
+  flex-direction: column;
+  align-items: last baseline;
+  width: 100%;
 }
 
 .dashboard {
-  margin-top: 2%;
+  /* margin-top: 2%; */
   display: flex;
   height: 100%;
-  justify-content: center;
-  overflow-y: scroll;
-}
-
-.ordersDash {
-  display: flex;
-  /* gap: 2rem; */
-  /* align-items: first baseline; */
+  /* justify-content: center; */
+  overflow-x: scroll;
 }
 
 .viewUpdateDelete {
@@ -23,10 +18,10 @@
 }
 
 .dashboard ul {
-  margin-top: 2%;
+  /* margin-top: -6%; */
   display: flex;
   flex-direction: column;
-  width: 98%;
+  /* width: 90%; */
   max-height: 25rem;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -95,23 +90,45 @@
   justify-content: center;
   margin-bottom: 1rem;
 }
+.sortButtons {
+  font-size: 1rem;
+  cursor: pointer;
+  margin-right: 4rem;
+}
+.ordersDash {
+  display: flex;
+  margin-left: 4rem;
+  gap: 2rem;
+  align-items: first baseline;
+  width: 100%;
+  /* margin-bottom: 1%; */
+}
+
+.buttonGroup {
+  /* display: flex; */
+  display: grid;
+  grid-template-columns: repeat(3, 11rem);
+}
 
 .displayCategories {
   max-height: 30rem;
-  position: fixed;
-  justify-items: center;
-  align-content: center;
+  margin-left: 2rem;
+  /* position: fixed; */
+  justify-content: center;
+  /* align-content: center; */
   /* margin-top: -1.5%; */
   margin-top: -2%;
+  /* margin-right: 5rem; */
   /* margin-right: 6rem; */
   padding: 1.5rem;
+  /* padding-bottom: -1.5rem; */
   /* max-width: 95%; */
-  width: 96.5%;
-  background-color: var(--background-color);
+  width: 66.6%;
+  /* background-color: var(--background-color); */
   display: grid;
-  grid-template-columns: repeat(9, 1fr);
+  grid-template-columns: repeat(7, 3.5fr);
   /* grid-template-columns: repeat(10, 1fr); */
-  gap: 1rem;
+  gap: 4rem;
 }
 
 .displayCategories p {
@@ -154,27 +171,22 @@
   margin-top: 2rem;
 }
 
-.sortButtons {
-  font-size: 1rem;
-  cursor: pointer;
-  margin-right: 4rem;
-}
-
-.buttonGroup {
-  display: flex;
-}
-
 @media (max-width: 1918px) {
+  .completeDash {
+    flex-direction: row;
+  }
   .ordersDash {
     display: flex;
+    flex-direction: column;
     align-items: first baseline;
+    width: max-content;
   }
   .displayCategories {
-    position: sticky;
+    /* position: sticky; */
     justify-items: left;
     padding: 0;
     /* align-content: left; */
-    margin-top: 2%;
+    /* margin-top: 2%; */
     /* margin-top: 0.5%; */
     /* padding: 1.5rem; */
     height: max-content;

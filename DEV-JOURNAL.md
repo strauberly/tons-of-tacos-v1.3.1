@@ -6,6 +6,8 @@
 
 - column categories matched up with order summary columns in responsive view less than 1920. Still working on making it happen in the other direction.
 
+- responsive styling for 1920 - 500 functioning as desired. Refactoring needed to clean up styling and moving styles to their own sheets near components. Will be part of the larger refactor for owner dashboard.
+
 ---
 
 -- 1 Oct 2025 --

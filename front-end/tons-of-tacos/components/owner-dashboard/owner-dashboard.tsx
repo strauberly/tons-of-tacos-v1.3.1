@@ -59,11 +59,13 @@ export default function OwnerDashboard() {
       )}
       <div>
         <ActionBar />
-        <div className={classes.ordersDash}>
-          <ul className={classes.displayCategories}>
-            {displayCategories.map((category) => (
-              <p key={category}>{`${category.toString()}`}</p>
-            ))}
+        <div className={classes.completeDash}>
+          <div className={classes.ordersDash}>
+            <ul className={classes.displayCategories}>
+              {displayCategories.map((category) => (
+                <p key={category}>{`${category.toString()}`}</p>
+              ))}
+            </ul>
             <div className={classes.buttonGroup}>
               <button
                 className={classes.sortButtons}
@@ -86,7 +88,7 @@ export default function OwnerDashboard() {
                 Open
               </button>
             </div>
-          </ul>
+          </div>
           <Orders sortState={sortState} />
         </div>
         <div className={classes.sales}>
