@@ -8,6 +8,8 @@
 
 - responsive styling for 1920 - 500 functioning as desired. Refactoring needed to clean up styling and moving styles to their own sheets near components. Will be part of the larger refactor for owner dashboard.
 
+- Returned functionality of finding an order by its id.
+
 ---
 
 -- 1 Oct 2025 --
