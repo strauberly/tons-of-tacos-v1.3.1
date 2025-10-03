@@ -34,17 +34,17 @@ export default function OrderView() {
   console.log("order to view: " + orderToView);
   // });
 
-  useEffect(() => {
-    async function OrderView() {
-      setOrderToView(await GetOrderByID(orderToView.orderUid, login.token));
-    }
-    // OrderView();
-  }, [
-    login.token,
-    orderToView.orderItems,
-    orderToView.orderUid,
-    setOrderToView,
-  ]);
+  // useEffect(() => {
+  //   async function OrderView() {
+  //     setOrderToView(await GetOrderByID(orderToView.orderUid, login.token));
+  //   }
+  //   OrderView();
+  // }, [
+  //   login.token,
+  //   orderToView.orderItems,
+  //   orderToView.orderUid,
+  //   setOrderToView,
+  // ]);
 
   return (
     <div className={classes.orderView}>

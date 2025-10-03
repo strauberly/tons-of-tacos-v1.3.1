@@ -258,13 +258,13 @@ export async function GetOrderByID(orderUid: string, token: string) {
   console.log(response.status);
   console.log(response.body);
   if (status === 200) {
-    // return orderResponse;
-    return data;
+    return orderResponse;
+    // return data;
   } else {
-    throw new Error(`${data.message}`);
-    // orderResponse.body = data.message;
-    // orderResponse.status = status;
-    // return orderResponse;
+    // throw new Error(`${data.message}`);
+    orderResponse.body = data.message;
+    orderResponse.status = status;
+    return orderResponse;
   }
 }
 

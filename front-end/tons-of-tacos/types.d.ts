@@ -97,7 +97,7 @@ type OrderRequestResponse = {
   status: number;
   // headers: { [key: string]: string };
   // body: unknown;
-  body: Order ;
+  body: Order | string;
 };
 
 type CustomerOrdersResponse = {

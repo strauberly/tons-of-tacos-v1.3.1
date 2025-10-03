@@ -9,7 +9,7 @@ export default function SearchByIdButton(props: {
   orderUid: string;
   token: string;
 }) {
-  const { setOrderToView } = useModalContext();
+  const { setOrderToView, orderToView } = useModalContext();
   const { setViewOrder, setShowModal } = useDisplayContext();
   const { setModal } = useModalContext();
 
@@ -19,10 +19,13 @@ export default function SearchByIdButton(props: {
   });
 
   function orderFound() {
+    // console.log(response.current.);
     console.log(response.current.status);
     console.log(response.current.body);
     if (response.current.status === 200) {
       setOrderToView(response.current.body as Order);
+      console.log(response.current.body);
+      console.log(orderToView);
       setViewOrder(true);
     } else {
       setModal(response.current.body as string);
@@ -35,6 +38,7 @@ export default function SearchByIdButton(props: {
       className={classes.searchButton}
       onClick={async () => [
         (response.current = await GetOrderByID(props.orderUid, props.token)),
+        console.log(response.current),
         orderFound(),
       ]}
     >
