@@ -1,12 +1,11 @@
 // import classes from "../../../owner-dashboard/owner-dashboard.module.css";
 
-import classes from "../search/search.module.css";
-
 import { useRef, useState } from "react";
 import SearchByIdButton from "../search/search-by-id-button";
 import SearchByPhoneButton from "../search/search-by-phone-button";
 import { useOwnerContext } from "@/context/owner-context";
 import { formatPhone } from "@/lib/general/multi-use";
+import classes from "../search/search.module.css";
 
 export default function SearchBar() {
   const [orderId, setOrderID] = useState<string>("");
