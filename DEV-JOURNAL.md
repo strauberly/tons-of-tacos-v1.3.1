@@ -10,6 +10,8 @@
 
 - Returned functionality of finding an order by its id.
 
+- adjusted styling for search input errors.
+
 ---
 
 -- 1 Oct 2025 --
