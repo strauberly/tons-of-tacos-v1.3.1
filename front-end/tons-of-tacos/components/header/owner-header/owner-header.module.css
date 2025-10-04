@@ -18,8 +18,7 @@
     left: 0.1%;
     background-color: var(--background-color);
     width: 100%;
-    border-bottom: solid;
-    border-color: var(--border-color);
+    border-bottom: solid 2px var(--border-color);
     justify-content: space-between;
     padding: 1rem;
   }
