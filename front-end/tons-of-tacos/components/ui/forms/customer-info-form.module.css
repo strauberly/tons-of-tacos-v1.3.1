@@ -8,6 +8,8 @@
   justify-content: center;
   margin-top: 1vw;
   margin-bottom: 1vw;
+  /* work on resonsive width */
+  width: 94%;
 }
 
 .form label {
@@ -28,6 +30,7 @@
   padding-top: 0.5vw;
   padding-bottom: 0.5vw;
   margin-bottom: 1rem;
+  /* max-width: 100%; */
 }
 
 .form input:focus,
@@ -68,11 +71,11 @@
 
 .names {
   display: flex;
-  align-items: first baseline;
-  flex-direction: row;
+  /* align-items: first baseline; */
+  /* flex-direction: row; */
   gap: 2%;
   margin-bottom: 1rem;
-  width: 95%;
+  width: 100%;
 }
 
 .first {
@@ -91,9 +94,10 @@
 }
 
 .last {
+  display: flex;
   flex-direction: column;
+  /* min-width: 40%; */
   min-width: 44%;
-  /* min-width: 44%; */
 }
 
 .lastNameError {
@@ -107,7 +111,7 @@
   display: flex;
   align-items: first baseline;
   margin-bottom: 1rem;
-  /* max-width: 97%; */
+  max-width: 100%;
 }
 
 .phoneColumn {
@@ -141,6 +145,36 @@
   color: var(--attention-color);
   max-width: 100%;
 }
+
+@media (max-width: 1160px) {
+  .names {
+    display: flex;
+    flex-direction: column;
+  }
+  .names label {
+    margin-bottom: 1rem;
+  }
+
+  .firstNameError {
+    margin-bottom: 1rem;
+  }
+
+  .phone {
+    flex-direction: column;
+  }
+
+  .phone label {
+    margin-bottom: 1rem;
+  }
+  .email {
+    flex-direction: column;
+  }
+
+  .email label {
+    margin-bottom: 1rem;
+  }
+}
+
 @media (max-width: 695px) {
   .phoneColumn {
     min-width: clamp(84%, 30vw, 88%);

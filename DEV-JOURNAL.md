@@ -2,6 +2,13 @@
 
 ---
 
+-- 4 Oct 2025 --
+
+- adjustment to border width on owner header.
+- responsive adjustments to customer form compatible for customer cart and owner order creator.
+
+---
+
 -- 2 Oct 2025 --
 
 - column categories matched up with order summary columns in responsive view less than 1920. Still working on making it happen in the other direction.
