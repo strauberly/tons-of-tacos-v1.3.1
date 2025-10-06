@@ -2,16 +2,19 @@
   position: fixed;
   margin-top: 10%;
   z-index: 100;
+  overflow-y: scroll;
+  /* max-height: 2rem; */
 }
 
 .orderDetails {
   display: flex;
   flex-direction: column;
-  padding: 1rem;
+  /* padding: 1rem; */
   padding-left: 1rem;
+  padding-top: 1rem;
   max-height: 20rem;
   overflow-y: scroll;
-  border-bottom: solid var(--border-color);
+  /* border-bottom: solid var(--border-color); */
 }
 
 .uneditableDetails {
@@ -35,6 +38,7 @@
 .editableDetails {
   display: grid;
   padding-top: 1rem;
+  padding-left: 1rem;
   grid-template-columns: repeat(3, 1fr);
   align-items: first baseline;
   row-gap: 1rem;
@@ -86,6 +90,12 @@
   color: var(--attention-color);
   font-family: var(--inter-font);
   padding: 0rem;
+}
+
+.orderItemView {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
 }
 
 .orderItems {
@@ -193,4 +203,62 @@
   display: flex;
   justify-self: center;
   margin-top: 2rem;
+}
+
+@media (max-width: 1300px) {
+  .orderItemView {
+    flex-direction: row;
+    display: flex;
+    margin-bottom: 1rem;
+    height: fit-content;
+    overflow-y: hidden;
+  }
+  .itemTitles {
+    grid-template-columns: repeat(1, 16.66%);
+    gap: 2rem;
+    margin-left: 1rem;
+    justify-items: left;
+  }
+
+  .itemTitles p:nth-child(1) {
+    margin-left: 0rem;
+  }
+
+  .orderItems {
+    max-height: fit-content;
+  }
+
+  .orderItems ul {
+    display: flex;
+    justify-content: center;
+    /* max-height: 8rem; */
+    /* overflow-y: scroll; */
+    overflow-y: hidden;
+    overflow-x: scroll;
+    padding-bottom: 1rem;
+    row-gap: 1rem;
+    justify-content: left;
+    margin-left: 1rem;
+    max-height: fit-content;
+  }
+
+  .orderItems ul li {
+    display: grid;
+    /* grid-template-columns: repeat(1, 16.66%); */
+    grid-template-columns: repeat(1, 100%);
+    /* padding-top: 1rem; */
+    justify-items: left;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    /* margin-left: 1rem; */
+    /* align-items: center; */
+    /* width: 100%; */
+    row-gap: 2rem;
+    min-width: fit-content;
+    border-right: solid var(--border-color) 2px;
+  }
+  .orderItems ul li p:first-child {
+    justify-self: left;
+    margin-left: 0rem;
+  }
 }
