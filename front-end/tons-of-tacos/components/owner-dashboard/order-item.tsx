@@ -3,12 +3,12 @@ import RemoveFromOrderButton from "../ui/buttons/order-edit/remove-from-order-bu
 import ArrowIcon from "../menu/menu-items/quantity-selector/arrow-icon";
 import UpdateOrderItemButton from "../ui/buttons/order-edit/update-order-item-button";
 import SizeSelector from "./size-selector";
-import classes from "./order-item.module.css";
 import { calcPrice } from "@/lib/owners-tools/owners-tools-client";
 import { useEditOrderContext } from "@/context/edit-order-context";
 import { useModalContext } from "@/context/modal-context";
 import { GetOrderByID } from "@/lib/owners-tools/owners-tools";
 import { useOwnerContext } from "@/context/owner-context";
+import classes from "./order-item.module.css";
 
 export default function OrderItem(orderItem: { orderItem: OrderItem }) {
   const { setOrderItem, setQuantity, quantity, orderChanged } =
@@ -69,7 +69,7 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
       orderItem.orderItem.size.toUpperCase() !== "M" &&
       orderItem.orderItem.size.toUpperCase() !== "L"
     ) {
-      return "";
+      return "NA ";
     } else {
       return orderItem.orderItem.size.toUpperCase();
     }

@@ -2,6 +2,13 @@
 
 ---
 
+-- 6 Oct 2025 --
+
+- Altered grids on order view for responsive styling.
+- Responsive design for order view in place.
+
+---
+
 -- 5 Oct 2025 --
 
 - Beginning work on responsive design for order view.
