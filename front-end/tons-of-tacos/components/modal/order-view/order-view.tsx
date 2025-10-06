@@ -59,9 +59,10 @@ export default function OrderView() {
               <p>Total:</p>
               <p>${orderToView.orderTotal.toFixed(2)}</p>
             </div>
-            <EditableDetails />
           </div>
-          <div>
+          <EditableDetails />
+          <div className={classes.orderItemView}>
+            {/* put titles and items in same div */}
             <div>
               <ul className={classes.itemTitles}>
                 {itemTitles.map((title) => (
@@ -80,8 +81,8 @@ export default function OrderView() {
                 ))}
               </ul>
             </div>
-            <AddOrderItem />
           </div>
+          <AddOrderItem />
           <button className={classes.close} onClick={() => setViewOrder(false)}>
             Close
           </button>

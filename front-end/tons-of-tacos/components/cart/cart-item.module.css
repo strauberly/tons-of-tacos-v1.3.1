@@ -10,9 +10,12 @@
 
 .price {
   justify-content: right;
+  margin-top: 1rem;
 }
 
 .size {
   color: var(--user-selected-color);
   justify-self: right;
+  margin-right: 1rem;
+  /* font-size: 1rem; */
 }

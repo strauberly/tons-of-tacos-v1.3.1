@@ -2,6 +2,12 @@
 
 ---
 
+-- 5 Oct 2025 --
+
+- Beginning work on responsive design for order view.
+
+---
+
 -- 4 Oct 2025 --
 
 - adjustment to border width on owner header.
