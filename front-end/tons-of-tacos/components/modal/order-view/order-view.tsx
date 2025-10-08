@@ -13,38 +13,75 @@ export default function OrderView() {
   const { orderToView, setOrderToView } = useModalContext();
   const { setViewOrder } = useDisplayContext();
   const { login } = useOwnerContext();
+  // const orderRef = useRef<Order>({
+  //   orderUid: "",
+  //   customerUid: "",
+  //   name: "",
+  //   email: "",
+  //   phone: "",
+  //   orderItems: [],
+  //   orderTotal: 0,
+  //   created: "",
+  //   ready: "",
+  //   closed: "",
+  // });
+
+  // const orderRef = useRef<Order>(orderToView);
 
   console.log("order to view: " + orderToView);
   const time: string = new Date(orderToView.created).toLocaleTimeString([], {
     timeStyle: "short",
   });
+  // const time: string = new Date(orderRef.current.created).toLocaleTimeString(
+  //   [],
+  //   {
+  //     timeStyle: "short",
+  //   }
+  // );
 
-  // order total should be a const 0 and then if order to View doesnt == undefined or a string the set the order total.
   const date: string = new Date(orderToView.created).toLocaleDateString();
-  // turn this into a ref and try assigning in use effect
-  const orderItemArr: OrderItem[] = orderToView.orderItems;
-
-  // let orderItemArr =(orderToView.orderItems);
+  // const date: string = new Date(orderRef.current.created).toLocaleDateString();
 
   const itemTitles: string[] = ["Item", "Quantity", "Size", "Item Total"];
-  // useEffect(() => {
-  // if (orderToView.orderTotal == undefined) {
-  //   orderToView.orderTotal = 0;
-  // }
+
   console.log("order to view: " + orderToView);
-  // });
+
+  const orderReqRes = useRef<OrderRequestResponse>({
+    status: 0,
+    body: "",
+  });
+
+  const orderItemArr = useRef<OrderItem[]>([]);
+
+  // const ready = useRef<string>(orderRef.current.ready);
 
   // useEffect(() => {
-  //   async function OrderView() {
-  //     setOrderToView(await GetOrderByID(orderToView.orderUid, login.token));
+  //   async function GetOrder() {
+  //     // orderReqRes.current = await GetOrderByID(
+  //     //   orderRef.current.orderUid,
+  //     //   login.token
+  //     // );
+
+  //     setOrderToView(orderReqRes.current.body as Order);
+  //     orderRef.current = orderToView;
   //   }
-  //   OrderView();
-  // }, [
-  //   login.token,
-  //   orderToView.orderItems,
-  //   orderToView.orderUid,
-  //   setOrderToView,
-  // ]);
+  //   GetOrder();
+  //   // setOrderToView(orderRef.current);
+  // }, [login.token, orderToView, setOrderToView]);
+
+  // useEffect(() => {
+  //   async function OrderUpdate() {
+  //     orderReqRes.current = await GetOrderByID(
+  //       orderToView.orderUid,
+  //       login.token
+  //     );
+
+  //     orderRef.current = orderReqRes.current.body as Order;
+  //     // orderItemArr.current = order;
+  //     setOrderToView(orderRef.current);
+  //   }
+  //   OrderUpdate();
+  // }, [login.token, orderToView.orderUid, setOrderToView]);
 
   return (
     <div className={classes.orderView}>
@@ -54,10 +91,12 @@ export default function OrderView() {
             <div className={classes.uneditableDetails}>
               <p>Order Id:</p>
               <p>{orderToView.orderUid}</p>
+              {/* <p>{orderRef.current.orderUid}</p> */}
               <p>Created:</p>
               <p>{`${time + " " + date}`}</p>
               <p>Total:</p>
-              <p>${orderToView.orderTotal.toFixed(2)}</p>
+              {/* <p>${orderRef.current.orderTotal.toFixed(2)}</p> */}
+              <p>${orderToView.orderTotal}</p>
             </div>
           </div>
           <EditableDetails />
@@ -73,7 +112,8 @@ export default function OrderView() {
 
             <div className={classes.orderItems}>
               <ul>
-                {orderItemArr.map((orderItem) => (
+                {/* {orderRef.current.orderItems?.map((orderItem) => ( */}
+                {orderToView.orderItems?.map((orderItem) => (
                   <OrderItem
                     key={orderItem.orderItemId}
                     orderItem={orderItem}
@@ -86,7 +126,9 @@ export default function OrderView() {
           <button className={classes.close} onClick={() => setViewOrder(false)}>
             Close
           </button>
+          {/* <p>{`${orderToView.ready}`}</p> */}
           {orderToView.ready !== "no" && (
+            // {orderRef.current.ready !== "no" && (
             <h3 className={classes.editWarning}>
               Order has been prepared and can not be edited!
             </h3>

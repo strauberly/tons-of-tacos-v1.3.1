@@ -42,6 +42,19 @@ export default function AddToOrderButton(props: {
 
   const itemInOrder = useRef<boolean>(false);
 
+  const orderRef = useRef<Order>({
+    orderUid: "",
+    customerUid: "",
+    name: "",
+    email: "",
+    phone: "",
+    orderItems: [],
+    orderTotal: 0,
+    created: "",
+    ready: "",
+    closed: "",
+  });
+
   function orderCheck() {
     // setOrder(GetOwnerOrder());
     console.log(order);
@@ -60,7 +73,7 @@ export default function AddToOrderButton(props: {
       });
     } else {
       console.log(order);
-      Array.from(orderToView.orderItems).forEach((orderItem) => {
+      orderRef.current.orderItems.forEach((orderItem) => {
         if (orderItem.itemName === props.menuItem.itemName) {
           setModal(
             "Item already in order. Update quantity, remove, or choose a different item."
@@ -113,6 +126,13 @@ export default function AddToOrderButton(props: {
     }
   }
 
+  const orderReqRes = useRef<OrderRequestResponse>({
+    status: 0,
+    body: "",
+  });
+
+  // useEffect(() => {});
+
   return (
     <button
       className={classes.addItemButton}
@@ -123,7 +143,15 @@ export default function AddToOrderButton(props: {
         orderCheck();
         checkOrderContext();
         if (!ownerOrder) {
-          setOrderToView(await GetOrderByID(props.orderUid, login.token));
+          orderReqRes.current = await GetOrderByID(
+            orderToView.orderUid,
+            login.token
+          );
+          // orderReqRes.current = await GetOrderByID(props.orderUid, login.token);
+          // if ((orderReqRes.current.status = 200)) {
+          setOrderToView(orderReqRes.current.body as Order);
+          // }
+          // setOrderToView(await GetOrderByID(props.orderUid, login.token));
         }
       }}
     >

@@ -80,20 +80,30 @@ export default function ActionConfirmationButton(props: { title: string }) {
   //   }
   //   CheckResponse();
   // }, [login.token, orderToView.orderUid, setOrderToView]);
-
+  const orderReqResRef = useRef<OrderRequestResponse>({
+    status: 0,
+    body: "",
+  });
   return (
     <button
-      onClick={async () => [
-        ((action.current = await ExecuteConfirm(props.title, orderEdit)),
-        setShowConfirmation(false)),
-        setModal(action.current),
-        setShowModal(true),
-        setItemSize("na"),
-        (orders.current = await GetAllOrders(login.token)),
-        setOrders(orders.current),
-        setOrderToView(await GetOrderByID(orderToView.orderUid, login.token)),
-        setOrderChanged(true),
-      ]}
+      onClick={async () => {
+        action.current = await ExecuteConfirm(props.title, orderEdit);
+        setShowConfirmation(false);
+        setModal(action.current);
+        setShowModal(true);
+        setItemSize("na");
+        orders.current = await GetAllOrders(login.token);
+        setOrders(orders.current);
+        orderReqResRef.current = await GetOrderByID(
+          orderToView.orderUid,
+          login.token
+        );
+
+        if (orderReqResRef.current.status === 200) {
+          setOrderToView(orderReqResRef.current.body as Order);
+        }
+        setOrderChanged(true);
+      }}
     >
       yes
     </button>

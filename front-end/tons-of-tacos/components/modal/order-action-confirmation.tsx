@@ -60,6 +60,11 @@ export default function OrderActionConfirmation(props: {
     message.current = CustomerUpdateMessage(customer);
   }
 
+  const orderReqResRef = useRef<OrderRequestResponse>({
+    status: 0,
+    body: "",
+  });
+
   return (
     <div className={classes.actionConfirmation}>
       <Card expand={true}>
@@ -69,13 +74,17 @@ export default function OrderActionConfirmation(props: {
           <div className={classes.buttons}>
             <ActionConfirmationButton title={props.title} />
             <button
-              onClick={async () => [
-                setShowConfirmation(false),
-                setOrderChanged(false),
-                setOrderToView(
-                  await GetOrderByID(orderToView.orderUid, login.token)
-                ),
-              ]}
+              onClick={async () => {
+                setShowConfirmation(false);
+                setOrderChanged(false);
+                orderReqResRef.current = await GetOrderByID(
+                  orderToView.orderUid,
+                  login.token
+                );
+                if (orderReqResRef.current.status === 200) {
+                  setOrderToView(orderReqResRef.current.body as Order);
+                }
+              }}
             >
               no
             </button>
