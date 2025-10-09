@@ -2,8 +2,12 @@
   position: fixed;
   margin-top: 10%;
   z-index: 100;
+  /* min-height: 10%; */
+}
+
+.heightControl {
+  height: 30%;
   overflow-y: scroll;
-  /* max-height: 2rem; */
 }
 
 .orderDetails {
@@ -200,6 +204,7 @@
   font-weight: bold;
   justify-self: center;
   margin-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 .editWarning {

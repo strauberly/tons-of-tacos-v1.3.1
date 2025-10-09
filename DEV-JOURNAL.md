@@ -2,6 +2,12 @@
 
 ---
 
+-- 9 Oct 2025 --
+
+- Previous responsive styling was affecting menu item cards in an undesirable way, solution now in place.
+
+---
+
 -- 8 Oct 2025 --
 
 - Issue with adding an item to an existing order stemmed from changes made in how the order in view was updated after the change in the confirmation button. This has been rectified.
