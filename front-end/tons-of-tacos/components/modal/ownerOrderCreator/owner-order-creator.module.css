@@ -11,7 +11,9 @@
   flex-direction: column;
   padding-left: 1rem;
   max-height: 48rem;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
+  /* margin-bottom: 2rem; */
+  /* padding-bottom: 2rem; */
 }
 
 .close {
@@ -22,6 +24,7 @@
   font-size: 1.75rem;
   margin-top: -1rem;
   cursor: pointer;
+  padding-bottom: 2rem;
 }
 
 .total {
