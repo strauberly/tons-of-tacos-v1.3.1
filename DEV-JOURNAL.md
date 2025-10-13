@@ -2,6 +2,12 @@
 
 ---
 
+-- 13 Oct 2025 --
+
+- Issue with adding an item to an existing order stemmed from changes made in how the order in view was updated after the change in the confirmation button. This has been rectified.
+- Change also made in remove from order button as well as update in quantity selector.
+- Order view is back to functioning as intended.
+
 -- 8 Oct 2025 --
 
 - Issue with adding an item to an existing order stemmed from changes made in how the order in view was updated after the change in the confirmation button. This has been rectified.
