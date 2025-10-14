@@ -2,6 +2,16 @@
 
 ---
 
+-- 14 Oct 2025 --
+
+- Addressed issue where size selector was displayed for some items that should not be in the owner order view when editing an item in an order.
+
+-- 9 Oct 2025 --
+
+- Previous responsive styling was affecting menu item cards in an undesirable way, solution now in place.
+
+---
+
 -- 13 Oct 2025 --
 
 - corrections for checking if an item is already in an order being viewed.
