@@ -85,8 +85,8 @@ export default function OrderView() {
 
   return (
     <div className={classes.orderView}>
-      <Card expand={true}>
-        <div>
+      <div className={classes.heightControl}>
+        <Card expand={true}>
           <div className={classes.orderDetails}>
             <div className={classes.uneditableDetails}>
               <p>Order Id:</p>
@@ -133,8 +133,8 @@ export default function OrderView() {
               Order has been prepared and can not be edited!
             </h3>
           )}
-        </div>
-      </Card>
+        </Card>
+      </div>
     </div>
   );
 }

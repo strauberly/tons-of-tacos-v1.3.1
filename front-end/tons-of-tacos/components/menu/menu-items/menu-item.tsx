@@ -1,16 +1,15 @@
 import Card from "@/components/ui/cards/card";
 import Image from "next/image";
-import classes from "./menu-item.module.css";
 import { useEffect, useState } from "react";
 import QuantitySelector from "./quantity-selector/quantity-selector";
 import MoreIcon from "@/components/ui/icons/more-icon";
-
 import { useSelectedSizeContext } from "@/context/size-context";
 import { useDisplayContext } from "@/context/display-context";
 import { useModalContext } from "@/context/modal-context";
 import AddToCart from "@/components/ui/buttons/add-to-cart/add-to-cart";
 import SizeSelector from "./size-selector/size-selector";
 import { useMenuItemIdContext } from "@/context/menu-item-context";
+import classes from "./menu-item.module.css";
 
 export default function MenuItem(props: {
   id: string;

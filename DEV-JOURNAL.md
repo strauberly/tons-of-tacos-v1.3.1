@@ -4,6 +4,16 @@
 
 -- 13 Oct 2025 --
 
+- corrections for checking if an item is already in an order being viewed.
+
+- Corrected styling for cards eliminating y scroll overlap.
+
+-- 9 Oct 2025 --
+
+- Previous responsive styling was affecting menu item cards in an undesirable way, solution now in place.
+
+---
+
 - Issue with adding an item to an existing order stemmed from changes made in how the order in view was updated after the change in the confirmation button. This has been rectified.
 - Change also made in remove from order button as well as update in quantity selector.
 - Order view is back to functioning as intended.
