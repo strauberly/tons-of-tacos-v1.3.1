@@ -1,7 +1,5 @@
 import { useState } from "react";
 import QuantitySelector from "../menu/menu-items/quantity-selector/quantity-selector";
-
-import classes from "./cart-item.module.css";
 import RemoveFromCart from "../ui/buttons/remove-from-cart/remove-from-cart";
 import Update from "../ui/buttons/update-cart-item/update-cart-item-copy";
 import { useCartContext } from "@/context/cart-context";
@@ -9,6 +7,7 @@ import { GetCart, RemoveCartItem } from "@/lib/cart";
 import { useModalContext } from "@/context/modal-context";
 import { useDisplayContext } from "@/context/display-context";
 import { useOwnerContext } from "@/context/owner-context";
+import classes from "./cart-item.module.css";
 
 export default function CartItem(props: {
   id: string;

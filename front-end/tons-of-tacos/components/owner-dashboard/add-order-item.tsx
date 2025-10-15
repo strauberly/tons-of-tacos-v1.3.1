@@ -150,7 +150,7 @@ export default function AddOrderItem() {
               className={`${classes.decrement}`}
               onClick={() => decrement()}
             >
-              <ArrowIcon />
+              <ArrowIcon scale={"scale(.75)"} />
             </button>
             <input
               name="quantity"
@@ -165,7 +165,7 @@ export default function AddOrderItem() {
               className={`${classes.increment}`}
               onClick={() => increment()}
             >
-              <ArrowIcon />
+              <ArrowIcon scale={"scale(.75)"} />
             </button>
           </div>
 

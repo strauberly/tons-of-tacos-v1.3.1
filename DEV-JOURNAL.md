@@ -2,9 +2,17 @@
 
 ---
 
+-- 15 Oct 2025 --
+
+- Altered arrow icon to take a prop called scale so that size can be altered for different components where it is used.
+
+---
+
 -- 14 Oct 2025 --
 
 - Addressed issue where size selector was displayed for some items that should not be in the owner order view when editing an item in an order.
+
+---
 
 -- 9 Oct 2025 --
 
