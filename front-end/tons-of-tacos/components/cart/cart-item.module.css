@@ -40,3 +40,25 @@
   margin-left: 1rem;
   margin-right: 1rem;
 }
+
+@media (max-width: 1380px) {
+  .ownerOrderItem {
+    /* display: grid; */
+    grid-template-columns: repeat(1, 1fr);
+    font-size: clamp(1.25rem, 1vw, 0.75vw);
+    align-items: center;
+    justify-self: center;
+    justify-items: center;
+    gap: 1rem;
+    border-bottom: solid var(--border-color) 1px;
+    padding-bottom: 1vw;
+    width: 80%;
+  }
+
+  .size {
+    color: var(--user-selected-color);
+    justify-self: center;
+    /* margin-right: 1rem; */
+    /* font-size: 1rem; */
+  }
+}
