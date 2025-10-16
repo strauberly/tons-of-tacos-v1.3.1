@@ -1,13 +1,16 @@
 import classes from "@/components/menu/menu-items/quantity-selector/quantity-selector.module.css";
 import ArrowIcon from "./arrow-icon";
+import { useOwnerContext } from "@/context/owner-context";
 
 export default function QuantitySelector(props: {
   value: number;
   increment: () => void;
   decrement: () => void;
 }) {
+  const { ownerOrder } = useOwnerContext();
+
   return (
-    <div className={classes.quantity}>
+    <div className={ownerOrder ? classes.ownerOrderQuantity : classes.quantity}>
       <button
         className={`${classes.decrement}`}
         onClick={() => props.decrement()}
@@ -25,7 +28,7 @@ export default function QuantitySelector(props: {
         className={`${classes.increment}`}
         onClick={() => props.increment()}
       >
-        <ArrowIcon />
+        <ArrowIcon scale={"scale(1)"} />
       </button>
     </div>
   );

@@ -237,29 +237,35 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
         )}
         {!canEdit && <p>{`${orderItem.orderItem.quantity}`}</p>}
         {!canEdit && <p>{`${sizeDisplay()}`}</p>}
+        {/* {!canEdit && <p>{`${sizeDisplay()}`}</p>} */}
         {/* <p> {`$${changedPrice()}`}</p> */}
         <p> {`$${price.current.toFixed(2)}`}</p>
         {/* <p> {`$${newPrice.toFixed(2)}`}</p> */}
-        {!canEdit && (
-          <button
-            className={classes.button}
-            disabled={orderToView.ready !== "no" || orderToView.closed !== "no"}
-            onClick={() => [
-              setCanEdit(!canEdit),
-              setOrderItem(orderItem.orderItem),
-              setNewPrice(orderItem.orderItem.total),
-              // setQuantity(newQuantity),
-            ]}
-          >
-            Edit
-          </button>
-        )}
-        {!canEdit && (
-          <RemoveFromOrderButton
-            orderItem={orderItem.orderItem}
-            orderToView={orderToView}
-          />
-        )}
+        {/* wrap and style */}
+        <div className={classes.alter}>
+          {!canEdit && (
+            <button
+              className={classes.button}
+              disabled={
+                orderToView.ready !== "no" || orderToView.closed !== "no"
+              }
+              onClick={() => [
+                setCanEdit(!canEdit),
+                setOrderItem(orderItem.orderItem),
+                setNewPrice(orderItem.orderItem.total),
+                // setQuantity(newQuantity),
+              ]}
+            >
+              Edit
+            </button>
+          )}
+          {!canEdit && (
+            <RemoveFromOrderButton
+              orderItem={orderItem.orderItem}
+              orderToView={orderToView}
+            />
+          )}
+        </div>
       </li>
       {showSizeError === true && (
         <p className={classes.sizeWarning}>{sizeError}</p>

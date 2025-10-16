@@ -48,3 +48,27 @@
   color: var(--user-selected-color);
   transition: 0.025s ease;
 }
+
+.ownerOrderQuantity {
+  display: flex;
+  gap: clamp(2.5rem, 2vw, 2.5vw);
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.ownerOrderQuantity input,
+.ownerOrderQuantity textarea {
+  font-size: clamp(0.75rem, 0.75rem, 0.75rem);
+  padding: 0.5vw;
+  background-color: transparent;
+  color: var(--user-selected-color);
+  text-align: center;
+  border: solid;
+  border-color: var(--border-color);
+  border-radius: 15%;
+  font-weight: 900;
+}

@@ -2,6 +2,18 @@
 
 ---
 
+-- 16 Oct 2025 --
+
+- styling adjustments for order items at less than 1560px.
+  - item details centered
+- edit customer info scooched over from the right just a touch.
+
+- gap reduced at less than 1560px for update and cancel.
+
+- have begun making adjustments for items in owner order creator.
+
+---
+
 -- 15 Oct 2025 --
 
 - Altered arrow icon to take a prop called scale so that size can be altered for different components where it is used.
