@@ -22,7 +22,7 @@ export default function CartItem(props: {
     useCartContext();
   const { setModal } = useModalContext();
   const { setShowModal } = useDisplayContext();
-  const { loggedIn } = useOwnerContext();
+  const { loggedIn, ownerOrder } = useOwnerContext();
 
   const increment = () => {
     if (quantity >= 10 && !loggedIn) {
@@ -66,7 +66,7 @@ export default function CartItem(props: {
   const price = calcPrice().toFixed(2);
 
   return (
-    <li className={classes.item}>
+    <li className={ownerOrder ? classes.ownerOrderItem : classes.item}>
       <p className={classes.itemName}>{props.itemName}</p>
       <p className={classes.size}> {props.size}</p>
       <QuantitySelector
@@ -74,16 +74,24 @@ export default function CartItem(props: {
         increment={increment}
         decrement={decrement}
       />
-      <p className={classes.price}> ${price}</p>
+      <p className={ownerOrder ? classes.ownerOrderItemPrice : classes.price}>
+        {" "}
+        ${price}
+      </p>
+      {/* new div for vert styling */}
+      <div className={classes.editCartItem}>
+        <Update
+          cartItem={props.itemName}
+          updatedItemQuantity={quantity}
+          updatedItemPrice={price}
+          oldQuantity={props.itemQuantity}
+        />
 
-      <Update
-        cartItem={props.itemName}
-        updatedItemQuantity={quantity}
-        updatedItemPrice={price}
-        oldQuantity={props.itemQuantity}
-      />
-
-      <RemoveFromCart id={props.menuId} cartItemQuantity={props.itemQuantity} />
+        <RemoveFromCart
+          id={props.menuId}
+          cartItemQuantity={props.itemQuantity}
+        />
+      </div>
     </li>
   );
 }
