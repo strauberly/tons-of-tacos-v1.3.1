@@ -12,6 +12,8 @@
 
 - have begun making adjustments for items in owner order creator.
 
+- responsive styling for owner order items in place.
+
 ---
 
 -- 15 Oct 2025 --

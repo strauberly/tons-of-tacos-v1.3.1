@@ -1,5 +1,4 @@
 import Card from "@/components/ui/cards/card";
-import classes from "./owner-order-creator.module.css";
 import { useDisplayContext } from "@/context/display-context";
 import CustomerInfoForm from "@/components/ui/forms/customer-info-form";
 import AddOrderItem from "@/components/owner-dashboard/add-order-item";
@@ -12,6 +11,7 @@ import { useEffect, useRef } from "react";
 import { useOwnerContext } from "@/context/owner-context";
 import { CalcOrderTotal } from "@/lib/general/multi-use";
 import { useCartContext } from "@/context/cart-context";
+import classes from "./owner-order-creator.module.css";
 
 export default function OwnerOrderCreator() {
   const { setShowOwnerOrderCreator } = useDisplayContext();

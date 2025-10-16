@@ -34,3 +34,6 @@
   margin: auto;
   margin-top: 1rem;
 }
+
+@media (max-width: 1380px) {
+}
