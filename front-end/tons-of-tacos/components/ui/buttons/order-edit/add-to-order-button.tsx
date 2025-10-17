@@ -104,7 +104,8 @@ export default function AddToOrderButton(props: {
           props.menuItem.id,
           props.menuItem.itemName,
           props.quantity,
-          props.menuItem.itemSize,
+          props.size,
+          // props.menuItem.itemSize,
           props.price
         ),
         props.reset(),

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import classes from "./cart-item.module.css";
+import { useEffect, useState } from "react";
 import QuantitySelector from "../menu/menu-items/quantity-selector/quantity-selector";
 import RemoveFromCart from "../ui/buttons/remove-from-cart/remove-from-cart";
 import Update from "../ui/buttons/update-cart-item/update-cart-item-copy";
@@ -7,7 +8,7 @@ import { GetCart, RemoveCartItem } from "@/lib/cart";
 import { useModalContext } from "@/context/modal-context";
 import { useDisplayContext } from "@/context/display-context";
 import { useOwnerContext } from "@/context/owner-context";
-import classes from "./cart-item.module.css";
+import SizeSelector from "../owner-dashboard/size-selector";
 
 export default function CartItem(props: {
   id: string;
@@ -65,26 +66,57 @@ export default function CartItem(props: {
 
   const price = calcPrice().toFixed(2);
 
+  const [showSizeError, setShowSizeError] = useState<boolean>(false);
+
+  const sizeError: string =
+    "Enter 'S' for small, 'M' for medium or 'L' for large.";
+  const [newPrice, setNewPrice] = useState<number>(Number(props.itemPrice));
+
+  const [newSize, setNewSize] = useState<string>(props.size);
+
+  // const [sameSize, setSameSize] = useState<boolean>(true);
+
+  // useEffect(() => {
+  //   function CompareSize() {
+  //     if (newSize !== props.size) {
+  //       setSameSize(false);
+  //     }
+  //   }
+  //   CompareSize();
+  // }, [newSize, props.size]);
+
   return (
     <li className={ownerOrder ? classes.ownerOrderItem : classes.item}>
       <p className={classes.itemName}>{props.itemName}</p>
-      <p className={classes.size}> {props.size}</p>
+      {/* display size of na or size selector conditionally */}
+      {/* <p className={classes.size}> {props.size}</p> */}
+      <SizeSelector
+        itemSize={props.size}
+        setShowSizeError={setShowSizeError}
+        setNewSize={setNewSize}
+      />
       <QuantitySelector
         value={quantity}
         increment={increment}
         decrement={decrement}
       />
+
       <p className={ownerOrder ? classes.ownerOrderItemPrice : classes.price}>
         {" "}
         ${price}
       </p>
       {/* new div for vert styling */}
       <div className={classes.editCartItem}>
+        {showSizeError === true && (
+          <p className={classes.sizeWarning}>{sizeError}</p>
+        )}
         <Update
           cartItem={props.itemName}
           updatedItemQuantity={quantity}
           updatedItemPrice={price}
           oldQuantity={props.itemQuantity}
+          oldSize={props.size}
+          newSize={newSize}
         />
 
         <RemoveFromCart
