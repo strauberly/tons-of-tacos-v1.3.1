@@ -8,6 +8,10 @@
 
 - Update button in owner cart updated to appear if size or quantity changed or both changed and correctly updates the order in session storage.
 
+- alterations made to size context changing the default size selected from "" to "NA". A size selector is now only displayed for items that have selectable sizes in customer cart.
+
+- Owner order creator and customer cart allow for editing items for size and quantity in a similar manner.
+
 ---
 
 -- 17 Oct 2025 --

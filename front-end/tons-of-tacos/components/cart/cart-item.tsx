@@ -57,7 +57,7 @@ export default function CartItem(props: {
       setQuantity(1);
     } else {
       // set quantity -1?
-      setCartQuantity(cartQuantity - props.itemQuantity);
+      // setCartQuantity(cartQuantity - props.itemQuantity);
     }
   };
 
@@ -131,11 +131,13 @@ export default function CartItem(props: {
       <p className={classes.itemName}>{props.itemName}</p>
       {/* display size of na or size selector conditionally */}
       {/* <p className={classes.size}> {props.size}</p> */}
-      <SizeSelector
-        itemSize={props.size}
-        setShowSizeError={setShowSizeError}
-        setNewSize={setNewSize}
-      />
+      {props.size !== "NA" && (
+        <SizeSelector
+          itemSize={props.size}
+          setShowSizeError={setShowSizeError}
+          setNewSize={setNewSize}
+        />
+      )}
       <QuantitySelector
         value={quantity}
         increment={increment}
@@ -144,7 +146,7 @@ export default function CartItem(props: {
 
       <p className={ownerOrder ? classes.ownerOrderItemPrice : classes.price}>
         {" "}
-        ${newPrice.toFixed(2)}
+        {}${newPrice.toFixed(2)}
         {/* ${price} */}
       </p>
       {/* new div for vert styling */}

@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import classes from "./size-selector.module.css";
+import { useOwnerContext } from "@/context/owner-context";
 
 export default function SizeSelector(props: {
   itemSize: string;
@@ -11,6 +12,8 @@ export default function SizeSelector(props: {
     The selector uses the logic from add order item to receive input from owner and then update call the update path from backend.
     Backend will need to be adjusted appropriately
     */
+
+  const { ownerOrder } = useOwnerContext();
 
   const [size, setSize] = useState<string>(`${props.itemSize}`);
 
@@ -57,11 +60,12 @@ export default function SizeSelector(props: {
             maxLength={1}
             style={{ textTransform: "uppercase" }}
             onChange={checkSize}
-            disabled={
-              props.itemSize !== "S" &&
-              props.itemSize !== "M" &&
-              props.itemSize !== "L"
-            }
+            // disabled={
+            //   ownerOrder &&
+            //   props.itemSize !== "S" &&
+            //   props.itemSize !== "M" &&
+            //   props.itemSize !== "L"
+            // }
           />
         )}
       </>
