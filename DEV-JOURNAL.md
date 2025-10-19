@@ -12,6 +12,9 @@
 
 - Owner order creator and customer cart allow for editing items for size and quantity in a similar manner.
 
+- Investigating multiple issues reoccurring.
+  - Issue involving size selector displayed even if item does not have selectable sizes rectified by ensuring homogenous values.
+
 ---
 
 -- 17 Oct 2025 --

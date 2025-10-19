@@ -131,7 +131,7 @@ export default function CartItem(props: {
       <p className={classes.itemName}>{props.itemName}</p>
       {/* display size of na or size selector conditionally */}
       {/* <p className={classes.size}> {props.size}</p> */}
-      {props.size !== "NA" && (
+      {props.size !== "na" && (
         <SizeSelector
           itemSize={props.size}
           setShowSizeError={setShowSizeError}
