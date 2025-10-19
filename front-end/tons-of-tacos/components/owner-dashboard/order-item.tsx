@@ -1,3 +1,4 @@
+import classes from "./order-item.module.css";
 import { useEffect, useRef, useState } from "react";
 import RemoveFromOrderButton from "../ui/buttons/order-edit/remove-from-order-button";
 import ArrowIcon from "../menu/menu-items/quantity-selector/arrow-icon";
@@ -8,7 +9,6 @@ import { useEditOrderContext } from "@/context/edit-order-context";
 import { useModalContext } from "@/context/modal-context";
 import { GetOrderByID } from "@/lib/owners-tools/owners-tools";
 import { useOwnerContext } from "@/context/owner-context";
-import classes from "./order-item.module.css";
 
 export default function OrderItem(orderItem: { orderItem: OrderItem }) {
   const { setOrderItem, setQuantity, quantity, orderChanged } =

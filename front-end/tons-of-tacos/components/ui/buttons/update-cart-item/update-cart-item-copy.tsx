@@ -21,6 +21,8 @@ export default function Update(props: {
   updatedItemQuantity: number;
   updatedItemPrice: string;
   oldQuantity: number;
+  oldSize: string;
+  newSize: string;
 }) {
   // get index of the the item already in cart
   const { cart, setCart, cartQuantity, setCartQuantity } = useCartContext();
@@ -29,6 +31,7 @@ export default function Update(props: {
   const { setShowModal } = useDisplayContext();
   const [largeOrder, setLargeOrder] = useState(false);
   const [itemQuantityChanged, setItemQuantityChanged] = useState(false);
+  const [sizeChanged, setSizeChanged] = useState(false);
 
   function updateCartItem() {
     let newQuantity = 0;
@@ -56,8 +59,12 @@ export default function Update(props: {
     );
 
     console.log("index: " + cartItemIndex);
-
-    newCart[cartItemIndex].quantity = props.updatedItemQuantity;
+    if (itemQuantityChanged) {
+      newCart[cartItemIndex].quantity = props.updatedItemQuantity;
+    }
+    if (sizeChanged) {
+      newCart[cartItemIndex].size = props.newSize;
+    }
     newCart[cartItemIndex].price = props.updatedItemPrice;
     if (ownerOrder) {
       updateOwnerOrder(newCart);
@@ -73,11 +80,26 @@ export default function Update(props: {
     if (props.oldQuantity != props.updatedItemQuantity) {
       setItemQuantityChanged(true);
     }
-  }, [props.oldQuantity, props.updatedItemQuantity]);
+    if (props.oldSize != props.newSize && props.newSize) {
+      setSizeChanged(true);
+    }
+    if (
+      props.newSize !== "S" &&
+      props.newSize !== "M" &&
+      props.newSize !== "L"
+    ) {
+      setSizeChanged(false);
+    }
+  }, [
+    props.newSize,
+    props.oldQuantity,
+    props.oldSize,
+    props.updatedItemQuantity,
+  ]);
 
   return (
     <div>
-      {itemQuantityChanged && (
+      {(itemQuantityChanged && (
         <button
           disabled={largeOrder === true ? true : false}
           className={classes.update}
@@ -85,7 +107,16 @@ export default function Update(props: {
         >
           Update
         </button>
-      )}
+      )) ||
+        (sizeChanged && (
+          <button
+            disabled={largeOrder === true ? true : false}
+            className={classes.update}
+            onClick={() => [updateCartItem()]}
+          >
+            Update
+          </button>
+        ))}
     </div>
   );
 }

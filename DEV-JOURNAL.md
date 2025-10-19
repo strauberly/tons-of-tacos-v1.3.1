@@ -2,6 +2,22 @@
 
 ---
 
+-- 19 Oct 2025 --
+
+- Items placed in cart for owner order updated for altering size and quantity.
+
+- Update button in owner cart updated to appear if size or quantity changed or both changed and correctly updates the order in session storage.
+
+---
+
+-- 17 Oct 2025 --
+
+- Fixed bug in cart item, while working on owner order creator. The wrong prop was being entered for size causing a cascading error.
+
+- Size selector in place for updating item size if available so that size can be changed prior to order submission. Still lots to work on.
+
+---
+
 -- 16 Oct 2025 --
 
 - styling adjustments for order items at less than 1560px.
