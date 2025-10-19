@@ -59,8 +59,12 @@ export default function Update(props: {
     );
 
     console.log("index: " + cartItemIndex);
-
-    newCart[cartItemIndex].quantity = props.updatedItemQuantity;
+    if (itemQuantityChanged) {
+      newCart[cartItemIndex].quantity = props.updatedItemQuantity;
+    }
+    if (sizeChanged) {
+      newCart[cartItemIndex].size = props.newSize;
+    }
     newCart[cartItemIndex].price = props.updatedItemPrice;
     if (ownerOrder) {
       updateOwnerOrder(newCart);
@@ -95,7 +99,15 @@ export default function Update(props: {
 
   return (
     <div>
-      {itemQuantityChanged ||
+      {(itemQuantityChanged && (
+        <button
+          disabled={largeOrder === true ? true : false}
+          className={classes.update}
+          onClick={() => [updateCartItem()]}
+        >
+          Update
+        </button>
+      )) ||
         (sizeChanged && (
           <button
             disabled={largeOrder === true ? true : false}

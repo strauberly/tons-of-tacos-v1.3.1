@@ -9,6 +9,7 @@ import { useModalContext } from "@/context/modal-context";
 import { useDisplayContext } from "@/context/display-context";
 import { useOwnerContext } from "@/context/owner-context";
 import SizeSelector from "../owner-dashboard/size-selector";
+import { calcPrice } from "@/lib/owners-tools/owners-tools-client";
 
 export default function CartItem(props: {
   id: string;
@@ -25,20 +26,24 @@ export default function CartItem(props: {
   const { setShowModal } = useDisplayContext();
   const { loggedIn, ownerOrder } = useOwnerContext();
 
+  const [newSize, setNewSize] = useState<string>(props.size);
+  const [newPrice, setNewPrice] = useState<number>(Number(props.itemPrice));
   const increment = () => {
     if (quantity >= 10 && !loggedIn) {
       setModal(
         "The limit for this item is 10. If you need more please give us a call so we can try to accommodate your order. Thanks!"
       );
       setShowModal(true);
+      setQuantity(10);
     } else if (quantity + cartQuantity > 30 && !loggedIn) {
       setModal(
         "Your order has grown to a fair size. The current maximum is 30 items. Please contact us before adding anything else. \n\nThis will ensure we can make your order happen today. You can also remove items from your cart. Thank you!"
       );
       setShowModal(true);
-    } else {
-      setQuantity(quantity + 1);
+      // setQuantity(cartQuantity - quantity);
     }
+    setQuantity(quantity + 1);
+    setNewPrice(priceWork() * quantity);
   };
 
   // need a context check and appropriate action
@@ -56,23 +61,35 @@ export default function CartItem(props: {
     }
   };
 
-  function calcPrice() {
+  function priceWork() {
     let adjPrice;
 
+    // let adjPrice: number;
+    let sizeSurcharge = 0;
+
+    if (newSize === "M") {
+      sizeSurcharge = 0.5;
+    } else if (newSize === "L") {
+      sizeSurcharge = 1.0;
+    }
+
+    // const unitPrice =
     // eslint-disable-next-line prefer-const
-    adjPrice = (parseFloat(props.itemPrice) / props.itemQuantity) * quantity;
+    adjPrice =
+      (Number(props.itemPrice) / Number(props.itemPrice) + sizeSurcharge) *
+      quantity;
+    console.log(adjPrice);
     return adjPrice;
   }
 
-  const price = calcPrice().toFixed(2);
+  // const price = calcPrice().toFixed(2);
 
   const [showSizeError, setShowSizeError] = useState<boolean>(false);
 
   const sizeError: string =
     "Enter 'S' for small, 'M' for medium or 'L' for large.";
-  const [newPrice, setNewPrice] = useState<number>(Number(props.itemPrice));
 
-  const [newSize, setNewSize] = useState<string>(props.size);
+  // const [newSize, setNewSize] = useState<string>(props.size);
 
   // const [sameSize, setSameSize] = useState<boolean>(true);
 
@@ -84,6 +101,30 @@ export default function CartItem(props: {
   //   }
   //   CompareSize();
   // }, [newSize, props.size]);
+
+  useEffect(() => {
+    function calcPrice() {
+      let adjPrice;
+
+      // let adjPrice: number;
+      let sizeSurcharge = 0;
+
+      if (newSize === "M") {
+        sizeSurcharge = 0.5;
+      } else if (newSize === "L") {
+        sizeSurcharge = 1.0;
+      }
+
+      // reflect price work
+      // eslint-disable-next-line prefer-const
+      // adjPrice = props.itemQuantity + sizeSurcharge * quantity;
+      adjPrice =
+        (Number(props.itemPrice) / Number(props.itemPrice) + sizeSurcharge) *
+        quantity;
+      return adjPrice;
+    }
+    setNewPrice(calcPrice());
+  }, [newSize, props.itemPrice, props.itemQuantity, quantity]);
 
   return (
     <li className={ownerOrder ? classes.ownerOrderItem : classes.item}>
@@ -103,7 +144,8 @@ export default function CartItem(props: {
 
       <p className={ownerOrder ? classes.ownerOrderItemPrice : classes.price}>
         {" "}
-        ${price}
+        ${newPrice.toFixed(2)}
+        {/* ${price} */}
       </p>
       {/* new div for vert styling */}
       <div className={classes.editCartItem}>
@@ -113,7 +155,7 @@ export default function CartItem(props: {
         <Update
           cartItem={props.itemName}
           updatedItemQuantity={quantity}
-          updatedItemPrice={price}
+          updatedItemPrice={newPrice.toFixed(2)}
           oldQuantity={props.itemQuantity}
           oldSize={props.size}
           newSize={newSize}
