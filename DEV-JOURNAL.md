@@ -4,7 +4,10 @@
 
 -- 20 Oct 2025 --
 
-- Items in customer cart and owner order creator successfully updating price based on quantity. Set up loop between ref and state so the calculation isn't lagged but the display still updates new value. Logic updated for calculating the unit price of the item for further calculation.
+- Items in and owner order creator successfully updating price based on quantity. Set up loop between ref and state so the calculation isn't lagged but the display still updates new value. Logic updated for calculating the unit price of the item for further calculation.
+
+- Items in owner order creator updating items correctly based on size and quantity.
+  - Will address update followed by customer cart next.
 
 ---
 

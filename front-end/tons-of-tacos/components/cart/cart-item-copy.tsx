@@ -34,26 +34,8 @@ export default function CartItemCopy(props: {
   const newQuantity = useRef<number>(quantity);
   console.log(newQuantity);
   // const quantity = useRef<number>(props)
-  const price = useRef<number>(Number(props.itemPrice));
+  const price = useRef<number>(Number(newPrice));
   const basePrice = Number(props.itemPrice) / props.itemQuantity;
-
-  function updatePrice() {
-    let surcharge: number = 0;
-    let adjPrice;
-    // let basePrice;
-    console.log("base price: " + basePrice);
-
-    if (newSize === "M") {
-      surcharge = 0.5;
-    } else if (newSize === "L") {
-      surcharge = 1.0;
-    }
-    // console.log(price.current + surcharge * uantity.current);
-    // adjPrice = newPrice + surcharge * quantity;
-    // adjPrice = (price.current + surcharge) * newQuantity.current;
-    adjPrice = (basePrice + surcharge) * newQuantity.current;
-    return adjPrice;
-  }
 
   const increment = () => {
     setQuantity((newQuantity.current += 1));
@@ -69,7 +51,7 @@ export default function CartItemCopy(props: {
       );
       setShowModal(true);
     }
-    setNewPrice(updatePrice());
+    // setNewPrice(updatePrice());
   };
 
   // need a context check and appropriate action
@@ -79,7 +61,7 @@ export default function CartItemCopy(props: {
       newQuantity.current = 1;
       setQuantity(newQuantity.current);
     } else {
-      setNewPrice(updatePrice());
+      // setNewPrice(updatePrice());
     }
   };
 
@@ -87,6 +69,32 @@ export default function CartItemCopy(props: {
 
   const sizeError: string =
     "Enter 'S' for small, 'M' for medium or 'L' for large.";
+
+  useEffect(() => {
+    function updatePrice() {
+      let adjPrice = 0;
+      let surcharge = 0;
+      let oldSurcharge = 0;
+
+      if (props.size === "M") {
+        oldSurcharge = 0.5;
+      } else if (props.size === "L") {
+        oldSurcharge = 1;
+      }
+
+      if (newSize === "M") {
+        surcharge = 0.5;
+      } else if (newSize === "L") {
+        surcharge = 1;
+      }
+
+      adjPrice = (basePrice - oldSurcharge + surcharge) * newQuantity.current;
+
+      return adjPrice;
+    }
+
+    setNewPrice(updatePrice());
+  });
 
   return (
     <li className={ownerOrder ? classes.ownerOrderItem : classes.item}>
