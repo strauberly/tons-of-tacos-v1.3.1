@@ -1,5 +1,5 @@
 import classes from "./cart-item.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import QuantitySelector from "../menu/menu-items/quantity-selector/quantity-selector";
 import RemoveFromCart from "../ui/buttons/remove-from-cart/remove-from-cart";
 import Update from "../ui/buttons/update-cart-item/update-cart-item-copy";
@@ -61,24 +61,25 @@ export default function CartItem(props: {
     }
   };
 
+  const sizeRef = useRef<string>(newSize);
+
   function priceWork() {
     let adjPrice;
 
     // let adjPrice: number;
     let sizeSurcharge = 0;
 
-    if (newSize === "M") {
+    if (sizeRef.current === "M") {
       sizeSurcharge = 0.5;
-    } else if (newSize === "L") {
+    } else if (sizeRef.current === "L") {
       sizeSurcharge = 1.0;
     }
 
+    const basePrice =
+      Number(props.itemPrice) / Number(props.itemPrice) / props.itemQuantity;
     // const unitPrice =
     // eslint-disable-next-line prefer-const
-    adjPrice =
-      (Number(props.itemPrice) / Number(props.itemPrice) + sizeSurcharge) *
-      quantity;
-    console.log(adjPrice);
+    adjPrice = (sizeSurcharge + basePrice) * quantity;
     return adjPrice;
   }
 
@@ -102,26 +103,52 @@ export default function CartItem(props: {
   //   CompareSize();
   // }, [newSize, props.size]);
 
+  const updatePrice = useRef<Number>(Number(props.itemPrice));
+
   useEffect(() => {
     function calcPrice() {
       let adjPrice;
 
       // let adjPrice: number;
       let sizeSurcharge = 0;
+      let oldSurcharge = 0;
 
+      // add clause for is size is na
+
+      if (props.size === "M") {
+        oldSurcharge = 0.5;
+      } else if (props.size === "L") {
+        oldSurcharge = 1.0;
+      }
       if (newSize === "M") {
         sizeSurcharge = 0.5;
       } else if (newSize === "L") {
         sizeSurcharge = 1.0;
       }
 
+      const basePrice =
+        Number(props.itemPrice) /
+          Number(props.itemQuantity) /
+          props.itemQuantity -
+        oldSurcharge;
+      // const unitPrice =
+      // eslint-disable-next-line prefer-const
+      adjPrice = (basePrice + sizeSurcharge) * quantity;
+      updatePrice.current = (basePrice + sizeSurcharge) * quantity;
+      console.log("base price: " + basePrice);
+      console.log(adjPrice);
+      console.log(props.size);
+      console.log(newSize);
+      return Number(updatePrice.current);
+      // return adjPrice;
+
       // reflect price work
       // eslint-disable-next-line prefer-const
       // adjPrice = props.itemQuantity + sizeSurcharge * quantity;
-      adjPrice =
-        (Number(props.itemPrice) / Number(props.itemPrice) + sizeSurcharge) *
-        quantity;
-      return adjPrice;
+      // adjPrice =
+      //   Number(props.itemPrice) / Number(props.itemQuantity) +
+      //   sizeSurcharge * quantity;
+      // return adjPrice;
     }
     setNewPrice(calcPrice());
   }, [newSize, props.itemPrice, props.itemQuantity, quantity]);
