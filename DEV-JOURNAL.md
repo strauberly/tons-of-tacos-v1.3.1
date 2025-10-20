@@ -14,6 +14,7 @@
 
 - Investigating multiple issues reoccurring.
   - Issue involving size selector displayed even if item does not have selectable sizes rectified by ensuring homogenous values.
+  - Item in owner order creator with selectable size correctly displaying price according to changes made to size and quantity.
 
 ---
 
