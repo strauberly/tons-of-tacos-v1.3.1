@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import CartItem from "./cart-item";
 import { useOwnerContext } from "@/context/owner-context";
 import { GetOwnerOrder } from "@/lib/owners-tools/owners-tools-client";
+import CartItemCopy from "./cart-item-copy";
 
 export default function CartItems() {
   const { cart, setCart } = useCartContext();
@@ -27,7 +28,7 @@ export default function CartItems() {
           size: string;
           price: string;
         }) => (
-          <CartItem
+          <CartItemCopy
             key={`${cartItem.itemName}_${cartItem.size}`}
             id={`${cartItem.itemName}_${cartItem.size}`}
             menuId={cartItem.menuId}
@@ -36,6 +37,15 @@ export default function CartItems() {
             size={cartItem.size}
             itemPrice={cartItem.price}
           />
+          // <CartItem
+          //   key={`${cartItem.itemName}_${cartItem.size}`}
+          //   id={`${cartItem.itemName}_${cartItem.size}`}
+          //   menuId={cartItem.menuId}
+          //   itemName={cartItem.itemName}
+          //   itemQuantity={cartItem.quantity}
+          //   size={cartItem.size}
+          //   itemPrice={cartItem.price}
+          // />
         )
       )}
     </ul>

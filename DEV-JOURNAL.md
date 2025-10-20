@@ -2,7 +2,17 @@
 
 ---
 
+-- 20 Oct 2025 --
+
+- Items in customer cart and owner order creator successfully updating price based on quantity. Set up loop between ref and state so the calculation isn't lagged but the display still updates new value. Logic updated for calculating the unit price of the item for further calculation.
+
+---
+
 -- 19 Oct 2025 --
+
+- Cart Item component was becoming a mess so created a copy and started a bit more fresh. Component is currently a mess but seems to be on the right track. Issues appear to stem from incorrect use of useEffect which was constantly overwriting changes and adding additional surcharge where not needed.
+
+  - So far an item quantity and price can be updated in the customer cart and owner order creator. See below for exercises in futility.
 
 - Items placed in cart for owner order updated for altering size and quantity.
 
