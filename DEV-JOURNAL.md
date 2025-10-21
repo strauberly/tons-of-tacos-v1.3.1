@@ -24,6 +24,8 @@
 
 - Forgot to add clause to add to order button disable for size na.
 
+- Cart item now displays na for an item without selectable sizes instead of the size selector.
+
 ---
 
 -- 20 Oct 2025 --

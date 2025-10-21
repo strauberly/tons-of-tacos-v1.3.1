@@ -101,6 +101,11 @@ export default function CartItemCopy(props: {
       <p className={classes.itemName}>{props.itemName}</p>
       {/* display size of na or size selector conditionally */}
       {/* <p className={classes.size}> {props.size}</p> */}
+      <QuantitySelector
+        value={quantity}
+        increment={increment}
+        decrement={decrement}
+      />
       {props.size !== "na" && (
         <SizeSelector
           itemSize={props.size}
@@ -108,11 +113,7 @@ export default function CartItemCopy(props: {
           setNewSize={setNewSize}
         />
       )}
-      <QuantitySelector
-        value={quantity}
-        increment={increment}
-        decrement={decrement}
-      />
+      {props.size === "na" && <p>{props.size}</p>}
 
       <p className={ownerOrder ? classes.ownerOrderItemPrice : classes.price}>
         {" "}
