@@ -33,7 +33,8 @@ export default function MenuItem(props: {
     setExpand(false);
   };
 
-  const itemSizes = ["small", "medium", "large"];
+  const itemSizes = ["S", "M", "L"];
+  // const itemSizes = ["small", "medium", "large"];
   const defaultQuantity: number = 1;
   const [quantity, setQuantity] = useState(defaultQuantity);
 

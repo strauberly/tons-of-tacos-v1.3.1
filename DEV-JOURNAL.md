@@ -2,6 +2,15 @@
 
 ---
 
+-- 21 Oct 2025 --
+
+- Update functionality for items in owner order creator and customer cart appear to be correct.
+
+- It appears size surcharges are being handled by the backend application as well. Think we'll stick to front end so that the changes in price are immediately visible.
+  - This has been temporarily addressed and will be reworked further.
+
+---
+
 -- 20 Oct 2025 --
 
 - Items in and owner order creator successfully updating price based on quantity. Set up loop between ref and state so the calculation isn't lagged but the display still updates new value. Logic updated for calculating the unit price of the item for further calculation.
