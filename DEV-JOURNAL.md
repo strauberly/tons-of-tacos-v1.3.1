@@ -18,7 +18,8 @@
     - component now correctly resets after to start the check over again.
     - button is disabled if an item with an available size does not have a valid size entered (ie S,M or L).
 
-- Bug introduced with changing size of an item in customer cart to small result in total for item being the surcharge of new size multiplied by the quantity but leaving out the base price. Will address next.
+- Bug introduced with changing size of an item in customer cart to small result in total for item being the surcharge of new size multiplied by the quantity but leaving out the base price.
+  - This has been corrected by creating uniformity in size selectors to use S,M, and L as the selections.
 
 ---
 

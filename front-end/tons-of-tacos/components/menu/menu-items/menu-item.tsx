@@ -68,9 +68,9 @@ export default function MenuItem(props: {
       let adjPrice: number;
       let sizeSurcharge = 0;
 
-      if (selectedSize === "medium" && props.id === menuItemId) {
+      if (selectedSize === "M" && props.id === menuItemId) {
         sizeSurcharge = 0.5;
-      } else if (selectedSize === "large" && props.id === menuItemId) {
+      } else if (selectedSize === "L" && props.id === menuItemId) {
         sizeSurcharge = 1.0;
       }
 
