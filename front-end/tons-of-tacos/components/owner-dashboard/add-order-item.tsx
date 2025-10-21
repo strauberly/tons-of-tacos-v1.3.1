@@ -71,9 +71,9 @@ export default function AddOrderItem() {
 
   const increment = () => {
     setQuantity(quantity + 1);
-    if (quantity >= 10) {
-      setQuantity(10);
-    }
+    // if (quantity >= 10) {
+    //   setQuantity(10);
+    // }
     setPrice(calcPrice());
   };
 

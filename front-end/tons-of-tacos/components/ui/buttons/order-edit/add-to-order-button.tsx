@@ -62,7 +62,10 @@ export default function AddToOrderButton(props: {
 
     if (ownerOrder) {
       cart.forEach((cartItem) => {
-        if (cartItem.itemName === props.menuItem.itemName) {
+        if (
+          cartItem.itemName === props.menuItem.itemName &&
+          cartItem.size === props.size
+        ) {
           setModal(
             "Item already in order. Update quantity, remove, or choose a different item."
           );
@@ -91,7 +94,7 @@ export default function AddToOrderButton(props: {
     if (!itemInOrder.current) {
       setShowConfirmation(true);
       setConfirmationTitle("Add To Order");
-      props.reset();
+      // props.reset();
     }
   }
 
@@ -138,12 +141,17 @@ export default function AddToOrderButton(props: {
   return (
     <button
       className={classes.addItemButton}
-      disabled={props.menuItem.itemName === ""}
+      // change this
+      disabled={props.size !== "S" && props.size !== "M" && props.size !== "L"}
       onClick={async () => {
+        if (itemInOrder.current === true) {
+          itemInOrder.current = false;
+        }
         setOrder(GetOwnerOrder());
         // setOrderToView(await GetOrderByID(orderToView.orderUid, login.token));
         orderCheck();
         checkOrderContext();
+
         if (!ownerOrder) {
           orderReqRes.current = await GetOrderByID(
             orderToView.orderUid,
@@ -152,6 +160,7 @@ export default function AddToOrderButton(props: {
           // orderReqRes.current = await GetOrderByID(props.orderUid, login.token);
           // if ((orderReqRes.current.status = 200)) {
           setOrderToView(orderReqRes.current.body as Order);
+
           // }
           // setOrderToView(await GetOrderByID(props.orderUid, login.token));
         }

@@ -7,7 +7,19 @@
 - Update functionality for items in owner order creator and customer cart appear to be correct.
 
 - It appears size surcharges are being handled by the backend application as well. Think we'll stick to front end so that the changes in price are immediately visible.
+
   - This has been temporarily addressed and will be reworked further.
+
+  - Restriction for how many of item and owner can add has been replaced. it is solely at their discretion.
+
+  - Modifications made to add to order button
+    - all items checked by name and size and if item already in cart is not added and user alerted
+    - if item has the same name but the size is different, it is allowed to be added.
+    - component now correctly resets after to start the check over again.
+    - button is disabled if an item with an available size does not have a valid size entered (ie S,M or L).
+
+- Bug introduced with changing size of an item in customer cart to small result in total for item being the surcharge of new size multiplied by the quantity but leaving out the base price.
+  - This has been corrected by creating uniformity in size selectors to use S,M, and L as the selections.
 
 ---
 
