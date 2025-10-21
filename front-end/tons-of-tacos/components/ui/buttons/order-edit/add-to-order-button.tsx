@@ -142,7 +142,12 @@ export default function AddToOrderButton(props: {
     <button
       className={classes.addItemButton}
       // change this
-      disabled={props.size !== "S" && props.size !== "M" && props.size !== "L"}
+      disabled={
+        props.size !== "S" &&
+        props.size !== "M" &&
+        props.size !== "L" &&
+        props.size !== "na"
+      }
       onClick={async () => {
         if (itemInOrder.current === true) {
           itemInOrder.current = false;
