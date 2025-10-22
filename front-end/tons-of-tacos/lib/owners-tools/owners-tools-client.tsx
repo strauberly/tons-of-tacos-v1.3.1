@@ -63,7 +63,7 @@ export function AddToOwnerOrder(
 export function RemoveFromOwnerOrder(id: string) {
   console.log(id);
   const updatedOrder = GetOwnerOrder().filter(
-    (orderItem) => orderItem.menuId != id
+    (orderItem) => orderItem.id != id
   );
   // console.log(updatedOrder);
   sessionStorage.removeItem("owner-order");
