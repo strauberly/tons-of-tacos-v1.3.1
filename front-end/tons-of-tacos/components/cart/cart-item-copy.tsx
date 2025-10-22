@@ -31,8 +31,12 @@ export default function CartItemCopy(props: {
   const [newPrice, setNewPrice] = useState<number>(Number(props.itemPrice));
   console.log(newPrice);
 
+  const [edited, setEdited] = useState<boolean>(false);
+
   const newQuantity = useRef<number>(quantity);
   console.log(newQuantity);
+
+  const oldSize = useRef<string>(props.size);
   // const quantity = useRef<number>(props)
   const price = useRef<number>(Number(newPrice));
   const basePrice = Number(props.itemPrice) / props.itemQuantity;
@@ -92,8 +96,11 @@ export default function CartItemCopy(props: {
 
       return adjPrice;
     }
-
-    setNewPrice(updatePrice());
+    if (edited) {
+      setNewPrice(updatePrice());
+    } else {
+      setNewPrice(Number(props.itemPrice));
+    }
   });
 
   return (
@@ -131,9 +138,24 @@ export default function CartItemCopy(props: {
           oldQuantity={props.itemQuantity}
           oldSize={props.size}
           newSize={newSize}
+          setEdited={setEdited}
+          edited={edited}
         />
 
         <RemoveFromCart id={props.id} cartItemQuantity={props.itemQuantity} />
+        {edited && (
+          <button
+            onClick={() => [
+              (newQuantity.current = props.itemQuantity),
+              setQuantity(newQuantity.current),
+              setNewPrice(newPrice),
+              setNewSize(oldSize.current),
+              setEdited(false),
+            ]}
+          >
+            Cancel
+          </button>
+        )}
       </div>
     </li>
   );

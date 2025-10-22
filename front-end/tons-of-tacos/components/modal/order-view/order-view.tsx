@@ -96,7 +96,7 @@ export default function OrderView() {
               <p>{`${time + " " + date}`}</p>
               <p>Total:</p>
               {/* <p>${orderRef.current.orderTotal.toFixed(2)}</p> */}
-              <p>${orderToView.orderTotal}</p>
+              <p>${orderToView.orderTotal.toFixed(2)}</p>
             </div>
           </div>
           <EditableDetails />

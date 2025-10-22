@@ -5,8 +5,13 @@
 -- 22 Oct 2025 --
 
 - Addressing issues in cart items stemming from id created for them not unique due to parameters in cart check not being unique as well.
+
   - Have addressed issues pertaining to updating a cart item in owner order creator.
   - Have addressed issues pertaining to removing a cart item in owner order creator.
+
+- Updated order view for total toFixed(2) in order to accurately display cost.
+
+- Cancel button implemented into owner order creator for reverting quantity and price if already entered still working on similar functionality for size selector.
 
 ---
 
