@@ -2,6 +2,14 @@
 
 ---
 
+-- 22 Oct 2025 --
+
+- Addressing issues in cart items stemming from id created for them not unique due to parameters in cart check not being unique as well.
+  - Have addressed issues pertaining to updating a cart item in owner order creator.
+  - Have addressed issues pertaining to removing a cart item in owner order creator.
+
+---
+
 -- 21 Oct 2025 --
 
 - Update functionality for items in owner order creator and customer cart appear to be correct.

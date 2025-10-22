@@ -103,7 +103,8 @@ export default function AddToOrderButton(props: {
     if (ownerOrder && itemInOrder.current === false) {
       return [
         AddToOwnerOrder(
-          `${props.menuItem.itemName}_${props.menuItem.itemSize}`,
+          `${props.menuItem.itemName}_${props.size}`,
+          // `${props.menuItem.itemName}_${props.menuItem.itemSize}`,
           props.menuItem.id,
           props.menuItem.itemName,
           props.quantity,
@@ -136,12 +137,45 @@ export default function AddToOrderButton(props: {
     body: "",
   });
 
-  // useEffect(() => {});
+  // try check if in cart in use effect
+  useEffect(() => {
+    async function Check() {
+      if (ownerOrder) {
+        cart.forEach((cartItem) => {
+          if (
+            cartItem.itemName === props.menuItem.itemName &&
+            cartItem.size === props.size
+          ) {
+            setModal(
+              "Item already in order. Update quantity, remove, or choose a different item."
+            );
+            setShowModal(true);
+            itemInOrder.current = true;
+            props.reset();
+          } else {
+            console.log(order);
+
+            orderToView.orderItems.forEach((orderItem) => {
+              if (orderItem.itemName === props.menuItem.itemName) {
+                setModal(
+                  "Item already in order. Update quantity, remove, or choose a different item."
+                );
+                setShowModal(true);
+                itemInOrder.current = true;
+                props.reset();
+              }
+            });
+          }
+        });
+      }
+    }
+    Check();
+    orderCheck();
+  }, []);
 
   return (
     <button
       className={classes.addItemButton}
-      // change this
       disabled={
         props.size !== "S" &&
         props.size !== "M" &&

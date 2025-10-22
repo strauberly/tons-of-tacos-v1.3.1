@@ -182,7 +182,7 @@ export default function CartItem(props: {
           <p className={classes.sizeWarning}>{sizeError}</p>
         )}
         <Update
-          cartItem={props.itemName}
+          cartItemId={props.itemName}
           updatedItemQuantity={quantity}
           updatedItemPrice={newPrice.toFixed(2)}
           oldQuantity={props.itemQuantity}

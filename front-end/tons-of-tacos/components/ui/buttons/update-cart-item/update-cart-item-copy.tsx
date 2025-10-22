@@ -17,7 +17,8 @@ import {
 import CartQuantity from "../../badges/cart-quantity";
 
 export default function Update(props: {
-  cartItem: string;
+  cartItemId: string;
+  // cartItem: string;
   updatedItemQuantity: number;
   updatedItemPrice: string;
   oldQuantity: number;
@@ -55,7 +56,8 @@ export default function Update(props: {
     console.log(newCart);
 
     const cartItemIndex: number = newCart.findIndex(
-      (cartItem) => cartItem.itemName === props.cartItem
+      (cartItem) => cartItem.id === props.cartItemId
+      // (cartItem) => cartItem.itemName === props.cartItem
     );
 
     console.log("index: " + cartItemIndex);

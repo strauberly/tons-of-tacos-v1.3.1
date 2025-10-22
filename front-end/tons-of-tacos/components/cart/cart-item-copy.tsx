@@ -125,7 +125,7 @@ export default function CartItemCopy(props: {
           <p className={classes.sizeWarning}>{sizeError}</p>
         )}
         <Update
-          cartItem={props.itemName}
+          cartItemId={props.id}
           updatedItemQuantity={quantity}
           updatedItemPrice={newPrice.toFixed(2)}
           oldQuantity={props.itemQuantity}
@@ -133,10 +133,7 @@ export default function CartItemCopy(props: {
           newSize={newSize}
         />
 
-        <RemoveFromCart
-          id={props.menuId}
-          cartItemQuantity={props.itemQuantity}
-        />
+        <RemoveFromCart id={props.id} cartItemQuantity={props.itemQuantity} />
       </div>
     </li>
   );
