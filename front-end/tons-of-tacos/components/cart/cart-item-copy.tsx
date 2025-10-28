@@ -33,6 +33,8 @@ export default function CartItemCopy(props: {
 
   const [edited, setEdited] = useState<boolean>(false);
 
+  const [canEdit, setCanEdit] = useState<boolean>(false);
+
   const newQuantity = useRef<number>(quantity);
   console.log(newQuantity);
 
@@ -107,20 +109,23 @@ export default function CartItemCopy(props: {
     <li className={ownerOrder ? classes.ownerOrderItem : classes.item}>
       <p className={classes.itemName}>{props.itemName}</p>
       {/* display size of na or size selector conditionally */}
-      {/* <p className={classes.size}> {props.size}</p> */}
-      <QuantitySelector
-        value={quantity}
-        increment={increment}
-        decrement={decrement}
-      />
-      {props.size !== "na" && (
+      {canEdit && (
+        <QuantitySelector
+          value={quantity}
+          increment={increment}
+          decrement={decrement}
+        />
+      )}
+      {!canEdit && <p className={classes.size}> {props.size}</p>}
+      {props.size === "na" && <p>{props.size}</p>}
+
+      {canEdit && props.size !== "na" && (
         <SizeSelector
           itemSize={props.size}
           setShowSizeError={setShowSizeError}
           setNewSize={setNewSize}
         />
       )}
-      {props.size === "na" && <p>{props.size}</p>}
 
       <p className={ownerOrder ? classes.ownerOrderItemPrice : classes.price}>
         {" "}
@@ -141,9 +146,9 @@ export default function CartItemCopy(props: {
           setEdited={setEdited}
           edited={edited}
         />
-
+        {!canEdit && <button onClick={() => setCanEdit(true)}>Edit</button>}
         <RemoveFromCart id={props.id} cartItemQuantity={props.itemQuantity} />
-        {edited && (
+        {canEdit && (
           <button
             onClick={() => [
               (newQuantity.current = props.itemQuantity),
@@ -151,6 +156,7 @@ export default function CartItemCopy(props: {
               setNewPrice(newPrice),
               setNewSize(oldSize.current),
               setEdited(false),
+              setCanEdit(false),
             ]}
           >
             Cancel
