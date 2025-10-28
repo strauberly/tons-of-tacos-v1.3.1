@@ -7,6 +7,7 @@
 - Addressing size selector retuning to default state ruled not important at this time. New strategy matches what is in place for order items when editing an already existing order.
 - updated styling needed.
 - Items in owner order creator back to correctly adjusting price when quantity changes while also taking size surcharges into account. Back to styling and issues with updates.
+  -Altering how an items id is mapped in cart-item-list appears to have resolved update issues in owner order creator.
 
 ---
 

@@ -22,6 +22,7 @@ export default function CartItems() {
     <ul>
       {cart.map(
         (cartItem: {
+          id: string;
           menuId: string;
           itemName: string;
           quantity: number;
@@ -30,7 +31,8 @@ export default function CartItems() {
         }) => (
           <CartItemCopy
             key={`${cartItem.itemName}_${cartItem.size}`}
-            id={`${cartItem.itemName}_${cartItem.size}`}
+            id={`${cartItem.id}`}
+            // id={`${cartItem.itemName}_${cartItem.size}`}
             menuId={cartItem.menuId}
             itemName={cartItem.itemName}
             itemQuantity={cartItem.quantity}
