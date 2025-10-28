@@ -15,30 +15,50 @@
 
 .size {
   color: var(--user-selected-color);
-  justify-self: right;
+  /* justify-self: right; */
   margin-right: 1rem;
   /* font-size: 1rem; */
 }
 
 .ownerOrderItem {
+  margin-top: 0.5rem;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   font-size: clamp(1.25rem, 1vw, 0.75vw);
   align-items: center;
+  justify-items: center;
   gap: 0.5rem;
-  border-bottom: solid var(--border-color) 1px;
+  border-bottom: solid var(--border-color) 2px;
   padding-bottom: 1vw;
 }
-
-.ownerOrderItem button {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
+.ownerOrderItem :nth-child(2) {
+  /* background-color: aqua; */
+  /* display: flex; */
+  /* margin-left: 100%; */
+  width: 2rem;
 }
 
+.quantity {
+  margin-right: 80%;
+}
 .ownerOrderItemPrice {
   align-items: center;
   margin-left: 1rem;
   margin-right: 1rem;
+}
+
+.actionButtonGroup1 {
+  display: flex;
+  /* justify-self: right; */
+  margin-left: 50%;
+  gap: 5rem;
+}
+
+.actionButtonGroup1 button {
+  color: var(--interactive-color);
+  font-size: clamp(1.25rem, 2vw, 1.5vw);
+  /* justify-self: right; */
+  cursor: pointer;
 }
 
 @media (max-width: 1380px) {
