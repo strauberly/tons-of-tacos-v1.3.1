@@ -103,7 +103,7 @@ export default function CartItemCopy(props: {
     } else {
       setNewPrice(Number(props.itemPrice));
     }
-  });
+  }, [edited, props.size, props.itemPrice, newSize, basePrice]);
 
   return (
     <li className={ownerOrder ? classes.ownerOrderItem : classes.item}>
