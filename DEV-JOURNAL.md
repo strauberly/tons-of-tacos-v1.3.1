@@ -2,6 +2,13 @@
 
 ---
 
+-- 28 Oct 2025 --
+
+- Addressing size selector retuning to default state ruled not important at this time. New strategy matches what is in place for order items when editing an already existing order.
+  updated styling needed.
+
+---
+
 -- 22 Oct 2025 --
 
 - Addressing issues in cart items stemming from id created for them not unique due to parameters in cart check not being unique as well.
