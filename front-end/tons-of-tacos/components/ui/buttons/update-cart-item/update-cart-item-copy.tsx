@@ -55,12 +55,17 @@ export default function Update(props: {
     // let newCart: CartItem[];
 
     // let cartItemIndex: number;
-    console.log(newCart);
+    console.log("new cart: " + JSON.stringify(newCart));
+
+    console.log("props id: " + props.cartItemId);
 
     const cartItemIndex: number = newCart.findIndex(
       (cartItem) => cartItem.id === props.cartItemId
+
       // (cartItem) => cartItem.itemName === props.cartItem
     );
+
+    // newCart;
 
     console.log("index: " + cartItemIndex);
     if (itemQuantityChanged) {
@@ -97,6 +102,7 @@ export default function Update(props: {
       setSizeChanged(false);
     }
   }, [
+    props,
     props.newSize,
     props.oldQuantity,
     props.oldSize,
