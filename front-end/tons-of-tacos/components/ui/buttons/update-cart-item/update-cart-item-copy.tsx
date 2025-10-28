@@ -24,6 +24,8 @@ export default function Update(props: {
   oldQuantity: number;
   oldSize: string;
   newSize: string;
+  setEdited: (edited: boolean) => void;
+  edited: boolean;
 }) {
   // get index of the the item already in cart
   const { cart, setCart, cartQuantity, setCartQuantity } = useCartContext();
@@ -81,9 +83,11 @@ export default function Update(props: {
   useEffect(() => {
     if (props.oldQuantity != props.updatedItemQuantity) {
       setItemQuantityChanged(true);
+      props.setEdited(true);
     }
     if (props.oldSize != props.newSize && props.newSize) {
       setSizeChanged(true);
+      props.setEdited(true);
     }
     if (
       props.newSize !== "S" &&
@@ -101,20 +105,20 @@ export default function Update(props: {
 
   return (
     <div>
-      {(itemQuantityChanged && (
+      {(itemQuantityChanged && props.edited && (
         <button
           disabled={largeOrder === true ? true : false}
           className={classes.update}
-          onClick={() => [updateCartItem()]}
+          onClick={() => [updateCartItem(), props.setEdited(false)]}
         >
           Update
         </button>
       )) ||
-        (sizeChanged && (
+        (sizeChanged && props.edited && (
           <button
             disabled={largeOrder === true ? true : false}
             className={classes.update}
-            onClick={() => [updateCartItem()]}
+            onClick={() => [updateCartItem(), props.setEdited(false)]}
           >
             Update
           </button>
