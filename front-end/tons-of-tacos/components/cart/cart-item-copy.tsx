@@ -159,6 +159,7 @@ export default function CartItemCopy(props: {
             />
           </div>
         )}
+        {/* <div className={classes.sizeGroup}> */}
         {!canEdit && props.size === "na" && (
           <p className={classes.size}> {props.size}</p>
         )}
@@ -176,6 +177,7 @@ export default function CartItemCopy(props: {
             setNewSize={setNewSize}
           />
         )}
+        {/* </div> */}
 
         {/* <p className={ownerOrder ? classes.ownerOrderItemPrice : classes.price}>
           {" "}
@@ -186,6 +188,8 @@ export default function CartItemCopy(props: {
           {showSizeError === true && (
             <p className={classes.sizeWarning}>{sizeError}</p>
           )}
+        </div>
+        <div className={classes.actionButtonGroup1}>
           <Update
             cartItemId={props.id}
             updatedItemQuantity={quantity}
@@ -198,8 +202,6 @@ export default function CartItemCopy(props: {
             setCanEdit={setCanEdit}
             // canEditFunc={canEditFunc}
           />
-        </div>
-        <div className={classes.actionButtonGroup1}>
           {canEdit && (
             <button
               onClick={() => [

@@ -16,6 +16,8 @@
 
 - Owner Order Creator component function as intended with responsive styling in place.
 
+- Touch ups to responsive styling for items in owner order creator.
+
 ---
 
 -- 28 Oct 2025 --
