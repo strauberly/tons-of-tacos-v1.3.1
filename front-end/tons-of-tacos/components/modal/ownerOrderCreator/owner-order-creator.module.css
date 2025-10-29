@@ -11,6 +11,7 @@
   flex-direction: column;
   padding-left: 1rem;
   max-height: 48rem;
+  margin-top: 1rem;
   /* overflow-y: scroll; */
   /* margin-bottom: 2rem; */
   /* padding-bottom: 2rem; */
@@ -32,6 +33,10 @@
   left: 0;
   right: 0;
   margin: auto;
+  margin-top: 1rem;
+}
+
+.itemsHeader {
   margin-top: 1rem;
 }
 

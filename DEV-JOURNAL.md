@@ -6,6 +6,8 @@
 
 - NA displayed for a cart item if size not applicable while viewing the item or making an edit to the quantity.
 
+- styling improvements for readability of items in owner order creator.
+
 ---
 
 -- 28 Oct 2025 --

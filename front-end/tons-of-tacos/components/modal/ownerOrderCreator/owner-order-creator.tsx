@@ -38,7 +38,7 @@ export default function OwnerOrderCreator() {
         <div className={classes.elements}>
           <AddOrderItem />
           <div>
-            <h3>Order Items:</h3>
+            <h3 className={classes.itemsHeader}>Order Items:</h3>
             <CartItems />
           </div>
           <h3 className={classes.total}>Total: ${total.current}</h3>
