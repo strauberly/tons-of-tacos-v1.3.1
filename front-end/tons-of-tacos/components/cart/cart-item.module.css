@@ -34,12 +34,12 @@
 .ownerOrderItem :nth-child(2) {
   /* background-color: aqua; */
   /* display: flex; */
-  /* margin-left: 100%; */
-  width: 2rem;
+  margin-left: 0%;
+  /* width: 2rem; */
 }
 
 .quantity {
-  margin-right: 80%;
+  margin-right: 10%;
 }
 .ownerOrderItemPrice {
   align-items: center;

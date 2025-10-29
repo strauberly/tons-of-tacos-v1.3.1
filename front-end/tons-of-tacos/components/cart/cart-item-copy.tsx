@@ -43,6 +43,11 @@ export default function CartItemCopy(props: {
   const price = useRef<number>(Number(newPrice));
   const basePrice = Number(props.itemPrice) / props.itemQuantity;
 
+  // function canEditFunc() {
+  //   setCanEdit(false);
+  //   // return canEdit;
+  // }
+
   const increment = () => {
     setQuantity((newQuantity.current += 1));
     if (quantity >= 10 && !loggedIn) {
@@ -50,14 +55,17 @@ export default function CartItemCopy(props: {
         "The limit for this item is 10. If you need more please give us a call so we can try to accommodate your order. Thanks!"
       );
       setShowModal(true);
-      // setQuantity(10);
+      setQuantity(10);
     } else if (quantity + cartQuantity > 30 && !loggedIn) {
       setModal(
         "Your order has grown to a fair size. The current maximum is 30 items. Please contact us before adding anything else. \n\nThis will ensure we can make your order happen today. You can also remove items from your cart. Thank you!"
       );
       setShowModal(true);
+    } else {
     }
-    // setNewPrice(updatePrice());
+    setEdited(true);
+    setNewPrice(updatePrice());
+    // setNewPrice(price.current);
   };
 
   // need a context check and appropriate action
@@ -67,9 +75,36 @@ export default function CartItemCopy(props: {
       newQuantity.current = 1;
       setQuantity(newQuantity.current);
     } else {
-      // setNewPrice(updatePrice());
+      setNewPrice(updatePrice());
     }
   };
+
+  function updatePrice() {
+    let adjPrice = 0;
+    let surcharge = 0;
+    let oldSurcharge = 0;
+
+    if (props.size === "M") {
+      oldSurcharge = 0.5;
+    } else if (props.size === "L") {
+      oldSurcharge = 1;
+    }
+
+    if (newSize === "M") {
+      surcharge = 0.5;
+    } else if (newSize === "L") {
+      surcharge = 1;
+    }
+
+    adjPrice = (basePrice - oldSurcharge + surcharge) * newQuantity.current;
+
+    return adjPrice;
+    // if (edited === true) {
+    //   setNewPrice(adjPrice);
+    // } else {
+    //   setNewPrice(Number(props.itemPrice));
+    // }
+  }
 
   const [showSizeError, setShowSizeError] = useState<boolean>(false);
 
@@ -77,6 +112,9 @@ export default function CartItemCopy(props: {
     "Enter 'S' for small, 'M' for medium or 'L' for large.";
 
   useEffect(() => {
+    // setCanEdit(canEdit);
+
+    console.log("canEdit: " + canEdit);
     function updatePrice() {
       let adjPrice = 0;
       let surcharge = 0;
@@ -103,7 +141,7 @@ export default function CartItemCopy(props: {
     } else {
       setNewPrice(Number(props.itemPrice));
     }
-  }, [edited, props.size, props.itemPrice, newSize, basePrice]);
+  }, [edited, props.size, props.itemPrice, newSize, basePrice, canEdit]);
 
   return (
     <>
@@ -117,6 +155,7 @@ export default function CartItemCopy(props: {
               value={quantity}
               increment={increment}
               decrement={decrement}
+              setEdited={setEdited}
             />
           </div>
         )}
@@ -125,7 +164,7 @@ export default function CartItemCopy(props: {
         )}
         {!canEdit && props.size !== "na" && <p>{props.size}</p>}
         {/* {!canEdit && } */}
-        {canEdit && props.size === "na" && <p> </p>}
+        {canEdit === true && props.size === "na" && <p>{props.size}</p>}
         {canEdit && props.size !== "na" && (
           <SizeSelector
             itemSize={props.size}
@@ -152,6 +191,8 @@ export default function CartItemCopy(props: {
             newSize={newSize}
             setEdited={setEdited}
             edited={edited}
+            setCanEdit={setCanEdit}
+            // canEditFunc={canEditFunc}
           />
         </div>
         <div className={classes.actionButtonGroup1}>

@@ -26,6 +26,8 @@ export default function Update(props: {
   newSize: string;
   setEdited: (edited: boolean) => void;
   edited: boolean;
+  setCanEdit: (canEdit: boolean) => void;
+  // canEditFunc: () => void;
 }) {
   // get index of the the item already in cart
   const { cart, setCart, cartQuantity, setCartQuantity } = useCartContext();
@@ -55,12 +57,17 @@ export default function Update(props: {
     // let newCart: CartItem[];
 
     // let cartItemIndex: number;
-    console.log(newCart);
+    console.log("new cart: " + JSON.stringify(newCart));
+
+    console.log("props id: " + props.cartItemId);
 
     const cartItemIndex: number = newCart.findIndex(
       (cartItem) => cartItem.id === props.cartItemId
+
       // (cartItem) => cartItem.itemName === props.cartItem
     );
+
+    // newCart;
 
     console.log("index: " + cartItemIndex);
     if (itemQuantityChanged) {
@@ -97,6 +104,7 @@ export default function Update(props: {
       setSizeChanged(false);
     }
   }, [
+    props,
     props.newSize,
     props.oldQuantity,
     props.oldSize,
@@ -109,7 +117,11 @@ export default function Update(props: {
         <button
           disabled={largeOrder === true ? true : false}
           className={classes.update}
-          onClick={() => [updateCartItem(), props.setEdited(false)]}
+          onClick={() => [
+            updateCartItem(),
+            props.setEdited(false),
+            props.setCanEdit(false),
+          ]}
         >
           Update
         </button>
@@ -118,7 +130,12 @@ export default function Update(props: {
           <button
             disabled={largeOrder === true ? true : false}
             className={classes.update}
-            onClick={() => [updateCartItem(), props.setEdited(false)]}
+            onClick={() => [
+              updateCartItem(),
+              props.setEdited(false),
+              props.setCanEdit(false),
+              // props.canEditFunc(false),
+            ]}
           >
             Update
           </button>
