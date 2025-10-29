@@ -162,9 +162,13 @@ export default function CartItemCopy(props: {
         {!canEdit && props.size === "na" && (
           <p className={classes.size}> {props.size}</p>
         )}
-        {!canEdit && props.size !== "na" && <p>{props.size}</p>}
+        {!canEdit && props.size !== "na" && (
+          <p className={classes.size}>{props.size}</p>
+        )}
         {/* {!canEdit && } */}
-        {canEdit === true && props.size === "na" && <p>{props.size}</p>}
+        {canEdit === true && props.size === "na" && (
+          <p className={classes.size}>{props.size}</p>
+        )}
         {canEdit && props.size !== "na" && (
           <SizeSelector
             itemSize={props.size}

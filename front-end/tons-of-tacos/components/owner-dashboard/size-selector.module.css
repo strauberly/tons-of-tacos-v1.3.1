@@ -27,3 +27,12 @@
   margin-top: 0.5rem;
   color: var(--attention-color);
 }
+
+@media (max-width: 1380px) {
+  .size {
+    /* display: flex; */
+    /* margin-left: 6rem; */
+    /* align-self: center; */
+    margin-right: 1rem;
+  }
+}
