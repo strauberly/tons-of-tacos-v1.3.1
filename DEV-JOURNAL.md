@@ -10,6 +10,12 @@
 
 - responsive styling improvements for items in owner order creator for quantity selector and size selector.
 
+- bug sorted for certain drinks not being able to be added to order for customer due to the size defined in sql script on backend.
+
+- add item disabled if an item hasn't been selected.
+
+- Owner Order Creator component function as intended with responsive styling in place.
+
 ---
 
 -- 28 Oct 2025 --
