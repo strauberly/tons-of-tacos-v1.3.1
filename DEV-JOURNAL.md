@@ -2,12 +2,20 @@
 
 ---
 
+-- 29 Oct 20225 --
+
+- NA displayed for a cart item if size not applicable while viewing the item or making an edit to the quantity.
+
+---
+
 -- 28 Oct 2025 --
 
 - Addressing size selector retuning to default state ruled not important at this time. New strategy matches what is in place for order items when editing an already existing order.
 - updated styling needed.
 - Items in owner order creator back to correctly adjusting price when quantity changes while also taking size surcharges into account. Back to styling and issues with updates.
-  -Altering how an items id is mapped in cart-item-list appears to have resolved update issues in owner order creator.
+- Altering how an items id is mapped in cart-item-list appears to have resolved update issues in owner order creator.
+- Unable to pass results of setCanEdit back to parent or some reason. yet update component disappears like it is supposed to.
+- This has been corrected by ensuring all conditions for an edit met. simple oversight.
 
 ---
 

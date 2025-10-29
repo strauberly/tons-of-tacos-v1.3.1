@@ -26,6 +26,8 @@ export default function Update(props: {
   newSize: string;
   setEdited: (edited: boolean) => void;
   edited: boolean;
+  setCanEdit: (canEdit: boolean) => void;
+  // canEditFunc: () => void;
 }) {
   // get index of the the item already in cart
   const { cart, setCart, cartQuantity, setCartQuantity } = useCartContext();
@@ -115,7 +117,11 @@ export default function Update(props: {
         <button
           disabled={largeOrder === true ? true : false}
           className={classes.update}
-          onClick={() => [updateCartItem(), props.setEdited(false)]}
+          onClick={() => [
+            updateCartItem(),
+            props.setEdited(false),
+            props.setCanEdit(false),
+          ]}
         >
           Update
         </button>
@@ -124,7 +130,12 @@ export default function Update(props: {
           <button
             disabled={largeOrder === true ? true : false}
             className={classes.update}
-            onClick={() => [updateCartItem(), props.setEdited(false)]}
+            onClick={() => [
+              updateCartItem(),
+              props.setEdited(false),
+              props.setCanEdit(false),
+              // props.canEditFunc(false),
+            ]}
           >
             Update
           </button>

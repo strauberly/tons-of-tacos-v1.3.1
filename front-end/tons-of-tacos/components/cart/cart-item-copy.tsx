@@ -43,6 +43,11 @@ export default function CartItemCopy(props: {
   const price = useRef<number>(Number(newPrice));
   const basePrice = Number(props.itemPrice) / props.itemQuantity;
 
+  // function canEditFunc() {
+  //   setCanEdit(false);
+  //   // return canEdit;
+  // }
+
   const increment = () => {
     setQuantity((newQuantity.current += 1));
     if (quantity >= 10 && !loggedIn) {
@@ -107,6 +112,9 @@ export default function CartItemCopy(props: {
     "Enter 'S' for small, 'M' for medium or 'L' for large.";
 
   useEffect(() => {
+    // setCanEdit(canEdit);
+
+    console.log("canEdit: " + canEdit);
     function updatePrice() {
       let adjPrice = 0;
       let surcharge = 0;
@@ -133,7 +141,7 @@ export default function CartItemCopy(props: {
     } else {
       setNewPrice(Number(props.itemPrice));
     }
-  }, [edited, props.size, props.itemPrice, newSize, basePrice]);
+  }, [edited, props.size, props.itemPrice, newSize, basePrice, canEdit]);
 
   return (
     <>
@@ -156,7 +164,7 @@ export default function CartItemCopy(props: {
         )}
         {!canEdit && props.size !== "na" && <p>{props.size}</p>}
         {/* {!canEdit && } */}
-        {canEdit && props.size === "na" && <p> </p>}
+        {canEdit === true && props.size === "na" && <p>{props.size}</p>}
         {canEdit && props.size !== "na" && (
           <SizeSelector
             itemSize={props.size}
@@ -183,6 +191,8 @@ export default function CartItemCopy(props: {
             newSize={newSize}
             setEdited={setEdited}
             edited={edited}
+            setCanEdit={setCanEdit}
+            // canEditFunc={canEditFunc}
           />
         </div>
         <div className={classes.actionButtonGroup1}>
