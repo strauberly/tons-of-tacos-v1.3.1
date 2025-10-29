@@ -8,6 +8,8 @@
 
 - styling improvements for readability of items in owner order creator.
 
+- responsive styling improvements for items in owner order creator for quantity selector and size selector.
+
 ---
 
 -- 28 Oct 2025 --
