@@ -38,6 +38,7 @@ export default function AddToOrderButton(props: {
     setItemSize,
   } = useEditOrderContext();
   console.log(props.quantity);
+  console.log("item: " + JSON.stringify(props.menuItem));
   console.log("item size: " + `${props.size}`);
 
   const itemInOrder = useRef<boolean>(false);
@@ -62,6 +63,11 @@ export default function AddToOrderButton(props: {
 
     if (ownerOrder) {
       cart.forEach((cartItem) => {
+        console.log(cartItem.itemName);
+        console.log(props.menuItem.itemName);
+        console.log(cartItem.size);
+        console.log(props.size);
+
         if (
           cartItem.itemName === props.menuItem.itemName &&
           cartItem.size === props.size
@@ -176,12 +182,13 @@ export default function AddToOrderButton(props: {
   return (
     <button
       className={classes.addItemButton}
-      disabled={
-        props.size !== "S" &&
-        props.size !== "M" &&
-        props.size !== "L" &&
-        props.size !== "na"
-      }
+      disabled={props.menuItem.itemName == ""}
+      // disabled={
+      //   props.size !== "S" &&
+      //   props.size !== "M" &&
+      //   props.size !== "L" &&
+      //   props.size !== "na"
+      // }
       onClick={async () => {
         if (itemInOrder.current === true) {
           itemInOrder.current = false;
