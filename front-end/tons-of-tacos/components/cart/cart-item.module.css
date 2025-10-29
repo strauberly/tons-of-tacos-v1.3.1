@@ -17,13 +17,21 @@
   color: var(--user-selected-color);
   /* justify-self: right; */
   margin-right: 1rem;
+  justify-items: left;
   /* font-size: 1rem; */
 }
 
+.sizeGroup {
+  display: flex;
+  justify-self: left;
+  margin-left: -2rem;
+}
+
 .ownerOrderItem {
+  width: 98%;
   margin-top: 0.5rem;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 25%);
   font-size: clamp(1.25rem, 1vw, 0.75vw);
   align-items: center;
   justify-items: center;
@@ -33,6 +41,9 @@
 }
 .ownerOrderItem :nth-child(2) {
   margin-left: 0%;
+}
+.ownerOrderItem :nth-child(4) {
+  margin-left: -30%;
 }
 
 .quantity {
@@ -47,8 +58,9 @@
 .actionButtonGroup1 {
   display: flex;
   /* justify-self: right; */
-  margin-left: 50%;
+  margin-left: 5%;
   gap: 5rem;
+  margin-top: 0.5rem;
 }
 
 .actionButtonGroup1 button {

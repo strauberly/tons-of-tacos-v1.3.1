@@ -16,7 +16,7 @@ export default function QuantitySelector(props: {
         className={`${classes.decrement}`}
         onClick={() => [props.decrement(), props.setEdited(true)]}
       >
-        <ArrowIcon scale={"scale(1)"} />
+        <ArrowIcon scale={"scale(.75)"} />
       </button>
       <input
         type="number"
@@ -29,7 +29,7 @@ export default function QuantitySelector(props: {
         className={`${classes.increment}`}
         onClick={() => [props.increment(), props.setEdited(true)]}
       >
-        <ArrowIcon scale={"scale(1)"} />
+        <ArrowIcon scale={"scale(.75)"} />
       </button>
     </div>
   );
