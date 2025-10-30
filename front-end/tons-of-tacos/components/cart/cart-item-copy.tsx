@@ -144,7 +144,7 @@ export default function CartItemCopy(props: {
   }, [edited, props.size, props.itemPrice, newSize, basePrice, canEdit]);
 
   return (
-    <>
+    <div className={classes.wholeItem}>
       <li className={ownerOrder ? classes.ownerOrderItem : classes.item}>
         <p className={classes.itemName}>{props.itemName}</p>
         {/* display size of na or size selector conditionally */}
@@ -189,37 +189,37 @@ export default function CartItemCopy(props: {
             <p className={classes.sizeWarning}>{sizeError}</p>
           )}
         </div>
-        <div className={classes.actionButtonGroup1}>
-          <Update
-            cartItemId={props.id}
-            updatedItemQuantity={quantity}
-            updatedItemPrice={newPrice.toFixed(2)}
-            oldQuantity={props.itemQuantity}
-            oldSize={props.size}
-            newSize={newSize}
-            setEdited={setEdited}
-            edited={edited}
-            setCanEdit={setCanEdit}
-            // canEditFunc={canEditFunc}
-          />
-          {canEdit && (
-            <button
-              onClick={() => [
-                (newQuantity.current = props.itemQuantity),
-                setQuantity(newQuantity.current),
-                setNewPrice(newPrice),
-                setNewSize(oldSize.current),
-                setEdited(false),
-                setCanEdit(false),
-              ]}
-            >
-              Cancel
-            </button>
-          )}
-          {!canEdit && <button onClick={() => setCanEdit(true)}>Edit</button>}
-          <RemoveFromCart id={props.id} cartItemQuantity={props.itemQuantity} />
-        </div>
       </li>
-    </>
+      <div className={classes.actionButtonGroup1}>
+        <Update
+          cartItemId={props.id}
+          updatedItemQuantity={quantity}
+          updatedItemPrice={newPrice.toFixed(2)}
+          oldQuantity={props.itemQuantity}
+          oldSize={props.size}
+          newSize={newSize}
+          setEdited={setEdited}
+          edited={edited}
+          setCanEdit={setCanEdit}
+          // canEditFunc={canEditFunc}
+        />
+        {canEdit && (
+          <button
+            onClick={() => [
+              (newQuantity.current = props.itemQuantity),
+              setQuantity(newQuantity.current),
+              setNewPrice(newPrice),
+              setNewSize(oldSize.current),
+              setEdited(false),
+              setCanEdit(false),
+            ]}
+          >
+            Cancel
+          </button>
+        )}
+        {!canEdit && <button onClick={() => setCanEdit(true)}>Edit</button>}
+        <RemoveFromCart id={props.id} cartItemQuantity={props.itemQuantity} />
+      </div>
+    </div>
   );
 }
