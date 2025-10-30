@@ -2,7 +2,14 @@
 
 ---
 
--- 29 Oct 20225 --
+-- 30 Oct 2025 --
+
+- Restyle of item adder let to a refactor
+  of the elements layout. It is now responsive. Files will need refinement.
+
+---
+
+-- 29 Oct 2025 --
 
 - NA displayed for a cart item if size not applicable while viewing the item or making an edit to the quantity.
 
