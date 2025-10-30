@@ -1,3 +1,9 @@
+.wholeItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .item {
   font-size: clamp(1.25rem, 2vw, 1.5vw);
   border-bottom: solid var(--border-color) 1px;
@@ -33,17 +39,14 @@
   display: grid;
   grid-template-columns: repeat(4, 25%);
   font-size: clamp(1.25rem, 1vw, 0.75vw);
-  align-items: center;
   justify-items: center;
-  gap: 0.5rem;
+
+  gap: 0rem;
   border-bottom: solid var(--border-color) 2px;
   padding-bottom: 1vw;
 }
 .ownerOrderItem :nth-child(2) {
   margin-left: 0%;
-}
-.ownerOrderItem :nth-child(4) {
-  margin-left: -30%;
 }
 
 .quantity {
@@ -58,7 +61,7 @@
 .actionButtonGroup1 {
   display: flex;
   /* justify-self: right; */
-  margin-left: 5%;
+  /* margin-left: 5%; */
   gap: 5rem;
   margin-top: 0.5rem;
 }
@@ -69,6 +72,12 @@
   /* font-size: clamp(1.25rem, 2vw, 1.5vw); */
   /* justify-self: right; */
   cursor: pointer;
+}
+
+.itemPrice {
+  display: flex;
+  /* justify-self: center; */
+  /* margin-left: 2rem; */
 }
 
 @media (max-width: 1380px) {

@@ -7,6 +7,8 @@
 - Restyle of item adder let to a refactor
   of the elements layout. It is now responsive. Files will need refinement.
 
+  - adjustment made to item price in owner order creator for an item. brought more into centerline with other items at smaller screen sizes.
+
 ---
 
 -- 29 Oct 2025 --
