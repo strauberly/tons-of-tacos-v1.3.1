@@ -182,7 +182,7 @@ export default function AddToOrderButton(props: {
   return (
     <button
       className={classes.addItemButton}
-      disabled={props.menuItem.itemName == ""}
+      disabled={props.menuItem.itemName === "" || props.size === "a"}
       // disabled={
       //   props.size !== "S" &&
       //   props.size !== "M" &&

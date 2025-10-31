@@ -13,6 +13,8 @@
 
   - altered border at bottom of items in owner order creator
 
+  - add item to order button disabled if no item selected or item has selectable sizes but size has not yet been selected.
+
 ---
 
 -- 29 Oct 2025 --
