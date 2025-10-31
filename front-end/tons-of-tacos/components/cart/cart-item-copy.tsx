@@ -190,7 +190,7 @@ export default function CartItemCopy(props: {
           )}
         </div>
       </li>
-      <div className={classes.actionButtonGroup1}>
+      <div className={classes.actionButtonGroup}>
         <Update
           cartItemId={props.id}
           updatedItemQuantity={quantity}
