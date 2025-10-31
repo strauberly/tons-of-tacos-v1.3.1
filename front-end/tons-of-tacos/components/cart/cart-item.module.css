@@ -2,11 +2,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-bottom: solid var(--border-color) 2px;
 }
 
 .item {
   font-size: clamp(1.25rem, 2vw, 1.5vw);
-  border-bottom: solid var(--border-color) 1px;
+  /* border-bottom: solid var(--border-color) 1px; */
   padding-bottom: 1vw;
 }
 
@@ -42,7 +43,7 @@
   justify-items: center;
 
   gap: 0rem;
-  border-bottom: solid var(--border-color) 2px;
+  /* border-bottom: solid var(--border-color) 2px; */
   padding-bottom: 1vw;
 }
 .ownerOrderItem :nth-child(2) {
@@ -58,17 +59,23 @@
   margin-right: 1rem;
 }
 
-.actionButtonGroup1 {
+.actionButtonGroup {
   display: flex;
-  /* justify-self: right; */
+  /* justify-self: center; */
   /* margin-left: 5%; */
   gap: 5rem;
-  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  /* margin-top: 0.5rem; */
+  margin-right: 2rem;
+  /* border-bottom: solid var(--border-color) 2px; */
+  /* justify-content: left; */
+  /* align-content: left; */
 }
 
-.actionButtonGroup1 button {
+.actionButtonGroup button {
   color: var(--interactive-color);
   font-size: clamp(1rem, 1.5vw, 1.25vw);
+  /* border-bottom: solid var(--border-color) 2px; */
   /* font-size: clamp(1.25rem, 2vw, 1.5vw); */
   /* justify-self: right; */
   cursor: pointer;
@@ -89,7 +96,7 @@
     justify-self: center;
     justify-items: center;
     gap: 1rem;
-    border-bottom: solid var(--border-color) 1px;
+    /* border-bottom: solid var(--border-color) 1px; */
     padding-bottom: 1vw;
     width: 80%;
   }

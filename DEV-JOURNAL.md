@@ -9,6 +9,10 @@
 
   - adjustment made to item price in owner order creator for an item. brought more into centerline with other items at smaller screen sizes.
 
+  - adjustments made to item selector for smaller screen sizes.
+
+  - altered border at bottom of items in owner order creator
+
 ---
 
 -- 29 Oct 2025 --
