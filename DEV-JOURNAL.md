@@ -15,6 +15,8 @@
 
   - add item to order button disabled if no item selected or item has selectable sizes but size has not yet been selected.
 
+  - responsive styling changes for customer cart items. Functionality for customer cart appears to be operating as desired.
+
 ---
 
 -- 29 Oct 2025 --
