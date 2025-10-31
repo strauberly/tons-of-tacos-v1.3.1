@@ -17,6 +17,8 @@
 
   - responsive styling changes for customer cart items. Functionality for customer cart appears to be operating as desired.
 
+  - close button in owner order creator adjusted to only occupy the necessary room.
+
 ---
 
 -- 29 Oct 2025 --
