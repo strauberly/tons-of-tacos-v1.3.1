@@ -151,7 +151,7 @@ export default function CartItem(props: {
       // return adjPrice;
     }
     setNewPrice(calcPrice());
-  }, [newSize, props.itemPrice, props.itemQuantity, quantity]);
+  }, [newSize, props.itemPrice, props.itemQuantity, props.size, quantity]);
 
   return (
     <li className={ownerOrder ? classes.ownerOrderItem : classes.item}>

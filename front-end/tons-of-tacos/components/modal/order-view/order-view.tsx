@@ -87,6 +87,13 @@ export default function OrderView() {
     <div className={classes.orderView}>
       <div className={classes.heightControl}>
         <Card expand={true}>
+          {/* <p>{`${orderToView.ready}`}</p> */}
+          {orderToView.ready !== "no" && (
+            // {orderRef.current.ready !== "no" && (
+            <h3 className={classes.editWarning}>
+              Order has been prepared and can not be edited!
+            </h3>
+          )}
           <div className={classes.orderDetails}>
             <div className={classes.uneditableDetails}>
               <p>Order Id:</p>
@@ -126,13 +133,6 @@ export default function OrderView() {
           <button className={classes.close} onClick={() => setViewOrder(false)}>
             Close
           </button>
-          {/* <p>{`${orderToView.ready}`}</p> */}
-          {orderToView.ready !== "no" && (
-            // {orderRef.current.ready !== "no" && (
-            <h3 className={classes.editWarning}>
-              Order has been prepared and can not be edited!
-            </h3>
-          )}
         </Card>
       </div>
     </div>
