@@ -212,6 +212,7 @@ export default function CartItemCopy(props: {
               setNewSize(oldSize.current),
               setEdited(false),
               setCanEdit(false),
+              setShowSizeError(false),
             ]}
           >
             Cancel

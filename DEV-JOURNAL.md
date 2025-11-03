@@ -2,6 +2,18 @@
 
 ---
 
+-- 3 Nov 2025 --
+
+- In order view, moved ordered prepared alert to top of card to improve effectiveness.
+
+- Order item in order view altered to match the design of cart items in terms of updating item price based on quantity and size.
+  - cancel reverts price to what it was as well as quantity.
+- size selector only available when item has selectable size.
+- Size selector now correctly only in caution color if size invalid.
+- Size error removed when canceling editing an item.
+
+---
+
 -- 30 Oct 2025 --
 
 - Restyle of item adder let to a refactor

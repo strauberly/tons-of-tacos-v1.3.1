@@ -20,7 +20,7 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
   //   orderItem.orderItem.quantity
   // );
 
-  const newQuantity = useRef<number>(orderItem.orderItem.quantity);
+  const [edited, setEdited] = useState<boolean>(false);
 
   const [newSize, setNewSize] = useState<string>(orderItem.orderItem.size);
 
@@ -28,6 +28,11 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
   const sizeError: string =
     "Enter 'S' for small, 'M' for medium or 'L' for large.";
   const [newPrice, setNewPrice] = useState<number>(orderItem.orderItem.total);
+  const newQuantity = useRef<number>(orderItem.orderItem.quantity);
+  const price = useRef<number>(orderItem.orderItem.total);
+
+  const basePrice =
+    Number(orderItem.orderItem.total) / orderItem.orderItem.quantity;
 
   function checkQuantity(number: number) {
     console.log(number);
@@ -69,128 +74,220 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
       orderItem.orderItem.size.toUpperCase() !== "M" &&
       orderItem.orderItem.size.toUpperCase() !== "L"
     ) {
-      return "NA ";
+      return "na";
     } else {
       return orderItem.orderItem.size.toUpperCase();
     }
   }
 
-  function calcSurcharge(size: string) {
-    let surcharge: number = 0.0;
-    if (size === "M") {
-      surcharge = 0.5;
-    } else if (size === "L") {
-      surcharge = 1.0;
+  // function calcSurcharge(size: string) {
+  //   let surcharge: number = 0.0;
+  //   if (size === "M") {
+  //     surcharge = 0.5;
+  //   } else if (size === "L") {
+  //     surcharge = 1.0;
+  //   }
+  //   return surcharge;
+  // }
+
+  function updatePrice() {
+    let adjPrice = 0;
+    let surcharge = 0;
+    let oldSurcharge = 0;
+
+    // if (props.size === "M") {
+    if (orderItem.orderItem.size === "M") {
+      oldSurcharge = 0.5;
+      // } else if (props.size === "L") {
+    } else if (orderItem.orderItem.size === "L") {
+      oldSurcharge = 1;
     }
-    return surcharge;
+
+    if (newSize === "M") {
+      surcharge = 0.5;
+    } else if (newSize === "L") {
+      surcharge = 1;
+    }
+
+    adjPrice = (basePrice - oldSurcharge + surcharge) * newQuantity.current;
+
+    return adjPrice;
   }
 
-  const price = useRef<number>(orderItem.orderItem.total);
-
   const decrement = () => {
-    // if (newQuantity.current <= 1) {
-    //   newQuantity.current = 1;
-    //   setQuantity(newQuantity.current);
-    //   // setNewQuantity(1);
-    // }
-    // // setNewQuantity(newQuantity - 1);
-    if (newQuantity.current < 2) {
+    setQuantity((newQuantity.current -= 1));
+    if (quantity < 2) {
       newQuantity.current = 1;
-      // setNewQuantity(1);
-    } else {
-      newQuantity.current = newQuantity.current - 1;
       setQuantity(newQuantity.current);
-      console.log(newQuantity.current);
-    }
-
-    price.current = calcPrice(
-      orderItem.orderItem.total / orderItem.orderItem.quantity -
-        calcSurcharge(orderItem.orderItem.size),
-      newSize,
-      newQuantity.current
-    );
-    // );
-    // price.current = newPrice;
-    if (newQuantity.current < 2) {
-      newQuantity.current = 1;
-      // setNewQuantity(1);
+      // setEdited(true);
+    } else {
+      setNewPrice(updatePrice());
     }
   };
+
+  // const decrement = () => {
+  //   // if (newQuantity.current <= 1) {
+  //   //   newQuantity.current = 1;
+  //   //   setQuantity(newQuantity.current);
+  //   //   // setNewQuantity(1);
+  //   // }
+  //   // // setNewQuantity(newQuantity - 1);
+  //   if (newQuantity.current < 2) {
+  //     newQuantity.current = 1;
+  //     // setNewQuantity(1);
+  //   } else {
+  //     newQuantity.current = newQuantity.current - 1;
+  //     setQuantity(newQuantity.current);
+  //     console.log(newQuantity.current);
+  //   }
+
+  //   price.current = calcPrice(
+  //     orderItem.orderItem.total / orderItem.orderItem.quantity -
+  //       calcSurcharge(orderItem.orderItem.size),
+  //     newSize,
+  //     newQuantity.current
+  //   );
+  //   // );
+  //   // price.current = newPrice;
+  //   if (newQuantity.current < 2) {
+  //     newQuantity.current = 1;
+  //     // setNewQuantity(1);
+  //   }
+  // };
 
   const increment = () => {
-    if (newQuantity.current > 9) {
-      // setNewQuantity(10);
-      newQuantity.current = 10;
-    } else {
-      // setNewQuantity(newQuantity + 1);
-      newQuantity.current = newQuantity.current + 1;
-      setQuantity(newQuantity.current);
-      console.log(quantity);
-      // setNewPrice(
-      price.current = calcPrice(
-        orderItem.orderItem.total / orderItem.orderItem.quantity -
-          calcSurcharge(orderItem.orderItem.size),
-        newSize,
-        newQuantity.current
-      );
-    }
-
-    // );
-    // price.current = newPrice;
-    // if (newQuantity.current >= 10) {
-    //   // setNewQuantity(10);
-    //   newQuantity.current = 10;
+    setQuantity((newQuantity.current += 1));
+    // if (quantity >= 10 && !loggedIn) {
+    //   setModal(
+    //     "The limit for this item is 10. If you need more please give us a call so we can try to accommodate your order. Thanks!"
+    //   );
+    //   setShowModal(true);
+    //   setQuantity(10);
+    // } else if (quantity + cartQuantity > 30 && !loggedIn) {
+    //   setModal(
+    //     "Your order has grown to a fair size. The current maximum is 30 items. Please contact us before adding anything else. \n\nThis will ensure we can make your order happen today. You can also remove items from your cart. Thank you!"
+    //   );
+    //   setShowModal(true);
+    // } else {
     // }
+    setEdited(true);
+    setNewPrice(updatePrice());
+    // setNewPrice(price.current);
   };
 
+  // const increment = () => {
+  //   if (newQuantity.current > 9) {
+  //     // setNewQuantity(10);
+  //     newQuantity.current = 10;
+  //   } else {
+  //     // setNewQuantity(newQuantity + 1);
+  //     newQuantity.current = newQuantity.current + 1;
+  //     setQuantity(newQuantity.current);
+  //     console.log(quantity);
+  //     // setNewPrice(
+  //     price.current = calcPrice(
+  //       orderItem.orderItem.total / orderItem.orderItem.quantity -
+  //         calcSurcharge(orderItem.orderItem.size),
+  //       newSize,
+  //       newQuantity.current
+  //     );
+  //   }
+
+  // );
+  // price.current = newPrice;
+  // if (newQuantity.current >= 10) {
+  //   // setNewQuantity(10);
+  //   newQuantity.current = 10;
+  // }
+  // };
+
+  // useEffect(() => {
+  //   // function ChangedPrice() {
+  //   //   // let itemPrice;
+
+  //   //   if (orderChanged === false) {
+  //   //     return setNewPrice(orderItem.orderItem.total);
+  //   //   } else {
+  //   //     return setNewPrice(
+  //   //       calcPrice(
+  //   //         orderItem.orderItem.total / orderItem.orderItem.quantity -
+  //   //           calcSurcharge(orderItem.orderItem.size),
+  //   //         newSize,
+  //   //         newQuantity
+  //   //       )
+  //   //     );
+  //   //   }
+  //   // }
+
+  //   // ChangedPrice();
+  //   // async function Reset() {
+  //   //   // setOrderToView(await GetOrderByID(orderToView.orderUid, login.token));
+  //   //   // if (orderChanged) {
+  //   //   setNewPrice(
+  //   //     calcPrice(
+  //   //       orderItem.orderItem.total / orderItem.orderItem.quantity -
+  //   //         calcSurcharge(orderItem.orderItem.size),
+  //   //       newSize,
+  //   //       newQuantity
+  //   //     )
+  //   //   );
+  //   // }
+  //   // }
+  //   if (orderToView.ready !== "no") {
+  //     setCanEdit(false);
+  //   }
+  //   // Reset();
+  // }, [
+  //   canEdit,
+  //   login.token,
+  //   newQuantity,
+  //   newSize,
+  //   orderChanged,
+  //   orderItem.orderItem.quantity,
+  //   orderItem.orderItem.size,
+  //   orderItem.orderItem.total,
+  //   orderToView.orderUid,
+  //   orderToView.ready,
+  //   setOrderToView,
+  // ]);
+
   useEffect(() => {
-    // function ChangedPrice() {
-    //   // let itemPrice;
+    // setCanEdit(canEdit);
 
-    //   if (orderChanged === false) {
-    //     return setNewPrice(orderItem.orderItem.total);
-    //   } else {
-    //     return setNewPrice(
-    //       calcPrice(
-    //         orderItem.orderItem.total / orderItem.orderItem.quantity -
-    //           calcSurcharge(orderItem.orderItem.size),
-    //         newSize,
-    //         newQuantity
-    //       )
-    //     );
-    //   }
-    // }
+    console.log("canEdit: " + canEdit);
+    function updatePrice() {
+      let adjPrice = 0;
+      let surcharge = 0;
+      let oldSurcharge = 0;
 
-    // ChangedPrice();
-    // async function Reset() {
-    //   // setOrderToView(await GetOrderByID(orderToView.orderUid, login.token));
-    //   // if (orderChanged) {
-    //   setNewPrice(
-    //     calcPrice(
-    //       orderItem.orderItem.total / orderItem.orderItem.quantity -
-    //         calcSurcharge(orderItem.orderItem.size),
-    //       newSize,
-    //       newQuantity
-    //     )
-    //   );
-    // }
-    // }
-    if (orderToView.ready !== "no") {
-      setCanEdit(false);
+      if (orderItem.orderItem.size === "M") {
+        oldSurcharge = 0.5;
+      } else if (orderItem.orderItem.size === "L") {
+        oldSurcharge = 1;
+      }
+
+      if (newSize === "M") {
+        surcharge = 0.5;
+      } else if (newSize === "L") {
+        surcharge = 1;
+      }
+
+      adjPrice = (basePrice - oldSurcharge + surcharge) * newQuantity.current;
+
+      return adjPrice;
     }
-    // Reset();
+    if (edited) {
+      setNewPrice(updatePrice());
+    } else {
+      setNewPrice(Number(orderItem.orderItem.total));
+    }
   }, [
-    canEdit,
-    login.token,
-    newQuantity,
     newSize,
-    orderChanged,
-    orderItem.orderItem.quantity,
+    basePrice,
+    canEdit,
     orderItem.orderItem.size,
     orderItem.orderItem.total,
-    orderToView.orderUid,
-    orderToView.ready,
-    setOrderToView,
+    edited,
   ]);
 
   return (
@@ -224,6 +321,17 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
               </button>
             </div>
 
+            {!canEdit && orderItem.orderItem.size === "na" && (
+              <p className={classes.size}> {orderItem.orderItem.size}</p>
+            )}
+            {!canEdit && orderItem.orderItem.size !== "na" && (
+              <p className={classes.size}>{orderItem.orderItem.size}</p>
+            )}
+            {/* {!canEdit && } */}
+            {canEdit === true && orderItem.orderItem.size === "na" && (
+              <p className={classes.size}>{orderItem.orderItem.size}</p>
+            )}
+
             <div>
               {newSize.toUpperCase() !== "NA" && (
                 <SizeSelector
@@ -239,8 +347,8 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
         {!canEdit && <p>{`${sizeDisplay()}`}</p>}
         {/* {!canEdit && <p>{`${sizeDisplay()}`}</p>} */}
         {/* <p> {`$${changedPrice()}`}</p> */}
-        <p> {`$${price.current.toFixed(2)}`}</p>
-        {/* <p> {`$${newPrice.toFixed(2)}`}</p> */}
+        {/* <p> {`$${price.current.toFixed(2)}`}</p> */}
+        <p> {`$${newPrice.toFixed(2)}`}</p>
         {/* wrap and style */}
         <div className={classes.alter}>
           {!canEdit && (
@@ -252,7 +360,8 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
               onClick={() => [
                 setCanEdit(!canEdit),
                 setOrderItem(orderItem.orderItem),
-                setNewPrice(orderItem.orderItem.total),
+                setNewPrice(newPrice),
+                // setNewPrice(orderItem.orderItem.total),
                 // setQuantity(newQuantity),
               ]}
             >
@@ -281,7 +390,12 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
           <button
             onClick={() => [
               setCanEdit(!canEdit),
-              (price.current = orderItem.orderItem.total),
+              (newQuantity.current = orderItem.orderItem.quantity),
+              setQuantity(newQuantity.current),
+              setNewPrice(newPrice),
+              setShowSizeError(false),
+              // (price.current = orderItem.orderItem.total),
+              // setNewPrice(price.current),
             ]}
           >
             Cancel

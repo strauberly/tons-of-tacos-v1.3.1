@@ -23,7 +23,7 @@ export default function SizeSelector(props: {
   //   const sizeError: string =
   //     "Enter 'S' for small, 'M' for medium or 'L' for large.";
 
-  const [sizeValid, setSizeValid] = useState<boolean>(false);
+  const [sizeValid, setSizeValid] = useState<boolean>();
 
   function checkSize(event: React.ChangeEvent<HTMLInputElement>) {
     sizeRef.current = event.currentTarget.value.toUpperCase();

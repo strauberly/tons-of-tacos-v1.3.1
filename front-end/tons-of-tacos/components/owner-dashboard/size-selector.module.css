@@ -5,12 +5,13 @@
 
 .size input,
 .quantity textarea {
-  padding: 0.4vw;
+  padding: 0.3vw;
   background-color: transparent;
   color: var(--user-selected-color);
   text-align: center;
   width: 6ch;
-  font-size: clamp(1rem, 1rem, 1rem);
+
+  font-size: clamp(0.75rem, 0.75rem, 0.75rem);
   /* justify-self: center; */
   /* margin-left: 6rem; */
 }
