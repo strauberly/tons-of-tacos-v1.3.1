@@ -3,11 +3,12 @@ import { useModalContext } from "@/context/modal-context";
 import Card from "../../ui/cards/card";
 import OrderItem from "../../owner-dashboard/order-item";
 import { useDisplayContext } from "@/context/display-context";
-import AddOrderItem from "../../owner-dashboard/add-order-item";
+// import AddOrderItem from "../../owner-dashboard/add-order-item";
 import EditableDetails from "./editable-details";
 import { useEffect, useRef } from "react";
 import { GetOrderByID } from "@/lib/owners-tools/owners-tools";
 import { useOwnerContext } from "@/context/owner-context";
+import AddOrderItem from "../../ui/selectors/add-to-order/add-order-item";
 
 export default function OrderView() {
   const { orderToView, setOrderToView } = useModalContext();

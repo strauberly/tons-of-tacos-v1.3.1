@@ -1,15 +1,19 @@
 "use client";
 
-import MenuItemSelector from "./menu-item-selector";
+// import MenuItemSelector from "./menu-item-selector";
+// import MenuItemSelector from "../ui/selectors/menu-item-selector/menu-item-selector";
+import MenuItemSelector from "../menu-item-selector/menu-item-selector";
 import { useEffect, useRef, useState } from "react";
-import ArrowIcon from "../menu/menu-items/quantity-selector/arrow-icon";
+// import ArrowIcon from "../quantity-selector/quantity-selector";
+import ArrowIcon from "../quantity-selector/arrow-icon";
 import { useModalContext } from "@/context/modal-context";
-import AddToOrderButton from "../ui/buttons/order-edit/add-to-order-button";
+// import AddToOrderButton from "../ui/buttons/order-edit/add-to-order-button";
+import AddToOrderButton from "../../buttons/order-edit/add-to-order-button";
 import { useOrdersContext } from "@/context/orders-context";
 import { useOwnerContext } from "@/context/owner-context";
 import classes from "./add-order-item.module.css";
 
-export default function AddOrderItem() {
+export default function AddOrderItemCopy() {
   const { orderToView, setOrderToView } = useModalContext();
   const { ownerOrder } = useOwnerContext();
   const [itemSelector, setItemSelector] = useState<boolean>(false);
@@ -132,7 +136,7 @@ export default function AddOrderItem() {
   return (
     <>
       <div className={classes.addItemToOrder}>
-        <ul>
+        <div className={classes.titles}>
           <button
             // disabled={orderToView.ready !== "no" || orderToView.closed !== "no"}
             onClick={() => setItemSelector(!itemSelector)}
@@ -142,8 +146,8 @@ export default function AddOrderItem() {
           <h3>Quantity</h3>
           <h3>Size </h3>
           <h3>Total</h3>
-        </ul>
-        <ul>
+        </div>
+        <div className={classes.values}>
           <p>{item?.itemName}</p>
           <div className={classes.quantity}>
             <button
@@ -183,38 +187,45 @@ export default function AddOrderItem() {
                 onChange={checkSize}
               />
             )}
+            {`${item.itemSize}` === "na" && <p>{item.itemSize}</p>}
           </div>
+
           {showSizeError === true && (
             <p className={classes.sizeWarning}>{sizeError}</p>
           )}
 
           <p className={classes.total}>${price.toFixed(2)}</p>
-        </ul>
-        {readyToAdd && (
-          <AddToOrderButton
-            orderUid={orderToView.orderUid}
-            menuItem={item}
-            quantity={quantity}
-            customerName={orderToView.name}
-            size={size}
-            price={price.toFixed(2)}
-            setItemName={setItemName}
+        </div>
+      </div>
+      <div className={classes.tail}>
+        <div className={classes.addItemButton}>
+          {readyToAdd && (
+            <AddToOrderButton
+              orderUid={orderToView.orderUid}
+              menuItem={item}
+              quantity={quantity}
+              customerName={orderToView.name}
+              size={size}
+              price={price.toFixed(2)}
+              setItemName={setItemName}
+              setReadyToAdd={setReadyToAdd}
+              reset={reset}
+            />
+          )}
+        </div>
+
+        {itemSelector && (
+          <MenuItemSelector
+            setItemName={itemNameSetter}
+            setItem={itemSetter}
+            itemName={itemName}
+            setItemSelector={setItemSelector}
             setReadyToAdd={setReadyToAdd}
-            reset={reset}
+            setPrice={setPrice}
+            setSize={setSize}
           />
         )}
       </div>
-      {itemSelector && (
-        <MenuItemSelector
-          setItemName={itemNameSetter}
-          setItem={itemSetter}
-          itemName={itemName}
-          setItemSelector={setItemSelector}
-          setReadyToAdd={setReadyToAdd}
-          setPrice={setPrice}
-          setSize={setSize}
-        />
-      )}
     </>
   );
 }

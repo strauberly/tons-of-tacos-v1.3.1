@@ -1,4 +1,4 @@
-import SearchBar from "@/components/ui/buttons/search/search-bar";
+import SearchBar from "./search-bar";
 import { useDisplayContext } from "@/context/display-context";
 import { CreateOwnerOrder } from "@/lib/owners-tools/owners-tools-client";
 import { useOwnerContext } from "@/context/owner-context";

@@ -2,6 +2,18 @@
 
 ---
 
+-- 4 Nov 2025 --
+
+- Beginning refactor for commonly used or duplicate components to bring everything onto same plane, make reusable and eliminate files and code. Wish me luck.
+  - Created folders in UI package for size, quantity and menuitem selectors in a folder labeled selectors.
+  - Adding an item from the menu item selector now correctly resets the menu item to a void/null state ready for next selection.
+  - Menu item selector functioning as desired after being relocated so far.
+  - Add to order moved into selectors.
+  - Quantity selector working so far. Will continue testing.
+  - Size selector appears to be working in Order edit and create new order.
+
+---
+
 -- 3 Nov 2025 --
 
 - In order view, moved ordered prepared alert to top of card to improve effectiveness.
@@ -11,6 +23,7 @@
 - size selector only available when item has selectable size.
 - Size selector now correctly only in caution color if size invalid.
 - Size error removed when canceling editing an item.
+- Search Bar moved out of buttons into the action bar package under owner dashboard.
 
 ---
 
