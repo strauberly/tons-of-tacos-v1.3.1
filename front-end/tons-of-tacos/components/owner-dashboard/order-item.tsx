@@ -1,7 +1,8 @@
 import classes from "./order-item.module.css";
 import { useEffect, useRef, useState } from "react";
 import RemoveFromOrderButton from "../ui/buttons/order-edit/remove-from-order-button";
-import ArrowIcon from "../menu/menu-items/quantity-selector/arrow-icon";
+// import ArrowIcon from "../menu/menu-items/quantity-selector/arrow-icon";
+import ArrowIcon from "../ui/selectors/quantity-selector/arrow-icon";
 import UpdateOrderItemButton from "../ui/buttons/order-edit/update-order-item-button";
 // import SizeSelector from "./size-selector";
 import SizeSelector from "../ui/selectors/size-selector/size-selector";

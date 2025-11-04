@@ -5,12 +5,19 @@
 -- 4 Nov 2025 --
 
 - Beginning refactor for commonly used or duplicate components to bring everything onto same plane, make reusable and eliminate files and code. Wish me luck.
+
   - Created folders in UI package for size, quantity and menuitem selectors in a folder labeled selectors.
   - Adding an item from the menu item selector now correctly resets the menu item to a void/null state ready for next selection.
   - Menu item selector functioning as desired after being relocated so far.
   - Add to order moved into selectors.
   - Quantity selector working so far. Will continue testing.
   - Size selector appears to be working in Order edit and create new order.
+  - Redundant file for cart item removed and replaced. Replacement makes use of centralized selectors in the ui package.
+  - Cart items in customer cart responding positively so far.
+
+- Scale property added to quantity selector for setting the size of the arrow selectors in quantity selector according to the needs of the component.
+
+- Starting to find bugs created through refactor, will address as noticed.
 
 ---
 

@@ -1,9 +1,11 @@
-import classes from "@/components/menu/menu-items/quantity-selector/quantity-selector.module.css";
+import classes from "./quantity-selector.module.css";
+// import classes from "@/components/menu/menu-items/quantity-selector/quantity-selector.module.css";
 import ArrowIcon from "./arrow-icon";
 import { useOwnerContext } from "@/context/owner-context";
 
 export default function QuantitySelector(props: {
   value: number;
+  scale: string;
   increment: () => void;
   decrement: () => void;
   setEdited: (edited: boolean) => void;
@@ -16,7 +18,7 @@ export default function QuantitySelector(props: {
         className={`${classes.decrement}`}
         onClick={() => [props.decrement(), props.setEdited(true)]}
       >
-        <ArrowIcon scale={"scale(.75)"} />
+        <ArrowIcon scale={props.scale} />
       </button>
       <input
         type="number"
@@ -29,7 +31,7 @@ export default function QuantitySelector(props: {
         className={`${classes.increment}`}
         onClick={() => [props.increment(), props.setEdited(true)]}
       >
-        <ArrowIcon scale={"scale(.75)"} />
+        <ArrowIcon scale={props.scale} />
       </button>
     </div>
   );
