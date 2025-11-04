@@ -1,4 +1,4 @@
-import classes from "@/components/menu/menu-items/quantity-selector/quantity-selector.module.css";
+import classes from "./quantity-selector.module.css";
 
 export default function ArrowIcon(props: { scale: string }) {
   return (

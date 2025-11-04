@@ -1,7 +1,8 @@
 import Card from "@/components/ui/cards/card";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import QuantitySelector from "./quantity-selector/quantity-selector";
+// import QuantitySelector from "./quantity-selector/quantity-selector";
+import QuantitySelector from "../../ui/selectors/quantity-selector/quantity-selector";
 import MoreIcon from "@/components/ui/icons/more-icon";
 import { useSelectedSizeContext } from "@/context/size-context";
 import { useDisplayContext } from "@/context/display-context";
@@ -25,7 +26,7 @@ export default function MenuItem(props: {
   const { menuItemId } = useMenuItemIdContext();
   const [expand, setExpand] = useState(false);
   const [price, setPrice] = useState("");
-
+  const [edited, setEdited] = useState<boolean>(false);
   const [sizeAvailable, setSizeAvailable] = useState(false);
   const { selectedSize, setSelectedSize } = useSelectedSizeContext();
 
@@ -131,6 +132,8 @@ export default function MenuItem(props: {
           value={quantity}
           increment={increment}
           decrement={decrement}
+          setEdited={setEdited}
+          scale="scale(1)"
         />
         <p className={classes.price}>${price}</p>
 
