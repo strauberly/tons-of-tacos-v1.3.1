@@ -1,7 +1,7 @@
 import { useDisplayContext } from "@/context/display-context";
 import { useModalContext } from "@/context/modal-context";
 import { useEditOrderContext } from "@/context/edit-order-context";
-import classes from "../../../owner-dashboard/add-order-item.module.css";
+import classes from "../../selectors/add-to-order/add-order-item.module.css";
 import { useOwnerContext } from "@/context/owner-context";
 import {
   AddToOwnerOrder,
@@ -177,7 +177,7 @@ export default function AddToOrderButton(props: {
     }
     Check();
     orderCheck();
-  }, []);
+  });
 
   return (
     <button
@@ -197,6 +197,7 @@ export default function AddToOrderButton(props: {
         // setOrderToView(await GetOrderByID(orderToView.orderUid, login.token));
         orderCheck();
         checkOrderContext();
+        props.reset();
 
         if (!ownerOrder) {
           orderReqRes.current = await GetOrderByID(
@@ -206,6 +207,7 @@ export default function AddToOrderButton(props: {
           // orderReqRes.current = await GetOrderByID(props.orderUid, login.token);
           // if ((orderReqRes.current.status = 200)) {
           setOrderToView(orderReqRes.current.body as Order);
+          props.reset();
 
           // }
           // setOrderToView(await GetOrderByID(props.orderUid, login.token));

@@ -1,7 +1,7 @@
 import Card from "@/components/ui/cards/card";
 import { useDisplayContext } from "@/context/display-context";
 import CustomerInfoForm from "@/components/ui/forms/customer-info-form";
-import AddOrderItem from "@/components/owner-dashboard/add-order-item";
+import AddOrderItem from "@/components/ui/selectors/add-to-order/add-order-item";
 import CartItems from "@/components/cart/cart-item-list";
 import {
   GetOwnerOrder,
@@ -12,7 +12,7 @@ import { useOwnerContext } from "@/context/owner-context";
 import { CalcOrderTotal } from "@/lib/general/multi-use";
 import { useCartContext } from "@/context/cart-context";
 import classes from "./owner-order-creator.module.css";
-import AddOrderItemCopy from "@/components/owner-dashboard/add-order-item-copy";
+// import AddOrderItemCopy from "@/components/owner-dashboard/add-order-item-copy";
 
 export default function OwnerOrderCreator() {
   const { setShowOwnerOrderCreator } = useDisplayContext();
@@ -37,7 +37,7 @@ export default function OwnerOrderCreator() {
     <div className={classes.ownerOrderCreator}>
       <Card expand={true}>
         <div className={classes.elements}>
-          <AddOrderItemCopy />
+          <AddOrderItem />
           <div>
             <h3 className={classes.itemsHeader}>Order Items:</h3>
             <CartItems />
