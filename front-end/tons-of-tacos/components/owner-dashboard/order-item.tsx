@@ -11,6 +11,7 @@ import { useEditOrderContext } from "@/context/edit-order-context";
 import { useModalContext } from "@/context/modal-context";
 import { GetOrderByID } from "@/lib/owners-tools/owners-tools";
 import { useOwnerContext } from "@/context/owner-context";
+import QuantitySelector from "../ui/selectors/quantity-selector/quantity-selector";
 
 export default function OrderItem(orderItem: { orderItem: OrderItem }) {
   const { setOrderItem, setQuantity, quantity, orderChanged } =
@@ -298,7 +299,14 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
         <p>{`${orderItem.orderItem.itemName}`}</p>
         {canEdit && (
           <>
-            <div className={classes.quantity}>
+            <QuantitySelector
+              value={quantity}
+              increment={increment}
+              decrement={decrement}
+              setEdited={setEdited}
+              scale="scale(.8)"
+            />
+            {/* <div className={classes.quantity}>
               <button
                 className={`${classes.decrement}`}
                 onClick={() => decrement()}
@@ -321,7 +329,7 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
               >
                 <ArrowIcon scale={"scale(.75)"} />
               </button>
-            </div>
+            </div> */}
 
             {!canEdit && orderItem.orderItem.size === "na" && (
               <p className={classes.size}> {orderItem.orderItem.size}</p>
@@ -334,15 +342,13 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
               <p className={classes.size}>{orderItem.orderItem.size}</p>
             )}
 
-            <div>
-              {newSize.toUpperCase() !== "NA" && (
-                <SizeSelector
-                  itemSize={orderItem.orderItem.size}
-                  setShowSizeError={setShowSizeError}
-                  setNewSize={setNewSize}
-                />
-              )}
-            </div>
+            {newSize.toUpperCase() !== "NA" && canEdit && (
+              <SizeSelector
+                itemSize={orderItem.orderItem.size}
+                setShowSizeError={setShowSizeError}
+                setNewSize={setNewSize}
+              />
+            )}
           </>
         )}
         {!canEdit && <p>{`${orderItem.orderItem.quantity}`}</p>}
