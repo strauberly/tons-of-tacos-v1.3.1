@@ -12,6 +12,7 @@ import AddToOrderButton from "../../buttons/order-edit/add-to-order-button";
 import { useOrdersContext } from "@/context/orders-context";
 import { useOwnerContext } from "@/context/owner-context";
 import classes from "./add-order-item.module.css";
+import QuantitySelector from "../quantity-selector/quantity-selector";
 
 export default function AddOrderItemCopy() {
   const { orderToView, setOrderToView } = useModalContext();
@@ -27,7 +28,7 @@ export default function AddOrderItemCopy() {
   const [showSizeError, setShowSizeError] = useState<boolean>(false);
 
   const [sizeValid, setSizeValid] = useState<boolean>(false);
-
+  const [edited, setEdited] = useState<boolean>(false);
   console.log(orderToView.name);
 
   const sizeRef = useRef<string>(size);
@@ -149,7 +150,14 @@ export default function AddOrderItemCopy() {
         </div>
         <div className={classes.values}>
           <p>{item?.itemName}</p>
-          <div className={classes.quantity}>
+          <QuantitySelector
+            value={quantity}
+            increment={increment}
+            decrement={decrement}
+            setEdited={setEdited}
+            scale="scale(.75)"
+          />
+          {/* <div className={classes.quantity}>
             <button
               className={`${classes.decrement}`}
               onClick={() => decrement()}
@@ -171,7 +179,7 @@ export default function AddOrderItemCopy() {
             >
               <ArrowIcon scale={"scale(.75)"} />
             </button>
-          </div>
+          </div> */}
 
           <div className={classes.size}>
             {`${item.itemSize}` === "a" && (

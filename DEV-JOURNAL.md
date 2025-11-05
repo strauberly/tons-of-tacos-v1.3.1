@@ -2,6 +2,13 @@
 
 ---
 
+-- 5 Nov 2025 --
+
+- Universal quantity selector appears to be successfully incorporated into order item in the order view component. Slight alterations to styling.
+- Universal quantity selector incorporated in add order item component.
+
+---
+
 -- 4 Nov 2025 --
 
 - Beginning refactor for commonly used or duplicate components to bring everything onto same plane, make reusable and eliminate files and code. Wish me luck.
