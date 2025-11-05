@@ -6,6 +6,7 @@
 
 - Universal quantity selector appears to be successfully incorporated into order item in the order view component. Slight alterations to styling.
 - Universal quantity selector incorporated in add order item component.
+- Order item price was not correctly resetting according to original size when clicking cancel button. This has been rectified.
 
 ---
 

@@ -400,6 +400,7 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
               setCanEdit(!canEdit),
               (newQuantity.current = orderItem.orderItem.quantity),
               setQuantity(newQuantity.current),
+              setNewSize(orderItem.orderItem.size),
               setNewPrice(newPrice),
               setShowSizeError(false),
               // (price.current = orderItem.orderItem.total),
