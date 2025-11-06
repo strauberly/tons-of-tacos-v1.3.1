@@ -14,9 +14,8 @@ import { useOwnerContext } from "@/context/owner-context";
 import classes from "./add-order-item.module.css";
 import QuantitySelector from "../quantity-selector/quantity-selector";
 // import MenuItemSelector from "../menu-item-selector/menu-item-selector-copy";
-import AddToOrderButtonCopy from "../../buttons/order-edit/add-to-order-button";
 
-export default function AddOrderItemCopy() {
+export default function AddOrderItem() {
   const { orderToView, setOrderToView } = useModalContext();
   const { ownerOrder } = useOwnerContext();
   const [itemSelector, setItemSelector] = useState<boolean>(false);

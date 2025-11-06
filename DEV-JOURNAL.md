@@ -6,6 +6,8 @@
 
 - Appear to have rectified an issue in add-to-order-button. Where viewing an order and then creating an owner order was leading to cross contamination of orders. Issue seems to have stemmed from the use effect in the component preventing the context from being properly established when referring to an order or cart.
 
+- Order confirmation moved out of cart into modals.
+
 ---
 
 -- 5 Nov 2025 --
