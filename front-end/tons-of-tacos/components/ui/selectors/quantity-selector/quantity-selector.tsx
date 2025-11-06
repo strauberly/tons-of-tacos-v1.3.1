@@ -6,6 +6,7 @@ import { useOwnerContext } from "@/context/owner-context";
 export default function QuantitySelector(props: {
   value: number;
   scale: string;
+  oldValue: number;
   increment: () => void;
   decrement: () => void;
   setEdited: (edited: boolean) => void;
@@ -26,6 +27,7 @@ export default function QuantitySelector(props: {
         max={`${props.value}`}
         disabled={true}
         value={`${props.value}`}
+        placeholder={`${props.oldValue}`}
       />
       <button
         className={`${classes.increment}`}

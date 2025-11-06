@@ -154,6 +154,7 @@ export default function CartItem(props: {
         {canEdit && (
           <div className={classes.quantity}>
             <QuantitySelector
+              // value={quantity}
               value={quantity}
               increment={increment}
               decrement={decrement}
