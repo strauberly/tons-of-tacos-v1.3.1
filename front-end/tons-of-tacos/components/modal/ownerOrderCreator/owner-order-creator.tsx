@@ -23,10 +23,10 @@ export default function OwnerOrderCreator() {
 
   const total = useRef<string>("");
 
+  // setCart(GetOwnerOrder());
   total.current = CalcOrderTotal(loggedIn);
   useEffect(() => {
     // change to set a cart
-    setCart(GetOwnerOrder());
     async function GetTotal() {
       total.current = orderTotal;
     }

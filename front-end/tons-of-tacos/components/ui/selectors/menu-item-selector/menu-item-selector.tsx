@@ -5,12 +5,11 @@ import classes from "./menu-item-selector.module.css";
 export default function MenuItemSelector(props: {
   setItemName: (item: string) => void;
   setItem: (item: MenuItem) => void;
+  itemName: string;
   setItemSelector: (itemSelector: boolean) => void;
   setReadyToAdd: (readyToAdd: boolean) => void;
   setPrice: (price: number) => void;
   setSize: (size: string) => void;
-
-  itemName: string;
 }) {
   const [tacos, setTacos] = useState<string[]>([]);
   const [sides, setSides] = useState<string[]>([]);
@@ -46,15 +45,16 @@ export default function MenuItemSelector(props: {
     const drink = menuItems.current.drinks.find(
       (item: MenuItem) => item.itemName === `${name}`
     );
-    if (taco != undefined) {
+    if (taco !== undefined) {
       menuItem.current = taco;
-    } else if (side != undefined) {
+    } else if (side !== undefined) {
       menuItem.current = side;
-    } else if (topping != undefined) {
+    } else if (topping !== undefined) {
       menuItem.current = topping;
-    } else if (drink != undefined) {
+    } else if (drink !== undefined) {
       menuItem.current = drink;
     }
+    console.log(menuItem.current);
     return menuItem.current;
   }
 
@@ -147,6 +147,9 @@ export default function MenuItemSelector(props: {
               onClick={() => [
                 props.setItemName(drinkName),
                 props.setItem(findItem(drinkName)),
+                console.log(findItem(drinkName)),
+                console.log(drinkName),
+
                 props.setReadyToAdd(true),
                 props.setItemSelector(false),
                 props.setPrice(menuItem.current.unitPrice),

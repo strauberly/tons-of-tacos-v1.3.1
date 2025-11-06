@@ -13,6 +13,8 @@ import { useOrdersContext } from "@/context/orders-context";
 import { useOwnerContext } from "@/context/owner-context";
 import classes from "./add-order-item.module.css";
 import QuantitySelector from "../quantity-selector/quantity-selector";
+// import MenuItemSelector from "../menu-item-selector/menu-item-selector-copy";
+import AddToOrderButtonCopy from "../../buttons/order-edit/add-to-order-button";
 
 export default function AddOrderItemCopy() {
   const { orderToView, setOrderToView } = useModalContext();
@@ -223,6 +225,15 @@ export default function AddOrderItemCopy() {
         </div>
 
         {itemSelector && (
+          // <MenuItemSelector
+          //   setItemName={itemNameSetter}
+          //   setItem={itemSetter}
+          //   itemName={itemName}
+          //   setItemSelector={setItemSelector}
+          //   setReadyToAdd={setReadyToAdd}
+          //   setPrice={setPrice}
+          //   setSize={setSize}
+          // />
           <MenuItemSelector
             setItemName={itemNameSetter}
             setItem={itemSetter}
