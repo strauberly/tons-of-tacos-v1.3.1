@@ -7,6 +7,9 @@
 - Appear to have rectified an issue in add-to-order-button. Where viewing an order and then creating an owner order was leading to cross contamination of orders. Issue seems to have stemmed from the use effect in the component preventing the context from being properly established when referring to an order or cart.
 
 - Order confirmation moved out of cart into modals.
+- Gave quantity selector a property for old value to use in placeholder. So when we go to edit quantity it starts from correct place.
+
+- Have started scrubbing unused code and comments from components where encountered.
 
 ---
 
