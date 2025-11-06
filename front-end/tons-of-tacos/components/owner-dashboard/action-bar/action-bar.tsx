@@ -1,14 +1,18 @@
 import SearchBar from "./search-bar";
 import { useDisplayContext } from "@/context/display-context";
-import { CreateOwnerOrder } from "@/lib/owners-tools/owners-tools-client";
+import {
+  CreateOwnerOrder,
+  GetOwnerOrder,
+} from "@/lib/owners-tools/owners-tools-client";
 import { useOwnerContext } from "@/context/owner-context";
 import classes from "./action-bar.module.css";
+import { useCartContext } from "@/context/cart-context";
 
 // includes search bars and create order
 export default function ActionBar() {
   const { setShowOwnerOrderCreator } = useDisplayContext();
   const { setOwnerOrder } = useOwnerContext();
-
+  const { setCart } = useCartContext();
   return (
     <div className={classes.actionBar}>
       <SearchBar />
@@ -16,8 +20,9 @@ export default function ActionBar() {
         className={classes.ownerCreate}
         onClick={() => [
           CreateOwnerOrder(),
-          setShowOwnerOrderCreator(true),
           setOwnerOrder(true),
+          setCart(GetOwnerOrder()),
+          setShowOwnerOrderCreator(true),
         ]}
       >
         Create Order

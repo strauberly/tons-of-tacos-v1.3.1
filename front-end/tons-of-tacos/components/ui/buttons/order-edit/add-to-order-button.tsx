@@ -62,6 +62,7 @@ export default function AddToOrderButton(props: {
     // setOrderTotal(CalcOrderTotal());
 
     if (ownerOrder) {
+      setCart(GetOwnerOrder());
       cart.forEach((cartItem) => {
         console.log(cartItem.itemName);
         console.log(props.menuItem.itemName);
@@ -144,40 +145,40 @@ export default function AddToOrderButton(props: {
   });
 
   // try check if in cart in use effect
-  useEffect(() => {
-    async function Check() {
-      if (ownerOrder) {
-        cart.forEach((cartItem) => {
-          if (
-            cartItem.itemName === props.menuItem.itemName &&
-            cartItem.size === props.size
-          ) {
-            setModal(
-              "Item already in order. Update quantity, remove, or choose a different item."
-            );
-            setShowModal(true);
-            itemInOrder.current = true;
-            props.reset();
-          } else {
-            console.log(order);
+  // useEffect(() => {
+  //   async function Check() {
+  //     if (ownerOrder) {
+  //       cart.forEach((cartItem) => {
+  //         if (
+  //           cartItem.itemName === props.menuItem.itemName &&
+  //           cartItem.size === props.size
+  //         ) {
+  //           setModal(
+  //             "Item already in order. Update quantity, remove, or choose a different item."
+  //           );
+  //           setShowModal(true);
+  //           itemInOrder.current = true;
+  //           props.reset();
+  //         } else {
+  //           console.log(order);
 
-            orderToView.orderItems.forEach((orderItem) => {
-              if (orderItem.itemName === props.menuItem.itemName) {
-                setModal(
-                  "Item already in order. Update quantity, remove, or choose a different item."
-                );
-                setShowModal(true);
-                itemInOrder.current = true;
-                props.reset();
-              }
-            });
-          }
-        });
-      }
-    }
-    Check();
-    orderCheck();
-  });
+  //           orderToView.orderItems.forEach((orderItem) => {
+  //             if (orderItem.itemName === props.menuItem.itemName) {
+  //               setModal(
+  //                 "Item already in order. Update quantity, remove, or choose a different item."
+  //               );
+  //               setShowModal(true);
+  //               itemInOrder.current = true;
+  //               props.reset();
+  //             }
+  //           });
+  //         }
+  //       });
+  //     }
+  //   }
+  //   Check();
+  //   orderCheck();
+  // });
 
   return (
     <button
