@@ -23,6 +23,14 @@ type CartItem = {
   price: string;
 };
 
+type OrderItem = {
+  orderItemId: number;
+  itemName: string;
+  quantity: number;
+  size: string;
+  total: number;
+};
+
 type Cart = {
   cartItems: CartItem[];
   total: number;
@@ -35,14 +43,6 @@ type CustomerInfoForm = {
 type Valid = {
   valid: boolean;
   message: string;
-};
-
-type OrderItem = {
-  orderItemId: number;
-  itemName: string;
-  quantity: number;
-  size: string;
-  total: number;
 };
 
 type OwnerLogin = {
@@ -95,8 +95,6 @@ type Sales = {
 
 type OrderRequestResponse = {
   status: number;
-  // headers: { [key: string]: string };
-  // body: unknown;
   body: Order | string;
 };
 

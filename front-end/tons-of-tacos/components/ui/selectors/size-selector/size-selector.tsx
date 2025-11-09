@@ -37,6 +37,7 @@ export default function SizeSelector(props: {
     ) {
       props.setShowSizeError(true);
       setSizeValid(false);
+      props.setNewSize(sizeRef.current);
     } else {
       setSizeValid(true);
       props.setShowSizeError(false);
@@ -60,12 +61,6 @@ export default function SizeSelector(props: {
             maxLength={1}
             style={{ textTransform: "uppercase" }}
             onChange={checkSize}
-            // disabled={
-            //   ownerOrder &&
-            //   props.itemSize !== "S" &&
-            //   props.itemSize !== "M" &&
-            //   props.itemSize !== "L"
-            // }
           />
         )}
       </>

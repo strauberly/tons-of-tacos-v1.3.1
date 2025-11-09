@@ -17,10 +17,7 @@ export default function Order(order: { order: Order }) {
   });
 
   const date: string = new Date(order.order.created).toLocaleDateString();
-  // const time: string = new Date(order.order.created).toLocaleTimeString([], {
-  //   timeStyle: "short",
-  // });
-  // const date: string = new Date(order.order.created).toLocaleDateString();
+
   const total: number = +order.order.orderTotal;
 
   useEffect(() => {

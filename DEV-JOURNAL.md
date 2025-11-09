@@ -2,6 +2,18 @@
 
 ---
 
+-- 8 Nov 2025 --
+
+- Quantity selector place holder was starting with wrong value when switching between items.
+
+- calc item function created in multi use lib. implemented in use effect in order item. Appears to be functioning as desired.
+
+  - Also implemented in increment and decrement functions eliminating close to 50 lines of code.
+
+- Update button for order item disabled if size !== S|M|L
+
+---
+
 -- 6 Nov 2025 --
 
 - Appear to have rectified an issue in add-to-order-button. Where viewing an order and then creating an owner order was leading to cross contamination of orders. Issue seems to have stemmed from the use effect in the component preventing the context from being properly established when referring to an order or cart.
