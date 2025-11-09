@@ -1,11 +1,12 @@
 import classes from "./order-item.module.css";
 import { useEffect, useRef, useState } from "react";
+import { useEditOrderContext } from "@/context/edit-order-context";
+import { useModalContext } from "@/context/modal-context";
 import RemoveFromOrderButton from "../ui/buttons/order-edit/remove-from-order-button";
 import UpdateOrderItemButton from "../ui/buttons/order-edit/update-order-item-button";
 import SizeSelector from "../ui/selectors/size-selector/size-selector";
-import { useEditOrderContext } from "@/context/edit-order-context";
-import { useModalContext } from "@/context/modal-context";
 import QuantitySelector from "../ui/selectors/quantity-selector/quantity-selector";
+import { calcItemTotal } from "@/lib/general/multi-use";
 
 export default function OrderItem(orderItem: { orderItem: OrderItem }) {
   const { setOrderItem, setQuantity, quantity } = useEditOrderContext();
@@ -31,32 +32,10 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
       orderItem.orderItem.size.toUpperCase() !== "M" &&
       orderItem.orderItem.size.toUpperCase() !== "L"
     ) {
-      return "na";
+      return "NA";
     } else {
       return orderItem.orderItem.size.toUpperCase();
     }
-  }
-
-  function updatePrice() {
-    let adjPrice = 0;
-    let surcharge = 0;
-    let oldSurcharge = 0;
-
-    if (orderItem.orderItem.size === "M") {
-      oldSurcharge = 0.5;
-    } else if (orderItem.orderItem.size === "L") {
-      oldSurcharge = 1;
-    }
-
-    if (newSize === "M") {
-      surcharge = 0.5;
-    } else if (newSize === "L") {
-      surcharge = 1;
-    }
-
-    adjPrice = (basePrice - oldSurcharge + surcharge) * newQuantity.current;
-
-    return adjPrice;
   }
 
   const decrement = () => {
@@ -65,40 +44,40 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
       newQuantity.current = 1;
       setQuantity(newQuantity.current);
     } else {
-      setNewPrice(updatePrice());
+      setNewPrice(
+        calcItemTotal(
+          basePrice,
+          orderItem.orderItem.size,
+          newSize,
+          newQuantity.current
+        )
+      );
     }
   };
 
   const increment = () => {
     setQuantity((newQuantity.current += 1));
     setEdited(true);
-    setNewPrice(updatePrice());
+    setNewPrice(
+      calcItemTotal(
+        basePrice,
+        orderItem.orderItem.size,
+        newSize,
+        newQuantity.current
+      )
+    );
   };
 
   useEffect(() => {
-    function updatePrice() {
-      let adjPrice = 0;
-      let surcharge = 0;
-      let oldSurcharge = 0;
-
-      if (orderItem.orderItem.size === "M") {
-        oldSurcharge = 0.5;
-      } else if (orderItem.orderItem.size === "L") {
-        oldSurcharge = 1;
-      }
-
-      if (newSize === "M") {
-        surcharge = 0.5;
-      } else if (newSize === "L") {
-        surcharge = 1;
-      }
-
-      adjPrice = (basePrice - oldSurcharge + surcharge) * newQuantity.current;
-
-      return adjPrice;
-    }
     if (edited) {
-      setNewPrice(updatePrice());
+      setNewPrice(
+        calcItemTotal(
+          basePrice,
+          orderItem.orderItem.size,
+          newSize,
+          newQuantity.current
+        )
+      );
     } else {
       setNewPrice(Number(orderItem.orderItem.total));
     }
@@ -118,9 +97,8 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
         {canEdit && (
           <>
             <QuantitySelector
-              value={quantity}
+              value={newQuantity.current}
               scale="scale(.8)"
-              oldValue={orderItem.orderItem.quantity}
               increment={increment}
               decrement={decrement}
               setEdited={setEdited}

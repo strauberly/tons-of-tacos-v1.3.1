@@ -19,6 +19,33 @@ export function CalcOrderTotal(loggedIn: boolean) {
   return orderTotal.toFixed(2);
 }
 
+export function calcItemTotal(
+  basePrice: number,
+  oldSize: string,
+  newSize: string,
+  newQuantity: number
+) {
+  let adjPrice = 0;
+  let surcharge = 0;
+  let oldSurcharge = 0;
+
+  if (oldSize === "M") {
+    oldSurcharge = 0.5;
+  } else if (oldSize === "L") {
+    oldSurcharge = 1;
+  }
+
+  if (newSize === "M") {
+    surcharge = 0.5;
+  } else if (newSize === "L") {
+    surcharge = 1;
+  }
+
+  adjPrice = (basePrice - oldSurcharge + surcharge) * newQuantity;
+
+  return adjPrice;
+}
+
 export function formatPhone(input: string) {
   if (!input) return input;
   const numberInput: string = input.replace(/[^\d]/g, "");

@@ -1,12 +1,10 @@
 import classes from "./quantity-selector.module.css";
-// import classes from "@/components/menu/menu-items/quantity-selector/quantity-selector.module.css";
 import ArrowIcon from "./arrow-icon";
 import { useOwnerContext } from "@/context/owner-context";
 
 export default function QuantitySelector(props: {
   value: number;
   scale: string;
-  oldValue: number;
   increment: () => void;
   decrement: () => void;
   setEdited: (edited: boolean) => void;
@@ -27,7 +25,7 @@ export default function QuantitySelector(props: {
         max={`${props.value}`}
         disabled={true}
         value={`${props.value}`}
-        placeholder={`${props.oldValue}`}
+        placeholder={`${props.value}`}
       />
       <button
         className={`${classes.increment}`}
