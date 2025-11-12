@@ -37,14 +37,14 @@ export default function OwnerDashboard() {
 
   const [sales, setSales] = useState<Sales>();
 
-  useEffect(() => {
-    async function Sales() {
-      setSales(await DailySales(login.token));
-    }
-    Sales();
+  // useEffect(() => {
+  //   async function Sales() {
+  //     setSales(await DailySales(login.accessToken));
+  //   }
+  //   Sales();
 
-    // setInterval(Sales, 3000);
-  }, [login.token, sales?.numberOfSales, sales?.total]);
+  //   // setInterval(Sales, 3000);
+  // }, [login.accessToken, sales.numberOfSales, sales.total]);
 
   return (
     <div>

@@ -20,13 +20,18 @@ export default function LoginButton(response: {
   const { setShowModal } = useDisplayContext();
   const { setModal } = useModalContext();
 
+  // let receivedLogin: OwnerLogin;
+
   useEffect(() => {
+    // let receivedLogin: OwnerLogin;
     let statusCode = response.status;
     try {
       if (statusCode === 200) {
-        console.log(JSON.stringify(response.response));
+        console.log("response: " + JSON.stringify(response.response));
         storeLogin(JSON.stringify(response.response));
-        setLoggedIn(IsAuthenticated());
+        // receivedLogin.accessToken = response.accessToken;
+        setLoggedIn(IsAuthenticated);
+        // setLogin(response.response as OwnerLogin);
         setLogin(getLogin());
       } else if (statusCode === 403) {
         setModal(

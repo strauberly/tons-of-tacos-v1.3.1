@@ -2,6 +2,14 @@
 
 ---
 
+-- 12 Nov 2025 --
+
+- Backend refactored to for refresh tokens.
+
+- Frontend refactored to accept the new object. Appears to function as desired so for. Will be working on implementing the refresh functionality next.
+
+---
+
 -- 8 Nov 2025 --
 
 - Quantity selector place holder was starting with wrong value when switching between items.
