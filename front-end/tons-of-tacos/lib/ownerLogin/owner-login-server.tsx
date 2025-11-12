@@ -111,17 +111,33 @@ export async function OwnerLogin(
   const status = response.status;
 
   if (status === 200) {
-    const [, payloadBase64] = data.token.split(".");
+    console.log("data: " + data);
+    console.log("token: " + data.accessToken);
+    console.log("refresh token: " + data.token);
+    console.log(data.accessToken.subject);
+
+    // const [, payloadBase64] = data.token.split(".");
+    const [, payloadBase64] = data.accessToken.split(".");
     const decodedPayload = Buffer.from(payloadBase64, "base64").toString(
       "utf-8"
     );
     const subject = await JSON.parse(decodedPayload);
-
+    console.log("exp:");
+    console.log(data.token);
+    console.log(subject);
+    console.log(decodedPayload);
+    console.log(decrypt(subject.sub));
     return {
       status: status,
-      response: { token: data.token, ownerName: decrypt(subject.ownername) },
+      response: {
+        accessToken: data.accessToken,
+        refreshToken: data.refreshToken,
+        ownerName: decrypt(subject.ownername),
+      },
     };
   } else {
     return { status: status, response: data.message };
   }
 }
+
+// refresh endpoint

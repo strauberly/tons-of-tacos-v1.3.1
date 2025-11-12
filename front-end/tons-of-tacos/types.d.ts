@@ -46,9 +46,14 @@ type Valid = {
 };
 
 type OwnerLogin = {
-  token: string;
+  accessToken: string;
+  refreshToken: string;
   ownerName: string;
 };
+// type OwnerLogin = {
+//   token: string;
+//   ownerName: string;
+// };
 
 type Order = {
   orderUid: string;

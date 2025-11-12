@@ -49,7 +49,7 @@ export default function Order(order: { order: Order }) {
           {order.order.ready === "no" && (
             <MarkReadyButton
               orderUid={order.order.orderUid}
-              token={login.token}
+              token={login.accessToken}
             />
           )}
         </div>
@@ -59,7 +59,7 @@ export default function Order(order: { order: Order }) {
         {order.order.ready !== "no" && order.order.closed === "no" && (
           <MarkClosedButton
             orderUid={order.order.orderUid}
-            token={login.token}
+            token={login.accessToken}
           />
         )}
       </div>

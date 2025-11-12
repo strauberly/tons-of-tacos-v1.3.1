@@ -35,13 +35,13 @@ export default function Orders(props: { sortState: string }) {
 
   useEffect(() => {
     async function GetOrders() {
-      const orders: Order[] = await GetAllOrders(login.token);
+      const orders: Order[] = await GetAllOrders(login.accessToken);
       setOrders(orders);
     }
 
     GetOrders();
     // setInterval(GetOrders, 5000);
-  }, [login.token, setOrders]);
+  }, [login.accessToken, setOrders]);
 
   return (
     <div className={classes.dashboard}>
