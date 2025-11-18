@@ -6,7 +6,7 @@
 
 - Backend refactored to for refresh tokens.
 
-- Frontend refactored to accept the new object. Appears to function as desired so for. Will be working on implementing the refresh functionality next.
+- Frontend refactored to accept the new object. Appears to function as desired so for. Will be working on impleme nting the refresh functionality next.
 
 ---
 
