@@ -1,5 +1,7 @@
 "use server";
 
+import { cookies } from "next/headers";
+
 function randomChar() {
   const min: number = 33;
   const max: number = 126;
@@ -141,3 +143,39 @@ export async function OwnerLogin(
 }
 
 // refresh endpoint
+
+export async function Refresh(refreshToken: string) {}
+
+// token response
+export async function StoreToken(login: OwnerLogin) {
+  console.log("store: " + login.ownerName);
+
+  await (
+    await cookies()
+  ).set({
+    name: "accessToken",
+    value: login.accessToken,
+    httpOnly: true,
+    sameSite: "strict",
+    secure: true,
+  });
+
+  await (
+    await cookies()
+  ).set({
+    name: "refreshToken",
+    value: login.refreshToken,
+    httpOnly: true,
+    sameSite: "strict",
+    secure: true,
+  });
+  await (
+    await cookies()
+  ).set({
+    name: "ownerName",
+    value: login.ownerName,
+    httpOnly: true,
+    sameSite: "strict",
+    secure: true,
+  });
+}

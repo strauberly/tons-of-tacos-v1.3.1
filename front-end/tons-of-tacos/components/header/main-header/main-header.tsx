@@ -16,12 +16,17 @@ import FadeOnLoad from "@/components/ui/animations/fade-on-load";
 
 export default function MainHeader() {
   const { showLogin } = useDisplayContext();
-  const { loggedIn, setLoggedIn, setLogin } = useOwnerContext();
+  const { loggedIn, setLoggedIn, setLogin, login } = useOwnerContext();
+
+  // useEffect(() => {
+  //   setLoggedIn(IsAuthenticated());
+  //   setLogin(getLogin());
+  // }, [loggedIn, setLoggedIn, setLogin]);
 
   useEffect(() => {
-    setLoggedIn(IsAuthenticated());
-    setLogin(getLogin());
-  }, [loggedIn, setLoggedIn, setLogin]);
+    console.log(login);
+    console.log(login.ownerName);
+  });
 
   return (
     <>
