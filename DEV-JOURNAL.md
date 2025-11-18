@@ -2,6 +2,24 @@
 
 ---
 
+-- 17 Nov 2025 --
+
+- Beginning work on implementation of storing tokens in http only cookies.
+
+-- 13 Nov 2025 --
+
+- removed useEffect in main header as it was preventing storing a user login in context. rerender in the login button was re rendering the header reverting to default state. I believe next step will be setting the refresh token to a cookie that will then be submitted to backend if the login state is null or token is expired.
+- We should be able to check the token status in that use effect, at least is what I am currently hoping for.
+- Also working on token stored as http only cookie. This potentially eliminates the need to even use context to store possibly.
+
+---
+
+- Backend refactoredfor refresh tokens.
+
+- Frontend refactored to accept the new object. Appears to function as desired so for. Will be working on impleme nting the refresh functionality next.
+
+---
+
 -- 12 Nov 2025 --
 
 - Backend refactored to for refresh tokens.
