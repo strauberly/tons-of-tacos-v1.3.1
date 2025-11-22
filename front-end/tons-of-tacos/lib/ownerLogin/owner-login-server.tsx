@@ -2,6 +2,8 @@
 
 import { cookies } from "next/headers";
 
+// const cookieStore = await cookies();
+
 function randomChar() {
   const min: number = 33;
   const max: number = 126;
@@ -124,7 +126,7 @@ export async function OwnerLogin(
       "utf-8"
     );
     const subject = await JSON.parse(decodedPayload);
-    console.log("exp:");
+    console.log("exp:" + subject.exp);
     console.log(data.token);
     console.log(subject);
     console.log(decodedPayload);
@@ -144,10 +146,34 @@ export async function OwnerLogin(
 
 // refresh endpoint
 
-export async function Refresh(refreshToken: string) {}
+export async function Refresh() {
+  // get the refresh token and send that not the body make sure path and all that is good
+  const cookieStore = await cookies();
+  const refreshToken = cookieStore.get("refreshToken");
+
+  const response = await fetch(
+    "http://localhost:8080/api/owners-tools/refresh",
+    {
+      method: "POST",
+      headers: {
+        // Authorization: `Bearer ${refreshToken?.value}`,
+        Cookie: `${refreshToken?.value}`,
+        "Content-Type": "application/json",
+      },
+      // // Cookie: `${refreshToken?.value}`,
+      body: JSON.stringify(refreshToken?.value),
+      credentials: "include",
+    }
+  );
+
+  const data = await response.json();
+  const status = response.status;
+  console.log(data);
+  console.log(status);
+}
 
 // token response
-export async function StoreToken(login: OwnerLogin) {
+export async function StoreLogin(login: OwnerLogin) {
   console.log("store: " + login.ownerName);
 
   await (
@@ -178,4 +204,29 @@ export async function StoreToken(login: OwnerLogin) {
     sameSite: "strict",
     secure: true,
   });
+}
+
+export async function GetLogin() {
+  const login: OwnerLogin = {
+    accessToken: "",
+    refreshToken: "",
+    ownerName: "",
+  };
+
+  const cookieStore = await cookies();
+
+  // console.log(cookieStore);
+
+  login.accessToken = cookieStore.get("accessToken")
+    ?.value as unknown as string;
+  login.refreshToken = cookieStore.get("refreshToken")
+    ?.value as unknown as string;
+  login.ownerName = cookieStore.get("ownerName")?.value as unknown as string;
+  return login;
+}
+
+export async function CookieCheck() {
+  const cookieStore = cookies();
+  const gotCookies: boolean = (await cookieStore).toString() === "";
+  return gotCookies;
 }

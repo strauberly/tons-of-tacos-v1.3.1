@@ -13,20 +13,45 @@ import {
 } from "@/lib/ownerLogin/owners-login-client";
 import { useOwnerContext } from "@/context/owner-context";
 import FadeOnLoad from "@/components/ui/animations/fade-on-load";
+import { CookieCheck, GetLogin } from "@/lib/ownerLogin/owner-login-server";
+import { cookies } from "next/headers";
 
 export default function MainHeader() {
   const { showLogin } = useDisplayContext();
   const { loggedIn, setLoggedIn, setLogin, login } = useOwnerContext();
 
-  // useEffect(() => {
-  //   setLoggedIn(IsAuthenticated());
-  //   setLogin(getLogin());
-  // }, [loggedIn, setLoggedIn, setLogin]);
-
   useEffect(() => {
-    console.log(login);
-    console.log(login.ownerName);
-  });
+    // const cookieStore = cookies();
+    async function CheckLogin() {
+      if ((await CookieCheck()) === true) {
+        console.log("gotcha");
+        setLoggedIn(false);
+      } else {
+        console.log("nope");
+        setLogin(await GetLogin());
+        setLoggedIn(true);
+      }
+      // setLoggedIn(IsAuthenticated());
+      // setLogin(await GetLogin());
+      // console.log(login);
+      // if (cookieStore) {
+      //   console.log("logged out");
+      // } else {
+      //   setLoggedIn(true);
+      // }
+      // const check = setInterval(() => CheckLogin(), 5000);
+      // // setInterval(TokenExp, 1000 * 60 * 3);
+      // return function cleanup() {
+      //   clearInterval(check);
+      // };
+    }
+    // const check = setInterval(() => CheckLogin(), 500);
+
+    // // setInterval(TokenExp, 1000 * 60 * 3);
+    // return function cleanup() {
+    //   clearInterval(check);
+    // };
+  }, [loggedIn, login, setLoggedIn, setLogin]);
 
   return (
     <>

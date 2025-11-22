@@ -15,7 +15,7 @@ export async function GetAllOrders(token: string) {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
-          Cookie: `${accessToken?.value}`,
+          // Cookie: `${accessToken?.value}`,
         },
         credentials: "include",
       }

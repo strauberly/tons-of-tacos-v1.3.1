@@ -4,6 +4,7 @@ import classes from "./owner-header.module.css";
 import LogoutButton from "../../ui/buttons/logout/logout";
 import FadeOnLoad from "@/components/ui/animations/fade-on-load";
 import { logout } from "@/lib/ownerLogin/owners-login-client";
+import { Refresh } from "@/lib/ownerLogin/owner-login-server";
 
 // import jwtDecode from 'jwt-decode';
 
@@ -22,7 +23,21 @@ export default function OwnerHeader() {
   //  set exp as hard 20:00
   // if token expired and its past 2000 > logout
 
+  const [, payloadBase64] = login.accessToken.split(".");
+  const decodedPayload = Buffer.from(payloadBase64, "base64").toString("utf-8");
+  const subject = JSON.parse(decodedPayload);
+
   useEffect(() => {
+    const exp = subject.exp * 1000;
+    console.log("subject: " + subject.exp * 1000);
+    console.log("time:" + Date.now());
+    console.log("Expired: " + `${exp < Date.now()}`);
+    // if exp call refresh token
+    console.log(login.refreshToken);
+    console.log(login.accessToken);
+    if (exp < Date.now()) {
+      Refresh();
+    }
     // async function TokenExp() {
     //   const [, payloadBase64] = login.token.split(".");
     //   const decodedPayload = Buffer.from(payloadBase64, "base64").toString(
@@ -36,13 +51,13 @@ export default function OwnerHeader() {
     //   }
     // }
 
-    const timer = setInterval(() => setDate(new Date()), 1000);
+    const timer = setInterval(() => setDate(new Date()), 1000 * 60);
 
     // setInterval(TokenExp, 1000 * 60 * 3);
     return function cleanup() {
       clearInterval(timer);
     };
-  }, [login.accessToken, setLoggedIn]);
+  }, [login.accessToken, login.refreshToken, setLoggedIn, subject]);
 
   return (
     <Suspense>
