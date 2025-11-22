@@ -2,9 +2,21 @@
 
 ---
 
+-- 18 Nov 2025 --
+
+- rough implementation in place for dealing with a refresh and keeping an owner logged in.
+
+- On login, the token is stored in http only cookie, owner login context is then set from cookie.
+
+- running into issues with session expired that will need to be checked.
+
+---
+
 -- 17 Nov 2025 --
 
 - Beginning work on implementation of storing tokens in http only cookies.
+
+---
 
 -- 13 Nov 2025 --
 
@@ -14,9 +26,9 @@
 
 ---
 
-- Backend refactoredfor refresh tokens.
+- Backend refactored for refresh tokens.
 
-- Frontend refactored to accept the new object. Appears to function as desired so for. Will be working on impleme nting the refresh functionality next.
+- Frontend refactored to accept the new object. Appears to function as desired so for. Will be working on implementing the refresh functionality next.
 
 ---
 
