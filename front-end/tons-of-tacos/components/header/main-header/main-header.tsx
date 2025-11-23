@@ -45,6 +45,7 @@ export default function MainHeader() {
       //   clearInterval(check);
       // };
     }
+    // CheckLogin();
     // const check = setInterval(() => CheckLogin(), 500);
 
     // // setInterval(TokenExp, 1000 * 60 * 3);

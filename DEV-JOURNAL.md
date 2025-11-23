@@ -2,13 +2,9 @@
 
 ---
 
--- 18 Nov 2025 --
+-- 22 Nov 2025 --
 
-- rough implementation in place for dealing with a refresh and keeping an owner logged in.
-
-- On login, the token is stored in http only cookie, owner login context is then set from cookie.
-
-- running into issues with session expired that will need to be checked.
+- Progress made on backend for implemnentation of token refresh still running into a few issues regarding how often refresh tokens are being generated. MOst likely as result of backend code but also need to investigate if useRef in owner header is causing a loop that repeatedly calls the back end.
 
 ---
 

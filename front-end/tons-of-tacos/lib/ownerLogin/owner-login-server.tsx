@@ -165,20 +165,61 @@ export async function Refresh() {
       credentials: "include",
     }
   );
-
+  console.log(response);
   const data = await response.json();
   const status = response.status;
-  console.log(data);
-  console.log(status);
+
+  console.log("access: " + data.accessToken);
+  console.log("refresh: " + data.refreshToken);
+  console.log("refresh status: " + status);
+
+  const [, payloadBase64] = data.accessToken.split(".");
+  const decodedPayload = Buffer.from(payloadBase64, "base64").toString("utf-8");
+  const subject = JSON.parse(decodedPayload);
+
+  console.log("owner name:" + decrypt(subject.ownername));
+  console.log("owner name:" + subject.ownername);
+
+  const login: OwnerLogin = {
+    accessToken: data.accessToken,
+    refreshToken: data.refreshToken,
+    ownerName: subject.ownername,
+  };
+
+  console.log(login);
+
+  // cookieStore.getAll().forEach((cookie) => {
+  //   cookieStore.delete(cookie.name);
+  // });
+
+  return login;
+  // StoreLogin(login);
+
+  //   const [, payloadBase64] = data.accessToken.split(".");
+  //   const decodedPayload = Buffer.from(payloadBase64, "base64").toString(
+  //     "utf-8"
+  //   );
+
+  //   const subject = JSON.parse(decodedPayload);
+  //   const login: OwnerLogin = {
+  //     accessToken: "",
+  //     refreshToken: "",
+  //     ownerName: "",
+  //   };
+
+  //   login.accessToken = data.accessToken;
+  //   login.refreshToken = data.refreshToken;
+  //   login.ownerName = decrypt(subject.ownername);
+  //   console.log("login: " + login);
+  //   // StoreLogin(login);
+  // });
 }
 
 // token response
 export async function StoreLogin(login: OwnerLogin) {
   console.log("store: " + login.ownerName);
 
-  await (
-    await cookies()
-  ).set({
+  (await cookies()).set({
     name: "accessToken",
     value: login.accessToken,
     httpOnly: true,
@@ -186,18 +227,14 @@ export async function StoreLogin(login: OwnerLogin) {
     secure: true,
   });
 
-  await (
-    await cookies()
-  ).set({
+  (await cookies()).set({
     name: "refreshToken",
     value: login.refreshToken,
     httpOnly: true,
     sameSite: "strict",
     secure: true,
   });
-  await (
-    await cookies()
-  ).set({
+  (await cookies()).set({
     name: "ownerName",
     value: login.ownerName,
     httpOnly: true,
