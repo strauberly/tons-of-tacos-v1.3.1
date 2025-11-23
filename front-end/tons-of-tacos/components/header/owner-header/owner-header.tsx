@@ -4,7 +4,11 @@ import classes from "./owner-header.module.css";
 import LogoutButton from "../../ui/buttons/logout/logout";
 import FadeOnLoad from "@/components/ui/animations/fade-on-load";
 import { logout } from "@/lib/ownerLogin/owners-login-client";
-import { Refresh } from "@/lib/ownerLogin/owner-login-server";
+import {
+  GetLogin,
+  Refresh,
+  StoreLogin,
+} from "@/lib/ownerLogin/owner-login-server";
 
 // import jwtDecode from 'jwt-decode';
 
@@ -35,14 +39,21 @@ export default function OwnerHeader() {
     // if exp call refresh token
     console.log(login.refreshToken);
     console.log(login.accessToken);
-    if (exp < Date.now()) {
-      Refresh();
+
+    async function Refresher() {
+      if (exp < Date.now()) {
+        StoreLogin(await Refresh());
+        // StoreLogin();
+        // reset context?
+      }
+      setDate(new Date());
+      // async function TokenExp() {
+      //   const [, payloadBase64] = login.token.split(".");
+      //   const decodedPayload = Buffer.from(payloadBase64, "base64").toString(
+      //     "utf-8"
+      //   );
     }
-    // async function TokenExp() {
-    //   const [, payloadBase64] = login.token.split(".");
-    //   const decodedPayload = Buffer.from(payloadBase64, "base64").toString(
-    //     "utf-8"
-    //   );
+
     //   const subject = await JSON.parse(decodedPayload);
     //   if (subject.exp < Date.now() / 1000) {
     //     console.log("its time");
@@ -50,13 +61,13 @@ export default function OwnerHeader() {
     //     setLoggedIn(false);
     //   }
     // }
+    setInterval(Refresher, 1000 * 60);
+    // const timer = setInterval(() => setDate(new Date()), 1000 * 60);
 
-    const timer = setInterval(() => setDate(new Date()), 1000 * 60);
-
-    // setInterval(TokenExp, 1000 * 60 * 3);
-    return function cleanup() {
-      clearInterval(timer);
-    };
+    // // setInterval(TokenExp, 1000 * 60 * 3);
+    // return function cleanup() {
+    //   clearInterval(timer);
+    // };
   }, [login.accessToken, login.refreshToken, setLoggedIn, subject]);
 
   return (
