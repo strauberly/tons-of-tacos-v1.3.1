@@ -13,7 +13,7 @@ import {
 // import jwtDecode from 'jwt-decode';
 
 export default function OwnerHeader() {
-  const { login, setLoggedIn } = useOwnerContext();
+  const { login, setLoggedIn, setLogin } = useOwnerContext();
 
   const [date, setDate] = useState(new Date());
   const options: Intl.DateTimeFormatOptions = {
@@ -61,7 +61,11 @@ export default function OwnerHeader() {
     //     setLoggedIn(false);
     //   }
     // }
-    setInterval(Refresher, 1000 * 60);
+    const tokeRefresh = setInterval(() => Refresher(), 1000 * 60);
+
+    return () => {
+      clearInterval(tokeRefresh);
+    };
     // const timer = setInterval(() => setDate(new Date()), 1000 * 60);
 
     // // setInterval(TokenExp, 1000 * 60 * 3);

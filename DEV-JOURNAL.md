@@ -2,6 +2,12 @@
 
 ---
 
+-- 23 Nov 2025 --
+
+- Needed cleanup function in use effect in owner header to prevent runaway and memory leakage causing excessive refresh token creation and storage. Still have refinements to make but really close to wrapping up this task!
+
+---
+
 -- 22 Nov 2025 --
 
 - Progress made on backend for implemnentation of token refresh still running into a few issues regarding how often refresh tokens are being generated. MOst likely as result of backend code but also need to investigate if useRef in owner header is causing a loop that repeatedly calls the back end.
