@@ -21,8 +21,8 @@ export async function GetAllOrders(token: string) {
       }
     );
     data = await response.json();
-    console.log(response.headers);
-    console.log("headers: " + response.headers.getSetCookie());
+    // console.log(response.headers);
+    // console.log("headers: " + response.headers.getSetCookie());
     const orders = data;
     return orders;
   } catch (error) {
