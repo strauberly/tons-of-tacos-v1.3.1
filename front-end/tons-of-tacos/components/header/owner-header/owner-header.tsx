@@ -36,12 +36,17 @@ export default function OwnerHeader() {
     console.log("subject: " + subject.exp * 1000);
     console.log("time:" + Date.now());
     console.log("Expired: " + `${exp < Date.now()}`);
+    const loginDate = new Date();
+    const hours = loginDate.getHours();
+
     // if exp call refresh token
     console.log(login.refreshToken);
     console.log(login.accessToken);
 
     async function Refresher() {
-      if (exp < Date.now()) {
+      if (exp < Date.now() && hours > 23) {
+        setLoggedIn(false);
+      } else if (exp < Date.now()) {
         StoreLogin(await Refresh());
         // StoreLogin();
         // reset context?

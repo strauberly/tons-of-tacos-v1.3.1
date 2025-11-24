@@ -264,6 +264,44 @@ export async function GetLogin() {
 
 export async function CookieCheck() {
   const cookieStore = cookies();
+  // const gotCookies: boolean = (await cookieStore).size;
   const gotCookies: boolean = (await cookieStore).toString() === "";
+  console.log("cookie check:" + (await gotCookies));
+  console.log("store: " + (await cookieStore));
   return gotCookies;
+}
+
+// create route to logout a user by deleting their cookie
+
+// use access token for request
+// use refresh token in body
+
+export async function OwnerLogout(accessToken: string) {
+  const cookieStore = await cookies();
+  const refreshToken = cookieStore.get("refreshToken");
+  // const accessToken = cookieStore.get("accessToken");
+  const address: string = `http://localhost:8080/api/owners-tools/logout`;
+  console.log(address);
+  console.log(refreshToken);
+
+  // let response;
+  // let data;
+
+  const response = await fetch(address.toString(), {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+    },
+    body: JSON.stringify(refreshToken),
+  });
+  const data = response;
+  console.log("logout response: " + data.body);
+}
+// maybe rest to accept a list of cookies to delete
+
+export async function DeleteCookies() {
+  const cookieStore = cookies();
+  (await cookieStore)
+    .getAll()
+    .forEach(async (cookie) => (await cookieStore).delete(`${cookie.name}`));
 }
