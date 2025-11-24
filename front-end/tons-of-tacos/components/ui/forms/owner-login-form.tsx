@@ -34,15 +34,18 @@ export default function OwnerLoginForm() {
   });
 
   useEffect(() => {
-    async function LOGIN() {
+    async function Login() {
       if (state.status === 200) {
         StoreLogin(state.response);
         setLogin(await GetLogin());
+        console.log("login form: " + login.accessToken);
+        console.log("login form: " + login.refreshToken);
+        console.log("login form: " + login.ownerName);
         setLoggedIn(true);
       }
       // set 403
     }
-    LOGIN();
+    Login();
   }, [login, setLoggedIn, setLogin, state.response, state.status]);
 
   return (

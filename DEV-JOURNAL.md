@@ -2,6 +2,18 @@
 
 ---
 
+-- 24 Nov 2025 --
+
+- Main header now maintains session through a browser refresh by checking if user was logged in and cookies still exist. If so will will reestablish context eliminating need to log back in in event of browser refresh.
+
+- Updated to logout user at a specified hour. Currently 1100pm. Set in owner header.
+
+- Logout button removes cookies from browser.
+- Logout button also now utilizes the api route logout, removing refresh token from db.
+- Further testing and refinement needed.
+
+---
+
 -- 23 Nov 2025 --
 
 - Needed cleanup function in use effect in owner header to prevent runaway and memory leakage causing excessive refresh token creation and storage. Still have refinements to make but really close to wrapping up this task!
