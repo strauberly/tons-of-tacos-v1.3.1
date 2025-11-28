@@ -42,13 +42,11 @@ export default function MainHeader() {
           <Link className={classes.home} href="/">
             Tons Of Tacos
           </Link>
-          <Suspense>
-            <FadeOnLoad>
+    
               {loggedIn && <OwnerHeader />}
               {showLogin && !loggedIn && <OwnerLoginForm />}
               {!showLogin && !loggedIn && <NavButtons />}
-            </FadeOnLoad>
-          </Suspense>
+   
         </header>
       </div>
     </>

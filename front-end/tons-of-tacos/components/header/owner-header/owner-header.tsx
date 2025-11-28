@@ -6,14 +6,19 @@ import FadeOnLoad from "@/components/ui/animations/fade-on-load";
 import { logout } from "@/lib/ownerLogin/owners-login-client";
 import {
   GetLogin,
+  OwnerLogout,
   Refresh,
   StoreLogin,
 } from "@/lib/ownerLogin/owner-login-server";
+import { GetAllMenuItems } from "@/lib/menu";
+import { useOrdersContext } from "@/context/orders-context";
+import { GetAllOrders } from "@/lib/owners-tools/owners-tools";
 
 // import jwtDecode from 'jwt-decode';
 
 export default function OwnerHeader() {
   const { login, setLoggedIn, setLogin } = useOwnerContext();
+  const { orders, setOrders } = useOrdersContext();
 
   const [date, setDate] = useState(new Date());
   const options: Intl.DateTimeFormatOptions = {
@@ -36,6 +41,7 @@ export default function OwnerHeader() {
     console.log("subject: " + subject.exp * 1000);
     console.log("time:" + Date.now());
     console.log("Expired: " + `${exp < Date.now()}`);
+
     const loginDate = new Date();
     const hours = loginDate.getHours();
 
@@ -45,9 +51,13 @@ export default function OwnerHeader() {
 
     async function Refresher() {
       if (exp < Date.now() && hours > 23) {
+        OwnerLogout(login.accessToken);
         setLoggedIn(false);
-      } else if (exp < Date.now()) {
+      } else if (exp - Number(Date.now()) < 60000) {
         StoreLogin(await Refresh());
+        setLogin(await GetLogin());
+        setOrders(await GetAllOrders(login.accessToken));
+
         // StoreLogin();
         // reset context?
       }
@@ -77,18 +87,21 @@ export default function OwnerHeader() {
     // return function cleanup() {
     //   clearInterval(timer);
     // };
-  }, [login.accessToken, login.refreshToken, setLoggedIn, subject]);
+  }, [
+    login.accessToken,
+    login.refreshToken,
+    setLoggedIn,
+    setLogin,
+    setOrders,
+    subject,
+  ]);
 
   return (
-    <Suspense>
-      <FadeOnLoad>
-        <div className={classes.ownerHeader}>
-          <p> Hola, {login.ownerName}!</p>
-          <p>{date.toLocaleTimeString([], { timeStyle: "short" })}</p>
-          <p>{date.toLocaleDateString(undefined, options)}</p>
-          <LogoutButton />
-        </div>
-      </FadeOnLoad>
-    </Suspense>
+    <div className={classes.ownerHeader}>
+      <p> Hola, {login.ownerName}!</p>
+      <p>{date.toLocaleTimeString([], { timeStyle: "short" })}</p>
+      <p>{date.toLocaleDateString(undefined, options)}</p>
+      <LogoutButton />
+    </div>
   );
 }
