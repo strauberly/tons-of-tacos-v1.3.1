@@ -129,7 +129,7 @@ export async function SendOrder(
 
   cartItems.forEach((cartItem) => {
     if (cartItem.size === "") {
-      cartItem.size = "na";
+      cartItem.size = "NA";
     }
   });
 

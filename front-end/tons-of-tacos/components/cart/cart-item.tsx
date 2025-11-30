@@ -97,13 +97,13 @@ export default function CartItem(props: {
             />
           </div>
         )}
-        {!canEdit && props.size === "na" && (
+        {!canEdit && props.size === "NA" && (
           <p className={classes.size}> {props.size}</p>
         )}
-        {!canEdit && props.size !== "na" && (
+        {!canEdit && props.size !== "NA" && (
           <p className={classes.size}>{props.size}</p>
         )}
-        {canEdit === true && props.size === "na" && (
+        {canEdit === true && props.size === "NA" && (
           <p className={classes.size}>{props.size}</p>
         )}
         {canEdit && props.size !== "NA" && (

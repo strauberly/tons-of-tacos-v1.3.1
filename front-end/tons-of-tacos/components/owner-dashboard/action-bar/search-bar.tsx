@@ -69,23 +69,6 @@ export default function SearchBar() {
     phoneNumberRef.current = formattedNumber;
   }
 
-  // function formatNumber(input: string) {
-  //   if (!input) return input;
-  //   const numberInput: string = input.replace(/[^\d]/g, "");
-  //   const inputLength: number = numberInput.length;
-
-  //   if (inputLength < 4) {
-  //     return numberInput;
-  //   } else if (inputLength < 7) {
-  //     return `${numberInput.slice(0, 3)}.${numberInput.slice(3)}`;
-  //   } else {
-  //     return `${numberInput.slice(0, 3)}.${numberInput.slice(
-  //       3,
-  //       6
-  //     )}.${numberInput.slice(6)}`;
-  //   }
-  // }
-
   return (
     <div className={classes.searchBar}>
       <div className={classes.search}>
@@ -100,7 +83,7 @@ export default function SearchBar() {
           onFocus={handleFocus}
           onChange={captureOrderID}
         />
-        <SearchByIdButton orderUid={orderId} token={login.token} />
+        <SearchByIdButton orderUid={orderId} token={login.accessToken} />
         <label>Find by Customer Phone :</label>
         <input
           id="phone"
@@ -112,7 +95,10 @@ export default function SearchBar() {
           onChange={captureCustomerPhone}
           value={phoneNumberRef.current}
         />
-        <SearchByPhoneButton customerName={customerPhone} token={login.token} />
+        <SearchByPhoneButton
+          customerName={customerPhone}
+          token={login.accessToken}
+        />
       </div>
       {!numberValid && <p className={classes.searchError}>{searchError}</p>}
       {!idValid && <p className={classes.searchError}>{searchError}</p>}

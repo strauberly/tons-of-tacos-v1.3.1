@@ -9,10 +9,12 @@ import {
   OwnerLogout,
   RemoveCookies,
 } from "@/lib/ownerLogin/owner-login-server";
+import { useModalContext } from "@/context/modal-context";
 
 export default function LogoutButton() {
   const { setLoggedIn, login } = useOwnerContext();
-  const { setShowLogin } = useDisplayContext();
+  const { setShowLogin, setShowModal } = useDisplayContext();
+  const { setModal } = useModalContext();
 
   function LogOut() {
     // logout();
@@ -25,7 +27,8 @@ export default function LogoutButton() {
       className={classes.logout}
       onClick={async () => [
         LogOut(),
-        OwnerLogout(login.accessToken),
+        setModal(await OwnerLogout(login.accessToken)),
+        setShowModal(true),
         DeleteCookies(),
         setLoggedIn(false),
       ]}

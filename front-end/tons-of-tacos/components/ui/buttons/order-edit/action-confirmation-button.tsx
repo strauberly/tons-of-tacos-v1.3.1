@@ -9,7 +9,7 @@ import {
   GetAllOrders,
   GetOrderByID,
 } from "@/lib/owners-tools/owners-tools";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 export default function ActionConfirmationButton(props: { title: string }) {
   const { setShowConfirmation, setShowModal } = useDisplayContext();
@@ -27,63 +27,22 @@ export default function ActionConfirmationButton(props: { title: string }) {
   const { orderToView, setModal, setOrderToView } = useModalContext();
 
   const orders = useRef<Order[]>([]);
-
-  const orderResponse = useRef<OrderRequestResponse>({
-    status: 0,
-    body: {
-      orderUid: "",
-      customerUid: "",
-      name: "",
-      email: "",
-      phone: "",
-      orderItems: [],
-      orderTotal: 0,
-      created: "",
-      ready: "",
-      closed: "",
-    },
-  });
-
-  // const order = useRef<Order>({
-  //   orderUid: "",
-  //   name: "",
-  //   email: "",
-  //   phone: "",
-  //   orderItems: [],
-  //   orderTotal: 0,
-  //   created: "",
-  //   ready: "",
-  //   closed: "",
-  // });
-
   const action = useRef<string>("");
-
   const orderEdit: OrderEdit = {
     orderUid: orderToView.orderUid,
     customer: customer,
     menuItemId: menuItem.id,
     quantity: quantity,
     itemSize: itemSize,
-    login: login.token,
+    login: login.accessToken,
     orderItem: orderItem,
   };
 
-  // useEffect(() => {
-  //   async function CheckResponse() {
-  //     orderResponse.current = await GetOrderByID(
-  //       orderToView.orderUid,
-  //       login.token
-  //     );
-  //     if ((orderResponse.current.status = 200)) {
-  //       setOrderToView(orderResponse.current.body);
-  //     }
-  //   }
-  //   CheckResponse();
-  // }, [login.token, orderToView.orderUid, setOrderToView]);
   const orderReqResRef = useRef<OrderRequestResponse>({
     status: 0,
     body: "",
   });
+
   return (
     <button
       onClick={async () => {
@@ -91,12 +50,12 @@ export default function ActionConfirmationButton(props: { title: string }) {
         setShowConfirmation(false);
         setModal(action.current);
         setShowModal(true);
-        setItemSize("na");
-        orders.current = await GetAllOrders(login.token);
+        setItemSize("NA");
+        orders.current = await GetAllOrders(login.accessToken);
         setOrders(orders.current);
         orderReqResRef.current = await GetOrderByID(
           orderToView.orderUid,
-          login.token
+          login.accessToken
         );
 
         if (orderReqResRef.current.status === 200) {

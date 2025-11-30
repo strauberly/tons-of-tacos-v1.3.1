@@ -5,11 +5,10 @@ import classes from "../../selectors/add-to-order/add-order-item.module.css";
 import { useOwnerContext } from "@/context/owner-context";
 import {
   AddToOwnerOrder,
-  CalcOrderTotal,
   GetOwnerOrder,
 } from "@/lib/owners-tools/owners-tools-client";
 import { useCartContext } from "@/context/cart-context";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { GetOrderByID } from "@/lib/owners-tools/owners-tools";
 
 export default function AddToOrderButton(props: {
@@ -43,23 +42,8 @@ export default function AddToOrderButton(props: {
 
   const itemInOrder = useRef<boolean>(false);
 
-  const orderRef = useRef<Order>({
-    orderUid: "",
-    customerUid: "",
-    name: "",
-    email: "",
-    phone: "",
-    orderItems: [],
-    orderTotal: 0,
-    created: "",
-    ready: "",
-    closed: "",
-  });
-
   function orderCheck() {
-    // setOrder(GetOwnerOrder());
     console.log(order);
-    // setOrderTotal(CalcOrderTotal());
 
     if (ownerOrder) {
       setCart(GetOwnerOrder());
@@ -101,7 +85,6 @@ export default function AddToOrderButton(props: {
     if (!itemInOrder.current) {
       setShowConfirmation(true);
       setConfirmationTitle("Add To Order");
-      // props.reset();
     }
   }
 
@@ -111,12 +94,12 @@ export default function AddToOrderButton(props: {
       return [
         AddToOwnerOrder(
           `${props.menuItem.itemName}_${props.size}`,
-          // `${props.menuItem.itemName}_${props.menuItem.itemSize}`,
+
           props.menuItem.id,
           props.menuItem.itemName,
           props.quantity,
           props.size,
-          // props.menuItem.itemSize,
+
           props.price
         ),
         props.reset(),
@@ -132,9 +115,6 @@ export default function AddToOrderButton(props: {
         props.setReadyToAdd(false),
         props.setItemName("Item"),
         proceed(),
-        // setShowConfirmation(true),
-        // setConfirmationTitle("Add To Order"),
-        // props.reset(),
       ];
     }
   }
@@ -144,58 +124,16 @@ export default function AddToOrderButton(props: {
     body: "",
   });
 
-  // try check if in cart in use effect
-  // useEffect(() => {
-  //   async function Check() {
-  //     if (ownerOrder) {
-  //       cart.forEach((cartItem) => {
-  //         if (
-  //           cartItem.itemName === props.menuItem.itemName &&
-  //           cartItem.size === props.size
-  //         ) {
-  //           setModal(
-  //             "Item already in order. Update quantity, remove, or choose a different item."
-  //           );
-  //           setShowModal(true);
-  //           itemInOrder.current = true;
-  //           props.reset();
-  //         } else {
-  //           console.log(order);
-
-  //           orderToView.orderItems.forEach((orderItem) => {
-  //             if (orderItem.itemName === props.menuItem.itemName) {
-  //               setModal(
-  //                 "Item already in order. Update quantity, remove, or choose a different item."
-  //               );
-  //               setShowModal(true);
-  //               itemInOrder.current = true;
-  //               props.reset();
-  //             }
-  //           });
-  //         }
-  //       });
-  //     }
-  //   }
-  //   Check();
-  //   orderCheck();
-  // });
-
   return (
     <button
       className={classes.addItemButton}
       disabled={props.menuItem.itemName === "" || props.size === "a"}
-      // disabled={
-      //   props.size !== "S" &&
-      //   props.size !== "M" &&
-      //   props.size !== "L" &&
-      //   props.size !== "na"
-      // }
       onClick={async () => {
         if (itemInOrder.current === true) {
           itemInOrder.current = false;
         }
         setOrder(GetOwnerOrder());
-        // setOrderToView(await GetOrderByID(orderToView.orderUid, login.token));
+
         orderCheck();
         checkOrderContext();
         props.reset();
@@ -203,15 +141,11 @@ export default function AddToOrderButton(props: {
         if (!ownerOrder) {
           orderReqRes.current = await GetOrderByID(
             orderToView.orderUid,
-            login.token
+            login.accessToken
           );
-          // orderReqRes.current = await GetOrderByID(props.orderUid, login.token);
-          // if ((orderReqRes.current.status = 200)) {
+
           setOrderToView(orderReqRes.current.body as Order);
           props.reset();
-
-          // }
-          // setOrderToView(await GetOrderByID(props.orderUid, login.token));
         }
       }}
     >

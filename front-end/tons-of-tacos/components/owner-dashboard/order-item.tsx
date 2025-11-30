@@ -104,14 +104,14 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
               setEdited={setEdited}
             />
 
-            {!canEdit && orderItem.orderItem.size === "na" && (
+            {!canEdit && orderItem.orderItem.size === "NA" && (
               <p className={classes.size}> {orderItem.orderItem.size}</p>
             )}
-            {!canEdit && orderItem.orderItem.size !== "na" && (
+            {!canEdit && orderItem.orderItem.size !== "NA" && (
               <p className={classes.size}>{orderItem.orderItem.size}</p>
             )}
 
-            {canEdit === true && orderItem.orderItem.size === "na" && (
+            {canEdit === true && orderItem.orderItem.size === "NA" && (
               <p className={classes.size}>{orderItem.orderItem.size}</p>
             )}
 

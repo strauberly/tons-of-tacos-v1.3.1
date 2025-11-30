@@ -188,31 +188,7 @@ export async function Refresh() {
 
   console.log(login);
 
-  // cookieStore.getAll().forEach((cookie) => {
-  //   cookieStore.delete(cookie.name);
-  // });
-
   return login;
-  // StoreLogin(login);
-
-  //   const [, payloadBase64] = data.accessToken.split(".");
-  //   const decodedPayload = Buffer.from(payloadBase64, "base64").toString(
-  //     "utf-8"
-  //   );
-
-  //   const subject = JSON.parse(decodedPayload);
-  //   const login: OwnerLogin = {
-  //     accessToken: "",
-  //     refreshToken: "",
-  //     ownerName: "",
-  //   };
-
-  //   login.accessToken = data.accessToken;
-  //   login.refreshToken = data.refreshToken;
-  //   login.ownerName = decrypt(subject.ownername);
-  //   console.log("login: " + login);
-  //   // StoreLogin(login);
-  // });
 }
 
 // token response
@@ -284,18 +260,22 @@ export async function OwnerLogout(accessToken: string) {
   console.log(address);
   console.log(refreshToken);
 
-  // let response;
-  // let data;
-
-  const response = await fetch(address.toString(), {
-    method: "DELETE",
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-    body: JSON.stringify(refreshToken),
-  });
-  const data = response;
-  console.log("logout response: " + data.body);
+  let response;
+  let data;
+  try {
+    response = await fetch(address.toString(), {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify(refreshToken),
+    });
+    data = await response.json();
+    console.log("logout response: " + data.body);
+    return data.message;
+  } catch (error) {
+    console.log(error);
+  }
 }
 // maybe rest to accept a list of cookies to delete
 
