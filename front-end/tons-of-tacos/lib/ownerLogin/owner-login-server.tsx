@@ -285,3 +285,8 @@ export async function DeleteCookies() {
     .getAll()
     .forEach(async (cookie) => (await cookieStore).delete(`${cookie.name}`));
 }
+
+export async function nextCookiePresent() {
+  const cookieStore = await cookies();
+  return cookieStore.has("accessToken");
+}

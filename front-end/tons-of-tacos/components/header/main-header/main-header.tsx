@@ -17,8 +17,9 @@ import {
   CookieCheck,
   DeleteCookies,
   GetLogin,
+  nextCookiePresent,
 } from "@/lib/ownerLogin/owner-login-server";
-import { cookies } from "next/headers";
+// import { cookies } from "next/headers";
 
 export default function MainHeader() {
   const { showLogin } = useDisplayContext();
@@ -33,9 +34,8 @@ export default function MainHeader() {
       if ((await CookieCheck()) === false && loggedIn === false) {
         setLogin(await GetLogin());
         setLoggedIn(true);
-      } else {
+      } else if (await nextCookiePresent()) {
         DeleteCookies();
-        setLoggedIn(false);
       }
     }
 
