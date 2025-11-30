@@ -272,6 +272,7 @@ export async function OwnerLogout(accessToken: string) {
     });
     data = await response.json();
     console.log("logout response: " + data.body);
+
     return data.message;
   } catch (error) {
     console.log(error);

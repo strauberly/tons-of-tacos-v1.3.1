@@ -6,13 +6,10 @@ import NavButtons from "@/components/ui/buttons/nav-buttons/nav-buttons";
 import OwnerLoginForm from "../../ui/forms/owner-login-form";
 import { useDisplayContext } from "@/context/display-context";
 import OwnerHeader from "../owner-header/owner-header";
-import { Suspense, useEffect } from "react";
-import {
-  getLogin,
-  IsAuthenticated,
-} from "@/lib/ownerLogin/owners-login-client";
+import { useEffect } from "react";
+
 import { useOwnerContext } from "@/context/owner-context";
-import FadeOnLoad from "@/components/ui/animations/fade-on-load";
+
 import {
   CookieCheck,
   DeleteCookies,
@@ -34,7 +31,7 @@ export default function MainHeader() {
       if ((await CookieCheck()) === false && loggedIn === false) {
         setLogin(await GetLogin());
         setLoggedIn(true);
-      } else if (await nextCookiePresent()) {
+      } else if ((await nextCookiePresent()) !== true) {
         DeleteCookies();
       }
     }
