@@ -11,44 +11,45 @@ export default function SearchBar() {
   const [orderId, setOrderID] = useState<string>("");
   const [customerPhone, setCustomerPhone] = useState<string>("");
   const [searchError, setSearchError] = useState<string>("");
-  const [numberValid, setNumberValid] = useState<boolean>(true);
-  const [idValid, SetIdValid] = useState<boolean>(true);
 
   const orderIdRef = useRef<string>("");
   const phoneNumberRef = useRef<string>("");
 
   const { login } = useOwnerContext();
 
+  const idValidRef = useRef<boolean>(false);
+  const phoneValidRef = useRef<boolean>(false);
+
   function captureOrderID(e: React.ChangeEvent<HTMLInputElement>) {
     setOrderID(e.target.value.toUpperCase());
-    orderIdRef.current = orderId;
+    orderIdRef.current = e.target.value;
     if (
       e.target.value.length !== 5 ||
-      !e.target.value.toUpperCase().match(/([A-Z+0-9])/g)
+      !e.target.value.toUpperCase().match(/(^[A-Z+0-9]+$)/g)
     ) {
-      SetIdValid(false);
+      idValidRef.current = false;
     } else {
-      SetIdValid(true);
+      idValidRef.current = true;
     }
     handleSearchError();
   }
 
   function handleFocus(e: React.FocusEvent<HTMLInputElement>) {
     if (e.target.id === "phone") {
-      SetIdValid(true);
+      idValidRef.current = true;
     } else {
-      setNumberValid(true);
+      phoneValidRef.current = true;
     }
   }
 
   function handleSearchError() {
-    if (!numberValid) {
+    if (phoneValidRef.current === false) {
       setSearchError("Valid phone number is ten digits.");
-    } else if (!idValid) {
+    } else if (idValidRef.current === false) {
       setSearchError(
         "Order ID must be 5 characters long and not contain any special characters ."
       );
-    } else {
+    } else if (customerPhone === "" && orderId === "") {
       setSearchError("");
     }
   }
@@ -61,9 +62,9 @@ export default function SearchBar() {
     setCustomerPhone(formattedNumber as string);
 
     if (!e.target.value.match(/([0-9||.]+)/g) || e.target.value.length != 12) {
-      setNumberValid(false);
+      phoneValidRef.current = false;
     } else {
-      setNumberValid(true);
+      phoneValidRef.current = true;
     }
     handleSearchError();
     phoneNumberRef.current = formattedNumber;
@@ -75,19 +76,22 @@ export default function SearchBar() {
         <label>Find by Order ID:</label>
         <input
           id="orderId"
-          className={idValid ? classes.valid : classes.invalid}
+          className={
+            idValidRef.current === false ? classes.valid : classes.invalid
+          }
           placeholder="Enter Order ID"
           type="text"
           maxLength={5}
           style={{ textTransform: "uppercase" }}
           onFocus={handleFocus}
           onChange={captureOrderID}
+          value={orderIdRef.current}
         />
         <SearchByIdButton orderUid={orderId} token={login.accessToken} />
         <label>Find by Customer Phone :</label>
         <input
           id="phone"
-          className={numberValid ? classes.valid : classes.invalid}
+          className={phoneValidRef.current ? classes.valid : classes.invalid}
           placeholder="ENTER CUSTOMER PHONE #"
           type="text"
           maxLength={12}
@@ -95,13 +99,18 @@ export default function SearchBar() {
           onChange={captureCustomerPhone}
           value={phoneNumberRef.current}
         />
+
         <SearchByPhoneButton
           customerName={customerPhone}
           token={login.accessToken}
         />
       </div>
-      {!numberValid && <p className={classes.searchError}>{searchError}</p>}
-      {!idValid && <p className={classes.searchError}>{searchError}</p>}
+      {idValidRef.current === false && (
+        <p className={classes.searchError}>{searchError}</p>
+      )}
+      {phoneValidRef.current === false && (
+        <p className={classes.searchError}>{searchError}</p>
+      )}
     </div>
   );
 }

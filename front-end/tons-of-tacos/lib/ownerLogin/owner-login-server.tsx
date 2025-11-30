@@ -272,6 +272,7 @@ export async function OwnerLogout(accessToken: string) {
     });
     data = await response.json();
     console.log("logout response: " + data.body);
+
     return data.message;
   } catch (error) {
     console.log(error);
@@ -284,4 +285,9 @@ export async function DeleteCookies() {
   (await cookieStore)
     .getAll()
     .forEach(async (cookie) => (await cookieStore).delete(`${cookie.name}`));
+}
+
+export async function nextCookiePresent() {
+  const cookieStore = await cookies();
+  return cookieStore.has("accessToken");
 }

@@ -4,6 +4,7 @@ import classes from "./owner-header.module.css";
 import LogoutButton from "../../ui/buttons/logout/logout";
 
 import {
+  DeleteCookies,
   GetLogin,
   OwnerLogout,
   Refresh,
@@ -35,8 +36,14 @@ export default function OwnerHeader() {
     const hours = loginDate.getHours();
 
     async function Refresher() {
-      if (exp < Date.now() && hours > 23) {
+      console.log(hours);
+      console.log(exp);
+      console.log(Date.now);
+      console.log(exp < Date.now());
+
+      if (exp > Date.now() && hours > 22) {
         OwnerLogout(login.accessToken);
+        DeleteCookies();
         setLoggedIn(false);
       } else if (exp - Number(Date.now()) < 60000) {
         StoreLogin(await Refresh());

@@ -6,15 +6,17 @@ import NavButtons from "@/components/ui/buttons/nav-buttons/nav-buttons";
 import OwnerLoginForm from "../../ui/forms/owner-login-form";
 import { useDisplayContext } from "@/context/display-context";
 import OwnerHeader from "../owner-header/owner-header";
-import { Suspense, useEffect } from "react";
-import {
-  getLogin,
-  IsAuthenticated,
-} from "@/lib/ownerLogin/owners-login-client";
+import { useEffect } from "react";
+
 import { useOwnerContext } from "@/context/owner-context";
-import FadeOnLoad from "@/components/ui/animations/fade-on-load";
-import { CookieCheck, GetLogin } from "@/lib/ownerLogin/owner-login-server";
-import { cookies } from "next/headers";
+
+import {
+  CookieCheck,
+  DeleteCookies,
+  GetLogin,
+  nextCookiePresent,
+} from "@/lib/ownerLogin/owner-login-server";
+// import { cookies } from "next/headers";
 
 export default function MainHeader() {
   const { showLogin } = useDisplayContext();
@@ -29,6 +31,8 @@ export default function MainHeader() {
       if ((await CookieCheck()) === false && loggedIn === false) {
         setLogin(await GetLogin());
         setLoggedIn(true);
+      } else if ((await nextCookiePresent()) !== true) {
+        DeleteCookies();
       }
     }
 
@@ -42,11 +46,10 @@ export default function MainHeader() {
           <Link className={classes.home} href="/">
             Tons Of Tacos
           </Link>
-    
-              {loggedIn && <OwnerHeader />}
-              {showLogin && !loggedIn && <OwnerLoginForm />}
-              {!showLogin && !loggedIn && <NavButtons />}
-   
+
+          {loggedIn && <OwnerHeader />}
+          {showLogin && !loggedIn && <OwnerLoginForm />}
+          {!showLogin && !loggedIn && <NavButtons />}
         </header>
       </div>
     </>
