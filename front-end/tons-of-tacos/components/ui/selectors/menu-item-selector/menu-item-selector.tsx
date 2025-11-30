@@ -90,8 +90,8 @@ export default function MenuItemSelector(props: {
     <div className={classes.menuItemSelector}>
       <div className={classes.categories}>
         <h3>Tacos</h3>
-        <h3>Sides</h3>
         <h3>Toppings</h3>
+        <h3>Sides</h3>
         <h3>Drinks</h3>
       </div>
       <div className={classes.items}>

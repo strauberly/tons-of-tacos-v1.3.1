@@ -8,11 +8,11 @@ export default function DailySalesDisplay() {
 
   useEffect(() => {
     async function Sales() {
-      setSales(await DailySales(login.token));
+      setSales(await DailySales(login.accessToken));
     }
     Sales();
     setInterval(Sales, 3000);
-  }, [login.token]);
+  }, [login.accessToken]);
 
   return (
     <div>

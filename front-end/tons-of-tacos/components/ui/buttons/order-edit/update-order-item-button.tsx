@@ -18,7 +18,8 @@ export default function UpdateOrderItemButton(props: {
         disabled={
           props.newSize !== "S" &&
           props.newSize !== "M" &&
-          props.newSize !== "L"
+          props.newSize !== "L" &&
+          props.newSize !== "NA"
         }
         onClick={() => [
           setQuantity(props.newQuantity),

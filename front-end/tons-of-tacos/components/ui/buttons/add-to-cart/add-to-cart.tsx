@@ -29,10 +29,6 @@ export default function AddToCart(props: {
   const [largeOrder, setLargeOrder] = useState<boolean>();
   const itemInCart = useRef(false);
 
-  function print() {
-    console.log("size: " + props.size.toString());
-  }
-
   function checkItem() {
     try {
       setCart(GetCart());
@@ -91,13 +87,6 @@ export default function AddToCart(props: {
     }
     itemInCart.current = false;
   };
-
-  // useEffect(() => {
-  //   if (props.size === "") {
-  //     setSelectedSize("na");
-  //   }
-  //   // print();
-  // }, [print, props.size, setSelectedSize]);
 
   return (
     <>

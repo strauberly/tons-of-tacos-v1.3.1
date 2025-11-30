@@ -1,22 +1,15 @@
 "use client";
 
-// import MenuItemSelector from "./menu-item-selector";
-// import MenuItemSelector from "../ui/selectors/menu-item-selector/menu-item-selector";
 import MenuItemSelector from "../menu-item-selector/menu-item-selector";
 import { useEffect, useRef, useState } from "react";
-// import ArrowIcon from "../quantity-selector/quantity-selector";
-import ArrowIcon from "../quantity-selector/arrow-icon";
 import { useModalContext } from "@/context/modal-context";
-// import AddToOrderButton from "../ui/buttons/order-edit/add-to-order-button";
 import AddToOrderButton from "../../buttons/order-edit/add-to-order-button";
-import { useOrdersContext } from "@/context/orders-context";
 import { useOwnerContext } from "@/context/owner-context";
 import classes from "./add-order-item.module.css";
 import QuantitySelector from "../quantity-selector/quantity-selector";
-// import MenuItemSelector from "../menu-item-selector/menu-item-selector-copy";
 
 export default function AddOrderItem() {
-  const { orderToView, setOrderToView } = useModalContext();
+  const { orderToView } = useModalContext();
   const { ownerOrder } = useOwnerContext();
   const [itemSelector, setItemSelector] = useState<boolean>(false);
   const [itemName, setItemName] = useState<string>("Item");
@@ -53,7 +46,6 @@ export default function AddOrderItem() {
   };
   // call from lib
   function calcPrice() {
-    let adjPrice: number;
     let sizeSurcharge = 0;
 
     if (sizeRef.current === "M") {
@@ -62,8 +54,7 @@ export default function AddOrderItem() {
       sizeSurcharge = 1.0;
     }
 
-    // eslint-disable-next-line prefer-const
-    adjPrice = (sizeSurcharge + item?.unitPrice) * quantity;
+    const adjPrice = (sizeSurcharge + item?.unitPrice) * quantity;
     return adjPrice;
   }
 
@@ -77,9 +68,6 @@ export default function AddOrderItem() {
 
   const increment = () => {
     setQuantity(quantity + 1);
-    // if (quantity >= 10) {
-    //   setQuantity(10);
-    // }
     setPrice(calcPrice());
   };
 
@@ -115,12 +103,9 @@ export default function AddOrderItem() {
     setItemSelector(false);
   }
 
-  // need an owner order context check
-
   useEffect(() => {
     console.log(ownerOrder);
     function calcPrice() {
-      let adjPrice: number;
       let sizeSurcharge = 0;
 
       if (size === "M") {
@@ -128,8 +113,7 @@ export default function AddOrderItem() {
       } else if (size === "L") {
         sizeSurcharge = 1.0;
       }
-      // eslint-disable-next-line prefer-const
-      adjPrice = (sizeSurcharge + item?.unitPrice) * quantity;
+      const adjPrice = (sizeSurcharge + item?.unitPrice) * quantity;
       return adjPrice;
     }
     setPrice(calcPrice());
@@ -139,10 +123,7 @@ export default function AddOrderItem() {
     <>
       <div className={classes.addItemToOrder}>
         <div className={classes.titles}>
-          <button
-            // disabled={orderToView.ready !== "no" || orderToView.closed !== "no"}
-            onClick={() => setItemSelector(!itemSelector)}
-          >
+          <button onClick={() => setItemSelector(!itemSelector)}>
             Select Item
           </button>
           <h3>Quantity</h3>
@@ -158,29 +139,6 @@ export default function AddOrderItem() {
             setEdited={setEdited}
             scale="scale(.75)"
           />
-          {/* <div className={classes.quantity}>
-            <button
-              className={`${classes.decrement}`}
-              onClick={() => decrement()}
-            >
-              <ArrowIcon scale={"scale(.75)"} />
-            </button>
-            <input
-              name="quantity"
-              id="quantity"
-              type="number"
-              min="1"
-              max={1}
-              disabled={true}
-              value={quantity}
-            />
-            <button
-              className={`${classes.increment}`}
-              onClick={() => increment()}
-            >
-              <ArrowIcon scale={"scale(.75)"} />
-            </button>
-          </div> */}
 
           <div className={classes.size}>
             {`${item.itemSize}` === "a" && (
@@ -196,7 +154,7 @@ export default function AddOrderItem() {
                 onChange={checkSize}
               />
             )}
-            {`${item.itemSize}` === "na" && <p>{item.itemSize}</p>}
+            {`${item.itemSize}` === "NA" && <p>{item.itemSize}</p>}
           </div>
 
           {showSizeError === true && (
@@ -224,15 +182,6 @@ export default function AddOrderItem() {
         </div>
 
         {itemSelector && (
-          // <MenuItemSelector
-          //   setItemName={itemNameSetter}
-          //   setItem={itemSetter}
-          //   itemName={itemName}
-          //   setItemSelector={setItemSelector}
-          //   setReadyToAdd={setReadyToAdd}
-          //   setPrice={setPrice}
-          //   setSize={setSize}
-          // />
           <MenuItemSelector
             setItemName={itemNameSetter}
             setItem={itemSetter}

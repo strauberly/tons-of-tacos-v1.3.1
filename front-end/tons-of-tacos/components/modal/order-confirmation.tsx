@@ -8,7 +8,6 @@ import { useOrderConfirmationContext } from "@/context/order-confirmation-contex
 import { useOwnerContext } from "@/context/owner-context";
 import { RemoveOwnerOrder } from "@/lib/owners-tools/owners-tools-client";
 import { useOrdersContext } from "@/context/orders-context";
-import { useEffect } from "react";
 import { GetAllOrders } from "@/lib/owners-tools/owners-tools";
 
 export default function OrderConfirmation() {
@@ -58,7 +57,7 @@ export default function OrderConfirmation() {
                 onClick={async () => {
                   orderCompletion();
                   if (loggedIn) {
-                    setOrders(await GetAllOrders(login.token));
+                    setOrders(await GetAllOrders(login.accessToken));
                   }
                 }}
               >

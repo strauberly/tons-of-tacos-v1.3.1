@@ -1,10 +1,8 @@
 import { useDisplayContext } from "@/context/display-context";
 import Card from "../ui/cards/card";
 import classes from "./order-action-confirmation.module.css";
-
 import { useModalContext } from "@/context/modal-context";
 import { useRef } from "react";
-
 import {
   AddToOrderMessage,
   CustomerUpdateMessage,
@@ -55,7 +53,6 @@ export default function OrderActionConfirmation(props: {
       newQuantity: quantity,
       newSize: itemSize,
     });
-    // setOrderChanged(true);
   } else if (props.title === "Update Customer") {
     message.current = CustomerUpdateMessage(customer);
   }
@@ -79,7 +76,7 @@ export default function OrderActionConfirmation(props: {
                 setOrderChanged(false);
                 orderReqResRef.current = await GetOrderByID(
                   orderToView.orderUid,
-                  login.token
+                  login.accessToken
                 );
                 if (orderReqResRef.current.status === 200) {
                   setOrderToView(orderReqResRef.current.body as Order);
