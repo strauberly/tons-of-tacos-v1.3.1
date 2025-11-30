@@ -16,6 +16,9 @@
 
 - A couple of images were not showing up, backend team(me) addressed a formatting issue that was preventing them from properly displaying.
 
+- Issue with next refresh cookie(**next_hmr_refresh_hash**) interferring with our cookie logic addressed for now.
+  - might be able to leverage this cookie down the road.
+
 ---
 
 -- 24 Nov 2025 --

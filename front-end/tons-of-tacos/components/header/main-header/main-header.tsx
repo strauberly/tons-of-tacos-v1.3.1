@@ -13,7 +13,11 @@ import {
 } from "@/lib/ownerLogin/owners-login-client";
 import { useOwnerContext } from "@/context/owner-context";
 import FadeOnLoad from "@/components/ui/animations/fade-on-load";
-import { CookieCheck, GetLogin } from "@/lib/ownerLogin/owner-login-server";
+import {
+  CookieCheck,
+  DeleteCookies,
+  GetLogin,
+} from "@/lib/ownerLogin/owner-login-server";
 import { cookies } from "next/headers";
 
 export default function MainHeader() {
@@ -29,6 +33,9 @@ export default function MainHeader() {
       if ((await CookieCheck()) === false && loggedIn === false) {
         setLogin(await GetLogin());
         setLoggedIn(true);
+      } else {
+        DeleteCookies();
+        setLoggedIn(false);
       }
     }
 
@@ -42,11 +49,10 @@ export default function MainHeader() {
           <Link className={classes.home} href="/">
             Tons Of Tacos
           </Link>
-    
-              {loggedIn && <OwnerHeader />}
-              {showLogin && !loggedIn && <OwnerLoginForm />}
-              {!showLogin && !loggedIn && <NavButtons />}
-   
+
+          {loggedIn && <OwnerHeader />}
+          {showLogin && !loggedIn && <OwnerLoginForm />}
+          {!showLogin && !loggedIn && <NavButtons />}
         </header>
       </div>
     </>
