@@ -1,12 +1,13 @@
 import { useDisplayContext } from "@/context/display-context";
 import SearchIcon from "./search-icon";
 import classes from "./search.module.css";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useModalContext } from "@/context/modal-context";
 import { GetOrdersByCustomerPhone } from "@/lib/owners-tools/owners-tools";
 import { useOrdersContext } from "@/context/orders-context";
 
 export default function SearchByPhoneButton(props: {
+  phoneValid: boolean;
   customerName: string;
   token: string;
 }) {
@@ -33,17 +34,20 @@ export default function SearchByPhoneButton(props: {
   }
 
   return (
-    <button
-      className={classes.searchButton}
-      onClick={async () => [
-        (response.current = await GetOrdersByCustomerPhone(
-          props.customerName,
-          props.token
-        )),
-        ordersFound(),
-      ]}
-    >
-      <SearchIcon />
-    </button>
+    <div>
+      <button
+        disabled={!props.phoneValid}
+        className={classes.searchButton}
+        onClick={async () => [
+          (response.current = await GetOrdersByCustomerPhone(
+            props.customerName,
+            props.token
+          )),
+          ordersFound(),
+        ]}
+      >
+        <SearchIcon />
+      </button>
+    </div>
   );
 }

@@ -87,7 +87,11 @@ export default function SearchBar() {
           onChange={captureOrderID}
           value={orderIdRef.current}
         />
-        <SearchByIdButton orderUid={orderId} token={login.accessToken} />
+        <SearchByIdButton
+          orderUid={orderId}
+          token={login.accessToken}
+          idValid={idValidRef.current}
+        />
         <label>Find by Customer Phone :</label>
         <input
           id="phone"
@@ -103,6 +107,7 @@ export default function SearchBar() {
         <SearchByPhoneButton
           customerName={customerPhone}
           token={login.accessToken}
+          phoneValid={phoneValidRef.current}
         />
       </div>
       {idValidRef.current === false && (

@@ -8,6 +8,8 @@
 
 - validation for search order search fields has been updated so that evaluation is happening on each keystroke through refs instead of state which was giving the undesired delayed feel.
 
+- search buttons are deactivated if fields are invalid.
+
 ---
 
 -- 28 Nov 2025 --

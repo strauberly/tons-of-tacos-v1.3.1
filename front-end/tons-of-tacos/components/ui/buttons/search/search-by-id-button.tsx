@@ -6,6 +6,7 @@ import { useDisplayContext } from "@/context/display-context";
 
 import classes from "./search.module.css";
 export default function SearchByIdButton(props: {
+  idValid: boolean;
   orderUid: string;
   token: string;
 }) {
@@ -32,9 +33,9 @@ export default function SearchByIdButton(props: {
       setShowModal(true);
     }
   }
-  // try catch on click?
   return (
     <button
+      disabled={!props.idValid}
       className={classes.searchButton}
       onClick={async () => [
         (response.current = await GetOrderByID(props.orderUid, props.token)),
