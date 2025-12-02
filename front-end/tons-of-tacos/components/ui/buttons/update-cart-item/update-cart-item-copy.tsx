@@ -92,7 +92,7 @@ export default function Update(props: {
       setItemQuantityChanged(true);
       props.setEdited(true);
     }
-    if (props.oldSize != props.newSize && props.newSize) {
+    if (props.oldSize !== props.newSize) {
       setSizeChanged(true);
       props.setEdited(true);
     }

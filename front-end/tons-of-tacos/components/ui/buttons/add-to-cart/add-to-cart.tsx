@@ -21,7 +21,7 @@ export default function AddToCart(props: {
 }) {
   const { setModal } = useModalContext();
   const { setShowModal } = useDisplayContext();
-  const { selectedSize, setSelectedSize } = useSelectedSizeContext();
+  const { selectedSize } = useSelectedSizeContext();
   const { cartQuantity, setCartQuantity, setItemsInCart, cart, setCart } =
     useCartContext();
   const { loggedIn } = useOwnerContext();
@@ -33,11 +33,13 @@ export default function AddToCart(props: {
     try {
       setCart(GetCart());
       cart.forEach((cartItem) => {
-        if (props.id == cartItem.id && props.size == selectedSize) {
+        if (props.id === cartItem.id && props.size === selectedSize) {
           itemInCart.current = true;
           if (itemInCart.current === true) {
             setModal(
-              `${props.itemName} is already in your cart. Select the cart icon to view your order and change quantities.`
+              `${
+                props.itemName + " " + props.size
+              } is already in your cart. Select the cart icon to view your order and change quantities or select this item with a different size.`
             );
             setShowModal(true);
           }
