@@ -2,6 +2,18 @@
 
 ---
 
+-- 1 Dec 2025 --
+
+- Application successfully timed out over night as designed.
+
+- update button on order item in order view, now sets items back to original state, signaling to the user that there has been a change after the confirmation closes.
+
+- In order view, add item button is disabled if closed property for the order != "no" indicating that the order has been closed because if the order is closed the property will be the acommpanying timestamp for when that action took place.
+
+- simplified logic of errors for search inputs and did a bit of styling work for valid invalid input while here.
+
+---
+
 -- 29 Nov 2025 --
 
 - Adjustments made to owner header, trying to ensure owner is logged out after 11pm. Juggling versus methodology in main header for preserving login session.

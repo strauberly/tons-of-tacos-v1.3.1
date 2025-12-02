@@ -4,7 +4,6 @@ import Card from "../../ui/cards/card";
 import OrderItem from "../../owner-dashboard/order-item";
 import { useDisplayContext } from "@/context/display-context";
 import EditableDetails from "./editable-details";
-
 import AddOrderItem from "../../ui/selectors/add-to-order/add-order-item";
 
 export default function OrderView() {

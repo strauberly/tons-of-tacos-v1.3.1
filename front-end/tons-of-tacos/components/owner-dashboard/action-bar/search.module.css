@@ -12,9 +12,19 @@
   margin-left: 2rem;
 }
 
+.invalid {
+  border: 2px solid var(--attention-color);
+  border-radius: 3px;
+}
+
+.valid {
+  border: 2px solid var(--border-color);
+  border-radius: 3px;
+}
+
 .search input {
   width: 28ch;
-  border: solid var(--border-color) 2px;
+  /* border: solid var(--border-color) 2px; */
 }
 
 .search input,
@@ -34,8 +44,9 @@
 
 .searchError {
   color: var(--attention-color);
-  margin-top: 2rem;
   /* margin-left: 20rem; */
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   justify-self: center;
   /* width: ; */
   /* font-size: 1.5rem; */

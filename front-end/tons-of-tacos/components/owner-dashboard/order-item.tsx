@@ -1,4 +1,3 @@
-import classes from "./order-item.module.css";
 import { useEffect, useRef, useState } from "react";
 import { useEditOrderContext } from "@/context/edit-order-context";
 import { useModalContext } from "@/context/modal-context";
@@ -7,6 +6,7 @@ import UpdateOrderItemButton from "../ui/buttons/order-edit/update-order-item-bu
 import SizeSelector from "../ui/selectors/size-selector/size-selector";
 import QuantitySelector from "../ui/selectors/quantity-selector/quantity-selector";
 import { calcItemTotal } from "@/lib/general/multi-use";
+import classes from "./order-item.module.css";
 
 export default function OrderItem(orderItem: { orderItem: OrderItem }) {
   const { setOrderItem, setQuantity, quantity } = useEditOrderContext();
