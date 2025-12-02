@@ -1,4 +1,3 @@
-import classes from "./cart-item.module.css";
 import { useEffect, useRef, useState } from "react";
 import { useCartContext } from "@/context/cart-context";
 import { useModalContext } from "@/context/modal-context";
@@ -9,6 +8,7 @@ import QuantitySelector from "../ui/selectors/quantity-selector/quantity-selecto
 import RemoveFromCart from "../ui/buttons/remove-from-cart/remove-from-cart";
 import Update from "../ui/buttons/update-cart-item/update-cart-item-copy";
 import { calcItemTotal } from "@/lib/general/multi-use";
+import classes from "./cart-item.module.css";
 
 export default function CartItem(props: {
   id: string;

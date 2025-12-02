@@ -2,6 +2,14 @@
 
 ---
 
+-- 2 Dec 2025 --
+
+- Made alterations to add menu item to customer cart so it is now correctly looking checking if item already in cart or not and adding to cart if not.
+
+- Working on check in cart to block from having 2 near identical items becoming identical items, ie(if large and medium iced tea in cart, do not let medium come a large, and do notlet the original large become a medium or essentially the same item is in cart twice.)
+
+---
+
 -- 1 Dec 2025 --
 
 - Application successfully timed out over night as designed.
