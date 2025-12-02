@@ -27,7 +27,7 @@ export default function UpdateOrderItemButton(props: {
           setOrderItem(props.orderItem),
           setShowConfirmation(true),
           setConfirmationTitle("Update Order Item"),
-          props.setCanEdit(true),
+          props.setCanEdit(false),
         ]}
       >
         Update

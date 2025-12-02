@@ -10,7 +10,8 @@ import classes from "./search.module.css";
 export default function SearchBar() {
   const [orderId, setOrderID] = useState<string>("");
   const [customerPhone, setCustomerPhone] = useState<string>("");
-  const [searchError, setSearchError] = useState<string>("");
+  const [idSearchError, setIdSearchError] = useState<string>("");
+  const [phoneSearchError, setPhoneSearchError] = useState<string>("");
 
   const orderIdRef = useRef<string>("");
   const phoneNumberRef = useRef<string>("");
@@ -28,33 +29,26 @@ export default function SearchBar() {
       !e.target.value.toUpperCase().match(/(^[A-Z+0-9]+$)/g)
     ) {
       idValidRef.current = false;
+      setIdSearchError(
+        "Order ID must be 5 characters long and not contain any special characters ."
+      );
     } else {
       idValidRef.current = true;
     }
-    handleSearchError();
+
+    if (e.target.value.length < 1) {
+      idValidRef.current = false;
+      setIdSearchError("");
+    }
   }
 
   function handleFocus(e: React.FocusEvent<HTMLInputElement>) {
     if (e.target.id === "phone") {
       idValidRef.current = true;
-    } else {
+    } else if (e.target.id === "orderId") {
       phoneValidRef.current = true;
     }
   }
-
-  function handleSearchError() {
-    if (phoneValidRef.current === false) {
-      setSearchError("Valid phone number is ten digits.");
-    } else if (idValidRef.current === false) {
-      setSearchError(
-        "Order ID must be 5 characters long and not contain any special characters ."
-      );
-    } else if (customerPhone === "" && orderId === "") {
-      setSearchError("");
-    }
-  }
-
-  //  search by customer phone number
 
   function captureCustomerPhone(e: React.ChangeEvent<HTMLInputElement>) {
     const formattedNumber = formatPhone(e.target.value);
@@ -63,10 +57,18 @@ export default function SearchBar() {
 
     if (!e.target.value.match(/([0-9||.]+)/g) || e.target.value.length != 12) {
       phoneValidRef.current = false;
+      setPhoneSearchError("Valid phone number is ten digits.");
     } else {
       phoneValidRef.current = true;
     }
-    handleSearchError();
+
+    if (e.target.value.length < 1) {
+      phoneValidRef.current = false;
+      setPhoneSearchError("");
+    }
+
+    // handleSearchError();
+
     phoneNumberRef.current = formattedNumber;
   }
 
@@ -77,7 +79,7 @@ export default function SearchBar() {
         <input
           id="orderId"
           className={
-            idValidRef.current === false ? classes.valid : classes.invalid
+            idValidRef.current === true ? classes.valid : classes.invalid
           }
           placeholder="Enter Order ID"
           type="text"
@@ -110,11 +112,11 @@ export default function SearchBar() {
           phoneValid={phoneValidRef.current}
         />
       </div>
-      {idValidRef.current === false && (
-        <p className={classes.searchError}>{searchError}</p>
-      )}
       {phoneValidRef.current === false && (
-        <p className={classes.searchError}>{searchError}</p>
+        <p className={classes.searchError}>{phoneSearchError}</p>
+      )}
+      {idValidRef.current === false && (
+        <p className={classes.searchError}>{idSearchError}</p>
       )}
     </div>
   );
