@@ -1,11 +1,14 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import classes from "./size-selector.module.css";
 import { useOwnerContext } from "@/context/owner-context";
+import { useCartContext } from "@/context/cart-context";
 
 export default function SizeSelector(props: {
   itemSize: string;
   setShowSizeError: (showSizeError: boolean) => void;
   setNewSize: (newSize: string) => void;
+  setSizeError: (sizeError: string) => void;
+  itemName: string;
 }) {
   /*
     Takes a size(string) from either a menu item or order item and if appropriate displays the selector.
@@ -14,6 +17,7 @@ export default function SizeSelector(props: {
     */
 
   const { ownerOrder } = useOwnerContext();
+  const { cart } = useCartContext();
 
   const [size, setSize] = useState<string>(`${props.itemSize}`);
 
@@ -35,6 +39,9 @@ export default function SizeSelector(props: {
       sizeRef.current !== "M" &&
       sizeRef.current !== "L"
     ) {
+      props.setSizeError(
+        "Enter 'S' for small, 'M' for medium or 'L' for large."
+      );
       props.setShowSizeError(true);
       setSizeValid(false);
       props.setNewSize(sizeRef.current);
@@ -45,6 +52,23 @@ export default function SizeSelector(props: {
       props.setNewSize(sizeRef.current);
     }
   }
+
+  useEffect(() => {
+    const sizes: string[] = [];
+    cart.forEach((cartItem) => {
+      if (cartItem.itemName === props.itemName) {
+        sizes.push(cartItem.size);
+      }
+      sizes.forEach((size) => {
+        if (size === sizeRef.current) {
+          props.setSizeError(
+            `${props.itemName + " " + sizeRef.current} is already in cart.`
+          );
+          props.setShowSizeError(true);
+        }
+      });
+    });
+  });
 
   return (
     <div className={classes.size}>
@@ -64,6 +88,7 @@ export default function SizeSelector(props: {
           />
         )}
       </>
+    
     </div>
   );
 }
