@@ -2,7 +2,7 @@
 
 import { useCartContext } from "@/context/cart-context";
 
-import { UpdateCart } from "@/lib/cart";
+import { GetCart, UpdateCart } from "@/lib/cart";
 
 import { useEffect, useState } from "react";
 
@@ -14,76 +14,37 @@ import {
   GetOwnerOrder,
   updateOwnerOrder,
 } from "@/lib/owners-tools/owners-tools-client";
+import CartQuantity from "../../badges/cart-quantity";
 
 export default function Update(props: {
-  cartItem: string;
+  cartItemId: string;
+  // cartItem: string;
   updatedItemQuantity: number;
   updatedItemPrice: string;
   oldQuantity: number;
+  oldSize: string;
+  newSize: string;
+  setEdited: (edited: boolean) => void;
+  edited: boolean;
+  setCanEdit: (canEdit: boolean) => void;
+  // canEditFunc: () => void;
 }) {
-  const { cart, setCart, setCartQuantity, cartQuantity } = useCartContext();
-
-  const { setModal, orderToView, setOrderToView } = useModalContext();
+  // get index of the the item already in cart
+  const { cart, setCart, cartQuantity, setCartQuantity } = useCartContext();
+  const { ownerOrder } = useOwnerContext();
+  const { setModal } = useModalContext();
   const { setShowModal } = useDisplayContext();
-  const { ownerOrder, order, setOrder } = useOwnerContext();
-
-  const newCart = cart;
-
   const [largeOrder, setLargeOrder] = useState(false);
-
   const [itemQuantityChanged, setItemQuantityChanged] = useState(false);
+  const [sizeChanged, setSizeChanged] = useState(false);
 
-  const updateCartItem = () => {
-    const cartItemIndex = newCart.findIndex(
-      (cartItem) => cartItem.itemName === props.cartItem
-    );
-
-    newCart[cartItemIndex].quantity = props.updatedItemQuantity;
-
-    newCart[cartItemIndex].price = props.updatedItemPrice;
-    UpdateCart(newCart);
-    setCart(newCart);
-  };
-
-  function updateOrderItem() {
-    console.log(GetOwnerOrder());
-    // setOrder(GetOwnerOrder());
-    console.log(order);
-    console.log(props.cartItem);
-    console.log(
-      order.findIndex((orderItem) => orderItem.itemName === props.cartItem)
-    );
-    const orderItemIndex = orderToView.orderItems.findIndex(
-      (orderItem) => orderItem.itemName === props.cartItem
-    );
-    // const orderItemIndex = order.findIndex(
-    //   (orderItem) => orderItem.itemName === props.cartItem
-    // );
-    console.log("order item index: " + orderToView.orderItems[orderItemIndex]);
-    // console.log("order item index: " + order[orderItemIndex]);
-    console.log(
-      "order item index quantity: " +
-        orderToView.orderItems[orderItemIndex].quantity
-    );
-    // console.log("order item index quantity: " + order[orderItemIndex].quantity);
-    orderToView.orderItems[orderItemIndex].quantity = props.updatedItemQuantity;
-    // order[orderItemIndex].quantity = props.updatedItemQuantity;
-    orderToView.orderItems[orderItemIndex].total = Number(
-      props.updatedItemPrice
-    );
-    // order[orderItemIndex].price = props.updatedItemPrice;
-
-    setOrder(order);
-    setOrder(order);
-    updateOwnerOrder(order);
-  }
-
-  let newQuantity = 0;
-
-  const updateQuantity = () => {
+  function updateCartItem() {
+    let newQuantity = 0;
+    const newCart = cart;
     newQuantity = cartQuantity - props.oldQuantity;
     newQuantity += props.updatedItemQuantity;
-    if (newQuantity > 30) {
+
+    if (!ownerOrder && newQuantity > 30) {
       setModal(
         "Your order has grown to a fair size. The current maximum is 30 items. Please contact us before adding anything else. \n\nThis will ensure we can make your order happen today. You can also remove items from your cart. Thank you!"
       );
@@ -92,42 +53,93 @@ export default function Update(props: {
     } else if (!largeOrder) {
       setCartQuantity(newQuantity);
     }
-  };
 
-  function checkOrderContext() {
-    if (ownerOrder) {
-      return [
-        setCart(GetOwnerOrder()),
+    // let newCart: CartItem[];
 
-        updateOrderItem(),
-        setItemQuantityChanged(false),
-      ];
-    } else {
-      return [
-        updateCartItem(),
-        updateQuantity(),
-        setItemQuantityChanged(false),
-      ];
+    // let cartItemIndex: number;
+    console.log("new cart: " + JSON.stringify(newCart));
+
+    console.log("props id: " + props.cartItemId);
+
+    const cartItemIndex: number = newCart.findIndex(
+      (cartItem) => cartItem.id === props.cartItemId
+
+      // (cartItem) => cartItem.itemName === props.cartItem
+    );
+
+    // newCart;
+
+    console.log("index: " + cartItemIndex);
+    if (itemQuantityChanged) {
+      newCart[cartItemIndex].quantity = props.updatedItemQuantity;
     }
+    if (sizeChanged) {
+      newCart[cartItemIndex].size = props.newSize;
+    }
+    newCart[cartItemIndex].price = props.updatedItemPrice;
+    if (ownerOrder) {
+      updateOwnerOrder(newCart);
+      setCart(GetOwnerOrder());
+    } else {
+      UpdateCart(newCart);
+      setCart(GetCart());
+    }
+    setItemQuantityChanged(false);
   }
 
   useEffect(() => {
     if (props.oldQuantity != props.updatedItemQuantity) {
       setItemQuantityChanged(true);
+      props.setEdited(true);
     }
-  }, [props.oldQuantity, props.updatedItemQuantity]);
+    if (props.oldSize != props.newSize) {
+      setSizeChanged(true);
+      props.setEdited(true);
+    }
+    if (
+      props.newSize !== "S" &&
+      props.newSize !== "M" &&
+      props.newSize !== "L"
+    ) {
+      setSizeChanged(false);
+    }
+  }, [
+    props,
+    props.newSize,
+    props.oldQuantity,
+    props.oldSize,
+    props.updatedItemQuantity,
+  ]);
 
   return (
     <div>
-      {itemQuantityChanged && (
+      {(itemQuantityChanged && props.edited && (
         <button
           disabled={largeOrder === true ? true : false}
           className={classes.update}
-          onClick={() => [checkOrderContext()]}
+          onClick={() => [
+            updateCartItem(),
+            props.setEdited(false),
+            props.setCanEdit(false),
+          ]}
         >
           Update
         </button>
-      )}
+      )) ||
+        (sizeChanged && props.edited && (
+          <button
+            disabled={largeOrder === true ? true : false}
+            className={classes.update}
+            onClick={() => [
+              updateCartItem(),
+              props.setEdited(false),
+              props.setCanEdit(false),
+              // props.canEditFunc(false),
+            ]}
+          >
+            Update
+          </button>
+        ))}
     </div>
   );
 }

@@ -8,6 +8,9 @@
 
 - Working on check in cart to block from having 2 near identical items becoming identical items, ie(if large and medium iced tea in cart, do not let medium come a large, and do notlet the original large become a medium or essentially the same item is in cart twice.)
 
+- Solution is in place. If two items are in cart with different sizes and use tries to change size to the same size as the duplicate item they will be alerted and update button is non functional.
+  - Need to test against owner functions but should be identical.
+
 ---
 
 -- 1 Dec 2025 --
