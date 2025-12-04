@@ -11,7 +11,10 @@ export default function MenuCategory(props: { name: string }) {
 
   return (
     <li>
-      <Link href={`/${props.name}`} onClick={() => setShowMenu(!showMenu)}>
+      <Link
+        href={`/menu-category/${props.name}`}
+        onClick={() => setShowMenu(!showMenu)}
+      >
         {props.name}
       </Link>
     </li>
