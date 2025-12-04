@@ -4,7 +4,9 @@
 
 -- 4 Dec 2025 --
 
-- Got to the bottom of menu items not surviving a refresh or being able to access a menu category by typing in address bar. This has been resolved utilizing the slug in address bar as state storage for the category we wish to view.
+- Got to the bottom of menu items not surviving a refresh or being able to access a menu category by typing in address bar. This has been resolved utilizing the slug in address bar as state storage for the category we wish to view. Lots more can be done with this just unneeded at this time.
+
+- menu items are now a nested dynamic route (ie. /menu-category/[category])
 
 ---
 

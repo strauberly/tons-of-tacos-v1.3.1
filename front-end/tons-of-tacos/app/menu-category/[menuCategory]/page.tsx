@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import FadeOnLoad from "@/components/ui/animations/fade-on-load";
-import Loading from "../loading";
+import Loading from "../../loading";
 import MenuItemList from "@/components/menu/menu-items/menu-item-list";
 
 export default async function MenuItemsByCategory(props: {

@@ -5,7 +5,6 @@ import CategoriesSource, { MenuItemsSource } from "@/lib/menu";
 import { useMenuContext } from "@/context/menu-context";
 import { useMenuCategoryContext } from "@/context/menu-category-context";
 import MenuItem from "./menu-item";
-import NotFound from "@/app/not-found";
 
 export default function MenuItemListCopy(category: { category: string }) {
   const { setMenuItems } = useMenuContext();
@@ -41,7 +40,6 @@ export default function MenuItemListCopy(category: { category: string }) {
           throw error;
         });
       }
-
       setMenuItems(menuItems.current);
     }
     DisplayMenuItems();
