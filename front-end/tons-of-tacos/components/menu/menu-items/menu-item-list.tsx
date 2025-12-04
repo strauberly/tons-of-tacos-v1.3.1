@@ -1,27 +1,39 @@
 "use client";
 import classes from "./menu-item-list.module.css";
 import { useEffect, useRef, useState } from "react";
-import { MenuItemsSource } from "@/lib/menu";
+import CategoriesSource, { MenuItemsSource } from "@/lib/menu";
 import { useMenuContext } from "@/context/menu-context";
-import { notFound } from "next/navigation";
 import { useMenuCategoryContext } from "@/context/menu-category-context";
 import MenuItem from "./menu-item";
+import NotFound from "@/app/not-found";
 
 export default function MenuItemListCopy(category: { category: string }) {
   const { setMenuItems } = useMenuContext();
-  const { menuCategories } = useMenuCategoryContext();
+  const { menuCategories, setMenuCategories } = useMenuCategoryContext();
   const menuItems = useRef<MenuItem[]>([]);
 
-  const menuOptions: string[] = menuCategories.map(
-    (category: { name: string }) => category.name
+  const [description, setDescription] = useState(
+    menuCategories
+      .find(function (mc) {
+        return mc.name === `${category.category}`;
+      })
+      ?.description.toString()
   );
 
-  if (!menuOptions.includes(category.category)) {
-    notFound();
-  }
   const [, setError] = useState();
   useEffect(() => {
     async function DisplayMenuItems() {
+      if (description === undefined) {
+        setMenuCategories(await CategoriesSource());
+        setDescription(
+          menuCategories
+            .find(function (mc) {
+              return mc.name === `${category.category}`;
+            })
+            ?.description.toString()
+        );
+      }
+
       try {
         menuItems.current = await MenuItemsSource(category.category);
       } catch (error) {
@@ -29,22 +41,16 @@ export default function MenuItemListCopy(category: { category: string }) {
           throw error;
         });
       }
+
       setMenuItems(menuItems.current);
     }
     DisplayMenuItems();
-  }, [category, menuCategories, setMenuItems]);
-
-  const description: string | undefined = menuCategories
-    .find(function (mc) {
-      return mc.name === `${category.category}`;
-    })
-    ?.description.toString();
-
+  }, [category, description, menuCategories, setMenuCategories, setMenuItems]);
   return (
     <>
       <div className={classes.category}>
         <h1>{category.category + ":"}</h1>
-        <p className={classes.description}>{description}</p>
+        <p className={classes.description}>{`${description}`}</p>
       </div>
       <ul className={classes.grid}>
         {menuItems.current.map(

@@ -7,8 +7,7 @@ export default function Error({ error }: { error: Error }) {
     <html>
       <body>
         <div className={classes.error}>
-          <h1>Whoops! {error.message}.</h1>
-          <p>Give us a shout and we&apos;ll get it worked out. Thanks!</p>
+          <h1>Whoops! {error.message}</h1>
           <p className={classes.errorContact}>Tons Of Tacos: contact info</p>
         </div>
       </body>

@@ -61,9 +61,6 @@ export default function MenuItem(props: {
     }
   };
 
-  console.log("item size:" + props.itemSize);
-  console.log("selected size:" + selectedSize);
-
   useEffect(() => {
     function calcPrice() {
       let adjPrice: number;
