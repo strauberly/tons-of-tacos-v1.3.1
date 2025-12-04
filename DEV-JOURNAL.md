@@ -8,6 +8,10 @@
 
 - menu items are now a nested dynamic route (ie. /menu-category/[category])
 
+- In owner header added condition for auto login back to owners tools. May need to further develop.
+
+- Formatting solution in place for is customer name is present or NA due to all orders by that customer closed and their information is no longer needed. latter yet to be implemented in backend.
+
 ---
 
 -- 2 Dec 2025 --

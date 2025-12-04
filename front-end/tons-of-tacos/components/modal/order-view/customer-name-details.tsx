@@ -78,6 +78,31 @@ export default function CustomerNameDetails() {
     validateLastName(e);
   }
 
+  function firstNameFormat() {
+    console.log("fn: " + currentFirstName);
+    let fName: string;
+    if (orderRef.current.name !== "NA") {
+      fName =
+        currentFirstName.charAt(0).toUpperCase() +
+        currentFirstName.substring(1, currentFirstName.length).toLowerCase();
+      return `${fName}`;
+    } else {
+      return orderRef.current.name;
+    }
+  }
+  function lastNameFormat() {
+    console.log("fn: " + currentLastName);
+    let fName: string;
+    if (orderRef.current.name !== "NA") {
+      fName =
+        currentLastName.charAt(0).toUpperCase() +
+        currentLastName.substring(1, currentLastName.length).toLowerCase();
+      return `${fName}`;
+    } else {
+      return "";
+    }
+  }
+
   const customerNameRef = useRef<string>(orderToView.name);
 
   return (
@@ -85,14 +110,15 @@ export default function CustomerNameDetails() {
       <p className={classes.editableDetailsTitle}>Name:</p>
       <p>
         {`${
-          currentFirstName.charAt(0).toUpperCase() +
-          currentFirstName.substring(1, currentFirstName.length).toLowerCase()
-        }` +
-          " " +
-          `${
-            currentLastName.charAt(0).toUpperCase() +
-            currentLastName.substring(1, currentLastName.length).toLowerCase()
-          }`}
+          firstNameFormat() + " " + lastNameFormat()
+          // currentFirstName.charAt(0).toUpperCase() +
+          // currentFirstName.substring(1, currentFirstName.length).toLowerCase()
+          // }` +
+          //   " " +
+          //   `${
+          //     currentLastName.charAt(0).toUpperCase() +
+          //     currentLastName.substring(1, currentLastName.length).toLowerCase()
+        }`}
       </p>
       {editName && (
         <div>
