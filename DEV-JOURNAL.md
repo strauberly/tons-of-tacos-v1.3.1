@@ -8,6 +8,10 @@
 
 -Reimplemented daily component in owner dashboard with clear interval close stopping call upon logout, conditionals were not operating correctly it, seems odd.
 
+- noticed update was not correctly appearing after editing quantity, condition alteration made in cart item at update component.
+
+- same issue for size selector. addressed.
+
 ---
 
 -- 4 Dec 2025 --

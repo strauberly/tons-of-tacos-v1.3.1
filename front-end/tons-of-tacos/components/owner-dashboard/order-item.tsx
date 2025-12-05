@@ -17,11 +17,12 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
   const [newSize, setNewSize] = useState<string>(orderItem.orderItem.size);
   const [showSizeError, setShowSizeError] = useState<boolean>(false);
   const [newPrice, setNewPrice] = useState<number>(orderItem.orderItem.total);
+  const [sizeError, setSizeError] = useState<string>("");
 
   const newQuantity = useRef<number>(orderItem.orderItem.quantity);
 
-  const sizeError: string =
-    "Enter 'S' for small, 'M' for medium or 'L' for large.";
+  // const sizeError: string =
+  //   "Enter 'S' for small, 'M' for medium or 'L' for large.";
 
   const basePrice =
     Number(orderItem.orderItem.total) / orderItem.orderItem.quantity;
@@ -120,6 +121,10 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
                 itemSize={orderItem.orderItem.size}
                 setShowSizeError={setShowSizeError}
                 setNewSize={setNewSize}
+                setSizeError={setSizeError}
+                itemName={orderItem.orderItem.itemName}
+                setEdited={setEdited}
+                edited={edited}
               />
             )}
           </>
