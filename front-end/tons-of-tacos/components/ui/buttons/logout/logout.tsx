@@ -27,8 +27,8 @@ export default function LogoutButton() {
       className={classes.logout}
       onClick={async () => [
         LogOut(),
-        setModal(await OwnerLogout(login.accessToken)),
-        setShowModal(true),
+        await OwnerLogout(login.accessToken),
+        // setShowModal(true),
         DeleteCookies(),
         setLoggedIn(false),
       ]}

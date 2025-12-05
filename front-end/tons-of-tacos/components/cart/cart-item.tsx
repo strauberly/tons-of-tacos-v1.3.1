@@ -110,6 +110,7 @@ export default function CartItem(props: {
   return (
     <div className={classes.wholeItem}>
       <li className={ownerOrder ? classes.ownerOrderItem : classes.item}>
+        <p>{`${edited}`}</p>
         <p className={classes.itemName}>{props.itemName}</p>
         {!canEdit && <p>{props.itemQuantity}</p>}
         {canEdit && (
@@ -139,6 +140,8 @@ export default function CartItem(props: {
             setNewSize={setNewSize}
             setSizeError={setSizeError}
             itemName={props.itemName}
+            setEdited={setEdited}
+            edited={edited}
           />
         )}
         <p>${newPrice.toFixed(2)}</p>
@@ -149,7 +152,8 @@ export default function CartItem(props: {
         </div>
       </li>
       <div className={classes.actionButtonGroup}>
-        {canUpdate && (
+        {edited && (
+          // {canUpdate && (
           <Update
             cartItemId={props.id}
             updatedItemQuantity={quantity}

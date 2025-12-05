@@ -9,6 +9,8 @@ export default function SizeSelector(props: {
   setNewSize: (newSize: string) => void;
   setSizeError: (sizeError: string) => void;
   itemName: string;
+  setEdited: (setEdited: boolean) => void;
+  edited: boolean;
 }) {
   /*
     Takes a size(string) from either a menu item or order item and if appropriate displays the selector.
@@ -68,6 +70,9 @@ export default function SizeSelector(props: {
         }
       });
     });
+    if (sizeRef.current !== props.itemSize) {
+      props.setEdited(true);
+    }
   });
 
   return (
@@ -88,7 +93,6 @@ export default function SizeSelector(props: {
           />
         )}
       </>
-    
     </div>
   );
 }
