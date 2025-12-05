@@ -124,7 +124,7 @@ export default function AddOrderItem() {
       <div className={classes.addItemToOrder}>
         <div className={classes.titles}>
           <button
-            disabled={orderToView.closed !== "no"}
+            disabled={!ownerOrder && orderToView.closed !== "no"}
             onClick={() => setItemSelector(!itemSelector)}
           >
             Select Item

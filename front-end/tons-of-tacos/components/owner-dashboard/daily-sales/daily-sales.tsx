@@ -4,15 +4,17 @@ import { useEffect, useState } from "react";
 
 export default function DailySalesDisplay() {
   const [sales, setSales] = useState<Sales | undefined>();
-  const { login } = useOwnerContext();
+  const { login, loggedIn } = useOwnerContext();
 
   useEffect(() => {
     async function Sales() {
-      setSales(await DailySales(login.accessToken));
+      if (loggedIn) setSales(await DailySales(login.accessToken));
     }
-    Sales();
-    setInterval(Sales, 3000);
-  }, [login.accessToken]);
+    const dailySales = setInterval(() => Sales(), 10000);
+    return () => {
+      clearInterval(dailySales);
+    };
+  }, [loggedIn, login.accessToken]);
 
   return (
     <div>

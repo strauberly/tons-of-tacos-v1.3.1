@@ -2,6 +2,14 @@
 
 ---
 
+-- 5 Dec 2025 --
+
+- Discovered an issue where select item button for owner order creator was failing, set conditional that appears to have rectified issue.
+
+-Reimplemented daily component in owner dashboard with clear interval close stopping call upon logout, conditionals were not operating correctly it, seems odd.
+
+---
+
 -- 4 Dec 2025 --
 
 - Got to the bottom of menu items not surviving a refresh or being able to access a menu category by typing in address bar. This has been resolved utilizing the slug in address bar as state storage for the category we wish to view. Lots more can be done with this just unneeded at this time.
