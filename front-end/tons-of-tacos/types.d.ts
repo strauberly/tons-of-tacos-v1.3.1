@@ -94,7 +94,7 @@ type Customer = {
 
 type Sales = {
   date: string;
-  numberOfSales: internal;
+  numberOfSales: number;
   total: number;
 };
 

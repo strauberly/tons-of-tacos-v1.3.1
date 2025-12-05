@@ -53,10 +53,10 @@ export default function OwnerHeader() {
       setDate(new Date());
     }
 
-    const tokeRefresh = setInterval(() => Refresher(), 1000 * 60);
+    const tokenRefresh = setInterval(() => Refresher(), 1000 * 60);
 
     return () => {
-      clearInterval(tokeRefresh);
+      clearInterval(tokenRefresh);
     };
   }, [
     login.accessToken,

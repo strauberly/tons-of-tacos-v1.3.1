@@ -92,7 +92,7 @@ export default function OwnerDashboard() {
           <Orders sortState={sortState} />
         </div>
         <div className={classes.sales}>
-          {/* <DailySalesDisplay /> */}
+          <DailySalesDisplay />
           {/* <h1>Sales For Today: {sales?.numberOfSales}</h1>
           <h1>Total: ${sales?.total.toFixed(2)}</h1> */}
         </div>
