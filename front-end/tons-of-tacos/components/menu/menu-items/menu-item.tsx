@@ -1,3 +1,4 @@
+"use client";
 import Card from "@/components/ui/cards/card";
 import Image from "next/image";
 import { useEffect, useState } from "react";
