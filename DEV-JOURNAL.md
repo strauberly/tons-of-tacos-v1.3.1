@@ -2,6 +2,14 @@
 
 ---
 
+-- 6 Dec 2025 --
+
+- While working out context refactor to improve readability and structure discovered the means joys of templates which allow for combining server components into a client component through the template. Calling menu items now has the desired suspense loading effect we had at one time and wanted to get back to.
+
+- Back to working on context refactor shortly.
+
+---
+
 -- 5 Dec 2025 --
 
 - Discovered an issue where select item button for owner order creator was failing, set conditional that appears to have rectified issue.
