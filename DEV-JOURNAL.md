@@ -8,6 +8,8 @@
 
 - Back to working on context refactor shortly.
 
+- Began moving providers out of the general providers fold to be more deeply nested with their corresponding components.
+
 ---
 
 -- 5 Dec 2025 --

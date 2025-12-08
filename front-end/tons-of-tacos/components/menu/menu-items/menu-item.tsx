@@ -26,10 +26,10 @@ export default function MenuItem(props: {
   const { setShowModal } = useDisplayContext();
   const { menuItemId } = useMenuItemIdContext();
   const [expand, setExpand] = useState(false);
+  const { selectedSize, setSelectedSize } = useSelectedSizeContext();
   const [price, setPrice] = useState("");
   const [edited, setEdited] = useState<boolean>(false);
   const [sizeAvailable, setSizeAvailable] = useState(false);
-  const { selectedSize, setSelectedSize } = useSelectedSizeContext();
 
   const expander = () => {
     setExpand(false);

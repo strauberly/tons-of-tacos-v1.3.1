@@ -6,6 +6,11 @@ import { Providers } from "@/context/providers";
 import OrderConfirmation from "@/components/modal/order-confirmation";
 import Footer from "@/components/footer/footer";
 import Modal from "@/components/modal/modal";
+import { AppWideProviders } from "@/context/providers/appwide-providers";
+import { CartContextProvider } from "@/context/cart-context";
+import { OrdersContextProvider } from "@/context/orders-context";
+import { SizeSelectedContextProvider } from "@/context/size-context";
+import { OrderConfirmationContextProvider } from "@/context/order-confirmation-context";
 
 export const metadata: Metadata = {
   title: "Tons Of Tacos",
@@ -20,17 +25,25 @@ export default function RootLayout({
   return (
     <html lang="en" className="html">
       <body className={`${inter.variable}`}>
-        <Providers>
+        {/* <Providers> */}
+        <AppWideProviders>
           <Modal />
-          <MainHeader />
-          <OrderConfirmation />
-          <div id="page-container">
-            <div id="content-wrap">
-              <div className="children">{children}</div>
-            </div>
-            <Footer />
-          </div>
-        </Providers>
+          <OrderConfirmationContextProvider>
+            <OrdersContextProvider>
+              <OrderConfirmation />
+              <MainHeader />
+              <SizeSelectedContextProvider>
+                <div id="page-container">
+                  <div id="content-wrap">
+                    <div className="children">{children}</div>
+                  </div>
+                  <Footer />
+                </div>
+              </SizeSelectedContextProvider>
+            </OrdersContextProvider>
+          </OrderConfirmationContextProvider>
+        </AppWideProviders>
+        {/* </Providers> */}
       </body>
     </html>
   );

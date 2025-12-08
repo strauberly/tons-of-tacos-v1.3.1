@@ -6,26 +6,47 @@ import Loading from "../../loading";
 import { useParams } from "next/navigation";
 import { useMenuCategoryContext } from "@/context/menu-category-context";
 import FadeOnLoad from "@/components/ui/animations/fade-on-load";
+import { MenuItemIdContextProvider } from "@/context/menu-item-context";
+import CategoriesSource from "@/lib/menu";
 export default function Template({ children }: { children: React.ReactNode }) {
   const params = useParams<{ menuCategory: string }>();
-  const { menuCategories } = useMenuCategoryContext();
-  const [description] = useState(
+  const { menuCategories, setMenuCategories } = useMenuCategoryContext();
+  const [description, setDescription] = useState(
     menuCategories
       .find(function (mc) {
         return mc.name === `${params.menuCategory}`;
       })
       ?.description.toString()
   );
-  useEffect(() => {});
+  // reset description
+  useEffect(() => {
+    async function DisplayMenuItems() {
+      if (description === undefined) {
+        setMenuCategories(await CategoriesSource());
+        setDescription(
+          menuCategories
+            .find(function (mc) {
+              return mc.name === `${params.menuCategory}`;
+            })
+            ?.description.toString()
+        );
+      }
+    }
+
+    DisplayMenuItems();
+  }, [description, menuCategories, params.menuCategory, setMenuCategories]);
+
   return (
     <>
       <Suspense fallback={<Loading />}>
         <FadeOnLoad>
-          <div className={classes.category}>
-            <h1>{params.menuCategory + ":"}</h1>
-            <p className={classes.description}>{`${description}`}</p>
-          </div>{" "}
-          {children}
+          <MenuItemIdContextProvider>
+            <div className={classes.category}>
+              <h1>{params.menuCategory + ":"}</h1>
+              <p className={classes.description}>{`${description}`}</p>
+            </div>
+            {children}
+          </MenuItemIdContextProvider>
         </FadeOnLoad>
       </Suspense>
     </>
