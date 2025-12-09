@@ -124,7 +124,10 @@ export default function AddOrderItem() {
       <div className={classes.addItemToOrder}>
         <div className={classes.titles}>
           <button
-            disabled={!ownerOrder && orderToView.closed !== "no"}
+            disabled={
+              (!ownerOrder && orderToView.closed !== "no") ||
+              orderToView.ready !== "no"
+            }
             onClick={() => setItemSelector(!itemSelector)}
           >
             Select Item
@@ -144,7 +147,7 @@ export default function AddOrderItem() {
           />
 
           <div className={classes.size}>
-            {`${item.itemSize}` === "a" && (
+            {`${item.itemSize}` === "A" && (
               <input
                 className={`${
                   sizeValid == false ? classes.invalid : classes.valid

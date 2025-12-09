@@ -83,11 +83,12 @@ export default function SizeSelector(props: {
             className={`${
               sizeValid == false ? classes.invalid : classes.valid
             }`}
+            disabled={props.itemSize === "N"}
             name="size"
             id="size"
             type="text"
             placeholder={props.itemSize}
-            maxLength={1}
+            maxLength={2}
             style={{ textTransform: "uppercase" }}
             onChange={checkSize}
           />
