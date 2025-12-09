@@ -27,6 +27,7 @@ export default function Update(props: {
   setEdited: (edited: boolean) => void;
   edited: boolean;
   setCanEdit: (canEdit: boolean) => void;
+  setShowSizeError: (showSizeError: boolean) => void;
   // canEditFunc: () => void;
 }) {
   // get index of the the item already in cart
@@ -134,6 +135,7 @@ export default function Update(props: {
               updateCartItem(),
               props.setEdited(false),
               props.setCanEdit(false),
+              props.setShowSizeError(false),
               // props.canEditFunc(false),
             ]}
           >

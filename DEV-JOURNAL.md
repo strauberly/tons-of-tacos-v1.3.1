@@ -2,11 +2,34 @@
 
 ---
 
+-- 7 Dec 2025 --
+
+- Chasing bugs as if git not properly updated or pulled. Issues resolved in owner order creator. Provider refactor appears to be working for that component.
+
+- Sales component appears to be functioning correctly.
+
+- While working on orderview provider/context refactor discovered issues with editing an order item's quantity.
+
+  - One is like it was using the quantity of any previous item's edits.
+  - Two is that if update for quantity is started and then canceled by clicking no, the quantity selector is not set back. Starts increment/decrement from the last quantity selection instead of current quantity for item.
+
+  - Appear to have corrected with changes made to decrement in order item, the no button in order-action-confirmation.
+
+    - need to check and see if these issues appear in other areas of the app.
+
+  - Issue is now that switching items preserves the quantity of previous item worked with when making edits to an item.
+
+    -Issue resolved by resetting quantity when clicking order Item.
+
+---
+
 -- 6 Dec 2025 --
 
 - While working out context refactor to improve readability and structure discovered the means joys of templates which allow for combining server components into a client component through the template. Calling menu items now has the desired suspense loading effect we had at one time and wanted to get back to.
 
 - Back to working on context refactor shortly.
+
+- Began moving providers out of the general providers fold to be more deeply nested with their corresponding components.
 
 ---
 

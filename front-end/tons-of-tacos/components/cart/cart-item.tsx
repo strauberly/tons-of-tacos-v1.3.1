@@ -110,7 +110,6 @@ export default function CartItem(props: {
   return (
     <div className={classes.wholeItem}>
       <li className={ownerOrder ? classes.ownerOrderItem : classes.item}>
-        <p>{`${edited}`}</p>
         <p className={classes.itemName}>{props.itemName}</p>
         {!canEdit && <p>{props.itemQuantity}</p>}
         {canEdit && (
@@ -164,6 +163,7 @@ export default function CartItem(props: {
             setEdited={setEdited}
             edited={edited}
             setCanEdit={setCanEdit}
+            setShowSizeError={setShowSizeError}
           />
         )}
         {canEdit && (

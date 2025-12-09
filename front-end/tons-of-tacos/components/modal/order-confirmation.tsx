@@ -6,7 +6,7 @@ import { CreateCart, ResetCart } from "@/lib/cart";
 import { useCartContext } from "@/context/cart-context";
 import { useOrderConfirmationContext } from "@/context/order-confirmation-context";
 import { useOwnerContext } from "@/context/owner-context";
-import { RemoveOwnerOrder } from "@/lib/owners-tools/owners-tools-client";
+import { DeleteOwnerOrder } from "@/lib/owners-tools/owners-tools-client";
 import { useOrdersContext } from "@/context/orders-context";
 import { GetAllOrders } from "@/lib/owners-tools/owners-tools";
 
@@ -29,7 +29,7 @@ export default function OrderConfirmation() {
     if (loggedIn) {
       setShowOwnerOrderCreator(false);
       setShowOrderConfirmation(false);
-      RemoveOwnerOrder();
+      DeleteOwnerOrder();
       ResetCart();
       CreateCart();
       setCart([]);

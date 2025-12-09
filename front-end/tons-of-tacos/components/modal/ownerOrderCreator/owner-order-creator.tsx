@@ -5,7 +5,7 @@ import AddOrderItem from "@/components/ui/selectors/add-to-order/add-order-item"
 import CartItems from "@/components/cart/cart-item-list";
 import {
   GetOwnerOrder,
-  RemoveOwnerOrder,
+  DeleteOwnerOrder,
 } from "@/lib/owners-tools/owners-tools-client";
 import { useEffect, useRef } from "react";
 import { useOwnerContext } from "@/context/owner-context";
@@ -49,7 +49,7 @@ export default function OwnerOrderCreator() {
             className={classes.close}
             onClick={() => [
               setShowOwnerOrderCreator(false),
-              RemoveOwnerOrder(),
+              DeleteOwnerOrder(),
               setOwnerOrder(false),
               setCart([]),
               // reset flag for owner order
