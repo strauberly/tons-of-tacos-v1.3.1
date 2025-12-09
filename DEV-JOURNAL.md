@@ -2,6 +2,12 @@
 
 ---
 
+-- 9 Dec 2025 --
+
+- Order view appears to be functioning as intended after context providers refactor.
+
+---
+
 -- 7 Dec 2025 --
 
 - Chasing bugs as if git not properly updated or pulled. Issues resolved in owner order creator. Provider refactor appears to be working for that component.

@@ -78,7 +78,7 @@ export default function MenuItem(props: {
       return adjPrice;
     }
 
-    if (props.itemSize === "a") {
+    if (props.itemSize === "A") {
       setSizeAvailable(true);
     }
     setPrice(calcPrice().toFixed(2));
