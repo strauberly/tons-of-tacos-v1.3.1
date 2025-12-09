@@ -2,6 +2,7 @@ import SearchBar from "./search-bar";
 import { useDisplayContext } from "@/context/display-context";
 import {
   CreateOwnerOrder,
+  DeleteOwnerOrder,
   GetOwnerOrder,
 } from "@/lib/owners-tools/owners-tools-client";
 import { useOwnerContext } from "@/context/owner-context";
@@ -19,6 +20,7 @@ export default function ActionBar() {
       <button
         className={classes.ownerCreate}
         onClick={() => [
+          DeleteOwnerOrder(),
           CreateOwnerOrder(),
           setOwnerOrder(true),
           setCart(GetOwnerOrder()),

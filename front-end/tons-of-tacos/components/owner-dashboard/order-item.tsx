@@ -21,6 +21,14 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
 
   const newQuantity = useRef<number>(orderItem.orderItem.quantity);
 
+  const newOrderItem: OrderItem = {
+    orderItemId: 0,
+    itemName: "",
+    quantity: 0,
+    size: "",
+    total: 0,
+  };
+
   // const sizeError: string =
   //   "Enter 'S' for small, 'M' for medium or 'L' for large.";
 
@@ -40,6 +48,7 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
   }
 
   const decrement = () => {
+    newQuantity.current = quantity;
     setQuantity((newQuantity.current -= 1));
     if (quantity < 2) {
       newQuantity.current = 1;
@@ -98,7 +107,7 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
         {canEdit && (
           <>
             <QuantitySelector
-              value={newQuantity.current}
+              value={quantity}
               scale="scale(.8)"
               increment={increment}
               decrement={decrement}
@@ -143,6 +152,7 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
                 setCanEdit(!canEdit),
                 setOrderItem(orderItem.orderItem),
                 setNewPrice(newPrice),
+                setQuantity(orderItem.orderItem.quantity),
               ]}
             >
               Edit
@@ -175,6 +185,7 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
               setNewSize(orderItem.orderItem.size),
               setNewPrice(newPrice),
               setShowSizeError(false),
+              setOrderItem(newOrderItem),
             ]}
           >
             Cancel

@@ -9,16 +9,16 @@ import { SizeSelectedContextProvider } from "../size-context";
 
 export function AppWideProviders({ children }: { children: ReactNode }) {
   return (
-    <DisplayContextProvider>
-      <ModalContextProvider>
-        <OwnerContextProvider>
-          <CartContextProvider>
+    <OwnerContextProvider>
+      <CartContextProvider>
+        <DisplayContextProvider>
+          <ModalContextProvider>
             <MenuCategoryContextProvider>
               {children}
             </MenuCategoryContextProvider>
-          </CartContextProvider>
-        </OwnerContextProvider>
-      </ModalContextProvider>
-    </DisplayContextProvider>
+          </ModalContextProvider>
+        </DisplayContextProvider>
+      </CartContextProvider>
+    </OwnerContextProvider>
   );
 }

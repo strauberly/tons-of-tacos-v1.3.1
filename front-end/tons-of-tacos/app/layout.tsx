@@ -11,6 +11,7 @@ import { CartContextProvider } from "@/context/cart-context";
 import { OrdersContextProvider } from "@/context/orders-context";
 import { SizeSelectedContextProvider } from "@/context/size-context";
 import { OrderConfirmationContextProvider } from "@/context/order-confirmation-context";
+import { EditOrderContextProvider } from "@/context/edit-order-context";
 
 export const metadata: Metadata = {
   title: "Tons Of Tacos",
@@ -28,20 +29,22 @@ export default function RootLayout({
         {/* <Providers> */}
         <AppWideProviders>
           <Modal />
-          <OrderConfirmationContextProvider>
-            <OrdersContextProvider>
-              <OrderConfirmation />
-              <MainHeader />
-              <SizeSelectedContextProvider>
-                <div id="page-container">
-                  <div id="content-wrap">
-                    <div className="children">{children}</div>
+          <EditOrderContextProvider>
+            <OrderConfirmationContextProvider>
+              <OrdersContextProvider>
+                <OrderConfirmation />
+                <MainHeader />
+                <SizeSelectedContextProvider>
+                  <div id="page-container">
+                    <div id="content-wrap">
+                      <div className="children">{children}</div>
+                    </div>
+                    <Footer />
                   </div>
-                  <Footer />
-                </div>
-              </SizeSelectedContextProvider>
-            </OrdersContextProvider>
-          </OrderConfirmationContextProvider>
+                </SizeSelectedContextProvider>
+              </OrdersContextProvider>
+            </OrderConfirmationContextProvider>
+          </EditOrderContextProvider>
         </AppWideProviders>
         {/* </Providers> */}
       </body>

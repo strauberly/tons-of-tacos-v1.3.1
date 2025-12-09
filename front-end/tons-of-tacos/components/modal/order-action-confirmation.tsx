@@ -22,8 +22,15 @@ export default function OrderActionConfirmation(props: {
   const { setShowConfirmation } = useDisplayContext();
   const { orderToView, setOrderToView } = useModalContext();
 
-  const { menuItem, quantity, orderItem, itemSize, customer, setOrderChanged } =
-    useEditOrderContext();
+  const {
+    menuItem,
+    quantity,
+    orderItem,
+    itemSize,
+    customer,
+    setOrderChanged,
+    setQuantity,
+  } = useEditOrderContext();
 
   const { login } = useOwnerContext();
 
@@ -74,6 +81,7 @@ export default function OrderActionConfirmation(props: {
               onClick={async () => {
                 setShowConfirmation(false);
                 setOrderChanged(false);
+                setQuantity(orderItem.quantity);
                 orderReqResRef.current = await GetOrderByID(
                   orderToView.orderUid,
                   login.accessToken
