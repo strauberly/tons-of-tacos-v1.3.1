@@ -6,6 +6,8 @@
 
 - Order view appears to be functioning as intended after context providers refactor.
 
+- Orders scroll to top and sorted by status(open, ready, closed) when selected.
+
 ---
 
 -- 7 Dec 2025 --
