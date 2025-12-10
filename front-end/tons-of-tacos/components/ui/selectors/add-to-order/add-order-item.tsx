@@ -7,6 +7,7 @@ import AddToOrderButton from "../../buttons/order-edit/add-to-order-button";
 import { useOwnerContext } from "@/context/owner-context";
 import classes from "./add-order-item.module.css";
 import QuantitySelector from "../quantity-selector/quantity-selector";
+import SizeSelector from "../size-selector/size-selector";
 
 export default function AddOrderItem() {
   const { orderToView } = useModalContext();
@@ -14,13 +15,14 @@ export default function AddOrderItem() {
   const [itemSelector, setItemSelector] = useState<boolean>(false);
   const [itemName, setItemName] = useState<string>("Item");
   const [quantity, setQuantity] = useState<number>(1);
-  const [size, setSize] = useState<string>("");
+  const [size, setSize] = useState<string>(" ");
   const [price, setPrice] = useState<number>(0);
   const [readyToAdd, setReadyToAdd] = useState<boolean>(false);
-  const sizeError: string =
-    "Enter 'S' for small, 'M' for medium or 'L' for large.";
+  // const sizeError: string =
+  //   "Enter 'S' for small, 'M' for medium or 'L' for large.";
   const [showSizeError, setShowSizeError] = useState<boolean>(false);
 
+  const [sizeError, setSizeError] = useState<string>("");
   const [sizeValid, setSizeValid] = useState<boolean>(false);
   const [edited, setEdited] = useState<boolean>(false);
   console.log(orderToView.name);
@@ -89,6 +91,14 @@ export default function AddOrderItem() {
     }
   }
 
+  // function sizeSwap(){
+  //   if{size === "a"}{
+  //     setSize(" ")
+  //   }
+  //   return size;
+
+  // }
+
   function reset() {
     setQuantity(1);
     setItem({
@@ -101,6 +111,8 @@ export default function AddOrderItem() {
       unitPrice: 0,
     });
     setItemSelector(false);
+    setSize(" ");
+    setShowSizeError(false);
   }
 
   useEffect(() => {
@@ -126,7 +138,7 @@ export default function AddOrderItem() {
           <button
             disabled={
               (!ownerOrder && orderToView.closed !== "no") ||
-              orderToView.ready !== "no"
+              (!ownerOrder && orderToView.ready !== "no")
             }
             onClick={() => setItemSelector(!itemSelector)}
           >
@@ -145,9 +157,9 @@ export default function AddOrderItem() {
             setEdited={setEdited}
             scale="scale(.75)"
           />
-
+          {/* 
           <div className={classes.size}>
-            {`${item.itemSize}` === "A" && (
+            {`${item.itemSize}` === "a" && (
               <input
                 className={`${
                   sizeValid == false ? classes.invalid : classes.valid
@@ -161,7 +173,17 @@ export default function AddOrderItem() {
               />
             )}
             {`${item.itemSize}` === "NA" && <p>{item.itemSize}</p>}
-          </div>
+          </div> */}
+
+          <SizeSelector
+            itemSize={size}
+            setShowSizeError={setShowSizeError}
+            setNewSize={setSize}
+            setSizeError={setSizeError}
+            itemName={itemName}
+            setEdited={setEdited}
+            edited={edited}
+          />
 
           {showSizeError === true && (
             <p className={classes.sizeWarning}>{sizeError}</p>

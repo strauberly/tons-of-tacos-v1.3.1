@@ -23,13 +23,20 @@ export default function SizeSelector(props: {
 
   const [size, setSize] = useState<string>(`${props.itemSize}`);
 
-  const sizeRef = useRef<string>(size);
+  const sizeRef = useRef<string>("");
+
+  console.log(`${sizeRef.current}`);
 
   //   const [showSizeError, setShowSizeError] = useState<boolean>(false);
   //   const sizeError: string =
   //     "Enter 'S' for small, 'M' for medium or 'L' for large.";
 
   const [sizeValid, setSizeValid] = useState<boolean>();
+  if (props.itemSize === "a") {
+    sizeRef.current = " ";
+  } else {
+    sizeRef.current = "NA";
+  }
 
   function checkSize(event: React.ChangeEvent<HTMLInputElement>) {
     sizeRef.current = event.currentTarget.value.toUpperCase();
@@ -48,7 +55,7 @@ export default function SizeSelector(props: {
       setSizeValid(false);
       props.setNewSize(sizeRef.current);
     } else {
-      setSizeValid(true);
+      // setSizeValid(true);
       props.setShowSizeError(false);
       setSize(sizeRef.current);
       props.setNewSize(sizeRef.current);
@@ -62,7 +69,7 @@ export default function SizeSelector(props: {
         sizes.push(cartItem.size);
       }
       sizes.forEach((size) => {
-        if (size === sizeRef.current) {
+        if (size === props.itemSize) {
           props.setSizeError(
             `${props.itemName + " " + sizeRef.current} is already in cart.`
           );
@@ -74,7 +81,9 @@ export default function SizeSelector(props: {
       props.setEdited(true);
     }
   });
-
+  console.log(props.itemSize);
+  console.log(`${props.itemSize}`);
+  console.log(`${sizeRef.current}`);
   return (
     <div className={classes.size}>
       <>
@@ -83,12 +92,12 @@ export default function SizeSelector(props: {
             className={`${
               sizeValid == false ? classes.invalid : classes.valid
             }`}
-            disabled={props.itemSize === "N"}
+            disabled={sizeRef.current === "NA" || props.itemSize === "NA"}
             name="size"
             id="size"
             type="text"
-            placeholder={props.itemSize}
-            maxLength={2}
+            placeholder={sizeRef.current}
+            maxLength={1}
             style={{ textTransform: "uppercase" }}
             onChange={checkSize}
           />

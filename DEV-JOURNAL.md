@@ -8,6 +8,8 @@
 
 - Orders scroll to top and sorted by status(open, ready, closed) when selected.
 
+- Successfully implemented existing size selector in place of code in owner order creator. Functionality of component appears to be correct and addresses bugs that existed prior to.
+
 ---
 
 -- 7 Dec 2025 --

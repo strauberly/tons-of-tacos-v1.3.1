@@ -127,7 +127,11 @@ export default function AddToOrderButton(props: {
   return (
     <button
       className={classes.addItemButton}
-      disabled={props.menuItem.itemName === "" || props.size === "A"}
+      disabled={
+        props.menuItem.itemName === "" ||
+        props.size === "a" ||
+        itemInOrder.current
+      }
       onClick={async () => {
         if (itemInOrder.current === true) {
           itemInOrder.current = false;
