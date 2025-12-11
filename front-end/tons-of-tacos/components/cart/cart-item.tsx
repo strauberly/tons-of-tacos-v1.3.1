@@ -29,6 +29,7 @@ export default function CartItem(props: {
   const [quantity, setQuantity] = useState<number>(props.itemQuantity);
   const [newPrice, setNewPrice] = useState<number>(Number(props.itemPrice));
   const [edited, setEdited] = useState<boolean>(false);
+  const [submitted, setSubmitted] = useState<boolean>(false);
   const [canEdit, setCanEdit] = useState<boolean>(false);
   const [canUpdate, setCanUpdate] = useState<boolean>(false);
   const [showSizeError, setShowSizeError] = useState<boolean>(false);
@@ -109,6 +110,7 @@ export default function CartItem(props: {
 
   return (
     <div className={classes.wholeItem}>
+      {/* <p>{`${canEdit}`}</p> */}
       <li className={ownerOrder ? classes.ownerOrderItem : classes.item}>
         <p className={classes.itemName}>{props.itemName}</p>
         {!canEdit && <p>{props.itemQuantity}</p>}
@@ -141,6 +143,9 @@ export default function CartItem(props: {
             itemName={props.itemName}
             setEdited={setEdited}
             edited={edited}
+            submitted={submitted}
+            canEdit={canEdit}
+            setCanEdit={setCanEdit}
           />
         )}
         <p>${newPrice.toFixed(2)}</p>
@@ -164,6 +169,7 @@ export default function CartItem(props: {
             edited={edited}
             setCanEdit={setCanEdit}
             setShowSizeError={setShowSizeError}
+            setSubmitted={setSubmitted}
           />
         )}
         {canEdit && (
@@ -181,7 +187,7 @@ export default function CartItem(props: {
             Cancel
           </button>
         )}
-        {!canEdit && <button onClick={() => setCanEdit(true)}>Edit</button>}
+        {!canEdit && <button onClick={() => [setCanEdit(true)]}>Edit</button>}
         <RemoveFromCart id={props.id} cartItemQuantity={props.itemQuantity} />
       </div>
     </div>

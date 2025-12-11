@@ -45,7 +45,7 @@ export default function Orders(props: { sortState: string }) {
 
   return (
     <div className={classes.dashboard}>
-      <ul>
+      <ul id={"orders-list"}>
         {props.sortState === "open" &&
           sortedOpen.map(
             (order: {
