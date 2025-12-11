@@ -23,8 +23,10 @@ export default function AddOrderItem() {
   const [showSizeError, setShowSizeError] = useState<boolean>(false);
 
   const [sizeError, setSizeError] = useState<string>("");
-  const [sizeValid, setSizeValid] = useState<boolean>(false);
+  // const [sizeValid, setSizeValid] = useState<boolean>(false);
+  const [submitted, setSubmitted] = useState<boolean>(false);
   const [edited, setEdited] = useState<boolean>(false);
+  const [canEdit, setCanEdit] = useState<boolean>(false);
   console.log(orderToView.name);
 
   const sizeRef = useRef<string>(size);
@@ -73,23 +75,23 @@ export default function AddOrderItem() {
     setPrice(calcPrice());
   };
 
-  function checkSize(event: React.ChangeEvent<HTMLInputElement>) {
-    sizeRef.current = event.currentTarget.value.toUpperCase();
-    setSize(event.target.value.toUpperCase());
-    console.log("item size: " + item.itemSize);
-    if (
-      sizeRef.current !== "S" &&
-      sizeRef.current !== "M" &&
-      sizeRef.current !== "L"
-    ) {
-      setShowSizeError(true);
-      setSizeValid(false);
-    } else {
-      setSizeValid(true);
-      setShowSizeError(false);
-      setSize(sizeRef.current);
-    }
-  }
+  // function checkSize(event: React.ChangeEvent<HTMLInputElement>) {
+  //   sizeRef.current = event.currentTarget.value.toUpperCase();
+  //   setSize(event.target.value.toUpperCase());
+  //   console.log("item size: " + item.itemSize);
+  //   if (
+  //     sizeRef.current !== "S" &&
+  //     sizeRef.current !== "M" &&
+  //     sizeRef.current !== "L"
+  //   ) {
+  //     setShowSizeError(true);
+  //     setSizeValid(false);
+  //   } else {
+  //     setSizeValid(true);
+  //     setShowSizeError(false);
+  //     setSize(sizeRef.current);
+  //   }
+  // }
 
   // function sizeSwap(){
   //   if{size === "a"}{
@@ -111,8 +113,10 @@ export default function AddOrderItem() {
       unitPrice: 0,
     });
     setItemSelector(false);
-    setSize(" ");
+    setSize("NA");
+    setSubmitted(true);
     setShowSizeError(false);
+    console.log("reset hit");
   }
 
   useEffect(() => {
@@ -128,8 +132,11 @@ export default function AddOrderItem() {
       const adjPrice = (sizeSurcharge + item?.unitPrice) * quantity;
       return adjPrice;
     }
+    if (submitted) {
+      setSubmitted(!submitted);
+    }
     setPrice(calcPrice());
-  }, [item?.unitPrice, ownerOrder, price, quantity, size]);
+  }, [item?.unitPrice, ownerOrder, price, quantity, size, submitted]);
 
   return (
     <>
@@ -183,6 +190,9 @@ export default function AddOrderItem() {
             itemName={itemName}
             setEdited={setEdited}
             edited={edited}
+            submitted={submitted}
+            canEdit={canEdit}
+            setCanEdit={setCanEdit}
           />
 
           {showSizeError === true && (

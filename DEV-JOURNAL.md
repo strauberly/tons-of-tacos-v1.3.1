@@ -2,6 +2,13 @@
 
 ---
 
+-- 11 Dec 2025 --
+
+- Size selector wasn't quite working out as intended when implemented between customer cart and owner order creator when going to edit items. Balancing the three components that are slightly different to utilize the same child component has become an interesting task.
+- Still needs to be tested between all three components and cleaned up and errors for user input refactored as well.
+
+---
+
 -- 9 Dec 2025 --
 
 - Order view appears to be functioning as intended after context providers refactor.
