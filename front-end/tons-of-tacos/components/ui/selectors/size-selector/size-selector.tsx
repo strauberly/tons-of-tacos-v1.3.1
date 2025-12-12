@@ -93,6 +93,11 @@ export default function SizeSelector(props: {
       // props.setCanEdit(true);
       props.setNewSize(size);
     }
+
+    if (size !== " " && props.submitted === false && props.canEdit === false) {
+      setSize(" ");
+      console.log("hi");
+    }
     // if (props.canEdit) {
     //   element.value = "";
     // props.setNewSize(size);
@@ -116,7 +121,7 @@ export default function SizeSelector(props: {
             }`}
             // disabled={!props.submitted && !props.canEdit}
             disabled={
-              (props.itemSize === " " && sizeRef.current === "NA") ||
+              (size === " " && sizeRef.current === "NA") ||
               props.itemSize === "NA"
             }
             name="size"

@@ -76,6 +76,11 @@ export default function CartItem(props: {
     }
   };
 
+  function reset() {
+    // props.size = "p";
+    // console.log("props: " + props.size);
+  }
+
   useEffect(() => {
     const sizes: string[] = [];
     cart.forEach((cartItem) => {
@@ -96,6 +101,7 @@ export default function CartItem(props: {
     } else {
       setNewPrice(Number(props.itemPrice));
     }
+    // setNewSize(props.size);
   }, [
     edited,
     props.size,
@@ -106,6 +112,7 @@ export default function CartItem(props: {
     cart,
     props.itemName,
     canUpdate,
+    selectedSize,
   ]);
 
   return (
@@ -170,6 +177,7 @@ export default function CartItem(props: {
             setCanEdit={setCanEdit}
             setShowSizeError={setShowSizeError}
             setSubmitted={setSubmitted}
+            reset={reset}
           />
         )}
         {canEdit && (
