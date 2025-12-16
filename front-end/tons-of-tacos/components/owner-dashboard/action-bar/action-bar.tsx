@@ -23,7 +23,7 @@ export default function ActionBar() {
           DeleteOwnerOrder(),
           CreateOwnerOrder(),
           setOwnerOrder(true),
-          setCart(GetOwnerOrder()),
+          // setCart(GetOwnerOrder()),
           setShowOwnerOrderCreator(true),
         ]}
       >
