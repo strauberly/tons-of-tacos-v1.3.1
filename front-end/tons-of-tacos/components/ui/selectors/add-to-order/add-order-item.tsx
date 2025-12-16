@@ -5,9 +5,9 @@ import { useEffect, useRef, useState } from "react";
 import { useModalContext } from "@/context/modal-context";
 import AddToOrderButton from "../../buttons/order-edit/add-to-order-button";
 import { useOwnerContext } from "@/context/owner-context";
-import classes from "./add-order-item.module.css";
 import QuantitySelector from "../quantity-selector/quantity-selector";
 import SizeSelector from "../size-selector/size-selector";
+import classes from "./add-order-item.module.css";
 
 export default function AddOrderItem() {
   const { orderToView } = useModalContext();

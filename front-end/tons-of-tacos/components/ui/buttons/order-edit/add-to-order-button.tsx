@@ -69,7 +69,11 @@ export default function AddToOrderButton(props: {
       console.log(order);
 
       orderToView.orderItems.forEach((orderItem) => {
-        if (orderItem.itemName === props.menuItem.itemName) {
+        if (
+          orderItem.itemName === props.menuItem.itemName &&
+          orderItem.size === props.size
+        ) {
+          // if (orderItem.itemName === props.menuItem.itemName ) {
           setModal(
             "Item already in order. Update quantity, remove, or choose a different item."
           );

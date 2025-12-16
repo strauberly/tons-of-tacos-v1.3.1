@@ -2,6 +2,17 @@
 
 ---
 
+-- 15 Dec 2025 --
+
+- Size selector in place for owner order creator and order to view add item to order. Next is to work on implementation on menu item(may not work).
+  Look at reimplementation of warning when editing an item size if already in cart.
+
+---
+
+-- 12 Dec 2025 --
+
+---
+
 -- 11 Dec 2025 --
 
 - Size selector wasn't quite working out as intended when implemented between customer cart and owner order creator when going to edit items. Balancing the three components that are slightly different to utilize the same child component has become an interesting task.

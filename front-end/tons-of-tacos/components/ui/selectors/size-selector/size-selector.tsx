@@ -121,9 +121,13 @@ export default function SizeSelector(props: {
             }`}
             // disabled={!props.submitted && !props.canEdit}
             disabled={
-              (size === " " && sizeRef.current === "NA") ||
-              props.itemSize === "NA"
+              (sizeRef.current === "NA" && props.itemSize === " ") ||
+              (sizeRef.current === "NA" && props.itemSize === "NA")
             }
+            // disabled={
+            //   (size === " " && sizeRef.current === "NA") ||
+            //   props.itemSize === "NA"
+            // }
             name="size"
             id="size"
             type="text"
