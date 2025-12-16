@@ -7,15 +7,15 @@ import { GetOwnerOrder } from "@/lib/owners-tools/owners-tools-client";
 
 export default function CartItems() {
   const { cart, setCart } = useCartContext();
-  const { ownerOrder, order } = useOwnerContext();
+  const { ownerOrder, order, loggedIn } = useOwnerContext();
 
   useEffect(() => {
-    if (ownerOrder) {
+    if (loggedIn) {
       return setCart(GetOwnerOrder());
     } else {
       return setCart(GetCart());
     }
-  }, [order, ownerOrder, setCart]);
+  }, [loggedIn, order, ownerOrder, setCart]);
 
   return (
     <ul>

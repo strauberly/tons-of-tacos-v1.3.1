@@ -26,7 +26,7 @@ export default function SizeSelector(props: {
 
   const [size, setSize] = useState<string>(`${props.itemSize}`);
 
-  const sizeRef = useRef<string>(props.itemName);
+  const sizeRef = useRef<string>(props.itemSize);
 
   console.log(`${sizeRef.current}`);
 
@@ -35,11 +35,11 @@ export default function SizeSelector(props: {
   //     "Enter 'S' for small, 'M' for medium or 'L' for large.";
 
   const [sizeValid, setSizeValid] = useState<boolean>();
-  if (props.itemSize === "a") {
-    sizeRef.current = " ";
-  } else {
-    sizeRef.current = "NA";
-  }
+  // if (props.itemSize === "a") {
+  //   sizeRef.current = " ";
+  // } else {
+  //   sizeRef.current = "NA";
+  // }
 
   function checkSize(event: React.ChangeEvent<HTMLInputElement>) {
     sizeRef.current = event.currentTarget.value.toUpperCase();
@@ -89,7 +89,7 @@ export default function SizeSelector(props: {
       (props.submitted && !props.canEdit) ||
       (!props.submitted && props.canEdit)
     ) {
-      element.value = "";
+      // element.value = "";
       // props.setCanEdit(true);
       props.setNewSize(size);
     }
@@ -98,10 +98,10 @@ export default function SizeSelector(props: {
       setSize(" ");
       console.log("hi");
     }
-    // if (props.canEdit) {
-    //   element.value = "";
-    // props.setNewSize(size);
-    // }
+    if (props.canEdit) {
+      element.value = `${sizeRef.current}`;
+      props.setNewSize(size);
+    }
   }, [cart, props, size]);
   console.log(props.itemSize);
   console.log(`${props.itemSize}`);
@@ -131,6 +131,8 @@ export default function SizeSelector(props: {
             name="size"
             id="size"
             type="text"
+            // placeholder={"NA"}
+            // value={size}
             placeholder={sizeRef.current}
             maxLength={1}
             style={{ textTransform: "uppercase" }}

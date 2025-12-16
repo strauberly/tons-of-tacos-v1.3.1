@@ -15,7 +15,7 @@ export default function AddOrderItem() {
   const [itemSelector, setItemSelector] = useState<boolean>(false);
   const [itemName, setItemName] = useState<string>("Item");
   const [quantity, setQuantity] = useState<number>(1);
-  const [size, setSize] = useState<string>(" ");
+  const [size, setSize] = useState<string>("NA");
   const [price, setPrice] = useState<number>(0);
   const [readyToAdd, setReadyToAdd] = useState<boolean>(false);
   // const sizeError: string =
@@ -23,7 +23,7 @@ export default function AddOrderItem() {
   const [showSizeError, setShowSizeError] = useState<boolean>(false);
 
   const [sizeError, setSizeError] = useState<string>("");
-  // const [sizeValid, setSizeValid] = useState<boolean>(false);
+  const [sizeValid, setSizeValid] = useState<boolean>(false);
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [edited, setEdited] = useState<boolean>(false);
   const [canEdit, setCanEdit] = useState<boolean>(false);
@@ -75,31 +75,30 @@ export default function AddOrderItem() {
     setPrice(calcPrice());
   };
 
-  // function checkSize(event: React.ChangeEvent<HTMLInputElement>) {
-  //   sizeRef.current = event.currentTarget.value.toUpperCase();
-  //   setSize(event.target.value.toUpperCase());
-  //   console.log("item size: " + item.itemSize);
-  //   if (
-  //     sizeRef.current !== "S" &&
-  //     sizeRef.current !== "M" &&
-  //     sizeRef.current !== "L"
-  //   ) {
-  //     setShowSizeError(true);
-  //     setSizeValid(false);
-  //   } else {
-  //     setSizeValid(true);
-  //     setShowSizeError(false);
-  //     setSize(sizeRef.current);
-  //   }
-  // }
+  function checkSize(event: React.ChangeEvent<HTMLInputElement>) {
+    sizeRef.current = event.currentTarget.value.toUpperCase();
+    setSize(event.target.value.toUpperCase());
+    console.log("item size: " + item.itemSize);
+    if (
+      sizeRef.current !== "S" &&
+      sizeRef.current !== "M" &&
+      sizeRef.current !== "L"
+    ) {
+      setShowSizeError(true);
+      setSizeValid(false);
+    } else {
+      setSizeValid(true);
+      setShowSizeError(false);
+      setSize(sizeRef.current);
+    }
+  }
 
-  // function sizeSwap(){
-  //   if{size === "a"}{
-  //     setSize(" ")
-  //   }
-  //   return size;
-
-  // }
+  function sizeSwap() {
+    if (size === "a") {
+      setSize(" ");
+    }
+    return size;
+  }
 
   function reset() {
     setQuantity(1);

@@ -2,14 +2,17 @@
 
 ---
 
+-- 16 Dec 2025 --
+
+- Size selector appears to be functioning correctly between items in customers cart, owners cart for a customer, editing an orderItem, and adding an item to an existing order.
+- some refinement still needed such as resetting components after their function is carried out.
+
+---
+
 -- 15 Dec 2025 --
 
 - Size selector in place for owner order creator and order to view add item to order. Next is to work on implementation on menu item(may not work).
   Look at reimplementation of warning when editing an item size if already in cart.
-
----
-
--- 12 Dec 2025 --
 
 ---
 

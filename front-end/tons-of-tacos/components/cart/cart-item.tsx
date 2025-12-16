@@ -157,9 +157,9 @@ export default function CartItem(props: {
         )}
         <p>${newPrice.toFixed(2)}</p>
         <div className={classes.editCartItem}>
-          {showSizeError === true && (
+          {/* {showSizeError === true && (
             <p className={classes.sizeWarning}>{sizeError}</p>
-          )}
+          )} */}
         </div>
       </li>
       <div className={classes.actionButtonGroup}>
