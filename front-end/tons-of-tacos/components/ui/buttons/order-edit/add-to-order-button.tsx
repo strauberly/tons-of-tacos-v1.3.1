@@ -57,11 +57,12 @@ export default function AddToOrderButton(props: {
           cartItem.itemName === props.menuItem.itemName &&
           cartItem.size === props.size
         ) {
-          setModal(
-            "Item already in order. Update quantity, remove, or choose a different item."
-          );
-          setShowModal(true);
+          // setModal(
+          //   "Item already in order. Update quantity, remove, or choose a different item."
+          // );
+          // setShowModal(true);
           itemInOrder.current = true;
+          props.setSizeValid(false);
           props.reset();
         }
       });
@@ -74,11 +75,12 @@ export default function AddToOrderButton(props: {
           orderItem.size === props.size
         ) {
           // if (orderItem.itemName === props.menuItem.itemName ) {
-          setModal(
-            "Item already in order. Update quantity, remove, or choose a different item."
-          );
-          setShowModal(true);
+          // setModal(
+          //   "Item already in order. Update quantity, remove, or choose a different item."
+          // );
+          // setShowModal(true);
           itemInOrder.current = true;
+          props.setSizeValid(false);
           props.reset();
         }
       });
@@ -129,35 +131,43 @@ export default function AddToOrderButton(props: {
   });
 
   return (
-    <button
-      className={classes.addItemButton}
-      disabled={
-        props.menuItem.itemName === "" ||
-        props.size === "a" ||
-        itemInOrder.current
-      }
-      onClick={async () => {
-        if (itemInOrder.current === true) {
-          itemInOrder.current = false;
+    <>
+      <button
+        className={classes.addItemButton}
+        disabled={
+          // props.menuItem.itemName === "" ||
+          // props.size === "a" ||
+          // itemInOrder.current
+          itemInOrder.current === true ||
+          (props.size !== "S" &&
+            props.size !== "M" &&
+            props.size !== "L" &&
+            props.size !== "NA")
         }
-        setOrder(GetOwnerOrder());
+        onClick={async () => {
+          if (itemInOrder.current === true) {
+            itemInOrder.current = false;
+            props.reset();
+          }
+          setOrder(GetOwnerOrder());
 
-        orderCheck();
-        checkOrderContext();
-        props.reset();
-
-        if (!ownerOrder) {
-          orderReqRes.current = await GetOrderByID(
-            orderToView.orderUid,
-            login.accessToken
-          );
-
-          setOrderToView(orderReqRes.current.body as Order);
+          orderCheck();
+          checkOrderContext();
           props.reset();
-        }
-      }}
-    >
-      Add Item
-    </button>
+
+          if (!ownerOrder) {
+            orderReqRes.current = await GetOrderByID(
+              orderToView.orderUid,
+              login.accessToken
+            );
+            setOrderToView(orderReqRes.current.body as Order);
+            props.reset();
+          }
+          props.reset();
+        }}
+      >
+        Add Item
+      </button>
+    </>
   );
 }
