@@ -2,6 +2,12 @@
 
 ---
 
+-- 17 Dec 2025 --
+
+- Beginnings of a solution in place for checkng if an item is already in the order before adding another but want to look into one more option. Submitting this as a place holder while working further.
+
+---
+
 -- 16 Dec 2025 --
 
 - Size selector appears to be functioning correctly between items in customers cart, owners cart for a customer, editing an orderItem, and adding an item to an existing order.

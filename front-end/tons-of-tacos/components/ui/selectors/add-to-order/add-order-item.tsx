@@ -119,6 +119,7 @@ export default function AddOrderItem() {
   }
 
   useEffect(() => {
+    // do a check herefor item in cart as all the info pipes back here
     console.log(ownerOrder);
     function calcPrice() {
       let sizeSurcharge = 0;
@@ -202,7 +203,6 @@ export default function AddOrderItem() {
             submitted={submitted}
             canEdit={canEdit}
             setCanEdit={setCanEdit}
-            reset={reset}
           />
 
           <p className={classes.total}>${price.toFixed(2)}</p>
@@ -224,6 +224,7 @@ export default function AddOrderItem() {
               setItemName={setItemName}
               setReadyToAdd={setReadyToAdd}
               reset={reset}
+              setSizeValid={setSizeValid}
             />
           )}
         </div>

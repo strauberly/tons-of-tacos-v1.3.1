@@ -34,7 +34,7 @@ export default function SizeSelector(props: {
   //   const sizeError: string =
   //     "Enter 'S' for small, 'M' for medium or 'L' for large.";
 
-  const [sizeValid, setSizeValid] = useState<boolean>();
+  const [sizeValid, setSizeValid] = useState<boolean>(true);
   // if (props.itemSize === "a") {
   //   sizeRef.current = " ";
   // } else {
@@ -71,22 +71,25 @@ export default function SizeSelector(props: {
     if (props.submitted === true) {
       sizeRef.current = props.itemSize;
     }
+
     const sizes: string[] = [];
     cart.forEach((cartItem) => {
-      if (cartItem.itemName === props.itemName) {
+      if (cartItem.itemName !== props.itemName) {
+        props.setShowSizeError(false);
+      } else {
         sizes.push(cartItem.size);
+        sizes.forEach((size) => {
+          if (size === props.itemSize) {
+            props.setSizeError(
+              `${
+                props.itemName + " " + sizeRef.current
+              } is already in cart. Select a different size or item.`
+            );
+            props.setShowSizeError(true);
+            setSizeValid(false);
+          }
+        });
       }
-      sizes.forEach((size) => {
-        if (size === props.itemSize) {
-          props.setSizeError(
-            `${
-              props.itemName + " " + sizeRef.current
-            } is already in cart. Select a different size or item.`
-          );
-          props.setShowSizeError(true);
-          setSizeValid(false);
-        }
-      });
     });
     if (sizeRef.current !== props.itemSize) {
       props.setEdited(true);
