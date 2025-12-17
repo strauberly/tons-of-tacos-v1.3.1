@@ -134,6 +134,11 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
                 itemName={orderItem.orderItem.itemName}
                 setEdited={setEdited}
                 edited={edited}
+                submitted={false}
+                canEdit={false}
+                setCanEdit={function (setCanEdit: boolean): void {
+                  throw new Error("Function not implemented.");
+                }}
               />
             )}
           </>

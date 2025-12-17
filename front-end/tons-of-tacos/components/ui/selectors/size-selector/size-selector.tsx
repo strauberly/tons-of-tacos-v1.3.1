@@ -49,10 +49,11 @@ export default function SizeSelector(props: {
     if (
       sizeRef.current !== "S" &&
       sizeRef.current !== "M" &&
-      sizeRef.current !== "L"
+      sizeRef.current !== "L" &&
+      sizeRef.current !== "NA"
     ) {
       props.setSizeError(
-        "Enter 'S' for small, 'M' for medium or 'L' for large."
+        "Enter 'S' for small, 'M' for medium or 'L' for large. Or no size is available."
       );
       props.setShowSizeError(true);
       setSizeValid(false);
@@ -67,6 +68,9 @@ export default function SizeSelector(props: {
   }
 
   useEffect(() => {
+    if (props.submitted === true) {
+      sizeRef.current = props.itemSize;
+    }
     const sizes: string[] = [];
     cart.forEach((cartItem) => {
       if (cartItem.itemName === props.itemName) {
@@ -75,9 +79,12 @@ export default function SizeSelector(props: {
       sizes.forEach((size) => {
         if (size === props.itemSize) {
           props.setSizeError(
-            `${props.itemName + " " + sizeRef.current} is already in cart.`
+            `${
+              props.itemName + " " + sizeRef.current
+            } is already in cart. Select a different size or item.`
           );
           props.setShowSizeError(true);
+          setSizeValid(false);
         }
       });
     });
@@ -89,7 +96,7 @@ export default function SizeSelector(props: {
       (props.submitted && !props.canEdit) ||
       (!props.submitted && props.canEdit)
     ) {
-      // element.value = "";
+      element.value = "";
       // props.setCanEdit(true);
       props.setNewSize(size);
     }
@@ -99,7 +106,7 @@ export default function SizeSelector(props: {
       console.log("hi");
     }
     if (props.canEdit) {
-      element.value = `${sizeRef.current}`;
+      // element.value = `${sizeRef.current}`;
       props.setNewSize(size);
     }
   }, [cart, props, size]);
@@ -109,30 +116,18 @@ export default function SizeSelector(props: {
   return (
     <div className={classes.size}>
       <>
-        <p>{"props: " + `${props.itemSize}`}</p>
-        <p>{"state: " + `${size}`}</p>
-        <p>{"ref: " + `${sizeRef.current}`}</p>
-        <p>{"submitted: " + `${props.submitted}`}</p>
-        <p>{"canEdit: " + `${props.canEdit}`}</p>
         {`${sizeRef.current}` !== "a" && (
           <input
             className={`${
               sizeValid == false ? classes.invalid : classes.valid
             }`}
-            // disabled={!props.submitted && !props.canEdit}
             disabled={
               (sizeRef.current === "NA" && props.itemSize === " ") ||
               (sizeRef.current === "NA" && props.itemSize === "NA")
             }
-            // disabled={
-            //   (size === " " && sizeRef.current === "NA") ||
-            //   props.itemSize === "NA"
-            // }
             name="size"
             id="size"
             type="text"
-            // placeholder={"NA"}
-            // value={size}
             placeholder={sizeRef.current}
             maxLength={1}
             style={{ textTransform: "uppercase" }}

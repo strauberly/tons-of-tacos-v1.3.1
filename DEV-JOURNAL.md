@@ -6,6 +6,10 @@
 
 - Size selector appears to be functioning correctly between items in customers cart, owners cart for a customer, editing an orderItem, and adding an item to an existing order.
 - some refinement still needed such as resetting components after their function is carried out.
+- solution in place moving on to other application issues.
+- resolved issue in cart library where size was being sterilized improperly before being transmitted. NA was being trimmed to N.
+
+- Moving back through add item component; everything with size selection feels good but think our error messages need to move out of our size selector to the parent component, where all is held so we are comparing most up to date and dynamic info.
 
 ---
 

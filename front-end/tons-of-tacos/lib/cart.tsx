@@ -139,7 +139,8 @@ export async function SendOrder(
     return {
       menuId: i.menuId,
       quantity: i.quantity,
-      size: i.size.charAt(0),
+      size: i.size,
+      // size: i.size.charAt(0),
     };
   });
 

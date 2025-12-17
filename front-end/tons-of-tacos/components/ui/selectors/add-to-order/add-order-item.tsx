@@ -135,7 +135,16 @@ export default function AddOrderItem() {
       setSubmitted(!submitted);
     }
     setPrice(calcPrice());
-  }, [item?.unitPrice, ownerOrder, price, quantity, size, submitted]);
+    setItemName(item.itemName);
+  }, [
+    item.itemName,
+    item?.unitPrice,
+    ownerOrder,
+    price,
+    quantity,
+    size,
+    submitted,
+  ]);
 
   return (
     <>
@@ -155,6 +164,7 @@ export default function AddOrderItem() {
           <h3>Total</h3>
         </div>
         <div className={classes.values}>
+          {/* <p>{item}</p> */}
           <p>{item?.itemName}</p>
           <QuantitySelector
             value={quantity}
@@ -192,16 +202,16 @@ export default function AddOrderItem() {
             submitted={submitted}
             canEdit={canEdit}
             setCanEdit={setCanEdit}
+            reset={reset}
           />
-
-          {showSizeError === true && (
-            <p className={classes.sizeWarning}>{sizeError}</p>
-          )}
 
           <p className={classes.total}>${price.toFixed(2)}</p>
         </div>
       </div>
       <div className={classes.tail}>
+        {showSizeError === true && (
+          <p className={classes.sizeWarning}>{sizeError}</p>
+        )}
         <div className={classes.addItemButton}>
           {readyToAdd && (
             <AddToOrderButton
