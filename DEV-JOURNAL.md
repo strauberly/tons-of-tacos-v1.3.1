@@ -2,6 +2,22 @@
 
 ---
 
+-- 18 Dec 2025 --
+
+- Have moved logic from size selector into add-order-item for checking if already in cart.
+- Have set up the select item button to reset and clear the item similar to add to item.
+- So far functionality seems to be correct for checking if an item is in cart but will need to check if sizes are being taken into account.
+- Also need work on error management as in if we are displaying an error due to in cart or size invalid.
+- Add to order button disabled if item in cart.
+
+---
+
+-- 17 Dec 2025 --
+
+- Beginnings of a solution in place for checkng if an item is already in the order before adding another but want to look into one more option. Submitting this as a place holder while working further.
+
+---
+
 -- 16 Dec 2025 --
 
 - Size selector appears to be functioning correctly between items in customers cart, owners cart for a customer, editing an orderItem, and adding an item to an existing order.

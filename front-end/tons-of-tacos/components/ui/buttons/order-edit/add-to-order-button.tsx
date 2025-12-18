@@ -21,6 +21,7 @@ export default function AddToOrderButton(props: {
   setItemName: (item: string) => void;
   setReadyToAdd: (readyToAdd: boolean) => void;
   reset: () => void;
+  setSizeValid: (sizeValid: boolean) => void;
 }) {
   const { setShowConfirmation } = useDisplayContext();
   const { setConfirmationTitle } = useModalContext();
@@ -92,6 +93,7 @@ export default function AddToOrderButton(props: {
       setShowConfirmation(true);
       setConfirmationTitle("Add To Order");
     }
+    props.reset();
   }
 
   function checkOrderContext() {
