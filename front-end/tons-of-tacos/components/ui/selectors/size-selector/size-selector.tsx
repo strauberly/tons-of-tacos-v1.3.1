@@ -72,25 +72,25 @@ export default function SizeSelector(props: {
       sizeRef.current = props.itemSize;
     }
 
-    const sizes: string[] = [];
-    cart.forEach((cartItem) => {
-      if (cartItem.itemName !== props.itemName) {
-        props.setShowSizeError(false);
-      } else {
-        sizes.push(cartItem.size);
-        sizes.forEach((size) => {
-          if (size === props.itemSize) {
-            props.setSizeError(
-              `${
-                props.itemName + " " + sizeRef.current
-              } is already in cart. Select a different size or item.`
-            );
-            props.setShowSizeError(true);
-            setSizeValid(false);
-          }
-        });
-      }
-    });
+    // const sizes: string[] = [];
+    // cart.forEach((cartItem) => {
+    //   if (cartItem.itemName !== props.itemName) {
+    //     props.setShowSizeError(false);
+    //   } else {
+    //     sizes.push(cartItem.size);
+    //     sizes.forEach((size) => {
+    //       if (size === props.itemSize) {
+    //         props.setSizeError(
+    //           `${
+    //             props.itemName + " " + sizeRef.current
+    //           } is already in cart. Select a different size or item.`
+    //         );
+    //         props.setShowSizeError(true);
+    //         setSizeValid(false);
+    //       }
+    //     });
+    //   }
+    // });
     if (sizeRef.current !== props.itemSize) {
       props.setEdited(true);
     }

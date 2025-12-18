@@ -1,17 +1,20 @@
 "use client";
 
+import classes from "./add-order-item.module.css";
 import MenuItemSelector from "../menu-item-selector/menu-item-selector";
 import { useEffect, useRef, useState } from "react";
 import { useModalContext } from "@/context/modal-context";
 import AddToOrderButton from "../../buttons/order-edit/add-to-order-button";
 import { useOwnerContext } from "@/context/owner-context";
+
 import QuantitySelector from "../quantity-selector/quantity-selector";
 import SizeSelector from "../size-selector/size-selector";
-import classes from "./add-order-item.module.css";
+import { useCartContext } from "@/context/cart-context";
 
 export default function AddOrderItem() {
   const { orderToView } = useModalContext();
   const { ownerOrder } = useOwnerContext();
+  const { cart } = useCartContext();
   const [itemSelector, setItemSelector] = useState<boolean>(false);
   const [itemName, setItemName] = useState<string>("Item");
   const [quantity, setQuantity] = useState<number>(1);
@@ -111,15 +114,57 @@ export default function AddOrderItem() {
       itemSize: "",
       unitPrice: 0,
     });
-    setItemSelector(false);
+    setItemSelector(!itemSelector);
     setSize("NA");
     setSubmitted(true);
     setShowSizeError(false);
     console.log("reset hit");
   }
 
+  const cartRef = useRef<CartItem[]>(cart);
   useEffect(() => {
     // do a check herefor item in cart as all the info pipes back here
+
+    // cart.forEach((cartItem) => {
+    //   if (cartItem.itemName !== props.itemName) {
+    //     props.setShowSizeError(false);
+    //   } else {
+    //     sizes.push(cartItem.size);
+    //     sizes.forEach((size) => {
+    //       if (size === props.itemSize) {
+    //         props.setSizeError(
+    //           `${
+    //             props.itemName + " " + sizeRef.current
+    //           } is already in cart. Select a different size or item.`
+    //         );
+    //         props.setShowSizeError(true);
+    //         setSizeValid(false);
+    //       }
+    //     });
+    //   }
+    // });
+    // const sizes: string[] = [];
+    // const cc = cart;
+    cart.forEach((cartItem) => {
+      if (cartItem.itemName === item.itemName) {
+        setSizeError(
+          `${
+            itemName + " " + sizeRef.current
+          } is already in cart. Select a different size or item.`
+        );
+        setShowSizeError(true);
+        setSizeValid(false);
+        setReadyToAdd(false);
+        // setShowSizeError(false);
+        // } else {
+        // sizes.push(cartItem.size);
+        // sizes.forEach((size) => {
+        //   if (size === props.itemSize) {
+        //   }
+        // });
+      }
+    });
+
     console.log(ownerOrder);
     function calcPrice() {
       let sizeSurcharge = 0;
@@ -138,11 +183,14 @@ export default function AddOrderItem() {
     setPrice(calcPrice());
     setItemName(item.itemName);
   }, [
+    cart,
     item.itemName,
     item?.unitPrice,
+    itemName,
     ownerOrder,
     price,
     quantity,
+    readyToAdd,
     size,
     submitted,
   ]);
@@ -156,7 +204,7 @@ export default function AddOrderItem() {
               (!ownerOrder && orderToView.closed !== "no") ||
               (!ownerOrder && orderToView.ready !== "no")
             }
-            onClick={() => setItemSelector(!itemSelector)}
+            onClick={() => reset()}
           >
             Select Item
           </button>

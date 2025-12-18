@@ -93,6 +93,7 @@ export default function AddToOrderButton(props: {
       setShowConfirmation(true);
       setConfirmationTitle("Add To Order");
     }
+    props.reset();
   }
 
   function checkOrderContext() {
