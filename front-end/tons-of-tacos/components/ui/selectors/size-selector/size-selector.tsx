@@ -53,7 +53,7 @@ export default function SizeSelector(props: {
       sizeRef.current !== "NA"
     ) {
       props.setSizeError(
-        "Enter 'S' for small, 'M' for medium or 'L' for large. Or no size is available."
+        "Enter 'S' for small, 'M' for medium or 'L' for large."
       );
       props.setShowSizeError(true);
       setSizeValid(false);
