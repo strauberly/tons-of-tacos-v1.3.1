@@ -2,9 +2,16 @@
 
 ---
 
+-- 21 Dec 2025 --
+
+- add order item in current phase is model of size selector validating size selected, and only adding to cart if size is valid and item with same size is not already in the cart or order.
+
+---
+
 -- 20 Dec 2025 --
 
 - Alterations made to styling of size error in order items available through order view modal. position and color changed for readability.
+- Added a state to add order item component to accept either order items or cart items and check if the item about to be added already exists in the collection, presents a warning and prevents from it being added.
 
 ---
 

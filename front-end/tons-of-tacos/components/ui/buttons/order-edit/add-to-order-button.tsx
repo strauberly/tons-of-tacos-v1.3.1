@@ -20,7 +20,7 @@ export default function AddToOrderButton(props: {
   price: string;
   setItemName: (item: string) => void;
   setReadyToAdd: (readyToAdd: boolean) => void;
-  reset: () => void;
+  reset: (component: string) => void;
   setSizeValid: (sizeValid: boolean) => void;
 }) {
   const { setShowConfirmation } = useDisplayContext();
@@ -64,7 +64,7 @@ export default function AddToOrderButton(props: {
           // setShowModal(true);
           itemInOrder.current = true;
           props.setSizeValid(false);
-          props.reset();
+          props.reset("addButton");
         }
       });
     } else {
@@ -82,7 +82,7 @@ export default function AddToOrderButton(props: {
           // setShowModal(true);
           itemInOrder.current = true;
           props.setSizeValid(false);
-          props.reset();
+          props.reset("addButton");
         }
       });
     }
@@ -93,7 +93,7 @@ export default function AddToOrderButton(props: {
       setShowConfirmation(true);
       setConfirmationTitle("Add To Order");
     }
-    props.reset();
+    props.reset("addButton");
   }
 
   function checkOrderContext() {
@@ -110,7 +110,7 @@ export default function AddToOrderButton(props: {
 
           props.price
         ),
-        props.reset(),
+        props.reset("addButton"),
         setCart(GetOwnerOrder()),
       ];
     } else if (!ownerOrder) {
@@ -149,13 +149,13 @@ export default function AddToOrderButton(props: {
         onClick={async () => {
           if (itemInOrder.current === true) {
             itemInOrder.current = false;
-            props.reset();
+            props.reset("addButton");
           }
           setOrder(GetOwnerOrder());
 
           orderCheck();
           checkOrderContext();
-          props.reset();
+          props.reset("addButton");
 
           if (!ownerOrder) {
             orderReqRes.current = await GetOrderByID(
@@ -163,9 +163,9 @@ export default function AddToOrderButton(props: {
               login.accessToken
             );
             setOrderToView(orderReqRes.current.body as Order);
-            props.reset();
+            props.reset("addButton");
           }
-          props.reset();
+          // props.reset();
         }}
       >
         Add Item

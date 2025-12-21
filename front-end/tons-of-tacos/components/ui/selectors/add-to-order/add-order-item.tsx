@@ -13,9 +13,9 @@ import { useCartContext } from "@/context/cart-context";
 
 export default function AddOrderItem() {
   const { orderToView } = useModalContext();
-  const { ownerOrder } = useOwnerContext();
+  const { ownerOrder, loggedIn } = useOwnerContext();
   const { cart } = useCartContext();
-  const [itemSelector, setItemSelector] = useState<boolean>(false);
+  const [itemSelector, setItemSelector] = useState<boolean | undefined>(false);
   const [itemName, setItemName] = useState<string>("Item");
   const [quantity, setQuantity] = useState<number>(1);
   const [size, setSize] = useState<string>("NA");
@@ -78,32 +78,40 @@ export default function AddOrderItem() {
     setPrice(calcPrice());
   };
 
-  function checkSize(event: React.ChangeEvent<HTMLInputElement>) {
-    sizeRef.current = event.currentTarget.value.toUpperCase();
-    setSize(event.target.value.toUpperCase());
-    console.log("item size: " + item.itemSize);
-    if (
-      sizeRef.current !== "S" &&
-      sizeRef.current !== "M" &&
-      sizeRef.current !== "L"
-    ) {
-      setShowSizeError(true);
-      setSizeValid(false);
-    } else {
-      setSizeValid(true);
-      setShowSizeError(false);
-      setSize(sizeRef.current);
+  // function checkSize(event: React.ChangeEvent<HTMLInputElement>) {
+  //   sizeRef.current = event.currentTarget.value.toUpperCase();
+  //   setSize(event.target.value.toUpperCase());
+  //   console.log("item size: " + item.itemSize);
+  //   if (
+  //     sizeRef.current !== "S" &&
+  //     sizeRef.current !== "M" &&
+  //     sizeRef.current !== "L"
+  //   ) {
+  //     setShowSizeError(true);
+  //     setSizeValid(false);
+  //   } else {
+  //     setSizeValid(true);
+  //     setShowSizeError(false);
+  //     setSize(sizeRef.current);
+  //   }
+  // }
+
+  // function sizeSwap() {
+  //   if (size === "a") {
+  //     setSize(" ");
+  //   }
+  //   return size;
+  // }
+
+  function showOrNo(component: string) {
+    if (itemSelector && component === "addButton") {
+      return false;
+    } else if (component === "selectButton") {
+      return itemSelector ? false : true;
     }
   }
 
-  function sizeSwap() {
-    if (size === "a") {
-      setSize(" ");
-    }
-    return size;
-  }
-
-  function reset() {
+  function reset(component: string) {
     setQuantity(1);
     setItem({
       id: "",
@@ -114,15 +122,23 @@ export default function AddOrderItem() {
       itemSize: "",
       unitPrice: 0,
     });
-    setItemSelector(!itemSelector);
+    setItemSelector(showOrNo(component));
     setSize("NA");
     setSubmitted(true);
     setShowSizeError(false);
     console.log("reset hit");
   }
 
-  const cartRef = useRef<CartItem[]>(cart);
+  const [itemContainer, setItemContainer] = useState<CartItem[] | OrderItem[]>(
+    []
+  );
+  // const cartRef = useRef<CartItem[]>(cart);
   useEffect(() => {
+    if (!ownerOrder && loggedIn) {
+      setItemContainer(orderToView.orderItems);
+    } else {
+      setItemContainer(cart);
+    }
     // do a check herefor item in cart as all the info pipes back here
 
     // cart.forEach((cartItem) => {
@@ -145,11 +161,14 @@ export default function AddOrderItem() {
     // });
     // const sizes: string[] = [];
     // const cc = cart;
-    cart.forEach((cartItem) => {
-      if (cartItem.itemName === item.itemName) {
+    itemContainer.forEach((containerItem) => {
+      if (
+        containerItem.itemName === item.itemName &&
+        containerItem.size === size
+      ) {
         setSizeError(
           `${
-            itemName + " " + sizeRef.current
+            itemName + " " + size
           } is already in cart. Select a different size or item.`
         );
         setShowSizeError(true);
@@ -162,6 +181,8 @@ export default function AddOrderItem() {
         //   if (size === props.itemSize) {
         //   }
         // });
+      } else {
+        setReadyToAdd(true);
       }
     });
 
@@ -185,8 +206,12 @@ export default function AddOrderItem() {
   }, [
     cart,
     item.itemName,
+    item.itemSize,
     item?.unitPrice,
+    itemContainer,
     itemName,
+    loggedIn,
+    orderToView.orderItems,
     ownerOrder,
     price,
     quantity,
@@ -204,7 +229,8 @@ export default function AddOrderItem() {
               (!ownerOrder && orderToView.closed !== "no") ||
               (!ownerOrder && orderToView.ready !== "no")
             }
-            onClick={() => reset()}
+            // onClick={() => setItemSelector(itemSelector ? false : true)}
+            onClick={() => reset("selectButton")}
           >
             Select Item
           </button>
