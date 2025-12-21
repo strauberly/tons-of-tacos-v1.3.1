@@ -2,6 +2,12 @@
 
 ---
 
+-- 20 Dec 2025 --
+
+- Alterations made to styling of size error in order items available through order view modal. position and color changed for readability.
+
+---
+
 -- 18 Dec 2025 --
 
 - Have moved logic from size selector into add-order-item for checking if already in cart.
