@@ -5,6 +5,9 @@
 -- 21 Dec 2025 --
 
 - add order item in current phase is model of size selector validating size selected, and only adding to cart if size is valid and item with same size is not already in the cart or order.
+- additional logic to select item and add to cart buttons so they arent tripping over one another setting the display.
+
+- Cart Items in owner order creator now correctly utilizing means for checking cart for an existing size before allowing an identical item to be added.
 
 ---
 

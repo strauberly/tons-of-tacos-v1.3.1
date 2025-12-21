@@ -25,7 +25,7 @@ export default function CartItem(props: {
   const { loggedIn, ownerOrder } = useOwnerContext();
   const { selectedSize } = useSelectedSizeContext();
 
-  const [newSize, setNewSize] = useState<string>(props.size);
+  const [newSize, setNewSize] = useState<string>("NA");
   const [quantity, setQuantity] = useState<number>(props.itemQuantity);
   const [newPrice, setNewPrice] = useState<number>(Number(props.itemPrice));
   const [edited, setEdited] = useState<boolean>(false);
@@ -33,7 +33,7 @@ export default function CartItem(props: {
   const [canEdit, setCanEdit] = useState<boolean>(false);
   const [canUpdate, setCanUpdate] = useState<boolean>(false);
   const [showSizeError, setShowSizeError] = useState<boolean>(false);
-  const [sizeError, setSizeError] = useState<string>("");
+  const [sizeError, setSizeError] = useState<string>("hi");
 
   const newQuantity = useRef<number>(quantity);
   const oldSize = useRef<string>(props.size);
@@ -81,19 +81,38 @@ export default function CartItem(props: {
     // console.log("props: " + props.size);
   }
 
+  const [sizes, setSize] = useState<string[]>([]);
+  const sizeRef = useRef<string[]>([]);
   useEffect(() => {
-    const sizes: string[] = [];
     cart.forEach((cartItem) => {
       if (cartItem.itemName === props.itemName) {
-        sizes.push(cartItem.size);
+        sizeRef.current.push(cartItem.size);
       }
+      sizeRef.current.forEach((size) => {
+        if (cartItem.itemName === props.itemName && size === newSize) {
+          setSizeError(
+            `${
+              props.itemName + " " + newSize
+            } is already in cart. Select a different size or item.`
+          );
+          setShowSizeError(true);
+          setCanUpdate(false);
+          // } else {
+          //   setShowSizeError(false);
+        }
+      });
     });
-
-    setCanUpdate(!sizes.some((size) => size === newSize));
+    // const sizes: string[] = [];
+    // cart.forEach((cartItem) => {
+    //   if (cartItem.itemName === props.itemName) {
+    //     sizes.push(cartItem.size);
+    //   }
+    // });
 
     console.log("found it: " + sizes.some((size) => size === newSize));
     console.log("itemSizes:" + sizes);
 
+    setCanUpdate(!sizeRef.current.some((size) => size === newSize));
     if (edited) {
       setNewPrice(
         calcItemTotal(basePrice, props.size, newSize, newQuantity.current)
@@ -113,11 +132,12 @@ export default function CartItem(props: {
     props.itemName,
     canUpdate,
     selectedSize,
+    sizes,
   ]);
 
   return (
     <div className={classes.wholeItem}>
-      {/* <p>{`${canEdit}`}</p> */}
+      <p>{`${sizes}`}</p>
       <li className={ownerOrder ? classes.ownerOrderItem : classes.item}>
         <p className={classes.itemName}>{props.itemName}</p>
         {!canEdit && <p>{props.itemQuantity}</p>}
@@ -156,14 +176,15 @@ export default function CartItem(props: {
           />
         )}
         <p>${newPrice.toFixed(2)}</p>
-        <div className={classes.editCartItem}>
-          {/* {showSizeError === true && (
-            <p className={classes.sizeWarning}>{sizeError}</p>
-          )} */}
-        </div>
       </li>
+      <div className={classes.editCartItem}>
+        {showSizeError === true && (
+          <p className={classes.sizeWarning}>{sizeError}</p>
+        )}
+      </div>
+
       <div className={classes.actionButtonGroup}>
-        {edited && (
+        {edited && canUpdate && (
           // {canUpdate && (
           <Update
             cartItemId={props.id}
