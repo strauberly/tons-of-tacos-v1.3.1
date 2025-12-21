@@ -24,6 +24,9 @@ export default function AddOrderItem() {
   // const sizeError: string =
   //   "Enter 'S' for small, 'M' for medium or 'L' for large.";
   const [showSizeError, setShowSizeError] = useState<boolean>(false);
+  const [itemContainer, setItemContainer] = useState<CartItem[] | OrderItem[]>(
+    []
+  );
 
   const [sizeError, setSizeError] = useState<string>("");
   const [sizeValid, setSizeValid] = useState<boolean>(false);
@@ -129,9 +132,6 @@ export default function AddOrderItem() {
     console.log("reset hit");
   }
 
-  const [itemContainer, setItemContainer] = useState<CartItem[] | OrderItem[]>(
-    []
-  );
   // const cartRef = useRef<CartItem[]>(cart);
   useEffect(() => {
     if (!ownerOrder && loggedIn) {

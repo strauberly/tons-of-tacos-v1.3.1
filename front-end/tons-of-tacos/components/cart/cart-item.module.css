@@ -37,6 +37,13 @@
   margin-left: -2rem;
 }
 
+.sizeWarning {
+  margin-top: -1rem;
+  color: var(--attention-color);
+  justify-self: center;
+  margin-bottom: 0.25rem;
+}
+
 .ownerOrderItem {
   width: 98%;
   margin-top: 0.5rem;
