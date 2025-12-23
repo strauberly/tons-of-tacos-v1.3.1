@@ -129,7 +129,7 @@ export async function SendOrder(
 
   cartItems.forEach((cartItem) => {
     if (cartItem.size === "") {
-      cartItem.size = "na";
+      cartItem.size = "NA";
     }
   });
 
@@ -139,7 +139,8 @@ export async function SendOrder(
     return {
       menuId: i.menuId,
       quantity: i.quantity,
-      size: i.size.charAt(0),
+      size: i.size,
+      // size: i.size.charAt(0),
     };
   });
 

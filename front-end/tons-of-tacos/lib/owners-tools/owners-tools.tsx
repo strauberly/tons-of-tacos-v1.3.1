@@ -1,9 +1,13 @@
 "use server";
 
+import { cookies } from "next/headers";
+
 export async function GetAllOrders(token: string) {
   // console.log(token);
   let response;
   let data;
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get("accessToken");
   try {
     response = await fetch(
       "http://localhost:8080/api/owners-tools/orders/get-orders",
@@ -11,10 +15,14 @@ export async function GetAllOrders(token: string) {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
+          // Cookie: `${accessToken?.value}`,
         },
+        credentials: "include",
       }
     );
     data = await response.json();
+    // console.log(response.headers);
+    // console.log("headers: " + response.headers.getSetCookie());
     const orders = data;
     return orders;
   } catch (error) {
@@ -98,6 +106,7 @@ export async function AddToOrder(
       headers: {
         Authorization: `Bearer ${token}`,
       },
+      credentials: "include",
     });
     data = await response.json();
     // let message: string = "";

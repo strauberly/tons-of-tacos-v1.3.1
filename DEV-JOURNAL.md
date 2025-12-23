@@ -2,6 +2,297 @@
 
 ---
 
+-- 21 Dec 2025 --
+
+- add order item in current phase is model of size selector validating size selected, and only adding to cart if size is valid and item with same size is not already in the cart or order.
+- additional logic to select item and add to cart buttons so they arent tripping over one another setting the display.
+
+- Cart Items in owner order creator now correctly utilizing means for checking cart for an existing size before allowing an identical item to be added.
+
+---
+
+-- 20 Dec 2025 --
+
+- Alterations made to styling of size error in order items available through order view modal. position and color changed for readability.
+- Added a state to add order item component to accept either order items or cart items and check if the item about to be added already exists in the collection, presents a warning and prevents from it being added.
+
+---
+
+-- 18 Dec 2025 --
+
+- Have moved logic from size selector into add-order-item for checking if already in cart.
+- Have set up the select item button to reset and clear the item similar to add to item.
+- So far functionality seems to be correct for checking if an item is in cart but will need to check if sizes are being taken into account.
+- Also need work on error management as in if we are displaying an error due to in cart or size invalid.
+- Add to order button disabled if item in cart.
+
+---
+
+-- 17 Dec 2025 --
+
+- Beginnings of a solution in place for checkng if an item is already in the order before adding another but want to look into one more option. Submitting this as a place holder while working further.
+
+---
+
+-- 16 Dec 2025 --
+
+- Size selector appears to be functioning correctly between items in customers cart, owners cart for a customer, editing an orderItem, and adding an item to an existing order.
+- some refinement still needed such as resetting components after their function is carried out.
+- solution in place moving on to other application issues.
+- resolved issue in cart library where size was being sterilized improperly before being transmitted. NA was being trimmed to N.
+
+- Moving back through add item component; everything with size selection feels good but think our error messages need to move out of our size selector to the parent component, where all is held so we are comparing most up to date and dynamic info.
+
+---
+
+-- 15 Dec 2025 --
+
+- Size selector in place for owner order creator and order to view add item to order. Next is to work on implementation on menu item(may not work).
+  Look at reimplementation of warning when editing an item size if already in cart.
+
+---
+
+-- 11 Dec 2025 --
+
+- Size selector wasn't quite working out as intended when implemented between customer cart and owner order creator when going to edit items. Balancing the three components that are slightly different to utilize the same child component has become an interesting task.
+- Still needs to be tested between all three components and cleaned up and errors for user input refactored as well.
+
+- Continuing to hunt through bugs. but it feels like it coming along. Need to evaluate the order items in owner order creator and figure out why they're glitching when size updated. BUt price is updating appropriately still and that feels good.
+
+---
+
+-- 9 Dec 2025 --
+
+- Order view appears to be functioning as intended after context providers refactor.
+
+- Orders scroll to top and sorted by status(open, ready, closed) when selected.
+
+- Successfully implemented existing size selector in place of code in owner order creator. Functionality of component appears to be correct and addresses bugs that existed prior to.
+
+---
+
+-- 7 Dec 2025 --
+
+- Chasing bugs as if git not properly updated or pulled. Issues resolved in owner order creator. Provider refactor appears to be working for that component.
+
+- Sales component appears to be functioning correctly.
+
+- While working on orderview provider/context refactor discovered issues with editing an order item's quantity.
+
+  - One is like it was using the quantity of any previous item's edits.
+  - Two is that if update for quantity is started and then canceled by clicking no, the quantity selector is not set back. Starts increment/decrement from the last quantity selection instead of current quantity for item.
+
+  - Appear to have corrected with changes made to decrement in order item, the no button in order-action-confirmation.
+
+    - need to check and see if these issues appear in other areas of the app.
+
+  - Issue is now that switching items preserves the quantity of previous item worked with when making edits to an item.
+
+    -Issue resolved by resetting quantity when clicking order Item.
+
+---
+
+-- 6 Dec 2025 --
+
+- While working out context refactor to improve readability and structure discovered the means joys of templates which allow for combining server components into a client component through the template. Calling menu items now has the desired suspense loading effect we had at one time and wanted to get back to.
+
+- Back to working on context refactor shortly.
+
+- Began moving providers out of the general providers fold to be more deeply nested with their corresponding components.
+
+---
+
+-- 5 Dec 2025 --
+
+- Discovered an issue where select item button for owner order creator was failing, set conditional that appears to have rectified issue.
+
+-Reimplemented daily component in owner dashboard with clear interval close stopping call upon logout, conditionals were not operating correctly it, seems odd.
+
+- noticed update was not correctly appearing after editing quantity, condition alteration made in cart item at update component.
+
+- same issue for size selector. addressed.
+
+---
+
+-- 4 Dec 2025 --
+
+- Got to the bottom of menu items not surviving a refresh or being able to access a menu category by typing in address bar. This has been resolved utilizing the slug in address bar as state storage for the category we wish to view. Lots more can be done with this just unneeded at this time.
+
+- menu items are now a nested dynamic route (ie. /menu-category/[category])
+
+- In owner header added condition for auto login back to owners tools. May need to further develop.
+
+- Formatting solution in place for is customer name is present or NA due to all orders by that customer closed and their information is no longer needed. latter yet to be implemented in backend.
+
+---
+
+-- 2 Dec 2025 --
+
+- Made alterations to add menu item to customer cart so it is now correctly looking checking if item already in cart or not and adding to cart if not.
+
+- Working on check in cart to block from having 2 near identical items becoming identical items, ie(if large and medium iced tea in cart, do not let medium come a large, and do not let the original large become a medium or essentially the same item is in cart twice.)
+
+- Solution is in place. If two items are in cart with different sizes and use tries to change size to the same size as the duplicate item they will be alerted and update button is non functional.
+  - Need to test against owner functions but should be identical.
+
+---
+
+-- 1 Dec 2025 --
+
+- Application successfully timed out over night as designed.
+
+- update button on order item in order view, now sets items back to original state, signaling to the user that there has been a change after the confirmation closes.
+
+- In order view, add item button is disabled if closed property for the order != "no" indicating that the order has been closed because if the order is closed the property will be the acommpanying timestamp for when that action took place.
+
+- simplified logic of errors for search inputs and did a bit of styling work for valid invalid input while here.
+
+---
+
+-- 29 Nov 2025 --
+
+- Adjustments made to owner header, trying to ensure owner is logged out after 11pm. Juggling versus methodology in main header for preserving login session.
+
+- validation for search order search fields has been updated so that evaluation is happening on each keystroke through refs instead of state which was giving the undesired delayed feel.
+
+- search buttons are deactivated if fields are invalid.
+
+---
+
+-- 28 Nov 2025 --
+
+- Was running into issue where refresh tokens were failing to fetch resources and complete functions. Discovered the issue was the user name not being encrypted for the new access token generated by the refresh token so it would fail one of the auth tests on the backend. Backend rectified the issue and all is well again.
+
+- User logs in and is issued an access token, refresh token and the user name for a greeting. The front end creates an http only token storing the refresh token info and is sent to the backend, where new tokens are generated and sent to the front end maintaining the users session. The tokens are designed with a timeout and the front end checks for the end time to log remove cookies and logout the user.
+
+- Also, so we set the clock once a minute, check if token is expired, and refresh our list of orders.
+
+- altered all refrerences of 'na' to 'NA'. Consistency.
+
+- log out message captured and presented in modal for consistency.
+
+- A couple of images were not showing up, backend team(me) addressed a formatting issue that was preventing them from properly displaying.
+
+- Issue with next refresh cookie(**next_hmr_refresh_hash**) interferring with our cookie logic addressed by putting in a check in the main header to see if the cookie is present and to delete if so. Refreshes have stopped malfunctioning.
+  - might be able to leverage this cookie down the road.
+
+---
+
+-- 24 Nov 2025 --
+
+- Main header now maintains session through a browser refresh by checking if user was logged in and cookies still exist. If so will will reestablish context eliminating need to log back in in event of browser refresh.
+
+- Updated to logout user at a specified hour. Currently 1100pm. Set in owner header.
+
+- Logout button removes cookies from browser.
+- Logout button also now utilizes the api route logout, removing refresh token from db.
+- Further testing and refinement needed.
+
+---
+
+-- 23 Nov 2025 --
+
+- Needed cleanup function in use effect in owner header to prevent runaway and memory leakage causing excessive refresh token creation and storage. Still have refinements to make but really close to wrapping up this task!
+
+---
+
+-- 22 Nov 2025 --
+
+- Progress made on backend for implemnentation of token refresh still running into a few issues regarding how often refresh tokens are being generated. MOst likely as result of backend code but also need to investigate if useRef in owner header is causing a loop that repeatedly calls the back end.
+
+---
+
+-- 17 Nov 2025 --
+
+- Beginning work on implementation of storing tokens in http only cookies.
+
+---
+
+-- 13 Nov 2025 --
+
+- removed useEffect in main header as it was preventing storing a user login in context. rerender in the login button was re rendering the header reverting to default state. I believe next step will be setting the refresh token to a cookie that will then be submitted to backend if the login state is null or token is expired.
+- We should be able to check the token status in that use effect, at least is what I am currently hoping for.
+- Also working on token stored as http only cookie. This potentially eliminates the need to even use context to store possibly.
+
+---
+
+- Backend refactored for refresh tokens.
+
+- Frontend refactored to accept the new object. Appears to function as desired so for. Will be working on implementing the refresh functionality next.
+
+---
+
+-- 12 Nov 2025 --
+
+- Backend refactored to for refresh tokens.
+
+- Frontend refactored to accept the new object. Appears to function as desired so for. Will be working on impleme nting the refresh functionality next.
+
+---
+
+-- 8 Nov 2025 --
+
+- Quantity selector place holder was starting with wrong value when switching between items.
+
+- calc item function created in multi use lib. implemented in use effect in order item. Appears to be functioning as desired.
+
+  - Also implemented in increment and decrement functions eliminating close to 50 lines of code.
+
+- Update button for order item disabled if size !== S|M|L
+
+---
+
+-- 6 Nov 2025 --
+
+- Appear to have rectified an issue in add-to-order-button. Where viewing an order and then creating an owner order was leading to cross contamination of orders. Issue seems to have stemmed from the use effect in the component preventing the context from being properly established when referring to an order or cart.
+
+- Order confirmation moved out of cart into modals.
+- Gave quantity selector a property for old value to use in placeholder. So when we go to edit quantity it starts from correct place.
+
+- Have started scrubbing unused code and comments from components where encountered.
+
+---
+
+-- 5 Nov 2025 --
+
+- Universal quantity selector appears to be successfully incorporated into order item in the order view component. Slight alterations to styling.
+- Universal quantity selector incorporated in add order item component.
+- Order item price was not correctly resetting according to original size when clicking cancel button. This has been rectified.
+
+---
+
+-- 4 Nov 2025 --
+
+- Beginning refactor for commonly used or duplicate components to bring everything onto same plane, make reusable and eliminate files and code. Wish me luck.
+
+  - Created folders in UI package for size, quantity and menuitem selectors in a folder labeled selectors.
+  - Adding an item from the menu item selector now correctly resets the menu item to a void/null state ready for next selection.
+  - Menu item selector functioning as desired after being relocated so far.
+  - Add to order moved into selectors.
+  - Quantity selector working so far. Will continue testing.
+  - Size selector appears to be working in Order edit and create new order.
+  - Redundant file for cart item removed and replaced. Replacement makes use of centralized selectors in the ui package.
+  - Cart items in customer cart responding positively so far.
+
+- Scale property added to quantity selector for setting the size of the arrow selectors in quantity selector according to the needs of the component.
+
+- Starting to find bugs created through refactor, will address as noticed.
+
+---
+
+-- 3 Nov 2025 --
+
+- In order view, moved ordered prepared alert to top of card to improve effectiveness.
+
+- Order item in order view altered to match the design of cart items in terms of updating item price based on quantity and size.
+  - cancel reverts price to what it was as well as quantity.
+- size selector only available when item has selectable size.
+- Size selector now correctly only in caution color if size invalid.
+- Size error removed when canceling editing an item.
+- Search Bar moved out of buttons into the action bar package under owner dashboard.
+
+---
+
 -- 30 Oct 2025 --
 
 - Restyle of item adder let to a refactor

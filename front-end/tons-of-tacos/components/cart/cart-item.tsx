@@ -1,15 +1,15 @@
-import classes from "./cart-item.module.css";
 import { useEffect, useRef, useState } from "react";
-import QuantitySelector from "../menu/menu-items/quantity-selector/quantity-selector";
-import RemoveFromCart from "../ui/buttons/remove-from-cart/remove-from-cart";
-import Update from "../ui/buttons/update-cart-item/update-cart-item-copy";
 import { useCartContext } from "@/context/cart-context";
-import { GetCart, RemoveCartItem } from "@/lib/cart";
 import { useModalContext } from "@/context/modal-context";
 import { useDisplayContext } from "@/context/display-context";
 import { useOwnerContext } from "@/context/owner-context";
-import SizeSelector from "../owner-dashboard/size-selector";
-import { calcPrice } from "@/lib/owners-tools/owners-tools-client";
+import SizeSelector from "../ui/selectors/size-selector/size-selector";
+import QuantitySelector from "../ui/selectors/quantity-selector/quantity-selector";
+import RemoveFromCart from "../ui/buttons/remove-from-cart/remove-from-cart";
+import Update from "../ui/buttons/update-cart-item/update-cart-item";
+import { calcItemTotal } from "@/lib/general/multi-use";
+import classes from "./cart-item.module.css";
+import { useSelectedSizeContext } from "@/context/size-context";
 
 export default function CartItem(props: {
   id: string;
@@ -19,16 +19,32 @@ export default function CartItem(props: {
   size: string;
   itemPrice: string;
 }) {
-  const [quantity, setQuantity] = useState(props.itemQuantity);
-  const { setCart, cartQuantity, setCartQuantity, setItemRemoved } =
-    useCartContext();
+  const { cartQuantity, cart } = useCartContext();
   const { setModal } = useModalContext();
   const { setShowModal } = useDisplayContext();
   const { loggedIn, ownerOrder } = useOwnerContext();
+  const { selectedSize } = useSelectedSizeContext();
 
-  const [newSize, setNewSize] = useState<string>(props.size);
+  const [newSize, setNewSize] = useState<string>("NA");
+  const [quantity, setQuantity] = useState<number>(props.itemQuantity);
   const [newPrice, setNewPrice] = useState<number>(Number(props.itemPrice));
+  const [edited, setEdited] = useState<boolean>(false);
+  const [submitted, setSubmitted] = useState<boolean>(false);
+  const [canEdit, setCanEdit] = useState<boolean>(false);
+  const [canUpdate, setCanUpdate] = useState<boolean>(false);
+  const [showSizeError, setShowSizeError] = useState<boolean>(false);
+  const [sizeError, setSizeError] = useState<string>("hi");
+
+  const newQuantity = useRef<number>(quantity);
+  const oldSize = useRef<string>(props.size);
+
+  const basePrice = Number(props.itemPrice) / props.itemQuantity;
+
+  // const sizeError: string =
+  //   "Enter 'S' for small, 'M' for medium or 'L' for large.";
+
   const increment = () => {
+    setQuantity((newQuantity.current += 1));
     if (quantity >= 10 && !loggedIn) {
       setModal(
         "The limit for this item is 10. If you need more please give us a call so we can try to accommodate your order. Thanks!"
@@ -40,161 +56,169 @@ export default function CartItem(props: {
         "Your order has grown to a fair size. The current maximum is 30 items. Please contact us before adding anything else. \n\nThis will ensure we can make your order happen today. You can also remove items from your cart. Thank you!"
       );
       setShowModal(true);
-      // setQuantity(cartQuantity - quantity);
-    }
-    setQuantity(quantity + 1);
-    setNewPrice(priceWork() * quantity);
-  };
-
-  // need a context check and appropriate action
-  const decrement = () => {
-    setQuantity(quantity - 1);
-    if (quantity <= 1) {
-      // RemoveCartItem(props.menuId);
-      // setItemRemoved(true);
-      // setCart(GetCart());
-      // setCartQuantity(cartQuantity - props.itemQuantity);
-      setQuantity(1);
     } else {
-      // set quantity -1?
-      // setCartQuantity(cartQuantity - props.itemQuantity);
+    }
+    setEdited(true);
+    setNewPrice(
+      calcItemTotal(basePrice, props.size, newSize, newQuantity.current)
+    );
+  };
+
+  const decrement = () => {
+    setQuantity((newQuantity.current -= 1));
+    if (quantity < 2) {
+      newQuantity.current = 1;
+      setQuantity(newQuantity.current);
+    } else {
+      setNewPrice(
+        calcItemTotal(basePrice, props.size, newSize, newQuantity.current)
+      );
     }
   };
 
-  const sizeRef = useRef<string>(newSize);
-
-  function priceWork() {
-    let adjPrice;
-
-    // let adjPrice: number;
-    let sizeSurcharge = 0;
-
-    if (sizeRef.current === "M") {
-      sizeSurcharge = 0.5;
-    } else if (sizeRef.current === "L") {
-      sizeSurcharge = 1.0;
-    }
-
-    const basePrice =
-      Number(props.itemPrice) / Number(props.itemPrice) / props.itemQuantity;
-    // const unitPrice =
-    // eslint-disable-next-line prefer-const
-    adjPrice = (sizeSurcharge + basePrice) * quantity;
-    return adjPrice;
+  function reset() {
+    // props.size = "p";
+    // console.log("props: " + props.size);
   }
 
-  // const price = calcPrice().toFixed(2);
-
-  const [showSizeError, setShowSizeError] = useState<boolean>(false);
-
-  const sizeError: string =
-    "Enter 'S' for small, 'M' for medium or 'L' for large.";
-
-  // const [newSize, setNewSize] = useState<string>(props.size);
-
-  // const [sameSize, setSameSize] = useState<boolean>(true);
-
-  // useEffect(() => {
-  //   function CompareSize() {
-  //     if (newSize !== props.size) {
-  //       setSameSize(false);
-  //     }
-  //   }
-  //   CompareSize();
-  // }, [newSize, props.size]);
-
-  const updatePrice = useRef<Number>(Number(props.itemPrice));
-
+  const [sizes, setSize] = useState<string[]>([]);
+  const sizeRef = useRef<string[]>([]);
   useEffect(() => {
-    function calcPrice() {
-      let adjPrice;
-
-      // let adjPrice: number;
-      let sizeSurcharge = 0;
-      let oldSurcharge = 0;
-
-      // add clause for is size is na
-
-      if (props.size === "M") {
-        oldSurcharge = 0.5;
-      } else if (props.size === "L") {
-        oldSurcharge = 1.0;
+    cart.forEach((cartItem) => {
+      if (cartItem.itemName === props.itemName) {
+        sizeRef.current.push(cartItem.size);
       }
-      if (newSize === "M") {
-        sizeSurcharge = 0.5;
-      } else if (newSize === "L") {
-        sizeSurcharge = 1.0;
-      }
+      sizeRef.current.forEach((size) => {
+        if (cartItem.itemName === props.itemName && size === newSize) {
+          setSizeError(
+            `${
+              props.itemName + " " + newSize
+            } is already in cart. Select a different size or item.`
+          );
+          setShowSizeError(true);
+          setCanUpdate(false);
+          // } else {
+          //   setShowSizeError(false);
+        }
+      });
+    });
+    // const sizes: string[] = [];
+    // cart.forEach((cartItem) => {
+    //   if (cartItem.itemName === props.itemName) {
+    //     sizes.push(cartItem.size);
+    //   }
+    // });
 
-      const basePrice =
-        Number(props.itemPrice) /
-          Number(props.itemQuantity) /
-          props.itemQuantity -
-        oldSurcharge;
-      // const unitPrice =
-      // eslint-disable-next-line prefer-const
-      adjPrice = (basePrice + sizeSurcharge) * quantity;
-      updatePrice.current = (basePrice + sizeSurcharge) * quantity;
-      console.log("base price: " + basePrice);
-      console.log(adjPrice);
-      console.log(props.size);
-      console.log(newSize);
-      return Number(updatePrice.current);
-      // return adjPrice;
+    console.log("found it: " + sizes.some((size) => size === newSize));
+    console.log("itemSizes:" + sizes);
 
-      // reflect price work
-      // eslint-disable-next-line prefer-const
-      // adjPrice = props.itemQuantity + sizeSurcharge * quantity;
-      // adjPrice =
-      //   Number(props.itemPrice) / Number(props.itemQuantity) +
-      //   sizeSurcharge * quantity;
-      // return adjPrice;
+    setCanUpdate(!sizeRef.current.some((size) => size === newSize));
+    if (edited) {
+      setNewPrice(
+        calcItemTotal(basePrice, props.size, newSize, newQuantity.current)
+      );
+    } else {
+      setNewPrice(Number(props.itemPrice));
     }
-    setNewPrice(calcPrice());
-  }, [newSize, props.itemPrice, props.itemQuantity, quantity]);
+    // setNewSize(props.size);
+  }, [
+    edited,
+    props.size,
+    props.itemPrice,
+    newSize,
+    basePrice,
+    canEdit,
+    cart,
+    props.itemName,
+    canUpdate,
+    selectedSize,
+    sizes,
+  ]);
 
   return (
-    <li className={ownerOrder ? classes.ownerOrderItem : classes.item}>
-      <p className={classes.itemName}>{props.itemName}</p>
-      {/* display size of na or size selector conditionally */}
-      {/* <p className={classes.size}> {props.size}</p> */}
-      {props.size !== "na" && (
-        <SizeSelector
-          itemSize={props.size}
-          setShowSizeError={setShowSizeError}
-          setNewSize={setNewSize}
-        />
-      )}
-      <QuantitySelector
-        value={quantity}
-        increment={increment}
-        decrement={decrement}
-      />
-
-      <p className={ownerOrder ? classes.ownerOrderItemPrice : classes.price}>
-        {" "}
-        {}${newPrice.toFixed(2)}
-        {/* ${price} */}
-      </p>
-      {/* new div for vert styling */}
+    <div className={classes.wholeItem}>
+      <p>{`${sizes}`}</p>
+      <li className={ownerOrder ? classes.ownerOrderItem : classes.item}>
+        <p className={classes.itemName}>{props.itemName}</p>
+        {!canEdit && <p>{props.itemQuantity}</p>}
+        {canEdit && (
+          <div className={classes.quantity}>
+            <QuantitySelector
+              value={quantity}
+              increment={increment}
+              decrement={decrement}
+              setEdited={setEdited}
+              scale="scale(.8)"
+            />
+          </div>
+        )}
+        {!canEdit && props.size === "NA" && (
+          <p className={classes.size}> {props.size}</p>
+        )}
+        {!canEdit && props.size !== "NA" && (
+          <p className={classes.size}>{props.size}</p>
+        )}
+        {canEdit === true && props.size === "NA" && (
+          <p className={classes.size}>{props.size}</p>
+        )}
+        {canEdit && props.size !== "NA" && (
+          <SizeSelector
+            itemSize={props.size}
+            setShowSizeError={setShowSizeError}
+            setNewSize={setNewSize}
+            setSizeError={setSizeError}
+            itemName={props.itemName}
+            setEdited={setEdited}
+            edited={edited}
+            submitted={submitted}
+            canEdit={canEdit}
+            setCanEdit={setCanEdit}
+          />
+        )}
+        <p>${newPrice.toFixed(2)}</p>
+      </li>
       <div className={classes.editCartItem}>
         {showSizeError === true && (
           <p className={classes.sizeWarning}>{sizeError}</p>
         )}
-        <Update
-          cartItemId={props.itemName}
-          updatedItemQuantity={quantity}
-          updatedItemPrice={newPrice.toFixed(2)}
-          oldQuantity={props.itemQuantity}
-          oldSize={props.size}
-          newSize={newSize}
-        />
-
-        <RemoveFromCart
-          id={props.menuId}
-          cartItemQuantity={props.itemQuantity}
-        />
       </div>
-    </li>
+
+      <div className={classes.actionButtonGroup}>
+        {edited && canUpdate && (
+          // {canUpdate && (
+          <Update
+            cartItemId={props.id}
+            updatedItemQuantity={quantity}
+            updatedItemPrice={newPrice.toFixed(2)}
+            oldQuantity={props.itemQuantity}
+            oldSize={props.size}
+            newSize={newSize}
+            setEdited={setEdited}
+            edited={edited}
+            setCanEdit={setCanEdit}
+            setShowSizeError={setShowSizeError}
+            setSubmitted={setSubmitted}
+            reset={reset}
+          />
+        )}
+        {canEdit && (
+          <button
+            onClick={() => [
+              (newQuantity.current = props.itemQuantity),
+              setQuantity(newQuantity.current),
+              setNewPrice(newPrice),
+              setNewSize(oldSize.current),
+              setEdited(false),
+              setCanEdit(false),
+              setShowSizeError(false),
+            ]}
+          >
+            Cancel
+          </button>
+        )}
+        {!canEdit && <button onClick={() => [setCanEdit(true)]}>Edit</button>}
+        <RemoveFromCart id={props.id} cartItemQuantity={props.itemQuantity} />
+      </div>
+    </div>
   );
 }

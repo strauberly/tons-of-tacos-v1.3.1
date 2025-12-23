@@ -50,6 +50,12 @@
   /* margin-left: 1rem; */
 }
 
+.sizeWarning {
+  margin-top: 0.5rem;
+  color: var(--attention-color);
+  justify-self: center;
+}
+
 @media (max-width: 1560px) {
   .update {
     gap: 2rem;

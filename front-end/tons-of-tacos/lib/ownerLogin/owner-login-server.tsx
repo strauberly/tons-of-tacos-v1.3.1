@@ -1,5 +1,9 @@
 "use server";
 
+import { cookies } from "next/headers";
+
+// const cookieStore = await cookies();
+
 function randomChar() {
   const min: number = 33;
   const max: number = 126;
@@ -111,17 +115,179 @@ export async function OwnerLogin(
   const status = response.status;
 
   if (status === 200) {
-    const [, payloadBase64] = data.token.split(".");
+    console.log("data: " + data);
+    console.log("token: " + data.accessToken);
+    console.log("refresh token: " + data.token);
+    console.log(data.accessToken.subject);
+
+    // const [, payloadBase64] = data.token.split(".");
+    const [, payloadBase64] = data.accessToken.split(".");
     const decodedPayload = Buffer.from(payloadBase64, "base64").toString(
       "utf-8"
     );
     const subject = await JSON.parse(decodedPayload);
-
+    console.log("exp:" + subject.exp);
+    console.log(data.token);
+    console.log(subject);
+    console.log(decodedPayload);
+    console.log(decrypt(subject.sub));
     return {
       status: status,
-      response: { token: data.token, ownerName: decrypt(subject.ownername) },
+      response: {
+        accessToken: data.accessToken,
+        refreshToken: data.refreshToken,
+        ownerName: decrypt(subject.ownername),
+      },
     };
   } else {
     return { status: status, response: data.message };
   }
+}
+
+// refresh endpoint
+
+export async function Refresh() {
+  // get the refresh token and send that not the body make sure path and all that is good
+  const cookieStore = await cookies();
+  const refreshToken = cookieStore.get("refreshToken");
+
+  const response = await fetch(
+    "http://localhost:8080/api/owners-tools/refresh",
+    {
+      method: "POST",
+      headers: {
+        // Authorization: `Bearer ${refreshToken?.value}`,
+        Cookie: `${refreshToken?.value}`,
+        "Content-Type": "application/json",
+      },
+      // // Cookie: `${refreshToken?.value}`,
+      body: JSON.stringify(refreshToken?.value),
+      credentials: "include",
+    }
+  );
+  console.log(response);
+  const data = await response.json();
+  const status = response.status;
+
+  console.log("access: " + data.accessToken);
+  console.log("refresh: " + data.refreshToken);
+  console.log("refresh status: " + status);
+
+  const [, payloadBase64] = data.accessToken.split(".");
+  const decodedPayload = Buffer.from(payloadBase64, "base64").toString("utf-8");
+  const subject = JSON.parse(decodedPayload);
+
+  console.log("owner name:" + decrypt(subject.ownername));
+  console.log("owner name:" + subject.ownername);
+
+  const login: OwnerLogin = {
+    accessToken: data.accessToken,
+    refreshToken: data.refreshToken,
+    ownerName: subject.ownername,
+  };
+
+  console.log(login);
+
+  return login;
+}
+
+// token response
+export async function StoreLogin(login: OwnerLogin) {
+  console.log("store: " + login.ownerName);
+
+  (await cookies()).set({
+    name: "accessToken",
+    value: login.accessToken,
+    httpOnly: true,
+    sameSite: "strict",
+    secure: true,
+  });
+
+  (await cookies()).set({
+    name: "refreshToken",
+    value: login.refreshToken,
+    httpOnly: true,
+    sameSite: "strict",
+    secure: true,
+  });
+  (await cookies()).set({
+    name: "ownerName",
+    value: login.ownerName,
+    httpOnly: true,
+    sameSite: "strict",
+    secure: true,
+  });
+}
+
+export async function GetLogin() {
+  const login: OwnerLogin = {
+    accessToken: "",
+    refreshToken: "",
+    ownerName: "",
+  };
+
+  const cookieStore = await cookies();
+
+  // console.log(cookieStore);
+
+  login.accessToken = cookieStore.get("accessToken")
+    ?.value as unknown as string;
+  login.refreshToken = cookieStore.get("refreshToken")
+    ?.value as unknown as string;
+  login.ownerName = cookieStore.get("ownerName")?.value as unknown as string;
+  return login;
+}
+
+export async function CookieCheck() {
+  const cookieStore = cookies();
+  // const gotCookies: boolean = (await cookieStore).size;
+  const gotCookies: boolean = (await cookieStore).toString() === "";
+  console.log("cookie check:" + (await gotCookies));
+  console.log("store: " + (await cookieStore));
+  return gotCookies;
+}
+
+// create route to logout a user by deleting their cookie
+
+// use access token for request
+// use refresh token in body
+
+export async function OwnerLogout(accessToken: string) {
+  const cookieStore = await cookies();
+  const refreshToken = cookieStore.get("refreshToken");
+  // const accessToken = cookieStore.get("accessToken");
+  const address: string = `http://localhost:8080/api/owners-tools/logout`;
+  console.log(address);
+  console.log(refreshToken);
+
+  let response;
+  let data;
+  try {
+    response = await fetch(address.toString(), {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify(refreshToken),
+    });
+    data = await response.json();
+    console.log("logout response: " + data.body);
+
+    return data.message;
+  } catch (error) {
+    console.log(error);
+  }
+}
+// maybe rest to accept a list of cookies to delete
+
+export async function DeleteCookies() {
+  const cookieStore = cookies();
+  (await cookieStore)
+    .getAll()
+    .forEach(async (cookie) => (await cookieStore).delete(`${cookie.name}`));
+}
+
+export async function nextCookiePresent() {
+  const cookieStore = await cookies();
+  return cookieStore.has("accessToken");
 }

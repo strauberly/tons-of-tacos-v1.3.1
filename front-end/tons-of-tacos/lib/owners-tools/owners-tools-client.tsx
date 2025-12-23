@@ -75,6 +75,6 @@ export function updateOwnerOrder(order: CartItem[]) {
   sessionStorage.setItem("owner-order", JSON.stringify(order));
 }
 
-export function RemoveOwnerOrder() {
+export function DeleteOwnerOrder() {
   sessionStorage.removeItem("owner-order");
 }

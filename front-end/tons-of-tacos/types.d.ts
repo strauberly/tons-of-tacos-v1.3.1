@@ -23,6 +23,14 @@ type CartItem = {
   price: string;
 };
 
+type OrderItem = {
+  orderItemId: number;
+  itemName: string;
+  quantity: number;
+  size: string;
+  total: number;
+};
+
 type Cart = {
   cartItems: CartItem[];
   total: number;
@@ -37,18 +45,15 @@ type Valid = {
   message: string;
 };
 
-type OrderItem = {
-  orderItemId: number;
-  itemName: string;
-  quantity: number;
-  size: string;
-  total: number;
-};
-
 type OwnerLogin = {
-  token: string;
+  accessToken: string;
+  refreshToken: string;
   ownerName: string;
 };
+// type OwnerLogin = {
+//   token: string;
+//   ownerName: string;
+// };
 
 type Order = {
   orderUid: string;
@@ -89,14 +94,12 @@ type Customer = {
 
 type Sales = {
   date: string;
-  numberOfSales: internal;
+  numberOfSales: number;
   total: number;
 };
 
 type OrderRequestResponse = {
   status: number;
-  // headers: { [key: string]: string };
-  // body: unknown;
   body: Order | string;
 };
 

@@ -35,16 +35,12 @@ export default function OwnerDashboard() {
 
   const [sortState, setSortState] = useState<string>("open");
 
-  const [sales, setSales] = useState<Sales>();
-
-  useEffect(() => {
-    async function Sales() {
-      setSales(await DailySales(login.token));
-    }
-    Sales();
-
-    // setInterval(Sales, 3000);
-  }, [login.token, sales?.numberOfSales, sales?.total]);
+  const scrollToTop = () => {
+    document.getElementById("orders-list")?.scrollTo({
+      top: 0,
+      behavior: "instant",
+    });
+  };
 
   return (
     <div>
@@ -69,20 +65,20 @@ export default function OwnerDashboard() {
             <div className={classes.buttonGroup}>
               <button
                 className={classes.sortButtons}
-                onClick={() => setSortState("ready")}
+                onClick={() => [setSortState("ready"), scrollToTop()]}
               >
                 {" "}
                 Ready
               </button>
               <button
-                onClick={() => setSortState("closed")}
+                onClick={() => [setSortState("closed"), scrollToTop()]}
                 className={classes.sortButtons}
               >
                 {" "}
                 Closed
               </button>
               <button
-                onClick={() => setSortState("open")}
+                onClick={() => [setSortState("open"), scrollToTop()]}
                 className={classes.sortButtons}
               >
                 Open
@@ -92,7 +88,7 @@ export default function OwnerDashboard() {
           <Orders sortState={sortState} />
         </div>
         <div className={classes.sales}>
-          {/* <DailySalesDisplay /> */}
+          <DailySalesDisplay />
           {/* <h1>Sales For Today: {sales?.numberOfSales}</h1>
           <h1>Total: ${sales?.total.toFixed(2)}</h1> */}
         </div>

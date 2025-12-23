@@ -11,6 +11,8 @@ export default function OwnersTools() {
   const { setShowLogin } = useDisplayContext();
   const { loggedIn } = useOwnerContext();
 
+  console.log("login: " + loggedIn);
+
   useEffect(() => {
     setShowLogin(true);
   });

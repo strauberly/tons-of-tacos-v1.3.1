@@ -6,9 +6,8 @@ import { CreateCart, ResetCart } from "@/lib/cart";
 import { useCartContext } from "@/context/cart-context";
 import { useOrderConfirmationContext } from "@/context/order-confirmation-context";
 import { useOwnerContext } from "@/context/owner-context";
-import { RemoveOwnerOrder } from "@/lib/owners-tools/owners-tools-client";
+import { DeleteOwnerOrder } from "@/lib/owners-tools/owners-tools-client";
 import { useOrdersContext } from "@/context/orders-context";
-import { useEffect } from "react";
 import { GetAllOrders } from "@/lib/owners-tools/owners-tools";
 
 export default function OrderConfirmation() {
@@ -30,7 +29,7 @@ export default function OrderConfirmation() {
     if (loggedIn) {
       setShowOwnerOrderCreator(false);
       setShowOrderConfirmation(false);
-      RemoveOwnerOrder();
+      DeleteOwnerOrder();
       ResetCart();
       CreateCart();
       setCart([]);
@@ -58,7 +57,7 @@ export default function OrderConfirmation() {
                 onClick={async () => {
                   orderCompletion();
                   if (loggedIn) {
-                    setOrders(await GetAllOrders(login.token));
+                    setOrders(await GetAllOrders(login.accessToken));
                   }
                 }}
               >

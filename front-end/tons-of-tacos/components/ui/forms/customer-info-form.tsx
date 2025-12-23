@@ -1,8 +1,8 @@
 "use client";
+import classes from "./customer-info-form.module.css";
 
 import React, { useRef, useState, useActionState, useEffect } from "react";
 import SubmitButton from "../buttons/submit-order/submitOrder-button";
-import classes from "./customer-info-form.module.css";
 import { checkEmail, checkName, checkPhone } from "@/lib/customer-form";
 import { SendOrder, setIsLoggedIn } from "@/lib/cart";
 import { useOrderConfirmationContext } from "@/context/order-confirmation-context";

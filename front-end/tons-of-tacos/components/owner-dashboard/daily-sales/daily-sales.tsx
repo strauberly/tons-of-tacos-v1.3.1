@@ -1,18 +1,24 @@
 import { useOwnerContext } from "@/context/owner-context";
 import { DailySales } from "@/lib/owners-tools/owners-tools";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function DailySalesDisplay() {
   const [sales, setSales] = useState<Sales | undefined>();
-  const { login } = useOwnerContext();
+  const { login, loggedIn } = useOwnerContext();
+
+  const salesRef = useRef(sales);
 
   useEffect(() => {
     async function Sales() {
-      setSales(await DailySales(login.token));
+      if (loggedIn) {
+        setSales(await DailySales(login.accessToken));
+      }
     }
-    Sales();
-    setInterval(Sales, 3000);
-  }, [login.token]);
+    const dailySales = setInterval(() => Sales(), 3000);
+    return () => {
+      clearInterval(dailySales);
+    };
+  }, [loggedIn, login.accessToken]);
 
   return (
     <div>
