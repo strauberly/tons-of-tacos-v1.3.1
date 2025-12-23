@@ -30,7 +30,6 @@
   border-color: var(--border-color);
 }
 .dashboard button {
-  cursor: pointer;
   font-size: 1rem;
 }
 
@@ -151,7 +150,7 @@
 }
 
 .search input {
-  width: 24ch;
+  width: 28ch;
 }
 
 .search input,
@@ -162,10 +161,15 @@
   text-align: center;
   background-color: var(--background-color);
   color: var(--user-selected-color);
-  border: solid var(--border-color) 2px;
 }
 
 .search input:focus,
 .search textarea:focus {
   outline: none;
+}
+
+.searchError {
+  color: var(--attention-color);
+  margin-top: 0.5rem;
+  margin-left: 20rem;
 }

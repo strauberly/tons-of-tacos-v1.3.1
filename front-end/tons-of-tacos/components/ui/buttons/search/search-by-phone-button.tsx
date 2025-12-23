@@ -1,7 +1,7 @@
 import { useDisplayContext } from "@/context/display-context";
 import SearchIcon from "./search-icon";
 import classes from "./search.module.css";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useModalContext } from "@/context/modal-context";
 import { GetOrdersByCustomerPhone } from "@/lib/owners-tools/owners-tools";
 import { useOrdersContext } from "@/context/orders-context";
@@ -22,7 +22,7 @@ export default function SearchByPhoneButton(props: {
   function ordersFound() {
     console.log(response.current.status);
     console.log(response.current.body);
-    if ((response.current.status = 200)) {
+    if (response.current.status === 200) {
       setCustomerOrders(response.current.body as Order[]);
       console.log(customerOrders);
       setShowCustomerOrders(true);

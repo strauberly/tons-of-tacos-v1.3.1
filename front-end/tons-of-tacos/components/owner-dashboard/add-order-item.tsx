@@ -9,7 +9,7 @@ import classes from "./add-order-item.module.css";
 
 export default function AddOrderItem() {
   const { orderToView } = useModalContext();
-  const [itemSelector, setItemSelector] = useState(false);
+  const [itemSelector, setItemSelector] = useState<boolean>(false);
   const [itemName, setItemName] = useState<string>("Item");
   const [quantity, setQuantity] = useState<number>(1);
   const [size, setSize] = useState<string>("");
@@ -128,7 +128,7 @@ export default function AddOrderItem() {
       <div className={classes.addItemToOrder}>
         <ul>
           <button
-            disabled={orderToView.ready !== "no" || orderToView.closed !== "no"}
+            // disabled={orderToView.ready !== "no" || orderToView.closed !== "no"}
             onClick={() => setItemSelector(!itemSelector)}
           >
             Select Item

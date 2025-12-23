@@ -4,7 +4,8 @@
   right: 50%;
   left: 50%;
   gap: 2vw;
-  font-size: clamp(1.25rem, 2vw, 1.5vw);
+  font-size: clamp(1rem, 1.5vw, 1vw);
+  /* font-size: clamp(1.25rem, 2vw, 1.5vw); */
   justify-content: center;
   margin-top: 1vw;
   margin-bottom: 1vw;
@@ -21,7 +22,8 @@
 
 .form input,
 .form textarea {
-  font-size: clamp(1.25rem, 2vw, 1.5vw);
+  font-size: clamp(1rem, 1.5vw, 1vw);
+  /* font-size: clamp(1.25rem, 2vw, 1.5vw); */
   text-align: left;
 
   background-color: var(--background-color);
@@ -40,7 +42,8 @@
 
 .form p {
   width: max-content;
-  font-size: clamp(1rem, 1.5vw, 1.25vw);
+  font-size: clamp(1rem, 1.25vw, 1vw);
+  /* font-size: clamp(1rem, 1.5vw, 1.25vw); */
 }
 
 .invalid {
@@ -73,12 +76,14 @@
   flex-direction: row;
   gap: 2%;
   margin-bottom: 1rem;
+  width: 95%;
 }
 
 .first {
   flex-direction: column;
+  /* min-width: 38%; */
   min-width: 44%;
-  padding-left: 0.5%;
+  /* padding-left: 0.5%; */
 }
 
 .firstNameError {
@@ -91,6 +96,7 @@
 .last {
   flex-direction: column;
   min-width: 44%;
+  /* min-width: 44%; */
 }
 
 .lastNameError {
@@ -108,13 +114,14 @@
 .phoneColumn {
   flex-direction: column;
   margin-left: 2%;
-  min-width: 89%;
+  min-width: 84%;
 }
 
 .phoneError {
   display: block;
   color: var(--attention-color);
   font-family: var(--inter-font);
+  /* checkwidth of this error on cart */
   max-width: 100%;
 }
 
@@ -124,7 +131,7 @@
 
 .emailColumn {
   flex-direction: column;
-  min-width: 89%;
+  min-width: 84%;
   margin-left: 2%;
 }
 
