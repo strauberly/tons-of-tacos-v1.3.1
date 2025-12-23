@@ -4,18 +4,37 @@
   flex-direction: column;
   background-color: var(--background-color);
   border: var(--border-color) solid 2px;
-  width: max-content;
   padding: 1vw;
   padding-bottom: 0.5rem;
   right: 0rem;
-  right: clamp(40vw, 86%, 65rem);
-  top: 3.55vw;
+  right: clamp(10vw, 79.5%, 34rem);
+  top: 3.54vw;
   height: 85vh;
   overflow-y: scroll;
   overflow-x: hidden;
 }
 
+.cart ul {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 .cart ul li {
+  list-style-type: none;
+  display: grid;
+  row-gap: 2vw;
+  grid-template-columns: repeat(3, minmax(6rem, 50%));
+  align-items: center;
+  margin: 1vw;
+  /* margin-left: 1vw; */
+  width: 95%;
+  justify-items: center;
+  /* padding-right: 1vw; */
+  /* padding-left: 2vw; */
+}
+
+/* .cart ul li {
   list-style-type: none;
   display: grid;
   row-gap: 2vw;
@@ -26,7 +45,7 @@
   width: 95%;
   padding-right: 1vw;
   padding-left: 2vw;
-}
+} */
 
 .total {
   font-family: "Quatl";
@@ -39,27 +58,28 @@
 /* medium devices*/
 @media (max-width: 1400px) {
   .cart {
-    right: clamp(30vw, 75%, 60rem);
-    top: 6.15vw;
+    right: clamp(10vw, 68%, 40rem);
+    top: 6.2vw;
   }
 }
 
 @media (max-width: 1240px) {
   .cart {
-    right: clamp(32.6rem, 90%, 10rem);
+    right: clamp(8vw, 73%, 25rem);
   }
 }
 
 @media (max-width: 1080px) {
   .cart {
-    right: clamp(33.6rem, 80%, 32vw);
+    right: clamp(10vw, 75%, 32rem);
+    top: 6vw;
   }
 }
 
 @media (max-width: 975px) {
   .cart {
-    width: 94vw;
-    left: 4.6%;
+    width: 96vw;
+    left: clamp(6vw, 5%, 34rem);
     transform: translateX(-92%);
     top: 6vw;
   }
@@ -68,7 +88,7 @@
 @media (max-width: 800px) {
   .cart {
     top: 8vw;
-    width: 94vw;
-    left: 8.5%;
+    /* width: 96vw; */
+    left: clamp(5vw, 10%, 32rem);
   }
 }

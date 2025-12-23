@@ -34,7 +34,9 @@ export default function Order(order: { order: Order }) {
   return (
     <li
       className={`${
-        (closed === true && classes.closed) || (ready === true && classes.ready)
+        (closed === true && classes.closed) ||
+        (ready === true && classes.ready) ||
+        (closed === false && ready === false && classes.open)
       } `}
     >
       <p>{`${order.order.orderUid}`}</p>
@@ -45,13 +47,15 @@ export default function Order(order: { order: Order }) {
       <p>{`${time}`}</p>
       <p>{`${date}`}</p>
       <div>
-        <p>{`${order.order.ready}`}</p>
-        {order.order.ready === "no" && (
-          <MarkReadyButton
-            orderUid={order.order.orderUid}
-            token={login.token}
-          />
-        )}
+        <div className={classes.readyFlex}>
+          <p>{`${order.order.ready}`}</p>
+          {order.order.ready === "no" && (
+            <MarkReadyButton
+              orderUid={order.order.orderUid}
+              token={login.token}
+            />
+          )}
+        </div>
       </div>
       <div>
         <p>{`${order.order.closed}`}</p>

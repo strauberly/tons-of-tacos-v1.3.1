@@ -1,9 +1,11 @@
-import classes from "../../../owner-dashboard/owner-dashboard.module.css";
+// import classes from "../../../owner-dashboard/owner-dashboard.module.css";
 
 import { useRef, useState } from "react";
 import SearchByIdButton from "../search/search-by-id-button";
 import SearchByPhoneButton from "../search/search-by-phone-button";
 import { useOwnerContext } from "@/context/owner-context";
+import { formatPhone } from "@/lib/general/multi-use";
+import classes from "../search/search.module.css";
 
 export default function SearchBar() {
   const [orderId, setOrderID] = useState<string>("");
@@ -21,7 +23,7 @@ export default function SearchBar() {
     setOrderID(e.target.value.toUpperCase());
     orderIdRef.current = orderId;
     if (
-      e.target.value.length !== 6 ||
+      e.target.value.length !== 5 ||
       !e.target.value.toUpperCase().match(/([A-Z+0-9])/g)
     ) {
       SetIdValid(false);
@@ -44,7 +46,7 @@ export default function SearchBar() {
       setSearchError("Valid phone number is ten digits.");
     } else if (!idValid) {
       setSearchError(
-        "Order ID must be 6 characters long and not contain any special characters ."
+        "Order ID must be 5 characters long and not contain any special characters ."
       );
     } else {
       setSearchError("");
@@ -54,7 +56,7 @@ export default function SearchBar() {
   //  search by customer phone number
 
   function captureCustomerPhone(e: React.ChangeEvent<HTMLInputElement>) {
-    const formattedNumber = formatNumber(e.target.value);
+    const formattedNumber = formatPhone(e.target.value);
 
     setCustomerPhone(formattedNumber as string);
 
@@ -67,25 +69,25 @@ export default function SearchBar() {
     phoneNumberRef.current = formattedNumber;
   }
 
-  function formatNumber(input: string) {
-    if (!input) return input;
-    const numberInput: string = input.replace(/[^\d]/g, "");
-    const inputLength: number = numberInput.length;
+  // function formatNumber(input: string) {
+  //   if (!input) return input;
+  //   const numberInput: string = input.replace(/[^\d]/g, "");
+  //   const inputLength: number = numberInput.length;
 
-    if (inputLength < 4) {
-      return numberInput;
-    } else if (inputLength < 7) {
-      return `${numberInput.slice(0, 3)}.${numberInput.slice(3)}`;
-    } else {
-      return `${numberInput.slice(0, 3)}.${numberInput.slice(
-        3,
-        6
-      )}.${numberInput.slice(6)}`;
-    }
-  }
+  //   if (inputLength < 4) {
+  //     return numberInput;
+  //   } else if (inputLength < 7) {
+  //     return `${numberInput.slice(0, 3)}.${numberInput.slice(3)}`;
+  //   } else {
+  //     return `${numberInput.slice(0, 3)}.${numberInput.slice(
+  //       3,
+  //       6
+  //     )}.${numberInput.slice(6)}`;
+  //   }
+  // }
 
   return (
-    <div>
+    <div className={classes.searchBar}>
       <div className={classes.search}>
         <label>Find by Order ID:</label>
         <input
@@ -93,7 +95,7 @@ export default function SearchBar() {
           className={idValid ? classes.valid : classes.invalid}
           placeholder="Enter Order ID"
           type="text"
-          maxLength={6}
+          maxLength={5}
           style={{ textTransform: "uppercase" }}
           onFocus={handleFocus}
           onChange={captureOrderID}

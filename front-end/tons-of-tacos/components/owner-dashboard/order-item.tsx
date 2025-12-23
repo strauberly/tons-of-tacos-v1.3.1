@@ -1,20 +1,26 @@
+import classes from "./order-item.module.css";
 import { useEffect, useRef, useState } from "react";
 import RemoveFromOrderButton from "../ui/buttons/order-edit/remove-from-order-button";
 import ArrowIcon from "../menu/menu-items/quantity-selector/arrow-icon";
 import UpdateOrderItemButton from "../ui/buttons/order-edit/update-order-item-button";
 import SizeSelector from "./size-selector";
-import classes from "./order-item.module.css";
 import { calcPrice } from "@/lib/owners-tools/owners-tools-client";
 import { useEditOrderContext } from "@/context/edit-order-context";
 import { useModalContext } from "@/context/modal-context";
+import { GetOrderByID } from "@/lib/owners-tools/owners-tools";
+import { useOwnerContext } from "@/context/owner-context";
 
 export default function OrderItem(orderItem: { orderItem: OrderItem }) {
-  const { setOrderItem, setQuantity, quantity } = useEditOrderContext();
-  const { orderToView } = useModalContext();
+  const { setOrderItem, setQuantity, quantity, orderChanged } =
+    useEditOrderContext();
+  const { orderToView, setOrderToView } = useModalContext();
+  const { login } = useOwnerContext();
   const [canEdit, setCanEdit] = useState(false);
-  const [newQuantity, setNewQuantity] = useState<number>(
-    orderItem.orderItem.quantity
-  );
+  // const [newQuantity, setNewQuantity] = useState<number>(
+  //   orderItem.orderItem.quantity
+  // );
+
+  const newQuantity = useRef<number>(orderItem.orderItem.quantity);
 
   const [newSize, setNewSize] = useState<string>(orderItem.orderItem.size);
 
@@ -26,15 +32,36 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
   function checkQuantity(number: number) {
     console.log(number);
     if (number.toString() === "NaN") {
-      setNewQuantity(number);
+      // setNewQuantity(number);
+      newQuantity.current = number;
     } else if (number < 1) {
-      setNewQuantity(1);
+      // setNewQuantity(1);
+      newQuantity.current = 1;
     } else if (number > 10) {
-      setNewQuantity(10);
+      // setNewQuantity(10);
+      newQuantity.current = 10;
     } else {
-      setNewQuantity(number);
+      // setNewQuantity(number);
+      newQuantity.current = number;
     }
   }
+
+  // function changedPrice() {
+  //   // let itemPrice;
+
+  //   if (orderChanged === false) {
+  //     return setNewPrice(orderItem.orderItem.total);
+  //   } else {
+  //     return setNewPrice(
+  //       calcPrice(
+  //         orderItem.orderItem.total / orderItem.orderItem.quantity -
+  //           calcSurcharge(orderItem.orderItem.size),
+  //         newSize,
+  //         newQuantity
+  //       )
+  //     );
+  //   }
+  // }
 
   function sizeDisplay() {
     if (
@@ -42,7 +69,7 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
       orderItem.orderItem.size.toUpperCase() !== "M" &&
       orderItem.orderItem.size.toUpperCase() !== "L"
     ) {
-      return "";
+      return "NA ";
     } else {
       return orderItem.orderItem.size.toUpperCase();
     }
@@ -58,44 +85,112 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
     return surcharge;
   }
 
+  const price = useRef<number>(orderItem.orderItem.total);
+
   const decrement = () => {
-    setNewQuantity(newQuantity - 1);
-    setQuantity(newQuantity);
-    console.log(quantity);
-    if (newQuantity <= 1) {
-      setNewQuantity(1);
+    // if (newQuantity.current <= 1) {
+    //   newQuantity.current = 1;
+    //   setQuantity(newQuantity.current);
+    //   // setNewQuantity(1);
+    // }
+    // // setNewQuantity(newQuantity - 1);
+    if (newQuantity.current < 2) {
+      newQuantity.current = 1;
+      // setNewQuantity(1);
+    } else {
+      newQuantity.current = newQuantity.current - 1;
+      setQuantity(newQuantity.current);
+      console.log(newQuantity.current);
+    }
+
+    price.current = calcPrice(
+      orderItem.orderItem.total / orderItem.orderItem.quantity -
+        calcSurcharge(orderItem.orderItem.size),
+      newSize,
+      newQuantity.current
+    );
+    // );
+    // price.current = newPrice;
+    if (newQuantity.current < 2) {
+      newQuantity.current = 1;
+      // setNewQuantity(1);
     }
   };
 
   const increment = () => {
-    setNewQuantity(newQuantity + 1);
-    setQuantity(newQuantity);
-    console.log(quantity);
-    if (newQuantity >= 10) {
-      setNewQuantity(10);
-    }
-  };
-
-  useEffect(() => {
-    setNewPrice(
-      calcPrice(
+    if (newQuantity.current > 9) {
+      // setNewQuantity(10);
+      newQuantity.current = 10;
+    } else {
+      // setNewQuantity(newQuantity + 1);
+      newQuantity.current = newQuantity.current + 1;
+      setQuantity(newQuantity.current);
+      console.log(quantity);
+      // setNewPrice(
+      price.current = calcPrice(
         orderItem.orderItem.total / orderItem.orderItem.quantity -
           calcSurcharge(orderItem.orderItem.size),
         newSize,
-        newQuantity
-      )
-    );
+        newQuantity.current
+      );
+    }
+
+    // );
+    // price.current = newPrice;
+    // if (newQuantity.current >= 10) {
+    //   // setNewQuantity(10);
+    //   newQuantity.current = 10;
+    // }
+  };
+
+  useEffect(() => {
+    // function ChangedPrice() {
+    //   // let itemPrice;
+
+    //   if (orderChanged === false) {
+    //     return setNewPrice(orderItem.orderItem.total);
+    //   } else {
+    //     return setNewPrice(
+    //       calcPrice(
+    //         orderItem.orderItem.total / orderItem.orderItem.quantity -
+    //           calcSurcharge(orderItem.orderItem.size),
+    //         newSize,
+    //         newQuantity
+    //       )
+    //     );
+    //   }
+    // }
+
+    // ChangedPrice();
+    // async function Reset() {
+    //   // setOrderToView(await GetOrderByID(orderToView.orderUid, login.token));
+    //   // if (orderChanged) {
+    //   setNewPrice(
+    //     calcPrice(
+    //       orderItem.orderItem.total / orderItem.orderItem.quantity -
+    //         calcSurcharge(orderItem.orderItem.size),
+    //       newSize,
+    //       newQuantity
+    //     )
+    //   );
+    // }
+    // }
     if (orderToView.ready !== "no") {
       setCanEdit(false);
     }
+    // Reset();
   }, [
     canEdit,
+    login.token,
     newQuantity,
     newSize,
+    orderChanged,
     orderItem.orderItem.quantity,
     orderItem.orderItem.size,
     orderItem.orderItem.total,
+    orderToView.orderUid,
     orderToView.ready,
+    setOrderToView,
   ]);
 
   return (
@@ -109,7 +204,7 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
                 className={`${classes.decrement}`}
                 onClick={() => decrement()}
               >
-                <ArrowIcon />
+                <ArrowIcon scale={"scale(.75)"} />
               </button>
               <input
                 name="quantity"
@@ -117,15 +212,15 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
                 type="number"
                 min="1"
                 max={1}
-                disabled={true}
-                value={newQuantity}
+                // disabled={newQuantity.current < 2}
+                value={newQuantity.current}
                 onChange={(e) => checkQuantity(parseInt(e.target.value))}
               />
               <button
                 className={`${classes.increment}`}
                 onClick={() => increment()}
               >
-                <ArrowIcon />
+                <ArrowIcon scale={"scale(.75)"} />
               </button>
             </div>
 
@@ -142,26 +237,35 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
         )}
         {!canEdit && <p>{`${orderItem.orderItem.quantity}`}</p>}
         {!canEdit && <p>{`${sizeDisplay()}`}</p>}
-        <p> {`$${newPrice.toFixed(2)}`}</p>
-        {!canEdit && (
-          <button
-            className={classes.button}
-            disabled={orderToView.ready !== "no" || orderToView.closed !== "no"}
-            onClick={() => [
-              setCanEdit(!canEdit),
-              setOrderItem(orderItem.orderItem),
-              // setQuantity(newQuantity),
-            ]}
-          >
-            Edit
-          </button>
-        )}
-        {!canEdit && (
-          <RemoveFromOrderButton
-            orderItem={orderItem.orderItem}
-            orderToView={orderToView}
-          />
-        )}
+        {/* {!canEdit && <p>{`${sizeDisplay()}`}</p>} */}
+        {/* <p> {`$${changedPrice()}`}</p> */}
+        <p> {`$${price.current.toFixed(2)}`}</p>
+        {/* <p> {`$${newPrice.toFixed(2)}`}</p> */}
+        {/* wrap and style */}
+        <div className={classes.alter}>
+          {!canEdit && (
+            <button
+              className={classes.button}
+              disabled={
+                orderToView.ready !== "no" || orderToView.closed !== "no"
+              }
+              onClick={() => [
+                setCanEdit(!canEdit),
+                setOrderItem(orderItem.orderItem),
+                setNewPrice(orderItem.orderItem.total),
+                // setQuantity(newQuantity),
+              ]}
+            >
+              Edit
+            </button>
+          )}
+          {!canEdit && (
+            <RemoveFromOrderButton
+              orderItem={orderItem.orderItem}
+              orderToView={orderToView}
+            />
+          )}
+        </div>
       </li>
       {showSizeError === true && (
         <p className={classes.sizeWarning}>{sizeError}</p>
@@ -170,11 +274,18 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
         <div className={classes.update}>
           <UpdateOrderItemButton
             orderItem={orderItem.orderItem}
-            newQuantity={newQuantity}
+            newQuantity={newQuantity.current}
             newSize={newSize}
             setCanEdit={setCanEdit}
           />
-          <button onClick={() => setCanEdit(!canEdit)}>Cancel</button>
+          <button
+            onClick={() => [
+              setCanEdit(!canEdit),
+              (price.current = orderItem.orderItem.total),
+            ]}
+          >
+            Cancel
+          </button>
         </div>
       )}
     </div>

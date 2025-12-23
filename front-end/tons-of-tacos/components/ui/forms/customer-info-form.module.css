@@ -1,19 +1,17 @@
 .form {
-  display: flex;
   flex-direction: column;
   right: 50%;
   left: 50%;
   gap: 2vw;
   font-size: clamp(1rem, 1.5vw, 1vw);
-  /* font-size: clamp(1.25rem, 2vw, 1.5vw); */
+
   justify-content: center;
   margin-top: 1vw;
   margin-bottom: 1vw;
+  /* work on resonsive width */
+  width: 94%;
 }
 
-.form div {
-  display: flex;
-}
 .form label {
   color: var(--interactive-color);
   justify-content: left;
@@ -23,7 +21,6 @@
 .form input,
 .form textarea {
   font-size: clamp(1rem, 1.5vw, 1vw);
-  /* font-size: clamp(1.25rem, 2vw, 1.5vw); */
   text-align: left;
 
   background-color: var(--background-color);
@@ -33,6 +30,7 @@
   padding-top: 0.5vw;
   padding-bottom: 0.5vw;
   margin-bottom: 1rem;
+  /* max-width: 100%; */
 }
 
 .form input:focus,
@@ -41,7 +39,7 @@
 }
 
 .form p {
-  width: max-content;
+  /* width: max-content; */
   font-size: clamp(1rem, 1.25vw, 1vw);
   /* font-size: clamp(1rem, 1.5vw, 1.25vw); */
 }
@@ -72,14 +70,16 @@
 }
 
 .names {
-  align-items: first baseline;
-  flex-direction: row;
+  display: flex;
+  /* align-items: first baseline; */
+  /* flex-direction: row; */
   gap: 2%;
   margin-bottom: 1rem;
-  width: 95%;
+  width: 100%;
 }
 
 .first {
+  display: flex;
   flex-direction: column;
   /* min-width: 38%; */
   min-width: 44%;
@@ -94,9 +94,10 @@
 }
 
 .last {
+  display: flex;
   flex-direction: column;
+  /* min-width: 40%; */
   min-width: 44%;
-  /* min-width: 44%; */
 }
 
 .lastNameError {
@@ -107,37 +108,73 @@
 }
 
 .phone {
+  display: flex;
   align-items: first baseline;
   margin-bottom: 1rem;
+  max-width: 100%;
 }
 
 .phoneColumn {
+  display: flex;
   flex-direction: column;
   margin-left: 2%;
-  min-width: 84%;
+  width: 100%;
 }
 
 .phoneError {
   display: block;
   color: var(--attention-color);
   font-family: var(--inter-font);
-  /* checkwidth of this error on cart */
   max-width: 100%;
 }
 
 .email {
+  display: flex;
   align-items: first baseline;
+  max-width: 100%;
 }
 
 .emailColumn {
+  display: flex;
   flex-direction: column;
-  min-width: 84%;
+  width: 100%;
   margin-left: 2%;
 }
 
 .emailError {
   color: var(--attention-color);
+  max-width: 100%;
 }
+
+@media (max-width: 1160px) {
+  .names {
+    display: flex;
+    flex-direction: column;
+  }
+  .names label {
+    margin-bottom: 1rem;
+  }
+
+  .firstNameError {
+    margin-bottom: 1rem;
+  }
+
+  .phone {
+    flex-direction: column;
+  }
+
+  .phone label {
+    margin-bottom: 1rem;
+  }
+  .email {
+    flex-direction: column;
+  }
+
+  .email label {
+    margin-bottom: 1rem;
+  }
+}
+
 @media (max-width: 695px) {
   .phoneColumn {
     min-width: clamp(84%, 30vw, 88%);

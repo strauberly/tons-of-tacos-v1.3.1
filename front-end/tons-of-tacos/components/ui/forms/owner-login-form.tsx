@@ -8,7 +8,7 @@ import { IsAuthenticated } from "@/lib/ownerLogin/owners-login-client";
 import { useDisplayContext } from "@/context/display-context";
 
 export default function OwnerLoginForm() {
-  const { setShowLogin } = useDisplayContext();
+  // const { setShowLogin } = useDisplayContext();
 
   const initialState = {
     status: 0,
@@ -32,7 +32,7 @@ export default function OwnerLoginForm() {
       />
 
       <input
-        type="text"
+        type="password"
         id="password"
         name="password"
         placeholder="Enter Password"

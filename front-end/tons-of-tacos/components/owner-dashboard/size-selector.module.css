@@ -1,23 +1,27 @@
-.size {
-  margin-left: 1rem;
-}
+/* .size { */
+/* margin-right: 5rem; */
+/* margin-left: -4rem; */
+/* } */
 
 .size input,
 .quantity textarea {
-  padding: 0.25vw;
+  padding: 0.4vw;
   background-color: transparent;
   color: var(--user-selected-color);
   text-align: center;
   width: 6ch;
+  font-size: clamp(1rem, 1rem, 1rem);
+  /* justify-self: center; */
+  /* margin-left: 6rem; */
 }
 
 .valid {
   border: 3px solid var(--border-color);
-  border-radius: 3px;
+  border-radius: 15%;
 }
 .invalid {
   border: 3px solid var(--attention-color);
-  border-radius: 3px;
+  border-radius: 15%;
 }
 
 .sizeWarning {
@@ -26,4 +30,10 @@
   margin-left: 2rem;
   margin-top: 0.5rem;
   color: var(--attention-color);
+}
+
+@media (max-width: 1380px) {
+  .size {
+    /* margin-right: 1rem; */
+  }
 }

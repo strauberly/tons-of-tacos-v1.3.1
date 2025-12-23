@@ -11,6 +11,7 @@ import { DailySales } from "@/lib/owners-tools/owners-tools";
 import OrdersByCustomerPhone from "../modal/orders-by-customer-phone";
 import ActionBar from "./action-bar/action-bar";
 import OwnerOrderCreator from "../modal/ownerOrderCreator/owner-order-creator";
+import DailySalesDisplay from "./daily-sales/daily-sales";
 
 export default function OwnerDashboard() {
   const {
@@ -42,52 +43,58 @@ export default function OwnerDashboard() {
     }
     Sales();
 
-    // setInterval(Sales, 5000);
+    // setInterval(Sales, 3000);
   }, [login.token, sales?.numberOfSales, sales?.total]);
 
   return (
     <div>
+      {showCustomerOrders && <OrdersByCustomerPhone />}
       {showOwnerOrderCreator && <OwnerOrderCreator />}
       {viewOrder && <OrderView />}
-      {showCustomerOrders && <OrdersByCustomerPhone />}
       {showConfirmation && (
         <OrderActionConfirmation
           title={confirmationTitle}
           order={orderToView}
         />
       )}
-      <ActionBar />
       <div>
-        <ul className={classes.displayCategories}>
-          {displayCategories.map((category) => (
-            <p key={category}>{`${category.toString()}`}</p>
-          ))}
-
-          <button
-            className={classes.sortButtons}
-            onClick={() => setSortState("ready")}
-          >
-            {" "}
-            Ready
-          </button>
-          <button
-            onClick={() => setSortState("closed")}
-            className={classes.sortButtons}
-          >
-            {" "}
-            Closed
-          </button>
-          <button
-            onClick={() => setSortState("open")}
-            className={classes.sortButtons}
-          >
-            Open
-          </button>
-        </ul>
-        <Orders sortState={sortState} />
+        <ActionBar />
+        <div className={classes.completeDash}>
+          <div className={classes.ordersDash}>
+            <ul className={classes.displayCategories}>
+              {displayCategories.map((category) => (
+                <p key={category}>{`${category.toString()}`}</p>
+              ))}
+            </ul>
+            <div className={classes.buttonGroup}>
+              <button
+                className={classes.sortButtons}
+                onClick={() => setSortState("ready")}
+              >
+                {" "}
+                Ready
+              </button>
+              <button
+                onClick={() => setSortState("closed")}
+                className={classes.sortButtons}
+              >
+                {" "}
+                Closed
+              </button>
+              <button
+                onClick={() => setSortState("open")}
+                className={classes.sortButtons}
+              >
+                Open
+              </button>
+            </div>
+          </div>
+          <Orders sortState={sortState} />
+        </div>
         <div className={classes.sales}>
-          <h1>Sales For Today: {sales?.numberOfSales}</h1>
-          <h1>Total: ${sales?.total.toFixed(2)}</h1>
+          {/* <DailySalesDisplay /> */}
+          {/* <h1>Sales For Today: {sales?.numberOfSales}</h1>
+          <h1>Total: ${sales?.total.toFixed(2)}</h1> */}
         </div>
       </div>
     </div>

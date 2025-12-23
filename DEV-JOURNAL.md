@@ -2,6 +2,368 @@
 
 ---
 
+-- 30 Oct 2025 --
+
+- Restyle of item adder let to a refactor
+  of the elements layout. It is now responsive. Files will need refinement.
+
+  - adjustment made to item price in owner order creator for an item. brought more into centerline with other items at smaller screen sizes.
+
+  - adjustments made to item selector for smaller screen sizes.
+
+  - altered border at bottom of items in owner order creator
+
+  - add item to order button disabled if no item selected or item has selectable sizes but size has not yet been selected.
+
+  - responsive styling changes for customer cart items. Functionality for customer cart appears to be operating as desired.
+
+  - close button in owner order creator adjusted to only occupy the necessary room.
+
+---
+
+-- 29 Oct 2025 --
+
+- NA displayed for a cart item if size not applicable while viewing the item or making an edit to the quantity.
+
+- styling improvements for readability of items in owner order creator.
+
+- responsive styling improvements for items in owner order creator for quantity selector and size selector.
+
+- bug sorted for certain drinks not being able to be added to order for customer due to the size defined in sql script on backend.
+
+- add item disabled if an item hasn't been selected.
+
+- Owner Order Creator component function as intended with responsive styling in place.
+
+- Touch ups to responsive styling for items in owner order creator.
+
+---
+
+-- 28 Oct 2025 --
+
+- Addressing size selector retuning to default state ruled not important at this time. New strategy matches what is in place for order items when editing an already existing order.
+- updated styling needed.
+- Items in owner order creator back to correctly adjusting price when quantity changes while also taking size surcharges into account. Back to styling and issues with updates.
+- Altering how an items id is mapped in cart-item-list appears to have resolved update issues in owner order creator.
+- Unable to pass results of setCanEdit back to parent or some reason. yet update component disappears like it is supposed to.
+- This has been corrected by ensuring all conditions for an edit met. simple oversight.
+
+---
+
+-- 22 Oct 2025 --
+
+- Addressing issues in cart items stemming from id created for them not unique due to parameters in cart check not being unique as well.
+
+  - Have addressed issues pertaining to updating a cart item in owner order creator.
+  - Have addressed issues pertaining to removing a cart item in owner order creator.
+
+- Updated order view for total toFixed(2) in order to accurately display cost.
+
+- Cancel button implemented into owner order creator for reverting quantity and price if already entered still working on similar functionality for size selector.
+
+---
+
+-- 21 Oct 2025 --
+
+- Update functionality for items in owner order creator and customer cart appear to be correct.
+
+- It appears size surcharges are being handled by the backend application as well. Think we'll stick to front end so that the changes in price are immediately visible.
+
+  - This has been temporarily addressed and will be reworked further.
+
+  - Restriction for how many of item and owner can add has been replaced. it is solely at their discretion.
+
+  - Modifications made to add to order button
+    - all items checked by name and size and if item already in cart is not added and user alerted
+    - if item has the same name but the size is different, it is allowed to be added.
+    - component now correctly resets after to start the check over again.
+    - button is disabled if an item with an available size does not have a valid size entered (ie S,M or L).
+
+- Bug introduced with changing size of an item in customer cart to small result in total for item being the surcharge of new size multiplied by the quantity but leaving out the base price.
+
+  - This has been corrected by creating uniformity in size selectors to use S,M, and L as the selections.
+
+- Forgot to add clause to add to order button disable for size na.
+
+- Cart item now displays na for an item without selectable sizes instead of the size selector.
+
+---
+
+-- 20 Oct 2025 --
+
+- Items in and owner order creator successfully updating price based on quantity. Set up loop between ref and state so the calculation isn't lagged but the display still updates new value. Logic updated for calculating the unit price of the item for further calculation.
+
+- Items in owner order creator updating items correctly based on size and quantity.
+  - Will address update followed by customer cart next.
+
+---
+
+-- 19 Oct 2025 --
+
+- Cart Item component was becoming a mess so created a copy and started a bit more fresh. Component is currently a mess but seems to be on the right track. Issues appear to stem from incorrect use of useEffect which was constantly overwriting changes and adding additional surcharge where not needed.
+
+  - So far an item quantity and price can be updated in the customer cart and owner order creator. See below for exercises in futility.
+
+- Items placed in cart for owner order updated for altering size and quantity.
+
+- Update button in owner cart updated to appear if size or quantity changed or both changed and correctly updates the order in session storage.
+
+- alterations made to size context changing the default size selected from "" to "NA". A size selector is now only displayed for items that have selectable sizes in customer cart.
+
+- Owner order creator and customer cart allow for editing items for size and quantity in a similar manner.
+
+- Investigating multiple issues reoccurring.
+  - Issue involving size selector displayed even if item does not have selectable sizes rectified by ensuring homogenous values.
+  - Item in owner order creator with selectable size correctly displaying price according to changes made to size and quantity.
+
+---
+
+-- 17 Oct 2025 --
+
+- Fixed bug in cart item, while working on owner order creator. The wrong prop was being entered for size causing a cascading error.
+
+- Size selector in place for updating item size if available so that size can be changed prior to order submission. Still lots to work on.
+
+---
+
+-- 16 Oct 2025 --
+
+- styling adjustments for order items at less than 1560px.
+  - item details centered
+- edit customer info scooched over from the right just a touch.
+
+- gap reduced at less than 1560px for update and cancel.
+
+- have begun making adjustments for items in owner order creator.
+
+- responsive styling for owner order items in place.
+
+---
+
+-- 15 Oct 2025 --
+
+- Altered arrow icon to take a prop called scale so that size can be altered for different components where it is used.
+
+---
+
+-- 14 Oct 2025 --
+
+- Addressed issue where size selector was displayed for some items that should not be in the owner order view when editing an item in an order.
+
+---
+
+-- 9 Oct 2025 --
+
+- Previous responsive styling was affecting menu item cards in an undesirable way, solution now in place.
+
+---
+
+-- 13 Oct 2025 --
+
+- corrections for checking if an item is already in an order being viewed.
+
+- Corrected styling for cards eliminating y scroll overlap.
+
+-- 9 Oct 2025 --
+
+- Previous responsive styling was affecting menu item cards in an undesirable way, solution now in place.
+
+---
+
+- Issue with adding an item to an existing order stemmed from changes made in how the order in view was updated after the change in the confirmation button. This has been rectified.
+- Change also made in remove from order button as well as update in quantity selector.
+- Order view is back to functioning as intended.
+
+-- 8 Oct 2025 --
+
+- Issue with adding an item to an existing order stemmed from changes made in how the order in view was updated after the change in the confirmation button. This has been rectified.
+- Change also made in remove from order button as well as update in quantity selector.
+- Order view is back to functioning as intended.
+
+---
+
+-- 7 Oct 2025 --
+
+- hunting down issues relating to adding an item to an already existing order.
+
+---
+
+-- 6 Oct 2025 --
+
+- Altered grids on order view for responsive styling.
+- Responsive design for order view in place.
+
+---
+
+-- 5 Oct 2025 --
+
+- Beginning work on responsive design for order view.
+
+---
+
+-- 4 Oct 2025 --
+
+- adjustment to border width on owner header.
+- responsive adjustments to customer form compatible for customer cart and owner order creator.
+
+---
+
+-- 2 Oct 2025 --
+
+- column categories matched up with order summary columns in responsive view less than 1920. Still working on making it happen in the other direction.
+
+- responsive styling for 1920 - 500 functioning as desired. Refactoring needed to clean up styling and moving styles to their own sheets near components. Will be part of the larger refactor for owner dashboard.
+
+- Returned functionality of finding an order by its id.
+
+- adjusted styling for search input errors.
+
+---
+
+-- 1 Oct 2025 --
+
+- Responsive styling in place for owner header once logged in.
+
+- Beginnings of responsive design for the owner dashboard. Moving into new position at 1400px coinciding with our responsive size scheme for the application as a whole.
+
+- Responsive styling for action and search bar in place.
+
+- Responsive scheme started for order summaries. Needs further refinement.
+
+---
+
+-- 29 Sep 2025 --
+
+- Began working on responsive styling for owners-tools Starting with owner login form.
+
+---
+
+-- 28 Sep 2025 --
+
+- Add to order button was not correctly adding an items total to the cart due to result of calculation not being passed to button component. This has been rectified.
+
+---
+
+-- 27 Sep 2025 --
+
+- Restored remove item from appropriate cart functionality. Will continue to research and see if we can slimline carts with context.
+
+---
+
+-- 26 Sep 2025 --
+
+- Continuing investigation into functionality for altering cart. Appears we are getting jumbled with possibly too much context interaction. Working on restoring functionality and then onto seeing if work can be streamlined.
+- If I recall correctly I believe the different context was created in order to prevent context for cart from wrapping entire application and unintentionally affect components shared between a customer and owner.
+  More research needed.
+- Functionality for adding items to carts, and updating quantities and totals restored.
+
+---
+
+-- 22 Sep 2025 --
+
+- cart updated to ensure proper functionality.
+- owner order editor for phone brought in line with other components for number formatting and validation.
+- format phone number function added to general library reducing redundant code.
+- working out why owner order creator is misbehaving.
+
+---
+
+-- 18 Sep 2025 --
+
+- Daily Sales brought into its own component to eliminate issues when rerendering to update.
+- input element for owner login form changed from text to password for obfuscation.
+- add to order button is now correctly checking if an item is in an order before adding and updating the order if an item is added.
+- order edits made by owner functioning correctly and recalculating order total correctly.
+
+---
+
+- ***
+
+  -- 16 Sep 2025 --
+
+- Customer phone number validation on checkout form brought inline with methodology found in owner search bar which provides auto formatting.
+
+---
+
+-- 15 Sep 2025 --
+
+- styling improvements made to orders by customer phone, resolving location of close button.
+- added customer name in case of multiple orders using same phone number.
+- changed structure in owner dashboard so that order view is above orders by phone number. This way we can close the order view and still have access to the other orders in case we wish to view a different order next with that phone number.
+- updated close button styling on view orders by phone to bring in line with close button on order view.
+
+---
+
+-- 14 Sep 2025 --
+
+- Addressed issues with getting orders back when looking up orders by phone number on the back end giving us our functionality again.
+
+- Addressed a few other issues as well pertaining to context of who is using the application. Components not responding as they should be.
+
+---
+
+-- 11 Sep 2025 --
+never forget
+
+- Styling in customer info form altered to prevent overall dimensions from auto growth.
+
+- Styling improvement for readability of order on owners dashboard.
+
+---
+
+-- 10 Sep 2025 --
+
+- General use library created for functions used through out application. Created CalcOrderTotal function there reducing redundant code.
+
+---
+
+-- 9 Sep 2025 --
+
+- General use library created for functions used through out application. Created CalcOrderTotal function there reducing redundant code.
+
+---
+
+-- 7 Sep 2025 --
+
+- Responsive styling repaired for cart.
+- Responsive styling repaired for menu navigation.
+- Quantity check removed for owner allowing them to create an order with a large size.
+
+---
+
+-- 6 Sep 2025 --
+
+- Owner order component now sends order to backend, updates orders on owners dashboard and redirects to the owner dashboard end point by refactoring order confirmation component.
+
+- Styling enhanced for owner order creator.
+- Styling altered in customer info form (email error) in norder to make component reusable.
+
+---
+
+-- 1 Sep 2025 --
+
+- Owner order total displayed accurately reflecting selected items.
+- Update button correctly functioning and price correctly reflected.
+
+---
+
+--24 Aug 2025--
+
+- Remove from cart button reformatted to apply to an owner order.
+- Added check for if menu item already added to owner order in add item button.
+- Update button from cart item refactored to work in the owner order creator also.
+- Close button in owner order creator removes owner-order object from session storage.
+
+---
+
+--23 Aug 2025--
+
+- created ownerorder context in owner-context.
+- add to order button in add order item component now checks context to see if order is an owner order and if so adds to owner-order held in session storage.
+  -owner order creator Now implements the cart item list component to show the items the owner has selected for the current order.
+
+---
+
 --16 Aug 2025--
 
 - Search component is now combined with an ownerOrderCreator component, inside of an action bar component allowing for more modularity.

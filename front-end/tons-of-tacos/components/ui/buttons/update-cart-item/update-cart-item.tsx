@@ -9,6 +9,11 @@ import { useEffect, useState } from "react";
 import classes from "./update-cart-item.module.css";
 import { useModalContext } from "@/context/modal-context";
 import { useDisplayContext } from "@/context/display-context";
+import { useOwnerContext } from "@/context/owner-context";
+import {
+  GetOwnerOrder,
+  updateOwnerOrder,
+} from "@/lib/owners-tools/owners-tools-client";
 
 export default function Update(props: {
   cartItem: string;
@@ -18,8 +23,9 @@ export default function Update(props: {
 }) {
   const { cart, setCart, setCartQuantity, cartQuantity } = useCartContext();
 
-  const { setModal } = useModalContext();
+  const { setModal, orderToView, setOrderToView } = useModalContext();
   const { setShowModal } = useDisplayContext();
+  const { ownerOrder, order, setOrder } = useOwnerContext();
 
   const newCart = cart;
 
@@ -35,9 +41,42 @@ export default function Update(props: {
     newCart[cartItemIndex].quantity = props.updatedItemQuantity;
 
     newCart[cartItemIndex].price = props.updatedItemPrice;
-    setCart(newCart);
     UpdateCart(newCart);
+    setCart(newCart);
   };
+
+  function updateOrderItem() {
+    console.log(GetOwnerOrder());
+    // setOrder(GetOwnerOrder());
+    console.log(order);
+    console.log(props.cartItem);
+    console.log(
+      order.findIndex((orderItem) => orderItem.itemName === props.cartItem)
+    );
+    const orderItemIndex = orderToView.orderItems.findIndex(
+      (orderItem) => orderItem.itemName === props.cartItem
+    );
+    // const orderItemIndex = order.findIndex(
+    //   (orderItem) => orderItem.itemName === props.cartItem
+    // );
+    console.log("order item index: " + orderToView.orderItems[orderItemIndex]);
+    // console.log("order item index: " + order[orderItemIndex]);
+    console.log(
+      "order item index quantity: " +
+        orderToView.orderItems[orderItemIndex].quantity
+    );
+    // console.log("order item index quantity: " + order[orderItemIndex].quantity);
+    orderToView.orderItems[orderItemIndex].quantity = props.updatedItemQuantity;
+    // order[orderItemIndex].quantity = props.updatedItemQuantity;
+    orderToView.orderItems[orderItemIndex].total = Number(
+      props.updatedItemPrice
+    );
+    // order[orderItemIndex].price = props.updatedItemPrice;
+
+    setOrder(order);
+    setOrder(order);
+    updateOwnerOrder(order);
+  }
 
   let newQuantity = 0;
 
@@ -55,6 +94,23 @@ export default function Update(props: {
     }
   };
 
+  function checkOrderContext() {
+    if (ownerOrder) {
+      return [
+        setCart(GetOwnerOrder()),
+
+        updateOrderItem(),
+        setItemQuantityChanged(false),
+      ];
+    } else {
+      return [
+        updateCartItem(),
+        updateQuantity(),
+        setItemQuantityChanged(false),
+      ];
+    }
+  }
+
   useEffect(() => {
     if (props.oldQuantity != props.updatedItemQuantity) {
       setItemQuantityChanged(true);
@@ -67,11 +123,7 @@ export default function Update(props: {
         <button
           disabled={largeOrder === true ? true : false}
           className={classes.update}
-          onClick={() => [
-            updateCartItem(),
-            updateQuantity(),
-            setItemQuantityChanged(false),
-          ]}
+          onClick={() => [checkOrderContext()]}
         >
           Update
         </button>

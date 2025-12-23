@@ -1,16 +1,15 @@
 import Card from "@/components/ui/cards/card";
 import Image from "next/image";
-import classes from "./menu-item.module.css";
 import { useEffect, useState } from "react";
 import QuantitySelector from "./quantity-selector/quantity-selector";
 import MoreIcon from "@/components/ui/icons/more-icon";
-
 import { useSelectedSizeContext } from "@/context/size-context";
 import { useDisplayContext } from "@/context/display-context";
 import { useModalContext } from "@/context/modal-context";
 import AddToCart from "@/components/ui/buttons/add-to-cart/add-to-cart";
 import SizeSelector from "./size-selector/size-selector";
 import { useMenuItemIdContext } from "@/context/menu-item-context";
+import classes from "./menu-item.module.css";
 
 export default function MenuItem(props: {
   id: string;
@@ -34,7 +33,8 @@ export default function MenuItem(props: {
     setExpand(false);
   };
 
-  const itemSizes = ["small", "medium", "large"];
+  const itemSizes = ["S", "M", "L"];
+  // const itemSizes = ["small", "medium", "large"];
   const defaultQuantity: number = 1;
   const [quantity, setQuantity] = useState(defaultQuantity);
 
@@ -68,9 +68,9 @@ export default function MenuItem(props: {
       let adjPrice: number;
       let sizeSurcharge = 0;
 
-      if (selectedSize === "medium" && props.id === menuItemId) {
+      if (selectedSize === "M" && props.id === menuItemId) {
         sizeSurcharge = 0.5;
-      } else if (selectedSize === "large" && props.id === menuItemId) {
+      } else if (selectedSize === "L" && props.id === menuItemId) {
         sizeSurcharge = 1.0;
       }
 

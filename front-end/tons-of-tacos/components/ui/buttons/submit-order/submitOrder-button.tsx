@@ -5,17 +5,22 @@ import classes from "./submitOrder-button.module.css";
 import { useFormStatus } from "react-dom";
 import { useEffect } from "react";
 import { useOrderConfirmationContext } from "@/context/order-confirmation-context";
+import { useOwnerContext } from "@/context/owner-context";
 
-export default function SubmitButton(validation: {
-  firstName: boolean | undefined;
-  lastName: boolean | undefined;
-  phone: boolean | undefined;
-  email: boolean | undefined;
-  state: string;
-}) {
+export default function SubmitButton(
+  validation: {
+    firstName: boolean | undefined;
+    lastName: boolean | undefined;
+    phone: boolean | undefined;
+    email: boolean | undefined;
+    state: string;
+  }
+  // user: string
+) {
   const status = useFormStatus();
   const { setShowOrderConfirmation } = useDisplayContext();
   const { setOrderConfirmation } = useOrderConfirmationContext();
+  const { setOwnerOrder } = useOwnerContext();
 
   useEffect(() => {
     setOrderConfirmation(validation.state);
@@ -34,7 +39,10 @@ export default function SubmitButton(validation: {
       }
       onClick={async () => {
         try {
+          // reset ownerOrder
           setOrderConfirmation(validation.state);
+          setOwnerOrder(false);
+
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (error) {
           throw new Error("Sorry, we can't process your order at the moment");

@@ -1,9 +1,37 @@
 .actionBar {
+  margin-top: 1%;
   display: flex;
+  margin-bottom: 3%;
+  /* align-items: top; */
 }
 
 .ownerCreate {
   margin-left: 3rem;
   font-size: 1rem;
   font-weight: bold;
+  /* margin-top: -3rem; */
+}
+
+@media (max-width: 1400px) {
+  .actionBar {
+    margin-top: 10%;
+  }
+}
+@media (max-width: 1280px) {
+  .actionBar {
+    flex-direction: column;
+    margin-top: 12%;
+  }
+  .ownerCreate {
+    left: 0;
+    right: 0;
+    margin: auto;
+    margin-top: 1.5rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .actionBar {
+    margin-top: 20%;
+  }
 }

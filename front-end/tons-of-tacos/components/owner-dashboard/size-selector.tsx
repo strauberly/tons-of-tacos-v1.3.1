@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import classes from "./size-selector.module.css";
+import { useOwnerContext } from "@/context/owner-context";
 
 export default function SizeSelector(props: {
   itemSize: string;
@@ -12,7 +13,9 @@ export default function SizeSelector(props: {
     Backend will need to be adjusted appropriately
     */
 
-  const [size, setSize] = useState<string>("");
+  const { ownerOrder } = useOwnerContext();
+
+  const [size, setSize] = useState<string>(`${props.itemSize}`);
 
   const sizeRef = useRef<string>(size);
 
@@ -45,7 +48,6 @@ export default function SizeSelector(props: {
   return (
     <div className={classes.size}>
       <>
-        {/* {`${props.itemSize}` !== "a" && ( */}
         {`${sizeRef.current}` !== "a" && (
           <input
             className={`${
@@ -58,11 +60,14 @@ export default function SizeSelector(props: {
             maxLength={1}
             style={{ textTransform: "uppercase" }}
             onChange={checkSize}
+            // disabled={
+            //   ownerOrder &&
+            //   props.itemSize !== "S" &&
+            //   props.itemSize !== "M" &&
+            //   props.itemSize !== "L"
+            // }
           />
         )}
-        {/* {showSizeError === true && (
-          <p className={classes.sizeWarning}>{sizeError}</p>
-        )} */}
       </>
     </div>
   );

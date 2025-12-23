@@ -1,3 +1,17 @@
+// import { isLoggedIn } from "./owners-tools/owners-tools-client";
+
+import { GetOwnerOrder } from "./owners-tools/owners-tools-client";
+
+export let isLoggedInRef: boolean;
+
+export function setIsLoggedIn(loggedIn: boolean) {
+  if (loggedIn) {
+    isLoggedInRef = true;
+  } else {
+    isLoggedInRef = false;
+  }
+}
+
 export function CreateCart() {
   const cart: CartItem[] = [];
   if (!sessionStorage.getItem("tons-of-tacos-cart")) {
@@ -29,8 +43,11 @@ export async function AddItemToCart(
   sessionStorage.setItem("tons-of-tacos-cart", JSON.stringify(newCart));
 }
 
-export function RemoveCartItem(id: string) {
-  const updatedCart = GetCart().filter((cartItem) => cartItem.id != id);
+export function RemoveCartItem(itemId: string) {
+  const updatedCart: CartItem[] = GetCart().filter(
+    (cartItem) => cartItem.id !== itemId
+  );
+  console.log("cart: " + updatedCart);
   sessionStorage.removeItem("tons-of-tacos-cart");
   sessionStorage.setItem("tons-of-tacos-cart", JSON.stringify(updatedCart));
 }
@@ -87,6 +104,7 @@ export const resp: string = "";
 export async function SendOrder(
   previousState: responseMessage,
   formData: FormData
+  // loggedIn: boolean,
 ) {
   const firstName = formData.get("first_name");
   const lastName = formData.get("last_name");
@@ -99,7 +117,15 @@ export async function SendOrder(
     size: string;
   };
 
-  const cartItems = GetCart();
+  let cartItems: CartItem[];
+
+  console.log(isLoggedInRef);
+
+  if (isLoggedInRef === true) {
+    cartItems = GetOwnerOrder();
+  } else {
+    cartItems = GetCart();
+  }
 
   cartItems.forEach((cartItem) => {
     if (cartItem.size === "") {
@@ -151,6 +177,12 @@ export async function SendOrder(
   const customerEmail = data.customerEmail;
   const customerPhone = data.customerPhone;
   const orderTotal = data.orderTotal;
+
+  let name;
+
+  // if(loggedIn){
+  //   name =
+  // }
 
   const receivedOrderItems: string[] = data.orderItems.map(
     (orderItem: OrderItem) =>

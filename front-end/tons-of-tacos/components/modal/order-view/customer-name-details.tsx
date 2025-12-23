@@ -6,18 +6,35 @@ import { useRef, useState } from "react";
 export default function CustomerNameDetails() {
   const { orderToView, setOrderToView } = useModalContext();
 
-  const firstName: string = orderToView.name.substring(
-    0,
-    orderToView.name.indexOf(" ")
-  );
+  const orderRef = useRef<Order>(orderToView);
 
-  const lastName: string = orderToView.name.substring(
-    orderToView.name.indexOf(" ") + 1,
-    orderToView.name.length
+  const firstNameRef = useRef<string>(
+    orderRef.current.name.substring(0, orderRef.current.name.indexOf(" "))
   );
+  // const firstName: string = orderToView.name.substring(
+  //   0,
+  //   orderToView.name.indexOf(" ")
+  // );
 
-  const [currentFirstName, setCurrentFirstName] = useState<string>(firstName);
-  const [currentLastName, setCurrentLastName] = useState<string>(lastName);
+  const lastNameRef = useRef(
+    orderRef.current.name.substring(
+      orderRef.current.name.indexOf(" ") + 1,
+      orderRef.current.name.length
+    )
+  );
+  // const lastName: string = orderToView.name.substring(
+  //   orderToView.name.indexOf(" ") + 1,
+  //   orderToView.name.length
+  // );
+
+  const [currentFirstName, setCurrentFirstName] = useState<string>(
+    firstNameRef.current
+  );
+  // const [currentFirstName, setCurrentFirstName] = useState<string>(firstName);
+  const [currentLastName, setCurrentLastName] = useState<string>(
+    lastNameRef.current
+  );
+  // const [currentLastName, setCurrentLastName] = useState<string>(lastName);
   const [editName, setEditName] = useState<boolean>(false);
   const [update, setUpdate] = useState<boolean>(false);
 
@@ -82,7 +99,8 @@ export default function CustomerNameDetails() {
           <input
             className={` 
                     ${firstNameValid ? classes.valid : classes.invalid}`}
-            placeholder={`${firstName}`}
+            placeholder={`${firstNameRef.current}`}
+            // placeholder={`${firstName}`}
             type="text"
             id="first_name"
             name="first_name"
@@ -97,7 +115,8 @@ export default function CustomerNameDetails() {
           <input
             className={` 
                     ${lastNameValid ? classes.valid : classes.invalid}`}
-            placeholder={`${lastName}`}
+            placeholder={`${lastNameRef.current}`}
+            // placeholder={`${lastName}`}
             type="text"
             id="last_name"
             name="last_name"
