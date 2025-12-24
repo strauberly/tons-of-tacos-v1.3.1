@@ -2,6 +2,12 @@
 
 ---
 
+-- 23 Dec 2025 --
+
+- Just about there for having the size selector order item with similar functionality and warnings as throughout the application allowing us to use the same component 4 different times. So thats fun. Needs some more testing and refinement.
+
+---
+
 -- 21 Dec 2025 --
 
 - add order item in current phase is model of size selector validating size selected, and only adding to cart if size is valid and item with same size is not already in the cart or order.

@@ -95,14 +95,15 @@ export default function SizeSelector(props: {
       props.setEdited(true);
     }
     const element = document.getElementById("size") as HTMLInputElement;
-    if (
-      (props.submitted && !props.canEdit) ||
-      (!props.submitted && props.canEdit)
-    ) {
-      element.value = "";
-      // props.setCanEdit(true);
-      props.setNewSize(size);
-    }
+    // if (
+    //   // (props.submitted && !props.canEdit) ||
+    //   !props.submitted &&
+    //   props.canEdit
+    // ) {
+    //   element.value = "";
+    //   // props.setCanEdit(true);
+    //   // props.setNewSize(size);
+    // }
 
     if (size !== " " && props.submitted === false && props.canEdit === false) {
       setSize(" ");
@@ -113,9 +114,9 @@ export default function SizeSelector(props: {
       props.setNewSize(size);
     }
   }, [cart, props, size]);
-  console.log(props.itemSize);
-  console.log(`${props.itemSize}`);
-  console.log(`${sizeRef.current}`);
+  // console.log(props.itemSize);
+  // console.log(`${props.itemSize}`);
+  // console.log(`${sizeRef.current}`);
   return (
     <div className={classes.size}>
       <>

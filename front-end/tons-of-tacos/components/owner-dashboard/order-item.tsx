@@ -9,18 +9,20 @@ import { calcItemTotal } from "@/lib/general/multi-use";
 // import classes from "./order-item.module.css";
 import classes from "./order-item.module.css";
 
-export default function OrderItem(orderItem: { orderItem: OrderItem }) {
+export default function OrderItem(props: { orderItem: OrderItem }) {
   const { setOrderItem, setQuantity, quantity } = useEditOrderContext();
   const { orderToView } = useModalContext();
 
   const [canEdit, setCanEdit] = useState(false);
+  // const [submitted, setSubmitted] = useState(false);
   const [edited, setEdited] = useState<boolean>(false);
-  const [newSize, setNewSize] = useState<string>(orderItem.orderItem.size);
+  const [newSize, setNewSize] = useState<string>("NA");
   const [showSizeError, setShowSizeError] = useState<boolean>(false);
-  const [newPrice, setNewPrice] = useState<number>(orderItem.orderItem.total);
+  const [newPrice, setNewPrice] = useState<number>(props.orderItem.total);
   const [sizeError, setSizeError] = useState<string>("");
+  const [canUpdate, setCanUpdate] = useState(false);
 
-  const newQuantity = useRef<number>(orderItem.orderItem.quantity);
+  const newQuantity = useRef<number>(props.orderItem.quantity);
 
   const newOrderItem: OrderItem = {
     orderItemId: 0,
@@ -33,18 +35,17 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
   // const sizeError: string =
   //   "Enter 'S' for small, 'M' for medium or 'L' for large.";
 
-  const basePrice =
-    Number(orderItem.orderItem.total) / orderItem.orderItem.quantity;
+  const basePrice = Number(props.orderItem.total) / props.orderItem.quantity;
 
   function sizeDisplay() {
     if (
-      orderItem.orderItem.size.toUpperCase() !== "S" &&
-      orderItem.orderItem.size.toUpperCase() !== "M" &&
-      orderItem.orderItem.size.toUpperCase() !== "L"
+      props.orderItem.size.toUpperCase() !== "S" &&
+      props.orderItem.size.toUpperCase() !== "M" &&
+      props.orderItem.size.toUpperCase() !== "L"
     ) {
       return "NA";
     } else {
-      return orderItem.orderItem.size.toUpperCase();
+      return props.orderItem.size.toUpperCase();
     }
   }
 
@@ -58,7 +59,7 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
       setNewPrice(
         calcItemTotal(
           basePrice,
-          orderItem.orderItem.size,
+          props.orderItem.size,
           newSize,
           newQuantity.current
         )
@@ -72,39 +73,62 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
     setNewPrice(
       calcItemTotal(
         basePrice,
-        orderItem.orderItem.size,
+        props.orderItem.size,
         newSize,
         newQuantity.current
       )
     );
   };
-
+  //  const [sizes] = useState<string[]>([]);
+  const sizeRef = useRef<string[]>([]);
   useEffect(() => {
+    orderToView.orderItems.forEach((item) => {
+      if (
+        props.orderItem.size === "NA" ||
+        (newSize === props.orderItem.size && newSize !== item.size)
+      ) {
+        setShowSizeError(false);
+      } else if (
+        item.itemName === props.orderItem.itemName &&
+        item.size === newSize
+      ) {
+        setSizeError(
+          `${
+            props.orderItem.itemName + " " + newSize
+          } is already in cart. Select a different size or item.`
+        );
+        setShowSizeError(true);
+        setCanUpdate(false);
+      }
+    });
+
     if (edited) {
       setNewPrice(
         calcItemTotal(
           basePrice,
-          orderItem.orderItem.size,
+          props.orderItem.size,
           newSize,
           newQuantity.current
         )
       );
     } else {
-      setNewPrice(Number(orderItem.orderItem.total));
+      setNewPrice(Number(props.orderItem.total));
     }
   }, [
     newSize,
     basePrice,
     canEdit,
-    orderItem.orderItem.size,
-    orderItem.orderItem.total,
+    props.orderItem.size,
+    props.orderItem.total,
     edited,
+    orderToView.orderItems,
+    props.orderItem.itemName,
   ]);
 
   return (
     <div>
       <li>
-        <p>{`${orderItem.orderItem.itemName}`}</p>
+        <p>{`${props.orderItem.itemName}`}</p>
         {canEdit && (
           <>
             <QuantitySelector
@@ -115,36 +139,34 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
               setEdited={setEdited}
             />
 
-            {!canEdit && orderItem.orderItem.size === "NA" && (
-              <p className={classes.size}> {orderItem.orderItem.size}</p>
+            {!canEdit && props.orderItem.size === "NA" && (
+              <p className={classes.size}> {props.orderItem.size}</p>
             )}
-            {!canEdit && orderItem.orderItem.size !== "NA" && (
-              <p className={classes.size}>{orderItem.orderItem.size}</p>
-            )}
-
-            {canEdit === true && orderItem.orderItem.size === "NA" && (
-              <p className={classes.size}>{orderItem.orderItem.size}</p>
+            {!canEdit && props.orderItem.size !== "NA" && (
+              <p className={classes.size}>{props.orderItem.size}</p>
             )}
 
-            {newSize.toUpperCase() !== "NA" && canEdit && (
+            {canEdit === true && props.orderItem.size === "NA" && (
+              <p className={classes.size}>{props.orderItem.size}</p>
+            )}
+
+            {props.orderItem.size.toUpperCase() !== "NA" && canEdit && (
               <SizeSelector
-                itemSize={orderItem.orderItem.size}
+                itemSize={props.orderItem.size}
                 setShowSizeError={setShowSizeError}
                 setNewSize={setNewSize}
                 setSizeError={setSizeError}
-                itemName={orderItem.orderItem.itemName}
+                itemName={props.orderItem.itemName}
                 setEdited={setEdited}
                 edited={edited}
                 submitted={false}
-                canEdit={false}
-                setCanEdit={function (setCanEdit: boolean): void {
-                  throw new Error("Function not implemented.");
-                }}
+                canEdit={canEdit}
+                setCanEdit={setCanEdit}
               />
             )}
           </>
         )}
-        {!canEdit && <p>{`${orderItem.orderItem.quantity}`}</p>}
+        {!canEdit && <p>{`${props.orderItem.quantity}`}</p>}
         {!canEdit && <p>{`${sizeDisplay()}`}</p>}
         <p> {`$${newPrice.toFixed(2)}`}</p>
         <div className={classes.alter}>
@@ -156,9 +178,9 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
               }
               onClick={() => [
                 setCanEdit(!canEdit),
-                setOrderItem(orderItem.orderItem),
+                setOrderItem(props.orderItem),
                 setNewPrice(newPrice),
-                setQuantity(orderItem.orderItem.quantity),
+                setQuantity(props.orderItem.quantity),
               ]}
             >
               Edit
@@ -166,7 +188,7 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
           )}
           {!canEdit && (
             <RemoveFromOrderButton
-              orderItem={orderItem.orderItem}
+              orderItem={props.orderItem}
               orderToView={orderToView}
             />
           )}
@@ -178,17 +200,18 @@ export default function OrderItem(orderItem: { orderItem: OrderItem }) {
       {canEdit && (
         <div className={classes.update}>
           <UpdateOrderItemButton
-            orderItem={orderItem.orderItem}
+            orderItem={props.orderItem}
             newQuantity={newQuantity.current}
             newSize={newSize}
             setCanEdit={setCanEdit}
+            setNewSize={setNewSize}
           />
           <button
             onClick={() => [
               setCanEdit(!canEdit),
-              (newQuantity.current = orderItem.orderItem.quantity),
+              (newQuantity.current = props.orderItem.quantity),
               setQuantity(newQuantity.current),
-              setNewSize(orderItem.orderItem.size),
+              setNewSize("NA"),
               setNewPrice(newPrice),
               setShowSizeError(false),
               setOrderItem(newOrderItem),
