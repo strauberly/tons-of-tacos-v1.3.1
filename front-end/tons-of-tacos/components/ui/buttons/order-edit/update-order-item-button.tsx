@@ -6,6 +6,7 @@ export default function UpdateOrderItemButton(props: {
   orderItem: OrderItem;
   newQuantity: number;
   newSize: string;
+  setEdited: (edited: boolean) => void;
   setCanEdit: (canEdit: boolean) => void;
   setNewSize: (newSize: string) => void;
 }) {
@@ -28,6 +29,7 @@ export default function UpdateOrderItemButton(props: {
           setOrderItem(props.orderItem),
           setShowConfirmation(true),
           setConfirmationTitle("Update Order Item"),
+          props.setEdited(false),
           props.setCanEdit(false),
           props.setNewSize("NA"),
         ]}

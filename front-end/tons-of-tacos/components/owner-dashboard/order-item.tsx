@@ -83,6 +83,9 @@ export default function OrderItem(props: { orderItem: OrderItem }) {
   const sizeRef = useRef<string[]>([]);
   useEffect(() => {
     orderToView.orderItems.forEach((item) => {
+      if (item.itemName === props.orderItem.itemName) {
+        sizeRef.current.push(item.size);
+      }
       if (
         props.orderItem.size === "NA" ||
         (newSize === props.orderItem.size && newSize !== item.size)
@@ -101,6 +104,8 @@ export default function OrderItem(props: { orderItem: OrderItem }) {
         setCanUpdate(false);
       }
     });
+
+    setCanUpdate(!sizeRef.current.some((size) => size === newSize));
 
     if (edited) {
       setNewPrice(
@@ -127,6 +132,7 @@ export default function OrderItem(props: { orderItem: OrderItem }) {
 
   return (
     <div>
+      <p>{`${edited}`}</p>
       <li>
         <p>{`${props.orderItem.itemName}`}</p>
         {canEdit && (
@@ -169,43 +175,25 @@ export default function OrderItem(props: { orderItem: OrderItem }) {
         {!canEdit && <p>{`${props.orderItem.quantity}`}</p>}
         {!canEdit && <p>{`${sizeDisplay()}`}</p>}
         <p> {`$${newPrice.toFixed(2)}`}</p>
-        <div className={classes.alter}>
-          {!canEdit && (
-            <button
-              className={classes.button}
-              disabled={
-                orderToView.ready !== "no" || orderToView.closed !== "no"
-              }
-              onClick={() => [
-                setCanEdit(!canEdit),
-                setOrderItem(props.orderItem),
-                setNewPrice(newPrice),
-                setQuantity(props.orderItem.quantity),
-              ]}
-            >
-              Edit
-            </button>
-          )}
-          {!canEdit && (
-            <RemoveFromOrderButton
-              orderItem={props.orderItem}
-              orderToView={orderToView}
-            />
-          )}
-        </div>
       </li>
       {showSizeError === true && (
         <p className={classes.sizeWarning}>{sizeError}</p>
       )}
-      {canEdit && (
-        <div className={classes.update}>
+      {/* rename */}
+      <div className={classes.alter}>
+        {edited && (
+          // <div className={classes.update}>
           <UpdateOrderItemButton
             orderItem={props.orderItem}
             newQuantity={newQuantity.current}
             newSize={newSize}
+            setEdited={setEdited}
             setCanEdit={setCanEdit}
             setNewSize={setNewSize}
           />
+          // </div>
+        )}
+        {canEdit && (
           <button
             onClick={() => [
               setCanEdit(!canEdit),
@@ -219,8 +207,28 @@ export default function OrderItem(props: { orderItem: OrderItem }) {
           >
             Cancel
           </button>
-        </div>
-      )}
+        )}
+        {!canEdit && (
+          <button
+            className={classes.button}
+            disabled={orderToView.ready !== "no" || orderToView.closed !== "no"}
+            onClick={() => [
+              setCanEdit(!canEdit),
+              setOrderItem(props.orderItem),
+              setNewPrice(newPrice),
+              setQuantity(props.orderItem.quantity),
+            ]}
+          >
+            Edit
+          </button>
+        )}
+        {!canEdit && (
+          <RemoveFromOrderButton
+            orderItem={props.orderItem}
+            orderToView={orderToView}
+          />
+        )}
+      </div>
     </div>
   );
 }
