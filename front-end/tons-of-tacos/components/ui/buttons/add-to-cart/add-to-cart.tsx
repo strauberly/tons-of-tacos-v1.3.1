@@ -6,6 +6,8 @@ import { AddItemToCart, GetCart } from "@/lib/cart";
 import { useEffect, useRef, useState } from "react";
 import { useDisplayContext } from "@/context/display-context";
 import { useSelectedSizeContext } from "@/context/size-context";
+import { useOwnerContext } from "@/context/owner-context";
+import { AddToOwnerOrder } from "@/lib/owners-tools/owners-tools-client";
 
 export default function AddToCart(props: {
   id: string;
@@ -19,26 +21,25 @@ export default function AddToCart(props: {
 }) {
   const { setModal } = useModalContext();
   const { setShowModal } = useDisplayContext();
-  const { selectedSize, setSelectedSize } = useSelectedSizeContext();
+  const { selectedSize } = useSelectedSizeContext();
   const { cartQuantity, setCartQuantity, setItemsInCart, cart, setCart } =
     useCartContext();
+  const { loggedIn } = useOwnerContext();
 
   const [largeOrder, setLargeOrder] = useState<boolean>();
   const itemInCart = useRef(false);
-
-  function print() {
-    console.log("size: " + props.size.toString());
-  }
 
   function checkItem() {
     try {
       setCart(GetCart());
       cart.forEach((cartItem) => {
-        if (props.id == cartItem.id && props.size == selectedSize) {
+        if (props.id === cartItem.id && props.size === selectedSize) {
           itemInCart.current = true;
           if (itemInCart.current === true) {
             setModal(
-              `${props.itemName} is already in your cart. Select the cart icon to view your order and change quantities.`
+              `${
+                props.itemName + " " + props.size
+              } is already in your cart. Select the cart icon to view your order and change quantities or select this item with a different size.`
             );
             setShowModal(true);
           }
@@ -64,26 +65,30 @@ export default function AddToCart(props: {
       setLargeOrder(false);
       props.quantitySelector();
       props.expander();
-      AddItemToCart(
-        props.id,
-        props.menuId,
-        props.itemName,
-        props.quantity,
-        selectedSize,
-        props.price
-      );
+      if (loggedIn) {
+        AddToOwnerOrder(
+          `${props.itemName}` + `_${props.size}`,
+          props.id,
+          props.itemName,
+          props.quantity,
+          props.size,
+          props.size
+        );
+      } else {
+        AddItemToCart(
+          props.id,
+          props.menuId,
+          props.itemName,
+          props.quantity,
+          selectedSize,
+          props.price
+        );
+      }
       setCart(GetCart());
       setCartQuantity(cartQuantity + props.quantity);
     }
     itemInCart.current = false;
   };
-
-  // useEffect(() => {
-  //   if (props.size === "") {
-  //     setSelectedSize("na");
-  //   }
-  //   // print();
-  // }, [print, props.size, setSelectedSize]);
 
   return (
     <>

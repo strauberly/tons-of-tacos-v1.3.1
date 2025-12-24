@@ -1,16 +1,26 @@
 "use client";
+import classes from "./customer-info-form.module.css";
 
 import React, { useRef, useState, useActionState, useEffect } from "react";
 import SubmitButton from "../buttons/submit-order/submitOrder-button";
-import classes from "./customer-info-form.module.css";
 import { checkEmail, checkName, checkPhone } from "@/lib/customer-form";
-import { SendOrder } from "@/lib/cart";
+import { SendOrder, setIsLoggedIn } from "@/lib/cart";
 import { useOrderConfirmationContext } from "@/context/order-confirmation-context";
+import { useOwnerContext } from "@/context/owner-context";
+import { isLoggedIn } from "@/lib/owners-tools/owners-tools-client";
+import { formatPhone } from "@/lib/general/multi-use";
 
 export default function CustomerInfoForm() {
   const { setOrderConfirmation } = useOrderConfirmationContext();
+  const { loggedIn } = useOwnerContext();
   const initialState = { message: "" };
   const [state, formAction] = useActionState(SendOrder, initialState);
+  console.log(loggedIn);
+  /*
+  check if logged in, if so set user library function and call in send order
+  in add item check if login create new order
+  set the logic for if should use cart or new order from owner
+  */
 
   const [firstNameValid, setFirstNameValid] = useState<boolean>(false);
   const [lastNameValid, setLastNameValid] = useState<boolean>(false);
@@ -25,7 +35,7 @@ export default function CustomerInfoForm() {
 
   const firstName = useRef("false");
   const lastName = useRef("false");
-  const phoneNumber = useRef("false");
+  const phoneNumber = useRef("");
   const email = useRef("false");
 
   function validateFirstName(event: React.ChangeEvent<HTMLInputElement>) {
@@ -47,8 +57,31 @@ export default function CustomerInfoForm() {
     });
   }
 
+  // function formatNumber(input: string) {
+  //   if (!input) return input;
+  //   const numberInput: string = input.replace(/[^\d]/g, "");
+  //   const inputLength: number = numberInput.length;
+
+  //   if (inputLength < 4) {
+  //     return numberInput;
+  //   } else if (inputLength < 7) {
+  //     return `${numberInput.slice(0, 3)}.${numberInput.slice(3)}`;
+  //   } else {
+  //     return `${numberInput.slice(0, 3)}.${numberInput.slice(
+  //       3,
+  //       6
+  //     )}.${numberInput.slice(6)}`;
+  //   }
+  // }
+
   function validatePhoneNumber(event: React.ChangeEvent<HTMLInputElement>) {
-    phoneNumber.current = event.target.value;
+    const formattedNumber = formatPhone(event.target.value);
+
+    phoneNumber.current = formattedNumber;
+
+    console.log(phoneNumber.current);
+    console.log(formattedNumber);
+
     setPhoneValid(checkPhone(phoneNumber.current).valid);
     setErrors({
       ...errors,
@@ -67,6 +100,10 @@ export default function CustomerInfoForm() {
   }
 
   useEffect(() => {
+    async function CheckLogin() {
+      setIsLoggedIn(loggedIn);
+    }
+    CheckLogin();
     setOrderConfirmation(state.message);
   });
 
@@ -119,10 +156,11 @@ export default function CustomerInfoForm() {
             type="text"
             id="phone"
             name="phone"
-            placeholder="Enter Phone Number (ie 555.555.5555)"
+            placeholder="Enter Numbers Only (Auto Formatted)"
             required
             maxLength={12}
             onChange={validatePhoneNumber}
+            value={phoneNumber.current}
           />
           {!phoneValid && (
             <p className={classes.phoneError}>{errors.phoneError}</p>

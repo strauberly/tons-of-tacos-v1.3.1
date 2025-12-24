@@ -1,9 +1,16 @@
+.completeDash {
+  display: flex;
+  flex-direction: column;
+  align-items: last baseline;
+  width: 100%;
+}
+
 .dashboard {
-  margin-top: 2%;
+  /* margin-top: 2%; */
   display: flex;
   height: 100%;
-  justify-content: center;
-  overflow-y: scroll;
+  /* justify-content: center; */
+  overflow-x: scroll;
 }
 
 .viewUpdateDelete {
@@ -11,18 +18,20 @@
 }
 
 .dashboard ul {
-  margin-top: 2%;
+  /* margin-top: -6%; */
   display: flex;
   flex-direction: column;
-  width: 99%;
+  /* width: 90%; */
   max-height: 25rem;
+  top: 0;
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .dashboard li {
   padding: 1rem;
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
+  grid-template-columns: repeat(10, 11rem);
   justify-items: center;
   align-items: first baseline;
   border-bottom: solid;
@@ -36,7 +45,7 @@
 .dashboard li div {
   display: flex;
   flex-direction: column;
-  justify-items: center;
+  /* justify-items: center; */
   align-items: center;
 }
 
@@ -82,18 +91,45 @@
   justify-content: center;
   margin-bottom: 1rem;
 }
+.sortButtons {
+  font-size: 1rem;
+  cursor: pointer;
+  margin-right: 4rem;
+}
+.ordersDash {
+  display: flex;
+  margin-left: 4rem;
+  gap: 2rem;
+  align-items: first baseline;
+  width: 100%;
+  /* margin-bottom: 1%; */
+}
+
+.buttonGroup {
+  /* display: flex; */
+  display: grid;
+  grid-template-columns: repeat(3, 11rem);
+}
 
 .displayCategories {
-  position: fixed;
-  justify-items: center;
-  align-content: center;
-  margin-top: -1.5%;
+  max-height: 30rem;
+  margin-left: 2rem;
+  /* position: fixed; */
+  justify-content: center;
+  /* align-content: center; */
+  /* margin-top: -1.5%; */
+  margin-top: -2%;
+  /* margin-right: 5rem; */
+  /* margin-right: 6rem; */
   padding: 1.5rem;
-  width: 96.5%;
-  background-color: var(--background-color);
+  /* padding-bottom: -1.5rem; */
+  /* max-width: 95%; */
+  width: 66.6%;
+  /* background-color: var(--background-color); */
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(7, 3.5fr);
+  /* grid-template-columns: repeat(10, 1fr); */
+  gap: 4rem;
 }
 
 .displayCategories p {
@@ -113,6 +149,12 @@
   align-items: center;
 }
 
+.closed {
+  display: flex;
+  /* justify-self: right; */
+  margin-right: -2rem;
+}
+
 .closed p {
   color: #499801;
 }
@@ -130,46 +172,96 @@
   margin-top: 2rem;
 }
 
-.sortButtons {
-  font-size: 1rem;
-  cursor: pointer;
-  margin-right: 4rem;
+@media (max-width: 1918px) {
+  .completeDash {
+    flex-direction: row;
+  }
+  .ordersDash {
+    display: flex;
+    flex-direction: column;
+    align-items: first baseline;
+    width: max-content;
+  }
+  .displayCategories {
+    /* position: sticky; */
+    justify-items: left;
+    padding: 0;
+    /* align-content: left; */
+    /* margin-top: 2%; */
+    /* margin-top: 0.5%; */
+    /* padding: 1.5rem; */
+    height: max-content;
+    width: max-content;
+    /* background-color: var(--background-color); */
+    /* display: grid; */
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+  }
+
+  /* .displayCategories {
+    position: fixed;
+    justify-items: center;
+    align-content: center;
+    margin-top: -1.5%;
+    padding: 1.5rem;
+    width: 96.5%;
+    background-color: var(--background-color);
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 1rem;
+  } */
+  .sortButtons {
+    /* font-size: 1rem; */
+    /* cursor: pointer; */
+    display: flex;
+    justify-items: start;
+    margin-right: 0rem;
+    /* gap: -1.5rem; */
+  }
+
+  .dashboard ul {
+    margin-top: -1%;
+    display: flex;
+    flex-direction: row;
+    width: 94%;
+    max-height: max-content;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    /* height: 230%; */
+  }
+
+  .dashboard li {
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(1, 11rem);
+    justify-items: center;
+    align-items: first baseline;
+    padding-left: 4rem;
+    padding-right: 4rem;
+    /* border-left: solid; */
+    border-right: solid;
+    border-bottom: none;
+    border-width: 0.15rem;
+    border-color: var(--border-color);
+    row-gap: 0.5rem;
+    height: 100%;
+  }
+  .buttonGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .dashboard li div {
+    /* display: flex; */
+    flex-direction: row;
+    /* justify-items: center; */
+    align-items: baseline;
+    gap: 1rem;
+  }
 }
 
-.search {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-
-.search label {
-  color: var(--interactive-color);
-  font-family: var(--inter-font);
-  font-weight: bold;
-  margin-left: 2rem;
-}
-
-.search input {
-  width: 28ch;
-}
-
-.search input,
-.search textarea {
-  font-size: 1rem;
-  padding-top: 0.1vw;
-  padding-bottom: 0.1vw;
-  text-align: center;
-  background-color: var(--background-color);
-  color: var(--user-selected-color);
-}
-
-.search input:focus,
-.search textarea:focus {
-  outline: none;
-}
-
-.searchError {
-  color: var(--attention-color);
-  margin-top: 0.5rem;
-  margin-left: 20rem;
+@media (max-width: 1400px) {
+  /* .dashboard {
+    margin-top: 0%;
+  } */
 }

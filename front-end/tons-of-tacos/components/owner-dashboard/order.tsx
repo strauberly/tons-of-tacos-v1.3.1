@@ -17,10 +17,7 @@ export default function Order(order: { order: Order }) {
   });
 
   const date: string = new Date(order.order.created).toLocaleDateString();
-  // const time: string = new Date(order.order.created).toLocaleTimeString([], {
-  //   timeStyle: "short",
-  // });
-  // const date: string = new Date(order.order.created).toLocaleDateString();
+
   const total: number = +order.order.orderTotal;
 
   useEffect(() => {
@@ -34,7 +31,9 @@ export default function Order(order: { order: Order }) {
   return (
     <li
       className={`${
-        (closed === true && classes.closed) || (ready === true && classes.ready)
+        (closed === true && classes.closed) ||
+        (ready === true && classes.ready) ||
+        (closed === false && ready === false && classes.open)
       } `}
     >
       <p>{`${order.order.orderUid}`}</p>
@@ -45,20 +44,22 @@ export default function Order(order: { order: Order }) {
       <p>{`${time}`}</p>
       <p>{`${date}`}</p>
       <div>
-        <p>{`${order.order.ready}`}</p>
-        {order.order.ready === "no" && (
-          <MarkReadyButton
-            orderUid={order.order.orderUid}
-            token={login.token}
-          />
-        )}
+        <div className={classes.readyFlex}>
+          <p>{`${order.order.ready}`}</p>
+          {order.order.ready === "no" && (
+            <MarkReadyButton
+              orderUid={order.order.orderUid}
+              token={login.accessToken}
+            />
+          )}
+        </div>
       </div>
       <div>
         <p>{`${order.order.closed}`}</p>
         {order.order.ready !== "no" && order.order.closed === "no" && (
           <MarkClosedButton
             orderUid={order.order.orderUid}
-            token={login.token}
+            token={login.accessToken}
           />
         )}
       </div>

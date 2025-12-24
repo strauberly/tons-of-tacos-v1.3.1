@@ -11,6 +11,9 @@
   border-radius: 10px;
   border-style: solid;
   padding: 0.1rem;
+  max-height: fit-content;
+  /* max-height: 75%; */
+  /* overflow-y: scroll; */
 }
 
 .menuCard:hover {
@@ -20,10 +23,14 @@
 
 .background {
   background-color: var(--background-color);
-  border-radius: 10px;
+  border-radius: 15px;
   width: 99%;
-  height: 99.5%;
+  /* height: 100%; */
+  /* height: fit-content; */
   justify-self: center;
+  /* padding: 1rem; */
+  /* margin-bottom: 1rem; */
+  overflow-y: scroll;
 }
 
 .expand {
@@ -31,7 +38,7 @@
   margin-top: -12%;
   align-self: baseline;
   z-index: 100;
-  width: clamp(22rem, 100%, 30%);
+  width: clamp(22rem, 100%, 34%);
   height: 50rem;
   margin-right: auto;
   margin-left: auto;
@@ -48,9 +55,25 @@
   box-shadow: 0px 0px 100px 40px var(--attention-color);
 }
 
+@media (max-width: 1400px) {
+  .background {
+    height: 100%;
+  }
+  .expand {
+    margin-top: -15%;
+  }
+
+  .menuCard {
+    max-height: 100%;
+  }
+}
+
 @media (max-height: 900px) {
   .expand {
     margin-top: -6rem;
+  }
+  .background {
+    height: 120%;
   }
 }
 

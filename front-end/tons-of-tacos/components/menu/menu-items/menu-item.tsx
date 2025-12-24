@@ -1,16 +1,17 @@
+"use client";
 import Card from "@/components/ui/cards/card";
 import Image from "next/image";
-import classes from "./menu-item.module.css";
 import { useEffect, useState } from "react";
-import QuantitySelector from "./quantity-selector/quantity-selector";
+// import QuantitySelector from "./quantity-selector/quantity-selector";
+import QuantitySelector from "../../ui/selectors/quantity-selector/quantity-selector";
 import MoreIcon from "@/components/ui/icons/more-icon";
-
 import { useSelectedSizeContext } from "@/context/size-context";
 import { useDisplayContext } from "@/context/display-context";
 import { useModalContext } from "@/context/modal-context";
 import AddToCart from "@/components/ui/buttons/add-to-cart/add-to-cart";
 import SizeSelector from "./size-selector/size-selector";
 import { useMenuItemIdContext } from "@/context/menu-item-context";
+import classes from "./menu-item.module.css";
 
 export default function MenuItem(props: {
   id: string;
@@ -25,16 +26,17 @@ export default function MenuItem(props: {
   const { setShowModal } = useDisplayContext();
   const { menuItemId } = useMenuItemIdContext();
   const [expand, setExpand] = useState(false);
-  const [price, setPrice] = useState("");
-
-  const [sizeAvailable, setSizeAvailable] = useState(false);
   const { selectedSize, setSelectedSize } = useSelectedSizeContext();
+  const [price, setPrice] = useState("");
+  const [edited, setEdited] = useState<boolean>(false);
+  const [sizeAvailable, setSizeAvailable] = useState(false);
 
   const expander = () => {
     setExpand(false);
   };
 
-  const itemSizes = ["small", "medium", "large"];
+  const itemSizes = ["S", "M", "L"];
+  // const itemSizes = ["small", "medium", "large"];
   const defaultQuantity: number = 1;
   const [quantity, setQuantity] = useState(defaultQuantity);
 
@@ -60,17 +62,14 @@ export default function MenuItem(props: {
     }
   };
 
-  console.log("item size:" + props.itemSize);
-  console.log("selected size:" + selectedSize);
-
   useEffect(() => {
     function calcPrice() {
       let adjPrice: number;
       let sizeSurcharge = 0;
 
-      if (selectedSize === "medium" && props.id === menuItemId) {
+      if (selectedSize === "M" && props.id === menuItemId) {
         sizeSurcharge = 0.5;
-      } else if (selectedSize === "large" && props.id === menuItemId) {
+      } else if (selectedSize === "L" && props.id === menuItemId) {
         sizeSurcharge = 1.0;
       }
 
@@ -131,6 +130,8 @@ export default function MenuItem(props: {
           value={quantity}
           increment={increment}
           decrement={decrement}
+          setEdited={setEdited}
+          scale="scale(1)"
         />
         <p className={classes.price}>${price}</p>
 

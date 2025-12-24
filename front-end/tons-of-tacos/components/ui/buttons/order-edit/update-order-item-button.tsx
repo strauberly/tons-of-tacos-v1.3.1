@@ -7,23 +7,33 @@ export default function UpdateOrderItemButton(props: {
   newQuantity: number;
   newSize: string;
   setCanEdit: (canEdit: boolean) => void;
+  setNewSize: (newSize: string) => void;
 }) {
   const { setQuantity, setOrderItem, setItemSize } = useEditOrderContext();
   const { setShowConfirmation } = useDisplayContext();
   const { setConfirmationTitle } = useModalContext();
-  console.log("new size" + props.newSize);
+  // console.log("new size" + props.newSize);
   return (
-    <button
-      onClick={() => [
-        setQuantity(props.newQuantity),
-        setItemSize(props.newSize),
-        setOrderItem(props.orderItem),
-        setShowConfirmation(true),
-        setConfirmationTitle("Update Order Item"),
-        props.setCanEdit(false),
-      ]}
-    >
-      Update
-    </button>
+    <>
+      <button
+        disabled={
+          props.newSize !== "S" &&
+          props.newSize !== "M" &&
+          props.newSize !== "L" &&
+          props.newSize !== "NA"
+        }
+        onClick={() => [
+          setQuantity(props.newQuantity),
+          setItemSize(props.newSize),
+          setOrderItem(props.orderItem),
+          setShowConfirmation(true),
+          setConfirmationTitle("Update Order Item"),
+          props.setCanEdit(false),
+          props.setNewSize("NA"),
+        ]}
+      >
+        Update
+      </button>
+    </>
   );
 }

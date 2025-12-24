@@ -6,22 +6,39 @@ import NavButtons from "@/components/ui/buttons/nav-buttons/nav-buttons";
 import OwnerLoginForm from "../../ui/forms/owner-login-form";
 import { useDisplayContext } from "@/context/display-context";
 import OwnerHeader from "../owner-header/owner-header";
-import { Suspense, useEffect } from "react";
-import {
-  getLogin,
-  IsAuthenticated,
-} from "@/lib/ownerLogin/owners-login-client";
+import { useEffect } from "react";
+
 import { useOwnerContext } from "@/context/owner-context";
-import FadeOnLoad from "@/components/ui/animations/fade-on-load";
+
+import {
+  CookieCheck,
+  DeleteCookies,
+  GetLogin,
+  nextCookiePresent,
+} from "@/lib/ownerLogin/owner-login-server";
+import { CartContextProvider } from "@/context/cart-context";
+// import { cookies } from "next/headers";
 
 export default function MainHeader() {
   const { showLogin } = useDisplayContext();
-  const { loggedIn, setLoggedIn, setLogin } = useOwnerContext();
+  const { loggedIn, setLoggedIn, setLogin, login } = useOwnerContext();
 
   useEffect(() => {
-    setLoggedIn(IsAuthenticated());
-    setLogin(getLogin());
-  }, [loggedIn, setLoggedIn, setLogin]);
+    async function LoginCheck() {
+      // setLoggedIn(await GetLogin())
+      console.log("check cook: " + (await CookieCheck()));
+      console.log("logged in: " + loggedIn);
+      console.log("login: " + login.ownerName);
+      if ((await CookieCheck()) === false && loggedIn === false) {
+        setLogin(await GetLogin());
+        if (login.ownerName !== "") setLoggedIn(true);
+      } else if ((await nextCookiePresent()) !== true) {
+        DeleteCookies();
+      }
+    }
+
+    LoginCheck();
+  }, [loggedIn, login.ownerName, setLoggedIn, setLogin]);
 
   return (
     <>
@@ -30,13 +47,10 @@ export default function MainHeader() {
           <Link className={classes.home} href="/">
             Tons Of Tacos
           </Link>
-          <Suspense>
-            <FadeOnLoad>
-              {loggedIn && <OwnerHeader />}
-              {showLogin && !loggedIn && <OwnerLoginForm />}
-              {!showLogin && !loggedIn && <NavButtons />}
-            </FadeOnLoad>
-          </Suspense>
+
+          {loggedIn && <OwnerHeader />}
+          {showLogin && !loggedIn && <OwnerLoginForm />}
+          {!showLogin && !loggedIn && <NavButtons />}
         </header>
       </div>
     </>

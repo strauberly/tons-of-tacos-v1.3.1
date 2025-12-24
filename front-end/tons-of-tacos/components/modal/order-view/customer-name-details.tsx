@@ -6,18 +6,35 @@ import { useRef, useState } from "react";
 export default function CustomerNameDetails() {
   const { orderToView, setOrderToView } = useModalContext();
 
-  const firstName: string = orderToView.name.substring(
-    0,
-    orderToView.name.indexOf(" ")
-  );
+  const orderRef = useRef<Order>(orderToView);
 
-  const lastName: string = orderToView.name.substring(
-    orderToView.name.indexOf(" ") + 1,
-    orderToView.name.length
+  const firstNameRef = useRef<string>(
+    orderRef.current.name.substring(0, orderRef.current.name.indexOf(" "))
   );
+  // const firstName: string = orderToView.name.substring(
+  //   0,
+  //   orderToView.name.indexOf(" ")
+  // );
 
-  const [currentFirstName, setCurrentFirstName] = useState<string>(firstName);
-  const [currentLastName, setCurrentLastName] = useState<string>(lastName);
+  const lastNameRef = useRef(
+    orderRef.current.name.substring(
+      orderRef.current.name.indexOf(" ") + 1,
+      orderRef.current.name.length
+    )
+  );
+  // const lastName: string = orderToView.name.substring(
+  //   orderToView.name.indexOf(" ") + 1,
+  //   orderToView.name.length
+  // );
+
+  const [currentFirstName, setCurrentFirstName] = useState<string>(
+    firstNameRef.current
+  );
+  // const [currentFirstName, setCurrentFirstName] = useState<string>(firstName);
+  const [currentLastName, setCurrentLastName] = useState<string>(
+    lastNameRef.current
+  );
+  // const [currentLastName, setCurrentLastName] = useState<string>(lastName);
   const [editName, setEditName] = useState<boolean>(false);
   const [update, setUpdate] = useState<boolean>(false);
 
@@ -61,6 +78,31 @@ export default function CustomerNameDetails() {
     validateLastName(e);
   }
 
+  function firstNameFormat() {
+    console.log("fn: " + currentFirstName);
+    let fName: string;
+    if (orderRef.current.name !== "NA") {
+      fName =
+        currentFirstName.charAt(0).toUpperCase() +
+        currentFirstName.substring(1, currentFirstName.length).toLowerCase();
+      return `${fName}`;
+    } else {
+      return orderRef.current.name;
+    }
+  }
+  function lastNameFormat() {
+    console.log("fn: " + currentLastName);
+    let fName: string;
+    if (orderRef.current.name !== "NA") {
+      fName =
+        currentLastName.charAt(0).toUpperCase() +
+        currentLastName.substring(1, currentLastName.length).toLowerCase();
+      return `${fName}`;
+    } else {
+      return "";
+    }
+  }
+
   const customerNameRef = useRef<string>(orderToView.name);
 
   return (
@@ -68,21 +110,23 @@ export default function CustomerNameDetails() {
       <p className={classes.editableDetailsTitle}>Name:</p>
       <p>
         {`${
-          currentFirstName.charAt(0).toUpperCase() +
-          currentFirstName.substring(1, currentFirstName.length).toLowerCase()
-        }` +
-          " " +
-          `${
-            currentLastName.charAt(0).toUpperCase() +
-            currentLastName.substring(1, currentLastName.length).toLowerCase()
-          }`}
+          firstNameFormat() + " " + lastNameFormat()
+          // currentFirstName.charAt(0).toUpperCase() +
+          // currentFirstName.substring(1, currentFirstName.length).toLowerCase()
+          // }` +
+          //   " " +
+          //   `${
+          //     currentLastName.charAt(0).toUpperCase() +
+          //     currentLastName.substring(1, currentLastName.length).toLowerCase()
+        }`}
       </p>
       {editName && (
         <div>
           <input
             className={` 
                     ${firstNameValid ? classes.valid : classes.invalid}`}
-            placeholder={`${firstName}`}
+            placeholder={`${firstNameRef.current}`}
+            // placeholder={`${firstName}`}
             type="text"
             id="first_name"
             name="first_name"
@@ -97,7 +141,8 @@ export default function CustomerNameDetails() {
           <input
             className={` 
                     ${lastNameValid ? classes.valid : classes.invalid}`}
-            placeholder={`${lastName}`}
+            placeholder={`${lastNameRef.current}`}
+            // placeholder={`${lastName}`}
             type="text"
             id="last_name"
             name="last_name"

@@ -1,9 +1,13 @@
 "use server";
 
+import { cookies } from "next/headers";
+
 export async function GetAllOrders(token: string) {
   // console.log(token);
   let response;
   let data;
+  const cookieStore = await cookies();
+  const accessToken = cookieStore.get("accessToken");
   try {
     response = await fetch(
       "http://localhost:8080/api/owners-tools/orders/get-orders",
@@ -11,10 +15,14 @@ export async function GetAllOrders(token: string) {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
+          // Cookie: `${accessToken?.value}`,
         },
+        credentials: "include",
       }
     );
     data = await response.json();
+    // console.log(response.headers);
+    // console.log("headers: " + response.headers.getSetCookie());
     const orders = data;
     return orders;
   } catch (error) {
@@ -98,6 +106,7 @@ export async function AddToOrder(
       headers: {
         Authorization: `Bearer ${token}`,
       },
+      credentials: "include",
     });
     data = await response.json();
     // let message: string = "";
@@ -221,47 +230,23 @@ export async function GetOrdersByCustomerPhone(phone: string, token: string) {
   }
 }
 
-// work on this
-// export async function GetOrdersByCustomer(customer: string, token: string) {
-//   console.log(customer);
-
-//   const customerOrdersResponse: CustomerOrdersResponse = {
-//     status: 0,
-//     body: "",
-//   };
-
-//   // try {
-//   const response = await fetch(
-//     `http://localhost:8080/api/owners-tools/orders/get-order-customer/customer?customer=${customer}`,
-//     {
-//       method: "GET",
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//       },
-//     }
-//   );
-//   //
-//   const data = await response.json();
-//   const status = response.status;
-//   customerOrdersResponse.body = data;
-//   customerOrdersResponse.status = status;
-//   console.log(response.status);
-//   console.log(response.body);
-//   if (response.status === 200) {
-//     return customerOrdersResponse;
-//   } else {
-//     customerOrdersResponse.body = data.message;
-//     customerOrdersResponse.status = status;
-//     return customerOrdersResponse;
-//   }
-// }
-
 export async function GetOrderByID(orderUid: string, token: string) {
   console.log(orderUid);
 
   const orderResponse: OrderRequestResponse = {
     status: 0,
-    body: "",
+    body: {
+      orderUid: "",
+      customerUid: "",
+      name: "",
+      email: "",
+      phone: "",
+      orderItems: [],
+      orderTotal: 0,
+      created: "",
+      ready: "",
+      closed: "",
+    },
   };
 
   // try {
@@ -281,9 +266,11 @@ export async function GetOrderByID(orderUid: string, token: string) {
   orderResponse.status = status;
   console.log(response.status);
   console.log(response.body);
-  if (response.status === 200) {
+  if (status === 200) {
     return orderResponse;
+    // return data;
   } else {
+    // throw new Error(`${data.message}`);
     orderResponse.body = data.message;
     orderResponse.status = status;
     return orderResponse;

@@ -6,7 +6,7 @@
 
 .name {
   display: flex;
-  justify-self: center;
+  /* justify-self: center; */
   margin-bottom: 1rem;
   color: var(--attention-color);
 }
@@ -27,16 +27,23 @@
 }
 
 .customerOrders li {
-  display: flex;
-  /* flex-direction: row; */
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
   width: 100%;
-  justify-content: space-between;
+  justify-items: center;
+}
+
+.status {
+  display: flex;
+  justify-self: right;
 }
 
 .close {
   display: flex;
   position: sticky;
-  margin-top: 95%;
+  margin-top: 5%;
+  cursor: pointer;
+  font-weight: bold;
   justify-self: center;
   font-size: 2rem;
 }

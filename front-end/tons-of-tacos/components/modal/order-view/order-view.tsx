@@ -1,49 +1,44 @@
-import classes from "./order-view.module.css";
 import { useModalContext } from "@/context/modal-context";
 import Card from "../../ui/cards/card";
 import OrderItem from "../../owner-dashboard/order-item";
 import { useDisplayContext } from "@/context/display-context";
-import AddOrderItem from "../../owner-dashboard/add-order-item";
 import EditableDetails from "./editable-details";
-import { useEffect } from "react";
+import AddOrderItem from "../../ui/selectors/add-to-order/add-order-item";
+import classes from "./order-view.module.css";
 
 export default function OrderView() {
   const { orderToView } = useModalContext();
   const { setViewOrder } = useDisplayContext();
 
-  console.log("order to view: " + orderToView);
   const time: string = new Date(orderToView.created).toLocaleTimeString([], {
     timeStyle: "short",
   });
-
-  // order total should be a const 0 and then if order to View doesnt == undefined or a string the set the order total.
   const date: string = new Date(orderToView.created).toLocaleDateString();
-
-  const orderItemArr: OrderItem[] = orderToView.orderItems;
-
   const itemTitles: string[] = ["Item", "Quantity", "Size", "Item Total"];
-  // useEffect(() => {
-  // if (orderToView.orderTotal == undefined) {
-  //   orderToView.orderTotal = 0;
-  // }
-  console.log("order to view: " + orderToView);
-  // });
+
   return (
     <div className={classes.orderView}>
-      <Card expand={true}>
-        <div>
+      <div className={classes.heightControl}>
+        <Card expand={true}>
+          {orderToView.ready !== "no" && (
+            <h3 className={classes.editWarning}>
+              Order has been prepared and can not be edited!
+            </h3>
+          )}
           <div className={classes.orderDetails}>
             <div className={classes.uneditableDetails}>
               <p>Order Id:</p>
               <p>{orderToView.orderUid}</p>
+
               <p>Created:</p>
               <p>{`${time + " " + date}`}</p>
               <p>Total:</p>
+
               <p>${orderToView.orderTotal.toFixed(2)}</p>
             </div>
-            <EditableDetails />
           </div>
-          <div>
+          <EditableDetails />
+          <div className={classes.orderItemView}>
             <div>
               <ul className={classes.itemTitles}>
                 {itemTitles.map((title) => (
@@ -54,7 +49,7 @@ export default function OrderView() {
 
             <div className={classes.orderItems}>
               <ul>
-                {orderItemArr.map((orderItem) => (
+                {orderToView.orderItems?.map((orderItem) => (
                   <OrderItem
                     key={orderItem.orderItemId}
                     orderItem={orderItem}
@@ -62,18 +57,13 @@ export default function OrderView() {
                 ))}
               </ul>
             </div>
-            <AddOrderItem />
           </div>
+          <AddOrderItem />
           <button className={classes.close} onClick={() => setViewOrder(false)}>
             Close
           </button>
-          {orderToView.ready !== "no" && (
-            <h3 className={classes.editWarning}>
-              Order has been prepared and can not be edited!
-            </h3>
-          )}
-        </div>
-      </Card>
+        </Card>
+      </div>
     </div>
   );
 }

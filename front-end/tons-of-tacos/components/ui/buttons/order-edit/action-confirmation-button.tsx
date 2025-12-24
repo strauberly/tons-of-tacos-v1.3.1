@@ -9,54 +9,60 @@ import {
   GetAllOrders,
   GetOrderByID,
 } from "@/lib/owners-tools/owners-tools";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 
 export default function ActionConfirmationButton(props: { title: string }) {
   const { setShowConfirmation, setShowModal } = useDisplayContext();
   const { setOrders } = useOrdersContext();
   const { login } = useOwnerContext();
-  const { menuItem, quantity, orderItem, itemSize, setItemSize, customer } =
-    useEditOrderContext();
+  const {
+    menuItem,
+    quantity,
+    orderItem,
+    itemSize,
+    setItemSize,
+    customer,
+    setOrderChanged,
+  } = useEditOrderContext();
   const { orderToView, setModal, setOrderToView } = useModalContext();
 
   const orders = useRef<Order[]>([]);
-
-  const order = useRef<Order>({
-    orderUid: "",
-    name: "",
-    email: "",
-    phone: "",
-    orderItems: [],
-    orderTotal: 0,
-    created: "",
-    ready: "",
-    closed: "",
-  });
-
   const action = useRef<string>("");
-
   const orderEdit: OrderEdit = {
     orderUid: orderToView.orderUid,
     customer: customer,
     menuItemId: menuItem.id,
     quantity: quantity,
     itemSize: itemSize,
-    login: login.token,
+    login: login.accessToken,
     orderItem: orderItem,
   };
 
+  const orderReqResRef = useRef<OrderRequestResponse>({
+    status: 0,
+    body: "",
+  });
+
   return (
     <button
-      onClick={async () => [
-        ((action.current = await ExecuteConfirm(props.title, orderEdit)),
-        setShowConfirmation(false)),
-        setModal(action.current),
-        setShowModal(true),
-        setItemSize("na"),
-        (orders.current = await GetAllOrders(login.token)),
-        setOrders(orders.current),
-        setOrderToView(await GetOrderByID(orderToView.orderUid, login.token)),
-      ]}
+      onClick={async () => {
+        action.current = await ExecuteConfirm(props.title, orderEdit);
+        setShowConfirmation(false);
+        setModal(action.current);
+        setShowModal(true);
+        setItemSize("NA");
+        orders.current = await GetAllOrders(login.accessToken);
+        setOrders(orders.current);
+        orderReqResRef.current = await GetOrderByID(
+          orderToView.orderUid,
+          login.accessToken
+        );
+
+        if (orderReqResRef.current.status === 200) {
+          setOrderToView(orderReqResRef.current.body as Order);
+        }
+        setOrderChanged(true);
+      }}
     >
       yes
     </button>

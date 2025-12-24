@@ -19,19 +19,24 @@ export default async function CategoriesSource() {
 
 export async function MenuItemsSource(category: string) {
   let data;
-  try {
-    const response = await fetch(
-      `http://localhost:8080/api/menu/category?category=${category}`
-    );
-    data = await response.json();
-    const menuItems: MenuItem[] = data;
-
+  let status;
+  // try {
+  const response = await fetch(
+    `http://localhost:8080/api/menu/category?category=${category}`
+  );
+  data = await response.json();
+  status = response.status;
+  const menuItems: MenuItem[] = data;
+  if (status !== 200) {
+    throw new Error(`${data.message}`);
+  } else {
     console.log(menuItems);
     return menuItems;
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  } catch (error) {
-    throw new Error("Sorry, we're having issues bringing you our menu");
   }
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // } catch (error) {
+  //   throw new Error("Sorry, we're having issues bringing you our menu");
+  // }
 }
 
 // get menu item

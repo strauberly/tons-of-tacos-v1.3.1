@@ -34,9 +34,16 @@
   .ownerLogin {
     position: absolute;
     flex-direction: column;
-    left: 30%;
+    /* left: 30%; */
+    left: 0;
+    right: 0;
+    margin: auto;
     top: 160%;
     align-items: center;
+    background-color: rgba(12, 4, 36, 0.7);
+    border: solid 2px var(--border-color);
+    height: 65vh;
+    padding: 2rem;
   }
 
   .ownerLogin input,
@@ -47,7 +54,10 @@
 
 @media (max-width: 800px) {
   .ownerLogin {
-    left: 15%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    /* left: 15%; */
   }
 
   .ownerLogin input,

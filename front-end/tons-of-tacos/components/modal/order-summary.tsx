@@ -26,9 +26,10 @@ export default function OrderSummary(props: { order: Order }) {
           (status === "ready" && classes.ready)
         }`}
       >
+        <p>{props.order.name}</p>
         <p>{props.order.orderUid}</p>
         <p>{`${date}`}</p>
-        <p>{status}</p>
+        <p className={classes.status}>{status}</p>
         <ViewOrderButton order={props.order} />
       </li>
     </div>

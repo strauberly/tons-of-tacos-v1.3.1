@@ -1,0 +1,153 @@
+.titles {
+  display: flex;
+  justify-self: center;
+  gap: 3.75vw;
+  align-items: last baseline;
+  margin-right: 1rem;
+}
+
+.titles button {
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.titles h3 {
+  font-family: var(--inter-font);
+}
+
+.values {
+  margin-top: 1rem;
+  display: flex;
+  justify-self: center;
+  gap: 2.8vw;
+  align-items: center;
+  margin-right: 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1rem;
+}
+
+/* ---------------------------- */
+
+.addItemToOrder {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+}
+.tail {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+
+  padding-bottom: 0.5rem;
+  border-bottom: solid var(--border-color) 2px;
+}
+
+.tail button {
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.addItemToOrder input {
+  width: 6ch;
+}
+.addItemToOrder input:focus {
+  border-color: none;
+}
+
+.decrement {
+  rotate: 90deg;
+}
+
+.increment {
+  rotate: -90deg;
+}
+
+.addItemToOrder input,
+.addItemToOrder textarea {
+  padding: 0.25vw;
+  background-color: transparent;
+  color: var(--user-selected-color);
+  text-align: center;
+}
+
+.valid {
+  border: 3px solid var(--border-color);
+  border-radius: 3px;
+}
+.invalid {
+  border: 3px solid var(--attention-color);
+  border-radius: 3px;
+}
+
+.sizeWarning {
+  grid-column-start: 3;
+  grid-row-start: 2;
+  margin-left: 2rem;
+  margin-top: 0.5rem;
+  color: var(--attention-color);
+}
+
+.total {
+  grid-column-start: 4;
+}
+
+.quantity {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-left: 0.5rem;
+}
+
+.quantity input,
+.quantity textarea {
+  border: 3px solid var(--border-color);
+  border-radius: 3px;
+}
+
+.addItemToOrder button {
+  display: flex;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: bold;
+  justify-self: center;
+}
+
+.addItemButton {
+  display: flex;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  justify-self: center;
+}
+
+@media (max-width: 1380px) {
+  .addItemToOrder {
+    display: flex;
+    flex-direction: row;
+
+    /* padding-bottom: 0.5rem;
+    border-bottom: solid var(--border-color) 2px; */
+  }
+  .titles {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    gap: 3.75vw;
+    align-items: last baseline;
+    margin-right: 1rem;
+  }
+  .values {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    gap: 2.8vw;
+    align-items: center;
+    margin-right: 1rem;
+    padding-left: 1.5rem;
+    padding-right: 1rem;
+  }
+}
