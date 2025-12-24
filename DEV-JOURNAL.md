@@ -2,6 +2,15 @@
 
 ---
 
+-- 24 Dec 2025 --
+
+- Merry Christmas!
+
+  - Working on rearranging a few components in order item to more closely match cart item.
+  - Made changes to quantity selector for it to properly not an order item or cart item as edited dictating whether the update button is available.
+
+---
+
 -- 23 Dec 2025 --
 
 - Just about there for having the size selector order item with similar functionality and warnings as throughout the application allowing us to use the same component 4 different times. So thats fun. Needs some more testing and refinement.
