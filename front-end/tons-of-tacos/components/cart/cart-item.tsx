@@ -186,7 +186,7 @@ export default function CartItem(props: {
       </div>
 
       <div className={classes.actionButtonGroup}>
-        {edited && canUpdate && (
+        {edited && (
           // {canUpdate && (
           <Update
             cartItemId={props.id}
