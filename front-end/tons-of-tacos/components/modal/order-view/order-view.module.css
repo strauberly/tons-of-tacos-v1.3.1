@@ -115,15 +115,16 @@
 
 .orderItems ul {
   justify-content: center;
-  max-height: 8rem;
-  overflow-y: scroll;
+  /* max-height: 8rem; */
+  /* overflow-y: scroll; */
   padding-bottom: 1rem;
   row-gap: 1rem;
 }
 
 .orderItems ul li {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  /* grid-template-columns: repeat(5, 1fr); */
   /* grid-template-columns: repeat(5, 16.66%); */
   /* grid-template-columns: repeat(6, 16.66%); */
   padding-top: 1rem;
@@ -136,15 +137,19 @@
   justify-self: left;
   margin-left: 1rem;
 }
+.orderItems ul li p:nth-child(3) {
+  color: var(--user-selected-color);
+}
 .orderItems ul li p:nth-child(5) {
   /* justify-self: left; */
-  margin-left: 1rem;
+  margin-left: 3rem;
 }
 
 .itemTitles {
   display: grid;
   /* grid-template-columns: repeat(5, 1fr); */
-  grid-template-columns: repeat(5, 18.66%);
+  grid-template-columns: repeat(4, 1fr);
+  /* grid-template-columns: repeat(5, 18.66%); */
   /* grid-template-columns: repeat(6, 16.66%); */
   padding-top: 1rem;
   width: 100%;
