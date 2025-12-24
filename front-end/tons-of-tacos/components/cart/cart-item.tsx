@@ -81,7 +81,7 @@ export default function CartItem(props: {
     // console.log("props: " + props.size);
   }
 
-  const [sizes, setSize] = useState<string[]>([]);
+  const [sizes] = useState<string[]>([]);
   const sizeRef = useRef<string[]>([]);
   useEffect(() => {
     cart.forEach((cartItem) => {
@@ -89,7 +89,9 @@ export default function CartItem(props: {
         sizeRef.current.push(cartItem.size);
       }
       sizeRef.current.forEach((size) => {
-        if (cartItem.itemName === props.itemName && size === newSize) {
+        if (props.size === "NA") {
+          setShowSizeError(false);
+        } else if (cartItem.itemName === props.itemName && size === newSize) {
           setSizeError(
             `${
               props.itemName + " " + newSize
