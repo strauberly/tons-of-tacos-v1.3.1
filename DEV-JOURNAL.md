@@ -8,6 +8,8 @@
 
   - Working on rearranging a few components in order item to more closely match cart item.
   - Made changes to quantity selector for it to properly not an order item or cart item as edited dictating whether the update button is available.
+  - Styling alterations for order items more closely mirroring cart items and adding to familiarity for user.
+  - Styling changes to card background makes it more modular.
 
 ---
 
