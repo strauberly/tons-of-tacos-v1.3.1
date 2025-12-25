@@ -7,7 +7,7 @@ import SizeSelector from "../ui/selectors/size-selector/size-selector";
 import QuantitySelector from "../ui/selectors/quantity-selector/quantity-selector";
 import { calcItemTotal } from "@/lib/general/multi-use";
 // import classes from "./order-item.module.css";
-import classes from "./order-item.module.css";
+import classes from "../owner-dashboard/order-item.module.css";
 
 export default function OrderItem(props: { orderItem: OrderItem }) {
   const { setOrderItem, setQuantity, quantity } = useEditOrderContext();
@@ -132,7 +132,6 @@ export default function OrderItem(props: { orderItem: OrderItem }) {
 
   return (
     <div>
-      <p>{`${edited}`}</p>
       <li>
         <p>{`${props.orderItem.itemName}`}</p>
         {canEdit && (
@@ -149,11 +148,11 @@ export default function OrderItem(props: { orderItem: OrderItem }) {
               <p className={classes.size}> {props.orderItem.size}</p>
             )}
             {!canEdit && props.orderItem.size !== "NA" && (
-              <p className={classes.size}>{props.orderItem.size}</p>
+              <p>{props.orderItem.size}</p>
             )}
 
             {canEdit === true && props.orderItem.size === "NA" && (
-              <p className={classes.size}>{props.orderItem.size}</p>
+              <p>{props.orderItem.size}</p>
             )}
 
             {props.orderItem.size.toUpperCase() !== "NA" && canEdit && (
@@ -180,54 +179,57 @@ export default function OrderItem(props: { orderItem: OrderItem }) {
         <p className={classes.sizeWarning}>{sizeError}</p>
       )}
       {/* rename */}
-      <div className={classes.alter}>
-        {edited && (
-          // <div className={classes.update}>
-          <UpdateOrderItemButton
-            orderItem={props.orderItem}
-            newQuantity={newQuantity.current}
-            newSize={newSize}
-            setEdited={setEdited}
-            setCanEdit={setCanEdit}
-            setNewSize={setNewSize}
-          />
-          // </div>
-        )}
-        {canEdit && (
-          <button
-            onClick={() => [
-              setCanEdit(!canEdit),
-              (newQuantity.current = props.orderItem.quantity),
-              setQuantity(newQuantity.current),
-              setNewSize("NA"),
-              setNewPrice(newPrice),
-              setShowSizeError(false),
-              setOrderItem(newOrderItem),
-            ]}
-          >
-            Cancel
-          </button>
-        )}
-        {!canEdit && (
-          <button
-            className={classes.button}
-            disabled={orderToView.ready !== "no" || orderToView.closed !== "no"}
-            onClick={() => [
-              setCanEdit(!canEdit),
-              setOrderItem(props.orderItem),
-              setNewPrice(newPrice),
-              setQuantity(props.orderItem.quantity),
-            ]}
-          >
-            Edit
-          </button>
-        )}
-        {!canEdit && (
-          <RemoveFromOrderButton
-            orderItem={props.orderItem}
-            orderToView={orderToView}
-          />
-        )}
+      <div className={classes.actionButtonGroup}>
+        <div className={classes.update}>
+          {edited && (
+            <UpdateOrderItemButton
+              orderItem={props.orderItem}
+              newQuantity={newQuantity.current}
+              newSize={newSize}
+              setEdited={setEdited}
+              setCanEdit={setCanEdit}
+              setNewSize={setNewSize}
+            />
+          )}
+          {canEdit && (
+            <button
+              onClick={() => [
+                setCanEdit(!canEdit),
+                (newQuantity.current = props.orderItem.quantity),
+                setQuantity(newQuantity.current),
+                setNewSize("NA"),
+                setNewPrice(newPrice),
+                setShowSizeError(false),
+                setOrderItem(newOrderItem),
+                setEdited(false),
+              ]}
+            >
+              Cancel
+            </button>
+          )}
+          {!canEdit && (
+            <button
+              className={classes.button}
+              disabled={
+                orderToView.ready !== "no" || orderToView.closed !== "no"
+              }
+              onClick={() => [
+                setCanEdit(!canEdit),
+                setOrderItem(props.orderItem),
+                setNewPrice(newPrice),
+                setQuantity(props.orderItem.quantity),
+              ]}
+            >
+              Edit
+            </button>
+          )}
+          {!canEdit && (
+            <RemoveFromOrderButton
+              orderItem={props.orderItem}
+              orderToView={orderToView}
+            />
+          )}
+        </div>
       </div>
     </div>
   );

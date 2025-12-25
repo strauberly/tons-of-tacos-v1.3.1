@@ -42,9 +42,9 @@
   font-weight: bold;
 }
 
-.alter {
+.actionButtonGroup {
   display: flex;
-  /* justify-self: left; */
+  justify-self: center;
   /* padding-left: 3rem; */
   gap: 2rem;
   /* margin-left: 1rem; */
