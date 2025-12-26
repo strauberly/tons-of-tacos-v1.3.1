@@ -201,6 +201,7 @@ export async function StoreLogin(login: OwnerLogin) {
     httpOnly: true,
     sameSite: "strict",
     secure: true,
+    path: "/owners-tools",
   });
 
   (await cookies()).set({
@@ -209,6 +210,7 @@ export async function StoreLogin(login: OwnerLogin) {
     httpOnly: true,
     sameSite: "strict",
     secure: true,
+    path: "/owners-tools",
   });
   (await cookies()).set({
     name: "ownerName",
@@ -216,6 +218,7 @@ export async function StoreLogin(login: OwnerLogin) {
     httpOnly: true,
     sameSite: "strict",
     secure: true,
+    path: "/owners-tools",
   });
 }
 
@@ -281,10 +284,42 @@ export async function OwnerLogout(accessToken: string) {
 // maybe rest to accept a list of cookies to delete
 
 export async function DeleteCookies() {
-  const cookieStore = cookies();
-  (await cookieStore)
-    .getAll()
-    .forEach(async (cookie) => (await cookieStore).delete(`${cookie.name}`));
+  // const cookieStore = cookies();
+  // (await cookieStore)
+  // .getAll()
+  // .forEach(async (cookie) => (await cookieStore)
+  (await cookies()).set({
+    name: "accessToken",
+    value: "",
+    httpOnly: true,
+    sameSite: "strict",
+    secure: true,
+    expires: new Date(0),
+    path: "/owners-tools",
+  });
+  (await cookies()).set({
+    name: "refreshToken",
+    value: "",
+    httpOnly: true,
+    sameSite: "strict",
+    secure: true,
+    expires: new Date(0),
+    path: "/owners-tools",
+  });
+  (await cookies()).set({
+    name: "ownerName",
+    value: "",
+    httpOnly: true,
+    sameSite: "strict",
+    secure: true,
+    expires: new Date(0),
+    path: "/owners-tools",
+  });
+  // );
+  // const cookieStore = cookies();
+  // (await cookieStore)
+  //   .getAll()
+  //   .forEach(async (cookie) => (await cookieStore).delete(`${cookie.name}`));
 }
 
 export async function nextCookiePresent() {
