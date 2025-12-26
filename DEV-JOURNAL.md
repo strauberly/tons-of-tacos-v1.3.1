@@ -2,6 +2,17 @@
 
 ---
 
+-- 25 Dec 2025 --
+
+- Merry Christmas!
+
+  - Started morning planning styling refactors and got distracted with multi tab possibilities while looking at the styling of a component used in both the customer side of the application and the owner side.
+  - This resulted in a bit of work and analysis in our cookie implementations and now allows for multiple tabs to be implemented as well as some functionality with multiple windows for the owner. Kind of neat.
+    - Cookies are now path specific and in order to delete the cookies we are re-setting them with an immediate expiration and an empty value which triggers browser to delete.
+    - Also rectifies what may have ended up as application deleting all cookies in the browser instead of targeting specific to this application.
+
+---
+
 -- 24 Dec 2025 --
 
 - Merry Christmas!
