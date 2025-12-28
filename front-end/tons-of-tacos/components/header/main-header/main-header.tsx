@@ -44,7 +44,11 @@ export default function MainHeader() {
     <>
       <div className={classes.headerAlignment}>
         <header className={classes.header}>
-          <Link className={classes.home} href="/">
+          <Link
+            className={classes.home}
+            onNavigate={() => [DeleteCookies, setLoggedIn(false)]}
+            href="/"
+          >
             Tons Of Tacos
           </Link>
 
