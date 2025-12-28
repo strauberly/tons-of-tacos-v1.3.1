@@ -14,6 +14,7 @@ export default function SizeSelector(props: {
   submitted: boolean;
   canEdit: boolean;
   setCanEdit: (setCanEdit: boolean) => void;
+  setReadyToAdd: (setReadyToAdd: boolean) => void;
 }) {
   /*
     Takes a size(string) from either a menu item or order item and if appropriate displays the selector.
@@ -95,17 +96,21 @@ export default function SizeSelector(props: {
       props.setEdited(true);
     }
     const element = document.getElementById("size") as HTMLInputElement;
-    // if (
-    //   // (props.submitted && !props.canEdit) ||
-    //   !props.submitted &&
-    //   props.canEdit
-    // ) {
-    //   element.value = "";
-    //   // props.setCanEdit(true);
-    //   // props.setNewSize(size);
-    // }
-
+    if (props.submitted === true) {
+      element.value = "NA";
+      sizeRef.current = "NA";
+    }
     if (size !== " " && props.submitted === false && props.canEdit === false) {
+      // if (
+      //   // (props.submitted && !props.canEdit) ||
+      //   !props.submitted &&
+      //   props.canEdit
+      // ) {
+      //   element.value = "";
+      //   // props.setCanEdit(true);
+      //   // props.setNewSize(size);
+      // }
+
       setSize(" ");
       console.log("hi");
     }
