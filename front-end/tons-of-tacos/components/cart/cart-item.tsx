@@ -34,6 +34,7 @@ export default function CartItem(props: {
   const [canUpdate, setCanUpdate] = useState<boolean>(false);
   const [showSizeError, setShowSizeError] = useState<boolean>(false);
   const [sizeError, setSizeError] = useState<string>("hi");
+  const [readyToAdd, setReadyToAdd] = useState<boolean>(false);
 
   const newQuantity = useRef<number>(quantity);
   const oldSize = useRef<string>(props.size);
@@ -89,13 +90,20 @@ export default function CartItem(props: {
         sizeRef.current.push(cartItem.size);
       }
       sizeRef.current.forEach((size) => {
-        if (props.size === "NA") {
+        if (
+          props.size === "NA" ||
+          (size !== props.size && quantity !== props.itemQuantity)
+        ) {
           setShowSizeError(false);
-        } else if (cartItem.itemName === props.itemName && size === newSize) {
+        } else if (
+          cartItem.itemName === props.itemName &&
+          size === newSize &&
+          edited
+        ) {
           setSizeError(
             `${
-              props.itemName + " " + newSize
-            } is already in cart. Select a different size or item.`
+              props.itemName + " " + newSize + " x " + props.itemQuantity
+            } is already in cart. Select a different size, item, quantity, or cancel.`
           );
           setShowSizeError(true);
           setCanUpdate(false);
@@ -135,6 +143,8 @@ export default function CartItem(props: {
     canUpdate,
     selectedSize,
     sizes,
+    props.itemQuantity,
+    quantity,
   ]);
 
   return (
@@ -164,6 +174,7 @@ export default function CartItem(props: {
           <p className={classes.size}>{props.size}</p>
         )}
         {canEdit && props.size !== "NA" && (
+          // address ready to add and other bugs
           <SizeSelector
             itemSize={props.size}
             setShowSizeError={setShowSizeError}
@@ -175,6 +186,7 @@ export default function CartItem(props: {
             submitted={submitted}
             canEdit={canEdit}
             setCanEdit={setCanEdit}
+            setReadyToAdd={setReadyToAdd}
           />
         )}
         <p>${newPrice.toFixed(2)}</p>
@@ -186,7 +198,7 @@ export default function CartItem(props: {
       </div>
 
       <div className={classes.actionButtonGroup}>
-        {edited && (
+        {edited && !showSizeError && (
           // {canUpdate && (
           <Update
             cartItemId={props.id}
@@ -218,7 +230,11 @@ export default function CartItem(props: {
             Cancel
           </button>
         )}
-        {!canEdit && <button onClick={() => [setCanEdit(true)]}>Edit</button>}
+        {!canEdit && (
+          <button onClick={() => [setCanEdit(true), setShowSizeError(false)]}>
+            Edit
+          </button>
+        )}
         <RemoveFromCart id={props.id} cartItemQuantity={props.itemQuantity} />
       </div>
     </div>
