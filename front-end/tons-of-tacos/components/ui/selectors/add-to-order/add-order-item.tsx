@@ -182,7 +182,9 @@ export default function AddOrderItem() {
         //   }
         // });
       } else {
-        setReadyToAdd(true);
+        if (item.itemName !== "") {
+          setReadyToAdd(true);
+        }
       }
     });
 
@@ -286,7 +288,7 @@ export default function AddOrderItem() {
         {showSizeError === true && (
           <p className={classes.sizeWarning}>{sizeError}</p>
         )}
-        <div className={classes.addItemButton}>
+        <div className={classes.addItemButtons}>
           {readyToAdd && (
             <AddToOrderButton
               orderUid={orderToView.orderUid}
@@ -301,6 +303,10 @@ export default function AddOrderItem() {
               setSizeValid={setSizeValid}
             />
           )}
+          <button onClick={() => [reset("cancelButton"), setReadyToAdd(false)]}>
+            {" "}
+            Cancel
+          </button>
         </div>
 
         {itemSelector && (

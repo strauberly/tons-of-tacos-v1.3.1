@@ -2,6 +2,14 @@
 
 ---
 
+-- 27 Dec 2025 --
+
+- Added cancel button to add to order component. Closes selector hides add to order button resets item to blank.
+- Logic adjustment to so that add item button is only displayed if item name is not blank preventing an essentially null item from being added.
+  -Added to main header link deleting cookies and logging out if heading to main page.
+
+---
+
 -- 25 Dec 2025 --
 
 - Merry Christmas!
