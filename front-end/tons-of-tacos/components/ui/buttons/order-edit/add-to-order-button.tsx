@@ -22,6 +22,7 @@ export default function AddToOrderButton(props: {
   setReadyToAdd: (readyToAdd: boolean) => void;
   reset: (component: string) => void;
   setSizeValid: (sizeValid: boolean) => void;
+  setSubmitted: (submitted: boolean) => void;
 }) {
   const { setShowConfirmation } = useDisplayContext();
   const { setConfirmationTitle } = useModalContext();
@@ -147,6 +148,7 @@ export default function AddToOrderButton(props: {
             props.size !== "NA")
         }
         onClick={async () => {
+          props.setSubmitted(true);
           if (itemInOrder.current === true) {
             itemInOrder.current = false;
             props.reset("addButton");

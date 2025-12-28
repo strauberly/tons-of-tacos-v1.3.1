@@ -127,8 +127,9 @@ export default function AddOrderItem() {
     });
     setItemSelector(showOrNo(component));
     setSize("NA");
-    setSubmitted(true);
+    // setSubmitted(true);
     setShowSizeError(false);
+    setReadyToAdd(false);
     console.log("reset hit");
   }
 
@@ -200,9 +201,9 @@ export default function AddOrderItem() {
       const adjPrice = (sizeSurcharge + item?.unitPrice) * quantity;
       return adjPrice;
     }
-    if (submitted) {
-      setSubmitted(!submitted);
-    }
+    // if (submitted) {
+    //   setSubmitted(!submitted);
+    // }
     setPrice(calcPrice());
     setItemName(item.itemName);
   }, [
@@ -232,7 +233,7 @@ export default function AddOrderItem() {
               (!ownerOrder && orderToView.ready !== "no")
             }
             // onClick={() => setItemSelector(itemSelector ? false : true)}
-            onClick={() => reset("selectButton")}
+            onClick={() => [reset("selectButton"), setSubmitted(false)]}
           >
             Select Item
           </button>
@@ -279,6 +280,7 @@ export default function AddOrderItem() {
             submitted={submitted}
             canEdit={canEdit}
             setCanEdit={setCanEdit}
+            setReadyToAdd={setReadyToAdd}
           />
 
           <p className={classes.total}>${price.toFixed(2)}</p>
@@ -301,9 +303,16 @@ export default function AddOrderItem() {
               setReadyToAdd={setReadyToAdd}
               reset={reset}
               setSizeValid={setSizeValid}
+              setSubmitted={setSubmitted}
             />
           )}
-          <button onClick={() => [reset("cancelButton"), setReadyToAdd(false)]}>
+          <button
+            onClick={() => [
+              reset("cancelButton"),
+              setReadyToAdd(false),
+              setSubmitted(true),
+            ]}
+          >
             {" "}
             Cancel
           </button>
