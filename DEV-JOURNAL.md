@@ -2,6 +2,14 @@
 
 ---
 
+-- 28 Dec 2025 --
+
+- Noticed a glitch in size selector for components relating to owners tools. If an item had a selectable size and added it was leaving being the size selector with the last item's size instead of the default "NA" state as desired.
+- Current fix is relying on submitted state to dictate returning selector to default state.
+- Bug hunt and rectification continues. Almost there.
+
+---
+
 -- 27 Dec 2025 --
 
 - Added cancel button to add to order component. Closes selector hides add to order button resets item to blank.
