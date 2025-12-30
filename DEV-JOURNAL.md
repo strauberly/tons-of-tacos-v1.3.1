@@ -2,7 +2,14 @@
 
 ---
 
--- 29 Dec 2025 --
+-- 30 Dec 2025 --
+
+- alterations made so that error message for editing a cart item appears under correct circumstances.
+
+  - Error displayed if there is already an item in the cart with the size the owner selected for the item to update and update button is not available. Effectively preventing a duplicate item in the cart.
+  - If items to be edited reenter original state message is displayed and no update button.
+
+    -- 29 Dec 2025 --
 
 -Still fine tuning the logic for an item being updated in the cart in order to prevent a duplicate item. Think its about there. Needs further testing and for the error messages to correlate.
 

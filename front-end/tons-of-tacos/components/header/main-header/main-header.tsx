@@ -16,7 +16,7 @@ import {
   GetLogin,
   nextCookiePresent,
 } from "@/lib/ownerLogin/owner-login-server";
-import { CartContextProvider } from "@/context/cart-context";
+
 // import { cookies } from "next/headers";
 
 export default function MainHeader() {
