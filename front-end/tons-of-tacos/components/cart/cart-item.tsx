@@ -86,8 +86,11 @@ export default function CartItem(props: {
   const sizeRef = useRef<string[]>([]);
   useEffect(() => {
     cart.forEach((cartItem) => {
-      if (cartItem.itemName === props.itemName) {
-        sizeRef.current.push(cartItem.size);
+      if (
+        cartItem.itemName === props.itemName &&
+        !sizeRef.current.some((size) => size === cartItem.size)
+      ) {
+        sizeRef.current.splice(0, 0, cartItem.size);
       }
       sizeRef.current.forEach((size) => {
         if (
@@ -106,12 +109,24 @@ export default function CartItem(props: {
             } is already in cart. Select a different size, item, quantity, or cancel.`
           );
           setShowSizeError(true);
-          setCanUpdate(false);
+          // setCanUpdate(false);
           // } else {
           //   setShowSizeError(false);
         }
       });
     });
+
+    if (props.size === newSize && quantity != props.itemQuantity) {
+      setCanUpdate(true);
+    } else if (!sizeRef.current.some((size) => size === newSize)) {
+      setCanUpdate(true);
+    } else if (
+      (sizeRef.current.some((size) => size === newSize) &&
+        quantity != props.itemQuantity) ||
+      quantity == props.itemQuantity
+    ) {
+      setCanUpdate(false);
+    }
     // const sizes: string[] = [];
     // cart.forEach((cartItem) => {
     //   if (cartItem.itemName === props.itemName) {
@@ -119,10 +134,30 @@ export default function CartItem(props: {
     //   }
     // });
 
+    // if (
+    //   sizeRef.current.some((size) => size === newSize) &&
+    //   quantity == props.itemQuantity
+    // ) {
+    //   setCanUpdate(false);
+    // } else if (
+    //   sizeRef.current.some((size) => size === newSize) &&
+    //   quantity != props.itemQuantity
+    // ) {
+    //   setCanUpdate(true);
+    // }
+
+    // if (quantity !== props.itemQuantity) {
+    //   setCanUpdate(true);
+    // else {
+    //   setCanUpdate(false);
+    // }
+
+    // if()
+
     console.log("found it: " + sizes.some((size) => size === newSize));
     console.log("itemSizes:" + sizes);
 
-    setCanUpdate(!sizeRef.current.some((size) => size === newSize));
+    // setCanUpdate(!sizeRef.current.some((size) => size === newSize));
     if (edited) {
       setNewPrice(
         calcItemTotal(basePrice, props.size, newSize, newQuantity.current)
@@ -130,6 +165,7 @@ export default function CartItem(props: {
     } else {
       setNewPrice(Number(props.itemPrice));
     }
+
     // setNewSize(props.size);
   }, [
     edited,
@@ -149,7 +185,8 @@ export default function CartItem(props: {
 
   return (
     <div className={classes.wholeItem}>
-      <p>{`${sizes}`}</p>
+      <p>{`${sizeRef.current}`}</p>
+      <p>{`${newQuantity.current != props.itemQuantity}`}</p>
       <li className={ownerOrder ? classes.ownerOrderItem : classes.item}>
         <p className={classes.itemName}>{props.itemName}</p>
         {!canEdit && <p>{props.itemQuantity}</p>}
@@ -198,8 +235,8 @@ export default function CartItem(props: {
       </div>
 
       <div className={classes.actionButtonGroup}>
-        {edited && !showSizeError && (
-          // {canUpdate && (
+        {/* {edited && !showSizeError && ( */}
+        {canUpdate && (
           <Update
             cartItemId={props.id}
             updatedItemQuantity={quantity}
