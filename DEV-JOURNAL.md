@@ -2,6 +2,10 @@
 
 ---
 
+-- 29 Dec 2025 --
+
+-Still fine tuning the logic for an item being updated in the cart in order to prevent a duplicate item. Think its about there. Needs further testing and for the error messages to correlate.
+
 -- 28 Dec 2025 --
 
 - Noticed a glitch in size selector for components relating to owners tools. If an item had a selectable size and added it was leaving being the size selector with the last item's size instead of the default "NA" state as desired.
