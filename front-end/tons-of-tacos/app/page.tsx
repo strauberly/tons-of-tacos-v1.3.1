@@ -14,12 +14,12 @@ export default function Home() {
   });
 
   return (
-    <Suspense fallback={<Loading />}>
-      <FadeOnLoad>
-        <main className={classes.page}>
+    <main className={classes.page}>
+      <Suspense fallback={<Loading />}>
+        <FadeOnLoad>
           <Splash />
-        </main>
-      </FadeOnLoad>
-    </Suspense>
+        </FadeOnLoad>
+      </Suspense>
+    </main>
   );
 }

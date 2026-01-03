@@ -198,7 +198,7 @@ export async function SendOrder(
   
   $${orderTotal.toFixed(
     2
-  )} is your total and we accept cash, credit, debit, and crypto.
+  )} is your total and we accept cash, credit, debit, and crypto at the truck.
   
   Your confirmation is ${orderNumber}  and your food should be ready in about 15 minutes.
   

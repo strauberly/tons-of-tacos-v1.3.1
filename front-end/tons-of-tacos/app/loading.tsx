@@ -1,5 +1,4 @@
 import classes from "./loading.module.css";
-
 import Image from "next/image";
 import logoImg from "@/public/images/logos/bird-logo-rendersa.svg";
 import logoRender from "@/public/images/logos/bird-logo-rendersb.svg";

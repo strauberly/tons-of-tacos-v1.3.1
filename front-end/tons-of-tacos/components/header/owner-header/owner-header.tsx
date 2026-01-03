@@ -1,5 +1,5 @@
 import { useOwnerContext } from "@/context/owner-context";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import classes from "./owner-header.module.css";
 import LogoutButton from "../../ui/buttons/logout/logout";
 
@@ -25,32 +25,56 @@ export default function OwnerHeader() {
     day: "numeric",
   };
 
-  const [, payloadBase64] = login.accessToken.split(".");
-  const decodedPayload = Buffer.from(payloadBase64, "base64").toString("utf-8");
-  const subject = JSON.parse(decodedPayload);
+  // const [, payloadBase64] = login.accessToken.split(".");
+  // const decodedPayload = Buffer.from(payloadBase64, "base64").toString("utf-8");
+  // const subject = JSON.parse(decodedPayload);
+
+  console.log(
+    "what it is: " + `${login} ` + `${Object.keys(login).length === 0}`
+  );
 
   useEffect(() => {
-    const exp = subject.exp * 1000;
+    // const [, payloadBase64] = login.accessToken.split(".");
+    // const decodedPayload = Buffer.from(payloadBase64, "base64").toString(
+    //   "utf-8"
+    // );
+    // const subject = JSON.parse(decodedPayload);
 
-    const loginDate = new Date();
-    const hours = loginDate.getHours();
+    // const exp = subject.exp * 1000;
+
+    // const loginDate = new Date();
+    // const hours = loginDate.getHours();
 
     async function Refresher() {
-      console.log(hours);
-      console.log(exp);
-      console.log(Date.now);
-      console.log(exp < Date.now());
+      if (Object.keys(login).length !== 0) {
+        const [, payloadBase64] = login.accessToken.split(".");
+        const decodedPayload = Buffer.from(payloadBase64, "base64").toString(
+          "utf-8"
+        );
+        const subject = JSON.parse(decodedPayload);
 
-      if (exp > Date.now() && hours > 22) {
-        OwnerLogout(login.accessToken);
-        DeleteCookies();
+        const exp = subject.exp * 1000;
+
+        const loginDate = new Date();
+        const hours = loginDate.getHours();
+        console.log(hours);
+        console.log(exp);
+        console.log(Date.now);
+        console.log(exp < Date.now());
+
+        if (exp > Date.now() && hours > 22) {
+          OwnerLogout(login.accessToken);
+          DeleteCookies();
+          setLoggedIn(false);
+        } else if (exp - Number(Date.now()) < 60000) {
+          StoreLogin(await Refresh());
+          setLogin(await GetLogin());
+          setOrders(await GetAllOrders(login.accessToken));
+        }
+        setDate(new Date());
+      } else {
         setLoggedIn(false);
-      } else if (exp - Number(Date.now()) < 60000) {
-        StoreLogin(await Refresh());
-        setLogin(await GetLogin());
-        setOrders(await GetAllOrders(login.accessToken));
       }
-      setDate(new Date());
     }
 
     const tokenRefresh = setInterval(() => Refresher(), 1000 * 60);
@@ -59,12 +83,12 @@ export default function OwnerHeader() {
       clearInterval(tokenRefresh);
     };
   }, [
+    login,
     login.accessToken,
     login.refreshToken,
     setLoggedIn,
     setLogin,
     setOrders,
-    subject,
   ]);
 
   return (
