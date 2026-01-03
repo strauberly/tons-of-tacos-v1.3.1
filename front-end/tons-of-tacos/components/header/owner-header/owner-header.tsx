@@ -1,6 +1,7 @@
-import { useOwnerContext } from "@/context/owner-context";
-import { useEffect, useRef, useState } from "react";
+"use client";
 import classes from "./owner-header.module.css";
+import { useOwnerContext } from "@/context/owner-context";
+import { useEffect, useState } from "react";
 import LogoutButton from "../../ui/buttons/logout/logout";
 
 import {
@@ -25,26 +26,7 @@ export default function OwnerHeader() {
     day: "numeric",
   };
 
-  // const [, payloadBase64] = login.accessToken.split(".");
-  // const decodedPayload = Buffer.from(payloadBase64, "base64").toString("utf-8");
-  // const subject = JSON.parse(decodedPayload);
-
-  console.log(
-    "what it is: " + `${login} ` + `${Object.keys(login).length === 0}`
-  );
-
   useEffect(() => {
-    // const [, payloadBase64] = login.accessToken.split(".");
-    // const decodedPayload = Buffer.from(payloadBase64, "base64").toString(
-    //   "utf-8"
-    // );
-    // const subject = JSON.parse(decodedPayload);
-
-    // const exp = subject.exp * 1000;
-
-    // const loginDate = new Date();
-    // const hours = loginDate.getHours();
-
     async function Refresher() {
       if (Object.keys(login).length !== 0) {
         const [, payloadBase64] = login.accessToken.split(".");

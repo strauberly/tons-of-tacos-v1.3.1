@@ -27,25 +27,9 @@
   grid-template-columns: repeat(3, minmax(6rem, 50%));
   align-items: center;
   margin: 1vw;
-  /* margin-left: 1vw; */
   width: 95%;
   justify-items: center;
-  /* padding-right: 1vw; */
-  /* padding-left: 2vw; */
 }
-
-/* .cart ul li {
-  list-style-type: none;
-  display: grid;
-  row-gap: 2vw;
-  grid-template-columns: repeat(2, minmax(12rem, 50%));
-  align-items: baseline;
-  margin: 1vw;
-  margin-left: 1vw;
-  width: 95%;
-  padding-right: 1vw;
-  padding-left: 2vw;
-} */
 
 .total {
   font-family: "Quatl";
@@ -88,7 +72,6 @@
 @media (max-width: 800px) {
   .cart {
     top: 8vw;
-    /* width: 96vw; */
     left: clamp(5vw, 10%, 32rem);
   }
 }

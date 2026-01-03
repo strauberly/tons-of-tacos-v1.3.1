@@ -12,7 +12,7 @@ import { useOwnerContext } from "@/context/owner-context";
 
 export default function Cart() {
   const { setShowCart } = useDisplayContext();
-  const { cart, setCart } = useCartContext();
+  const { setCart } = useCartContext();
   const cartRef = useRef<HTMLDivElement>(null);
   const { loggedIn } = useOwnerContext();
 
@@ -34,7 +34,6 @@ export default function Cart() {
           <div ref={cartRef} className={classes.cart}>
             <CartItems />
             <p className={classes.total}>Total: $ {CalcOrderTotal(loggedIn)}</p>
-
             <CustomerInfoForm />
           </div>
         </DropDown>
