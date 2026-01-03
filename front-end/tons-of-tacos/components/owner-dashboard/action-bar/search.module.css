@@ -24,7 +24,6 @@
 
 .search input {
   width: 28ch;
-  /* border: solid var(--border-color) 2px; */
 }
 
 .search input,
@@ -44,20 +43,10 @@
 
 .searchError {
   color: var(--attention-color);
-  /* margin-left: 20rem; */
   margin-top: 2rem;
   margin-bottom: 2rem;
   justify-self: center;
-  /* width: ; */
-  /* font-size: 1.5rem; */
 }
-
-/* ---------------------- */
-
-/* .searchBar {
-  display: flex;
-  flex-direction: column;
-} */
 
 .searchButton {
   display: flex;
@@ -70,6 +59,5 @@
 @media (max-width: 1280px) {
   .search {
     flex-direction: column;
-    /* gap: 2rem; */
   }
 }

@@ -3,7 +3,7 @@ import "./globals.css";
 import MainHeader from "../components/header/main-header/main-header";
 import { inter } from "../components/ui/fonts/fonts";
 
-import OrderConfirmation from "@/components/modal/order-confirmation";
+import OrderConfirmation from "@/components/modal/confirmations/order-confirmation";
 import Footer from "@/components/footer/footer";
 import Modal from "@/components/modal/modal";
 import { AppWideProviders } from "@/context/providers/appwide-providers";

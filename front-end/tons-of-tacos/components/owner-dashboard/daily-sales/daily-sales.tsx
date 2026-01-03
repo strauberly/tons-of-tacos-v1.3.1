@@ -1,12 +1,10 @@
 import { useOwnerContext } from "@/context/owner-context";
 import { DailySales } from "@/lib/owners-tools/owners-tools";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function DailySalesDisplay() {
   const [sales, setSales] = useState<Sales | undefined>();
   const { login, loggedIn } = useOwnerContext();
-
-  const salesRef = useRef(sales);
 
   useEffect(() => {
     async function Sales() {

@@ -1,4 +1,4 @@
-import classes from "./order-view.module.css";
+import classes from "../order-view.module.css";
 import { useModalContext } from "@/context/modal-context";
 import { checkPhone } from "@/lib/customer-form";
 import { formatPhone } from "@/lib/general/multi-use";

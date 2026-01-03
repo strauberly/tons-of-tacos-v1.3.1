@@ -1,7 +1,6 @@
+import classes from "./order-summary.module.css";
 import ViewOrderButton from "@/components/ui/buttons/view-order/view-order-button";
 import { useEffect, useState } from "react";
-// import classes from "../owner-dashboard/owner-dashboard.module.css";
-import classes from "./order-summary.module.css";
 
 export default function OrderSummary(props: { order: Order }) {
   const [status, setStatus] = useState<string>("");

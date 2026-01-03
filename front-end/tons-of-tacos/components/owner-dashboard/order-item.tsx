@@ -1,3 +1,4 @@
+import classes from "../owner-dashboard/order-item.module.css";
 import { useEffect, useRef, useState } from "react";
 import { useEditOrderContext } from "@/context/edit-order-context";
 import { useModalContext } from "@/context/modal-context";
@@ -6,21 +7,18 @@ import UpdateOrderItemButton from "../ui/buttons/order-edit/update-order-item-bu
 import SizeSelector from "../ui/selectors/size-selector/size-selector";
 import QuantitySelector from "../ui/selectors/quantity-selector/quantity-selector";
 import { calcItemTotal } from "@/lib/general/multi-use";
-// import classes from "./order-item.module.css";
-import classes from "../owner-dashboard/order-item.module.css";
 
 export default function OrderItem(props: { orderItem: OrderItem }) {
   const { setOrderItem, setQuantity, quantity } = useEditOrderContext();
   const { orderToView } = useModalContext();
 
   const [canEdit, setCanEdit] = useState(false);
-  // const [submitted, setSubmitted] = useState(false);
   const [edited, setEdited] = useState<boolean>(false);
   const [newSize, setNewSize] = useState<string>("NA");
   const [showSizeError, setShowSizeError] = useState<boolean>(false);
   const [newPrice, setNewPrice] = useState<number>(props.orderItem.total);
   const [sizeError, setSizeError] = useState<string>("");
-  const [canUpdate, setCanUpdate] = useState(false);
+  const [, setCanUpdate] = useState(false);
 
   const newQuantity = useRef<number>(props.orderItem.quantity);
 
@@ -31,9 +29,6 @@ export default function OrderItem(props: { orderItem: OrderItem }) {
     size: "",
     total: 0,
   };
-
-  // const sizeError: string =
-  //   "Enter 'S' for small, 'M' for medium or 'L' for large.";
 
   const basePrice = Number(props.orderItem.total) / props.orderItem.quantity;
 
@@ -79,7 +74,7 @@ export default function OrderItem(props: { orderItem: OrderItem }) {
       )
     );
   };
-  //  const [sizes] = useState<string[]>([]);
+
   const sizeRef = useRef<string[]>([]);
   useEffect(() => {
     orderToView.orderItems.forEach((item) => {

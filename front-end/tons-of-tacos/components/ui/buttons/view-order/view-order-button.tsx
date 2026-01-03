@@ -1,7 +1,7 @@
 import { useDisplayContext } from "@/context/display-context";
 import { useModalContext } from "@/context/modal-context";
 
-import classes from "../../../modal/order-summary.module.css";
+import classes from "../../../modal/order-summary/order-summary.module.css";
 import { useCartContext } from "@/context/cart-context";
 
 export default function ViewOrderButton(order: { order: Order }) {

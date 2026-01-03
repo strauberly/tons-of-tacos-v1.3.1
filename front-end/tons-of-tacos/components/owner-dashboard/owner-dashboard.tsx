@@ -3,12 +3,12 @@ import { useDisplayContext } from "@/context/display-context";
 import Orders from "./orders";
 import { useModalContext } from "@/context/modal-context";
 import OrderView from "../modal/order-view/order-view";
-import OrderActionConfirmation from "../modal/order-action-confirmation";
+import OrderActionConfirmation from "../modal/confirmations/order-action-confirmation";
 import React, { Suspense, useState } from "react";
 
-import OrdersByCustomerPhone from "../modal/orders-by-customer-phone";
+import OrdersByCustomerPhone from "../modal/search-results/orders-by-customer-phone";
 import ActionBar from "./action-bar/action-bar";
-import OwnerOrderCreator from "../modal/ownerOrderCreator/owner-order-creator";
+import OwnerOrderCreator from "../modal/owner-order-creator/owner-order-creator";
 import DailySalesDisplay from "./daily-sales/daily-sales";
 import FadeOnLoad from "../ui/animations/fade-on-load";
 import Loading from "@/app/loading";

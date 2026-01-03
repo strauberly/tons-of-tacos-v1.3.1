@@ -1,10 +1,10 @@
+import classes from "./order-view.module.css";
 import { useModalContext } from "@/context/modal-context";
 import Card from "../../ui/cards/card";
 import OrderItem from "../../owner-dashboard/order-item";
 import { useDisplayContext } from "@/context/display-context";
-import EditableDetails from "./editable-details";
+import EditableDetails from "./editable-details/editable-details";
 import AddOrderItem from "../../ui/selectors/add-to-order/add-order-item";
-import classes from "./order-view.module.css";
 
 export default function OrderView() {
   const { orderToView } = useModalContext();

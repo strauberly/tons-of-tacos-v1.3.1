@@ -1,7 +1,7 @@
 import { useOrdersContext } from "@/context/orders-context";
-import Card from "../ui/cards/card";
+import Card from "../../ui/cards/card";
 import classes from "./orders-by-customer-phone.module.css";
-import OrderSummary from "./order-summary";
+import OrderSummary from "../order-summary/order-summary";
 import { useDisplayContext } from "@/context/display-context";
 
 export default function OrdersByCustomerPhone() {

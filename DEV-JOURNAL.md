@@ -16,8 +16,28 @@
         login and presence of cookies related to the application.
 
   - Started working in Menu component folder.
+
     - Adjustment made in menu item for adjPrice in useEffect properly initialized with a value.
     - Files scrubbed in menu component folders and files.
+
+  - Started working in Modal component folder.
+
+    - Orders by customer phone and styling sheet refactored to live in a folder name search-results.
+    - Files for confirming actions taken when altering an existing order placed in folder action-confirmation.
+    - Action-confirmation renamed to Confirmations and now also contains files pertaining to order confirmations.
+    - order-summary folder created and corresponding files moved.
+    - In view-order created new folder editable-details, and moved pertaining files to location.
+    - All files and folders in view order scrubbed.
+    - All files in owner-Order-Creator scrubbed
+    - All files in Modal component folder scrubbed.
+
+  - Started working in Owner-Dashboard component folder.
+    - All files in action-bar folder scrubbed.
+    - All files in daily-sales folder scrubbed.
+    - Removed redundant files pertaining to menu item selector as those component files are located in the selectors folders in UI.
+    - While working on order-item in owner dashboard discovered property for size selector ready to add was not being used and unnecessary so it has been removed. Keep an eye out that this has not impacted functionality elsewhere in the application.
+    - Removed leftover style sheet from size selector before it was moved in the selectors folder under UI.
+    - All files and folders under Owner-Dashboard scrubbed.
 
 ---
 

@@ -2,7 +2,6 @@
   position: fixed;
   margin-top: 10%;
   z-index: 100;
-  /* min-height: 10%; */
 }
 
 .heightControl {
@@ -13,12 +12,11 @@
 .orderDetails {
   display: flex;
   flex-direction: column;
-  /* padding: 1rem; */
+
   padding-left: 1rem;
   padding-top: 1rem;
   max-height: 20rem;
   overflow-y: scroll;
-  /* border-bottom: solid var(--border-color); */
 }
 
 .uneditableDetails {
@@ -46,8 +44,6 @@
   grid-template-columns: repeat(3, 1fr);
   align-items: first baseline;
   row-gap: 1rem;
-  /* border-radius: 0.5rem; */
-  /* border: solid var(--border-color) 2px; */
 }
 .editableDetails button {
   font-weight: bold;
@@ -115,8 +111,7 @@
 
 .orderItems ul {
   justify-content: center;
-  /* max-height: 8rem; */
-  /* overflow-y: scroll; */
+
   padding-bottom: 1rem;
   row-gap: 1rem;
 }
@@ -124,9 +119,7 @@
 .orderItems ul li {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  /* grid-template-columns: repeat(5, 1fr); */
-  /* grid-template-columns: repeat(5, 16.66%); */
-  /* grid-template-columns: repeat(6, 16.66%); */
+
   padding-top: 1rem;
   justify-items: center;
   align-items: center;
@@ -141,16 +134,14 @@
   color: var(--user-selected-color);
 }
 .orderItems ul li p:nth-child(5) {
-  /* justify-self: left; */
   margin-left: 3rem;
 }
 
 .itemTitles {
   display: grid;
-  /* grid-template-columns: repeat(5, 1fr); */
+
   grid-template-columns: repeat(4, 1fr);
-  /* grid-template-columns: repeat(5, 18.66%); */
-  /* grid-template-columns: repeat(6, 16.66%); */
+
   padding-top: 1rem;
   width: 100%;
   justify-items: center;
@@ -226,12 +217,10 @@
   justify-self: center;
   margin-top: 2rem;
   margin-left: 1rem;
-  /* margin-bottom: 1rem; */
+
   padding-bottom: 1rem;
-  /* margin: auto; */
 }
 
-/* @media (max-width: 1300px) { */
 @media (max-width: 1560px) {
   .orderItemView {
     flex-direction: row;
@@ -258,8 +247,7 @@
   .orderItems ul {
     display: flex;
     justify-content: center;
-    /* max-height: 8rem; */
-    /* overflow-y: scroll; */
+
     overflow-y: hidden;
     overflow-x: scroll;
     padding-bottom: 1rem;
@@ -271,15 +259,14 @@
 
   .orderItems ul li {
     display: grid;
-    /* grid-template-columns: repeat(1, 16.66%); */
+
     grid-template-columns: repeat(1, 100%);
-    /* padding-top: 1rem; */
-    /* justify-items: left; */
+
     padding-left: 1rem;
     padding-right: 1rem;
-    /* margin-left: 1rem; */
+
     align-items: center;
-    /* width: 100%; */
+
     row-gap: 2rem;
     min-width: max-content;
     border-right: solid var(--border-color) 2px;
@@ -294,10 +281,6 @@
     padding-bottom: 1rem;
   }
   .editableDetails button {
-    /* grid-column-start: 3; */
-    /* font-size: 1rem; */
-    /* cursor: pointer; */
-    /* margin-right: 0.5%; */
     padding-right: 0.5rem;
   }
 }
