@@ -1,9 +1,9 @@
+import classes from "./owner-dashboard.module.css";
 import { useOrdersContext } from "@/context/orders-context";
 import { useOwnerContext } from "@/context/owner-context";
 import { GetAllOrders } from "@/lib/owners-tools/owners-tools";
 import { useEffect } from "react";
 import Order from "./order";
-import classes from "./owner-dashboard.module.css";
 
 export default function Orders(props: { sortState: string }) {
   const { orders, setOrders } = useOrdersContext();

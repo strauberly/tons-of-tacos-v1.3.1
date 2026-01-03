@@ -1,4 +1,4 @@
-import classes from "./order-view.module.css";
+import classes from "../order-view.module.css";
 import { useModalContext } from "@/context/modal-context";
 import { checkName } from "@/lib/customer-form";
 import { useRef, useState } from "react";
@@ -11,10 +11,6 @@ export default function CustomerNameDetails() {
   const firstNameRef = useRef<string>(
     orderRef.current.name.substring(0, orderRef.current.name.indexOf(" "))
   );
-  // const firstName: string = orderToView.name.substring(
-  //   0,
-  //   orderToView.name.indexOf(" ")
-  // );
 
   const lastNameRef = useRef(
     orderRef.current.name.substring(
@@ -22,19 +18,15 @@ export default function CustomerNameDetails() {
       orderRef.current.name.length
     )
   );
-  // const lastName: string = orderToView.name.substring(
-  //   orderToView.name.indexOf(" ") + 1,
-  //   orderToView.name.length
-  // );
 
   const [currentFirstName, setCurrentFirstName] = useState<string>(
     firstNameRef.current
   );
-  // const [currentFirstName, setCurrentFirstName] = useState<string>(firstName);
+
   const [currentLastName, setCurrentLastName] = useState<string>(
     lastNameRef.current
   );
-  // const [currentLastName, setCurrentLastName] = useState<string>(lastName);
+
   const [editName, setEditName] = useState<boolean>(false);
   const [update, setUpdate] = useState<boolean>(false);
 
@@ -79,7 +71,6 @@ export default function CustomerNameDetails() {
   }
 
   function firstNameFormat() {
-    console.log("fn: " + currentFirstName);
     let fName: string;
     if (orderRef.current.name !== "NA") {
       fName =
@@ -91,13 +82,12 @@ export default function CustomerNameDetails() {
     }
   }
   function lastNameFormat() {
-    console.log("fn: " + currentLastName);
-    let fName: string;
+    let lName: string;
     if (orderRef.current.name !== "NA") {
-      fName =
+      lName =
         currentLastName.charAt(0).toUpperCase() +
         currentLastName.substring(1, currentLastName.length).toLowerCase();
-      return `${fName}`;
+      return `${lName}`;
     } else {
       return "";
     }
@@ -108,25 +98,13 @@ export default function CustomerNameDetails() {
   return (
     <div className={classes.editableDetails}>
       <p className={classes.editableDetailsTitle}>Name:</p>
-      <p>
-        {`${
-          firstNameFormat() + " " + lastNameFormat()
-          // currentFirstName.charAt(0).toUpperCase() +
-          // currentFirstName.substring(1, currentFirstName.length).toLowerCase()
-          // }` +
-          //   " " +
-          //   `${
-          //     currentLastName.charAt(0).toUpperCase() +
-          //     currentLastName.substring(1, currentLastName.length).toLowerCase()
-        }`}
-      </p>
+      <p>{`${firstNameFormat() + " " + lastNameFormat()}`}</p>
       {editName && (
         <div>
           <input
             className={` 
                     ${firstNameValid ? classes.valid : classes.invalid}`}
             placeholder={`${firstNameRef.current}`}
-            // placeholder={`${firstName}`}
             type="text"
             id="first_name"
             name="first_name"
@@ -142,7 +120,6 @@ export default function CustomerNameDetails() {
             className={` 
                     ${lastNameValid ? classes.valid : classes.invalid}`}
             placeholder={`${lastNameRef.current}`}
-            // placeholder={`${lastName}`}
             type="text"
             id="last_name"
             name="last_name"

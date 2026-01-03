@@ -1,4 +1,4 @@
-import classes from "./order-view.module.css";
+import classes from "../order-view.module.css";
 import { useModalContext } from "@/context/modal-context";
 import CustomerNameDetails from "./customer-name-details";
 import CustomerPhoneDetails from "./customer-phone-details";
