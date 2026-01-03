@@ -2,6 +2,25 @@
 
 ---
 
+-- 1 Jan 2025 --
+Happy New Year!
+
+- Continuing to work on refactor and clean up. Still looking at handling refresh with next.js own refresh cookie reappearing.
+
+  - trying a check for if the login object has been set or not before proceeding, this may need to be set outside of use effect if issue persists.
+
+  - Updated order confirmation message to state "payment is accepted at the truck."
+
+  - Cleaning up old notes and unused code.
+
+  - Providers pertaining to orders consolidated into OrdersProviders and implemented in root layout.
+
+  - Have gone through files in app folder and scrubbed.
+
+  -
+
+---
+
 -- 30 Dec 2025 --
 
 - alterations made so that error message for editing a cart item appears under correct circumstances.
@@ -9,7 +28,9 @@
   - Error displayed if there is already an item in the cart with the size the owner selected for the item to update and update button is not available. Effectively preventing a duplicate item in the cart.
   - If items to be edited reenter original state message is displayed and no update button.
 
-    -- 29 Dec 2025 --
+  ***
+
+  -- 29 Dec 2025 --
 
 -Still fine tuning the logic for an item being updated in the cart in order to prevent a duplicate item. Think its about there. Needs further testing and for the error messages to correlate.
 
