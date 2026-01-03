@@ -17,15 +17,12 @@ import {
   nextCookiePresent,
 } from "@/lib/ownerLogin/owner-login-server";
 
-// import { cookies } from "next/headers";
-
 export default function MainHeader() {
   const { showLogin } = useDisplayContext();
   const { loggedIn, setLoggedIn, setLogin, login } = useOwnerContext();
 
   useEffect(() => {
     async function LoginCheck() {
-      // setLoggedIn(await GetLogin())
       console.log("check cook: " + (await CookieCheck()));
       console.log("logged in: " + loggedIn);
       console.log("login: " + login.ownerName);

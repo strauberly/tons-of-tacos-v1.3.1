@@ -1,8 +1,8 @@
 "use client";
+import classes from "./menu-item.module.css";
 import Card from "@/components/ui/cards/card";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-// import QuantitySelector from "./quantity-selector/quantity-selector";
 import QuantitySelector from "../../ui/selectors/quantity-selector/quantity-selector";
 import MoreIcon from "@/components/ui/icons/more-icon";
 import { useSelectedSizeContext } from "@/context/size-context";
@@ -11,7 +11,6 @@ import { useModalContext } from "@/context/modal-context";
 import AddToCart from "@/components/ui/buttons/add-to-cart/add-to-cart";
 import SizeSelector from "./size-selector/size-selector";
 import { useMenuItemIdContext } from "@/context/menu-item-context";
-import classes from "./menu-item.module.css";
 
 export default function MenuItem(props: {
   id: string;
@@ -27,8 +26,9 @@ export default function MenuItem(props: {
   const { menuItemId } = useMenuItemIdContext();
   const [expand, setExpand] = useState(false);
   const { selectedSize, setSelectedSize } = useSelectedSizeContext();
+
   const [price, setPrice] = useState("");
-  const [edited, setEdited] = useState<boolean>(false);
+  const [, setEdited] = useState<boolean>(false);
   const [sizeAvailable, setSizeAvailable] = useState(false);
 
   const expander = () => {
@@ -36,7 +36,7 @@ export default function MenuItem(props: {
   };
 
   const itemSizes = ["S", "M", "L"];
-  // const itemSizes = ["small", "medium", "large"];
+
   const defaultQuantity: number = 1;
   const [quantity, setQuantity] = useState(defaultQuantity);
 
@@ -64,7 +64,7 @@ export default function MenuItem(props: {
 
   useEffect(() => {
     function calcPrice() {
-      let adjPrice: number;
+      let adjPrice = 0;
       let sizeSurcharge = 0;
 
       if (selectedSize === "M" && props.id === menuItemId) {
@@ -73,7 +73,6 @@ export default function MenuItem(props: {
         sizeSurcharge = 1.0;
       }
 
-      // eslint-disable-next-line prefer-const
       adjPrice = (sizeSurcharge + props.unitPrice) * quantity;
       return adjPrice;
     }

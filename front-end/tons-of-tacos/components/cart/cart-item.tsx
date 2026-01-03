@@ -1,3 +1,4 @@
+import classes from "./cart-item.module.css";
 import { useEffect, useRef, useState } from "react";
 import { useCartContext } from "@/context/cart-context";
 import { useModalContext } from "@/context/modal-context";
@@ -8,10 +9,7 @@ import QuantitySelector from "../ui/selectors/quantity-selector/quantity-selecto
 import RemoveFromCart from "../ui/buttons/remove-from-cart/remove-from-cart";
 import Update from "../ui/buttons/update-cart-item/update-cart-item";
 import { calcItemTotal } from "@/lib/general/multi-use";
-import classes from "./cart-item.module.css";
 import { useSelectedSizeContext } from "@/context/size-context";
-import { GetOwnerOrder } from "@/lib/owners-tools/owners-tools-client";
-import { GetCart } from "@/lib/cart";
 
 export default function CartItem(props: {
   id: string;
@@ -36,15 +34,12 @@ export default function CartItem(props: {
   const [canUpdate, setCanUpdate] = useState<boolean>(false);
   const [showSizeError, setShowSizeError] = useState<boolean>(false);
   const [sizeError, setSizeError] = useState<string>("hi");
-  const [readyToAdd, setReadyToAdd] = useState<boolean>(false);
+  const [, setReadyToAdd] = useState<boolean>(false);
 
   const newQuantity = useRef<number>(quantity);
   const oldSize = useRef<string>(props.size);
 
   const basePrice = Number(props.itemPrice) / props.itemQuantity;
-
-  // const sizeError: string =
-  //   "Enter 'S' for small, 'M' for medium or 'L' for large.";
 
   const increment = () => {
     setQuantity((newQuantity.current += 1));
@@ -79,10 +74,10 @@ export default function CartItem(props: {
     }
   };
 
-  function reset() {
-    // props.size = "p";
-    // console.log("props: " + props.size);
-  }
+  /* Solely to satisfy update button component prop dependency. Evaluate for implementation.
+   If in place should be used. Other option is creating separate components for virtually
+  the same use.*/
+  function reset() {}
 
   const [sizes] = useState<string[]>([]);
   const sizeRef = useRef<string[]>([]);
@@ -106,20 +101,12 @@ export default function CartItem(props: {
           size === newSize &&
           edited
         ) {
-          // setSizeError(
-          //   `${
-          //     props.itemName + " " + newSize + " x " + props.itemQuantity
-          //   } is already in cart. Select a different size, item, quantity, or cancel.`
-          // );
           setSizeError(
             `${
               props.itemName + " " + newSize
             } is already in cart. Select a different size, quantity, remove other or cancel.`
           );
           setShowSizeError(true);
-          // setCanUpdate(false);
-          // } else {
-          //   setShowSizeError(false);
         }
       });
     });
@@ -142,37 +129,6 @@ export default function CartItem(props: {
       setCanUpdate(false);
     }
 
-    // const sizes: string[] = [];
-    // cart.forEach((cartItem) => {
-    //   if (cartItem.itemName === props.itemName) {
-    //     sizes.push(cartItem.size);
-    //   }
-    // });
-
-    // if (
-    //   sizeRef.current.some((size) => size === newSize) &&
-    //   quantity == props.itemQuantity
-    // ) {
-    //   setCanUpdate(false);
-    // } else if (
-    //   sizeRef.current.some((size) => size === newSize) &&
-    //   quantity != props.itemQuantity
-    // ) {
-    //   setCanUpdate(true);
-    // }
-
-    // if (quantity !== props.itemQuantity) {
-    //   setCanUpdate(true);
-    // else {
-    //   setCanUpdate(false);
-    // }
-
-    // if()
-
-    console.log("found it: " + sizes.some((size) => size === newSize));
-    console.log("itemSizes:" + sizes);
-
-    // setCanUpdate(!sizeRef.current.some((size) => size === newSize));
     if (edited) {
       setNewPrice(
         calcItemTotal(basePrice, props.size, newSize, newQuantity.current)
@@ -180,8 +136,6 @@ export default function CartItem(props: {
     } else {
       setNewPrice(Number(props.itemPrice));
     }
-
-    // setNewSize(props.size);
   }, [
     edited,
     props.size,
@@ -226,7 +180,6 @@ export default function CartItem(props: {
           <p className={classes.size}>{props.size}</p>
         )}
         {canEdit && props.size !== "NA" && (
-          // address ready to add and other bugs
           <SizeSelector
             itemSize={props.size}
             setShowSizeError={setShowSizeError}
@@ -250,7 +203,6 @@ export default function CartItem(props: {
       </div>
 
       <div className={classes.actionButtonGroup}>
-        {/* {edited && !showSizeError && ( */}
         {canUpdate && (
           <Update
             cartItemId={props.id}
