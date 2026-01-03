@@ -1,18 +1,14 @@
+import classes from "./owner-order-creator.module.css";
 import Card from "@/components/ui/cards/card";
 import { useDisplayContext } from "@/context/display-context";
 import CustomerInfoForm from "@/components/ui/forms/customer-info-form";
 import AddOrderItem from "@/components/ui/selectors/add-to-order/add-order-item";
 import CartItems from "@/components/cart/cart-item-list";
-import {
-  GetOwnerOrder,
-  DeleteOwnerOrder,
-} from "@/lib/owners-tools/owners-tools-client";
+import { DeleteOwnerOrder } from "@/lib/owners-tools/owners-tools-client";
 import { useEffect, useRef } from "react";
 import { useOwnerContext } from "@/context/owner-context";
 import { CalcOrderTotal } from "@/lib/general/multi-use";
 import { useCartContext } from "@/context/cart-context";
-import classes from "./owner-order-creator.module.css";
-// import AddOrderItemCopy from "@/components/owner-dashboard/add-order-item-copy";
 
 export default function OwnerOrderCreator() {
   const { setShowOwnerOrderCreator } = useDisplayContext();
@@ -23,10 +19,8 @@ export default function OwnerOrderCreator() {
 
   const total = useRef<string>("");
 
-  // setCart(GetOwnerOrder());
   total.current = CalcOrderTotal(loggedIn);
   useEffect(() => {
-    // change to set a cart
     async function GetTotal() {
       total.current = orderTotal;
     }
@@ -52,7 +46,6 @@ export default function OwnerOrderCreator() {
               DeleteOwnerOrder(),
               setOwnerOrder(false),
               setCart([]),
-              // reset flag for owner order
             ]}
           >
             Close

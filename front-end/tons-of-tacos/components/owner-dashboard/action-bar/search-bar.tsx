@@ -1,11 +1,9 @@
-// import classes from "../../../owner-dashboard/owner-dashboard.module.css";
-
+import classes from "./search.module.css";
 import { useRef, useState } from "react";
 import SearchByIdButton from "../../ui/buttons/search/search-by-id-button";
 import SearchByPhoneButton from "../../ui/buttons/search/search-by-phone-button";
 import { useOwnerContext } from "@/context/owner-context";
 import { formatPhone } from "@/lib/general/multi-use";
-import classes from "./search.module.css";
 
 export default function SearchBar() {
   const [orderId, setOrderID] = useState<string>("");
@@ -66,9 +64,6 @@ export default function SearchBar() {
       phoneValidRef.current = false;
       setPhoneSearchError("");
     }
-
-    // handleSearchError();
-
     phoneNumberRef.current = formattedNumber;
   }
 

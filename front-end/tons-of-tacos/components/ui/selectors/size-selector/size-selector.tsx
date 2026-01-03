@@ -14,7 +14,6 @@ export default function SizeSelector(props: {
   submitted: boolean;
   canEdit: boolean;
   setCanEdit: (setCanEdit: boolean) => void;
-  setReadyToAdd: (setReadyToAdd: boolean) => void;
 }) {
   /*
     Takes a size(string) from either a menu item or order item and if appropriate displays the selector.

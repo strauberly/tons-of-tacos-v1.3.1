@@ -7,8 +7,6 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  /* margin-left: 0.5rem; */
-  /* margin-right: 5rem; */
 }
 
 .decrement {
@@ -45,9 +43,7 @@
 .actionButtonGroup {
   display: flex;
   justify-self: center;
-  /* padding-left: 3rem; */
   gap: 2rem;
-  /* margin-left: 1rem; */
 }
 
 .sizeWarning {
