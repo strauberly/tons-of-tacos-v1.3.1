@@ -38,9 +38,7 @@ export default function Orders(props: { sortState: string }) {
       const orders: Order[] = await GetAllOrders(login.accessToken);
       setOrders(orders);
     }
-
     GetOrders();
-    // setInterval(GetOrders, 5000);
   }, [login.accessToken, setOrders]);
 
   return (
