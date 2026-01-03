@@ -6,7 +6,6 @@
   row-gap: 1.5rem;
   background-color: #0c0424;
   border-radius: 10px;
-  /* height: 30rem; */
 }
 
 .itemName {
@@ -15,8 +14,6 @@
 
 .card img {
   border-radius: 10px;
-  /* width: 75%; */
-  /* height: 75%; */
   margin-bottom: -5%;
 }
 

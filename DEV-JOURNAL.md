@@ -2,6 +2,25 @@
 
 ---
 
+-- 3 Jan 2025 --
+
+- Beginning work cleaning up files in components.
+
+  - Files scrubbed in cart folder.
+  - Started working in Footer component folder.
+    - Scrubbed files in Footer.
+  - Started working in Header component folder.
+
+    - Scrubbed files in all header folders and files.
+      - As a side note; may be worthwhile to evaluate if some logic found in owner header is better refactored into part of main header. Such as checking for
+        login and presence of cookies related to the application.
+
+  - Started working in Menu component folder.
+    - Adjustment made in menu item for adjPrice in useEffect properly initialized with a value.
+    - Files scrubbed in menu component folders and files.
+
+---
+
 -- 1 Jan 2025 --
 Happy New Year!
 
