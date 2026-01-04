@@ -1,13 +1,9 @@
 "use server";
 
-import { cookies } from "next/headers";
-
 export async function GetAllOrders(token: string) {
-  // console.log(token);
   let response;
   let data;
-  const cookieStore = await cookies();
-  const accessToken = cookieStore.get("accessToken");
+
   try {
     response = await fetch(
       "http://localhost:8080/api/owners-tools/orders/get-orders",
@@ -15,14 +11,11 @@ export async function GetAllOrders(token: string) {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
-          // Cookie: `${accessToken?.value}`,
         },
         credentials: "include",
       }
     );
     data = await response.json();
-    // console.log(response.headers);
-    // console.log("headers: " + response.headers.getSetCookie());
     const orders = data;
     return orders;
   } catch (error) {
@@ -31,7 +24,6 @@ export async function GetAllOrders(token: string) {
 }
 
 export async function DeleteOrder(orderUid: string, token: string) {
-  console.log(orderUid);
   let response;
   let data;
 
@@ -46,12 +38,7 @@ export async function DeleteOrder(orderUid: string, token: string) {
       },
     });
     data = await response.json();
-    // let message: string = "";
 
-    console.log(data.message);
-    // message = data.message;
-    // confirmation = data.message;
-    // return message;
     return data.message;
   } catch (error) {
     console.log(error);
@@ -73,12 +60,7 @@ export async function RemoveFromOrder(orderItemId: number, token: string) {
       },
     });
     data = await response.json();
-    // let message: string = "";
 
-    console.log(data.message);
-    // message = data.message;
-    // confirmation = data.message;
-    // return message;
     return data.message;
   } catch (error) {
     console.log(error);
@@ -109,10 +91,7 @@ export async function AddToOrder(
       credentials: "include",
     });
     data = await response.json();
-    // let message: string = "";
 
-    console.log(data);
-    // message = data.message;
     return data.message;
   } catch (error) {
     console.log(error);
@@ -120,7 +99,6 @@ export async function AddToOrder(
 }
 
 export async function UpdateOrderItemQuantity(
-  // add size and change from update order item quantity update order item size
   orderUid: string,
   orderItemId: number,
   newQuantity: number,
@@ -204,7 +182,6 @@ export async function GetOrdersByCustomerPhone(phone: string, token: string) {
     body: "",
   };
 
-  // try {
   const response = await fetch(
     `http://localhost:8080/api/owners-tools/orders/get-order-customer-phone/phone?phone=${phone}`,
     {
@@ -219,8 +196,6 @@ export async function GetOrdersByCustomerPhone(phone: string, token: string) {
   const status = response.status;
   customerOrdersResponse.body = data;
   customerOrdersResponse.status = status;
-  console.log(response.status);
-  console.log(response.body);
   if (response.status === 200) {
     return customerOrdersResponse;
   } else {
@@ -231,8 +206,6 @@ export async function GetOrdersByCustomerPhone(phone: string, token: string) {
 }
 
 export async function GetOrderByID(orderUid: string, token: string) {
-  console.log(orderUid);
-
   const orderResponse: OrderRequestResponse = {
     status: 0,
     body: {
@@ -249,7 +222,6 @@ export async function GetOrderByID(orderUid: string, token: string) {
     },
   };
 
-  // try {
   const response = await fetch(
     `http://localhost:8080/api/owners-tools/orders/get-order-uid/orderUid?orderUid=${orderUid}`,
     {
@@ -264,13 +236,10 @@ export async function GetOrderByID(orderUid: string, token: string) {
   const status = response.status;
   orderResponse.body = data;
   orderResponse.status = status;
-  console.log(response.status);
-  console.log(response.body);
+
   if (status === 200) {
     return orderResponse;
-    // return data;
   } else {
-    // throw new Error(`${data.message}`);
     orderResponse.body = data.message;
     orderResponse.status = status;
     return orderResponse;
@@ -281,7 +250,6 @@ export async function UpdateCustomer(customer: Customer, token: string) {
   let response;
 
   const uid: string = customer.customerUid;
-  console.log(uid);
   const name: string = customer.name;
   const phone: string = customer.phone;
   const email: string = customer.email;
@@ -297,7 +265,6 @@ export async function UpdateCustomer(customer: Customer, token: string) {
       }
     );
     const data = await response.json();
-    console.log("data: " + data.message);
     return data.message;
   } catch (error) {
     console.log(error);

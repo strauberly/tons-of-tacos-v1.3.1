@@ -7,7 +7,7 @@ import CartItems from "@/components/cart/cart-item-list";
 import { DeleteOwnerOrder } from "@/lib/owners-tools/owners-tools-client";
 import { useEffect, useRef } from "react";
 import { useOwnerContext } from "@/context/owner-context";
-import { CalcOrderTotal } from "@/lib/general/multi-use";
+import { CalcOrderTotal } from "@/lib/multi-use/multi-use";
 import { useCartContext } from "@/context/cart-context";
 
 export default function OwnerOrderCreator() {

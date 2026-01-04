@@ -5,7 +5,7 @@ import {
   GetLogin,
   OwnerLogin,
   StoreLogin,
-} from "@/lib/ownerLogin/owner-login-server";
+} from "@/lib/owner-session/owner-session-server";
 import LoginButton from "../buttons/login/login-button";
 import { useOwnerContext } from "@/context/owner-context";
 

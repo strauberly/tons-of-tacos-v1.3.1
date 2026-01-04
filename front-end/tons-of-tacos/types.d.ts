@@ -1,7 +1,16 @@
 // organize please
+
+// menu
 type Category = {
   name: string;
   description: string;
+};
+
+type AllMenuItems = {
+  tacos: MenuItem[];
+  sides: MenuItem[];
+  toppings: MenuItem[];
+  drinks: MenuItem[];
 };
 
 type MenuItem = {
@@ -14,6 +23,11 @@ type MenuItem = {
   unitPrice: number;
 };
 
+// cart
+type Cart = {
+  cartItems: CartItem[];
+  total: number;
+};
 type CartItem = {
   id: string;
   menuId: string;
@@ -21,6 +35,20 @@ type CartItem = {
   quantity: number;
   size: string;
   price: string;
+};
+
+// order
+type Order = {
+  orderUid: string;
+  customerUid: string;
+  name: string;
+  email: string;
+  phone: string;
+  orderItems: OrderItem[];
+  orderTotal: number;
+  created: string;
+  ready: string;
+  closed: string;
 };
 
 type OrderItem = {
@@ -31,11 +59,17 @@ type OrderItem = {
   total: number;
 };
 
-type Cart = {
-  cartItems: CartItem[];
-  total: number;
+type OrderEdit = {
+  orderUid: string;
+  customer: Customer;
+  menuItemId: string;
+  quantity: number;
+  itemSize: string;
+  login: string;
+  orderItem: OrderItem;
 };
 
+// user
 type CustomerInfoForm = {
   name: string;
 };
@@ -50,40 +84,6 @@ type OwnerLogin = {
   refreshToken: string;
   ownerName: string;
 };
-// type OwnerLogin = {
-//   token: string;
-//   ownerName: string;
-// };
-
-type Order = {
-  orderUid: string;
-  customerUid: string;
-  name: string;
-  email: string;
-  phone: string;
-  orderItems: OrderItem[];
-  orderTotal: number;
-  created: string;
-  ready: string;
-  closed: string;
-};
-
-type AllMenuItems = {
-  tacos: MenuItem[];
-  sides: MenuItem[];
-  toppings: MenuItem[];
-  drinks: MenuItem[];
-};
-
-type OrderEdit = {
-  orderUid: string;
-  customer: Customer;
-  menuItemId: string;
-  quantity: number;
-  itemSize: string;
-  login: string;
-  orderItem: OrderItem;
-};
 
 type Customer = {
   customerUid: string;
@@ -92,11 +92,15 @@ type Customer = {
   email: string;
 };
 
+// sales
+
 type Sales = {
   date: string;
   numberOfSales: number;
   total: number;
 };
+
+// responses
 
 type OrderRequestResponse = {
   status: number;
