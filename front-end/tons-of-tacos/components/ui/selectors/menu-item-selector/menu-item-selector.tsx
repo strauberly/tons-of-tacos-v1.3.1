@@ -1,6 +1,6 @@
+import classes from "./menu-item-selector.module.css";
 import { GetAllMenuItems } from "@/lib/menu";
 import { useEffect, useRef, useState } from "react";
-import classes from "./menu-item-selector.module.css";
 
 export default function MenuItemSelector(props: {
   setItemName: (item: string) => void;

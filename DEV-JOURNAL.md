@@ -32,12 +32,33 @@
     - All files in Modal component folder scrubbed.
 
   - Started working in Owner-Dashboard component folder.
+
     - All files in action-bar folder scrubbed.
     - All files in daily-sales folder scrubbed.
     - Removed redundant files pertaining to menu item selector as those component files are located in the selectors folders in UI.
     - While working on order-item in owner dashboard discovered property for size selector ready to add was not being used and unnecessary so it has been removed. Keep an eye out that this has not impacted functionality elsewhere in the application.
     - Removed leftover style sheet from size selector before it was moved in the selectors folder under UI.
     - All files and folders under Owner-Dashboard scrubbed.
+
+  - Started working in UI component folder.
+
+    - All files and folders in animations folder scrubbed.
+    - All files and folders in badges folder scrubbed.
+    - All files and folders in login and logout folders scrubbed. Folders consolidated into session-buttons.
+    - All files in size-buttons folder scrubbed.
+    - All files in social-links folder scrubbed.
+    - All files in submit-order folder scrubbed.
+      - Folder and files names updated from submitOrder-button to submit-order-button.
+    - All files in update-cart-item folder scrubbed.
+    - All files in view-order folder scrubbed.
+    - Files and folders in Buttons folder scrubbed.
+    - Files in Cards folder scrubbed.
+    - Files in Fonts folder scrubbed.
+    - Files in Forms folder scrubbed.
+    - Files in Icons folder scrubbed.
+    - Files and folders in Selectors folder scrubbed.
+
+- Pretty solid start!
 
 ---
 

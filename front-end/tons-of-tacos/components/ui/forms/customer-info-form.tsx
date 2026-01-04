@@ -1,26 +1,18 @@
 "use client";
 import classes from "./customer-info-form.module.css";
-
 import React, { useRef, useState, useActionState, useEffect } from "react";
-import SubmitButton from "../buttons/submit-order/submitOrder-button";
+import SubmitButton from "../buttons/submit-order/submit-order-button";
 import { checkEmail, checkName, checkPhone } from "@/lib/customer-form";
 import { SendOrder, setIsLoggedIn } from "@/lib/cart";
 import { useOrderConfirmationContext } from "@/context/order-confirmation-context";
 import { useOwnerContext } from "@/context/owner-context";
-import { isLoggedIn } from "@/lib/owners-tools/owners-tools-client";
 import { formatPhone } from "@/lib/general/multi-use";
 
 export default function CustomerInfoForm() {
-  const { setOrderConfirmation } = useOrderConfirmationContext();
-  const { loggedIn } = useOwnerContext();
   const initialState = { message: "" };
   const [state, formAction] = useActionState(SendOrder, initialState);
-  console.log(loggedIn);
-  /*
-  check if logged in, if so set user library function and call in send order
-  in add item check if login create new order
-  set the logic for if should use cart or new order from owner
-  */
+  const { setOrderConfirmation } = useOrderConfirmationContext();
+  const { loggedIn } = useOwnerContext();
 
   const [firstNameValid, setFirstNameValid] = useState<boolean>(false);
   const [lastNameValid, setLastNameValid] = useState<boolean>(false);
@@ -56,23 +48,6 @@ export default function CustomerInfoForm() {
       lastNameError: `${"Last " + checkName(lastName.current).message}`,
     });
   }
-
-  // function formatNumber(input: string) {
-  //   if (!input) return input;
-  //   const numberInput: string = input.replace(/[^\d]/g, "");
-  //   const inputLength: number = numberInput.length;
-
-  //   if (inputLength < 4) {
-  //     return numberInput;
-  //   } else if (inputLength < 7) {
-  //     return `${numberInput.slice(0, 3)}.${numberInput.slice(3)}`;
-  //   } else {
-  //     return `${numberInput.slice(0, 3)}.${numberInput.slice(
-  //       3,
-  //       6
-  //     )}.${numberInput.slice(6)}`;
-  //   }
-  // }
 
   function validatePhoneNumber(event: React.ChangeEvent<HTMLInputElement>) {
     const formattedNumber = formatPhone(event.target.value);
