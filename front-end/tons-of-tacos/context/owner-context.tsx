@@ -18,8 +18,6 @@ interface ContextProps {
   setOwnerOrder: Dispatch<SetStateAction<boolean>>;
   order: CartItem[];
   setOrder: Dispatch<SetStateAction<CartItem[]>>;
-  // order: OrderItem[];
-  // setOrder: Dispatch<SetStateAction<OrderItem[]>>;
   orderTotal: string;
   setOrderTotal: Dispatch<SetStateAction<string>>;
 }

@@ -10,7 +10,7 @@ import {
   OwnerLogout,
   Refresh,
   StoreLogin,
-} from "@/lib/ownerLogin/owner-login-server";
+} from "@/lib/owner-session/owner-session-server";
 
 import { useOrdersContext } from "@/context/orders-context";
 import { GetAllOrders } from "@/lib/owners-tools/owners-tools";

@@ -6,7 +6,7 @@ import { checkEmail, checkName, checkPhone } from "@/lib/customer-form";
 import { SendOrder, setIsLoggedIn } from "@/lib/cart";
 import { useOrderConfirmationContext } from "@/context/order-confirmation-context";
 import { useOwnerContext } from "@/context/owner-context";
-import { formatPhone } from "@/lib/general/multi-use";
+import { formatPhone } from "@/lib/multi-use/multi-use";
 
 export default function CustomerInfoForm() {
   const initialState = { message: "" };

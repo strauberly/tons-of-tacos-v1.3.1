@@ -7,7 +7,7 @@ import CustomerInfoForm from "../ui/forms/customer-info-form";
 import CartItems from "./cart-item-list";
 import { AnimatePresence } from "framer-motion";
 import DropDown from "../ui/animations/drop-down";
-import { CalcOrderTotal } from "@/lib/general/multi-use";
+import { CalcOrderTotal } from "@/lib/multi-use/multi-use";
 import { useOwnerContext } from "@/context/owner-context";
 
 export default function Cart() {
