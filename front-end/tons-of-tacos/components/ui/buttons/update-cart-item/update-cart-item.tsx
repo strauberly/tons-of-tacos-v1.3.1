@@ -1,12 +1,8 @@
 "use client";
-
-import { useCartContext } from "@/context/cart-context";
-
-import { GetCart, UpdateCart } from "@/lib/cart";
-
-import { useEffect, useState } from "react";
-
 import classes from "./update-cart-item.module.css";
+import { useCartContext } from "@/context/cart-context";
+import { GetCart, UpdateCart } from "@/lib/cart";
+import { useEffect, useState } from "react";
 import { useModalContext } from "@/context/modal-context";
 import { useDisplayContext } from "@/context/display-context";
 import { useOwnerContext } from "@/context/owner-context";
@@ -14,11 +10,9 @@ import {
   GetOwnerOrder,
   updateOwnerOrder,
 } from "@/lib/owners-tools/owners-tools-client";
-import CartQuantity from "../../badges/cart-quantity";
 
-export default function Update(props: {
+export default function UpdateCartItem(props: {
   cartItemId: string;
-  // cartItem: string;
   updatedItemQuantity: number;
   updatedItemPrice: string;
   oldQuantity: number;
@@ -30,13 +24,12 @@ export default function Update(props: {
   setShowSizeError: (showSizeError: boolean) => void;
   setSubmitted: (setSubmitted: boolean) => void;
   reset: (reset: void) => void;
-  // canEditFunc: () => void;
 }) {
-  // get index of the the item already in cart
   const { cart, setCart, cartQuantity, setCartQuantity } = useCartContext();
   const { ownerOrder } = useOwnerContext();
   const { setModal } = useModalContext();
   const { setShowModal } = useDisplayContext();
+
   const [largeOrder, setLargeOrder] = useState(false);
   const [itemQuantityChanged, setItemQuantityChanged] = useState(false);
   const [sizeChanged, setSizeChanged] = useState(false);
@@ -57,22 +50,10 @@ export default function Update(props: {
       setCartQuantity(newQuantity);
     }
 
-    // let newCart: CartItem[];
-
-    // let cartItemIndex: number;
-    console.log("new cart: " + JSON.stringify(newCart));
-
-    console.log("props id: " + props.cartItemId);
-
     const cartItemIndex: number = newCart.findIndex(
       (cartItem) => cartItem.id === props.cartItemId
-
-      // (cartItem) => cartItem.itemName === props.cartItem
     );
 
-    // newCart;
-
-    console.log("index: " + cartItemIndex);
     if (itemQuantityChanged) {
       newCart[cartItemIndex].quantity = props.updatedItemQuantity;
     }
@@ -80,6 +61,7 @@ export default function Update(props: {
       newCart[cartItemIndex].size = props.newSize;
     }
     newCart[cartItemIndex].price = props.updatedItemPrice;
+
     if (ownerOrder) {
       updateOwnerOrder(newCart);
       setCart(GetOwnerOrder());
@@ -106,7 +88,6 @@ export default function Update(props: {
     ) {
       setSizeChanged(false);
     }
-    // props.reset();
   }, [
     props,
     props.newSize,
@@ -125,7 +106,6 @@ export default function Update(props: {
             updateCartItem(),
             props.setEdited(false),
             props.setCanEdit(false),
-            // props.reset(props.newSize),
           ]}
         >
           Update
@@ -142,7 +122,6 @@ export default function Update(props: {
               props.setShowSizeError(false),
               props.setSubmitted(true),
               props.reset(),
-              // props.canEditFunc(false),
             ]}
           >
             Update
