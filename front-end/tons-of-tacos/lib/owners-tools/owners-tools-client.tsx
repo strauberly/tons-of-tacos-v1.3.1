@@ -1,8 +1,5 @@
-// export let OwnerOrderTotal = 0;
-
 export function calcPrice(unitPrice: number, size: string, quantity: number) {
   let sizeSurcharge: number = 0.0;
-  // let adjPrice: number;
 
   switch (size) {
     case "M":
@@ -29,7 +26,7 @@ export function GetOwnerOrder() {
     ownerCart = JSON.parse(sessionStorage.getItem("owner-order") || "{}");
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    throw new Error("whups...");
+    throw new Error("whups..." + error);
   }
   return ownerCart;
 }
@@ -51,10 +48,8 @@ export function AddToOwnerOrder(
     price: Number(price).toFixed(2).toString(),
   };
 
-  let newOwnerCart: CartItem[] = [];
-  newOwnerCart = GetOwnerOrder();
-  console.log(cartItem);
-  console.log(newOwnerCart);
+  const newOwnerCart: CartItem[] = GetOwnerOrder();
+
   newOwnerCart.push(cartItem);
   sessionStorage.removeItem("owner-order");
   sessionStorage.setItem("owner-order", JSON.stringify(newOwnerCart));
@@ -65,7 +60,6 @@ export function RemoveFromOwnerOrder(id: string) {
   const updatedOrder = GetOwnerOrder().filter(
     (orderItem) => orderItem.id != id
   );
-  // console.log(updatedOrder);
   sessionStorage.removeItem("owner-order");
   sessionStorage.setItem("owner-order", JSON.stringify(updatedOrder));
 }

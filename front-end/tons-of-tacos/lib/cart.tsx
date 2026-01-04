@@ -1,5 +1,3 @@
-// import { isLoggedIn } from "./owners-tools/owners-tools-client";
-
 import { GetOwnerOrder } from "./owners-tools/owners-tools-client";
 
 export let isLoggedInRef: boolean;
@@ -47,7 +45,7 @@ export function RemoveCartItem(itemId: string) {
   const updatedCart: CartItem[] = GetCart().filter(
     (cartItem) => cartItem.id !== itemId
   );
-  console.log("cart: " + updatedCart);
+
   sessionStorage.removeItem("tons-of-tacos-cart");
   sessionStorage.setItem("tons-of-tacos-cart", JSON.stringify(updatedCart));
 }
@@ -59,13 +57,13 @@ export function GetCart() {
     oldCart = JSON.parse(sessionStorage.getItem("tons-of-tacos-cart") || "{}");
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
-    throw new Error("hrm...");
+    throw new Error("hrm..." + error);
   }
   return oldCart;
 }
 
 export async function GetCartQuantity() {
-  const cart: CartItem[] = await GetCart();
+  const cart: CartItem[] = GetCart();
   let cartQuantity: number[] = [];
   let quantity: number = 0;
   try {
@@ -104,7 +102,6 @@ export const resp: string = "";
 export async function SendOrder(
   previousState: responseMessage,
   formData: FormData
-  // loggedIn: boolean,
 ) {
   const firstName = formData.get("first_name");
   const lastName = formData.get("last_name");
@@ -133,14 +130,11 @@ export async function SendOrder(
     }
   });
 
-  console.log(cartItems);
-
   const orderItems: item[] = cartItems.map((i) => {
     return {
       menuId: i.menuId,
       quantity: i.quantity,
       size: i.size,
-      // size: i.size.charAt(0),
     };
   });
 
@@ -178,12 +172,6 @@ export async function SendOrder(
   const customerEmail = data.customerEmail;
   const customerPhone = data.customerPhone;
   const orderTotal = data.orderTotal;
-
-  let name;
-
-  // if(loggedIn){
-  //   name =
-  // }
 
   const receivedOrderItems: string[] = data.orderItems.map(
     (orderItem: OrderItem) =>

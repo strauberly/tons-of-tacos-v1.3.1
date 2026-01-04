@@ -2,16 +2,12 @@
 
 import { cookies } from "next/headers";
 
-// const cookieStore = await cookies();
-
 function randomChar() {
   const min: number = 33;
   const max: number = 126;
   const random: number = Math.random() * (max - min + 1) + min;
   const excluded: number[] = [34, 92, 39];
   let choice: string = String.fromCharCode(0);
-
-  console.log();
 
   excluded.forEach((excludedNumber) => {
     choice =
@@ -115,22 +111,18 @@ export async function OwnerLogin(
   const status = response.status;
 
   if (status === 200) {
+    // remove after full functionality established
     console.log("data: " + data);
     console.log("token: " + data.accessToken);
     console.log("refresh token: " + data.token);
     console.log(data.accessToken.subject);
 
-    // const [, payloadBase64] = data.token.split(".");
     const [, payloadBase64] = data.accessToken.split(".");
     const decodedPayload = Buffer.from(payloadBase64, "base64").toString(
       "utf-8"
     );
     const subject = await JSON.parse(decodedPayload);
-    console.log("exp:" + subject.exp);
-    console.log(data.token);
-    console.log(subject);
-    console.log(decodedPayload);
-    console.log(decrypt(subject.sub));
+
     return {
       status: status,
       response: {
@@ -144,10 +136,7 @@ export async function OwnerLogin(
   }
 }
 
-// refresh endpoint
-
 export async function Refresh() {
-  // get the refresh token and send that not the body make sure path and all that is good
   const cookieStore = await cookies();
   const refreshToken = cookieStore.get("refreshToken");
 
@@ -156,29 +145,23 @@ export async function Refresh() {
     {
       method: "POST",
       headers: {
-        // Authorization: `Bearer ${refreshToken?.value}`,
         Cookie: `${refreshToken?.value}`,
         "Content-Type": "application/json",
       },
-      // // Cookie: `${refreshToken?.value}`,
       body: JSON.stringify(refreshToken?.value),
       credentials: "include",
     }
   );
-  console.log(response);
   const data = await response.json();
   const status = response.status;
 
-  console.log("access: " + data.accessToken);
-  console.log("refresh: " + data.refreshToken);
+  console.log(" refreshed access: " + data.accessToken);
+  console.log("refreshed refresh: " + data.refreshToken);
   console.log("refresh status: " + status);
 
   const [, payloadBase64] = data.accessToken.split(".");
   const decodedPayload = Buffer.from(payloadBase64, "base64").toString("utf-8");
   const subject = JSON.parse(decodedPayload);
-
-  console.log("owner name:" + decrypt(subject.ownername));
-  console.log("owner name:" + subject.ownername);
 
   const login: OwnerLogin = {
     accessToken: data.accessToken,
@@ -186,12 +169,9 @@ export async function Refresh() {
     ownerName: subject.ownername,
   };
 
-  console.log(login);
-
   return login;
 }
 
-// token response
 export async function StoreLogin(login: OwnerLogin) {
   console.log("store: " + login.ownerName);
 
@@ -231,8 +211,6 @@ export async function GetLogin() {
 
   const cookieStore = await cookies();
 
-  // console.log(cookieStore);
-
   login.accessToken = cookieStore.get("accessToken")
     ?.value as unknown as string;
   login.refreshToken = cookieStore.get("refreshToken")
@@ -241,27 +219,20 @@ export async function GetLogin() {
   return login;
 }
 
+// double check implementation and logic please
 export async function CookieCheck() {
   const cookieStore = cookies();
-  // const gotCookies: boolean = (await cookieStore).size;
+
   const gotCookies: boolean = (await cookieStore).toString() === "";
-  console.log("cookie check:" + (await gotCookies));
-  console.log("store: " + (await cookieStore));
+
   return gotCookies;
 }
-
-// create route to logout a user by deleting their cookie
-
-// use access token for request
-// use refresh token in body
 
 export async function OwnerLogout(accessToken: string) {
   const cookieStore = await cookies();
   const refreshToken = cookieStore.get("refreshToken");
-  // const accessToken = cookieStore.get("accessToken");
+
   const address: string = `http://localhost:8080/api/owners-tools/logout`;
-  console.log(address);
-  console.log(refreshToken);
 
   let response;
   let data;
@@ -284,10 +255,6 @@ export async function OwnerLogout(accessToken: string) {
 // maybe rest to accept a list of cookies to delete
 
 export async function DeleteCookies() {
-  // const cookieStore = cookies();
-  // (await cookieStore)
-  // .getAll()
-  // .forEach(async (cookie) => (await cookieStore)
   (await cookies()).set({
     name: "accessToken",
     value: "",
@@ -315,13 +282,9 @@ export async function DeleteCookies() {
     expires: new Date(0),
     path: "/owners-tools",
   });
-  // );
-  // const cookieStore = cookies();
-  // (await cookieStore)
-  //   .getAll()
-  //   .forEach(async (cookie) => (await cookieStore).delete(`${cookie.name}`));
 }
 
+// this needs an update to accurately discern hotswap cookie from the others.
 export async function nextCookiePresent() {
   const cookieStore = await cookies();
   return cookieStore.has("accessToken");

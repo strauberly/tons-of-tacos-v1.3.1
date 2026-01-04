@@ -15,7 +15,7 @@ import {
   DeleteCookies,
   GetLogin,
   nextCookiePresent,
-} from "@/lib/ownerLogin/owner-login-server";
+} from "@/lib/owner-session/owner-session-server";
 
 export default function MainHeader() {
   const { showLogin } = useDisplayContext();

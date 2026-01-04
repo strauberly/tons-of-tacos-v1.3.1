@@ -2,6 +2,34 @@
 
 ---
 
+-- 4 Jan 2025 --
+
+- Continuing work for scrubbing files for unused code and superfluous comments.
+
+  - All files in context folder scrubbed.
+  - In lib/content folder, files scrubbed.
+    - As more functions appear in this file they will eventually need to be organized by what they affect(ie calculators, parser, etc);
+  - In lib/owner-login folder, files scrubbed, folder name changed to owner-session. File names reflect these changes. owner-session-client removed as we are no longer using session storage to hold user credentials or tokens.
+    - When features implemented for customer accounts and login, all will be consolidated into a Session library folder.
+  - In lib/owners-tools folder:
+
+    - Confirmation messages at some point to incorporate the confirmation message for when an order is submitted.
+    - Files scrubbed.
+
+  - In lib/cart folder:
+
+    - All files scrubbed.
+
+  - In lib/customer-form folder:
+    - Files scrubbed
+  - In lib/menu folder:
+    - Files scrubbed
+  - Rough organization for objects in types.d.ts
+
+- Application file scrub complete. Moving on to eyeballing code and ensuring errors are handled.
+
+---
+
 -- 3 Jan 2025 --
 
 - Beginning work cleaning up files in components.
@@ -76,8 +104,6 @@ Happy New Year!
   - Providers pertaining to orders consolidated into OrdersProviders and implemented in root layout.
 
   - Have gone through files in app folder and scrubbed.
-
-  -
 
 ---
 

@@ -6,7 +6,7 @@ import RemoveFromOrderButton from "../ui/buttons/order-edit/remove-from-order-bu
 import UpdateOrderItemButton from "../ui/buttons/order-edit/update-order-item-button";
 import SizeSelector from "../ui/selectors/size-selector/size-selector";
 import QuantitySelector from "../ui/selectors/quantity-selector/quantity-selector";
-import { calcItemTotal } from "@/lib/general/multi-use";
+import { calcItemTotal } from "@/lib/multi-use/multi-use";
 
 export default function OrderItem(props: { orderItem: OrderItem }) {
   const { setOrderItem, setQuantity, quantity } = useEditOrderContext();

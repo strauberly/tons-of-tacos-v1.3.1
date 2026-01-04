@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import SearchByIdButton from "../../ui/buttons/search/search-by-id-button";
 import SearchByPhoneButton from "../../ui/buttons/search/search-by-phone-button";
 import { useOwnerContext } from "@/context/owner-context";
-import { formatPhone } from "@/lib/general/multi-use";
+import { formatPhone } from "@/lib/multi-use/multi-use";
 
 export default function SearchBar() {
   const [orderId, setOrderID] = useState<string>("");
