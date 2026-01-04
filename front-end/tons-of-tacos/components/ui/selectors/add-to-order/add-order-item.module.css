@@ -129,9 +129,6 @@
   .addItemToOrder {
     display: flex;
     flex-direction: row;
-
-    /* padding-bottom: 0.5rem;
-    border-bottom: solid var(--border-color) 2px; */
   }
   .titles {
     display: flex;

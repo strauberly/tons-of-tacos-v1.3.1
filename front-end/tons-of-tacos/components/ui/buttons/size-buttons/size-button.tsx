@@ -1,5 +1,5 @@
-import { useSelectedSizeContext } from "@/context/size-context";
 import classes from "./size-buttons.module.css";
+import { useSelectedSizeContext } from "@/context/size-context";
 import { useId } from "react";
 import { useMenuItemIdContext } from "@/context/menu-item-context";
 

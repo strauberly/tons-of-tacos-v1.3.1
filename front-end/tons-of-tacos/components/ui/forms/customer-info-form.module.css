@@ -4,11 +4,9 @@
   left: 50%;
   gap: 2vw;
   font-size: clamp(1rem, 1.5vw, 1vw);
-
   justify-content: center;
   margin-top: 1vw;
   margin-bottom: 1vw;
-  /* work on resonsive width */
   width: 94%;
 }
 
@@ -22,15 +20,12 @@
 .form textarea {
   font-size: clamp(1rem, 1.5vw, 1vw);
   text-align: left;
-
   background-color: var(--background-color);
-
   color: var(--user-selected-color);
   padding-left: 1vw;
   padding-top: 0.5vw;
   padding-bottom: 0.5vw;
   margin-bottom: 1rem;
-  /* max-width: 100%; */
 }
 
 .form input:focus,
@@ -39,9 +34,7 @@
 }
 
 .form p {
-  /* width: max-content; */
   font-size: clamp(1rem, 1.25vw, 1vw);
-  /* font-size: clamp(1rem, 1.5vw, 1.25vw); */
 }
 
 .invalid {
@@ -71,8 +64,6 @@
 
 .names {
   display: flex;
-  /* align-items: first baseline; */
-  /* flex-direction: row; */
   gap: 2%;
   margin-bottom: 1rem;
   width: 100%;
@@ -81,9 +72,7 @@
 .first {
   display: flex;
   flex-direction: column;
-  /* min-width: 38%; */
   min-width: 44%;
-  /* padding-left: 0.5%; */
 }
 
 .firstNameError {
@@ -96,7 +85,6 @@
 .last {
   display: flex;
   flex-direction: column;
-  /* min-width: 40%; */
   min-width: 44%;
 }
 

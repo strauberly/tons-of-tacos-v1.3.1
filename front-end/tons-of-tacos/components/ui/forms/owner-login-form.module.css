@@ -34,7 +34,6 @@
   .ownerLogin {
     position: absolute;
     flex-direction: column;
-    /* left: 30%; */
     left: 0;
     right: 0;
     margin: auto;
@@ -57,7 +56,6 @@
     left: 0;
     right: 0;
     margin: auto;
-    /* left: 15%; */
   }
 
   .ownerLogin input,

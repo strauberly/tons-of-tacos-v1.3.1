@@ -9,9 +9,7 @@
 }
 
 .categories {
-  /* justify-self: center; */
   position: relative;
-  /* position: absolute; */
   background-color: var(--background-color);
   display: grid;
   grid-template-columns: repeat(4, 0.5fr);
@@ -28,7 +26,6 @@
 }
 .items {
   padding-top: 0.5rem;
-  /* margin-top: 1rem; */
   overflow-y: scroll;
   display: grid;
   grid-template-columns: repeat(4, 1fr);

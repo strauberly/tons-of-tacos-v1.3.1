@@ -1,40 +1,26 @@
 "use client";
-
-import { useActionState, useEffect, useRef } from "react";
 import classes from "./owner-login-form.module.css";
+import { useActionState, useEffect } from "react";
 import {
   GetLogin,
   OwnerLogin,
   StoreLogin,
 } from "@/lib/ownerLogin/owner-login-server";
 import LoginButton from "../buttons/login/login-button";
-import { IsAuthenticated } from "@/lib/ownerLogin/owners-login-client";
-import { useDisplayContext } from "@/context/display-context";
 import { useOwnerContext } from "@/context/owner-context";
 
 export default function OwnerLoginForm() {
-  // const { setShowLogin } = useDisplayContext();
-
   const initialState = {
     status: 0,
     response: {},
   };
 
-  // try setting here
   const [state, formAction] = useActionState(OwnerLogin, initialState);
   const { setLogin, setLoggedIn, login } = useOwnerContext();
 
-  // useEffect(() => {
-  // }, [setShowLogin]);
-
-  const loginRef = useRef<OwnerLogin>({
-    accessToken: "",
-    refreshToken: "",
-    ownerName: "",
-  });
-
   useEffect(() => {
     async function Login() {
+      // def get error message in here/try catch
       if (state.status === 200) {
         StoreLogin(state.response);
         setLogin(await GetLogin());
@@ -43,7 +29,6 @@ export default function OwnerLoginForm() {
         console.log("login form: " + login.ownerName);
         setLoggedIn(true);
       }
-      // set 403
     }
     Login();
   }, [login, setLoggedIn, setLogin, state.response, state.status]);
@@ -67,7 +52,7 @@ export default function OwnerLoginForm() {
         maxLength={8}
         required
       />
-      <LoginButton status={state.status} response={state.response} />
+      <LoginButton />
     </form>
   );
 }

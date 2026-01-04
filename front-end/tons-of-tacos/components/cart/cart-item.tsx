@@ -7,7 +7,7 @@ import { useOwnerContext } from "@/context/owner-context";
 import SizeSelector from "../ui/selectors/size-selector/size-selector";
 import QuantitySelector from "../ui/selectors/quantity-selector/quantity-selector";
 import RemoveFromCart from "../ui/buttons/remove-from-cart/remove-from-cart";
-import Update from "../ui/buttons/update-cart-item/update-cart-item";
+import UpdateCartItem from "../ui/buttons/update-cart-item/update-cart-item";
 import { calcItemTotal } from "@/lib/general/multi-use";
 import { useSelectedSizeContext } from "@/context/size-context";
 
@@ -204,7 +204,7 @@ export default function CartItem(props: {
 
       <div className={classes.actionButtonGroup}>
         {canUpdate && (
-          <Update
+          <UpdateCartItem
             cartItemId={props.id}
             updatedItemQuantity={quantity}
             updatedItemPrice={newPrice.toFixed(2)}
