@@ -11,11 +11,13 @@ import Cart from "@/components/cart/cart";
 import { useCartContext } from "@/context/cart-context";
 import { GetCart } from "@/lib/cart";
 import CategoriesSource from "@/lib/menu";
+import { useErrorContext } from "@/context/error-context";
 
 export default function NavButtons() {
   const { setMenuCategories } = useMenuCategoryContext();
   const { showMenu, setShowMenu, showCart, setShowCart } = useDisplayContext();
   const { setCart, cartQuantity } = useCartContext();
+  const { setError, setErrorMessage } = useErrorContext();
 
   function toggleMenu() {
     setShowCart(false);
@@ -31,7 +33,12 @@ export default function NavButtons() {
 
   useEffect(() => {
     async function getCategories() {
-      categories.current = await CategoriesSource();
+      try {
+        categories.current = await CategoriesSource();
+      } catch (error) {
+        setError(true);
+        setErrorMessage("Cant connect " + `${error}`);
+      }
     }
     getCategories();
     setMenuCategories(categories.current);
@@ -42,6 +49,8 @@ export default function NavButtons() {
   }, [
     cartQuantity,
     setCart,
+    setError,
+    setErrorMessage,
     setMenuCategories,
     setShowCart,
     showCart,

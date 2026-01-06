@@ -75,14 +75,18 @@ export default function AddToCart(props: {
           props.size
         );
       } else {
-        AddItemToCart(
-          props.id,
-          props.menuId,
-          props.itemName,
-          props.quantity,
-          selectedSize,
-          props.price
-        );
+        // try {
+          AddItemToCart(
+            props.id,
+            props.menuId,
+            props.itemName,
+            props.quantity,
+            selectedSize,
+            props.price
+          );
+        // } catch (error) {
+        //   throw new Error(`${error}`);
+        // }
       }
       setCart(GetCart());
       setCartQuantity(cartQuantity + props.quantity);
@@ -90,12 +94,21 @@ export default function AddToCart(props: {
     itemInCart.current = false;
   };
 
+  function execute() {
+    try {
+      checkItem();
+      addCartItem();
+    } catch (error) {
+      throw new Error(`${error}`);
+    }
+  }
+
   return (
     <>
       <button
         disabled={largeOrder === true ? true : false}
         className={classes.add}
-        onClick={() => [checkItem(), addCartItem()]}
+        onClick={() => execute()}
       >
         Add To Cart
       </button>

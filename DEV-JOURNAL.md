@@ -2,6 +2,24 @@
 
 ---
 
+-- 5 Jan --
+
+- Have begun investigation into moments where errors are potentially not being handled and implementing solutions.
+  - By placing an error handler in route segments as well as implementing an Error component from the home page, we have gained the ability to receive error messages from the server as well as our own custom error messages on the front-end with an aesthetic that feels congruent with one another.
+  - Essentially the strategy becomes:
+    - If request is not completed due to server being down this is handled at root level.
+    - If error from client input(address bar), handled with error component in that segment.
+    - If error triggered by owner input during a task like looking up an order by uid, the error is displayed in a modal dismissed with button.
+- Be aware that throwing a new error will trigger next.js hot module replacement.
+  - Not going to lie that in my limited time with the framework the current implementation of hot module replacement feels like a misstep that unnecessarily hinders development.
+    - Evaluating to see what we have done that makes this an issue.
+      - Appear to have rectified with alteration in main header that was causing logged in to be set when it shouldn't. Please continue observation.
+- All functions in lib/menu appear to have appropriate error handling in place.
+- lib/customer-form is comprised of validation functions that provide immediate feedback to user and disable ability so submit information until all fields are deemed valid.
+- Need to continue monitoring for code that needs to be scrubbed. observe console.
+
+---
+
 -- 4 Jan 2025 --
 
 - Continuing work for scrubbing files for unused code and superfluous comments.
