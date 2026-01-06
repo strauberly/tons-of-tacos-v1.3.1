@@ -2,7 +2,7 @@
 
 import classes from "@/app/page.module.css";
 
-export default function Error(error: { message: string }) {
+export default function Error({ error }: { error: Error }) {
   return (
     <div className={classes.error}>
       <h1>Whoops! {error.message}</h1>

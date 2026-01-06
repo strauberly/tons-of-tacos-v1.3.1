@@ -10,6 +10,7 @@ export default function CartItems() {
   const { ownerOrder, order, loggedIn } = useOwnerContext();
 
   useEffect(() => {
+    // try catch
     if (loggedIn) {
       return setCart(GetOwnerOrder());
     } else {
