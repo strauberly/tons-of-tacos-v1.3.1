@@ -35,8 +35,14 @@ export async function AddItemToCart(
   };
 
   let newCart: CartItem[] = [];
+  // try {
   newCart = GetCart();
   newCart.push(cartItem);
+  // } catch (error) {
+  //   throw new Error(
+  //     "Cart not currently available for adding an item." + `${error}`
+  //   );
+  // }
   sessionStorage.removeItem("tons-of-tacos-cart");
   sessionStorage.setItem("tons-of-tacos-cart", JSON.stringify(newCart));
 }

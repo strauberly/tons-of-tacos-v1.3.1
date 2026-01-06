@@ -93,7 +93,7 @@ button:hover {
 .children {
   display: flexbox;
   z-index: 0;
-  padding: 2rem;
+  padding: 1rem;
   padding-top: 6vw;
   justify-content: center;
   align-items: center;

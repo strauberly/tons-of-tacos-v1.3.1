@@ -26,9 +26,10 @@ export default function MainHeader() {
       console.log("check cook: " + (await CookieCheck()));
       console.log("logged in: " + loggedIn);
       console.log("login: " + login.ownerName);
+
       if ((await CookieCheck()) === false && loggedIn === false) {
         setLogin(await GetLogin());
-        if (login.ownerName !== "") setLoggedIn(true);
+        if (login.ownerName !== undefined) setLoggedIn(true);
       } else if ((await nextCookiePresent()) !== true) {
         DeleteCookies();
       }
