@@ -9,12 +9,20 @@ export default function CartItems() {
   const { cart, setCart } = useCartContext();
   const { ownerOrder, order, loggedIn } = useOwnerContext();
 
+  if (cart == null) {
+    throw new Error("uh..");
+  }
+
   useEffect(() => {
     // try catch
     if (loggedIn) {
-      return setCart(GetOwnerOrder());
+      setCart(GetOwnerOrder());
     } else {
-      return setCart(GetCart());
+      try {
+        setCart(GetCart());
+      } catch {
+        throw new Error("up");
+      }
     }
   }, [loggedIn, order, ownerOrder, setCart]);
 

@@ -35,14 +35,18 @@ export async function AddItemToCart(
   };
 
   let newCart: CartItem[] = [];
-  // try {
-  newCart = GetCart();
-  newCart.push(cartItem);
-  // } catch (error) {
-  //   throw new Error(
-  //     "Cart not currently available for adding an item." + `${error}`
-  //   );
-  // }
+  try {
+    newCart = GetCart();
+  } catch {
+    throw new Error("hell");
+  }
+  try {
+    newCart.push(cartItem);
+  } catch (error) {
+    throw new Error(
+      "Cart not currently available for adding an item." + `${error}`
+    );
+  }
   sessionStorage.removeItem("tons-of-tacos-cart");
   sessionStorage.setItem("tons-of-tacos-cart", JSON.stringify(newCart));
 }
@@ -58,6 +62,11 @@ export function RemoveCartItem(itemId: string) {
 
 export function GetCart() {
   let oldCart: CartItem[] = [];
+  try {
+    sessionStorage.getItem("tons-of-tacos-cart");
+  } catch {
+    throw new Error("whup");
+  }
 
   try {
     oldCart = JSON.parse(sessionStorage.getItem("tons-of-tacos-cart") || "{}");

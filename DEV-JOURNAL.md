@@ -17,6 +17,8 @@
 - All functions in lib/menu appear to have appropriate error handling in place.
 - lib/customer-form is comprised of validation functions that provide immediate feedback to user and disable ability so submit information until all fields are deemed valid.
 - Need to continue monitoring for code that needs to be scrubbed. observe console.
+- A few advancements, Global error handler appears to be doing its job, yay! refresh button directs user back to home page. In theory this should reset anything like a cart being deleted from session storage by mistake by user etc.
+- main header should be good to go instead of it feeling like random determination of which sub header to display whenever we had an app wide reset.
 
 ---
 
