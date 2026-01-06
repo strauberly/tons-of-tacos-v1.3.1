@@ -29,7 +29,9 @@ export default function MainHeader() {
 
       if ((await CookieCheck()) === false && loggedIn === false) {
         setLogin(await GetLogin());
-        if (login.ownerName !== undefined) setLoggedIn(true);
+      }
+      if (login.ownerName) {
+        setLoggedIn(true);
       } else if ((await nextCookiePresent()) !== true) {
         DeleteCookies();
       }
@@ -44,7 +46,7 @@ export default function MainHeader() {
         <header className={classes.header}>
           <Link
             className={classes.home}
-            onNavigate={() => [DeleteCookies, setLoggedIn(false)]}
+            onNavigate={() => [DeleteCookies(), setLoggedIn(false)]}
             href="/"
           >
             Tons Of Tacos

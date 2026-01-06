@@ -75,7 +75,7 @@ export default function AddToCart(props: {
           props.size
         );
       } else {
-        // try {
+        try {
           AddItemToCart(
             props.id,
             props.menuId,
@@ -84,9 +84,9 @@ export default function AddToCart(props: {
             selectedSize,
             props.price
           );
-        // } catch (error) {
-        //   throw new Error(`${error}`);
-        // }
+        } catch (error) {
+          throw new Error(`${error}`);
+        }
       }
       setCart(GetCart());
       setCartQuantity(cartQuantity + props.quantity);
