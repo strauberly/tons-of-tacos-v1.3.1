@@ -16,10 +16,12 @@ import {
   GetLogin,
   nextCookiePresent,
 } from "@/lib/owner-session/owner-session-server";
+import { useErrorContext } from "@/context/error-context";
 
 export default function MainHeader() {
   const { showLogin } = useDisplayContext();
   const { loggedIn, setLoggedIn, setLogin, login } = useOwnerContext();
+  const { setError } = useErrorContext();
 
   useEffect(() => {
     async function LoginCheck() {
@@ -46,7 +48,12 @@ export default function MainHeader() {
         <header className={classes.header}>
           <Link
             className={classes.home}
-            onNavigate={() => [DeleteCookies(), setLoggedIn(false)]}
+            onNavigate={() => [
+              DeleteCookies(),
+              setLoggedIn(false),
+              setError(false),
+              (window.location.href = "/"),
+            ]}
             href="/"
           >
             Tons Of Tacos

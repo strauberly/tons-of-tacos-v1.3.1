@@ -2,6 +2,12 @@
 
 ---
 
+-- 7 Jan --
+
+- Was trying to build improvement for error handling for user if they enter an item category as a means of navigation and it is incorrect(spelling, formatting etc). Discovered current solution in place is actually working really well to provide desired result so leaving it alone for time being.
+
+---
+
 -- 5 Jan --
 
 - Have begun investigation into moments where errors are potentially not being handled and implementing solutions.
