@@ -9,7 +9,7 @@ import {
 } from "@/lib/owners-tools/owners-tools-client";
 import { useCartContext } from "@/context/cart-context";
 import { useRef } from "react";
-import { GetOrderByID } from "@/lib/owners-tools/owners-tools";
+import { GetOrderByID } from "@/lib/owners-tools/owners-tools-server";
 
 export default function AddToOrderButton(props: {
   orderUid: string;

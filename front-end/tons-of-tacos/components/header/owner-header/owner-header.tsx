@@ -13,7 +13,7 @@ import {
 } from "@/lib/owner-session/owner-session-server";
 
 import { useOrdersContext } from "@/context/orders-context";
-import { GetAllOrders } from "@/lib/owners-tools/owners-tools";
+import { GetAllOrders } from "@/lib/owners-tools/owners-tools-server";
 
 export default function OwnerHeader() {
   const { login, setLoggedIn, setLogin } = useOwnerContext();

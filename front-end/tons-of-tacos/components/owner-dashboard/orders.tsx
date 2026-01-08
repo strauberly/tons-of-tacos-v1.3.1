@@ -1,17 +1,22 @@
+"use client";
+
 import classes from "./owner-dashboard.module.css";
 import { useOrdersContext } from "@/context/orders-context";
 import { useOwnerContext } from "@/context/owner-context";
-import { GetAllOrders } from "@/lib/owners-tools/owners-tools";
+import { GetAllOrders } from "@/lib/owners-tools/owners-tools-server";
 import { useEffect } from "react";
 import Order from "./order";
+import { useErrorContext } from "@/context/error-context";
 
 export default function Orders(props: { sortState: string }) {
   const { orders, setOrders } = useOrdersContext();
   const { login } = useOwnerContext();
+  const { setError, setErrorMessage } = useErrorContext();
 
   const readyOrders: Order[] = orders.filter(checkReady);
   const openOrders: Order[] = orders.filter(checkOpen);
   const closedOrders: Order[] = orders.filter(checkClosed);
+
   const sortedOpen: Order[] = openOrders
     .concat(readyOrders)
     .concat(closedOrders);
@@ -37,9 +42,15 @@ export default function Orders(props: { sortState: string }) {
     async function GetOrders() {
       const orders: Order[] = await GetAllOrders(login.accessToken);
       setOrders(orders);
+      if (orders.length === 0) {
+        setError(true);
+        setErrorMessage(
+          "Orders not available at the moment. Please refresh and try again"
+        );
+      }
     }
     GetOrders();
-  }, [login.accessToken, setOrders]);
+  }, [login.accessToken, setError, setErrorMessage, setOrders]);
 
   return (
     <div className={classes.dashboard}>

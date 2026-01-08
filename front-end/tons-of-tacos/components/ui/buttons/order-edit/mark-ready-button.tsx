@@ -1,5 +1,8 @@
 import { useOrdersContext } from "@/context/orders-context";
-import { GetAllOrders, MarkOrderReady } from "@/lib/owners-tools/owners-tools";
+import {
+  GetAllOrders,
+  MarkOrderReady,
+} from "@/lib/owners-tools/owners-tools-server";
 import { useRef } from "react";
 
 export default function MarkReadyButton(props: {

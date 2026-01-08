@@ -8,7 +8,7 @@ import {
   ExecuteConfirm,
   GetAllOrders,
   GetOrderByID,
-} from "@/lib/owners-tools/owners-tools";
+} from "@/lib/owners-tools/owners-tools-server";
 import { useRef } from "react";
 
 export default function ActionConfirmationButton(props: { title: string }) {

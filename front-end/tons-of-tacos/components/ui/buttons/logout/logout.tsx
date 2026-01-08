@@ -10,7 +10,7 @@ import {
 } from "@/lib/owner-session/owner-session-server";
 
 export default function LogoutButton() {
-  const { setLoggedIn, login } = useOwnerContext();
+  const { setLoggedIn, login, setLogin } = useOwnerContext();
   const { setShowLogin } = useDisplayContext();
 
   function LogOut() {
@@ -26,6 +26,11 @@ export default function LogoutButton() {
         await OwnerLogout(login.accessToken),
         DeleteCookies(),
         setLoggedIn(false),
+        setLogin({
+          accessToken: "",
+          refreshToken: "",
+          ownerName: "",
+        }),
       ]}
     >
       Log Out

@@ -1,3 +1,5 @@
+"use client";
+
 import classes from "./action-bar.module.css";
 import SearchBar from "./search-bar";
 import { useDisplayContext } from "@/context/display-context";

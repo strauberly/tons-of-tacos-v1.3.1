@@ -8,7 +8,7 @@ import { useOrderConfirmationContext } from "@/context/order-confirmation-contex
 import { useOwnerContext } from "@/context/owner-context";
 import { DeleteOwnerOrder } from "@/lib/owners-tools/owners-tools-client";
 import { useOrdersContext } from "@/context/orders-context";
-import { GetAllOrders } from "@/lib/owners-tools/owners-tools";
+import { GetAllOrders } from "@/lib/owners-tools/owners-tools-server";
 
 export default function OrderConfirmation() {
   const {
