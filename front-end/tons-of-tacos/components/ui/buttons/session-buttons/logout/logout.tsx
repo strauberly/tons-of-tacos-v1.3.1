@@ -1,7 +1,7 @@
 "use client";
 
 import { useDisplayContext } from "@/context/display-context";
-import { useOwnerContext } from "@/context/owner-context";
+import { useOwnerContext } from "@/context/order-context/owner-context";
 
 import classes from "./logout.module.css";
 import {
@@ -10,11 +10,11 @@ import {
 } from "@/lib/owner-session/owner-session-server";
 
 export default function LogoutButton() {
-  const { setLoggedIn, login } = useOwnerContext();
+  const { setLoggedIn, login, setLogin } = useOwnerContext();
   const { setShowLogin } = useDisplayContext();
 
   function LogOut() {
-    setLoggedIn(IsAuthenticated());
+    setLoggedIn(false);
     setShowLogin(true);
   }
 
@@ -26,6 +26,11 @@ export default function LogoutButton() {
         await OwnerLogout(login.accessToken),
         DeleteCookies(),
         setLoggedIn(false),
+        setLogin({
+          accessToken: "",
+          refreshToken: "",
+          ownerName: "",
+        }),
       ]}
     >
       Log Out

@@ -7,10 +7,10 @@ import QuantitySelector from "../../ui/selectors/quantity-selector/quantity-sele
 import MoreIcon from "@/components/ui/icons/more-icon";
 import { useSelectedSizeContext } from "@/context/size-context";
 import { useDisplayContext } from "@/context/display-context";
-import { useModalContext } from "@/context/modal-context";
-import AddToCart from "@/components/ui/buttons/add-to-cart/add-to-cart";
+import { useModalContext } from "@/context/menu-context/modal-context";
+import AddToCart from "@/components/ui/buttons/cart-buttons/add-to-cart/add-to-cart";
 import SizeSelector from "./size-selector/size-selector";
-import { useMenuItemIdContext } from "@/context/menu-item-context";
+import { useMenuItemIdContext } from "@/context/menu-context/menu-item-context";
 
 export default function MenuItem(props: {
   id: string;

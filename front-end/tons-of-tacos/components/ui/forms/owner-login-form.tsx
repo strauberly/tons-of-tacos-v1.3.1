@@ -6,8 +6,8 @@ import {
   OwnerLogin,
   StoreLogin,
 } from "@/lib/owner-session/owner-session-server";
-import LoginButton from "../buttons/login/login-button";
-import { useOwnerContext } from "@/context/owner-context";
+import LoginButton from "../buttons/session-buttons/login/login-button";
+import { useOwnerContext } from "@/context/order-context/owner-context";
 import { useErrorContext } from "@/context/error-context";
 
 export default function OwnerLoginForm() {

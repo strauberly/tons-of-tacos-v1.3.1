@@ -1,7 +1,7 @@
 import classes from "./owner-dashboard.module.css";
 import { useDisplayContext } from "@/context/display-context";
 import Orders from "./orders";
-import { useModalContext } from "@/context/modal-context";
+import { useModalContext } from "@/context/menu-context/modal-context";
 import OrderView from "../modal/order-view/order-view";
 import OrderActionConfirmation from "../modal/confirmations/order-action-confirmation";
 import React, { Suspense, useState } from "react";

@@ -1,7 +1,7 @@
 "use client";
 import classes from "./modal.module.css";
 import { useDisplayContext } from "@/context/display-context";
-import { useModalContext } from "@/context/modal-context";
+import { useModalContext } from "@/context/menu-context/modal-context";
 
 export default function Modal() {
   const { showModal, setShowModal } = useDisplayContext();
