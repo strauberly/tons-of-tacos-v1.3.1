@@ -1,5 +1,5 @@
 import classes from "./order-view.module.css";
-import { useModalContext } from "@/context/modal-context";
+import { useModalContext } from "@/context/menu-context/modal-context";
 import Card from "../../ui/cards/card";
 import OrderItem from "../../owner-dashboard/order-item";
 import { useDisplayContext } from "@/context/display-context";

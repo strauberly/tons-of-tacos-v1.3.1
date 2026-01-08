@@ -1,10 +1,9 @@
+import classes from "./search.module.css";
 import { GetOrderByID } from "@/lib/owners-tools/owners-tools-server";
 import SearchIcon from "./search-icon";
 import { useRef } from "react";
-import { useModalContext } from "@/context/modal-context";
+import { useModalContext } from "@/context/menu-context/modal-context";
 import { useDisplayContext } from "@/context/display-context";
-
-import classes from "./search.module.css";
 export default function SearchByIdButton(props: {
   idValid: boolean;
   orderUid: string;
@@ -20,9 +19,6 @@ export default function SearchByIdButton(props: {
   });
 
   function orderFound() {
-    // console.log(response.current.);
-    console.log(response.current.status);
-    console.log(response.current.body);
     if (response.current.status === 200) {
       setOrderToView(response.current.body as Order);
       console.log(response.current.body);

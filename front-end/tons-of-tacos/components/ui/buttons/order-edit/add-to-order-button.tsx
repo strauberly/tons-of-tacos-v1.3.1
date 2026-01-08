@@ -1,8 +1,8 @@
-import { useDisplayContext } from "@/context/display-context";
-import { useModalContext } from "@/context/modal-context";
-import { useEditOrderContext } from "@/context/edit-order-context";
 import classes from "../../selectors/add-to-order/add-order-item.module.css";
-import { useOwnerContext } from "@/context/owner-context";
+import { useDisplayContext } from "@/context/display-context";
+import { useModalContext } from "@/context/menu-context/modal-context";
+import { useEditOrderContext } from "@/context/order-context/edit-order-context";
+import { useOwnerContext } from "@/context/order-context/owner-context";
 import {
   AddToOwnerOrder,
   GetOwnerOrder,
@@ -29,8 +29,8 @@ export default function AddToOrderButton(props: {
   const { orderToView } = useModalContext();
   const { ownerOrder, setOrder, order, login } = useOwnerContext();
   const { setCart, cart } = useCartContext();
-  const { setModal, setOrderToView } = useModalContext();
-  const { setShowModal } = useDisplayContext();
+  const { setOrderToView } = useModalContext();
+
   const {
     setMenuItem,
     setQuantity,
@@ -38,9 +38,6 @@ export default function AddToOrderButton(props: {
     setMenuItemSize,
     setItemSize,
   } = useEditOrderContext();
-  console.log(props.quantity);
-  console.log("item: " + JSON.stringify(props.menuItem));
-  console.log("item size: " + `${props.size}`);
 
   const itemInOrder = useRef<boolean>(false);
 
@@ -49,43 +46,35 @@ export default function AddToOrderButton(props: {
 
     if (ownerOrder) {
       setCart(GetOwnerOrder());
-      cart.forEach((cartItem) => {
-        console.log(cartItem.itemName);
-        console.log(props.menuItem.itemName);
-        console.log(cartItem.size);
-        console.log(props.size);
-
-        if (
-          cartItem.itemName === props.menuItem.itemName &&
-          cartItem.size === props.size
-        ) {
-          // setModal(
-          //   "Item already in order. Update quantity, remove, or choose a different item."
-          // );
-          // setShowModal(true);
-          itemInOrder.current = true;
-          props.setSizeValid(false);
-          props.reset("addButton");
-        }
-      });
+      try {
+        cart.forEach((cartItem) => {
+          if (
+            cartItem.itemName === props.menuItem.itemName &&
+            cartItem.size === props.size
+          ) {
+            itemInOrder.current = true;
+            props.setSizeValid(false);
+            props.reset("addButton");
+          }
+        });
+      } catch (error) {
+        throw new Error(`${error}`);
+      }
     } else {
-      console.log(order);
-
-      orderToView.orderItems.forEach((orderItem) => {
-        if (
-          orderItem.itemName === props.menuItem.itemName &&
-          orderItem.size === props.size
-        ) {
-          // if (orderItem.itemName === props.menuItem.itemName ) {
-          // setModal(
-          //   "Item already in order. Update quantity, remove, or choose a different item."
-          // );
-          // setShowModal(true);
-          itemInOrder.current = true;
-          props.setSizeValid(false);
-          props.reset("addButton");
-        }
-      });
+      try {
+        orderToView.orderItems.forEach((orderItem) => {
+          if (
+            orderItem.itemName === props.menuItem.itemName &&
+            orderItem.size === props.size
+          ) {
+            itemInOrder.current = true;
+            props.setSizeValid(false);
+            props.reset("addButton");
+          }
+        });
+      } catch (error) {
+        throw new Error(`${error}`);
+      }
     }
   }
 
@@ -138,9 +127,6 @@ export default function AddToOrderButton(props: {
       <button
         className={classes.addItemButton}
         disabled={
-          // props.menuItem.itemName === "" ||
-          // props.size === "a" ||
-          // itemInOrder.current
           itemInOrder.current === true ||
           (props.size !== "S" &&
             props.size !== "M" &&
@@ -167,7 +153,6 @@ export default function AddToOrderButton(props: {
             setOrderToView(orderReqRes.current.body as Order);
             props.reset("addButton");
           }
-          // props.reset();
         }}
       >
         Add Item

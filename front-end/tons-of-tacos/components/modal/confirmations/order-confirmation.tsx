@@ -4,10 +4,10 @@ import { useDisplayContext } from "@/context/display-context";
 import { useRouter } from "next/navigation";
 import { CreateCart, ResetCart } from "@/lib/cart";
 import { useCartContext } from "@/context/cart-context";
-import { useOrderConfirmationContext } from "@/context/order-confirmation-context";
-import { useOwnerContext } from "@/context/owner-context";
+import { useOrderConfirmationContext } from "@/context/order-context/order-confirmation-context";
+import { useOwnerContext } from "@/context/order-context/owner-context";
 import { DeleteOwnerOrder } from "@/lib/owners-tools/owners-tools-client";
-import { useOrdersContext } from "@/context/orders-context";
+import { useOrdersContext } from "@/context/order-context/orders-context";
 import { GetAllOrders } from "@/lib/owners-tools/owners-tools-server";
 
 export default function OrderConfirmation() {

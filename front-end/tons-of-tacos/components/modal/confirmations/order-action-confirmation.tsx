@@ -1,7 +1,7 @@
 import classes from "./order-action-confirmation.module.css";
 import { useDisplayContext } from "@/context/display-context";
 import Card from "../../ui/cards/card";
-import { useModalContext } from "@/context/modal-context";
+import { useModalContext } from "@/context/menu-context/modal-context";
 import { useRef } from "react";
 import {
   AddToOrderMessage,
@@ -10,10 +10,10 @@ import {
   RemoveFromOrderMessage,
   UpdateOrderItemMessage,
 } from "@/lib/owners-tools/confirmation-messages";
-import { useEditOrderContext } from "@/context/edit-order-context";
+import { useEditOrderContext } from "@/context/order-context/edit-order-context";
 import ActionConfirmationButton from "../../ui/buttons/order-edit/action-confirmation-button";
 import { GetOrderByID } from "@/lib/owners-tools/owners-tools-server";
-import { useOwnerContext } from "@/context/owner-context";
+import { useOwnerContext } from "@/context/order-context/owner-context";
 
 export default function OrderActionConfirmation(props: {
   title: string;

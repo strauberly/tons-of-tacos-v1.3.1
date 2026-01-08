@@ -1,7 +1,7 @@
 import classes from "./size-buttons.module.css";
 import { useSelectedSizeContext } from "@/context/size-context";
 import { useId } from "react";
-import { useMenuItemIdContext } from "@/context/menu-item-context";
+import { useMenuItemIdContext } from "@/context/menu-context/menu-item-context";
 
 export default function SizeButton(props: { size: string; id: string }) {
   const itemId = useId();

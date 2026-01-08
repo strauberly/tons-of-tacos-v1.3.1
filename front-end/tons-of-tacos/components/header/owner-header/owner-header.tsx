@@ -1,8 +1,8 @@
 "use client";
 import classes from "./owner-header.module.css";
-import { useOwnerContext } from "@/context/owner-context";
+import { useOwnerContext } from "@/context/order-context/owner-context";
 import { useEffect, useState } from "react";
-import LogoutButton from "../../ui/buttons/logout/logout";
+import LogoutButton from "../../ui/buttons/session-buttons/logout/logout";
 
 import {
   DeleteCookies,
@@ -12,7 +12,7 @@ import {
   StoreLogin,
 } from "@/lib/owner-session/owner-session-server";
 
-import { useOrdersContext } from "@/context/orders-context";
+import { useOrdersContext } from "@/context/order-context/orders-context";
 import { GetAllOrders } from "@/lib/owners-tools/owners-tools-server";
 
 export default function OwnerHeader() {

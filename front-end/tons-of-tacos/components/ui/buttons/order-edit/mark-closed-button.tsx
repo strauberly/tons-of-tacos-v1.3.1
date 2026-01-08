@@ -1,4 +1,4 @@
-import { useOrdersContext } from "@/context/orders-context";
+import { useOrdersContext } from "@/context/order-context/orders-context";
 import {
   GetAllOrders,
   MarkOrderClosed,
@@ -7,9 +7,9 @@ import { useRef } from "react";
 
 export default function MarkClosedButton(props: {
   orderUid: string;
-  token: string | undefined;
+  token: string;
 }) {
-  const orders = useRef<Order[] | undefined>();
+  const orders = useRef<Order[]>([]);
   const { setOrders } = useOrdersContext();
   return (
     <button

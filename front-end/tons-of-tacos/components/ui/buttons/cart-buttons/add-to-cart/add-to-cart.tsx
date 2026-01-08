@@ -1,12 +1,12 @@
 "use client";
 import classes from "./add-to-cart.module.css";
-import { useModalContext } from "@/context/modal-context";
+import { useModalContext } from "@/context/menu-context/modal-context";
 import { useCartContext } from "@/context/cart-context";
 import { AddItemToCart, GetCart } from "@/lib/cart";
 import { useRef, useState } from "react";
 import { useDisplayContext } from "@/context/display-context";
 import { useSelectedSizeContext } from "@/context/size-context";
-import { useOwnerContext } from "@/context/owner-context";
+import { useOwnerContext } from "@/context/order-context/owner-context";
 import { AddToOwnerOrder } from "@/lib/owners-tools/owners-tools-client";
 
 export default function AddToCart(props: {
