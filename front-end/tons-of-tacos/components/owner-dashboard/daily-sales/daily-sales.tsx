@@ -1,9 +1,13 @@
 import { useOwnerContext } from "@/context/owner-context";
-import { DailySales } from "@/lib/owners-tools/owners-tools";
+import { DailySales } from "@/lib/owners-tools/owners-tools-server";
 import { useEffect, useState } from "react";
 
 export default function DailySalesDisplay() {
-  const [sales, setSales] = useState<Sales | undefined>();
+  const [sales, setSales] = useState<Sales>({
+    date: "",
+    numberOfSales: 0,
+    total: 0,
+  });
   const { login, loggedIn } = useOwnerContext();
 
   useEffect(() => {

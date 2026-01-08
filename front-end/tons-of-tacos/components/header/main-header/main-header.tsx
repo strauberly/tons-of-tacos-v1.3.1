@@ -16,24 +16,22 @@ import {
   GetLogin,
   nextCookiePresent,
 } from "@/lib/owner-session/owner-session-server";
-import { useErrorContext } from "@/context/error-context";
+
+// import { cookies } from "next/headers";
 
 export default function MainHeader() {
   const { showLogin } = useDisplayContext();
   const { loggedIn, setLoggedIn, setLogin, login } = useOwnerContext();
-  const { setError } = useErrorContext();
 
   useEffect(() => {
     async function LoginCheck() {
+      // setLoggedIn(await GetLogin())
       console.log("check cook: " + (await CookieCheck()));
       console.log("logged in: " + loggedIn);
       console.log("login: " + login.ownerName);
-
       if ((await CookieCheck()) === false && loggedIn === false) {
         setLogin(await GetLogin());
-      }
-      if (login.ownerName) {
-        setLoggedIn(true);
+        if (login.ownerName !== "") setLoggedIn(true);
       } else if ((await nextCookiePresent()) !== true) {
         DeleteCookies();
       }
@@ -49,9 +47,8 @@ export default function MainHeader() {
           <Link
             className={classes.home}
             onNavigate={() => [
-              DeleteCookies(),
+              DeleteCookies,
               setLoggedIn(false),
-              setError(false),
               (window.location.href = "/"),
             ]}
             href="/"

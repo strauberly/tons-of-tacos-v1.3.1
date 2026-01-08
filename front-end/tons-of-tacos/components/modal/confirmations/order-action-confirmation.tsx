@@ -12,7 +12,7 @@ import {
 } from "@/lib/owners-tools/confirmation-messages";
 import { useEditOrderContext } from "@/context/edit-order-context";
 import ActionConfirmationButton from "../../ui/buttons/order-edit/action-confirmation-button";
-import { GetOrderByID } from "@/lib/owners-tools/owners-tools";
+import { GetOrderByID } from "@/lib/owners-tools/owners-tools-server";
 import { useOwnerContext } from "@/context/owner-context";
 
 export default function OrderActionConfirmation(props: {

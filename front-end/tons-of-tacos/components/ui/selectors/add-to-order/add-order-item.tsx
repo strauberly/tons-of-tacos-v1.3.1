@@ -10,7 +10,7 @@ import SizeSelector from "../size-selector/size-selector";
 import { useCartContext } from "@/context/cart-context";
 
 export default function AddOrderItem() {
-  const { orderToView } = useModalContext();
+  const { orderToView, setOrderToView } = useModalContext();
   const { ownerOrder, loggedIn } = useOwnerContext();
   const { cart } = useCartContext();
 
@@ -156,6 +156,7 @@ export default function AddOrderItem() {
     price,
     quantity,
     readyToAdd,
+    setOrderToView,
     size,
     submitted,
   ]);

@@ -2,13 +2,24 @@
 
 ---
 
--- 7 Jan --
+-- 8 Jan 2026 --
 
-- Was trying to build improvement for error handling for user if they enter an item category as a means of navigation and it is incorrect(spelling, formatting etc). Discovered current solution in place is actually working really well to provide desired result so leaving it alone for time being.
+- All API calls in lib/owners-tools/owners-tools-server have been set to handle errors when encountered.
+- Error throwing enacted in orders component to be handled by error component in owners-tools route.
+- Error handling in place for owners-tools login. Should also work for other errors held in owners-tools components but needs further testing to verify.
 
 ---
 
--- 5 Jan --
+-- 7 Jan 2026 --
+
+- Was trying to build improvement for error handling for user if they enter an item category as a means of navigation and it is incorrect(spelling, formatting etc). Discovered current solution in place is actually working really well to provide desired result so leaving it alone for time being.
+
+- Had to back up a second, a previous commit had missed a couple of details regarding logins during refactor. Moving Forward.
+- Owners-tools renamed to owners-tools-server
+
+---
+
+-- 5 Jan 2026--
 
 - Have begun investigation into moments where errors are potentially not being handled and implementing solutions.
   - By placing an error handler in route segments as well as implementing an Error component from the home page, we have gained the ability to receive error messages from the server as well as our own custom error messages on the front-end with an aesthetic that feels congruent with one another.
@@ -28,7 +39,7 @@
 
 ---
 
--- 4 Jan 2025 --
+-- 4 Jan 2026 --
 
 - Continuing work for scrubbing files for unused code and superfluous comments.
 
@@ -56,7 +67,7 @@
 
 ---
 
--- 3 Jan 2025 --
+-- 3 Jan 2026 --
 
 - Beginning work cleaning up files in components.
 
@@ -116,7 +127,7 @@
 
 ---
 
--- 1 Jan 2025 --
+-- 1 Jan 2026 --
 Happy New Year!
 
 - Continuing to work on refactor and clean up. Still looking at handling refresh with next.js own refresh cookie reappearing.

@@ -19,7 +19,9 @@ export async function GetAllOrders(token: string) {
     const orders = data;
     return orders;
   } catch (error) {
-    console.log(error);
+    throw new Error(
+      "Bummer, looks like our systems are down. Give us a shout for more info or try again later."
+    );
   }
 }
 
@@ -41,7 +43,7 @@ export async function DeleteOrder(orderUid: string, token: string) {
 
     return data.message;
   } catch (error) {
-    console.log(error);
+    throw new Error(`${error}`);
   }
 }
 export async function RemoveFromOrder(orderItemId: number, token: string) {
@@ -63,7 +65,7 @@ export async function RemoveFromOrder(orderItemId: number, token: string) {
 
     return data.message;
   } catch (error) {
-    console.log(error);
+    throw new Error(`${error}`);
   }
 }
 
@@ -94,7 +96,7 @@ export async function AddToOrder(
 
     return data.message;
   } catch (error) {
-    console.log(error);
+    throw new Error(`${error}`);
   }
 }
 
@@ -121,7 +123,7 @@ export async function UpdateOrderItemQuantity(
     console.log(data);
     return data.message;
   } catch (error) {
-    console.log(error);
+    throw new Error(`${error}`);
   }
 }
 
@@ -144,29 +146,24 @@ export async function MarkOrderReady(
     data = response.json();
     console.log(data);
   } catch (error) {
-    console.log(error);
+    throw new Error(`${error}`);
   }
 }
 export async function MarkOrderClosed(
   orderUid: string,
   token: string | undefined
 ) {
-  let response;
-  let data;
-
   const address: string = `http://localhost:8080/api/owners-tools/orders/close-order/${orderUid}`;
 
   try {
-    response = await fetch(address.toString(), {
+    await fetch(address.toString(), {
       method: "PUT",
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    data = response.json();
-    console.log(data);
   } catch (error) {
-    console.log(error);
+    throw new Error(`${error}`);
   }
 }
 export async function DeleteConfirmation(orderUid: string, token: string) {
@@ -175,33 +172,35 @@ export async function DeleteConfirmation(orderUid: string, token: string) {
 }
 
 export async function GetOrdersByCustomerPhone(phone: string, token: string) {
-  console.log(phone);
-
   const customerOrdersResponse: CustomerOrdersResponse = {
     status: 0,
     body: "",
   };
 
-  const response = await fetch(
-    `http://localhost:8080/api/owners-tools/orders/get-order-customer-phone/phone?phone=${phone}`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-  //
-  const data = await response.json();
-  const status = response.status;
-  customerOrdersResponse.body = data;
-  customerOrdersResponse.status = status;
-  if (response.status === 200) {
-    return customerOrdersResponse;
-  } else {
-    customerOrdersResponse.body = data.message;
+  try {
+    const response = await fetch(
+      `http://localhost:8080/api/owners-tools/orders/get-order-customer-phone/phone?phone=${phone}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    //
+    const data = await response.json();
+    const status = response.status;
+    customerOrdersResponse.body = data;
     customerOrdersResponse.status = status;
-    return customerOrdersResponse;
+    if (response.status === 200) {
+      return customerOrdersResponse;
+    } else {
+      customerOrdersResponse.body = data.message;
+      customerOrdersResponse.status = status;
+      return customerOrdersResponse;
+    }
+  } catch (error) {
+    throw new Error(`${error}`);
   }
 }
 
@@ -222,27 +221,31 @@ export async function GetOrderByID(orderUid: string, token: string) {
     },
   };
 
-  const response = await fetch(
-    `http://localhost:8080/api/owners-tools/orders/get-order-uid/orderUid?orderUid=${orderUid}`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-  //
-  const data = await response.json();
-  const status = response.status;
-  orderResponse.body = data;
-  orderResponse.status = status;
-
-  if (status === 200) {
-    return orderResponse;
-  } else {
-    orderResponse.body = data.message;
+  try {
+    const response = await fetch(
+      `http://localhost:8080/api/owners-tools/orders/get-order-uid/orderUid?orderUid=${orderUid}`,
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    //
+    const data = await response.json();
+    const status = response.status;
+    orderResponse.body = data;
     orderResponse.status = status;
-    return orderResponse;
+
+    if (status === 200) {
+      return orderResponse;
+    } else {
+      orderResponse.body = data.message;
+      orderResponse.status = status;
+      return orderResponse;
+    }
+  } catch (error) {
+    throw new Error(`${error}`);
   }
 }
 
@@ -267,7 +270,7 @@ export async function UpdateCustomer(customer: Customer, token: string) {
     const data = await response.json();
     return data.message;
   } catch (error) {
-    console.log(error);
+    throw new Error(`${error}`);
   }
 }
 
@@ -286,7 +289,7 @@ export async function DailySales(token: string) {
     const data = await response.json();
     return data;
   } catch (error) {
-    console.log(error);
+    throw new Error(`${error}`);
   }
 }
 
