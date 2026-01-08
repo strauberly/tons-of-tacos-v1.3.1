@@ -1,10 +1,10 @@
 import classes from "../order-view.module.css";
-import { useModalContext } from "@/context/modal-context";
+import { useModalContext } from "@/context/menu-context/modal-context";
 import CustomerNameDetails from "./customer-name-details";
 import CustomerPhoneDetails from "./customer-phone-details";
 import CustomerEmailDetails from "./customer-email-details";
 import { useDisplayContext } from "@/context/display-context";
-import { useEditOrderContext } from "@/context/edit-order-context";
+import { useEditOrderContext } from "@/context/order-context/edit-order-context";
 
 export default function EditableDetails() {
   const { orderToView } = useModalContext();

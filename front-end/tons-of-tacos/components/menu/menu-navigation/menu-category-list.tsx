@@ -1,4 +1,4 @@
-import { useMenuCategoryContext } from "@/context/menu-category-context";
+import { useMenuCategoryContext } from "@/context/menu-context/menu-category-context";
 import MenuCategory from "./menu-category";
 
 export default function MenuCategories() {

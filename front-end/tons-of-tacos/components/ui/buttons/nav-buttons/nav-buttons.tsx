@@ -1,5 +1,5 @@
 "use client";
-import { useMenuCategoryContext } from "@/context/menu-category-context";
+import { useMenuCategoryContext } from "@/context/menu-context/menu-category-context";
 import classes from "./nav-buttons.module.css";
 import MenuIcon from "./menu-icon";
 import MenuNav from "../../../menu/menu-navigation/menu-navigation";

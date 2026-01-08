@@ -1,12 +1,12 @@
 "use client";
-import { useOwnerContext } from "@/context/owner-context";
+import { useOwnerContext } from "@/context/order-context/owner-context";
 import classes from "/components/menu/menu-items/menu-item-list.module.css";
 import { Suspense, useEffect, useState } from "react";
 import Loading from "../../loading";
 import { useParams } from "next/navigation";
-import { useMenuCategoryContext } from "@/context/menu-category-context";
+import { useMenuCategoryContext } from "@/context/menu-context/menu-category-context";
 import FadeOnLoad from "@/components/ui/animations/fade-on-load";
-import { MenuItemIdContextProvider } from "@/context/menu-item-context";
+import { MenuItemIdContextProvider } from "@/context/menu-context/menu-item-context";
 import CategoriesSource from "@/lib/menu";
 export default function Template({ children }: { children: React.ReactNode }) {
   const params = useParams<{ menuCategory: string }>();

@@ -1,8 +1,8 @@
 "use client";
 
 import classes from "./owner-dashboard.module.css";
-import { useOrdersContext } from "@/context/orders-context";
-import { useOwnerContext } from "@/context/owner-context";
+import { useOrdersContext } from "@/context/order-context/orders-context";
+import { useOwnerContext } from "@/context/order-context/owner-context";
 import { GetAllOrders } from "@/lib/owners-tools/owners-tools-server";
 import { useEffect } from "react";
 import Order from "./order";

@@ -1,13 +1,13 @@
 import classes from "./cart-item.module.css";
 import { useEffect, useRef, useState } from "react";
 import { useCartContext } from "@/context/cart-context";
-import { useModalContext } from "@/context/modal-context";
+import { useModalContext } from "@/context/menu-context/modal-context";
 import { useDisplayContext } from "@/context/display-context";
-import { useOwnerContext } from "@/context/owner-context";
+import { useOwnerContext } from "@/context/order-context/owner-context";
 import SizeSelector from "../ui/selectors/size-selector/size-selector";
 import QuantitySelector from "../ui/selectors/quantity-selector/quantity-selector";
-import RemoveFromCart from "../ui/buttons/remove-from-cart/remove-from-cart";
-import UpdateCartItem from "../ui/buttons/update-cart-item/update-cart-item";
+import RemoveFromCart from "../ui/buttons/cart-buttons/remove-from-cart/remove-from-cart";
+import UpdateCartItem from "../ui/buttons/cart-buttons/update-cart-item/update-cart-item";
 import { calcItemTotal } from "@/lib/multi-use/multi-use";
 import { useSelectedSizeContext } from "@/context/size-context";
 

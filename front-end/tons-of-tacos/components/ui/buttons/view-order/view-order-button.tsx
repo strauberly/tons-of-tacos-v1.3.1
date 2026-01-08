@@ -1,6 +1,6 @@
 import classes from "../../../modal/order-summary/order-summary.module.css";
 import { useDisplayContext } from "@/context/display-context";
-import { useModalContext } from "@/context/modal-context";
+import { useModalContext } from "@/context/menu-context/modal-context";
 
 export default function ViewOrderButton(order: { order: Order }) {
   const { setOrderToView } = useModalContext();

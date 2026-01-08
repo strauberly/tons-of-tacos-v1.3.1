@@ -7,6 +7,10 @@
 - All API calls in lib/owners-tools/owners-tools-server have been set to handle errors when encountered.
 - Error throwing enacted in orders component to be handled by error component in owners-tools route.
 - Error handling in place for owners-tools login. Should also work for other errors held in owners-tools components but needs further testing to verify.
+- Added additional folders to context for order and menu related context in an attempt to organize and cleanup a bit.
+- Button folders pertaining to Cart consolidated into a cart-buttons folder.
+- Session buttons cleaned up.
+- More scrubbing in buttons and order edit files and folders.
 
 ---
 
