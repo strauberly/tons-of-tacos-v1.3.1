@@ -1,5 +1,8 @@
 import { useOrdersContext } from "@/context/orders-context";
-import { GetAllOrders, MarkOrderClosed } from "@/lib/owners-tools/owners-tools";
+import {
+  GetAllOrders,
+  MarkOrderClosed,
+} from "@/lib/owners-tools/owners-tools-server";
 import { useRef } from "react";
 
 export default function MarkClosedButton(props: {

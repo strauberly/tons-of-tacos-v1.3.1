@@ -8,6 +8,7 @@ import {
 } from "@/lib/owner-session/owner-session-server";
 import LoginButton from "../buttons/login/login-button";
 import { useOwnerContext } from "@/context/owner-context";
+import { useErrorContext } from "@/context/error-context";
 
 export default function OwnerLoginForm() {
   const initialState = {
@@ -17,10 +18,10 @@ export default function OwnerLoginForm() {
 
   const [state, formAction] = useActionState(OwnerLogin, initialState);
   const { setLogin, setLoggedIn, login } = useOwnerContext();
+  const { setError, setErrorMessage } = useErrorContext();
 
   useEffect(() => {
     async function Login() {
-      // def get error message in here/try catch
       if (state.status === 200) {
         StoreLogin(state.response);
         setLogin(await GetLogin());
@@ -28,10 +29,23 @@ export default function OwnerLoginForm() {
         console.log("login form: " + login.refreshToken);
         console.log("login form: " + login.ownerName);
         setLoggedIn(true);
+        setError(false);
+        setErrorMessage("");
+      } else if (state.status != 0) {
+        setErrorMessage(`${state.response} ` + "Please try again.");
+        setError(true);
       }
     }
     Login();
-  }, [login, setLoggedIn, setLogin, state.response, state.status]);
+  }, [
+    login,
+    setError,
+    setErrorMessage,
+    setLoggedIn,
+    setLogin,
+    state.response,
+    state.status,
+  ]);
 
   return (
     <form className={classes.ownerLogin} action={formAction}>

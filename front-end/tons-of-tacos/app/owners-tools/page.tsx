@@ -8,10 +8,13 @@ import { Suspense, useEffect } from "react";
 import Splash from "../splash";
 import FadeOnLoad from "@/components/ui/animations/fade-on-load";
 import Loading from "../loading";
+import Error from "./error";
+import { useErrorContext } from "@/context/error-context";
 
 export default function OwnersTools() {
   const { setShowLogin } = useDisplayContext();
   const { loggedIn } = useOwnerContext();
+  const { error, errorMessage } = useErrorContext();
 
   useEffect(() => {
     setShowLogin(true);
@@ -19,7 +22,10 @@ export default function OwnersTools() {
 
   return (
     <Suspense fallback={<Loading />}>
-      <FadeOnLoad>{loggedIn ? <OwnerDashboard /> : <Splash />}</FadeOnLoad>
+      <FadeOnLoad>
+        {error && <Error message={errorMessage} />}
+        {loggedIn ? <OwnerDashboard /> : !error && <Splash />}
+      </FadeOnLoad>
     </Suspense>
   );
 }

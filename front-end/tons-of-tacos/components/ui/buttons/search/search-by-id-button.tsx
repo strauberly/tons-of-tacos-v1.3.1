@@ -1,4 +1,4 @@
-import { GetOrderByID } from "@/lib/owners-tools/owners-tools";
+import { GetOrderByID } from "@/lib/owners-tools/owners-tools-server";
 import SearchIcon from "./search-icon";
 import { useRef } from "react";
 import { useModalContext } from "@/context/modal-context";
