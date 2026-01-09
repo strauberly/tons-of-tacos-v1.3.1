@@ -2,6 +2,14 @@
 
 ---
 
+-- 9 Jan 2026 --
+
+- Some items relating orders context were established in owner context for some reason, these have been relocated to orders context wich seems more appropriate. Continuous monitoring for breakage as a result.
+
+- Clean up refactor complete. Will reoccur happen from time to time as project expands. Refactor still required for styling. Almost there!
+
+---
+
 -- 8 Jan 2026 --
 
 - All API calls in lib/owners-tools/owners-tools-server have been set to handle errors when encountered.
@@ -11,6 +19,7 @@
 - Button folders pertaining to Cart consolidated into a cart-buttons folder.
 - Session buttons cleaned up.
 - More scrubbing in buttons and order edit files and folders.
+- Files pertaining to orders in owner dashboard consolidated into an folder named orders.
 
 ---
 

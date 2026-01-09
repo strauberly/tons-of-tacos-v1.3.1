@@ -1,8 +1,7 @@
 "use client";
-
-import classes from "./owner-dashboard.module.css";
+import classes from "../../owner-dashboard/owner-dashboard.module.css";
 import { useOrdersContext } from "@/context/order-context/orders-context";
-import { useOwnerContext } from "@/context/order-context/owner-context";
+import { useOwnerContext } from "@/context/owner-context";
 import { GetAllOrders } from "@/lib/owners-tools/owners-tools-server";
 import { useEffect } from "react";
 import Order from "./order";
@@ -45,7 +44,7 @@ export default function Orders(props: { sortState: string }) {
       if (orders.length === 0) {
         setError(true);
         setErrorMessage(
-          "Orders not available at the moment. Please refresh and try again"
+          "Orders not available at the moment. Please refresh and try again."
         );
       }
     }

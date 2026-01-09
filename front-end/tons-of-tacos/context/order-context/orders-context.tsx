@@ -13,6 +13,12 @@ interface ContextProps {
   setOrders: Dispatch<SetStateAction<Order[]>>;
   customerOrders: Order[];
   setCustomerOrders: Dispatch<SetStateAction<Order[]>>;
+  ownerOrder: boolean;
+  setOwnerOrder: Dispatch<SetStateAction<boolean>>;
+  order: CartItem[];
+  setOrder: Dispatch<SetStateAction<CartItem[]>>;
+  orderTotal: string;
+  setOrderTotal: Dispatch<SetStateAction<string>>;
 }
 
 const OrdersContext = createContext<ContextProps>({
@@ -20,6 +26,12 @@ const OrdersContext = createContext<ContextProps>({
   setOrders: () => {},
   customerOrders: [],
   setCustomerOrders: () => {},
+  ownerOrder: false,
+  setOwnerOrder: () => {},
+  order: [],
+  setOrder: () => {},
+  orderTotal: "",
+  setOrderTotal: () => {},
 });
 
 export const OrdersContextProvider = ({
@@ -29,6 +41,10 @@ export const OrdersContextProvider = ({
 }) => {
   const [orders, setOrders] = useState<Order[]>([]);
   const [customerOrders, setCustomerOrders] = useState<Order[]>([]);
+  const [ownerOrder, setOwnerOrder] = useState(false);
+  const [order, setOrder] = useState<CartItem[]>([]);
+  const [orderTotal, setOrderTotal] = useState<string>("");
+
   return (
     <OrdersContext.Provider
       value={{
@@ -36,6 +52,12 @@ export const OrdersContextProvider = ({
         setOrders,
         customerOrders,
         setCustomerOrders,
+        ownerOrder,
+        setOwnerOrder,
+        order,
+        setOrder,
+        orderTotal,
+        setOrderTotal,
       }}
     >
       {children}

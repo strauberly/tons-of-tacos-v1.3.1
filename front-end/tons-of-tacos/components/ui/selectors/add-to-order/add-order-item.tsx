@@ -4,7 +4,7 @@ import MenuItemSelector from "../menu-item-selector/menu-item-selector";
 import { useEffect, useRef, useState } from "react";
 import { useModalContext } from "@/context/menu-context/modal-context";
 import AddToOrderButton from "../../buttons/order-edit/add-to-order-button";
-import { useOwnerContext } from "@/context/order-context/owner-context";
+import { useOwnerContext } from "@/context/owner-context";
 import QuantitySelector from "../quantity-selector/quantity-selector";
 import SizeSelector from "../size-selector/size-selector";
 import { useCartContext } from "@/context/cart-context";

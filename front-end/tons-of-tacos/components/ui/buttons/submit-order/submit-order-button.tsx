@@ -4,7 +4,7 @@ import { useDisplayContext } from "@/context/display-context";
 import { useFormStatus } from "react-dom";
 import { useEffect } from "react";
 import { useOrderConfirmationContext } from "@/context/order-context/order-confirmation-context";
-import { useOwnerContext } from "@/context/order-context/owner-context";
+import { useOwnerContext } from "@/context/owner-context";
 
 export default function SubmitButton(props: {
   firstName: boolean | undefined;

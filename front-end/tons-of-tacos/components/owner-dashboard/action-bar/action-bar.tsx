@@ -7,11 +7,11 @@ import {
   CreateOwnerOrder,
   DeleteOwnerOrder,
 } from "@/lib/owners-tools/owners-tools-client";
-import { useOwnerContext } from "@/context/order-context/owner-context";
+import { useOrdersContext } from "@/context/order-context/orders-context";
 
 export default function ActionBar() {
   const { setShowOwnerOrderCreator } = useDisplayContext();
-  const { setOwnerOrder } = useOwnerContext();
+  const { setOwnerOrder } = useOrdersContext();
 
   return (
     <div className={classes.actionBar}>
