@@ -5,7 +5,7 @@ import SubmitButton from "../buttons/submit-order/submit-order-button";
 import { checkEmail, checkName, checkPhone } from "@/lib/customer-form";
 import { SendOrder, setIsLoggedIn } from "@/lib/cart";
 import { useOrderConfirmationContext } from "@/context/order-context/order-confirmation-context";
-import { useOwnerContext } from "@/context/order-context/owner-context";
+import { useOwnerContext } from "@/context/owner-context";
 import { formatPhone } from "@/lib/multi-use/multi-use";
 
 export default function CustomerInfoForm() {

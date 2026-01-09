@@ -13,7 +13,7 @@ import {
 import { useEditOrderContext } from "@/context/order-context/edit-order-context";
 import ActionConfirmationButton from "../../ui/buttons/order-edit/action-confirmation-button";
 import { GetOrderByID } from "@/lib/owners-tools/owners-tools-server";
-import { useOwnerContext } from "@/context/order-context/owner-context";
+import { useOwnerContext } from "@/context/owner-context";
 
 export default function OrderActionConfirmation(props: {
   title: string;

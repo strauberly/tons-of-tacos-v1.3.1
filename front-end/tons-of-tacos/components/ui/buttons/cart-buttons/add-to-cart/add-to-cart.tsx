@@ -6,7 +6,7 @@ import { AddItemToCart, GetCart } from "@/lib/cart";
 import { useRef, useState } from "react";
 import { useDisplayContext } from "@/context/display-context";
 import { useSelectedSizeContext } from "@/context/size-context";
-import { useOwnerContext } from "@/context/order-context/owner-context";
+import { useOwnerContext } from "@/context/owner-context";
 import { AddToOwnerOrder } from "@/lib/owners-tools/owners-tools-client";
 
 export default function AddToCart(props: {

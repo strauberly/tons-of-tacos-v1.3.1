@@ -1,6 +1,6 @@
 import classes from "./quantity-selector.module.css";
 import ArrowIcon from "./arrow-icon";
-import { useOwnerContext } from "@/context/order-context/owner-context";
+import { useOwnerContext } from "@/context/owner-context";
 
 export default function QuantitySelector(props: {
   value: number;

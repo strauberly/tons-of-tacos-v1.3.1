@@ -111,12 +111,6 @@ export async function OwnerLogin(
   const status = response.status;
 
   if (status === 200) {
-    // remove after full functionality established
-    console.log("data: " + data);
-    console.log("token: " + data.accessToken);
-    console.log("refresh token: " + data.token);
-    console.log(data.accessToken.subject);
-
     const [, payloadBase64] = data.accessToken.split(".");
     const decodedPayload = Buffer.from(payloadBase64, "base64").toString(
       "utf-8"
@@ -155,10 +149,6 @@ export async function Refresh() {
   const data = await response.json();
   const status = response.status;
 
-  console.log(" refreshed access: " + data.accessToken);
-  console.log("refreshed refresh: " + data.refreshToken);
-  console.log("refresh status: " + status);
-
   const [, payloadBase64] = data.accessToken.split(".");
   const decodedPayload = Buffer.from(payloadBase64, "base64").toString("utf-8");
   const subject = JSON.parse(decodedPayload);
@@ -168,13 +158,14 @@ export async function Refresh() {
     refreshToken: data.refreshToken,
     ownerName: subject.ownername,
   };
-
-  return login;
+  if (status === 200) {
+    return login;
+  } else {
+    throw new Error("Issue refreshing login.");
+  }
 }
 
 export async function StoreLogin(login: OwnerLogin) {
-  console.log("store: " + login.ownerName);
-
   (await cookies()).set({
     name: "accessToken",
     value: login.accessToken,
@@ -219,7 +210,6 @@ export async function GetLogin() {
   return login;
 }
 
-// double check implementation and logic please
 export async function CookieCheck() {
   const cookieStore = cookies();
 
