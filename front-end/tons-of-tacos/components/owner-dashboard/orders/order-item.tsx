@@ -1,11 +1,11 @@
-import classes from "../owner-dashboard/order-item.module.css";
+import classes from "./order-item.module.css";
 import { useEffect, useRef, useState } from "react";
 import { useEditOrderContext } from "@/context/order-context/edit-order-context";
 import { useModalContext } from "@/context/menu-context/modal-context";
-import RemoveFromOrderButton from "../ui/buttons/order-edit/remove-from-order-button";
-import UpdateOrderItemButton from "../ui/buttons/order-edit/update-order-item-button";
-import SizeSelector from "../ui/selectors/size-selector/size-selector";
-import QuantitySelector from "../ui/selectors/quantity-selector/quantity-selector";
+import RemoveFromOrderButton from "../../ui/buttons/order-edit/remove-from-order-button";
+import UpdateOrderItemButton from "../../ui/buttons/order-edit/update-order-item-button";
+import SizeSelector from "../../ui/selectors/size-selector/size-selector";
+import QuantitySelector from "../../ui/selectors/quantity-selector/quantity-selector";
 import { calcItemTotal } from "@/lib/multi-use/multi-use";
 
 export default function OrderItem(props: { orderItem: OrderItem }) {

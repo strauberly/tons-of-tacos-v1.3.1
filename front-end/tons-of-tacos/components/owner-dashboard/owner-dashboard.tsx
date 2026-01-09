@@ -1,11 +1,10 @@
 import classes from "./owner-dashboard.module.css";
 import { useDisplayContext } from "@/context/display-context";
-import Orders from "./orders";
+import Orders from "./orders/orders";
 import { useModalContext } from "@/context/menu-context/modal-context";
 import OrderView from "../modal/order-view/order-view";
 import OrderActionConfirmation from "../modal/confirmations/order-action-confirmation";
 import React, { Suspense, useState } from "react";
-
 import OrdersByCustomerPhone from "../modal/search-results/orders-by-customer-phone";
 import ActionBar from "./action-bar/action-bar";
 import OwnerOrderCreator from "../modal/owner-order-creator/owner-order-creator";

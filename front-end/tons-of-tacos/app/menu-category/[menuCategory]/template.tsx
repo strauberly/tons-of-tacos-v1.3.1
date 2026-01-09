@@ -1,5 +1,5 @@
 "use client";
-import { useOwnerContext } from "@/context/order-context/owner-context";
+import { useOwnerContext } from "@/context/owner-context";
 import classes from "/components/menu/menu-items/menu-item-list.module.css";
 import { Suspense, useEffect, useState } from "react";
 import Loading from "../../loading";

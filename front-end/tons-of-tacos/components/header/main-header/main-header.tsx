@@ -8,7 +8,7 @@ import { useDisplayContext } from "@/context/display-context";
 import OwnerHeader from "../owner-header/owner-header";
 import { useEffect } from "react";
 
-import { useOwnerContext } from "@/context/order-context/owner-context";
+import { useOwnerContext } from "@/context/owner-context";
 
 import {
   CookieCheck,
@@ -17,18 +17,12 @@ import {
   nextCookiePresent,
 } from "@/lib/owner-session/owner-session-server";
 
-// import { cookies } from "next/headers";
-
 export default function MainHeader() {
   const { showLogin } = useDisplayContext();
   const { loggedIn, setLoggedIn, setLogin, login } = useOwnerContext();
 
   useEffect(() => {
     async function LoginCheck() {
-      // setLoggedIn(await GetLogin())
-      console.log("check cook: " + (await CookieCheck()));
-      console.log("logged in: " + loggedIn);
-      console.log("login: " + login.ownerName);
       if ((await CookieCheck()) === false && loggedIn === false) {
         setLogin(await GetLogin());
         if (login.ownerName !== "") setLoggedIn(true);

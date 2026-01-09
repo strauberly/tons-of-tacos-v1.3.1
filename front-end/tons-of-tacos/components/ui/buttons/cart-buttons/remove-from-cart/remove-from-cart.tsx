@@ -2,7 +2,7 @@
 import { RemoveCartItem } from "@/lib/cart";
 import classes from "./remove-from-cart.module.css";
 import { useCartContext } from "@/context/cart-context";
-import { useOwnerContext } from "@/context/order-context/owner-context";
+import { useOwnerContext } from "@/context/owner-context";
 import {
   GetOwnerOrder,
   RemoveFromOwnerOrder,
