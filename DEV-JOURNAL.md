@@ -2,6 +2,12 @@
 
 ---
 
+-- 10 Jan 2026 --
+
+- Styling adjustments to main header and cart.
+
+---
+
 -- 9 Jan 2026 --
 
 - Some items relating orders context were established in owner context for some reason, these have been relocated to orders context wich seems more appropriate. Continuous monitoring for breakage as a result.

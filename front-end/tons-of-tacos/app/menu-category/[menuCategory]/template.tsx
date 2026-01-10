@@ -1,5 +1,5 @@
 "use client";
-import { useOwnerContext } from "@/context/owner-context";
+
 import classes from "/components/menu/menu-items/menu-item-list.module.css";
 import { Suspense, useEffect, useState } from "react";
 import Loading from "../../loading";
@@ -18,7 +18,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
       })
       ?.description.toString()
   );
-  // reset description
+
   useEffect(() => {
     async function DisplayMenuItems() {
       if (description === undefined) {

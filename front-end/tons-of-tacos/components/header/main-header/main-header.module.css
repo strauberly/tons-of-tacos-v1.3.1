@@ -41,6 +41,11 @@
 
 /* xsmall devices */
 @media (max-width: 500px) {
+  .header {
+    justify-content: space-between;
+    width: 98%;
+    padding: 0.75%;
+  }
   .home {
     font-size: 6vw;
   }
