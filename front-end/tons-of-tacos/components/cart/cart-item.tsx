@@ -10,6 +10,7 @@ import RemoveFromCart from "../ui/buttons/cart-buttons/remove-from-cart/remove-f
 import UpdateCartItem from "../ui/buttons/cart-buttons/update-cart-item/update-cart-item";
 import { calcItemTotal } from "@/lib/multi-use/multi-use";
 import { useSelectedSizeContext } from "@/context/size-context";
+import { useOrdersContext } from "@/context/order-context/orders-context";
 
 export default function CartItem(props: {
   id: string;
@@ -22,7 +23,8 @@ export default function CartItem(props: {
   const { cartQuantity, cart, setCart } = useCartContext();
   const { setModal } = useModalContext();
   const { setShowModal } = useDisplayContext();
-  const { loggedIn, ownerOrder } = useOwnerContext();
+  const { loggedIn } = useOwnerContext();
+  const { ownerOrder } = useOrdersContext();
   const { selectedSize } = useSelectedSizeContext();
 
   const [newSize, setNewSize] = useState<string>("NA");
@@ -34,7 +36,7 @@ export default function CartItem(props: {
   const [canUpdate, setCanUpdate] = useState<boolean>(false);
   const [showSizeError, setShowSizeError] = useState<boolean>(false);
   const [sizeError, setSizeError] = useState<string>("hi");
-  const [, setReadyToAdd] = useState<boolean>(false);
+
 
   const newQuantity = useRef<number>(quantity);
   const oldSize = useRef<string>(props.size);
@@ -127,6 +129,7 @@ export default function CartItem(props: {
       quantity == props.itemQuantity
     ) {
       setCanUpdate(false);
+      
     }
 
     if (edited) {
@@ -191,7 +194,6 @@ export default function CartItem(props: {
             submitted={submitted}
             canEdit={canEdit}
             setCanEdit={setCanEdit}
-            setReadyToAdd={setReadyToAdd}
           />
         )}
         <p>${newPrice.toFixed(2)}</p>

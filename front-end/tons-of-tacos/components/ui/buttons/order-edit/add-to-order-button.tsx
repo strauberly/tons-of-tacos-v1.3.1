@@ -10,6 +10,7 @@ import {
 import { useCartContext } from "@/context/cart-context";
 import { useRef } from "react";
 import { GetOrderByID } from "@/lib/owners-tools/owners-tools-server";
+import { useOrdersContext } from "@/context/order-context/orders-context";
 
 export default function AddToOrderButton(props: {
   orderUid: string;
@@ -27,7 +28,8 @@ export default function AddToOrderButton(props: {
   const { setShowConfirmation } = useDisplayContext();
   const { setConfirmationTitle } = useModalContext();
   const { orderToView } = useModalContext();
-  const { ownerOrder, setOrder, order, login } = useOwnerContext();
+  const { login } = useOwnerContext();
+  const { ownerOrder, setOrder, order } = useOrdersContext();
   const { setCart, cart } = useCartContext();
   const { setOrderToView } = useModalContext();
 

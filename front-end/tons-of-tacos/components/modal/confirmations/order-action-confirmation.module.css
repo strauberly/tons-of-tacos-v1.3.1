@@ -13,6 +13,9 @@
   width: 100%;
   align-items: center;
 }
+.messageContents h2 {
+  font-size: 1vw;
+}
 
 .actionConfirmation button {
   font-size: 1.5rem;
@@ -22,4 +25,15 @@
 .buttons {
   display: flex;
   gap: 4rem;
+}
+
+@media (max-width: 1240px) {
+  .messageContents h2 {
+    font-size: 1.25vw;
+  }
+}
+@media (max-width: 940px) {
+  .messageContents h2 {
+    font-size: 1rem;
+  }
 }

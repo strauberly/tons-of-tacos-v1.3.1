@@ -277,5 +277,10 @@ export async function DeleteCookies() {
 // this needs an update to accurately discern hotswap cookie from the others.
 export async function nextCookiePresent() {
   const cookieStore = await cookies();
-  return cookieStore.has("accessToken");
+
+  if (cookieStore.has("__next_hmr_refresh_hash__")) {
+    cookieStore.delete("__next_hmr_refresh_hash__");
+  }
+  return cookieStore.has("__next_hmr_refresh_hash__");
+  // return cookieStore.has("accessToken");
 }
