@@ -2,6 +2,27 @@
 
 ---
 
+-- 12 Jan 2026 --
+
+- margins adjusted for menu item categories in menu item selector through media queries. Less awkward for toppings.
+
+- trying logic out for eleminating next refresh cookie which is impeding on development process when large changes made.
+
+---
+
+-- 11 Jan 2026 --
+
+- Styling adjustments for cart item in customers cart so that elements are aligned whether being aligned or not.
+- Also adjusted spacing for size selection errors.
+
+- Put is some time bug hunting and adjusting components as result of refactor;
+
+- Adjustment to order edit action confirmation size styling. May revert over time, test for ux.
+
+- update button for customer details now responsive
+
+---
+
 -- 10 Jan 2026 --
 
 - Styling adjustments to main header and cart.

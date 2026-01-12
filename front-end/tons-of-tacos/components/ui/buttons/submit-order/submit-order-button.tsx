@@ -4,7 +4,8 @@ import { useDisplayContext } from "@/context/display-context";
 import { useFormStatus } from "react-dom";
 import { useEffect } from "react";
 import { useOrderConfirmationContext } from "@/context/order-context/order-confirmation-context";
-import { useOwnerContext } from "@/context/owner-context";
+import { useErrorContext } from "@/context/error-context";
+import { useOrdersContext } from "@/context/order-context/orders-context";
 
 export default function SubmitButton(props: {
   firstName: boolean | undefined;
@@ -16,7 +17,8 @@ export default function SubmitButton(props: {
   const status = useFormStatus();
   const { setShowOrderConfirmation } = useDisplayContext();
   const { setOrderConfirmation } = useOrderConfirmationContext();
-  const { setOwnerOrder } = useOwnerContext();
+  const { setOwnerOrder } = useOrdersContext();
+  const { setError, setErrorMessage } = useErrorContext();
 
   useEffect(() => {
     setOrderConfirmation(props.state);
@@ -41,7 +43,8 @@ export default function SubmitButton(props: {
 
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
         } catch (error) {
-          throw new Error("Sorry, we can't process your order at the moment");
+          setErrorMessage("Sorry we cant process your order right now.");
+          setError(true);
         }
         await new Promise((resolve) => setTimeout(resolve, 250));
         setShowOrderConfirmation(true);

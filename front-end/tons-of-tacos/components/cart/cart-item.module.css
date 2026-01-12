@@ -7,8 +7,9 @@
 
 .item {
   display: flex;
+  align-items: center;
   font-size: clamp(1.25rem, 2vw, 1.5vw);
-  padding-bottom: 1vw;
+  padding-bottom: 0.5vw;
   width: 1%;
 }
 
@@ -23,7 +24,7 @@
 
 .size {
   color: var(--user-selected-color);
-  margin-right: 1rem;
+  /* margin-right: 3rem; */
   justify-items: left;
 }
 
@@ -34,10 +35,10 @@
 }
 
 .sizeWarning {
-  margin-top: -1rem;
+
   color: var(--attention-color);
   justify-self: center;
-  margin-bottom: 0.25rem;
+  margin-bottom: 1rem;
 }
 
 .ownerOrderItem {
@@ -46,8 +47,7 @@
   display: grid;
   grid-template-columns: repeat(4, 25%);
   font-size: clamp(1.25rem, 1vw, 0.75vw);
-  justify-items: center;
-
+  align-items: center;
   gap: 0rem;
   padding-bottom: 1vw;
 }
@@ -55,9 +55,6 @@
   margin-left: 0%;
 }
 
-.quantity {
-  margin-right: 10%;
-}
 .ownerOrderItemPrice {
   align-items: center;
   margin-left: 1rem;

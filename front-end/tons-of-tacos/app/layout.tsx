@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import MainHeader from "../components/header/main-header/main-header";
 import { inter } from "../components/ui/fonts/fonts";
-
-
 import Footer from "@/components/footer/footer";
 import Modal from "@/components/modal/modal";
 import { AppWideProviders } from "@/context/providers/appwide-providers";

@@ -8,10 +8,12 @@ import { useOwnerContext } from "@/context/owner-context";
 import QuantitySelector from "../quantity-selector/quantity-selector";
 import SizeSelector from "../size-selector/size-selector";
 import { useCartContext } from "@/context/cart-context";
+import { useOrdersContext } from "@/context/order-context/orders-context";
 
 export default function AddOrderItem() {
   const { orderToView, setOrderToView } = useModalContext();
-  const { ownerOrder, loggedIn } = useOwnerContext();
+  const { loggedIn } = useOwnerContext();
+  const { ownerOrder } = useOrdersContext();
   const { cart } = useCartContext();
 
   const [itemSelector, setItemSelector] = useState<boolean | undefined>(false);

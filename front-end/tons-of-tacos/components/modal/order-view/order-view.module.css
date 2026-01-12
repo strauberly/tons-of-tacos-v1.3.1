@@ -5,7 +5,7 @@
 }
 
 .heightControl {
-  height: 30%;
+  /* height: 30%; */
   overflow-y: scroll;
 }
 
@@ -16,7 +16,10 @@
   padding-left: 1rem;
   padding-top: 1rem;
   max-height: 20rem;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
+  padding-bottom: 1rem;
+  border-bottom: solid var(--border-color);
+  margin-bottom: 0.5rem;
 }
 
 .uneditableDetails {
@@ -189,13 +192,13 @@
   display: flex;
   right: 0;
   left: 0;
-  margin-top: 1.5rem;
   justify-content: space-evenly;
 }
 .contactUpdate button {
   font-size: 1rem;
   cursor: pointer;
   font-weight: bold;
+  margin-top: 1vw;
 }
 
 .warning {
@@ -208,8 +211,9 @@
   cursor: pointer;
   font-weight: bold;
   justify-self: center;
-  margin-top: 2rem;
+  margin-top: 1rem;
   padding-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .editWarning {
@@ -222,6 +226,9 @@
 }
 
 @media (max-width: 1560px) {
+  .contactUpdate {
+    margin-top: -0.75vw;
+  }
   .orderItemView {
     flex-direction: row;
     display: flex;
