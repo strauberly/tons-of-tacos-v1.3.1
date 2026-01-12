@@ -14,7 +14,7 @@ export default function OrderView() {
     timeStyle: "short",
   });
   const date: string = new Date(orderToView.created).toLocaleDateString();
-  const itemTitles: string[] = ["Item", "Quantity", "Size", "Item Total"];
+  const itemTitles: string[] = ["Item:", "Quantity:", "Size:", "Item Total:"];
 
   return (
     <div className={classes.orderView}>
@@ -39,27 +39,26 @@ export default function OrderView() {
             <EditableDetails />
           </div>
           <AddOrderItem />
-          <div className={classes.orderItemView}>
-            <div>
-              <ul className={classes.itemTitles}>
-                {itemTitles.map((title) => (
-                  <p key={title}>{`${title.toString()}`}</p>
-                ))}
-              </ul>
-            </div>
-
-            <div className={classes.orderItems}>
-              <ul>
-                {orderToView.orderItems?.map((orderItem) => (
-                  <OrderItem
-                    key={orderItem.orderItemId}
-                    orderItem={orderItem}
-                  />
-                ))}
-              </ul>
+          <div className={classes.orientation}>
+            <ul className={classes.itemTitles}>
+              {itemTitles.map((title) => (
+                <p key={title}>{`${title.toString()}`}</p>
+              ))}
+            </ul>
+            <div className={classes.orderItemView}>
+              <div className={classes.orderItems}>
+                <ul>
+                  {orderToView.orderItems?.map((orderItem) => (
+                    <OrderItem
+                      key={orderItem.orderItemId}
+                      orderItem={orderItem}
+                    />
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
-          {/* <AddOrderItem /> */}
+
           <button className={classes.close} onClick={() => setViewOrder(false)}>
             Close
           </button>

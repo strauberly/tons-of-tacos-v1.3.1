@@ -1,4 +1,9 @@
+import { useErrorContext } from "@/context/error-context";
 import { useOwnerContext } from "@/context/owner-context";
+import {
+  GetLogin,
+  nextCookiePresent,
+} from "@/lib/owner-session/owner-session-server";
 import { DailySales } from "@/lib/owners-tools/owners-tools-server";
 import { useEffect, useState } from "react";
 
@@ -8,19 +13,29 @@ export default function DailySalesDisplay() {
     numberOfSales: 0,
     total: 0,
   });
-  const { login, loggedIn } = useOwnerContext();
+  const { login, loggedIn, setLogin } = useOwnerContext();
+  const { setError, setErrorMessage } = useErrorContext();
 
   useEffect(() => {
     async function Sales() {
-      if (loggedIn) {
-        setSales(await DailySales(login.accessToken));
+      try {
+        if (loggedIn) {
+          setSales(await DailySales(login.accessToken));
+        } else {
+          nextCookiePresent();
+          setLogin(await GetLogin());
+          setSales(await DailySales(login.accessToken));
+        }
+      } catch (error) {
+        setErrorMessage(`${error}`);
+        setError(true);
       }
     }
     const dailySales = setInterval(() => Sales(), 3000);
     return () => {
       clearInterval(dailySales);
     };
-  }, [loggedIn, login.accessToken]);
+  }, [loggedIn, login.accessToken, setError, setErrorMessage, setLogin]);
 
   return (
     <div>

@@ -5,7 +5,6 @@
 }
 
 .heightControl {
-  /* height: 30%; */
   overflow-y: scroll;
 }
 
@@ -16,7 +15,7 @@
   padding-left: 1rem;
   padding-top: 1rem;
   max-height: 20rem;
-  /* overflow-y: scroll; */
+
   padding-bottom: 1rem;
   border-bottom: solid var(--border-color);
   margin-bottom: 0.5rem;
@@ -101,12 +100,11 @@
   flex-direction: column;
   margin-bottom: 1rem;
   margin-top: 1rem;
-  border-top: solid var(--border-color) 2px;
+  height: 10vw;
+  overflow-y: scroll;
 }
 
 .orderItems {
-  border-bottom: solid var(--border-color);
-  max-height: 5rem;
 }
 
 .orderItems button {
@@ -115,7 +113,6 @@
 
 .orderItems ul {
   justify-content: center;
-
   padding-bottom: 1rem;
   row-gap: 1rem;
 }
@@ -123,7 +120,6 @@
 .orderItems ul li {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-
   padding-top: 1rem;
   justify-items: center;
   align-items: center;
@@ -143,10 +139,8 @@
 
 .itemTitles {
   display: grid;
-
   grid-template-columns: repeat(4, 1fr);
-
-  padding-top: 1rem;
+  /* padding-top: 1rem; */
   width: 100%;
   justify-items: center;
 }
@@ -165,9 +159,9 @@
 .itemTitles p:nth-child(n + 2) {
   margin-right: 25%;
 }
-.itemTitles p:nth-child(n + 2) {
+/* .itemTitles p:nth-child(n + 2) {
   margin-right: 25%;
-}
+} */
 
 .button {
   display: flex;
@@ -234,22 +228,28 @@
     flex-direction: row;
     display: flex;
     margin-bottom: 1rem;
-    height: fit-content;
+    height: 20vw;
     overflow-y: hidden;
   }
+  .orientation {
+    display: flex;
+    flex-direction: row;
+  }
+
   .itemTitles {
-    grid-template-columns: repeat(1, 16.66%);
-    gap: 2rem;
-    margin-left: 1rem;
-    justify-items: left;
+    display: flex;
+    flex-direction: column;
+    margin-top: -0.25vw;
+    height: 20vw;
+  }
+
+  .itemTitles p {
+    margin-top: 2.5vw;
+    align-items: first baseline;
   }
 
   .itemTitles p:nth-child(1) {
     margin-left: 0rem;
-  }
-
-  .orderItems {
-    max-height: fit-content;
   }
 
   .orderItems ul {
@@ -262,7 +262,7 @@
     row-gap: 1rem;
     justify-content: left;
     margin-left: 1rem;
-    max-height: fit-content;
+
   }
 
   .orderItems ul li {
@@ -277,8 +277,8 @@
 
     row-gap: 2rem;
     min-width: max-content;
-    border-right: solid var(--border-color) 2px;
   }
+
   .orderItems ul li p:first-child {
     justify-self: center;
     margin-left: 0rem;
@@ -290,5 +290,62 @@
   }
   .editableDetails button {
     padding-right: 0.5rem;
+  }
+}
+
+@media (max-width: 1280px) {
+  .itemTitles p {
+    margin-top: 2.75vw;
+  }
+}
+
+@media (max-width: 1180px) {
+  .orderItemView {
+    height: 22vw;
+  }
+}
+
+@media (max-width: 1080px) {
+  .itemTitles {
+    margin-top: 0.5vw;
+  }
+
+  .itemTitles p {
+    margin-top: 3vw;
+  }
+
+  .orderItemView {
+    height: 25vw;
+  }
+}
+@media (max-width: 940px) {
+  .itemTitles p {
+    margin-top: 3.6vw;
+  }
+
+  .orderItemView {
+    height: 33vw;
+  }
+
+  .orderItems ul li {
+    margin-top: -0.25vw;
+    row-gap: 3.6vw;
+  }
+}
+
+@media (max-width: 640px) {
+  .orderItemView {
+    height: 40vw;
+  }
+  .orderItems ul {
+    row-gap: 0.5vw;
+    justify-content: left;
+    margin-left: 1rem;
+    margin-top: -0.5vw;
+  }
+
+  .orderItems ul li {
+    margin-top: -1.4vw;
+    row-gap: 3.8vw;
   }
 }
