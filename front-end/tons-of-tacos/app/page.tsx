@@ -5,7 +5,6 @@ import { Suspense, useEffect } from "react";
 import Splash from "./splash";
 import FadeOnLoad from "@/components/ui/animations/fade-on-load";
 import Loading from "./loading";
-import MainHeader from "@/components/header/main-header/main-header";
 import { useErrorContext } from "@/context/error-context";
 import Error from "./error";
 

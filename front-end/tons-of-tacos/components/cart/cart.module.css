@@ -6,6 +6,7 @@
   border: var(--border-color) solid 2px;
   padding: 1vw;
   padding-bottom: 0.5rem;
+  padding-top: 0;
   right: 78.5%;
   top: 3.49vw;
   height: 85vh;
@@ -24,8 +25,9 @@
   display: grid;
   row-gap: 2vw;
   grid-template-columns: repeat(3, minmax(6rem, 50%));
-  align-items: center;
-  margin: 1vw;
+  align-items: flex-end;
+  margin-top: 1vw;
+  margin-bottom: 1vw;
   width: 95%;
   justify-items: center;
 }

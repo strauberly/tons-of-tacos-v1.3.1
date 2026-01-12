@@ -36,8 +36,9 @@ export default function OrderView() {
 
               <p>${orderToView.orderTotal.toFixed(2)}</p>
             </div>
+            <EditableDetails />
           </div>
-          <EditableDetails />
+          <AddOrderItem />
           <div className={classes.orderItemView}>
             <div>
               <ul className={classes.itemTitles}>
@@ -58,7 +59,7 @@ export default function OrderView() {
               </ul>
             </div>
           </div>
-          <AddOrderItem />
+          {/* <AddOrderItem /> */}
           <button className={classes.close} onClick={() => setViewOrder(false)}>
             Close
           </button>

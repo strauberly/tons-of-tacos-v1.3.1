@@ -22,15 +22,14 @@ export default function LogoutButton() {
     <button
       className={classes.logout}
       onClick={async () => [
-        LogOut(),
         await OwnerLogout(login.accessToken),
         DeleteCookies(),
-        setLoggedIn(false),
         setLogin({
           accessToken: "",
           refreshToken: "",
           ownerName: "",
         }),
+        LogOut(),
       ]}
     >
       Log Out
