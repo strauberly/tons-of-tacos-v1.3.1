@@ -106,6 +106,7 @@
 
 .orderItems {
   border-bottom: solid var(--border-color);
+  max-height: 5rem;
 }
 
 .orderItems button {
