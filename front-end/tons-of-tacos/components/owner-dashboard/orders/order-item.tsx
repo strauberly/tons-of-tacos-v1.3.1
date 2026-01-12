@@ -126,7 +126,7 @@ export default function OrderItem(props: { orderItem: OrderItem }) {
   ]);
 
   return (
-    <div>
+    <div className={classes.item}>
       <li>
         <p>{`${props.orderItem.itemName}`}</p>
         {canEdit && (

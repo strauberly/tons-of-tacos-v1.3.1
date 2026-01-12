@@ -10,6 +10,10 @@
 
 - Adjustments made to order items in own order creator containing the the items height start a device widths making the bottom of the card more accessible during larger order creation.
 
+- Styling enhancements for order items in order view.
+
+- Alterations made for order items in order view for styling and layout of order view and order item creator are closer in styling than before .
+
 ---
 
 -- 11 Jan 2026 --
