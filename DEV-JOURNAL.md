@@ -4,9 +4,11 @@
 
 -- 12 Jan 2026 --
 
-- margins adjusted for menu item categories in menu item selector through media queries. Less awkward for toppings.
+- Margins adjusted for menu item categories in menu item selector through media queries. Less awkward for toppings.
 
-- trying logic out for eleminating next refresh cookie which is impeding on development process when large changes made.
+- Trying logic out for eliminating next refresh cookie which is impeding on development process when large changes made.
+
+- Adjustments made to order items in own order creator containing the the items height start a device widths making the bottom of the card more accessible during larger order creation.
 
 ---
 

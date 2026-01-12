@@ -6,6 +6,11 @@
   /* width: 100%; */
 }
 
+.ownerOrderCreator ul {
+  max-height: 14vw;
+  overflow-y: scroll;
+}
+
 .elements {
   display: flex;
   flex-direction: column;
@@ -43,4 +48,8 @@
 }
 
 @media (max-width: 1380px) {
+  .ownerOrderCreator ul {
+    max-height: 15vw;
+    overflow-y: scroll;
+  }
 }
