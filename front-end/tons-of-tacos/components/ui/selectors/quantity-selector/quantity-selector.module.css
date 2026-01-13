@@ -11,7 +11,7 @@
 
 .quantity input,
 .quantity textarea {
-  padding: 0.25vw;
+  padding: 0.5vw;
   background-color: transparent;
   color: var(--user-selected-color);
   text-align: center;
@@ -24,11 +24,15 @@
 .decrement {
   z-index: 1;
   rotate: 90deg;
+  margin-right: -0.25vw;
+  margin-left: -0.25vw;
 }
 
 .increment {
   z-index: 1;
   rotate: -90deg;
+  margin-right: -0.25vw;
+  margin-left: -0.25vw;
 }
 
 .icon {
@@ -70,10 +74,4 @@
   border-color: var(--border-color);
   border-radius: 15%;
   font-weight: 900;
-}
-
-@media (max-width: 1380px) {
-  .ownerOrderQuantity {
-    margin-left: 2rem;
-  }
 }

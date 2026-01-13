@@ -10,6 +10,8 @@
 
 - Improvements and adjustments to order view. Focus on improving layout and readability on small screens
 - Quantity selector real broken.
+- Add item Selector responsive improvements eliminating some crowding for the items owner has added to the tentative order.
+- Repaired remove from cart button in owner order creator. Was missed in refactor reorganization.
 
 ---
 
