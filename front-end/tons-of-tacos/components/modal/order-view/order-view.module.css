@@ -2,7 +2,7 @@
   position: fixed;
   margin-top: 10%;
   z-index: 100;
-  /* min-width: 100%; */
+  min-width: max-content;
 }
 
 .heightControl {
@@ -16,7 +16,8 @@
   padding-left: 1rem;
   padding-top: 1rem;
   max-height: 20rem;
-
+  overflow-y: scroll;
+  overflow-x: hidden;
   padding-bottom: 1rem;
   border-bottom: solid var(--border-color);
   margin-bottom: 0.5rem;
@@ -28,6 +29,7 @@
   align-items: first baseline;
   row-gap: 1rem;
   border-radius: 0.5rem;
+  width: 100%;
 }
 
 .uneditableDetails p:nth-child(even) {
@@ -38,18 +40,16 @@
 .uneditableDetails p:nth-child(odd) {
   grid-column-start: 1;
   color: var(--user-selected-color);
+  width: max-content;
 }
 
 .editableDetails {
   display: grid;
   padding-top: 1rem;
-  padding-left: 1rem;
   grid-template-columns: repeat(3, 1fr);
   align-items: first baseline;
   row-gap: 1rem;
-}
-.editableDetails button {
-  font-weight: bold;
+  min-width: 100%;
 }
 
 .editableDetailsTitle {
@@ -61,6 +61,7 @@
 }
 
 .editableDetails button {
+  font-weight: bold;
   grid-column-start: 3;
   font-size: 1rem;
   cursor: pointer;
@@ -70,12 +71,13 @@
 .editableDetails input {
   margin-top: 1rem;
   width: 20ch;
+  margin-left: 0.5vw;
+  margin-right: 0.75vw;
 }
 
 .editableDetails input,
 .editableDetails textarea {
   font-size: 1rem;
-  padding-left: 0.5rem;
   padding-top: 0.5vw;
   padding-bottom: 0.5vw;
   margin-bottom: 1rem;
@@ -93,7 +95,7 @@
 .error {
   color: var(--attention-color);
   font-family: var(--inter-font);
-  padding: 0rem;
+  padding: 0.75vw;
 }
 
 .orderItemView {
@@ -186,15 +188,16 @@
 
 .contactUpdate {
   display: flex;
-  right: 0;
-  left: 0;
-  justify-content: space-evenly;
 }
 .contactUpdate button {
   font-size: 1rem;
   cursor: pointer;
   font-weight: bold;
   margin-top: 1vw;
+  right: 0;
+  left: 0;
+  margin: auto;
+  margin-top: 1.5vw;
 }
 
 .warning {
@@ -229,7 +232,7 @@
     margin-bottom: 1rem;
     height: 20vw;
     overflow-y: hidden;
-    overflow-x: hidden;
+    overflow-x: scroll;
     width: 100%;
   }
   .orientation {
@@ -257,14 +260,13 @@
   .orderItems ul {
     display: flex;
     justify-content: center;
-
     overflow-y: hidden;
-    /* overflow-x: scroll; */
+    overflow-x: scroll;
     padding-bottom: 1rem;
     row-gap: 1rem;
     justify-content: left;
     margin-left: 1rem;
-    min-width: 100%;
+    width: max-content;
   }
 
   .orderItems ul li {
@@ -295,9 +297,38 @@
   }
 }
 
+@media (max-width: 1465px) {
+  .uneditableDetails p:nth-child(4) {
+    margin-left: 2.5vw;
+  }
+}
 @media (max-width: 1400px) {
   .itemTitles p {
     margin-top: 2.5vw;
+  }
+
+  .editableDetails input {
+    display: flex;
+    justify-self: center;
+  }
+
+  .editableDetails {
+    display: unset;
+  }
+  .editableDetails p:nth-child(even) {
+    grid-column-start: 2;
+    margin-top: -1.5vw;
+  }
+  .editableDetails button {
+    display: flex;
+    right: 0;
+    left: 0;
+    margin: auto;
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+  }
+  .error {
+    margin-bottom: -1vw;
   }
 }
 
@@ -314,6 +345,12 @@
 }
 
 @media (max-width: 1080px) {
+  .editableDetails p:nth-child(even) {
+    grid-column-start: 2;
+    margin-top: -1.75vw;
+    margin-top: -2vw;
+  }
+
   .itemTitles {
     margin-top: 0.25vw;
   }
@@ -327,6 +364,16 @@
   }
 }
 @media (max-width: 970px) {
+  .editableDetails p:nth-child(even) {
+    grid-column-start: 2;
+    margin-top: -1.75vw;
+    margin-top: -2.25vw;
+  }
+
+  .uneditableDetails p:nth-child(4) {
+    margin-left: 2.75vw;
+  }
+
   .itemTitles {
     margin-top: 0.25vw;
   }
@@ -343,9 +390,17 @@
     margin-top: -0.25vw;
     row-gap: 3.6vw;
   }
+
+  .error {
+    padding: 1.5vw;
+  }
 }
 
 @media (max-width: 640px) {
+  .editableDetails p:nth-child(even) {
+    grid-column-start: 2;
+    margin-top: -3.5vw;
+  }
   .itemTitles p {
     margin-top: 3.75vw;
   }

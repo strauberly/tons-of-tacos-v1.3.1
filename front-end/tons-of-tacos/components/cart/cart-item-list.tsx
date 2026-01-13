@@ -2,12 +2,14 @@ import { useCartContext } from "@/context/cart-context";
 import { GetCart } from "@/lib/cart";
 import { useEffect } from "react";
 import CartItem from "./cart-item";
-import { useOwnerContext } from "@/context/owner-context";
+import { useOwnerContext } from "@/context/order-context/owner-context";
 import { GetOwnerOrder } from "@/lib/owners-tools/owners-tools-client";
+import { useOrdersContext } from "@/context/order-context/orders-context";
 
 export default function CartItems() {
   const { cart, setCart } = useCartContext();
-  const { ownerOrder, order, loggedIn } = useOwnerContext();
+  const { loggedIn } = useOwnerContext();
+  const { ownerOrder, order } = useOrdersContext();
 
   if (cart == null) {
     throw new Error("uh..");

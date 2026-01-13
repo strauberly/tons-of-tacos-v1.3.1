@@ -139,11 +139,11 @@
     margin-right: 1rem;
   }
   .values {
-    margin-top: 1rem;
+    margin-top: 0.5vw;
     display: flex;
     flex-direction: column;
     justify-self: center;
-    gap: 2.8vw;
+    gap: 3.25vw;
     align-items: center;
     margin-right: 1rem;
     padding-left: 1.5rem;

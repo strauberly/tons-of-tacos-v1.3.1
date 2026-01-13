@@ -2,7 +2,7 @@ import classes from "../owner-dashboard.module.css";
 import ViewOrderButton from "../../ui/buttons/view-order/view-order-button";
 import DeleteOrderButton from "../../ui/buttons/order-edit/delete-order-button";
 import MarkReadyButton from "../../ui/buttons/order-edit/mark-ready-button";
-import { useOwnerContext } from "@/context/owner-context";
+import { useOwnerContext } from "@/context/order-context/owner-context";
 import MarkClosedButton from "../../ui/buttons/order-edit/mark-closed-button";
 import { useEffect, useState } from "react";
 

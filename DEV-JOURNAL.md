@@ -5,6 +5,11 @@
 -- 13 Jan 2026 --
 
 - Adjusted styling in the orders dashboard to take up dead space.
+- Order view details styling update more more consistent alteration at lower screen sizes.
+- Improved responsive design for order details.
+
+- Improvements and adjustments to order view. Focus on improving layout and readability on small screens
+- Quantity selector real broken.
 
 ---
 
