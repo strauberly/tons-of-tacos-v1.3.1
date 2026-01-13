@@ -2,6 +2,7 @@
   position: fixed;
   margin-top: 10%;
   z-index: 100;
+  /* min-width: 100%; */
 }
 
 .heightControl {
@@ -105,6 +106,7 @@
 }
 
 .orderItems {
+  min-width: 100%;
 }
 
 .orderItems button {
@@ -115,8 +117,10 @@
   justify-content: center;
   padding-bottom: 1rem;
   row-gap: 1rem;
+  width: 100%;
 }
 
+/* ----------------------------------- */
 .orderItems ul li {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -140,9 +144,9 @@
 .itemTitles {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  /* padding-top: 1rem; */
   width: 100%;
   justify-items: center;
+  margin-top: 1rem;
 }
 
 .itemTitles p {
@@ -159,9 +163,6 @@
 .itemTitles p:nth-child(n + 2) {
   margin-right: 25%;
 }
-/* .itemTitles p:nth-child(n + 2) {
-  margin-right: 25%;
-} */
 
 .button {
   display: flex;
@@ -206,7 +207,6 @@
   cursor: pointer;
   font-weight: bold;
   justify-self: center;
-  margin-top: 1rem;
   padding-bottom: 2rem;
   margin-bottom: 1rem;
 }
@@ -216,7 +216,6 @@
   justify-self: center;
   margin-top: 2rem;
   margin-left: 1rem;
-
   padding-bottom: 1rem;
 }
 
@@ -230,6 +229,8 @@
     margin-bottom: 1rem;
     height: 20vw;
     overflow-y: hidden;
+    overflow-x: hidden;
+    width: 100%;
   }
   .orientation {
     display: flex;
@@ -241,10 +242,11 @@
     flex-direction: column;
     margin-top: -0.25vw;
     height: 20vw;
+    width: min-content;
   }
 
   .itemTitles p {
-    margin-top: 2.5vw;
+    margin-top: 2.25vw;
     align-items: first baseline;
   }
 
@@ -257,12 +259,12 @@
     justify-content: center;
 
     overflow-y: hidden;
-    overflow-x: scroll;
+    /* overflow-x: scroll; */
     padding-bottom: 1rem;
     row-gap: 1rem;
     justify-content: left;
     margin-left: 1rem;
-
+    min-width: 100%;
   }
 
   .orderItems ul li {
@@ -276,7 +278,7 @@
     align-items: center;
 
     row-gap: 2rem;
-    min-width: max-content;
+    min-width: 100%;
   }
 
   .orderItems ul li p:first-child {
@@ -290,6 +292,12 @@
   }
   .editableDetails button {
     padding-right: 0.5rem;
+  }
+}
+
+@media (max-width: 1400px) {
+  .itemTitles p {
+    margin-top: 2.5vw;
   }
 }
 
@@ -307,7 +315,7 @@
 
 @media (max-width: 1080px) {
   .itemTitles {
-    margin-top: 0.5vw;
+    margin-top: 0.25vw;
   }
 
   .itemTitles p {
@@ -318,7 +326,11 @@
     height: 25vw;
   }
 }
-@media (max-width: 940px) {
+@media (max-width: 970px) {
+  .itemTitles {
+    margin-top: 0.25vw;
+  }
+
   .itemTitles p {
     margin-top: 3.6vw;
   }
@@ -334,6 +346,10 @@
 }
 
 @media (max-width: 640px) {
+  .itemTitles p {
+    margin-top: 3.75vw;
+  }
+
   .orderItemView {
     height: 40vw;
   }

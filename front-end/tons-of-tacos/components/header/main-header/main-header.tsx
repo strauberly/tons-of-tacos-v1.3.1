@@ -26,8 +26,8 @@ export default function MainHeader() {
       nextCookiePresent();
       if ((await CookieCheck()) === false && loggedIn === false) {
         setLogin(await GetLogin());
-        // } else if ((await nextCookiePresent()) !== true) {
-        //   DeleteCookies();
+      } else if ((await nextCookiePresent()) === true) {
+        DeleteCookies();
       }
       if (login.ownerName !== "") {
         setLoggedIn(true);

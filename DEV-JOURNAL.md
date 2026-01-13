@@ -12,7 +12,13 @@
 
 - Styling enhancements for order items in order view.
 
-- Alterations made for order items in order view for styling and layout of order view and order item creator are closer in styling than before .
+- Alterations made for order items in order view for styling and layout of order view and order item creator are closer in styling than before.
+
+- Went back and made some additional changes to order items in the order view. More space taken up on smaller orders. Needs to be tested.
+
+- Worked in menu item selector responsive styling. Grid was a mess with crowding.
+
+- tried to create a more stable experience for cart items in owner order creator.
 
 ---
 
