@@ -2,6 +2,12 @@
 
 ---
 
+-- 13 Jan 2026 --
+
+- Adjusted styling in the orders dashboard to take up dead space.
+
+---
+
 -- 12 Jan 2026 --
 
 - Margins adjusted for menu item categories in menu item selector through media queries. Less awkward for toppings.

@@ -46,8 +46,8 @@ export default function OwnerHeader() {
           DeleteCookies();
           setLoggedIn(false);
         } else if (exp - Number(Date.now()) < 60000) {
-          nextCookiePresent();
           StoreLogin(await Refresh());
+          nextCookiePresent();
           setLogin(await GetLogin());
           setOrders(await GetAllOrders(login.accessToken));
         }

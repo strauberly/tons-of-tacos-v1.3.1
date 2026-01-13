@@ -9,6 +9,7 @@
   display: flex;
   height: 100%;
   overflow-x: scroll;
+  width: 100%;
 }
 
 .viewUpdateDelete {
@@ -18,7 +19,7 @@
 .dashboard ul {
   display: flex;
   flex-direction: column;
-
+  width: 100%;
   max-height: 25rem;
   top: 0;
   overflow-y: scroll;
@@ -34,6 +35,7 @@
   border-bottom: solid;
   border-width: 0.15rem;
   border-color: var(--border-color);
+  width: 100%;
 }
 .dashboard button {
   font-size: 1rem;
@@ -186,7 +188,7 @@
     margin-top: -1%;
     display: flex;
     flex-direction: row;
-    width: 94%;
+    width: 100%;
     max-height: max-content;
     overflow-y: hidden;
     overflow-x: scroll;
@@ -207,6 +209,7 @@
     border-color: var(--border-color);
     row-gap: 0.5rem;
     height: 100%;
+    width: 100%;
   }
   .buttonGroup {
     display: flex;
