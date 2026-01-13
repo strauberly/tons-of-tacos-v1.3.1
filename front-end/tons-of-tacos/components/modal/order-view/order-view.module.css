@@ -188,16 +188,22 @@
 
 .contactUpdate {
   display: flex;
-}
-.contactUpdate button {
-  font-size: 1rem;
-  cursor: pointer;
-  font-weight: bold;
-  margin-top: 1vw;
+  padding: 1rem, 1rem;
+  max-width: min-content;
   right: 0;
   left: 0;
   margin: auto;
-  margin-top: 1.5vw;
+  padding-top: 0.5rem;
+  margin-top: 1.8vw;
+}
+.contactUpdate button {
+  font-size: 1.25rem;
+  cursor: pointer;
+  font-weight: bold;
+  padding-top: 0.5rem;
+  margin-top: 1.8vw;
+  border-top: 1px solid var(--border-color);
+  width: min-content;
 }
 
 .warning {

@@ -13,6 +13,8 @@
 - Add item Selector responsive improvements eliminating some crowding for the items owner has added to the tentative order.
 - Repaired remove from cart button in owner order creator. Was missed in refactor reorganization.
 
+- Update customer detail button improvements to help it stand out from others in the vicinity. Increased size and added border.
+
 ---
 
 -- 12 Jan 2026 --
