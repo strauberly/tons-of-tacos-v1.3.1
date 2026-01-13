@@ -17,7 +17,7 @@ export default function OwnerOrderCreator() {
   const { loggedIn } = useOwnerContext();
   const { setOrder, orderTotal, setOwnerOrder } = useOrdersContext();
 
-  const { setCart } = useCartContext();
+  const { setCart, cart } = useCartContext();
 
   const total = useRef<string>("");
 
@@ -34,10 +34,12 @@ export default function OwnerOrderCreator() {
       <Card expand={true}>
         <div className={classes.elements}>
           <AddOrderItem />
-          <div className={classes.items}>
-            <h3 className={classes.itemsHeader}>Order Items:</h3>
-            <CartItems />
-          </div>
+          {cart.length != 0 && (
+            <div className={classes.items}>
+              <h3 className={classes.itemsHeader}>Order Items:</h3>
+              <CartItems />
+            </div>
+          )}
           <h3 className={classes.total}>Total: ${total.current}</h3>
           <CustomerInfoForm />
 

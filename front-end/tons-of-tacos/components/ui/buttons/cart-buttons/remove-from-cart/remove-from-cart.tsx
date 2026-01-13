@@ -2,23 +2,19 @@
 import { RemoveCartItem } from "@/lib/cart";
 import classes from "./remove-from-cart.module.css";
 import { useCartContext } from "@/context/cart-context";
-import { useOwnerContext } from "@/context/order-context/owner-context";
 import {
   GetOwnerOrder,
   RemoveFromOwnerOrder,
 } from "@/lib/owners-tools/owners-tools-client";
-// import { useEffect } from "react";
+import { useOrdersContext } from "@/context/order-context/orders-context";
 
 export default function Remove(props: {
   id: string;
   cartItemQuantity: number;
 }) {
   const { cartQuantity, setCartQuantity, setItemRemoved } = useCartContext();
-  const { ownerOrder, setOrder } = useOwnerContext();
 
-  // useEffect(() => {
-  //   setCart(GetCart());
-  // });
+  const { ownerOrder, setOrder } = useOrdersContext();
 
   function checkOrderContext() {
     console.log("id: " + props.id);

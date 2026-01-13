@@ -24,7 +24,6 @@
 
 .size {
   color: var(--user-selected-color);
-  /* margin-right: 3rem; */
   justify-items: left;
 }
 
@@ -41,17 +40,18 @@
 }
 
 .ownerOrderItem {
-  width: 98%;
+  width: 100%;
   margin-top: 0.5rem;
   display: grid;
-  grid-template-columns: repeat(4, 25%);
+  grid-template-columns: repeat(4, 1fr);
   font-size: clamp(1.25rem, 1vw, 0.75vw);
   align-items: center;
   gap: 0rem;
   padding-bottom: 1vw;
 }
-.ownerOrderItem :nth-child(2) {
-  margin-left: 0%;
+.ownerOrderItem p:not(:first-child) {
+  display: flex;
+  justify-content: center;
 }
 
 .ownerOrderItemPrice {
@@ -77,8 +77,6 @@
 .itemPrice {
   display: flex;
 }
-
-
 
 @media (max-width: 1380px) {
   .ownerOrderItem {
