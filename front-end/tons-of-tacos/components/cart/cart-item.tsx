@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { useCartContext } from "@/context/cart-context";
 import { useModalContext } from "@/context/menu-context/modal-context";
 import { useDisplayContext } from "@/context/display-context";
-import { useOwnerContext } from "@/context/owner-context";
+import { useOwnerContext } from "@/context/order-context/owner-context";
 import SizeSelector from "../ui/selectors/size-selector/size-selector";
 import QuantitySelector from "../ui/selectors/quantity-selector/quantity-selector";
 import RemoveFromCart from "../ui/buttons/cart-buttons/remove-from-cart/remove-from-cart";
@@ -36,7 +36,6 @@ export default function CartItem(props: {
   const [canUpdate, setCanUpdate] = useState<boolean>(false);
   const [showSizeError, setShowSizeError] = useState<boolean>(false);
   const [sizeError, setSizeError] = useState<string>("hi");
-
 
   const newQuantity = useRef<number>(quantity);
   const oldSize = useRef<string>(props.size);
@@ -129,7 +128,6 @@ export default function CartItem(props: {
       quantity == props.itemQuantity
     ) {
       setCanUpdate(false);
-      
     }
 
     if (edited) {

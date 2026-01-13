@@ -3,7 +3,7 @@ import { useDisplayContext } from "@/context/display-context";
 import { useEditOrderContext } from "@/context/order-context/edit-order-context";
 import { useModalContext } from "@/context/menu-context/modal-context";
 import { useOrdersContext } from "@/context/order-context/orders-context";
-import { useOwnerContext } from "@/context/owner-context";
+import { useOwnerContext } from "@/context/order-context/owner-context";
 import {
   ExecuteConfirm,
   GetAllOrders,

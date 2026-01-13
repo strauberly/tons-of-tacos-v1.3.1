@@ -1,6 +1,6 @@
 import classes from "./quantity-selector.module.css";
 import ArrowIcon from "./arrow-icon";
-import { useOwnerContext } from "@/context/owner-context";
+import { useOrdersContext } from "@/context/order-context/orders-context";
 
 export default function QuantitySelector(props: {
   value: number;
@@ -9,7 +9,7 @@ export default function QuantitySelector(props: {
   decrement: () => void;
   setEdited: (edited: boolean) => void;
 }) {
-  const { ownerOrder } = useOwnerContext();
+  const { ownerOrder } = useOrdersContext();
 
   return (
     <div className={ownerOrder ? classes.ownerOrderQuantity : classes.quantity}>

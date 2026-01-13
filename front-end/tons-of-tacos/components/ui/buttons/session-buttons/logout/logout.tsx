@@ -1,7 +1,7 @@
 "use client";
 
 import { useDisplayContext } from "@/context/display-context";
-import { useOwnerContext } from "@/context/owner-context";
+import { useOwnerContext } from "@/context/order-context/owner-context";
 
 import classes from "./logout.module.css";
 import {

@@ -1,6 +1,6 @@
 "use client";
 import { ReactNode } from "react";
-import { OwnerContextProvider } from "../owner-context";
+import { OwnerContextProvider } from "../order-context/owner-context";
 import { DisplayContextProvider } from "../display-context";
 import { ModalContextProvider } from "../menu-context/modal-context";
 import { MenuCategoryContextProvider } from "../menu-context/menu-category-context";

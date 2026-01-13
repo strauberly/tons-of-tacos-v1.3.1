@@ -8,7 +8,7 @@ import { useDisplayContext } from "@/context/display-context";
 import OwnerHeader from "../owner-header/owner-header";
 import { useEffect } from "react";
 
-import { useOwnerContext } from "@/context/owner-context";
+import { useOwnerContext } from "@/context/order-context/owner-context";
 
 import {
   CookieCheck,

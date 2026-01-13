@@ -1,6 +1,6 @@
 "use client";
 import classes from "./owner-header.module.css";
-import { useOwnerContext } from "@/context/owner-context";
+import { useOwnerContext } from "@/context/order-context/owner-context";
 import { useEffect, useState } from "react";
 import LogoutButton from "../../ui/buttons/session-buttons/logout/logout";
 
