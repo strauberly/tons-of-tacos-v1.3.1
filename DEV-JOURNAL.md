@@ -18,7 +18,7 @@
 
 - Worked in menu item selector responsive styling. Grid was a mess with crowding.
 
-- tried to create a more stable experience for cart items in owner order creator.
+- Tried to create a more stable experience for cart items in owner order creator.
 
 ---
 
