@@ -34,7 +34,7 @@ export default function OwnerOrderCreator() {
       <Card expand={true}>
         <div className={classes.elements}>
           <AddOrderItem />
-          <div>
+          <div className={classes.items}>
             <h3 className={classes.itemsHeader}>Order Items:</h3>
             <CartItems />
           </div>

@@ -7,6 +7,7 @@ import LogoutButton from "../../ui/buttons/session-buttons/logout/logout";
 import {
   DeleteCookies,
   GetLogin,
+  nextCookiePresent,
   OwnerLogout,
   Refresh,
   StoreLogin,
@@ -45,6 +46,7 @@ export default function OwnerHeader() {
           DeleteCookies();
           setLoggedIn(false);
         } else if (exp - Number(Date.now()) < 60000) {
+          nextCookiePresent();
           StoreLogin(await Refresh());
           setLogin(await GetLogin());
           setOrders(await GetAllOrders(login.accessToken));

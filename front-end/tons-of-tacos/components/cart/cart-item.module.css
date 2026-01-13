@@ -35,7 +35,6 @@
 }
 
 .sizeWarning {
-
   color: var(--attention-color);
   justify-self: center;
   margin-bottom: 1rem;

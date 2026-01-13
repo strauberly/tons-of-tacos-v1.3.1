@@ -3,12 +3,15 @@
   margin-top: 10%;
   z-index: 100;
   justify-content: center;
-  /* width: 100%; */
 }
 
 .ownerOrderCreator ul {
-  max-height: 14vw;
+  height: 12rem;
   overflow-y: scroll;
+}
+
+.items {
+  min-height: 16rem;
 }
 
 .elements {
@@ -18,9 +21,6 @@
   max-height: 48rem;
   margin-top: 1rem;
   overflow-x: hidden;
-  /* width: 100%; */
-  /* margin-bottom: 2rem; */
-  /* padding-bottom: 2rem; */
 }
 
 .close {
@@ -40,16 +40,16 @@
   left: 0;
   right: 0;
   margin: auto;
-  margin-top: 1rem;
+  margin-top: 0.25vw;
 }
 
 .itemsHeader {
-  margin-top: 1rem;
+  margin-top: 1vw;
 }
 
 @media (max-width: 1380px) {
   .ownerOrderCreator ul {
-    max-height: 15vw;
+    height: 12rem;
     overflow-y: scroll;
   }
 }
