@@ -23,7 +23,7 @@ export default function CartItems() {
       try {
         setCart(GetCart());
       } catch {
-        throw new Error("up");
+        throw new Error("whup");
       }
     }
   }, [loggedIn, order, ownerOrder, setCart]);
