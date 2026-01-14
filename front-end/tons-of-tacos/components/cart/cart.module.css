@@ -27,7 +27,7 @@
   display: grid;
   row-gap: 2vw;
   grid-template-columns: repeat(3, minmax(6rem, 50%));
-  align-items: flex-end;
+  align-items: center;
   margin-top: 1vw;
   margin-bottom: 1vw;
   width: 95%;
