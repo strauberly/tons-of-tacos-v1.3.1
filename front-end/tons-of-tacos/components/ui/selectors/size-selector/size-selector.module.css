@@ -1,3 +1,7 @@
+.size {
+  margin-top: -0.4vw;
+}
+
 .size input,
 .quantity textarea {
   padding: 0.4vw;
@@ -5,7 +9,7 @@
   color: var(--user-selected-color);
   text-align: center;
   width: 6ch;
-  font-size: clamp(0.75rem, 0.75rem, 0.75rem);
+  font-size: clamp(1rem, 1rem, 1rem);
 }
 
 .valid {

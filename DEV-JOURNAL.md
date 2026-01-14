@@ -21,7 +21,9 @@
 
 - Responsive adjustments for cart.
 
-- responsive adjustment to menu nav.
+- Responsive adjustment to menu nav.
+
+- Size selector aligned with other items in cart item when being edited. holy moses.
 
 ---
 
