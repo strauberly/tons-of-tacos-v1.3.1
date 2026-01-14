@@ -155,8 +155,13 @@
   flex-direction: column;
   gap: 2rem;
   width: 98.7%;
-  padding-top: 2rem;
-  margin-top: 2rem;
+  padding-top: 1rem;
+  margin-left: 1rem;
+  /* margin-top: 1rem; */
+}
+.sales h1 {
+  margin-top: 1vw;
+  font-size: 2vw;
 }
 
 @media (max-width: 1900px) {
@@ -220,5 +225,16 @@
     flex-direction: row;
     align-items: baseline;
     gap: 1rem;
+  }
+}
+
+@media (max-width: 1280px) {
+  .sales h1 {
+    font-size: 3vw;
+  }
+}
+@media (max-width: 640px) {
+  .sales h1 {
+    font-size: 5vw;
   }
 }

@@ -2,8 +2,8 @@
   position: relative;
   display: flex;
   justify-content: center;
-  top: 3.525vw;
-  right: clamp(4rem, 24%, 10rem);
+  top: 3.5vw;
+  right: 3.49vw;
   font-family: "Quatl";
   background-color: var(--border-color);
 }
@@ -32,7 +32,7 @@
 @media (max-width: 1400px) {
   .menu {
     top: 6.2vw;
-    left: -7vw;
+    left: -6vw;
   }
 
   .menu a {
@@ -47,13 +47,13 @@
 @media (max-width: 1240px) {
   .menu {
     top: 6vw;
-    left: -7.7vw;
+    left: -6vw;
   }
 }
 
 @media (max-width: 975px) {
   .menu {
-    width: 95vw;
+    width: 99vw;
     left: 15%;
     transform: translateX(-92%);
     top: 6vw;
@@ -64,7 +64,7 @@
 @media (max-width: 800px) {
   .menu {
     top: 8vw;
-    width: 95vw;
+    width: 98vw;
     left: 14%;
     transform: translateX(-86.5%);
   }
