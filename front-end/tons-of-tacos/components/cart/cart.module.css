@@ -48,22 +48,27 @@
   }
 }
 
-@media (max-width: 1240px) {
+@media (max-width: 1200px) {
   .cart {
-    right: 67%;
+    right: 69%;
   }
 }
 
+@media (max-width: 1160px) {
+  .cart {
+    right: 50%;
+    /* top: 6vw; */
+  }
+}
 @media (max-width: 1080px) {
   .cart {
-    right: 60%;
-    top: 6vw;
+    right: 55%;
   }
 }
 
-@media (max-width: 975px) {
+@media (max-width: 1020px) {
   .cart {
-    width: 96vw;
+    width: 97vw;
     left: clamp(6vw, 5%, 34rem);
     transform: translateX(-92%);
     top: 6vw;

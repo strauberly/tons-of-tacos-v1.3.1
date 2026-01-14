@@ -15,6 +15,14 @@
 
 - Update customer detail button improvements to help it stand out from others in the vicinity. Increased size and added border.
 
+- Responsive styling upgrades for daily sales.
+
+- Responsive improvement to create order button.
+
+- Responsive adjustments for cart.
+
+- responsive adjustment to menu nav.
+
 ---
 
 -- 12 Jan 2026 --

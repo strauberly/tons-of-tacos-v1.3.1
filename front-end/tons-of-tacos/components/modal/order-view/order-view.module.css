@@ -194,14 +194,14 @@
   left: 0;
   margin: auto;
   padding-top: 0.5rem;
-  margin-top: 1.8vw;
+  margin-top: 0.5rem;
 }
 .contactUpdate button {
   font-size: 1.25rem;
   cursor: pointer;
   font-weight: bold;
   padding-top: 0.5rem;
-  margin-top: 1.8vw;
+  margin-top: 0.5rem;
   border-top: 1px solid var(--border-color);
   width: min-content;
 }
