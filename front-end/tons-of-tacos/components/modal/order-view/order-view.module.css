@@ -43,61 +43,6 @@
   width: max-content;
 }
 
-.editableDetails {
-  display: grid;
-  padding-top: 1rem;
-  grid-template-columns: repeat(3, 1fr);
-  align-items: first baseline;
-  row-gap: 1rem;
-  min-width: 100%;
-}
-
-.editableDetailsTitle {
-  color: var(--user-selected-color);
-}
-
-.editableDetails p:nth-child(2n + 2) {
-  justify-self: center;
-}
-
-.editableDetails button {
-  font-weight: bold;
-  grid-column-start: 3;
-  font-size: 1rem;
-  cursor: pointer;
-  margin-left: 4rem;
-}
-
-.editableDetails input {
-  margin-top: 1rem;
-  width: 20ch;
-  margin-left: 0.5vw;
-  margin-right: 0.75vw;
-}
-
-.editableDetails input,
-.editableDetails textarea {
-  font-size: 1rem;
-  padding-top: 0.5vw;
-  padding-bottom: 0.5vw;
-  margin-bottom: 1rem;
-  text-align: center;
-  background-color: var(--background-color);
-  color: var(--user-selected-color);
-  margin-bottom: 1rem;
-}
-
-.editableDetails input:focus,
-.editableDetails textarea:focus {
-  outline: none;
-}
-
-.error {
-  color: var(--attention-color);
-  font-family: var(--inter-font);
-  padding: 0.75vw;
-}
-
 .orderItemView {
   display: flex;
   flex-direction: column;
@@ -122,7 +67,6 @@
   width: 100%;
 }
 
-/* ----------------------------------- */
 .orderItems ul li {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -174,36 +118,6 @@
   margin-top: 3rem;
   cursor: pointer;
   width: 100%;
-}
-
-.invalid {
-  border: 2px solid var(--attention-color);
-  border-radius: 3px;
-}
-
-.valid {
-  border: 2px solid var(--border-color);
-  border-radius: 3px;
-}
-
-.contactUpdate {
-  display: flex;
-  padding: 1rem, 1rem;
-  max-width: min-content;
-  right: 0;
-  left: 0;
-  margin: auto;
-  padding-top: 0.5rem;
-  margin-top: 0.5rem;
-}
-.contactUpdate button {
-  font-size: 1.25rem;
-  cursor: pointer;
-  font-weight: bold;
-  padding-top: 0.5rem;
-  margin-top: 0.5rem;
-  border-top: 1px solid var(--border-color);
-  width: min-content;
 }
 
 .warning {
@@ -298,43 +212,11 @@
     margin-top: 0.5rem;
     padding-bottom: 1rem;
   }
-  .editableDetails button {
-    padding-right: 0.5rem;
-  }
 }
 
 @media (max-width: 1465px) {
   .uneditableDetails p:nth-child(4) {
     margin-left: 2.5vw;
-  }
-}
-@media (max-width: 1400px) {
-  .itemTitles p {
-    margin-top: 2.5vw;
-  }
-
-  .editableDetails input {
-    display: flex;
-    justify-self: center;
-  }
-
-  .editableDetails {
-    display: unset;
-  }
-  .editableDetails p:nth-child(even) {
-    grid-column-start: 2;
-    margin-top: -1.5vw;
-  }
-  .editableDetails button {
-    display: flex;
-    right: 0;
-    left: 0;
-    margin: auto;
-    margin-top: 1vw;
-    margin-bottom: 1vw;
-  }
-  .error {
-    margin-bottom: -1vw;
   }
 }
 
@@ -351,12 +233,6 @@
 }
 
 @media (max-width: 1080px) {
-  .editableDetails p:nth-child(even) {
-    grid-column-start: 2;
-    margin-top: -1.75vw;
-    margin-top: -2vw;
-  }
-
   .itemTitles {
     margin-top: 0.25vw;
   }
@@ -370,12 +246,6 @@
   }
 }
 @media (max-width: 970px) {
-  .editableDetails p:nth-child(even) {
-    grid-column-start: 2;
-    margin-top: -1.75vw;
-    margin-top: -2.25vw;
-  }
-
   .uneditableDetails p:nth-child(4) {
     margin-left: 2.75vw;
   }
@@ -396,17 +266,9 @@
     margin-top: -0.25vw;
     row-gap: 3.6vw;
   }
-
-  .error {
-    padding: 1.5vw;
-  }
 }
 
 @media (max-width: 640px) {
-  .editableDetails p:nth-child(even) {
-    grid-column-start: 2;
-    margin-top: -3.5vw;
-  }
   .itemTitles p {
     margin-top: 3.75vw;
   }

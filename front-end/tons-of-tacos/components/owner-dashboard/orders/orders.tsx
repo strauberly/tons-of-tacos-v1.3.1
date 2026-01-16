@@ -1,7 +1,7 @@
 "use client";
 import classes from "../../owner-dashboard/owner-dashboard.module.css";
 import { useOrdersContext } from "@/context/order-context/orders-context";
-import { useOwnerContext } from "@/context/order-context/owner-context";
+import { useOwnerContext } from "@/context/session-context/owner-context";
 import { GetAllOrders } from "@/lib/owners-tools/owners-tools-server";
 import { useEffect } from "react";
 import Order from "./order";
@@ -39,17 +39,24 @@ export default function Orders(props: { sortState: string }) {
 
   useEffect(() => {
     async function GetOrders() {
-      const orders: Order[] = await GetAllOrders(login.accessToken);
-      setOrders(orders);
-      if (orders.length === 0) {
-        setError(true);
-        setErrorMessage(
-          "Orders not available at the moment. Please refresh and try again."
-        );
-      }
+      setOrders(await GetAllOrders(login.accessToken));
     }
     GetOrders();
-  }, [login.accessToken, setError, setErrorMessage, setOrders]);
+  }, [login.accessToken, setOrders]);
+
+  // useEffect(() => {
+  //   async function GetOrders() {
+  //     const orders: Order[] = await GetAllOrders(login.accessToken);
+  //     setOrders(orders);
+  //     if (orders.length === 0) {
+  //       setError(true);
+  //       setErrorMessage(
+  //         "Orders not available at the moment. Please refresh and try again."
+  //       );
+  //     }
+  //   }
+  //   GetOrders();
+  // }, [login.accessToken, setError, setErrorMessage, setOrders]);
 
   return (
     <div className={classes.dashboard}>
