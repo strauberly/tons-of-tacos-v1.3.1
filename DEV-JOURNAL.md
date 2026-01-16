@@ -16,6 +16,7 @@
 
 - Order item moved out of owner dashboard into order view package under modal folder as this is where an order item is actually viewed. Potentially less running around try to find it when working with the order view.
   - Associated files updated for location.
+- Adjusted styling for order sorting buttons bringing them more inline with the rest of the grid.
 
 ---
 
