@@ -1,6 +1,6 @@
 "use client";
 import classes from "./owner-header.module.css";
-import { useOwnerContext } from "@/context/order-context/owner-context";
+import { useOwnerContext } from "@/context/session-context/owner-context";
 import { useEffect, useState } from "react";
 import LogoutButton from "../../ui/buttons/session-buttons/logout/logout";
 
@@ -42,9 +42,10 @@ export default function OwnerHeader() {
         const hours = loginDate.getHours();
 
         if (exp > Date.now() && hours > 22) {
+          StoreLogin(await Refresh());
+          setLoggedIn(false);
           OwnerLogout(login.accessToken);
           DeleteCookies();
-          setLoggedIn(false);
         } else if (exp - Number(Date.now()) < 60000) {
           StoreLogin(await Refresh());
           nextCookiePresent();

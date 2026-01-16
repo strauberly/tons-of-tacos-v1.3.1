@@ -2,7 +2,7 @@ import classes from "../../selectors/add-to-order/add-order-item.module.css";
 import { useDisplayContext } from "@/context/display-context";
 import { useModalContext } from "@/context/menu-context/modal-context";
 import { useEditOrderContext } from "@/context/order-context/edit-order-context";
-import { useOwnerContext } from "@/context/order-context/owner-context";
+import { useOwnerContext } from "@/context/session-context/owner-context";
 import {
   AddToOwnerOrder,
   GetOwnerOrder,

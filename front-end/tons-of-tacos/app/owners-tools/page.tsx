@@ -2,7 +2,7 @@
 
 import OwnerDashboard from "@/components/owner-dashboard/owner-dashboard";
 import { useDisplayContext } from "@/context/display-context";
-import { useOwnerContext } from "@/context/order-context/owner-context";
+import { useOwnerContext } from "@/context/session-context/owner-context";
 import { Suspense, useEffect } from "react";
 
 import Splash from "../splash";

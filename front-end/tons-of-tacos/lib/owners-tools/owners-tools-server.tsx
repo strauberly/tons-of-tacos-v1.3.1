@@ -18,7 +18,7 @@ export async function GetAllOrders(token: string) {
     data = await response.json();
     const orders = data;
     return orders;
-  } catch (error) {
+  } catch {
     throw new Error(
       "Bummer, looks like our systems are down. Give us a shout for more info or try again later."
     );

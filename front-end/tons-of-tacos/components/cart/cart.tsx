@@ -8,7 +8,7 @@ import CartItems from "./cart-item-list";
 import { AnimatePresence } from "framer-motion";
 import DropDown from "../ui/animations/drop-down";
 import { CalcOrderTotal } from "@/lib/multi-use/multi-use";
-import { useOwnerContext } from "@/context/order-context/owner-context";
+import { useOwnerContext } from "@/context/session-context/owner-context";
 
 export default function Cart() {
   const { setShowCart } = useDisplayContext();

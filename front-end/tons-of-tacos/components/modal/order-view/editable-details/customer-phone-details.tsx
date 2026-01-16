@@ -1,4 +1,4 @@
-import classes from "../order-view.module.css";
+import classes from "./editables.module.css";
 import { useModalContext } from "@/context/menu-context/modal-context";
 import { checkPhone } from "@/lib/customer-form";
 import { formatPhone } from "@/lib/multi-use/multi-use";

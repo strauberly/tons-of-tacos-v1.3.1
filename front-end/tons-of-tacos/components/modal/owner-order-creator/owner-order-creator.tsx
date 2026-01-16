@@ -6,7 +6,7 @@ import AddOrderItem from "@/components/ui/selectors/add-to-order/add-order-item"
 import CartItems from "@/components/cart/cart-item-list";
 import { DeleteOwnerOrder } from "@/lib/owners-tools/owners-tools-client";
 import { useEffect, useRef } from "react";
-import { useOwnerContext } from "@/context/order-context/owner-context";
+import { useOwnerContext } from "@/context/session-context/owner-context";
 import { CalcOrderTotal } from "@/lib/multi-use/multi-use";
 import { useCartContext } from "@/context/cart-context";
 import { useOrdersContext } from "@/context/order-context/orders-context";
