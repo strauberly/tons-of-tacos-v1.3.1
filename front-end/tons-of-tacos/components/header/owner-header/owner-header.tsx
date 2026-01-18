@@ -41,7 +41,7 @@ export default function OwnerHeader() {
 
         const loginDate = new Date();
         const hours = loginDate.getHours();
-        if (exp < Date.now() && hours > 23) {
+        if (exp > Date.now() && hours > 22) {
           OwnerLogout(login.accessToken);
           setLoggedIn(false);
           DeleteCookies();
@@ -53,9 +53,9 @@ export default function OwnerHeader() {
           } catch (error) {
             setErrorMessage(`${error}`);
             setError(true);
-          } finally {
-            setDate(new Date());
+            setLoggedIn(false);
           }
+          setDate(new Date());
         } else {
           setLoggedIn(false);
         }

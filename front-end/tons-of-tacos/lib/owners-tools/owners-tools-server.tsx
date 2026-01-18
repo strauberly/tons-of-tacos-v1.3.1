@@ -12,11 +12,6 @@ export async function GetAllOrders(token: string) {
     }
   );
   const data = await response.json();
-  console.log("data:");
-  console.log(data.toString);
-  console.log(JSON.stringify(data));
-  console.log(data.message);
-  console.log(response.status);
   return data;
 }
 

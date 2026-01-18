@@ -10,6 +10,8 @@ import {
   GetOwnerOrder,
   updateOwnerOrder,
 } from "@/lib/owners-tools/owners-tools-client";
+import { useOrdersContext } from "@/context/order-context/orders-context";
+import { CalcOrderTotal } from "@/lib/multi-use/multi-use";
 
 export default function UpdateCartItem(props: {
   cartItemId: string;
@@ -26,9 +28,10 @@ export default function UpdateCartItem(props: {
   reset: (reset: void) => void;
 }) {
   const { cart, setCart, cartQuantity, setCartQuantity } = useCartContext();
-  const { ownerOrder } = useOwnerContext();
+  const { loggedIn } = useOwnerContext();
   const { setModal } = useModalContext();
   const { setShowModal } = useDisplayContext();
+  const { setOrderTotal, ownerOrder } = useOrdersContext();
 
   const [largeOrder, setLargeOrder] = useState(false);
   const [itemQuantityChanged, setItemQuantityChanged] = useState(false);
@@ -106,6 +109,7 @@ export default function UpdateCartItem(props: {
             updateCartItem(),
             props.setEdited(false),
             props.setCanEdit(false),
+            setOrderTotal(CalcOrderTotal(loggedIn)),
           ]}
         >
           Update
@@ -122,6 +126,7 @@ export default function UpdateCartItem(props: {
               props.setShowSizeError(false),
               props.setSubmitted(true),
               props.reset(),
+              setOrderTotal(CalcOrderTotal(loggedIn)),
             ]}
           >
             Update

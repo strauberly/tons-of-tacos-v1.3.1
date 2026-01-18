@@ -15,6 +15,8 @@ import {
   DeleteCookies,
   GetLogin,
   nextCookiePresent,
+  Refresh,
+  StoreLogin,
 } from "@/lib/owner-session/owner-session-server";
 
 export default function MainHeader() {
@@ -24,11 +26,12 @@ export default function MainHeader() {
   useEffect(() => {
     async function LoginCheck() {
       nextCookiePresent();
-      if ((await CookieCheck()) === false && loggedIn === false) {
+      if ((await CookieCheck()) === true && loggedIn === false) {
+        setLogin({ accessToken: "", refreshToken: "", ownerName: "" });
+        DeleteCookies();
+      } else if ((await CookieCheck()) === false && loggedIn === false) {
+        StoreLogin(await Refresh());
         setLogin(await GetLogin());
-      } else if ((await nextCookiePresent()) === true) {
-      }
-      if (login.ownerName !== "") {
         setLoggedIn(true);
       }
     }
@@ -43,7 +46,12 @@ export default function MainHeader() {
           <Link
             className={classes.home}
             onNavigate={() => [
-              DeleteCookies,
+              DeleteCookies(),
+              setLogin({
+                accessToken: "",
+                refreshToken: "",
+                ownerName: "",
+              }),
               setLoggedIn(false),
               (window.location.href = "/"),
             ]}
