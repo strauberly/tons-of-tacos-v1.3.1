@@ -3,7 +3,7 @@ import classes from "../../owner-dashboard/owner-dashboard.module.css";
 import { useOrdersContext } from "@/context/order-context/orders-context";
 import { useOwnerContext } from "@/context/session-context/owner-context";
 import { GetAllOrders } from "@/lib/owners-tools/owners-tools-server";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Order from "./order";
 import { useErrorContext } from "@/context/error-context";
 
@@ -12,6 +12,16 @@ export default function Orders(props: { sortState: string }) {
   const { login } = useOwnerContext();
   const { setError, setErrorMessage } = useErrorContext();
 
+  console.log(orders);
+  console.log(orders.length);
+  const ordersRef = useRef<Order[]>(orders);
+
+  if ((ordersRef.current.length = 0 && !login)) {
+    setErrorMessage(
+      "Try logging out, Grab a cup of coffee and giving it another go. Give us a shout if that doesn't work and we'll get you going again."
+    );
+    setError(true);
+  }
   const readyOrders: Order[] = orders.filter(checkReady);
   const openOrders: Order[] = orders.filter(checkOpen);
   const closedOrders: Order[] = orders.filter(checkClosed);
@@ -37,26 +47,23 @@ export default function Orders(props: { sortState: string }) {
     return order.ready !== "no" && order.closed !== "no";
   }
 
+  /* Dependency array left empty intentionally. Tis is a fail safe for losing connection to server */
   useEffect(() => {
     async function GetOrders() {
-      setOrders(await GetAllOrders(login.accessToken));
+      ordersRef.current = orders;
+      if ((ordersRef.current = [])) {
+        setOrders(await GetAllOrders(login.accessToken));
+        setErrorMessage("");
+        setError(false);
+      } else {
+        setErrorMessage(
+          "Bummer, looks like our systems are down. Give us a shout for more info or try again later."
+        );
+        setError(true);
+      }
     }
     GetOrders();
-  }, [login.accessToken, setOrders]);
-
-  // useEffect(() => {
-  //   async function GetOrders() {
-  //     const orders: Order[] = await GetAllOrders(login.accessToken);
-  //     setOrders(orders);
-  //     if (orders.length === 0) {
-  //       setError(true);
-  //       setErrorMessage(
-  //         "Orders not available at the moment. Please refresh and try again."
-  //       );
-  //     }
-  //   }
-  //   GetOrders();
-  // }, [login.accessToken, setError, setErrorMessage, setOrders]);
+  }, []);
 
   return (
     <div className={classes.dashboard}>

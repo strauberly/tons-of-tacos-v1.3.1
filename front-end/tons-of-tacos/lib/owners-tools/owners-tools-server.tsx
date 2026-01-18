@@ -1,28 +1,23 @@
 "use server";
 
 export async function GetAllOrders(token: string) {
-  let response;
-  let data;
-
-  try {
-    response = await fetch(
-      "http://localhost:8080/api/owners-tools/orders/get-orders",
-      {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        credentials: "include",
-      }
-    );
-    data = await response.json();
-    const orders = data;
-    return orders;
-  } catch {
-    throw new Error(
-      "Bummer, looks like our systems are down. Give us a shout for more info or try again later."
-    );
-  }
+  const response = await fetch(
+    "http://localhost:8080/api/owners-tools/orders/get-orders",
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      credentials: "include",
+    }
+  );
+  const data = await response.json();
+  console.log("data:");
+  console.log(data.toString);
+  console.log(JSON.stringify(data));
+  console.log(data.message);
+  console.log(response.status);
+  return data;
 }
 
 export async function DeleteOrder(orderUid: string, token: string) {
@@ -288,8 +283,10 @@ export async function DailySales(token: string) {
     );
     const data = await response.json();
     return data;
-  } catch (error) {
-    throw new Error(`${error}`);
+  } catch {
+    throw new Error(
+      "Bummer, looks like our systems are down. Give us a shout for more info or try again later."
+    );
   }
 }
 

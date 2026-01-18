@@ -1,3 +1,4 @@
+"use client";
 import { useErrorContext } from "@/context/error-context";
 import { useOwnerContext } from "@/context/session-context/owner-context";
 import {
@@ -40,7 +41,7 @@ export default function DailySalesDisplay() {
   return (
     <div>
       <h1>Sales For Today: {sales?.numberOfSales}</h1>
-      <h1>Total: ${sales?.total.toFixed(2)}</h1>
+      <h1>Total: ${sales?.total?.toFixed(2)}</h1>
     </div>
   );
 }

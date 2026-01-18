@@ -8,10 +8,12 @@ import {
   DeleteCookies,
   OwnerLogout,
 } from "@/lib/owner-session/owner-session-server";
+import { useErrorContext } from "@/context/error-context";
 
 export default function LogoutButton() {
   const { setLoggedIn, login, setLogin } = useOwnerContext();
   const { setShowLogin } = useDisplayContext();
+  const { setError, setErrorMessage } = useErrorContext();
 
   function LogOut() {
     setLoggedIn(false);
@@ -30,6 +32,8 @@ export default function LogoutButton() {
           ownerName: "",
         }),
         LogOut(),
+        setErrorMessage(""),
+        setError(false),
       ]}
     >
       Log Out

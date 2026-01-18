@@ -2,6 +2,14 @@
 
 ---
 
+-- 17 Jan 2026 --
+
+- Quite a bit of work today trying to restore some sanity to the application.
+
+- Was having issues with token refresh issues and error handling during crashes. Believe it is back to manageable with examples in place for handling during connectivity crashes. Will continue to monitor but should be back to working on styling refactor and getting this sucker ready to ship for demo!
+
+---
+
 -- 16 Jan 2026 --
 
 - 0wner-session-context moved into a folder named session context.
@@ -17,6 +25,31 @@
 - Order item moved out of owner dashboard into order view package under modal folder as this is where an order item is actually viewed. Potentially less running around try to find it when working with the order view.
   - Associated files updated for location.
 - Adjusted styling for order sorting buttons bringing them more inline with the rest of the grid.
+
+---
+
+-- 13 Jan 2026 --
+
+- Adjusted styling in the orders dashboard to take up dead space.
+- Order view details styling update more more consistent alteration at lower screen sizes.
+- Improved responsive design for order details.
+
+- Improvements and adjustments to order view. Focus on improving layout and readability on small screens
+- Quantity selector real broken.
+- Add item Selector responsive improvements eliminating some crowding for the items owner has added to the tentative order.
+- Repaired remove from cart button in owner order creator. Was missed in refactor reorganization.
+
+- Update customer detail button improvements to help it stand out from others in the vicinity. Increased size and added border.
+
+- Responsive styling upgrades for daily sales.
+
+- Responsive improvement to create order button.
+
+- Responsive adjustments for cart.
+
+- Responsive adjustment to menu nav.
+
+- Size selector aligned with other items in cart item when being edited. holy moses.
 
 ---
 
