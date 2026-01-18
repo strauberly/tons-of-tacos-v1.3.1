@@ -1,3 +1,5 @@
+"use-client";
+
 import classes from "./owner-dashboard.module.css";
 import { useDisplayContext } from "@/context/display-context";
 import Orders from "./orders/orders";
@@ -11,6 +13,7 @@ import OwnerOrderCreator from "../modal/owner-order-creator/owner-order-creator"
 import DailySalesDisplay from "./daily-sales/daily-sales";
 import FadeOnLoad from "../ui/animations/fade-on-load";
 import Loading from "@/app/loading";
+// import { useOwnerContext } from "@/context/session-context/owner-context";
 
 export default function OwnerDashboard() {
   const {
@@ -21,6 +24,7 @@ export default function OwnerDashboard() {
   } = useDisplayContext();
 
   const { confirmationTitle, orderToView } = useModalContext();
+  // const { login } = useOwnerContext();
 
   const displayCategories: string[] = [
     "Order Id",

@@ -133,10 +133,10 @@ export async function OwnerLogin(
 export async function Refresh() {
   const cookieStore = await cookies();
   const refreshToken = cookieStore.get("refreshToken");
-
-  const response = await fetch(
-    "http://localhost:8080/api/owners-tools/refresh",
-    {
+  let response: Response;
+  let data;
+  try {
+    response = await fetch("http://localhost:8080/api/owners-tools/refresh", {
       method: "POST",
       headers: {
         Cookie: `${refreshToken?.value}`,
@@ -144,9 +144,13 @@ export async function Refresh() {
       },
       body: JSON.stringify(refreshToken?.value),
       credentials: "include",
-    }
-  );
-  const data = await response.json();
+    });
+    data = await response.json();
+  } catch {
+    throw new Error(
+      "Weren't able to connect to server please try refreshing browser, logging out and back in. Give us a shout if that doesn't work. Thanks!"
+    );
+  }
   const status = response.status;
 
   const [, payloadBase64] = data.accessToken.split(".");
@@ -280,7 +284,8 @@ export async function nextCookiePresent() {
 
   if (cookieStore.has("__next_hmr_refresh_hash__")) {
     cookieStore.delete("__next_hmr_refresh_hash__");
+    return true;
+  } else {
+    return false;
   }
-  return cookieStore.has("__next_hmr_refresh_hash__");
-  // return cookieStore.has("accessToken");
 }

@@ -9,6 +9,7 @@ import {
 import LoginButton from "../buttons/session-buttons/login/login-button";
 import { useOwnerContext } from "@/context/session-context/owner-context";
 import { useErrorContext } from "@/context/error-context";
+import { useOrdersContext } from "@/context/order-context/orders-context";
 
 export default function OwnerLoginForm() {
   const initialState = {
@@ -19,15 +20,14 @@ export default function OwnerLoginForm() {
   const [state, formAction] = useActionState(OwnerLogin, initialState);
   const { setLogin, setLoggedIn, login } = useOwnerContext();
   const { setError, setErrorMessage } = useErrorContext();
+  const { setOrders } = useOrdersContext();
 
   useEffect(() => {
     async function Login() {
       if (state.status === 200) {
         StoreLogin(state.response);
         setLogin(await GetLogin());
-        console.log("login form: " + login.accessToken);
-        console.log("login form: " + login.refreshToken);
-        console.log("login form: " + login.ownerName);
+
         setLoggedIn(true);
         setError(false);
         setErrorMessage("");
@@ -43,6 +43,7 @@ export default function OwnerLoginForm() {
     setErrorMessage,
     setLoggedIn,
     setLogin,
+    setOrders,
     state.response,
     state.status,
   ]);

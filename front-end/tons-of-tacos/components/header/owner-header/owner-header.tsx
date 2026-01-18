@@ -7,7 +7,6 @@ import LogoutButton from "../../ui/buttons/session-buttons/logout/logout";
 import {
   DeleteCookies,
   GetLogin,
-  nextCookiePresent,
   OwnerLogout,
   Refresh,
   StoreLogin,
@@ -15,10 +14,12 @@ import {
 
 import { useOrdersContext } from "@/context/order-context/orders-context";
 import { GetAllOrders } from "@/lib/owners-tools/owners-tools-server";
+import { useErrorContext } from "@/context/error-context";
 
 export default function OwnerHeader() {
   const { login, setLoggedIn, setLogin } = useOwnerContext();
   const { setOrders } = useOrdersContext();
+  const { setErrorMessage, setError } = useErrorContext();
 
   const [date, setDate] = useState(new Date());
   const options: Intl.DateTimeFormatOptions = {
@@ -40,21 +41,24 @@ export default function OwnerHeader() {
 
         const loginDate = new Date();
         const hours = loginDate.getHours();
-
-        if (exp > Date.now() && hours > 22) {
-          StoreLogin(await Refresh());
-          setLoggedIn(false);
+        if (exp < Date.now() && hours > 23) {
           OwnerLogout(login.accessToken);
+          setLoggedIn(false);
           DeleteCookies();
         } else if (exp - Number(Date.now()) < 60000) {
-          StoreLogin(await Refresh());
-          nextCookiePresent();
-          setLogin(await GetLogin());
-          setOrders(await GetAllOrders(login.accessToken));
+          try {
+            StoreLogin(await Refresh());
+            setLogin(await GetLogin());
+            setOrders(await GetAllOrders(login.accessToken));
+          } catch (error) {
+            setErrorMessage(`${error}`);
+            setError(true);
+          } finally {
+            setDate(new Date());
+          }
+        } else {
+          setLoggedIn(false);
         }
-        setDate(new Date());
-      } else {
-        setLoggedIn(false);
       }
     }
 
@@ -67,6 +71,8 @@ export default function OwnerHeader() {
     login,
     login.accessToken,
     login.refreshToken,
+    setError,
+    setErrorMessage,
     setLoggedIn,
     setLogin,
     setOrders,

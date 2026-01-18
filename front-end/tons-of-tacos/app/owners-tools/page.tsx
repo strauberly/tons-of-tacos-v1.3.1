@@ -24,7 +24,11 @@ export default function OwnersTools() {
     <Suspense fallback={<Loading />}>
       <FadeOnLoad>
         {error && <Error message={errorMessage} />}
-        {loggedIn ? <OwnerDashboard /> : !error && <Splash />}
+        {loggedIn && !error ? (
+          <OwnerDashboard />
+        ) : (
+          !loggedIn && !error && <Splash />
+        )}
       </FadeOnLoad>
     </Suspense>
   );
