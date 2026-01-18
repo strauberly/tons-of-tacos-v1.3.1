@@ -131,7 +131,7 @@ export default function CustomerInfoForm() {
             type="text"
             id="phone"
             name="phone"
-            placeholder="Enter Numbers Only (Auto Formatted)"
+            placeholder="Enter Numbers Only"
             required
             maxLength={12}
             onChange={validatePhoneNumber}

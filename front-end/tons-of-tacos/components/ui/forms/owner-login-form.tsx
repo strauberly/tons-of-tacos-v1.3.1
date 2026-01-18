@@ -27,7 +27,6 @@ export default function OwnerLoginForm() {
       if (state.status === 200) {
         StoreLogin(state.response);
         setLogin(await GetLogin());
-
         setLoggedIn(true);
         setError(false);
         setErrorMessage("");

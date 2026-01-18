@@ -217,7 +217,8 @@ export async function GetLogin() {
 export async function CookieCheck() {
   const cookieStore = cookies();
 
-  const gotCookies: boolean = (await cookieStore).toString() === "";
+  const gotCookies: boolean =
+    (await cookieStore).get("accessToken") === undefined;
 
   return gotCookies;
 }

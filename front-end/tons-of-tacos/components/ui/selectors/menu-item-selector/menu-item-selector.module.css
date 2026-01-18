@@ -4,8 +4,6 @@
   padding: 0.5vw;
   height: 8rem;
   margin-bottom: 0.15vw;
-  /* margin-bottom: 2rem; */
-  /* border-bottom: solid var(--border-color); */
   justify-content: center;
   max-width: 100%;
   ::-webkit-scrollbar {
@@ -46,13 +44,11 @@
 
 .items ul {
   display: flex;
-  /* padding-right: 2rem; */
   flex-direction: column;
   width: 100%;
   align-items: flex-start;
   overflow-x: hidden;
   justify-items: center;
-  /* height: 20vw; */
 }
 
 .menuItemSelector button {
@@ -93,7 +89,6 @@
   }
   .menuItemSelector {
     padding: 0vw;
-    /* margin-bottom: -2rem; */
   }
 }
 @media (max-width: 750px) {
@@ -103,9 +98,6 @@
 }
 
 @media (max-width: 620px) {
-  .categories h3:nth-child(2) {
-    margin-left: 0.25vw;
-  }
   .menuItemSelector button {
     font-size: 2.5vw;
   }

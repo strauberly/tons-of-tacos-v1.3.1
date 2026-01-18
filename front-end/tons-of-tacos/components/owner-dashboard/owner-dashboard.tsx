@@ -13,7 +13,6 @@ import OwnerOrderCreator from "../modal/owner-order-creator/owner-order-creator"
 import DailySalesDisplay from "./daily-sales/daily-sales";
 import FadeOnLoad from "../ui/animations/fade-on-load";
 import Loading from "@/app/loading";
-// import { useOwnerContext } from "@/context/session-context/owner-context";
 
 export default function OwnerDashboard() {
   const {
@@ -24,7 +23,6 @@ export default function OwnerDashboard() {
   } = useDisplayContext();
 
   const { confirmationTitle, orderToView } = useModalContext();
-  // const { login } = useOwnerContext();
 
   const displayCategories: string[] = [
     "Order Id",
@@ -37,12 +35,18 @@ export default function OwnerDashboard() {
   ];
 
   const [sortState, setSortState] = useState<string>("open");
-
-  const scrollToTop = () => {
-    document.getElementById("orders-list")?.scrollTo({
-      top: 0,
-      behavior: "instant",
-    });
+  const scrollToBeginning = () => {
+    if (window.innerWidth < 1900) {
+      document.getElementById("orders-list")?.scrollTo({
+        left: 0,
+        behavior: "instant",
+      });
+    } else {
+      document.getElementById("orders-list")?.scrollTo({
+        left: 0,
+        behavior: "instant",
+      });
+    }
   };
 
   return (
@@ -70,20 +74,23 @@ export default function OwnerDashboard() {
                 <div className={classes.buttonGroup}>
                   <button
                     className={classes.sortButtons}
-                    onClick={() => [setSortState("ready"), scrollToTop()]}
+                    onClick={() => [setSortState("ready"), scrollToBeginning()]}
                   >
                     {" "}
                     Ready
                   </button>
                   <button
-                    onClick={() => [setSortState("closed"), scrollToTop()]}
+                    onClick={() => [
+                      setSortState("closed"),
+                      scrollToBeginning(),
+                    ]}
                     className={classes.sortButtons}
                   >
                     {" "}
                     Closed
                   </button>
                   <button
-                    onClick={() => [setSortState("open"), scrollToTop()]}
+                    onClick={() => [setSortState("open"), scrollToBeginning()]}
                     className={classes.sortButtons}
                   >
                     Open

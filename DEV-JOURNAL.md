@@ -2,6 +2,18 @@
 
 ---
 
+-- 18 Jan 2026 --
+
+- Change made in owner dashboard so that whether orders are in horizontal or vertical view based on screen size clicking one of the sort by status buttons scrolls to the beginning of the updated results.
+
+- Adjustment to action bar responsive height at smaller screen sizes.
+
+- Responsive adjustments for cart-item, customer-info-form, menu-item-selector and add-order-item.
+
+- Improvements to logic for session management in owner header allowing for session to survive a refresh.
+
+---
+
 -- 17 Jan 2026 --
 
 - Quite a bit of work today trying to restore some sanity to the application.
