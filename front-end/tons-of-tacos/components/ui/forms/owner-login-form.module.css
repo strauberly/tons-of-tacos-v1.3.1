@@ -9,16 +9,10 @@
 
 .ownerLogin input,
 .ownerLogin textarea {
-  border: solid;
-  border-color: var(--attention-color);
-  border-radius: 3px;
   font-size: clamp(1.25rem, 2vw, 1.5vw);
   text-align: left;
-
   background-color: var(--background-color);
-
   color: var(--user-selected-color);
-
   padding-left: 1vw;
   padding-top: 0.5vw;
   padding-bottom: 0.5vw;
@@ -28,6 +22,15 @@
 .ownerLogin input:focus,
 .ownerLogin textarea:focus {
   outline: none;
+}
+
+.valid {
+  border: 2px solid var(--border-color);
+  border-radius: 3px;
+}
+.invalid {
+  border: 2px solid var(--attention-color);
+  border-radius: 3px;
 }
 
 @media (max-width: 1400px) {

@@ -2,6 +2,14 @@
 
 ---
 
+-- 19 Jan 2026 --
+
+- Base validation with visual feed back for user in for owner login fields. Simply changes color if users password and id meets base criteria ie length and specific characters. credential validation file created in owner-session.
+
+- Search input fields altered to include logic for clearing the input of field not in use and not showing an error as a result of there not being input which would normally fire off an error.
+
+---
+
 -- 18 Jan 2026 --
 
 - Change made in owner dashboard so that whether orders are in horizontal or vertical view based on screen size clicking one of the sort by status buttons scrolls to the beginning of the updated results.
