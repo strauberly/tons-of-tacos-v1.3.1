@@ -28,6 +28,7 @@ export default function OwnerLoginForm() {
 
   const [idValid, setIdValid] = useState<boolean>(false);
   const idRef = useRef<string>("");
+
   const [passwordValid, setPasswordValid] = useState<boolean>(false);
   const passwordRef = useRef<string>("");
 
@@ -88,7 +89,10 @@ export default function OwnerLoginForm() {
         required
         onChange={validatePassword}
       />
-      <LoginButton />
+      <LoginButton
+        setIdValid={setIdValid}
+        setPasswordValid={setPasswordValid}
+      />
     </form>
   );
 }

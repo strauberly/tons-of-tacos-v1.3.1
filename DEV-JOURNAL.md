@@ -8,6 +8,12 @@
 
 - Search input fields altered to include logic for clearing the input of field not in use and not showing an error as a result of there not being input which would normally fire off an error.
 
+- login inputs reset on click
+
+- Trying out implementing template to include more components so that UX experience is consistent.
+
+- Discovered bug where using navigation links in footer resulted in navigating there but leaving an owner logged in and the login form displayed. Logic implemented in main header to prevent this.
+
 ---
 
 -- 18 Jan 2026 --
