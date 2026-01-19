@@ -1,6 +1,6 @@
 "use client";
 import classes from "./owner-login-form.module.css";
-import { useActionState, useEffect } from "react";
+import { useActionState, useEffect, useRef, useState } from "react";
 import {
   GetLogin,
   OwnerLogin,
@@ -10,6 +10,10 @@ import LoginButton from "../buttons/session-buttons/login/login-button";
 import { useOwnerContext } from "@/context/session-context/owner-context";
 import { useErrorContext } from "@/context/error-context";
 import { useOrdersContext } from "@/context/order-context/orders-context";
+import {
+  checkID,
+  checkPassword,
+} from "@/lib/owner-session/credential-validation";
 
 export default function OwnerLoginForm() {
   const initialState = {
@@ -21,6 +25,20 @@ export default function OwnerLoginForm() {
   const { setLogin, setLoggedIn, login } = useOwnerContext();
   const { setError, setErrorMessage } = useErrorContext();
   const { setOrders } = useOrdersContext();
+
+  const [idValid, setIdValid] = useState<boolean>(false);
+  const idRef = useRef<string>("");
+  const [passwordValid, setPasswordValid] = useState<boolean>(false);
+  const passwordRef = useRef<string>("");
+
+  function validateID(event: React.ChangeEvent<HTMLInputElement>) {
+    idRef.current = event.target.value;
+    setIdValid(checkID(idRef.current));
+  }
+  function validatePassword(event: React.ChangeEvent<HTMLInputElement>) {
+    passwordRef.current = event.target.value;
+    setPasswordValid(checkPassword(passwordRef.current));
+  }
 
   useEffect(() => {
     async function Login() {
@@ -50,21 +68,25 @@ export default function OwnerLoginForm() {
   return (
     <form className={classes.ownerLogin} action={formAction}>
       <input
+        className={idValid ? classes.valid : classes.invalid}
         type="text"
         id="owner_id"
         name="owner_id"
         placeholder="Enter ID"
         maxLength={7}
         required
+        onChange={validateID}
       />
 
       <input
+        className={passwordValid ? classes.valid : classes.invalid}
         type="password"
         id="password"
         name="password"
         placeholder="Enter Password"
         maxLength={8}
         required
+        onChange={validatePassword}
       />
       <LoginButton />
     </form>

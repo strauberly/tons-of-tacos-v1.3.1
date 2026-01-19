@@ -42,9 +42,13 @@ export default function SearchBar() {
 
   function handleFocus(e: React.FocusEvent<HTMLInputElement>) {
     if (e.target.id === "phone") {
-      idValidRef.current = true;
+      idValidRef.current = false;
+      orderIdRef.current = "";
+      setIdSearchError("");
     } else if (e.target.id === "orderId") {
-      phoneValidRef.current = true;
+      phoneValidRef.current = false;
+      phoneNumberRef.current = "";
+      setPhoneSearchError("");
     }
   }
 

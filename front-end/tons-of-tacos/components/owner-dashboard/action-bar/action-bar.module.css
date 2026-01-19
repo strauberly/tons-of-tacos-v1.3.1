@@ -10,7 +10,7 @@
   font-size: 1rem;
   font-weight: bold;
   margin-top: 0.25rem;
-  padding-left: 1vw;
+  padding-left: 3rem;
   border-left: solid 2px var(--border-color);
 }
 
@@ -28,7 +28,7 @@
     left: 0;
     right: 0;
     margin: auto;
-    margin-top: 2vw;
+    margin-top: 4vw;
     margin-bottom: 5vw;
     padding-left: 0vw;
     border-left: none;
