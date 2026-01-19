@@ -19,12 +19,19 @@ import {
   StoreLogin,
 } from "@/lib/owner-session/owner-session-server";
 
+import { usePathname } from "next/navigation";
+
 export default function MainHeader() {
-  const { showLogin } = useDisplayContext();
+  const pathName = usePathname();
+  const { showLogin, setShowLogin } = useDisplayContext();
   const { loggedIn, setLoggedIn, setLogin, login } = useOwnerContext();
 
   useEffect(() => {
     async function LoginCheck() {
+      if (pathName !== "/owners-tools") {
+        setLoggedIn(false);
+        setShowLogin(false);
+      }
       nextCookiePresent();
       if ((await CookieCheck()) === true && loggedIn === false) {
         setLogin({ accessToken: "", refreshToken: "", ownerName: "" });
@@ -37,7 +44,14 @@ export default function MainHeader() {
     }
 
     LoginCheck();
-  }, [loggedIn, login.ownerName, setLoggedIn, setLogin]);
+  }, [
+    loggedIn,
+    login.ownerName,
+    pathName,
+    setLoggedIn,
+    setLogin,
+    setShowLogin,
+  ]);
 
   return (
     <>
@@ -59,7 +73,6 @@ export default function MainHeader() {
           >
             Tons Of Tacos
           </Link>
-
           {loggedIn && <OwnerHeader />}
           {showLogin && !loggedIn && <OwnerLoginForm />}
           {!showLogin && !loggedIn && <NavButtons />}
