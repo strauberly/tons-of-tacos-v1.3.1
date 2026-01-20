@@ -98,14 +98,14 @@ export default function MenuItem(props: {
       >
         <h2 className={classes.itemName}>{props.itemName}</h2>
 
-        {expand && (
+        {/* {expand && (
           <button
             onClick={() => setExpand(false)}
             className={classes.closeExpanded}
           >
             X
           </button>
-        )}
+        )} */}
 
         <Image
           id={classes.itemImage}
@@ -147,6 +147,15 @@ export default function MenuItem(props: {
         {!expand && (
           <button onClick={() => setExpand(true)}>
             <MoreIcon />
+          </button>
+        )}
+
+        {expand && (
+          <button
+            onClick={() => setExpand(false)}
+            className={classes.closeExpanded}
+          >
+            Close
           </button>
         )}
       </li>

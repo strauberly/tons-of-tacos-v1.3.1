@@ -14,6 +14,8 @@
 
 - Discovered bug where using navigation links in footer resulted in navigating there but leaving an owner logged in and the login form displayed. Logic implemented in main header to prevent this.
 
+- Expanded view for a menu item alter so that x button for close is moved to bottom and changed to the word closed keeping it more in line with rest of application.
+
 ---
 
 -- 18 Jan 2026 --
