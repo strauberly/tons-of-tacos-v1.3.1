@@ -116,7 +116,7 @@ export async function OwnerLogin(
       "utf-8"
     );
     const subject = await JSON.parse(decodedPayload);
-
+    // store login here?
     return {
       status: status,
       response: {
@@ -146,6 +146,7 @@ export async function Refresh() {
       credentials: "include",
     });
     data = await response.json();
+    console.log(`${data.status}`);
   } catch {
     throw new Error(
       "Weren't able to connect to server please try refreshing browser, logging out and back in. Give us a shout if that doesn't work. Thanks!"

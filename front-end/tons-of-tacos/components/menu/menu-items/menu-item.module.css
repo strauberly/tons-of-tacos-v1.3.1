@@ -103,10 +103,9 @@
 }
 
 .closeExpanded {
-  position: sticky;
-  font-size: clamp(2rem, 1vw, 1vw);
+  font-size: clamp(1.5rem, 1vw, 1vw);
+  font-family: "Quatl";
   bottom: 100%;
-  margin-left: 90%;
   cursor: pointer;
 }
 
