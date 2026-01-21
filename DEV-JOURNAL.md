@@ -2,6 +2,21 @@
 
 ---
 
+-- 21 Jan 2026 --
+
+- autocomplete set to off on input for owner login form for the time being on password.
+
+---
+
+-- 20 Jan 2026 --
+
+- Moved expiration check logic into owner-session-server from owner-header.
+
+- Bit of research showed me what I was looking for in transferring data through cookies from font end to back end in a manner that allows for incorporating them as originally intended by backend team(me ^\_^); So now our call to refresh the session only utilizes the cookie instead of where a cookie and req body were being sent.
+- Also determined error was being thrown anytime the owner login was not being returned if we want more details from server we will need a more generic response object similar to how we are handling other responses. (See owner login) to be refined down the road.
+
+---
+
 -- 19 Jan 2026 --
 
 - Base validation with visual feed back for user in for owner login fields. Simply changes color if users password and id meets base criteria ie length and specific characters. credential validation file created in owner-session.

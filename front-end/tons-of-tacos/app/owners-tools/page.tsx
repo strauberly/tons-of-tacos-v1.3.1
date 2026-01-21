@@ -21,15 +21,17 @@ export default function OwnersTools() {
   });
 
   return (
-    <Suspense fallback={<Loading />}>
-      <FadeOnLoad>
-        {error && <Error message={errorMessage} />}
-        {loggedIn && !error ? (
-          <OwnerDashboard />
-        ) : (
-          !loggedIn && !error && <Splash />
-        )}
-      </FadeOnLoad>
-    </Suspense>
+    <>
+      <Suspense fallback={<Loading />}>
+        <FadeOnLoad>
+          {error && <Error message={errorMessage} />}
+          {loggedIn && !error ? (
+            <OwnerDashboard />
+          ) : (
+            !loggedIn && !error && <Splash />
+          )}
+        </FadeOnLoad>
+      </Suspense>
+    </>
   );
 }

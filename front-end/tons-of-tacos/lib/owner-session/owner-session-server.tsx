@@ -139,14 +139,13 @@ export async function Refresh() {
     response = await fetch("http://localhost:8080/api/owners-tools/refresh", {
       method: "POST",
       headers: {
-        Cookie: `${refreshToken?.value}`,
+        Cookie: `token=${refreshToken?.value}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(refreshToken?.value),
       credentials: "include",
     });
+
     data = await response.json();
-    console.log(`${data.status}`);
   } catch {
     throw new Error(
       "Weren't able to connect to server please try refreshing browser, logging out and back in. Give us a shout if that doesn't work. Thanks!"
@@ -290,4 +289,12 @@ export async function nextCookiePresent() {
   } else {
     return false;
   }
+}
+
+export async function GetCookieExp(login: OwnerLogin) {
+  const [, payloadBase64] = login.accessToken.split(".");
+  const decodedPayload = Buffer.from(payloadBase64, "base64").toString("utf-8");
+  const subject = JSON.parse(decodedPayload);
+  const exp = subject.exp * 1000;
+  return exp;
 }

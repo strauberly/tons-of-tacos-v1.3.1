@@ -6,6 +6,7 @@ import LogoutButton from "../../ui/buttons/session-buttons/logout/logout";
 
 import {
   DeleteCookies,
+  GetCookieExp,
   GetLogin,
   OwnerLogout,
   Refresh,
@@ -30,37 +31,30 @@ export default function OwnerHeader() {
 
   useEffect(() => {
     async function Refresher() {
-      if (Object.keys(login).length !== 0) {
-        const [, payloadBase64] = login.accessToken.split(".");
-        const decodedPayload = Buffer.from(payloadBase64, "base64").toString(
-          "utf-8"
-        );
-        const subject = JSON.parse(decodedPayload);
-
-        const exp = subject.exp * 1000;
-
-        const loginDate = new Date();
-        const hours = loginDate.getHours();
-        if (exp > Date.now() && hours > 22) {
-          OwnerLogout(login.accessToken);
-          setLoggedIn(false);
-          DeleteCookies();
-        } else if (exp - Number(Date.now()) < 60000) {
-          try {
-            StoreLogin(await Refresh());
-            setLogin(await GetLogin());
-            setOrders(await GetAllOrders(login.accessToken));
-          } catch (error) {
-            setErrorMessage(`${error}`);
-            setError(true);
-            setLoggedIn(false);
-          }
-          setDate(new Date());
-        } else {
+      
+      const exp = await GetCookieExp(login);
+      const loginDate = new Date();
+      const hours = loginDate.getHours();
+      if (exp > Date.now() && hours > 22) {
+        OwnerLogout(login.accessToken);
+        setLoggedIn(false);
+        DeleteCookies();
+      } else if (exp - Number(Date.now()) < 60000) {
+        try {
+          StoreLogin(await Refresh());
+          setLogin(await GetLogin());
+          setOrders(await GetAllOrders(login.accessToken));
+        } catch (error) {
+          setErrorMessage(`${error}`);
+          setError(true);
           setLoggedIn(false);
         }
+        setDate(new Date());
+      } else {
+        setLoggedIn(false);
       }
     }
+    // }
 
     const tokenRefresh = setInterval(() => Refresher(), 1000 * 60);
 
