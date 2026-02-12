@@ -2,6 +2,14 @@
 
 ---
 
+-- 12 Feb 2026 --
+
+- Updated url for getting all categories from back end to match back end update.
+
+- Working on catching runaway condition when trying to call a category that doesnt exist with update to backend to a response enitity try ing to apply condition of what should be a 404 returned.
+
+---
+
 -- 21 Jan 2026 --
 
 - autocomplete set to off on input for owner login form for the time being on password.

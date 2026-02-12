@@ -4,9 +4,7 @@ export default async function CategoriesSource() {
   let data;
 
   try {
-    const response = await fetch(
-      "http://localhost:8080/api/utility/categories"
-    );
+    const response = await fetch("http://localhost:8080/api/menu/categories");
     data = await response.json();
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
