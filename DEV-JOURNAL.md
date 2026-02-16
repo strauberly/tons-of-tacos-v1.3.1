@@ -2,6 +2,12 @@
 
 ---
 
+-- 15 Feb 2026 --
+
+- Best solution appears to utilize the not found page we established to address this very condition. Code has been updated implementing this solution.
+
+---
+
 -- 12 Feb 2026 --
 
 - Updated url for getting all categories from back end to match back end update.
