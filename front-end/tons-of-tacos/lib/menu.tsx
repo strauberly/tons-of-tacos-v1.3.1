@@ -1,5 +1,7 @@
 "use server";
 
+import { notFound } from "next/navigation";
+
 export default async function CategoriesSource() {
   let data;
 
@@ -24,7 +26,7 @@ export async function MenuItemsSource(category: string) {
   const status = response.status;
   const menuItems: MenuItem[] = data;
   if (status !== 200) {
-    throw new Error(`${data.message}`);
+    notFound();
   } else {
     return menuItems;
   }
