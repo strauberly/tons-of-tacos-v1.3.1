@@ -28,7 +28,7 @@ export const MenuCategoryContextProvider = ({
 }: {
   children: ReactNode;
 }) => {
-  const [categories, setMenuCategories] = useState<[] | Category[]>([]);
+  const [categories, setMenuCategories] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   return (

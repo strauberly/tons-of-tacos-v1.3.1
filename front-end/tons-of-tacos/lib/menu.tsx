@@ -3,19 +3,27 @@
 import { notFound } from "next/navigation";
 
 export default async function CategoriesSource() {
-  let data;
+  // let data;
 
-  try {
-    const response = await fetch("http://localhost:8080/api/menu/categories");
-    data = await response.json();
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  } catch (error) {
-    throw new Error(
-      "Bummer, looks like our systems are down. Give us a shout for more info or try again later."
-    );
+  // try {
+  const response = await fetch("http://localhost:8080/api/menu/categories");
+  const data = await response.json();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  console.log("error:" + response.status);
+
+  if (response.status === 200) {
+    const categories: Category[] = data;
+    return categories;
+  } else {
+    throw new Error(data.message);
   }
-  const categories: Category[] = data;
-  return categories;
+  // utilize error for status
+  // } catch (error) {
+  //   console.log(error);
+  //   throw new Error(
+  //     "Bummer, looks like our systems are down. Give us a shout for more info or try again later."
+  //   );
+  // }
 }
 
 export async function MenuItemsSource(category: string) {
