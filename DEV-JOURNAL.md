@@ -2,6 +2,12 @@
 
 ---
 
+-- 18 Feb 2026
+
+- Call for menu categoriesSource in menu library now handles errors from the server if it cant connect to get the menu item categories preventing the user from using the application.
+
+---
+
 -- 15 Feb 2026 --
 
 - Best solution appears to utilize the not found page we established to address this very condition. Code has been updated implementing this solution.
