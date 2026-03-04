@@ -1,6 +1,6 @@
 import { useOwnerContext } from "@/context/session-context/owner-context";
 import classes from "./editables.module.css";
-import { useModalContext } from "@/context/menu-context/modal-context";
+import { useModalContext } from "@/context/modal-context";
 import { checkName } from "@/lib/customer-form";
 import { UpdateCustomerName } from "@/lib/owners-tools/owners-tools-customers/edit-customer-server";
 import { useRef, useState } from "react";
@@ -15,40 +15,32 @@ export default function CustomerNameDetails() {
   const { setShowModal } = useDisplayContext();
   const { setModalMessage } = useModalContext();
 
+  const response = useRef<UpdateCustomerResponse>({ status: 0, body: "" });
   const orderRef = useRef<Order>(orderToView);
-
   const customerNameRef = useRef<string>(orderToView.name);
-
   const firstNameRef = useRef<string>(
     orderRef.current.name.substring(0, orderRef.current.name.indexOf(" "))
   );
-
   const lastNameRef = useRef(
     orderRef.current.name.substring(
       orderRef.current.name.indexOf(" ") + 1,
       orderRef.current.name.length
     )
   );
+  const firstNameValidRef = useRef("true");
+  const lastNameValidRef = useRef("true");
 
   const [currentFirstName, setCurrentFirstName] = useState<string>(
     firstNameRef.current
   );
-
   const [currentLastName, setCurrentLastName] = useState<string>(
     lastNameRef.current
   );
-
   const [nameEdited, setNameEdited] = useState<boolean>(false);
   const [editName, setEditName] = useState<boolean>(false);
   const [update, setUpdate] = useState<boolean>(false);
-
   const [firstNameValid, setFirstNameValid] = useState<boolean>(true);
   const [lastNameValid, setLastNameValid] = useState<boolean>(true);
-
-  const response = useRef<UpdateCustomerResponse>({ status: 0, body: "" });
-  const firstNameValidRef = useRef("true");
-  const lastNameValidRef = useRef("true");
-
   const [errors, setErrors] = useState({
     firstNameError: "Change first name or cancel.",
     lastNameError: "Change last name or cancel.",
@@ -87,7 +79,7 @@ export default function CustomerNameDetails() {
     setNameEdited(true);
   }
 
-  function updateCustomerName(resp: CustomerOrdersResponse) {
+  function updateCustomerName(resp: UpdateCustomerResponse) {
     setModalMessage(`${resp.body}`);
     setShowModal(true);
   }

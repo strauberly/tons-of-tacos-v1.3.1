@@ -2,7 +2,7 @@
 import { ReactNode } from "react";
 import { OwnerContextProvider } from "@/context/session-context/owner-context";
 import { DisplayContextProvider } from "../display-context";
-import { ModalContextProvider } from "../menu-context/modal-context";
+import { ModalContextProvider } from "../modal-context";
 import { MenuCategoryContextProvider } from "../menu-context/menu-category-context";
 import { CartContextProvider } from "../cart-context";
 import { ErrorContextProvider } from "../error-context";

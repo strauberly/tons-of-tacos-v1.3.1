@@ -1,6 +1,6 @@
 import { useDisplayContext } from "@/context/display-context";
 import { useEditOrderContext } from "@/context/order-context/edit-order-context";
-import { useModalContext } from "@/context/menu-context/modal-context";
+import { useModalContext } from "@/context/modal-context";
 
 export default function UpdateOrderItemButton(props: {
   orderItem: OrderItem;

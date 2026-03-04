@@ -1,7 +1,7 @@
 import classes from "./cart-item.module.css";
 import { useEffect, useRef, useState } from "react";
 import { useCartContext } from "@/context/cart-context";
-import { useModalContext } from "@/context/menu-context/modal-context";
+import { useModalContext } from "@/context/modal-context";
 import { useDisplayContext } from "@/context/display-context";
 import { useOwnerContext } from "@/context/session-context/owner-context";
 import SizeSelector from "../ui/selectors/size-selector/size-selector";

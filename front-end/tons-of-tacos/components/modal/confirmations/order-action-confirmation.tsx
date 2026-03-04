@@ -1,7 +1,7 @@
 import classes from "./order-action-confirmation.module.css";
 import { useDisplayContext } from "@/context/display-context";
 import Card from "../../ui/cards/card";
-import { useModalContext } from "@/context/menu-context/modal-context";
+import { useModalContext } from "@/context/modal-context";
 import { useRef } from "react";
 import {
   AddToOrderMessage,
