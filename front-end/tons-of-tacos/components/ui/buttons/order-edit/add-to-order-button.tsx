@@ -25,7 +25,8 @@ export default function AddToOrderButton(props: {
   setSizeValid: (sizeValid: boolean) => void;
   setSubmitted: (submitted: boolean) => void;
 }) {
-  const { setShowConfirmation } = useDisplayContext();
+  const { setShowOrderUpdateConfirmation: setShowConfirmation } =
+    useDisplayContext();
   const { setConfirmationTitle } = useModalContext();
   const { orderToView } = useModalContext();
   const { login } = useOwnerContext();

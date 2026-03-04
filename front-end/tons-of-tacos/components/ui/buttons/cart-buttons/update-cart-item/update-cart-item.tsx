@@ -29,7 +29,7 @@ export default function UpdateCartItem(props: {
 }) {
   const { cart, setCart, cartQuantity, setCartQuantity } = useCartContext();
   const { loggedIn } = useOwnerContext();
-  const { setModal } = useModalContext();
+  const { setModalMessage: setModal } = useModalContext();
   const { setShowModal } = useDisplayContext();
   const { setOrderTotal, ownerOrder } = useOrdersContext();
 

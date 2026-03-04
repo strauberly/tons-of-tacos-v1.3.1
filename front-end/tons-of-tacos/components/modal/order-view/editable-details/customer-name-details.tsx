@@ -1,12 +1,23 @@
+import { useOwnerContext } from "@/context/session-context/owner-context";
 import classes from "./editables.module.css";
 import { useModalContext } from "@/context/menu-context/modal-context";
 import { checkName } from "@/lib/customer-form";
+import { UpdateCustomerName } from "@/lib/owners-tools/owners-tools-customers/edit-customer-server";
 import { useRef, useState } from "react";
+import { useOrdersContext } from "@/context/order-context/orders-context";
+import { GetAllOrders } from "@/lib/owners-tools/owners-tools-server";
+import { useDisplayContext } from "@/context/display-context";
 
 export default function CustomerNameDetails() {
   const { orderToView, setOrderToView } = useModalContext();
+  const { login } = useOwnerContext();
+  const { setOrders } = useOrdersContext();
+  const { setShowModal } = useDisplayContext();
+  const { setModalMessage } = useModalContext();
 
   const orderRef = useRef<Order>(orderToView);
+
+  const customerNameRef = useRef<string>(orderToView.name);
 
   const firstNameRef = useRef<string>(
     orderRef.current.name.substring(0, orderRef.current.name.indexOf(" "))
@@ -27,18 +38,20 @@ export default function CustomerNameDetails() {
     lastNameRef.current
   );
 
+  const [nameEdited, setNameEdited] = useState<boolean>(false);
   const [editName, setEditName] = useState<boolean>(false);
   const [update, setUpdate] = useState<boolean>(false);
 
-  const [firstNameValid, setFirstNameValid] = useState<boolean>(false);
-  const [lastNameValid, setLastNameValid] = useState<boolean>(false);
+  const [firstNameValid, setFirstNameValid] = useState<boolean>(true);
+  const [lastNameValid, setLastNameValid] = useState<boolean>(true);
 
-  const firstNameValidRef = useRef("false");
-  const lastNameValidRef = useRef("false");
+  const response = useRef<UpdateCustomerResponse>({ status: 0, body: "" });
+  const firstNameValidRef = useRef("true");
+  const lastNameValidRef = useRef("true");
 
   const [errors, setErrors] = useState({
-    firstNameError: "First Name must not be blank",
-    lastNameError: "Last Name must not be blank",
+    firstNameError: "Change first name or cancel.",
+    lastNameError: "Change last name or cancel.",
   });
 
   function validateFirstName(event: React.ChangeEvent<HTMLInputElement>) {
@@ -62,54 +75,40 @@ export default function CustomerNameDetails() {
   }
 
   function updateFirstName(e: React.ChangeEvent<HTMLInputElement>) {
-    setCurrentFirstName(e.target.value);
+    const name = e.target.value;
+    setCurrentFirstName(name.charAt(0).toUpperCase() + name.slice(1));
     validateFirstName(e);
+    setNameEdited(true);
   }
   function updateLastName(e: React.ChangeEvent<HTMLInputElement>) {
-    setCurrentLastName(e.target.value);
+    const name = e.target.value;
+    setCurrentLastName(name.charAt(0).toUpperCase() + name.slice(1));
     validateLastName(e);
+    setNameEdited(true);
   }
 
-  function firstNameFormat() {
-    let fName: string;
-    if (orderRef.current.name !== "NA") {
-      fName =
-        currentFirstName.charAt(0).toUpperCase() +
-        currentFirstName.substring(1, currentFirstName.length).toLowerCase();
-      return `${fName}`;
-    } else {
-      return orderRef.current.name;
-    }
+  function updateCustomerName(resp: CustomerOrdersResponse) {
+    setModalMessage(`${resp.body}`);
+    setShowModal(true);
   }
-  function lastNameFormat() {
-    let lName: string;
-    if (orderRef.current.name !== "NA") {
-      lName =
-        currentLastName.charAt(0).toUpperCase() +
-        currentLastName.substring(1, currentLastName.length).toLowerCase();
-      return `${lName}`;
-    } else {
-      return "";
-    }
-  }
-
-  const customerNameRef = useRef<string>(orderToView.name);
 
   return (
     <div className={classes.editableDetails}>
       <p className={classes.editableDetailsTitle}>Name:</p>
-      <p>{`${firstNameFormat() + " " + lastNameFormat()}`}</p>
+      <p>{`${currentFirstName + " " + currentLastName}`}</p>
+
       {editName && (
         <div>
           <input
             className={` 
-                    ${firstNameValid ? classes.valid : classes.invalid}`}
+                    ${firstNameValid ? classes.valid : classes.invalid} `}
             placeholder={`${firstNameRef.current}`}
             type="text"
             id="first_name"
             name="first_name"
             maxLength={17}
             required
+            value={currentFirstName}
             onChange={updateFirstName}
           />
 
@@ -125,6 +124,7 @@ export default function CustomerNameDetails() {
             name="last_name"
             maxLength={17}
             required
+            value={currentLastName}
             onChange={updateLastName}
           />
           {!lastNameValid && (
@@ -159,27 +159,21 @@ export default function CustomerNameDetails() {
         </button>
       )}
       {editName == true &&
-        firstNameValid === true &&
-        lastNameValid === true && (
+        nameEdited == true &&
+        firstNameValid == true &&
+        lastNameValid == true && (
           <button
-            onClick={() => [
+            onClick={async () => [
+              (response.current = await UpdateCustomerName(
+                orderToView.customerUid,
+                `${currentFirstName + " " + currentLastName}`,
+                login.accessToken
+              )),
+              updateCustomerName(response.current),
               setOrderToView({
                 orderUid: orderToView.orderUid,
                 customerUid: orderToView.customerUid,
-                name:
-                  `${
-                    currentFirstName.charAt(0).toUpperCase() +
-                    currentFirstName
-                      .substring(1, currentFirstName.length)
-                      .toLowerCase()
-                  }` +
-                  " " +
-                  `${
-                    currentLastName.charAt(0).toUpperCase() +
-                    currentLastName
-                      .substring(1, currentLastName.length)
-                      .toLowerCase()
-                  }`,
+                name: `${currentFirstName}` + " " + `${currentLastName}`,
                 email: orderToView.email,
                 phone: orderToView.phone,
                 orderTotal: orderToView.orderTotal,
@@ -189,23 +183,12 @@ export default function CustomerNameDetails() {
                 closed: orderToView.closed,
               }),
               setEditName(!editName),
-              setFirstNameValid(false),
-              setLastNameValid(false),
+              setFirstNameValid(true),
+              setLastNameValid(true),
               setUpdate(!update),
               (customerNameRef.current =
-                `${
-                  currentFirstName.charAt(0).toUpperCase() +
-                  currentFirstName
-                    .substring(1, currentFirstName.length)
-                    .toLowerCase()
-                }` +
-                " " +
-                `${
-                  currentLastName.charAt(0).toUpperCase() +
-                  currentLastName
-                    .substring(1, currentLastName.length)
-                    .toLowerCase()
-                }`),
+                `${currentFirstName}` + " " + `${currentLastName}`),
+              setOrders(await GetAllOrders(login.accessToken)),
             ]}
           >
             Done

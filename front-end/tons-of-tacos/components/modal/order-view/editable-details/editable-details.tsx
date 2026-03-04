@@ -8,7 +8,8 @@ import { useEditOrderContext } from "@/context/order-context/edit-order-context"
 
 export default function EditableDetails() {
   const { orderToView } = useModalContext();
-  const { setShowConfirmation } = useDisplayContext();
+  const { setShowOrderUpdateConfirmation: setShowConfirmation } =
+    useDisplayContext();
   const { setConfirmationTitle } = useModalContext();
   const { setCustomer } = useEditOrderContext();
 

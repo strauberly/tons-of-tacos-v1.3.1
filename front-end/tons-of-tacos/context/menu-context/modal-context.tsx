@@ -9,8 +9,8 @@ import {
 } from "react";
 
 interface ContextProps {
-  modal: string;
-  setModal: Dispatch<SetStateAction<string>>;
+  modalMessage: string;
+  setModalMessage: Dispatch<SetStateAction<string>>;
   orderToView: Order;
   setOrderToView: Dispatch<SetStateAction<Order>>;
   confirmationTitle: string;
@@ -18,8 +18,8 @@ interface ContextProps {
 }
 
 const ModalContext = createContext<ContextProps>({
-  modal: "",
-  setModal: () => {},
+  modalMessage: "",
+  setModalMessage: () => {},
   orderToView: {
     orderUid: "",
     customerUid: "",
@@ -38,7 +38,7 @@ const ModalContext = createContext<ContextProps>({
 });
 
 export const ModalContextProvider = ({ children }: { children: ReactNode }) => {
-  const [modal, setModal] = useState<string>("");
+  const [modalMessage, setModalMessage] = useState<string>("");
   const [orderToView, setOrderToView] = useState<Order>({
     orderUid: "",
     customerUid: "",
@@ -55,8 +55,8 @@ export const ModalContextProvider = ({ children }: { children: ReactNode }) => {
   return (
     <ModalContext.Provider
       value={{
-        modal,
-        setModal,
+        modalMessage,
+        setModalMessage,
         orderToView,
         setOrderToView,
         confirmationTitle,

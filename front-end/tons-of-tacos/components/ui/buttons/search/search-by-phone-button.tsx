@@ -13,7 +13,7 @@ export default function SearchByPhoneButton(props: {
 }) {
   const { setShowCustomerOrders, setShowModal } = useDisplayContext();
   const { customerOrders, setCustomerOrders } = useOrdersContext();
-  const { setModal } = useModalContext();
+  const { setModalMessage: setModal } = useModalContext();
 
   const response = useRef<CustomerOrdersResponse>({
     status: 0,

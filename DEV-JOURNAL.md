@@ -2,6 +2,31 @@
 
 ---
 
+-- 3 March 2026 --
+
+- Realized there is no need to create new components as we can simply utilize our modal that has all ready been created for purpose of providing user with feedback from the server.
+  - Redundant files and methods removed.
+- Did make some changes to customer name input when editing to format first letter to Cap.
+  Reduces to need to reformat after.
+- Also altered default states for validation to correctly reflect state.
+
+-- 2 March 2026 --
+
+- Began working on new response and functionality for editing a customer with an open orders details.
+
+  - Functions for updating a customers details will be found in lib/owners-tools-customers/edit-customer-server. The idea is to separate these functions from owner-tools-server where they are currently lumped together with functions for orders.
+  - Created files under modal/confirmations for messages pertaining to updating a customer. Since the api call is coming from the order view and not a page in the application our error component/page is not able to be used so user will get a message from the server that either the action was successful or notification of a problem with what they are trying to submit. The can then close the modal and try again.
+
+  - Buttons are in progress for the modal.
+  - Display context added to for displaying the modal or not.
+  - In modal context renamed modal to modalMessage, and setModal to setModalMessage. This should hopefully be more intuitive.
+
+-- 2 March 2026 --
+
+- Added a an update to done button to for edit name to refresh order when done.
+
+---
+
 -- 18 Feb 2026
 
 - Call for menu categoriesSource in menu library now handles errors from the server if it cant connect to get the menu item categories preventing the user from using the application.

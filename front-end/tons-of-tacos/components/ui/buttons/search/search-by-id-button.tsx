@@ -11,7 +11,7 @@ export default function SearchByIdButton(props: {
 }) {
   const { setOrderToView, orderToView } = useModalContext();
   const { setViewOrder, setShowModal } = useDisplayContext();
-  const { setModal } = useModalContext();
+  const { setModalMessage: setModal } = useModalContext();
 
   const response = useRef<OrderRequestResponse>({
     status: 0,
