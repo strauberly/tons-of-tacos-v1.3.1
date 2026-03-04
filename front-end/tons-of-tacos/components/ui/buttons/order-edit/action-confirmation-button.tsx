@@ -12,7 +12,8 @@ import {
 import { useRef } from "react";
 
 export default function ActionConfirmationButton(props: { title: string }) {
-  const { setShowConfirmation, setShowModal } = useDisplayContext();
+  const { setShowOrderUpdateConfirmation: setShowConfirmation, setShowModal } =
+    useDisplayContext();
   const { setOrders } = useOrdersContext();
   const { login } = useOwnerContext();
   const {
@@ -24,7 +25,11 @@ export default function ActionConfirmationButton(props: { title: string }) {
     customer,
     setOrderChanged,
   } = useEditOrderContext();
-  const { orderToView, setModal, setOrderToView } = useModalContext();
+  const {
+    orderToView,
+    setModalMessage: setModal,
+    setOrderToView,
+  } = useModalContext();
 
   const orders = useRef<Order[]>([]);
   const action = useRef<string>("");

@@ -24,8 +24,10 @@ interface ContextProps {
   setShowLogin: Dispatch<SetStateAction<boolean>>;
   viewOrder: boolean;
   setViewOrder: Dispatch<SetStateAction<boolean>>;
-  showConfirmation: boolean;
-  setShowConfirmation: Dispatch<SetStateAction<boolean>>;
+  showOrderUpdateConfirmation: boolean;
+  setShowOrderUpdateConfirmation: Dispatch<SetStateAction<boolean>>;
+  showCustomerUpdateConfirmation: boolean;
+  setShowCustomerUpdateConfirmation: Dispatch<SetStateAction<boolean>>;
   showCustomerOrders: boolean;
   setShowCustomerOrders: Dispatch<SetStateAction<boolean>>;
   showOwnerOrderCreator: boolean;
@@ -47,8 +49,10 @@ const DisplayContext = createContext<ContextProps>({
   setShowLogin: () => {},
   viewOrder: false,
   setViewOrder: () => {},
-  showConfirmation: false,
-  setShowConfirmation: () => {},
+  showOrderUpdateConfirmation: false,
+  setShowOrderUpdateConfirmation: () => {},
+  showCustomerUpdateConfirmation: false,
+  setShowCustomerUpdateConfirmation: () => {},
   showCustomerOrders: false,
   setShowCustomerOrders: () => {},
   showOwnerOrderCreator: false,
@@ -67,7 +71,10 @@ export const DisplayContextProvider = ({
   const [showOrderConfirmation, setShowOrderConfirmation] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [viewOrder, setViewOrder] = useState(false);
-  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [showOrderUpdateConfirmation, setShowOrderUpdateConfirmation] =
+    useState(false);
+  const [showCustomerUpdateConfirmation, setShowCustomerUpdateConfirmation] =
+    useState(false);
   const [showCustomerOrders, setShowCustomerOrders] = useState(false);
   const [showOwnerOrderCreator, setShowOwnerOrderCreator] = useState(false);
 
@@ -88,8 +95,10 @@ export const DisplayContextProvider = ({
         setShowLogin,
         viewOrder,
         setViewOrder,
-        showConfirmation,
-        setShowConfirmation,
+        showOrderUpdateConfirmation,
+        setShowOrderUpdateConfirmation,
+        showCustomerUpdateConfirmation,
+        setShowCustomerUpdateConfirmation,
         showCustomerOrders,
         setShowCustomerOrders,
         showOwnerOrderCreator,

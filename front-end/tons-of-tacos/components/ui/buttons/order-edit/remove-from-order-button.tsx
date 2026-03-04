@@ -7,7 +7,8 @@ export default function RemoveFromOrderButton(props: {
   orderItem: OrderItem;
   orderToView: Order;
 }) {
-  const { setShowConfirmation } = useDisplayContext();
+  const { setShowOrderUpdateConfirmation: setShowConfirmation } =
+    useDisplayContext();
   const { setConfirmationTitle } = useModalContext();
 
   const { setOrderItem } = useEditOrderContext();

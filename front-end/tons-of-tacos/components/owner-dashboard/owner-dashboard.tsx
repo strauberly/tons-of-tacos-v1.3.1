@@ -13,13 +13,15 @@ import OwnerOrderCreator from "../modal/owner-order-creator/owner-order-creator"
 import DailySalesDisplay from "./daily-sales/daily-sales";
 import FadeOnLoad from "../ui/animations/fade-on-load";
 import Loading from "@/app/loading";
+import CustomerUpdateConfirmation from "../modal/confirmations/customer-update-confirmation";
 
 export default function OwnerDashboard() {
   const {
     viewOrder,
-    showConfirmation,
+    showOrderUpdateConfirmation,
     showCustomerOrders,
     showOwnerOrderCreator,
+    showCustomerUpdateConfirmation,
   } = useDisplayContext();
 
   const { confirmationTitle, orderToView } = useModalContext();
@@ -56,7 +58,18 @@ export default function OwnerDashboard() {
           {showCustomerOrders && <OrdersByCustomerPhone />}
           {showOwnerOrderCreator && <OwnerOrderCreator />}
           {viewOrder && <OrderView />}
-          {showConfirmation && (
+          {showCustomerUpdateConfirmation && (
+            <CustomerUpdateConfirmation
+              title={confirmationTitle}
+              customer={{
+                customerUid: "",
+                name: "",
+                phone: "",
+                email: "",
+              }}
+            />
+          )}
+          {showOrderUpdateConfirmation && (
             <OrderActionConfirmation
               title={confirmationTitle}
               order={orderToView}

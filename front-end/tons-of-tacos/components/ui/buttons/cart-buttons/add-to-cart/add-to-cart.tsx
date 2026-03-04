@@ -19,7 +19,7 @@ export default function AddToCart(props: {
   quantitySelector: () => void;
   expander: () => void;
 }) {
-  const { setModal } = useModalContext();
+  const { setModalMessage: setModal } = useModalContext();
   const { setShowModal } = useDisplayContext();
   const { selectedSize } = useSelectedSizeContext();
   const { cartQuantity, setCartQuantity, setItemsInCart, cart, setCart } =

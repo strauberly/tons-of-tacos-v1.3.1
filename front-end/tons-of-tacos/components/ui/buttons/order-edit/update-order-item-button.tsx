@@ -11,7 +11,8 @@ export default function UpdateOrderItemButton(props: {
   setNewSize: (newSize: string) => void;
 }) {
   const { setQuantity, setOrderItem, setItemSize } = useEditOrderContext();
-  const { setShowConfirmation } = useDisplayContext();
+  const { setShowOrderUpdateConfirmation: setShowConfirmation } =
+    useDisplayContext();
   const { setConfirmationTitle } = useModalContext();
 
   return (

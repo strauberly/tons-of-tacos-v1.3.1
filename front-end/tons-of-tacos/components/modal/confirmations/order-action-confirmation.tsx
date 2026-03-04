@@ -19,7 +19,7 @@ export default function OrderActionConfirmation(props: {
   title: string;
   order: Order;
 }) {
-  const { setShowConfirmation } = useDisplayContext();
+  const { setShowOrderUpdateConfirmation } = useDisplayContext();
   const { orderToView, setOrderToView } = useModalContext();
 
   const {
@@ -79,7 +79,7 @@ export default function OrderActionConfirmation(props: {
             <ActionConfirmationButton title={props.title} />
             <button
               onClick={async () => {
-                setShowConfirmation(false);
+                setShowOrderUpdateConfirmation(false);
                 setOrderChanged(false);
                 setQuantity(orderItem.quantity);
                 orderReqResRef.current = await GetOrderByID(

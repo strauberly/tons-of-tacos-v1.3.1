@@ -111,3 +111,8 @@ type CustomerOrdersResponse = {
   status: number;
   body: Order[] | string;
 };
+
+type UpdateCustomerResponse = {
+  status: number;
+  body: string;
+};

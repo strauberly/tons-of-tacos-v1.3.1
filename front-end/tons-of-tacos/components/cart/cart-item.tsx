@@ -21,7 +21,7 @@ export default function CartItem(props: {
   itemPrice: string;
 }) {
   const { cartQuantity, cart, setCart } = useCartContext();
-  const { setModal } = useModalContext();
+  const { setModalMessage: setModal } = useModalContext();
   const { setShowModal } = useDisplayContext();
   const { loggedIn } = useOwnerContext();
   const { ownerOrder } = useOrdersContext();

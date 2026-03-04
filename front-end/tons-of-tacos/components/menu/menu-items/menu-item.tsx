@@ -21,7 +21,7 @@ export default function MenuItem(props: {
   itemSize: string;
   unitPrice: number;
 }) {
-  const { setModal } = useModalContext();
+  const { setModalMessage: setModal } = useModalContext();
   const { setShowModal } = useDisplayContext();
   const { menuItemId } = useMenuItemIdContext();
   const [expand, setExpand] = useState(false);

@@ -2,7 +2,8 @@ import { useDisplayContext } from "@/context/display-context";
 import { useModalContext } from "@/context/menu-context/modal-context";
 
 export default function DeleteOrderButton(props: { order: Order }) {
-  const { setShowConfirmation } = useDisplayContext();
+  const { setShowOrderUpdateConfirmation: setShowConfirmation } =
+    useDisplayContext();
   const { setOrderToView, setConfirmationTitle } = useModalContext();
 
   return (

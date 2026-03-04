@@ -5,7 +5,7 @@ import { useModalContext } from "@/context/menu-context/modal-context";
 
 export default function Modal() {
   const { showModal, setShowModal } = useDisplayContext();
-  const { modal } = useModalContext();
+  const { modalMessage: modal } = useModalContext();
 
   return (
     <>
