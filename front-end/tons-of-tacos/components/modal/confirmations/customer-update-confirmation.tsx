@@ -4,7 +4,7 @@ import { useRef } from "react";
 import Card from "@/components/ui/cards/card";
 import ActionConfirmationButton from "@/components/ui/buttons/order-edit/action-confirmation-button";
 import { useDisplayContext } from "@/context/display-context";
-import { useModalContext } from "@/context/menu-context/modal-context";
+import { useModalContext } from "@/context/modal-context";
 
 export default function CustomerUpdateConfirmation(props: {
   title: string;

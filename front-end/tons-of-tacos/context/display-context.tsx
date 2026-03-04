@@ -8,7 +8,7 @@ import {
   useState,
   ReactNode,
 } from "react";
-// add for display orders by customer
+
 interface ContextProps {
   showMenu: boolean;
   setShowMenu: Dispatch<SetStateAction<boolean>>;
@@ -26,8 +26,6 @@ interface ContextProps {
   setViewOrder: Dispatch<SetStateAction<boolean>>;
   showOrderUpdateConfirmation: boolean;
   setShowOrderUpdateConfirmation: Dispatch<SetStateAction<boolean>>;
-  showCustomerUpdateConfirmation: boolean;
-  setShowCustomerUpdateConfirmation: Dispatch<SetStateAction<boolean>>;
   showCustomerOrders: boolean;
   setShowCustomerOrders: Dispatch<SetStateAction<boolean>>;
   showOwnerOrderCreator: boolean;
@@ -51,8 +49,6 @@ const DisplayContext = createContext<ContextProps>({
   setViewOrder: () => {},
   showOrderUpdateConfirmation: false,
   setShowOrderUpdateConfirmation: () => {},
-  showCustomerUpdateConfirmation: false,
-  setShowCustomerUpdateConfirmation: () => {},
   showCustomerOrders: false,
   setShowCustomerOrders: () => {},
   showOwnerOrderCreator: false,
@@ -72,8 +68,6 @@ export const DisplayContextProvider = ({
   const [showLogin, setShowLogin] = useState(false);
   const [viewOrder, setViewOrder] = useState(false);
   const [showOrderUpdateConfirmation, setShowOrderUpdateConfirmation] =
-    useState(false);
-  const [showCustomerUpdateConfirmation, setShowCustomerUpdateConfirmation] =
     useState(false);
   const [showCustomerOrders, setShowCustomerOrders] = useState(false);
   const [showOwnerOrderCreator, setShowOwnerOrderCreator] = useState(false);
@@ -97,8 +91,6 @@ export const DisplayContextProvider = ({
         setViewOrder,
         showOrderUpdateConfirmation,
         setShowOrderUpdateConfirmation,
-        showCustomerUpdateConfirmation,
-        setShowCustomerUpdateConfirmation,
         showCustomerOrders,
         setShowCustomerOrders,
         showOwnerOrderCreator,

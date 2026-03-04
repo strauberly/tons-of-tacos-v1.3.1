@@ -1,6 +1,6 @@
 "use client";
 import classes from "./add-to-cart.module.css";
-import { useModalContext } from "@/context/menu-context/modal-context";
+import { useModalContext } from "@/context/modal-context";
 import { useCartContext } from "@/context/cart-context";
 import { AddItemToCart, GetCart } from "@/lib/cart";
 import { useRef, useState } from "react";

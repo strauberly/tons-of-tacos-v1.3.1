@@ -2,7 +2,7 @@ import classes from "./search.module.css";
 import { useDisplayContext } from "@/context/display-context";
 import SearchIcon from "./search-icon";
 import { useRef } from "react";
-import { useModalContext } from "@/context/menu-context/modal-context";
+import { useModalContext } from "@/context/modal-context";
 import { GetOrdersByCustomerPhone } from "@/lib/owners-tools/owners-tools-server";
 import { useOrdersContext } from "@/context/order-context/orders-context";
 

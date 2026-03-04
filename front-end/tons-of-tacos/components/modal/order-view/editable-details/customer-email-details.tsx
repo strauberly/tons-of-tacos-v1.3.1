@@ -1,16 +1,28 @@
-import classes from "./editables.module.css";
-import { useModalContext } from "@/context/menu-context/modal-context";
+import { useOrdersContext } from "@/context/order-context/orders-context";
+import { useModalContext } from "@/context/modal-context";
+import { useOwnerContext } from "@/context/session-context/owner-context";
 import { checkEmail } from "@/lib/customer-form";
 import { useRef, useState } from "react";
+import classes from "./editables.module.css";
+import { useDisplayContext } from "@/context/display-context";
+import { GetAllOrders } from "@/lib/owners-tools/owners-tools-server";
+import { UpdateCustomerEmail } from "@/lib/owners-tools/owners-tools-customers/edit-customer-server";
 
 export default function CustomerEmailDetails() {
-  const { orderToView, setOrderToView } = useModalContext();
+  const { orderToView, setOrderToView, setModalMessage } = useModalContext();
+  const { login } = useOwnerContext();
+  const { setOrders } = useOrdersContext();
+  const { setShowModal } = useDisplayContext();
+
+  const customerEmailRef = useRef<string>(orderToView.email);
+  const email = useRef("true");
+  const response = useRef<UpdateCustomerResponse>({ status: 0, body: "" });
+
   const [currentEmail, setCurrentEmail] = useState<string>(orderToView.email);
   const [update, setUpdate] = useState<boolean>(false);
+  const [emailEdited, setEmailEdited] = useState<boolean>(false);
   const [editEmail, setEditEmail] = useState<boolean>(false);
-  const [emailValid, setEmailValid] = useState<boolean>(false);
-  const email = useRef("false");
-
+  const [emailValid, setEmailValid] = useState<boolean>(true);
   const [errors, setErrors] = useState({
     emailError: "Email must not be blank",
   });
@@ -28,9 +40,13 @@ export default function CustomerEmailDetails() {
   function updateEmail(e: React.ChangeEvent<HTMLInputElement>) {
     setCurrentEmail(e.target.value);
     validateEmail(e);
+    setEmailEdited(true);
   }
 
-  const customerEmailRef = useRef<string>(orderToView.email);
+  function updateCustomerEmail(resp: UpdateCustomerResponse) {
+    setModalMessage(`${resp.body}`);
+    setShowModal(true);
+  }
 
   return (
     <div className={classes.editableDetails}>
@@ -41,12 +57,13 @@ export default function CustomerEmailDetails() {
         <div>
           <input
             className={` ${emailValid ? classes.valid : classes.invalid}`}
-            placeholder={`${currentEmail}`}
+            placeholder={`${email.current}`}
             type="text"
             id="email"
             name="email"
             required
             maxLength={32}
+            value={currentEmail}
             onChange={updateEmail}
           ></input>
           {!emailValid && <p className={classes.error}>{errors.emailError}</p>}
@@ -70,9 +87,15 @@ export default function CustomerEmailDetails() {
           Cancel
         </button>
       )}
-      {emailValid && (
+      {editEmail == true && emailEdited == true && emailValid && (
         <button
-          onClick={() => [
+          onClick={async () => [
+            (response.current = await UpdateCustomerEmail(
+              orderToView.customerUid,
+              `${currentEmail}`,
+              login.accessToken
+            )),
+            updateCustomerEmail(response.current),
             setOrderToView({
               orderUid: orderToView.orderUid,
               customerUid: orderToView.customerUid,
@@ -86,9 +109,10 @@ export default function CustomerEmailDetails() {
               closed: orderToView.closed,
             }),
             setEditEmail(!editEmail),
-            setEmailValid(!emailValid),
+            setEmailValid(true),
             setUpdate(!update),
             (customerEmailRef.current = currentEmail),
+            setOrders(await GetAllOrders(login.accessToken)),
           ]}
         >
           Done

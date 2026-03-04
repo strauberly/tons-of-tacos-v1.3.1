@@ -9,6 +9,9 @@
 - Did make some changes to customer name input when editing to format first letter to Cap.
   Reduces to need to reformat after.
 - Also altered default states for validation to correctly reflect state.
+- Editing customer email now follows a similar pattern.
+
+---
 
 -- 2 March 2026 --
 

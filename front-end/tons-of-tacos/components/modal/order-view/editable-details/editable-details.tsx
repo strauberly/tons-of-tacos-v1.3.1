@@ -1,5 +1,5 @@
 import classes from "./editables.module.css";
-import { useModalContext } from "@/context/menu-context/modal-context";
+import { useModalContext } from "@/context/modal-context";
 import CustomerNameDetails from "./customer-name-details";
 import CustomerPhoneDetails from "./customer-phone-details";
 import CustomerEmailDetails from "./customer-email-details";
