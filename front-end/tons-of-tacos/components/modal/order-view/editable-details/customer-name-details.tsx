@@ -9,11 +9,10 @@ import { GetAllOrders } from "@/lib/owners-tools/owners-tools-server";
 import { useDisplayContext } from "@/context/display-context";
 
 export default function CustomerNameDetails() {
-  const { orderToView, setOrderToView } = useModalContext();
+  const { orderToView, setOrderToView, setModalMessage } = useModalContext();
   const { login } = useOwnerContext();
   const { setOrders } = useOrdersContext();
   const { setShowModal } = useDisplayContext();
-  const { setModalMessage } = useModalContext();
 
   const response = useRef<UpdateCustomerResponse>({ status: 0, body: "" });
   const orderRef = useRef<Order>(orderToView);
@@ -150,42 +149,40 @@ export default function CustomerNameDetails() {
           Cancel
         </button>
       )}
-      {editName == true &&
-        nameEdited == true &&
-        firstNameValid == true &&
-        lastNameValid == true && (
-          <button
-            onClick={async () => [
-              (response.current = await UpdateCustomerName(
-                orderToView.customerUid,
-                `${currentFirstName + " " + currentLastName}`,
-                login.accessToken
-              )),
-              updateCustomerName(response.current),
-              setOrderToView({
-                orderUid: orderToView.orderUid,
-                customerUid: orderToView.customerUid,
-                name: `${currentFirstName}` + " " + `${currentLastName}`,
-                email: orderToView.email,
-                phone: orderToView.phone,
-                orderTotal: orderToView.orderTotal,
-                orderItems: orderToView.orderItems,
-                created: orderToView.created,
-                ready: orderToView.ready,
-                closed: orderToView.closed,
-              }),
-              setEditName(!editName),
-              setFirstNameValid(true),
-              setLastNameValid(true),
-              setUpdate(!update),
-              (customerNameRef.current =
-                `${currentFirstName}` + " " + `${currentLastName}`),
-              setOrders(await GetAllOrders(login.accessToken)),
-            ]}
-          >
-            Done
-          </button>
-        )}
+      {editName && nameEdited && firstNameValid && lastNameValid && (
+        <button
+          onClick={async () => [
+            (response.current = await UpdateCustomerName(
+              orderToView.customerUid,
+              `${currentFirstName + " " + currentLastName}`,
+              login.accessToken
+            )),
+            updateCustomerName(response.current),
+            setOrderToView({
+              orderUid: orderToView.orderUid,
+              customerUid: orderToView.customerUid,
+              name: `${currentFirstName}` + " " + `${currentLastName}`,
+              email: orderToView.email,
+              phone: orderToView.phone,
+              orderTotal: orderToView.orderTotal,
+              orderItems: orderToView.orderItems,
+              created: orderToView.created,
+              ready: orderToView.ready,
+              closed: orderToView.closed,
+            }),
+            setEditName(!editName),
+            setNameEdited(false),
+            setFirstNameValid(true),
+            setLastNameValid(true),
+            setUpdate(!update),
+            (customerNameRef.current =
+              `${currentFirstName}` + " " + `${currentLastName}`),
+            setOrders(await GetAllOrders(login.accessToken)),
+          ]}
+        >
+          Done
+        </button>
+      )}
     </div>
   );
 }

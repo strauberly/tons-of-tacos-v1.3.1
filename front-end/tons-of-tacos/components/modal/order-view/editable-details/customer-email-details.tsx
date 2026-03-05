@@ -28,12 +28,12 @@ export default function CustomerEmailDetails() {
   });
 
   function validateEmail(event: React.ChangeEvent<HTMLInputElement>) {
-    email.current = event.target.value;
+    customerEmailRef.current = event.target.value;
 
-    setEmailValid(checkEmail(email.current).valid);
+    setEmailValid(checkEmail(customerEmailRef.current).valid);
     setErrors({
       ...errors,
-      emailError: checkEmail(email.current).message,
+      emailError: checkEmail(customerEmailRef.current).message,
     });
   }
 
@@ -44,7 +44,7 @@ export default function CustomerEmailDetails() {
   }
 
   function updateCustomerEmail(resp: UpdateCustomerResponse) {
-    setModalMessage(`${resp.body}`);
+    setModalMessage(resp.body);
     setShowModal(true);
   }
 
@@ -87,12 +87,12 @@ export default function CustomerEmailDetails() {
           Cancel
         </button>
       )}
-      {editEmail == true && emailEdited == true && emailValid && (
+      {editEmail  && emailEdited  && emailValid && (
         <button
           onClick={async () => [
             (response.current = await UpdateCustomerEmail(
               orderToView.customerUid,
-              `${currentEmail}`,
+              currentEmail,
               login.accessToken
             )),
             updateCustomerEmail(response.current),
@@ -110,6 +110,7 @@ export default function CustomerEmailDetails() {
             }),
             setEditEmail(!editEmail),
             setEmailValid(true),
+            setEmailEdited(false),
             setUpdate(!update),
             (customerEmailRef.current = currentEmail),
             setOrders(await GetAllOrders(login.accessToken)),
