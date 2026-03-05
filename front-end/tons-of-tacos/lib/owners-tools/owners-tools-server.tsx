@@ -239,31 +239,6 @@ export async function GetOrderByID(orderUid: string, token: string) {
   }
 }
 
-export async function UpdateCustomer(customer: Customer, token: string) {
-  let response;
-
-  const uid: string = customer.customerUid;
-  const name: string = customer.name;
-  const phone: string = customer.phone;
-  const email: string = customer.email;
-
-  try {
-    response = await fetch(
-      `http://localhost:8080/api/owners-tools/customers/update-customer/${uid}/${name}/${phone}/${email}`,
-      {
-        method: "PUT",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-    const data = await response.json();
-    return data.message;
-  } catch (error) {
-    throw new Error(`${error}`);
-  }
-}
-
 export async function DailySales(token: string) {
   let response;
   try {
@@ -306,7 +281,5 @@ export async function ExecuteConfirm(title: string, orderEdit: OrderEdit) {
       orderEdit.itemSize,
       orderEdit.login
     );
-  } else if (title === "Update Customer") {
-    return UpdateCustomer(orderEdit.customer, orderEdit.login);
   }
 }

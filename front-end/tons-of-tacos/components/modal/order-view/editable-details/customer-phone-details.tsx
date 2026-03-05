@@ -1,43 +1,57 @@
+import { useOwnerContext } from "@/context/session-context/owner-context";
 import classes from "./editables.module.css";
 import { useModalContext } from "@/context/modal-context";
 import { checkPhone } from "@/lib/customer-form";
 import { formatPhone } from "@/lib/multi-use/multi-use";
 import { useRef, useState } from "react";
+import { useOrdersContext } from "@/context/order-context/orders-context";
+import { useDisplayContext } from "@/context/display-context";
+import { GetAllOrders } from "@/lib/owners-tools/owners-tools-server";
+import { UpdateCustomerPhone } from "@/lib/owners-tools/owners-tools-customers/edit-customer-server";
 
 export default function CustomerPhoneDetails() {
-  const { orderToView, setOrderToView } = useModalContext();
+  const { orderToView, setOrderToView, setModalMessage } = useModalContext();
+  const { login } = useOwnerContext();
+  const { setOrders } = useOrdersContext();
+  const { setShowModal } = useDisplayContext();
+
+  const customerPhoneRef = useRef<string>(orderToView.phone);
+  const response = useRef<UpdateCustomerResponse>({ status: 0, body: "" });
 
   const [currentPhone, setCurrentPhone] = useState<string>(orderToView.phone);
-
-  const [editPhone, setEditPhone] = useState<boolean>(false);
-  const [phoneValid, setPhoneValid] = useState<boolean>(false);
   const [update, setUpdate] = useState<boolean>(false);
-
+  const [phoneEdited, setPhoneEdited] = useState<boolean>(false);
+  const [editPhone, setEditPhone] = useState<boolean>(false);
+  const [phoneValid, setPhoneValid] = useState<boolean>(true);
   const [errors, setErrors] = useState({
     phoneError: "Phone Number must not be blank",
   });
 
-  const phoneNumber = useRef(currentPhone);
-
   function validatePhoneNumber(event: React.ChangeEvent<HTMLInputElement>) {
-    const formattedNumber = formatPhone(event.target.value);
+    customerPhoneRef.current = formatPhone(event.target.value);
 
-    phoneNumber.current = formattedNumber;
-
-    console.log(phoneNumber.current);
-    console.log(formattedNumber);
-
-    setPhoneValid(checkPhone(phoneNumber.current).valid);
+    setPhoneValid(checkPhone(customerPhoneRef.current).valid);
     setErrors({
       ...errors,
-      phoneError: checkPhone(phoneNumber.current).message,
+      phoneError: checkPhone(customerPhoneRef.current).message,
     });
+  }
+
+  function updatePhone(e: React.ChangeEvent<HTMLInputElement>) {
+    setCurrentPhone(e.target.value);
+    validatePhoneNumber(e);
+    setPhoneEdited(true);
+  }
+
+  function updateCustomerPhone(resp: UpdateCustomerResponse) {
+    setModalMessage(resp.body);
+    setShowModal(true);
   }
 
   return (
     <div className={classes.editableDetails}>
       <p className={classes.editableDetailsTitle}>Phone:</p>
-      <p>{phoneNumber.current}</p>
+      <p>{currentPhone}</p>
       {editPhone && (
         <div>
           <input
@@ -48,8 +62,8 @@ export default function CustomerPhoneDetails() {
             name="phone"
             required
             maxLength={12}
-            onChange={validatePhoneNumber}
-            value={phoneNumber.current}
+            value={currentPhone}
+            onChange={updatePhone}
           />
           {!phoneValid && <p className={classes.error}>{errors.phoneError}</p>}
         </div>
@@ -72,15 +86,21 @@ export default function CustomerPhoneDetails() {
           Cancel
         </button>
       )}
-      {phoneValid && (
+      {editPhone && phoneEdited && phoneValid && (
         <button
-          onClick={() => [
+          onClick={async () => [
+            (response.current = await UpdateCustomerPhone(
+              orderToView.customerUid,
+              currentPhone,
+              login.accessToken
+            )),
+            updateCustomerPhone(response.current),
             setOrderToView({
               orderUid: orderToView.orderUid,
               customerUid: orderToView.customerUid,
               name: orderToView.name,
               email: orderToView.email,
-              phone: phoneNumber.current,
+              phone: currentPhone,
               orderTotal: orderToView.orderTotal,
               orderItems: orderToView.orderItems,
               created: orderToView.created,
@@ -88,9 +108,11 @@ export default function CustomerPhoneDetails() {
               closed: orderToView.closed,
             }),
             setEditPhone(!editPhone),
-            setPhoneValid(!phoneValid),
+            setPhoneEdited(false),
+            setPhoneValid(true),
             setUpdate(!update),
-            phoneNumber.current,
+            (customerPhoneRef.current = currentPhone),
+            setOrders(await GetAllOrders(login.accessToken)),
           ]}
         >
           Done

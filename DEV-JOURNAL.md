@@ -10,6 +10,9 @@
   Reduces to need to reformat after.
 - Also altered default states for validation to correctly reflect state.
 - Editing customer email now follows a similar pattern.
+- Editing customer phone now follows same pattern
+- Touchups to previous work to bring familiarity across all parts od updating a customers information.
+- Removed update customer from owners-tools-server as all calls for updating a customer now exist in /owners-tools/owners-tools-customers/edit-customers-server.
 
 ---
 
