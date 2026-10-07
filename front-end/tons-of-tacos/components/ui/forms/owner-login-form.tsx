@@ -2,7 +2,6 @@
 import classes from "./owner-login-form.module.css";
 import { useActionState, useEffect, useRef, useState } from "react";
 import {
-  GetLogin,
   OwnerLogin,
   StoreLogin,
 } from "@/lib/owner-session/owner-session-server";
@@ -14,6 +13,7 @@ import {
   checkID,
   checkPassword,
 } from "@/lib/owner-session/credential-validation";
+import { StoreUser } from "@/lib/owner-session/owner-session-client";
 
 export default function OwnerLoginForm() {
   const initialState = {
@@ -44,8 +44,11 @@ export default function OwnerLoginForm() {
   useEffect(() => {
     async function Login() {
       if (state.status === 200) {
-        StoreLogin(state.response);
-        setLogin(await GetLogin());
+        console.log("response: " + JSON.stringify(state.response));
+        StoreUser(state.response.userName);
+        // StoreLogin(state.response);
+        // StoreUser(state.response.ownerName);
+        setLogin(state.response);
         setLoggedIn(true);
         setError(false);
         setErrorMessage("");

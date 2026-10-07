@@ -1,5 +1,5 @@
 "use server";
-
+// rewrite all for cookie?
 export async function GetAllOrders(token: string) {
   const response = await fetch(
     "http://localhost:8080/api/owners-tools/orders/get-orders",
@@ -12,7 +12,12 @@ export async function GetAllOrders(token: string) {
     }
   );
   const data = await response.json();
-  return data;
+  const status = response.status;
+  if (status === 200) {
+    return data;
+  } else {
+    return data.message;
+  }
 }
 
 export async function DeleteOrder(orderUid: string, token: string) {

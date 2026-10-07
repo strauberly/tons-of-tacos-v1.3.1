@@ -1,7 +1,7 @@
 "use client";
 import classes from "./owner-header.module.css";
 import { useOwnerContext } from "@/context/session-context/owner-context";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import LogoutButton from "../../ui/buttons/session-buttons/logout/logout";
 
 import {
@@ -10,12 +10,14 @@ import {
   GetLogin,
   OwnerLogout,
   Refresh,
-  StoreLogin,
+  RefreshLogin,
 } from "@/lib/owner-session/owner-session-server";
 
 import { useOrdersContext } from "@/context/order-context/orders-context";
 import { GetAllOrders } from "@/lib/owners-tools/owners-tools-server";
 import { useErrorContext } from "@/context/error-context";
+import { decrypt } from "@/lib/multi-use/encryption";
+import { GetUser, StoreUser } from "@/lib/owner-session/owner-session-client";
 
 export default function OwnerHeader() {
   const { login, setLoggedIn, setLogin } = useOwnerContext();
@@ -29,9 +31,11 @@ export default function OwnerHeader() {
     day: "numeric",
   };
 
+  const newUser = useRef("");
+  const oldUser = useRef("");
+
   useEffect(() => {
     async function Refresher() {
-      
       const exp = await GetCookieExp(login);
       const loginDate = new Date();
       const hours = loginDate.getHours();
@@ -41,8 +45,17 @@ export default function OwnerHeader() {
         DeleteCookies();
       } else if (exp - Number(Date.now()) < 60000) {
         try {
-          StoreLogin(await Refresh());
-          setLogin(await GetLogin());
+          // oldUser.current = GetUser();
+          // get user from session storage -> find cookie and set to context
+          // owner name set
+          // newUser.current = await RefreshLogin(
+          //   await Refresh(GetUser()),
+          //   oldUser.current
+          // );
+          // StoreUser(newUser.current);
+          // start here with refreshing user
+          RefreshLogin(await Refresh(GetUser()));
+          setLogin(await GetLogin(GetUser()));
           setOrders(await GetAllOrders(login.accessToken));
         } catch (error) {
           setErrorMessage(`${error}`);
@@ -74,7 +87,7 @@ export default function OwnerHeader() {
 
   return (
     <div className={classes.ownerHeader}>
-      <p> Hola, {login.ownerName}!</p>
+      <p> Hola, {decrypt(login.ownerName)}!</p>
       <p>{date.toLocaleTimeString([], { timeStyle: "short" })}</p>
       <p>{date.toLocaleDateString(undefined, options)}</p>
       <LogoutButton />

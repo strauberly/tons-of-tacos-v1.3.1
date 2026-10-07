@@ -1,12 +1,20 @@
 "use server";
 
 import { notFound } from "next/navigation";
+import { getHttpsAgent } from "./https-agent";
+import { secureApiFetch } from "./api-base";
 
 export default async function CategoriesSource() {
   // let data;
 
+  // const agent = getHttpsAgent();
+
   // try {
-  const response = await fetch("http://localhost:8080/api/menu/categories");
+  const response = await secureApiFetch("menu/categories");
+  // const response = await fetch("https://localhost:8443/api/menu/categories", {
+  //   agent,
+  // });
+  // const response = await fetch("http://localhost:8080/api/menu/categories");
   const data = await response.json();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   console.log("error:" + response.status);

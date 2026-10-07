@@ -34,7 +34,12 @@ export default function MainHeader() {
       }
       nextCookiePresent();
       if ((await CookieCheck()) === true && loggedIn === false) {
-        setLogin({ accessToken: "", refreshToken: "", ownerName: "" });
+        setLogin({
+          accessToken: "",
+          refreshToken: "",
+          ownerName: "",
+          userName: "",
+        });
         DeleteCookies();
       } else if ((await CookieCheck()) === false && loggedIn === false) {
         StoreLogin(await Refresh());
@@ -65,7 +70,13 @@ export default function MainHeader() {
                 accessToken: "",
                 refreshToken: "",
                 ownerName: "",
+                userName: "",
               }),
+              // setLogin({
+              //   accessToken: "",
+              //   refreshToken: "",
+              //   ownerName: "",
+              // }),
               setLoggedIn(false),
               (window.location.href = "/"),
             ]}

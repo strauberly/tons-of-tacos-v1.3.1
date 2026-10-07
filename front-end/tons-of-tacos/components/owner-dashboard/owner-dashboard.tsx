@@ -100,9 +100,9 @@ export default function OwnerDashboard() {
               </div>
               <Orders sortState={sortState} />
             </div>
-            <div className={classes.sales}>
+            {/* <div className={classes.sales}>
               <DailySalesDisplay />
-            </div>
+            </div> */}
           </div>
         </div>
       </FadeOnLoad>
