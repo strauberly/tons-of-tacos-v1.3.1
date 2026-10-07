@@ -2,6 +2,69 @@
 
 ---
 
+-- 6 Oct 2026 --
+
+Whoo! What a summer, finally back to it!
+
+- Readdressing goal of utilizing cookies to send encrypted credentials for owner login generating an encrypted jwt token to be utilized by front end for subsequent requests automatically
+- Early development of this goal was semi successful but not entirely concerns were:
+  - cookie stored in front end was undeterminable from owner to owner
+  - resolved by giving cookie the username as its name instead of generic cookie
+    - allowed for separate users to be logged in on one machine at same time through browser tabs, however also meant that user name was being sent in plain text.
+    - That work was done sometime ago and requires verification, as well as verifying that addressing the issue through another means is not better. Example at one time was using through session storage but believe there were issues with maintaining appropriate session when another user logged in.
+- Main issue was that cookie containing jwt was not being sent for owner after login
+  - Research indicated https requests needed to achieve objective, which is ok because that was part of the planned specs any how.
+  - Lots of time spent researching generating certs compatible between springboot and next.js
+  - Utilized claude haiku 4.5 during this time to speed up research and generate examples.
+  - Implemented examples by hand typing, testing and refining until desired results achieved. No copy and and paste of generated AI code. Unknown aspects of code researched.
+  - Prompts and conversations saved for reference. May contain vulger language. I'm human but working on it >\_<:
+- Utilized bash commands in springboot project folder src/main/resources to generate .pem and pkcs files
+- certificate placed in root directory of next.js front end
+- created env.local and api-base files in order to utilize https call in development and utilize a reusable base url
+- Still need to update all API route addresses for HTTPS and retry to see if desired functionality:
+
+  - Owner logs in, is issued a jwt specific to them, stored as cookie and then sent on subsequent secured requests only available to the owners.
+  - Owner's session maintained when another user logs in utilizing same browser and different tab.
+
+  Wish me luck, getting there but still lots to do!
+
+---
+
+-- 24 May 2026 --
+
+- Much study about methodology for industry standard handling logins, access tokens and means for sending credentials due to desire for application security.
+  - Lead to refactor of code base to utilize http only cookies in order to transmit access token in jwt form with claims for necessary information including refresh tokens. Lots of refactoring on both front and backend applications in use. Will go into more detail later.
+
+---
+
+-- 25 April 2026 --
+
+- Excluded values in place for generating a random char that aligns with backend application used in encryption.
+
+- Created files for formatting and calculations under multi-use folder in lib.
+
+- Moved encryption file under multi-use folder. Need to update dependent files.
+
+---
+
+-- 24 April 2026 --
+
+- Far bit has changed for user sessions as well as a few additional changes
+  - Working on moving functions for encryption and decryption to its own library but this has not yet been implemented.
+    - Working to ensure encryption and decryption is in lock step with what has been established in backend application.
+  - User name, access token, and refresh token are now stored as a singular cookie for each user instead of as a cookie for each value for each user.
+  - Session process is currently as follows:
+    - User logs in and tokens and owner name are stored in cookie the name of the cookie is the an encrypted version of the owner name.
+    - The owner name is stored in the session storage as an encrypted version. Currently matches the version stored in session storage but will likely change when encryption library is implemented.
+    - The login context is set to mirror the cookie and is implemented across the application where needed.
+    - To refresh the tokens and keep the users session active, since the session storage is persistent and the context values are not, the user name is called from session storage and used to look up the correct cookie by comparing the decrypted values of both.
+      Currently the refresh token pulled from the cookie and then sent in a manully configured cookie sent in a header to the API. We will then receive a new access token, refresh token, and the owner name newly encrypted.
+      The process starts again with the user stored, rewriting the cookie and setting the login context.
+      - What this accomplishes is allowing for two users to be logged in at the same time and even on the same machine with either a separate browser window open or even just an additional tab.
+      - Additional note: manual cookie was for proof of concept. This will be reworked as it is neither efficient or necessary as cookies should be sent with request automatically. Will just be some reconfiguring in back end application.
+
+---
+
 -- 3 March 2026 --
 
 - Realized there is no need to create new components as we can simply utilize our modal that has all ready been created for purpose of providing user with feedback from the server.

@@ -83,7 +83,13 @@ type OwnerLogin = {
   accessToken: string;
   refreshToken: string;
   ownerName: string;
+  userName: string;
 };
+// type OwnerLogin = {
+//   accessToken: string;
+//   refreshToken: string;
+//   ownerName: string;
+// };
 
 type Customer = {
   customerUid: string;

@@ -17,7 +17,16 @@ interface ContextProps {
 }
 
 const OwnerContext = createContext<ContextProps>({
-  login: { accessToken: "null", refreshToken: "null", ownerName: "null" },
+  login: {
+    accessToken: "null",
+    refreshToken: "null",
+    ownerName: "null",
+    userName: "null",
+  },
+  // login: { accessToken: "null",
+  //    refreshToken: "null",
+  //     ownerName: "null",
+  //   },
   setLogin: () => {},
   loggedIn: false,
   setLoggedIn: () => {},
@@ -28,7 +37,13 @@ export const OwnerContextProvider = ({ children }: { children: ReactNode }) => {
     accessToken: "",
     refreshToken: "",
     ownerName: "",
+    userName: "",
   });
+  // const [login, setLogin] = useState<OwnerLogin>({
+  //   accessToken: "",
+  //   refreshToken: "",
+  //   ownerName: "",
+  // });
   const [loggedIn, setLoggedIn] = useState(false);
 
   return (
