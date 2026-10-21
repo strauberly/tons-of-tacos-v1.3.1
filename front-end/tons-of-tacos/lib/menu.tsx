@@ -1,11 +1,11 @@
 "use server";
 
 import { notFound } from "next/navigation";
-import { getHttpsAgent } from "./https-agent";
+// import { getHttpsAgent } from "./https-agent";
 import { secureApiFetch } from "./api-base";
 
 export default async function CategoriesSource() {
-  // let data;
+  // let data;t ca
 
   // const agent = getHttpsAgent();
 
@@ -35,9 +35,10 @@ export default async function CategoriesSource() {
 }
 
 export async function MenuItemsSource(category: string) {
-  const response = await fetch(
-    `http://localhost:8080/api/menu/category?category=${category}`
-  );
+  // const response = await fetch(
+  //   `http://localhost:8080/api/menu/category?category=${category}`
+  // );
+  const response = await secureApiFetch(`menu/category?category=${category}`);
   const data = await response.json();
   const status = response.status;
   const menuItems: MenuItem[] = data;

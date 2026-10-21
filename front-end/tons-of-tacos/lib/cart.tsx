@@ -1,3 +1,8 @@
+// "use client";
+
+import { CartItem, CustomerItem, OrderItem } from "@/types";
+import { secureApiFetch } from "./api-base";
+import { submitOrder } from "./customer/customer-server";
 import { GetOwnerOrder } from "./owners-tools/owners-tools-client";
 
 export let isLoggedInRef: boolean;
@@ -145,7 +150,8 @@ export async function SendOrder(
     }
   });
 
-  const orderItems: item[] = cartItems.map((i) => {
+  // const orderItems: item[] = cartItems.map((i) => {
+  const orderItems: CustomerItem[] = cartItems.map((i) => {
     return {
       menuId: i.menuId,
       quantity: i.quantity,
@@ -162,19 +168,31 @@ export async function SendOrder(
     order: orderItems,
   };
 
-  let data;
+  // let data;
   let response;
   let status;
 
   try {
-    response = await fetch("http://localhost:8080/api/order/checkout", {
+    response = await submitOrder(order);
+    /*
+    this goes in submit order
+    response = await secureApiFetch("order/checkout", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(order),
     });
-    data = await response.json();
+    */
+    // response = await fetch("http://localhost:8080/api/order/checkout", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(order),
+    // });
+    // data = await response.text();
+    // data = await response.json();
     status = response.status;
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -182,14 +200,21 @@ export async function SendOrder(
     throw new Error("Sorry, we can't process your order right now.");
   }
 
-  const orderNumber = data.orderUid;
-  const customerName = data.customerName;
-  const customerEmail = data.customerEmail;
-  const customerPhone = data.customerPhone;
-  const orderTotal = data.orderTotal;
+  // const orderNumber = data.orderUid;
+  const orderNumber = response.orderUid;
+  // const customerName = data.customerName;
+  const customerName = response.customerName;
+  // const customerEmail = data.customerEmail;
+  const customerEmail = response.customerEmail;
+  // const customerPhone = data.customerPhone;
+  const customerPhone = response.customerPhone;
+  // const orderTotal = data.orderTotal;
+  const orderTotal = response.orderTotal;
 
-  const receivedOrderItems: string[] = data.orderItems.map(
-    (orderItem: OrderItem) =>
+  const receivedOrderItems: string[] = response.orderItems.map(
+    // const receivedOrderItems: string[] = data.orderItems.map(
+    // (orderItem: OrderItem) =>
+    (orderItem) =>
       `\n${orderItem.quantity}  x  ${orderItem.itemName}:
     size  (${orderItem.size})  =  $${orderItem.total.toFixed(2)}`
   );
@@ -212,6 +237,6 @@ export async function SendOrder(
   if (status === 201) {
     return { message: orderConfirmation };
   } else {
-    return { message: data.message };
+    return { message: response.message };
   }
 }
