@@ -15,7 +15,7 @@ export function CalcOrderTotal(loggedIn: boolean) {
   for (i = 0; i < order.length; i++) {
     orderTotal += parseFloat(order[i].price);
   }
-  console.log("owner order total: " + orderTotal.toFixed(2));
+  // console.log("owner order total: " + orderTotal.toFixed(2));
   return orderTotal.toFixed(2);
 }
 

@@ -37,6 +37,23 @@ type CartItem = {
   price: string;
 };
 
+// customer order
+
+type CustomerItem = {
+  menuId: string;
+  quantity: number;
+  size: string;
+};
+
+type CustomerOrder = {
+  customer: {
+    name: string;
+    phoneNumber: FormDataEntryValue | null;
+    email: FormDataEntryValue | null;
+  };
+  order: CustomerItem[];
+};
+
 // order
 type Order = {
   orderUid: string;
@@ -106,7 +123,33 @@ type Sales = {
   total: number;
 };
 
+// API WORK
+
+// fetch options
+// see if this can be incorporated in secureApiFetch()
+type FetchOptions = {
+  method?: "GET" | "POST" | "DELETE" | "PATCH";
+  body?: string | buffer;
+  headers?: Record<string, string>;
+};
+
 // responses
+
+export type CustomerOrderResponse = {
+  orderUid: string;
+  customerName: string;
+  customerEmail: string;
+  customerPhone: string;
+  orderTotal: number;
+  orderItems: Array<{
+    quantity: number;
+    itemName: string;
+    size: string;
+    total: number;
+  }>;
+  status: number;
+  message?: string;
+};
 
 type OrderRequestResponse = {
   status: number;
